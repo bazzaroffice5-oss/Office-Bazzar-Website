@@ -17,11 +17,61 @@ export interface NotificationResult {
 export interface QuoteEmailNotificationResult {
   success: boolean;
   messageId?: string;
-  provider: 'resend' | 'simulated';
+  provider: 'resend' | 'simulated' | 'unconfigured';
   isDuplicate?: boolean;
   to: string;
   cc: string;
   error?: string;
+}
+
+export interface ContactUsSubmission {
+  id?: string;
+  referenceNumber: string;
+  name: string;
+  companyName?: string;
+  email: string;
+  phone: string;
+  message: string;
+  submittedAt: string;
+}
+
+export interface ContactEmailNotificationResult {
+  success: boolean;
+  messageId?: string;
+  provider: 'resend' | 'simulated' | 'unconfigured';
+  to: string;
+  cc: string;
+  error?: string;
+}
+
+/**
+ * Resolve verified sender address for transactional & administrative alerts
+ */
+export function getEmailFromAddress(): string {
+  const configuredFrom = (process.env.EMAIL_FROM_ADDRESS || '').replace(/[\r\n]/g, '').trim();
+  if (configuredFrom) {
+    return configuredFrom;
+  }
+  return 'Office Bazzar <onboarding@resend.dev>';
+}
+
+/**
+ * Resolve authorized recipient mailboxes for internal company alerts
+ */
+export function getNotificationRecipients(): { salesEmail: string; marketingEmail: string } {
+  const salesEmail = (
+    process.env.QUOTE_SALES_EMAIL ||
+    BUSINESS_CONFIG.contact.salesEmail ||
+    'sales4@officebazzar.com'
+  ).replace(/[\r\n]/g, '').trim();
+
+  const marketingEmail = (
+    process.env.QUOTE_MARKETING_EMAIL ||
+    BUSINESS_CONFIG.contact.marketingEmail ||
+    'marketing@officebazzar.com'
+  ).replace(/[\r\n]/g, '').trim();
+
+  return { salesEmail, marketingEmail };
 }
 
 // In-memory set of quotation identifiers that have successfully dispatched emails
@@ -293,16 +343,7 @@ export function buildQuotationEmailHtml(
 export async function sendQuoteEmailNotification(
   quotation: Quotation
 ): Promise<QuoteEmailNotificationResult> {
-  const quoteSalesEmail = (
-    process.env.QUOTE_SALES_EMAIL ||
-    BUSINESS_CONFIG.contact.salesEmail ||
-    'sales4@officebazzar.com'
-  ).replace(/[\r\n]/g, '').trim();
-  const quoteMarketingEmail = (
-    process.env.QUOTE_MARKETING_EMAIL ||
-    BUSINESS_CONFIG.contact.marketingEmail ||
-    'marketing@officebazzar.com'
-  ).replace(/[\r\n]/g, '').trim();
+  const { salesEmail: quoteSalesEmail, marketingEmail: quoteMarketingEmail } = getNotificationRecipients();
 
   const dedupKey = quotation.idempotencyKey || quotation.id || quotation.quotationNumber;
 
@@ -330,9 +371,39 @@ export async function sendQuoteEmailNotification(
   const text = buildQuotationEmailText(quotation, quoteSalesEmail, quoteMarketingEmail);
 
   const providerApiKey = (process.env.EMAIL_API_KEY || process.env.RESEND_API_KEY || '').trim();
-  const fromAddress = (process.env.EMAIL_FROM_ADDRESS || 'noreply@officebazzar.co.in').replace(/[\r\n]/g, '').trim();
+  const fromAddress = getEmailFromAddress();
 
-  // Live Resend API Integration when API key is provided and simulation mode is not enabled
+  // If no email API key is configured
+  if (!providerApiKey) {
+    if (process.env.EMAIL_SIMULATION_MODE === 'true') {
+      console.log(
+        `[NotificationService:QuoteEmail:Simulated] Simulation mode active. Email accepted for ${quotation.quotationNumber}`
+      );
+      sentQuoteEmailKeys.add(dedupKey);
+      sentQuoteEmailKeys.add(quotation.quotationNumber);
+      if (quotation.id) sentQuoteEmailKeys.add(quotation.id);
+
+      return {
+        success: true,
+        messageId: `sim_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`,
+        provider: 'simulated',
+        to: quoteSalesEmail,
+        cc: quoteMarketingEmail,
+      };
+    }
+
+    const unconfiguredErr = 'Email service unconfigured: RESEND_API_KEY is not set in server environment.';
+    console.warn(`[NotificationService:QuoteEmail] ${unconfiguredErr}`);
+    return {
+      success: false,
+      error: unconfiguredErr,
+      provider: 'unconfigured',
+      to: quoteSalesEmail,
+      cc: quoteMarketingEmail,
+    };
+  }
+
+  // Live Resend API Integration when API key is provided
   if (providerApiKey && process.env.EMAIL_SIMULATION_MODE !== 'true') {
     try {
       // 1. Try sending one unified notification with TO: sales and CC: marketing
@@ -346,6 +417,7 @@ export async function sendQuoteEmailNotification(
           from: fromAddress,
           to: [quoteSalesEmail],
           cc: [quoteMarketingEmail],
+          reply_to: quotation.email,
           subject,
           html,
           text,
@@ -383,6 +455,7 @@ export async function sendQuoteEmailNotification(
           body: JSON.stringify({
             from: fromAddress,
             to: [quoteSalesEmail],
+            reply_to: quotation.email,
             subject,
             html,
             text,
@@ -397,6 +470,7 @@ export async function sendQuoteEmailNotification(
           body: JSON.stringify({
             from: fromAddress,
             to: [quoteMarketingEmail],
+            reply_to: quotation.email,
             subject,
             html,
             text,
@@ -442,17 +516,9 @@ export async function sendQuoteEmailNotification(
     }
   }
 
-  // Authoritative server-side simulation mode (default when no API key is set, or EMAIL_SIMULATION_MODE=true)
-  // Ensures test submissions work reliably without sending unauthorized live emails to real mailboxes
+  // Explicit simulation mode when EMAIL_SIMULATION_MODE=true
   console.log(
-    `[NotificationService:QuoteEmail:Simulated] Email successfully accepted for dispatch:\n` +
-      `  TO: ${quoteSalesEmail}\n` +
-      `  CC: ${quoteMarketingEmail}\n` +
-      `  Subject: ${subject}\n` +
-      `  Customer: ${quotation.customerName} (${quotation.companyName})\n` +
-      `  Email: ${quotation.email} | Phone: ${quotation.phone}\n` +
-      `  Items: ${quotation.items.length} product(s) | Indicative Total: ₹${quotation.indicativeTotal}\n` +
-      `  Submitted At: ${quotation.createdAt}`
+    `[NotificationService:QuoteEmail:Simulated] Email simulated for ${quotation.quotationNumber} to ${quoteSalesEmail} / ${quoteMarketingEmail}`
   );
 
   sentQuoteEmailKeys.add(dedupKey);
@@ -694,4 +760,253 @@ export async function retryNotification(logId: string): Promise<{ success: boole
       ? 'Notification delivered successfully'
       : `Retry failed: ${attemptResult.error || 'Unknown error'}`,
   };
+}
+
+/**
+ * Format plain-text email message for Contact Us customer enquiry
+ */
+export function buildContactUsEmailText(
+  submission: ContactUsSubmission,
+  salesEmail: string = 'sales4@officebazzar.com',
+  marketingEmail: string = 'marketing@officebazzar.com'
+): string {
+  return `OFFICEBAZZAR CUSTOMER CONTACT ENQUIRY
+==================================================
+Reference Number : ${submission.referenceNumber}
+Submission Time  : ${submission.submittedAt}
+Notification To  : TO: ${salesEmail} | CC: ${marketingEmail}
+
+CUSTOMER & BUSINESS DETAILS:
+--------------------------------------------------
+Customer Name    : ${submission.name}
+Company Name     : ${submission.companyName || 'Not Provided'}
+Customer Email   : ${submission.email}
+Phone Number     : ${submission.phone}
+
+CUSTOMER MESSAGE:
+--------------------------------------------------
+${submission.message}
+
+==================================================
+Direct reply to this email will respond to: ${submission.email}
+`;
+}
+
+/**
+ * Format rich HTML email message for Contact Us customer enquiry
+ */
+export function buildContactUsEmailHtml(
+  submission: ContactUsSubmission,
+  salesEmail: string = 'sales4@officebazzar.com',
+  marketingEmail: string = 'marketing@officebazzar.com'
+): string {
+  return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>New Customer Contact Message</title>
+</head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f3f4f6; margin: 0; padding: 20px;">
+  <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e5e7eb;">
+    <div style="background-color: #004b87; padding: 20px 24px; color: #ffffff;">
+      <h1 style="margin: 0; font-size: 20px; font-weight: 700;">OfficeBazzar &bull; Contact Us Message</h1>
+      <p style="margin: 4px 0 0 0; font-size: 13px; opacity: 0.9;">New Customer Inquiry from officebazzar.com</p>
+    </div>
+
+    <div style="background-color: #eff6ff; border-bottom: 1px solid #dbeafe; padding: 10px 24px; font-size: 12px; color: #1e40af;">
+      <strong>Notification Recipients:</strong>
+      &nbsp;TO: <a href="mailto:${salesEmail}" style="color: #1d4ed8; font-weight: 600; text-decoration: none;">${salesEmail}</a>
+      &nbsp;&bull;&nbsp;CC: <a href="mailto:${marketingEmail}" style="color: #1d4ed8; font-weight: 600; text-decoration: none;">${marketingEmail}</a>
+    </div>
+
+    <div style="background-color: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 12px 24px; display: flex; justify-content: space-between;">
+      <div>
+        <span style="font-size: 11px; color: #64748b; text-transform: uppercase; font-weight: 700;">Reference</span>
+        <div style="font-size: 16px; font-weight: 700; color: #004b87;">${submission.referenceNumber}</div>
+      </div>
+      <div style="text-align: right;">
+        <span style="font-size: 11px; color: #64748b;">Received</span>
+        <div style="font-size: 13px; color: #0f172a; font-weight: 600;">${submission.submittedAt}</div>
+      </div>
+    </div>
+
+    <div style="padding: 24px;">
+      <h3 style="margin-top: 0; font-size: 13px; text-transform: uppercase; color: #475569; letter-spacing: 0.5px; border-bottom: 2px solid #f1f5f9; padding-bottom: 6px;">
+        Sender Information
+      </h3>
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
+        <tr>
+          <td style="padding: 6px 0; color: #64748b; width: 35%;">Customer Name:</td>
+          <td style="padding: 6px 0; color: #0f172a; font-weight: 600;">${submission.name}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #64748b;">Company Name:</td>
+          <td style="padding: 6px 0; color: #0f172a; font-weight: 600;">${submission.companyName || '<em style="color:#94a3b8">Not Provided</em>'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #64748b;">Email Address:</td>
+          <td style="padding: 6px 0; color: #0f172a;"><a href="mailto:${submission.email}" style="color: #004b87; font-weight: 600;">${submission.email}</a></td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #64748b;">Phone Number:</td>
+          <td style="padding: 6px 0; color: #0f172a;"><a href="tel:${submission.phone}" style="color: #004b87; font-weight: 600;">${submission.phone}</a></td>
+        </tr>
+      </table>
+
+      <h3 style="font-size: 13px; text-transform: uppercase; color: #475569; letter-spacing: 0.5px; border-bottom: 2px solid #f1f5f9; padding-bottom: 6px; margin-top: 20px;">
+        Customer Message
+      </h3>
+      <div style="background-color: #f8fafc; border-left: 4px solid #004b87; padding: 14px 18px; border-radius: 0 6px 6px 0; font-size: 13px; color: #1e293b; line-height: 1.6; white-space: pre-wrap;">
+${submission.message}
+      </div>
+
+      <div style="margin-top: 24px; padding-top: 14px; border-top: 1px solid #f1f5f9; font-size: 12px; color: #64748b; text-align: center;">
+        Direct reply to this notification will automatically address <strong>${submission.email}</strong>.
+      </div>
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+/**
+ * Dispatch official Contact Us email alert to Sales (TO) and Marketing (CC)
+ */
+export async function sendContactUsEmailNotification(
+  submission: ContactUsSubmission
+): Promise<ContactEmailNotificationResult> {
+  const { salesEmail, marketingEmail } = getNotificationRecipients();
+  const fromAddress = getEmailFromAddress();
+  const providerApiKey = (process.env.EMAIL_API_KEY || process.env.RESEND_API_KEY || '').trim();
+
+  const subject = `New Contact Enquiry — Office Bazzar [Ref: ${submission.referenceNumber}]`;
+  const html = buildContactUsEmailHtml(submission, salesEmail, marketingEmail);
+  const text = buildContactUsEmailText(submission, salesEmail, marketingEmail);
+
+  // If no email provider key is configured
+  if (!providerApiKey) {
+    if (process.env.EMAIL_SIMULATION_MODE === 'true') {
+      console.log(
+        `[NotificationService:ContactEmail:Simulated] Contact enquiry simulated for ${submission.referenceNumber} to ${salesEmail} / ${marketingEmail}`
+      );
+      return {
+        success: true,
+        messageId: `sim_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`,
+        provider: 'simulated',
+        to: salesEmail,
+        cc: marketingEmail,
+      };
+    }
+
+    const unconfiguredErr = 'Email service unconfigured: RESEND_API_KEY is not set in server environment.';
+    console.warn(`[NotificationService:ContactEmail] ${unconfiguredErr}`);
+    return {
+      success: false,
+      error: unconfiguredErr,
+      provider: 'unconfigured',
+      to: salesEmail,
+      cc: marketingEmail,
+    };
+  }
+
+  // Live Resend API Integration
+  try {
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${providerApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: fromAddress,
+        to: [salesEmail],
+        cc: [marketingEmail],
+        reply_to: submission.email,
+        subject,
+        html,
+        text,
+      }),
+    });
+
+    if (response.ok) {
+      const resData = await response.json();
+      return {
+        success: true,
+        messageId: resData.id,
+        provider: 'resend',
+        to: salesEmail,
+        cc: marketingEmail,
+      };
+    }
+
+    // If unified TO/CC fails, fallback to separate messages
+    console.warn(
+      `[NotificationService:ContactEmail] Unified TO/CC send failed (${response.status}). Retrying with separate messages...`
+    );
+
+    const [salesRes, marketingRes] = await Promise.all([
+      fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${providerApiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: fromAddress,
+          to: [salesEmail],
+          reply_to: submission.email,
+          subject,
+          html,
+          text,
+        }),
+      }),
+      fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${providerApiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: fromAddress,
+          to: [marketingEmail],
+          reply_to: submission.email,
+          subject,
+          html,
+          text,
+        }),
+      }),
+    ]);
+
+    if (salesRes.ok && marketingRes.ok) {
+      const salesData = await salesRes.json();
+      return {
+        success: true,
+        messageId: salesData.id,
+        provider: 'resend',
+        to: salesEmail,
+        cc: marketingEmail,
+      };
+    }
+
+    const salesErr = !salesRes.ok ? await salesRes.text() : '';
+    const marketingErr = !marketingRes.ok ? await marketingRes.text() : '';
+    const combinedErr = [salesErr, marketingErr].filter(Boolean).join('; ');
+
+    return {
+      success: false,
+      error: `Resend API error: ${combinedErr}`,
+      provider: 'resend',
+      to: salesEmail,
+      cc: marketingEmail,
+    };
+  } catch (err) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    return {
+      success: false,
+      error: `Network error contacting email provider: ${errorMsg}`,
+      provider: 'resend',
+      to: salesEmail,
+      cc: marketingEmail,
+    };
+  }
 }
