@@ -36,8 +36,8 @@ function loadCustomProductsFromDisk(): Product[] {
         path.resolve(process.cwd(), '..', 'Product-Added-Admin-Panel', 'src', 'lib', 'data', 'custom_products.json'),
       ];
       for (const filePath of pathsToCheck) {
-        if (fs.existsSync(filePath)) {
-          const raw = fs.readFileSync(filePath, 'utf-8');
+        if (fs.existsSync(/*turbopackIgnore: true*/ filePath)) {
+          const raw = fs.readFileSync(/*turbopackIgnore: true*/ filePath, 'utf-8');
           const parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length > 0) return parsed;
         }
