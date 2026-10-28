@@ -69,11 +69,6 @@ export default function Header() {
     pathname?.startsWith('/categories') ||
     pathname?.startsWith('/category');
 
-  // Completely hide public header on all hidden admin dashboard routes
-  if (pathname?.startsWith('/office-control')) {
-    return null;
-  }
-
   const navLinks = [
     { name: 'About Us', href: '/about' },
     { name: 'Blogs', href: '/blogs' },

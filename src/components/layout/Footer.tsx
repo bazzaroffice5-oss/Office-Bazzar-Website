@@ -5,8 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, ArrowRight, Navigation, ExternalLink } from 'lucide-react';
 
-import { usePathname } from 'next/navigation';
-
 const GOOGLE_MAPS_DIRECTIONS_URL =
   'https://www.google.com/maps/dir/?api=1&destination=Officebazzar+Tower,+29/15+Subbedar+Hussain+Street,+Royapettah,+Chennai,+Tamil+Nadu+600014';
 const GOOGLE_MAPS_VIEW_URL =
@@ -48,13 +46,6 @@ const SOCIAL_LINKS = [
 ];
 
 export default function Footer() {
-  const pathname = usePathname();
-
-  // Completely hide public footer on all hidden admin dashboard routes
-  if (pathname?.startsWith('/office-control')) {
-    return null;
-  }
-
   return (
     <footer id="footer" className="w-full bg-[#0a192f] text-slate-300 pt-12 sm:pt-14 pb-8 sm:pb-10 border-t border-slate-800">
       <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
