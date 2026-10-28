@@ -10,6 +10,8 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/admin',
           '/admin/',
+          '/office-control',
+          '/office-control/',
           '/account',
           '/account/',
           '/checkout',
@@ -34,6 +36,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: [
           '/admin/',
+          '/office-control/',
           '/account/',
           '/checkout/',
           '/cart/',

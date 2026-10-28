@@ -14,17 +14,104 @@ import {
 import { CATEGORIES, BRANDS, INITIAL_PRODUCTS, COUPONS, resolveMainCategory } from '@/lib/data/catalog';
 import { supabase, supabaseAdmin, isSupabaseConfigured } from './supabase';
 
-// Persistent in-memory data store for resilient fallback when database is offline or unconfigured
-let productsList: Product[] = [...INITIAL_PRODUCTS];
-const ordersList: Order[] = [];
-const bulkRFQsList: BulkRFQ[] = [];
+// Shared store state attached to globalThis to prevent process/worker boundary divergence in Next.js
+interface GlobalStoreState {
+  productsList: Product[];
+  ordersList: Order[];
+  bulkRFQsList: BulkRFQ[];
+  quotationsList: Quotation[];
+  quotationCounter: number;
+  notificationLogsList: NotificationLog[];
+}
+
+function loadCustomProductsFromDisk(): Product[] {
+  if (typeof window === 'undefined') {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const fs = require('fs');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const path = require('path');
+      const filePath = path.join(process.cwd(), 'src', 'lib', 'data', 'custom_products.json');
+      if (fs.existsSync(filePath)) {
+        const raw = fs.readFileSync(filePath, 'utf-8');
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch {
+      // ignore
+    }
+  }
+  return [];
+}
+
+function persistCustomProductsToDisk(products: Product[]) {
+  if (typeof window === 'undefined') {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const fs = require('fs');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const path = require('path');
+      const filePath = path.join(process.cwd(), 'src', 'lib', 'data', 'custom_products.json');
+      const initialIds = new Set(INITIAL_PRODUCTS.map((p) => p.id));
+      const customOnly = products.filter((p) => !initialIds.has(p.id));
+      fs.writeFileSync(filePath, JSON.stringify(customOnly, null, 2), 'utf-8');
+    } catch {
+      // ignore
+    }
+  }
+}
+
+const globalForStore = globalThis as unknown as {
+  __officeBazzarStore?: GlobalStoreState;
+};
+
+if (!globalForStore.__officeBazzarStore) {
+  const diskProducts = loadCustomProductsFromDisk();
+  const initialMap = new Map<string, Product>();
+  // Custom products take priority
+  for (const p of diskProducts) {
+    initialMap.set(p.id, p);
+  }
+  for (const p of INITIAL_PRODUCTS) {
+    if (!initialMap.has(p.id)) {
+      initialMap.set(p.id, p);
+    }
+  }
+
+  globalForStore.__officeBazzarStore = {
+    productsList: Array.from(initialMap.values()),
+    ordersList: [],
+    bulkRFQsList: [],
+    quotationsList: [],
+    quotationCounter: 1,
+    notificationLogsList: [],
+  };
+}
+
+const storeState = globalForStore.__officeBazzarStore;
+let productsList: Product[] = storeState.productsList;
+const ordersList: Order[] = storeState.ordersList;
+const bulkRFQsList: BulkRFQ[] = storeState.bulkRFQsList;
 const idempotencyStore = new Map<string, Order>();
 
 // Quotation & Notification In-Memory Fallback State
-let quotationCounter = 1;
-const quotationsList: Quotation[] = [];
+let quotationCounter = storeState.quotationCounter;
+const quotationsList: Quotation[] = storeState.quotationsList;
 const quotationIdempotencyStore = new Map<string, Quotation>();
-const notificationLogsList: NotificationLog[] = [];
+const notificationLogsList: NotificationLog[] = storeState.notificationLogsList;
+
+function syncCustomProducts() {
+  const disk = loadCustomProductsFromDisk();
+  for (const dp of disk) {
+    const idx = storeState.productsList.findIndex((p) => p.id === dp.id);
+    if (idx !== -1) {
+      storeState.productsList[idx] = dp;
+    } else {
+      storeState.productsList.unshift(dp);
+    }
+  }
+  productsList = storeState.productsList;
+}
 
 // Map database row (snake_case) to Product interface (camelCase)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -269,7 +356,8 @@ export async function getProducts(filters?: FilterParams): Promise<{ products: P
   }
 
   // Fallback: In-memory store
-  let result = [...productsList].filter((p) => p.isActive);
+  syncCustomProducts();
+  let result = [...storeState.productsList].filter((p) => p.isActive !== false);
 
   if (filters?.query) {
     const q = filters.query.toLowerCase().trim();
@@ -369,16 +457,20 @@ export async function getAdminProducts(): Promise<Product[]> {
       // Fallback
     }
   }
-  return [...productsList];
+  syncCustomProducts();
+  return [...storeState.productsList];
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
+  const cleanSlug = decodeURIComponent(slug).toLowerCase().trim();
+
   if (isSupabaseConfigured && supabase) {
     try {
       const { data, error } = await supabase
         .from('products')
         .select('*')
-        .or(`slug.eq.${slug},sku.ilike.${slug},id.eq.${slug}`)
+        .or(`slug.eq.${cleanSlug},sku.ilike.${cleanSlug},id.eq.${cleanSlug}`)
+        .eq('is_active', true)
         .maybeSingle();
 
       if (!error && data) {
@@ -389,16 +481,22 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
     }
   }
 
-  const product = productsList.find(
-    (p) => p.slug === slug || p.sku.toLowerCase() === slug.toLowerCase() || p.id === slug
+  syncCustomProducts();
+  const product = storeState.productsList.find(
+    (p) =>
+      (p.slug.toLowerCase() === cleanSlug ||
+        p.sku.toLowerCase() === cleanSlug ||
+        p.id.toLowerCase() === cleanSlug) &&
+      p.isActive !== false
   );
   return product || null;
 }
 
 export async function getProductById(id: string): Promise<Product | null> {
-  if (isSupabaseConfigured && supabase) {
+  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
     try {
-      const { data, error } = await supabase.from('products').select('*').eq('id', id).maybeSingle();
+      const client = supabaseAdmin || supabase!;
+      const { data, error } = await client.from('products').select('*').eq('id', id).maybeSingle();
       if (!error && data) {
         return mapDbProduct(data);
       }
@@ -407,7 +505,8 @@ export async function getProductById(id: string): Promise<Product | null> {
     }
   }
 
-  const product = productsList.find((p) => p.id === id);
+  syncCustomProducts();
+  const product = storeState.productsList.find((p) => p.id === id);
   return product || null;
 }
 
@@ -864,26 +963,45 @@ export async function updateOrderStatus(
 // ----------------------------------------------------------------------
 
 export async function saveProduct(productData: Partial<Product>): Promise<Product> {
+  const generatedSlug =
+    productData.slug ||
+    (productData.name
+      ? productData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
+      : `prod-${Date.now()}`);
+
+  const generatedSku =
+    productData.sku ||
+    `OB-${Math.floor(100000 + Math.random() * 900000)}`;
+
   if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
     try {
       const client = supabaseAdmin || supabase!;
-      const payload = {
+      const payload: Record<string, unknown> = {
         name: productData.name,
-        slug: productData.slug,
-        sku: productData.sku,
-        description: productData.description,
-        short_description: productData.shortDescription,
-        price: productData.price,
-        mrp: productData.mrp,
-        gst_percent: productData.gstPercent,
-        hsn_code: productData.hsnCode,
-        stock_quantity: productData.stockQuantity,
-        min_order_quantity: productData.minOrderQuantity,
-        pack_size: productData.packSize,
-        images: productData.images,
+        slug: generatedSlug,
+        sku: generatedSku,
+        category_id: productData.categoryId || null,
+        category_name: productData.categoryName || null,
+        subcategory_id: productData.subcategoryId || null,
+        subcategory_name: productData.subcategoryName || null,
+        brand_id: productData.brandId || null,
+        brand_name: productData.brandName || null,
+        description: productData.description || '',
+        short_description: productData.shortDescription || null,
+        specifications: productData.specifications || {},
+        price: productData.price !== undefined ? productData.price : null,
+        mrp: productData.mrp !== undefined ? productData.mrp : null,
+        gst_percent: productData.gstPercent !== undefined ? productData.gstPercent : 18,
+        hsn_code: productData.hsnCode || null,
+        stock_quantity: productData.stockQuantity !== undefined ? productData.stockQuantity : 100,
+        min_order_quantity: productData.minOrderQuantity || 1,
+        pack_size: productData.packSize || 'Standard Pack',
+        images: Array.isArray(productData.images) ? productData.images : [],
         is_active: productData.isActive !== false,
-        is_featured: productData.featured,
-        is_bestseller: productData.bestseller,
+        is_featured: Boolean(productData.featured),
+        is_bestseller: Boolean(productData.bestseller),
+        meta_title: productData.metaTitle || null,
+        meta_description: productData.metaDescription || null,
         updated_at: new Date().toISOString(),
       };
 
@@ -895,7 +1013,18 @@ export async function saveProduct(productData: Partial<Product>): Promise<Produc
           .select()
           .single();
 
-        if (!error && data) return mapDbProduct(data);
+        if (!error && data) {
+          const mapped = mapDbProduct(data);
+          const inMemIdx = storeState.productsList.findIndex((p) => p.id === mapped.id);
+          if (inMemIdx !== -1) {
+            storeState.productsList[inMemIdx] = mapped;
+          } else {
+            storeState.productsList.unshift(mapped);
+          }
+          productsList = storeState.productsList;
+          persistCustomProductsToDisk(storeState.productsList);
+          return mapped;
+        }
       } else {
         const { data, error } = await client
           .from('products')
@@ -903,54 +1032,108 @@ export async function saveProduct(productData: Partial<Product>): Promise<Produc
           .select()
           .single();
 
-        if (!error && data) return mapDbProduct(data);
+        if (!error && data) {
+          const mapped = mapDbProduct(data);
+          storeState.productsList.unshift(mapped);
+          productsList = storeState.productsList;
+          persistCustomProductsToDisk(storeState.productsList);
+          return mapped;
+        }
+      }
+    } catch {
+      // Fallback to in-memory
+    }
+  }
+
+  // In-memory fallback
+  if (productData.id) {
+    const idx = storeState.productsList.findIndex((p) => p.id === productData.id);
+    if (idx !== -1) {
+      storeState.productsList[idx] = {
+        ...storeState.productsList[idx],
+        ...productData,
+        slug: generatedSlug,
+        sku: generatedSku,
+        isActive: productData.isActive !== false,
+      } as Product;
+      productsList = storeState.productsList;
+      persistCustomProductsToDisk(storeState.productsList);
+      return storeState.productsList[idx];
+    }
+  }
+
+  const newProduct: Product = {
+    id: productData.id || `prod-${Date.now()}`,
+    name: productData.name || 'New Office Product',
+    slug: generatedSlug,
+    sku: generatedSku,
+    categoryId: productData.categoryId || 'office-supplies-stationery',
+    categoryName: productData.categoryName || 'Office Supplies & Stationery',
+    subcategoryId: productData.subcategoryId,
+    subcategoryName: productData.subcategoryName,
+    brandId: productData.brandId || 'officebazzar',
+    brandName: productData.brandName || 'OfficeBazzar',
+    description: productData.description || 'Enterprise office supplies product.',
+    shortDescription: productData.shortDescription || '',
+    specifications: productData.specifications || {},
+    price: productData.price !== undefined ? productData.price : null,
+    mrp: productData.mrp !== undefined ? productData.mrp : null,
+    gstPercent: Number(productData.gstPercent) || 18,
+    hsnCode: productData.hsnCode,
+    stockQuantity: Number(productData.stockQuantity) || 100,
+    minOrderQuantity: Number(productData.minOrderQuantity) || 1,
+    packSize: productData.packSize || 'Standard Pack',
+    images:
+      productData.images && productData.images.length > 0
+        ? productData.images
+        : ['https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=800&auto=format&fit=crop'],
+    rating: null,
+    reviewCount: 0,
+    isActive: productData.isActive !== false,
+    featured: Boolean(productData.featured),
+    bestseller: Boolean(productData.bestseller),
+    metaTitle: productData.metaTitle,
+    metaDescription: productData.metaDescription,
+  };
+
+  storeState.productsList.unshift(newProduct);
+  productsList = storeState.productsList;
+  persistCustomProductsToDisk(storeState.productsList);
+  return newProduct;
+}
+
+export async function updateProductPublishStatus(id: string, isActive: boolean): Promise<Product | null> {
+  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
+    try {
+      const client = supabaseAdmin || supabase!;
+      const { data, error } = await client
+        .from('products')
+        .update({ is_active: isActive, updated_at: new Date().toISOString() })
+        .eq('id', id)
+        .select()
+        .single();
+
+      if (!error && data) {
+        const mapped = mapDbProduct(data);
+        const idx = storeState.productsList.findIndex((p) => p.id === id);
+        if (idx !== -1) storeState.productsList[idx] = mapped;
+        productsList = storeState.productsList;
+        persistCustomProductsToDisk(storeState.productsList);
+        return mapped;
       }
     } catch {
       // Fallback
     }
   }
 
-  // In-memory fallback
-  if (productData.id) {
-    const idx = productsList.findIndex((p) => p.id === productData.id);
-    if (idx !== -1) {
-      productsList[idx] = { ...productsList[idx], ...productData } as Product;
-      return productsList[idx];
-    }
+  const idx = storeState.productsList.findIndex((p) => p.id === id);
+  if (idx !== -1) {
+    storeState.productsList[idx] = { ...storeState.productsList[idx], isActive };
+    productsList = storeState.productsList;
+    persistCustomProductsToDisk(storeState.productsList);
+    return storeState.productsList[idx];
   }
-
-  const newProduct: Product = {
-    id: `prod-${Date.now()}`,
-    name: productData.name || 'New Office Product',
-    slug: productData.slug || `prod-${Date.now()}`,
-    sku: productData.sku || `OB-${Math.floor(1000 + Math.random() * 9000)}`,
-    categoryId: productData.categoryId || 'cat-stationery',
-    categoryName: productData.categoryName || 'Office Supplies & Stationery',
-    brandId: productData.brandId || 'b-nataraj',
-    brandName: productData.brandName || 'OfficeBazzar Pro',
-    description: productData.description || 'Enterprise office supplies product.',
-    shortDescription: productData.shortDescription || '',
-    specifications: productData.specifications || {},
-    price: Number(productData.price) || 100,
-    mrp: Number(productData.mrp) || Number(productData.price) || 120,
-    gstPercent: Number(productData.gstPercent) || 18,
-    hsnCode: productData.hsnCode,
-    stockQuantity: Number(productData.stockQuantity) || 50,
-    minOrderQuantity: Number(productData.minOrderQuantity) || 1,
-    packSize: productData.packSize || '1 Unit',
-    images:
-      productData.images && productData.images.length > 0
-        ? productData.images
-        : ['https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=800&auto=format&fit=crop'],
-    rating: 4.5,
-    reviewCount: 0,
-    isActive: productData.isActive !== false,
-    featured: Boolean(productData.featured),
-    bestseller: Boolean(productData.bestseller),
-  };
-
-  productsList.unshift(newProduct);
-  return newProduct;
+  return null;
 }
 
 export async function deleteProduct(productId: string): Promise<boolean> {
@@ -958,15 +1141,125 @@ export async function deleteProduct(productId: string): Promise<boolean> {
     try {
       const client = supabaseAdmin || supabase!;
       const { error } = await client.from('products').delete().eq('id', productId);
-      if (!error) return true;
+      if (!error) {
+        storeState.productsList = storeState.productsList.filter((p) => p.id !== productId);
+        productsList = storeState.productsList;
+        persistCustomProductsToDisk(storeState.productsList);
+        return true;
+      }
     } catch {
       // Fallback
     }
   }
 
-  const initialLen = productsList.length;
-  productsList = productsList.filter((p) => p.id !== productId);
-  return productsList.length < initialLen;
+  const initialLen = storeState.productsList.length;
+  storeState.productsList = storeState.productsList.filter((p) => p.id !== productId);
+  productsList = storeState.productsList;
+  persistCustomProductsToDisk(storeState.productsList);
+  return storeState.productsList.length < initialLen;
+}
+
+export async function createCategory(data: {
+  name: string;
+  slug?: string;
+  description?: string;
+  parentId?: string | null;
+}): Promise<Category> {
+  const slug =
+    data.slug ||
+    data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+  const id = `cat-${slug}`;
+
+  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
+    try {
+      const client = supabaseAdmin || supabase!;
+      const { data: dbData, error } = await client
+        .from('categories')
+        .insert({
+          id,
+          name: data.name.trim(),
+          slug,
+          description: data.description || '',
+          parent_id: data.parentId || null,
+          is_active: true,
+        })
+        .select()
+        .single();
+
+      if (!error && dbData) {
+        return {
+          id: dbData.id,
+          name: dbData.name,
+          slug: dbData.slug,
+          description: dbData.description,
+          subcategories: [],
+        };
+      }
+    } catch {
+      // Fallback
+    }
+  }
+
+  const newCat: Category = {
+    id,
+    name: data.name.trim(),
+    slug,
+    description: data.description,
+    subcategories: [],
+  };
+  CATEGORIES.push(newCat);
+  return newCat;
+}
+
+export async function createBrand(data: {
+  name: string;
+  slug?: string;
+  description?: string;
+  logoUrl?: string;
+}): Promise<Brand> {
+  const slug =
+    data.slug ||
+    data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+  const id = `brand-${slug}`;
+
+  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
+    try {
+      const client = supabaseAdmin || supabase!;
+      const { data: dbData, error } = await client
+        .from('brands')
+        .insert({
+          id,
+          name: data.name.trim(),
+          slug,
+          description: data.description || '',
+          logo_url: data.logoUrl || null,
+        })
+        .select()
+        .single();
+
+      if (!error && dbData) {
+        return {
+          id: dbData.id,
+          name: dbData.name,
+          slug: dbData.slug,
+          description: dbData.description,
+          logoUrl: dbData.logo_url,
+        };
+      }
+    } catch {
+      // Fallback
+    }
+  }
+
+  const newBrand: Brand = {
+    id,
+    name: data.name.trim(),
+    slug,
+    description: data.description,
+    logoUrl: data.logoUrl,
+  };
+  BRANDS.push(newBrand);
+  return newBrand;
 }
 
 // ----------------------------------------------------------------------

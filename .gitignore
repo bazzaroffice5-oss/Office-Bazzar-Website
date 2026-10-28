@@ -49,3 +49,7 @@ yarn-error.log*
 next-env.d.ts
 
 test_shot.png
+
+# uploaded files
+/public/uploads/*
+!/public/uploads/.gitkeep

@@ -65,9 +65,14 @@ export default function Header() {
   };
 
   const isProductsActive =
-    pathname.startsWith('/products') ||
-    pathname.startsWith('/categories') ||
-    pathname.startsWith('/category');
+    pathname?.startsWith('/products') ||
+    pathname?.startsWith('/categories') ||
+    pathname?.startsWith('/category');
+
+  // Completely hide public header on all hidden admin dashboard routes
+  if (pathname?.startsWith('/office-control')) {
+    return null;
+  }
 
   const navLinks = [
     { name: 'About Us', href: '/about' },
