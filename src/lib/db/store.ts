@@ -31,11 +31,16 @@ function loadCustomProductsFromDisk(): Product[] {
       const fs = require('fs');
       // eslint-disable-next-line @typescript-eslint/no-require-imports
       const path = require('path');
-      const filePath = path.join(process.cwd(), 'src', 'lib', 'data', 'custom_products.json');
-      if (fs.existsSync(filePath)) {
-        const raw = fs.readFileSync(filePath, 'utf-8');
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) return parsed;
+      const pathsToCheck = [
+        path.join(process.cwd(), 'src', 'lib', 'data', 'custom_products.json'),
+        path.resolve(process.cwd(), '..', 'Product-Added-Admin-Panel', 'src', 'lib', 'data', 'custom_products.json'),
+      ];
+      for (const filePath of pathsToCheck) {
+        if (fs.existsSync(filePath)) {
+          const raw = fs.readFileSync(filePath, 'utf-8');
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
       }
     } catch {
       // ignore
