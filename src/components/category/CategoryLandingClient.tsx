@@ -7,6 +7,7 @@ import { useSearchParams, usePathname } from 'next/navigation';
 import {
   ChevronRight,
   ArrowLeft,
+  ArrowRight,
   Package,
 } from 'lucide-react';
 import ProductCard from '@/components/product/ProductCard';
@@ -112,8 +113,25 @@ export default function CategoryLandingClient({
   // Subcategory Grid matching reference design
   // ==========================================
   if (!isProductListingOpen) {
+    const cards = [
+      {
+        id: 'all-products',
+        name: 'All Products',
+        href: '/products',
+        imageUrl: category.imageUrl || '/images/categories/office-supplies-stationery.jpg',
+        description: 'Browse our complete workplace catalogue across all 9 categories with direct wholesale pricing and GST input credit.',
+      },
+      ...(category.subcategories || []).map((sub) => ({
+        id: sub.id,
+        name: sub.name,
+        href: `${categoryBaseUrl}?sub=${sub.slug}`,
+        imageUrl: sub.imageUrl || category.imageUrl || '/images/categories/office-supplies-stationery.jpg',
+        description: sub.description,
+      })),
+    ];
+
     return (
-      <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
+      <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
         {/* Breadcrumb Navigation: Home → Main Category */}
         <nav
           aria-label="Breadcrumb"
@@ -134,47 +152,50 @@ export default function CategoryLandingClient({
             {category.name}
           </h1>
           <div className="w-16 h-[3px] bg-[#ea580c] mx-auto mt-3 rounded-full" />
+          {category.description && (
+            <p className="text-xs sm:text-sm text-slate-600 mt-3 font-normal max-w-xl mx-auto leading-relaxed">
+              {category.description}
+            </p>
+          )}
         </div>
 
-        {/* Responsive Grid of Image-Based Subcategory Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 mb-8">
-          {category.subcategories?.map((sub) => {
-            const count = subcategoryCounts[sub.slug] || sub.itemCount || 0;
-            const subImageUrl = sub.imageUrl || category.imageUrl || '/images/categories/office-supplies-stationery.jpg';
+        {/* 10 Category Cards in Responsive Grid: Desktop 4 cols, Medium screens 3 cols, Tablets 2 cols, Mobile 1 col */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 mb-14">
+          {cards.map((card, index) => (
+            <Link
+              key={card.id}
+              href={card.href}
+              className="group relative flex flex-col w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 bg-slate-100 border border-slate-200/90 hover:border-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004b87] focus-visible:ring-offset-2"
+            >
+              {/* Category Image with Smooth Hover Zoom */}
+              <Image
+                src={card.imageUrl}
+                alt={`${card.name} Category`}
+                fill
+                priority={index < 4}
+                className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              />
 
-            return (
-              <Link
-                key={sub.id}
-                href={`${categoryBaseUrl}?sub=${sub.slug}`}
-                className="group relative block w-full aspect-[4/3] sm:aspect-[4/3.4] lg:aspect-[4/3.4] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004b87] focus-visible:ring-offset-2"
-              >
-                <Image
-                  src={subImageUrl}
-                  alt={sub.name}
-                  fill
-                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-                {/* Hover Tint */}
-                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/20 transition-colors duration-300" />
+              {/* Subtle Overall Gradient/Tint on Hover */}
+              <div className="absolute inset-0 bg-slate-900/15 group-hover:bg-slate-900/25 transition-colors duration-300" />
 
-                {/* Product Count Badge at Top-Right */}
-                {count > 0 && (
-                  <div className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-10 flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-semibold text-slate-800 shadow-sm border border-slate-200/60 pointer-events-none">
-                    <Package className="w-3.5 h-3.5 text-[#004b87]" />
-                    <span>{count} Products</span>
-                  </div>
-                )}
-
-                {/* Subcategory Name near bottom */}
-                <div className="absolute inset-x-0 bottom-0 z-10 pt-16 pb-4 sm:pb-5 px-4 sm:px-5 bg-gradient-to-t from-black/80 via-black/35 to-transparent">
+              {/* Bottom Gradient Overlay with Category Name & Description */}
+              <div className="absolute inset-x-0 bottom-0 z-10 pt-16 pb-4 sm:pb-5 px-4 sm:px-5 bg-gradient-to-t from-black/85 via-black/45 to-transparent">
+                <div className="flex items-center justify-between gap-2">
                   <h2 className="text-base sm:text-lg font-bold text-white tracking-tight drop-shadow-sm group-hover:text-blue-100 transition-colors leading-snug">
-                    {sub.name}
+                    {card.name}
                   </h2>
+                  <ArrowRight className="w-4 h-4 text-white/80 group-hover:text-white group-hover:translate-x-1 transition-all shrink-0" />
                 </div>
-              </Link>
-            );
-          })}
+                {card.description && (
+                  <p className="text-xs text-slate-200/90 line-clamp-2 mt-1 font-normal drop-shadow-sm leading-relaxed">
+                    {card.description}
+                  </p>
+                )}
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     );

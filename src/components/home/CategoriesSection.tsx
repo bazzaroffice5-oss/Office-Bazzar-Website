@@ -41,7 +41,7 @@ export default function CategoriesSection({
           {displayCategories.map((cat) => (
             <Link
               key={cat.id}
-              href="/categories"
+              href={`/categories/${cat.slug}`}
               className="group relative flex flex-col bg-white rounded-2xl border border-slate-200/90 hover:border-slate-300 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004b87] focus-visible:ring-offset-2"
             >
               {/* Category Image Banner with Consistent Sizing and Smooth Hover */}
