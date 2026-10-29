@@ -56,7 +56,7 @@ export default async function ProductsPage({
   searchParams: Promise<{ query?: string; category?: string; brand?: string; sub?: string }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  const { products } = await getProducts();
+  const { products } = await getProducts({ limit: 1000 });
   const allCategories = await getCategories();
   const categories = APPROVED_CATEGORIES.map((slug) =>
     allCategories.find((c) => c.slug === slug)
@@ -65,7 +65,7 @@ export default async function ProductsPage({
 
   const breadcrumbJsonLd = getBreadcrumbJsonLd([
     { name: 'Home', url: '/' },
-    { name: 'Products', url: '/products' },
+    { name: 'All Products', url: '/products' },
   ]);
 
   return (
@@ -75,11 +75,10 @@ export default async function ProductsPage({
         initialProducts={products}
         categories={categories}
         brands={brands}
-        initialQuery={resolvedSearchParams.query}
-        initialCategorySlug={resolvedSearchParams.category}
-        initialSubcategorySlug={resolvedSearchParams.sub}
-        initialBrandSlug={resolvedSearchParams.brand}
-        showAllCategoriesHeader
+        initialQuery={resolvedSearchParams?.query}
+        initialCategorySlug={resolvedSearchParams?.category}
+        initialSubcategorySlug={resolvedSearchParams?.sub}
+        initialBrandSlug={resolvedSearchParams?.brand}
       />
     </main>
   );
