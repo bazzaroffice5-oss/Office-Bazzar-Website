@@ -7,11 +7,22 @@ import {
 } from '@/lib/data/catalog';
 import AllCategoriesClient from '@/components/category/AllCategoriesClient';
 import { getCanonicalUrl, SITE_CONFIG } from '@/lib/seo/config';
+import { Subcategory } from '@/types';
+
+export const ALL_PRODUCTS_CARD: Subcategory = {
+  id: 'all-products',
+  name: 'All Products',
+  slug: 'all-products',
+  categoryId: 'all',
+  description: 'Browse our complete workplace catalogue across all 9 categories with direct wholesale pricing and GST input credit.',
+  imageUrl: '/images/categories/office-supplies-stationery.jpg',
+  itemCount: 0,
+};
 
 export async function generateMetadata() {
-  const metaTitle = 'All Categories | Workplace Procurement | OfficeBazzar Chennai';
+  const metaTitle = 'All Categories & Products | Workplace Procurement | OfficeBazzar Chennai';
   const metaDescription =
-    'Explore all 9 workplace procurement categories at OfficeBazzar: Writing Instruments, Paper & Notebooks, Files & Office Organization, Printing & IT Supplies, Cleaning & Hygiene Essentials, Packaging & Dispatch, Office Pantry Essentials, Office Furniture & Accessories, and Safety & Maintenance.';
+    'Explore our complete workplace procurement catalog and 9 specialized categories at OfficeBazzar: All Products, Writing Instruments, Paper & Notebooks, Files & Office Organization, Printing & IT Supplies, Cleaning & Hygiene Essentials, Packaging & Dispatch, Office Pantry Essentials, Office Furniture & Accessories, and Safety & Maintenance.';
   const canonical = getCanonicalUrl('/categories');
 
   return {
@@ -51,8 +62,8 @@ export default async function AllCategoriesPage({
   // 1. Fetch products
   const { products: allProducts } = await getProducts();
 
-  // 2. The 9 specialized categories
-  const categories = NINE_SUBCATEGORIES;
+  // 2. The 10 cards: All Products first, followed by the 9 categories
+  const categories = [ALL_PRODUCTS_CARD, ...NINE_SUBCATEGORIES];
 
   // 3. Compute accurate product counts based on actual active products
   const productCounts: Record<string, number> = {};
