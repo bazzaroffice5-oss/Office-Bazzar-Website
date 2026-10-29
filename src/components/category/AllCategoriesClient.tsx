@@ -48,12 +48,12 @@ export default function AllCategoriesClient({
         </h1>
         <div className="w-16 h-[3px] bg-[#ea580c] mx-auto mt-3 rounded-full" />
         <p className="text-xs sm:text-sm text-slate-600 mt-3 font-normal max-w-xl mx-auto leading-relaxed">
-          Explore our 9 specialized workplace procurement categories for enterprises, institutions, and facility managers across South India.
+          Explore our 4 core workplace procurement divisions: Office Stationery, Housekeeping & Hygiene, Printers & Technology, and Packaging Supplies.
         </p>
       </div>
 
       {/* 9 Category Cards in 3-Column Responsive Grid (3 on desktop, 2 on tablet, 1-2 on mobile) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mb-12">
         {categories.map((cat) => {
           const count = productCounts[cat.id] ?? productCounts[cat.slug] ?? 0;
           const imageUrl = cat.imageUrl || '/images/categories/office-supplies-stationery.jpg';
@@ -63,7 +63,7 @@ export default function AllCategoriesClient({
             <Link
               key={cat.id}
               href={`${categoryBase}/${cat.slug}`}
-              className="group relative flex flex-col w-full aspect-[4/3] sm:aspect-[16/11] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 bg-slate-100 border border-slate-200/90 hover:border-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004b87] focus-visible:ring-offset-2"
+              className="group relative flex flex-col w-full aspect-[4/3] sm:aspect-[4/3.4] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 bg-slate-100 border border-slate-200/90 hover:border-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004b87] focus-visible:ring-offset-2"
             >
               {/* Category Image with Smooth Hover Zoom */}
               <Image
@@ -72,7 +72,7 @@ export default function AllCategoriesClient({
                 fill
                 priority={cat.id === 'files-office-organization' || cat.id === 'printing-it-supplies' || cat.id === 'housekeeping-hygiene'}
                 className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               />
 
               {/* Subtle Overall Gradient/Tint on Hover */}

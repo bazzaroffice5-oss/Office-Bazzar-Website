@@ -8,7 +8,7 @@ import { getCanonicalUrl, SITE_CONFIG } from '@/lib/seo/config';
 export async function generateMetadata() {
   const metaTitle = 'All Categories | Workplace Procurement | OfficeBazzar Chennai';
   const metaDescription =
-    'Explore all 9 workplace procurement categories at OfficeBazzar: Writing Instruments, Paper & Notebooks, Files & Office Organization, Printing & IT Supplies, Housekeeping & Hygiene, Packaging & Dispatch, Office Pantry Essentials, Office Furniture & Accessories, and Safety & Maintenance.';
+    'Explore all 4 corporate procurement categories at OfficeBazzar: Office Stationery, Housekeeping & Hygiene, Printers & Technology, and Packaging Supplies.';
   const canonical = getCanonicalUrl('/categories');
 
   return {

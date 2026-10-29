@@ -12,13 +12,12 @@ import {
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
-const ALL_CATEGORIES_ROUTE = '/categories';
 
 const PRODUCT_CATEGORIES = [
-  { name: 'Office Stationery', href: ALL_CATEGORIES_ROUTE },
-  { name: 'Housekeeping & Hygiene', href: ALL_CATEGORIES_ROUTE },
-  { name: 'Printers & Technology', href: ALL_CATEGORIES_ROUTE },
-  { name: 'Packaging Supplies', href: ALL_CATEGORIES_ROUTE },
+  { name: 'Office Stationery', href: '/categories/office-stationery' },
+  { name: 'Housekeeping & Hygiene', href: '/categories/housekeeping-hygiene' },
+  { name: 'Printers & Technology', href: '/categories/printers-technology' },
+  { name: 'Packaging Supplies', href: '/categories/packaging-supplies' },
 ];
 
 export default function Header() {

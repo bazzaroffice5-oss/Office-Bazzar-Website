@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import ProductCard from '@/components/product/ProductCard';
 import { Product, Category, Subcategory } from '@/types';
-import { CATEGORY_MAP } from '@/lib/data/catalog';
+import { CATEGORY_MAP, isProductInSubcategory } from '@/lib/data/catalog';
 
 interface CategoryLandingClientProps {
   category: Category;
@@ -52,21 +52,16 @@ export default function CategoryLandingClient({
     });
   }, [allProducts, category]);
 
-  // Compute product counts for each subcategory
+  // Compute product counts for each subcategory across catalog
   const subcategoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
     category.subcategories?.forEach((sub) => {
-      const inSub = categoryProducts.filter((p) => {
-        if (p.subcategoryId === sub.id || p.subcategoryId === sub.slug) return true;
-        if (p.subcategoryName && p.subcategoryName.toLowerCase() === sub.name.toLowerCase()) return true;
-        const mapped = CATEGORY_MAP[p.subcategoryId || ''] || CATEGORY_MAP[p.categoryId || ''];
-        return mapped?.subSlug === sub.slug;
-      });
-      counts[sub.slug] = inSub.length || sub.itemCount || 0;
+      const inSub = allProducts.filter((p) => isProductInSubcategory(p, sub.slug));
+      counts[sub.slug] = inSub.length;
       counts[sub.id] = counts[sub.slug];
     });
     return counts;
-  }, [category, categoryProducts]);
+  }, [category, allProducts]);
 
   // Determine if product listing mode is active
   const isViewingAll = viewParam === 'all' || viewParam === 'products';
@@ -85,13 +80,8 @@ export default function CategoryLandingClient({
     if (isViewingAll || !activeSubcategory) {
       return categoryProducts;
     }
-    return categoryProducts.filter((p) => {
-      if (p.subcategoryId === activeSubcategory.id || p.subcategoryId === activeSubcategory.slug) return true;
-      if (p.subcategoryName && p.subcategoryName.toLowerCase() === activeSubcategory.name.toLowerCase()) return true;
-      const mapped = CATEGORY_MAP[p.subcategoryId || ''] || CATEGORY_MAP[p.categoryId || ''];
-      return mapped?.subSlug === activeSubcategory.slug;
-    });
-  }, [categoryProducts, isProductListingOpen, isViewingAll, activeSubcategory]);
+    return allProducts.filter((p) => isProductInSubcategory(p, activeSubcategory.slug));
+  }, [categoryProducts, allProducts, isProductListingOpen, isViewingAll, activeSubcategory]);
 
   const totalItems = displayedProducts.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -188,7 +178,7 @@ export default function CategoryLandingClient({
             {/* Subcategory Name near bottom */}
             <div className="absolute inset-x-0 bottom-0 z-10 pt-16 pb-4 sm:pb-5 px-4 sm:px-5 bg-gradient-to-t from-black/80 via-black/35 to-transparent">
               <h2 className="text-base sm:text-lg font-bold text-white tracking-tight drop-shadow-sm group-hover:text-blue-100 transition-colors leading-snug">
-                All Products
+                All {category.name} Products
               </h2>
             </div>
           </Link>
@@ -308,7 +298,7 @@ export default function CategoryLandingClient({
               : 'bg-white border border-slate-200 text-slate-700 hover:border-[#004b87] hover:text-[#004b87]'
           }`}
         >
-          <span>All Products</span>
+          <span>All {category.name}</span>
           <span
             className={`text-[11px] px-1.5 py-0.5 rounded-full font-semibold ${
               isViewingAll ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'

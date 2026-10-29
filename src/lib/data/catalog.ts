@@ -1,4 +1,4 @@
-import { Category, Brand, Product, Coupon } from '@/types';
+import { Category, Subcategory, Brand, Product, Coupon } from '@/types';
 
 export const LEGACY_CATEGORIES: Category[] = [
   {
@@ -123,228 +123,144 @@ export const LEGACY_CATEGORIES: Category[] = [
   }
 ];
 
-export const MAIN_CATEGORIES: Category[] = [
+export const NINE_SUBCATEGORIES: Subcategory[] = [
   {
     id: 'writing-instruments',
     name: 'Writing Instruments',
     slug: 'writing-instruments',
+    categoryId: 'office-stationery',
     description: 'Pens, pencils, markers, highlighters and refills.',
     imageUrl: '/images/hero-collage/colored-pens.jpg',
-    icon: 'PenTool',
-    featured: true,
     itemCount: 0,
-    subcategories: [],
   },
   {
     id: 'paper-notebooks',
     name: 'Paper & Notebooks',
     slug: 'paper-notebooks',
+    categoryId: 'office-stationery',
     description: 'Notebooks, registers, printer paper, sticky notes and paper products.',
     imageUrl: '/images/banners/jk-copier.jpg',
-    icon: 'BookOpen',
-    featured: true,
     itemCount: 0,
-    subcategories: [],
   },
   {
     id: 'files-office-organization',
     name: 'Files & Office Organization',
     slug: 'files-office-organization',
+    categoryId: 'office-stationery',
     description: 'Files, folders, binders, document organizers and desk organizers.',
     imageUrl: '/images/banners/stationery-files-workspace.jpg',
-    icon: 'Folder',
-    featured: true,
     itemCount: 22,
-    subcategories: [
-      {
-        id: 'cat-stationery',
-        name: 'Desk Stationery & Files',
-        slug: 'desk-stationery-files',
-        categoryId: 'files-office-organization',
-        itemCount: 9,
-        imageUrl: '/images/subcategories/desk-stationery.jpg',
-      },
-      {
-        id: 'cat-boards',
-        name: 'Boards & Accessories',
-        slug: 'boards-accessories',
-        categoryId: 'files-office-organization',
-        itemCount: 9,
-        imageUrl: '/images/categories/boards-displays.jpg',
-      },
-      {
-        id: 'cat-display-stand',
-        name: 'Display Stands & Nameplates',
-        slug: 'display-stands-nameplates',
-        categoryId: 'files-office-organization',
-        itemCount: 4,
-        imageUrl: '/images/subcategories/display-stands.webp',
-      },
-    ],
   },
   {
     id: 'printing-it-supplies',
     name: 'Printing & IT Supplies',
     slug: 'printing-it-supplies',
+    categoryId: 'printers-technology',
     description: 'Printers, ink, toner, cartridges, cables and computer accessories.',
     imageUrl: '/images/categories/printer-supplies-toner.jpg',
-    icon: 'Printer',
-    featured: true,
     itemCount: 26,
-    subcategories: [
-      {
-        id: 'cat-printer-cartridges',
-        name: 'Laser Toners & Cartridges',
-        slug: 'laser-toners-cartridges',
-        categoryId: 'printing-it-supplies',
-        itemCount: 12,
-        imageUrl: '/images/subcategories/laser-toners.webp',
-      },
-      {
-        id: 'cat-computer-consumables',
-        name: 'Computer Consumables & Peripherals',
-        slug: 'computer-consumables-peripherals',
-        categoryId: 'printing-it-supplies',
-        itemCount: 8,
-        imageUrl: '/images/subcategories/computer-consumables.jpg',
-      },
-      {
-        id: 'cat-shredders-currency',
-        name: 'Paper Shredders & Currency Counters',
-        slug: 'paper-shredders-currency-counters',
-        categoryId: 'printing-it-supplies',
-        itemCount: 6,
-        imageUrl: '/images/subcategories/paper-shredders.webp',
-      },
-    ],
   },
   {
-    id: 'housekeeping-hygiene',
-    name: 'Housekeeping & Hygiene',
-    slug: 'housekeeping-hygiene',
+    id: 'cleaning-hygiene-essentials',
+    name: 'Cleaning & Hygiene Essentials',
+    slug: 'cleaning-hygiene-essentials',
+    categoryId: 'housekeeping-hygiene',
     description: 'Cleaning supplies, tissue products, handwash and hygiene essentials.',
     imageUrl: '/images/categories/housekeeping-facility.jpg',
-    icon: 'Sparkles',
-    featured: true,
     itemCount: 44,
-    subcategories: [
-      {
-        id: 'cat-housekeeping',
-        name: 'Housekeeping Equipment & Tools',
-        slug: 'housekeeping-equipment-tools',
-        categoryId: 'housekeeping-hygiene',
-        itemCount: 18,
-        imageUrl: '/images/subcategories/housekeeping-tools.jpg',
-      },
-      {
-        id: 'cat-cleaning-chemicals',
-        name: 'Cleaning Chemicals & Taski',
-        slug: 'cleaning-chemicals-taski',
-        categoryId: 'housekeeping-hygiene',
-        itemCount: 9,
-        imageUrl: '/images/subcategories/cleaning-chemicals.webp',
-      },
-      {
-        id: 'cat-garbage-bin',
-        name: 'Industrial Garbage Bins',
-        slug: 'industrial-garbage-bins',
-        categoryId: 'housekeeping-hygiene',
-        itemCount: 6,
-        imageUrl: '/images/subcategories/industrial-dustbins.jpg',
-      },
-      {
-        id: 'cat-housekeeping-accessories',
-        name: 'Housekeeping Accessories & Sprays',
-        slug: 'housekeeping-accessories-sprays',
-        categoryId: 'housekeeping-hygiene',
-        itemCount: 5,
-        imageUrl: '/images/subcategories/housekeeping-accessories.webp',
-      },
-      {
-        id: 'cat-tissue-napkin',
-        name: 'Tissue Paper & Napkins',
-        slug: 'tissue-paper-napkins',
-        categoryId: 'housekeeping-hygiene',
-        itemCount: 6,
-        imageUrl: '/images/subcategories/tissue-paper.webp',
-      },
-    ],
   },
   {
     id: 'packaging-dispatch',
     name: 'Packaging & Dispatch',
     slug: 'packaging-dispatch',
+    categoryId: 'packaging-supplies',
     description: 'Cartons, bubble wrap, packing tape, labels and courier supplies.',
     imageUrl: '/images/categories/packaging-materials.jpg',
-    icon: 'Package',
-    featured: true,
     itemCount: 9,
-    subcategories: [
-      {
-        id: 'cat-packaging-tapes',
-        name: 'Packaging Tapes & Adhesives',
-        slug: 'packaging-tapes-adhesives',
-        categoryId: 'packaging-dispatch',
-        itemCount: 5,
-        imageUrl: '/images/subcategories/packaging-tapes.webp',
-      },
-      {
-        id: 'cat-protective-materials',
-        name: 'Protective & Strapping Materials',
-        slug: 'protective-strapping-materials',
-        categoryId: 'packaging-dispatch',
-        itemCount: 4,
-        imageUrl: '/images/subcategories/protective-packaging.jpg',
-      },
-    ],
   },
   {
     id: 'office-pantry-essentials',
     name: 'Office Pantry Essentials',
     slug: 'office-pantry-essentials',
-    description: 'Tea, coffee, drinking water supplies, cups and pantry consumables, where available.',
+    categoryId: 'office-stationery',
+    description: 'Tea, coffee, drinking water supplies, cups and pantry consumables.',
     imageUrl: '/images/categories/pantry-hygiene.jpg',
-    icon: 'Coffee',
-    featured: false,
     itemCount: 0,
-    subcategories: [],
   },
   {
     id: 'office-furniture-accessories',
     name: 'Office Furniture & Accessories',
     slug: 'office-furniture-accessories',
-    description: 'Office chairs, desks, monitor stands and ergonomic accessories, where available.',
+    categoryId: 'office-stationery',
+    description: 'Office chairs, desks, monitor stands and ergonomic accessories.',
     imageUrl: '/images/hero/chair.jpg',
-    icon: 'Armchair',
-    featured: false,
     itemCount: 0,
-    subcategories: [],
   },
   {
     id: 'safety-maintenance',
     name: 'Safety & Maintenance',
     slug: 'safety-maintenance',
-    description: 'Safety signs, gloves, maintenance tools and facility safety products, where available.',
+    categoryId: 'office-stationery',
+    description: 'Safety signs, gloves, maintenance tools and facility safety products.',
     imageUrl: '/images/categories/safety-ppe-equipment.jpg',
-    icon: 'ShieldAlert',
-    featured: false,
     itemCount: 0,
-    subcategories: [],
+  },
+];
+
+export const MAIN_CATEGORIES: Category[] = [
+  {
+    id: 'office-stationery',
+    name: 'Office Stationery',
+    slug: 'office-stationery',
+    description: 'Wholesale office stationery, registers, paper tag files, box files, staplers, whiteboards, and visual display accessories for corporate workplaces.',
+    imageUrl: '/images/banners/stationery-files-workspace.jpg',
+    icon: 'PenTool',
+    featured: true,
+    itemCount: 22,
+    subcategories: NINE_SUBCATEGORIES.map((sub) => ({ ...sub, categoryId: 'office-stationery' })),
+  },
+  {
+    id: 'housekeeping-hygiene',
+    name: 'Housekeeping & Hygiene',
+    slug: 'housekeeping-hygiene',
+    description: 'Commercial housekeeping equipment, Diversey Taski chemicals, mobile wheeled garbage bins, wipers, dispensers, and washroom hygiene supplies.',
+    imageUrl: '/images/categories/housekeeping-facility.jpg',
+    icon: 'Sparkles',
+    featured: true,
+    itemCount: 44,
+    subcategories: NINE_SUBCATEGORIES.map((sub) => ({ ...sub, categoryId: 'housekeeping-hygiene' })),
+  },
+  {
+    id: 'printers-technology',
+    name: 'Printers & Technology',
+    slug: 'printers-technology',
+    description: 'Laser toner cartridges, barcode printers, computer consumables, cables, lamination machines, paper shredders, and currency counting machinery.',
+    imageUrl: '/images/categories/printer-supplies-toner.jpg',
+    icon: 'Printer',
+    featured: true,
+    itemCount: 26,
+    subcategories: NINE_SUBCATEGORIES.map((sub) => ({ ...sub, categoryId: 'printers-technology' })),
+  },
+  {
+    id: 'packaging-supplies',
+    name: 'Packaging Supplies',
+    slug: 'packaging-supplies',
+    description: 'Heavy-duty BOPP brown cello tape, floor marking tapes, bubble wrap rolls, foam thermocol sheets, and protective packaging materials.',
+    imageUrl: '/images/categories/packaging-materials.jpg',
+    icon: 'Package',
+    featured: true,
+    itemCount: 9,
+    subcategories: NINE_SUBCATEGORIES.map((sub) => ({ ...sub, categoryId: 'packaging-supplies' })),
   },
 ];
 
 export const CATEGORIES: Category[] = MAIN_CATEGORIES;
 
 export const APPROVED_CATEGORIES = [
-  'writing-instruments',
-  'paper-notebooks',
-  'files-office-organization',
-  'printing-it-supplies',
+  'office-stationery',
   'housekeeping-hygiene',
-  'packaging-dispatch',
-  'office-pantry-essentials',
-  'office-furniture-accessories',
-  'safety-maintenance',
+  'printers-technology',
+  'packaging-supplies',
 ];
 
 export const CATEGORY_MAP: Record<
@@ -357,127 +273,334 @@ export const CATEGORY_MAP: Record<
     subSlug: string;
   }
 > = {
+  // Legacy product categories
   'cat-stationery': {
-    mainId: 'files-office-organization',
-    mainName: 'Files & Office Organization',
-    mainSlug: 'files-office-organization',
-    subName: 'Desk Stationery & Files',
-    subSlug: 'desk-stationery-files',
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Files & Office Organization',
+    subSlug: 'files-office-organization',
   },
   'cat-boards': {
-    mainId: 'files-office-organization',
-    mainName: 'Files & Office Organization',
-    mainSlug: 'files-office-organization',
-    subName: 'Boards & Accessories',
-    subSlug: 'boards-accessories',
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Files & Office Organization',
+    subSlug: 'files-office-organization',
   },
   'cat-display-stand': {
-    mainId: 'files-office-organization',
-    mainName: 'Files & Office Organization',
-    mainSlug: 'files-office-organization',
-    subName: 'Display Stands & Nameplates',
-    subSlug: 'display-stands-nameplates',
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Files & Office Organization',
+    subSlug: 'files-office-organization',
   },
   'cat-housekeeping': {
     mainId: 'housekeeping-hygiene',
     mainName: 'Housekeeping & Hygiene',
     mainSlug: 'housekeeping-hygiene',
-    subName: 'Housekeeping Equipment & Tools',
-    subSlug: 'housekeeping-equipment-tools',
+    subName: 'Cleaning & Hygiene Essentials',
+    subSlug: 'cleaning-hygiene-essentials',
   },
   'cat-cleaning-chemicals': {
     mainId: 'housekeeping-hygiene',
     mainName: 'Housekeeping & Hygiene',
     mainSlug: 'housekeeping-hygiene',
-    subName: 'Cleaning Chemicals & Taski',
-    subSlug: 'cleaning-chemicals-taski',
+    subName: 'Cleaning & Hygiene Essentials',
+    subSlug: 'cleaning-hygiene-essentials',
   },
   'cat-garbage-bin': {
     mainId: 'housekeeping-hygiene',
     mainName: 'Housekeeping & Hygiene',
     mainSlug: 'housekeeping-hygiene',
-    subName: 'Industrial Garbage Bins',
-    subSlug: 'industrial-garbage-bins',
+    subName: 'Cleaning & Hygiene Essentials',
+    subSlug: 'cleaning-hygiene-essentials',
   },
   'cat-housekeeping-accessories': {
     mainId: 'housekeeping-hygiene',
     mainName: 'Housekeeping & Hygiene',
     mainSlug: 'housekeeping-hygiene',
-    subName: 'Housekeeping Accessories & Sprays',
-    subSlug: 'housekeeping-accessories-sprays',
+    subName: 'Cleaning & Hygiene Essentials',
+    subSlug: 'cleaning-hygiene-essentials',
   },
   'cat-tissue-napkin': {
     mainId: 'housekeeping-hygiene',
     mainName: 'Housekeeping & Hygiene',
     mainSlug: 'housekeeping-hygiene',
-    subName: 'Tissue Paper & Napkins',
-    subSlug: 'tissue-paper-napkins',
+    subName: 'Cleaning & Hygiene Essentials',
+    subSlug: 'cleaning-hygiene-essentials',
   },
   'cat-printer-cartridges': {
-    mainId: 'printing-it-supplies',
-    mainName: 'Printing & IT Supplies',
-    mainSlug: 'printing-it-supplies',
-    subName: 'Laser Toners & Cartridges',
-    subSlug: 'laser-toners-cartridges',
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Printing & IT Supplies',
+    subSlug: 'printing-it-supplies',
   },
   'cat-computer-consumables': {
-    mainId: 'printing-it-supplies',
-    mainName: 'Printing & IT Supplies',
-    mainSlug: 'printing-it-supplies',
-    subName: 'Computer Consumables & Peripherals',
-    subSlug: 'computer-consumables-peripherals',
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Printing & IT Supplies',
+    subSlug: 'printing-it-supplies',
   },
   'cat-shredders-currency': {
-    mainId: 'printing-it-supplies',
-    mainName: 'Printing & IT Supplies',
-    mainSlug: 'printing-it-supplies',
-    subName: 'Paper Shredders & Currency Counters',
-    subSlug: 'paper-shredders-currency-counters',
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Printing & IT Supplies',
+    subSlug: 'printing-it-supplies',
   },
   'cat-packaging': {
-    mainId: 'packaging-dispatch',
-    mainName: 'Packaging & Dispatch',
-    mainSlug: 'packaging-dispatch',
-    subName: 'Packaging Materials & Tapes',
-    subSlug: 'packaging-materials-tapes',
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'Packaging & Dispatch',
+    subSlug: 'packaging-dispatch',
   },
   'cat-packaging-tapes': {
-    mainId: 'packaging-dispatch',
-    mainName: 'Packaging & Dispatch',
-    mainSlug: 'packaging-dispatch',
-    subName: 'Packaging Tapes & Adhesives',
-    subSlug: 'packaging-tapes-adhesives',
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'Packaging & Dispatch',
+    subSlug: 'packaging-dispatch',
   },
   'cat-protective-materials': {
-    mainId: 'packaging-dispatch',
-    mainName: 'Packaging & Dispatch',
-    mainSlug: 'packaging-dispatch',
-    subName: 'Protective & Strapping Materials',
-    subSlug: 'protective-strapping-materials',
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'Packaging & Dispatch',
+    subSlug: 'packaging-dispatch',
   },
-  // Legacy main category aliases
-  'office-stationery': {
-    mainId: 'files-office-organization',
-    mainName: 'Files & Office Organization',
-    mainSlug: 'files-office-organization',
-    subName: 'Desk Stationery & Files',
-    subSlug: 'desk-stationery-files',
+
+  // 9 Subcategories mappings
+  'writing-instruments': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Writing Instruments',
+    subSlug: 'writing-instruments',
   },
-  'printers-technology': {
-    mainId: 'printing-it-supplies',
-    mainName: 'Printing & IT Supplies',
-    mainSlug: 'printing-it-supplies',
-    subName: 'Laser Toners & Cartridges',
-    subSlug: 'laser-toners-cartridges',
+  'paper-notebooks': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Paper & Notebooks',
+    subSlug: 'paper-notebooks',
   },
-  'packaging-supplies': {
-    mainId: 'packaging-dispatch',
-    mainName: 'Packaging & Dispatch',
-    mainSlug: 'packaging-dispatch',
-    subName: 'Packaging Materials & Tapes',
-    subSlug: 'packaging-materials-tapes',
+  'files-office-organization': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Files & Office Organization',
+    subSlug: 'files-office-organization',
+  },
+  'printing-it-supplies': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Printing & IT Supplies',
+    subSlug: 'printing-it-supplies',
+  },
+  'cleaning-hygiene-essentials': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning & Hygiene Essentials',
+    subSlug: 'cleaning-hygiene-essentials',
+  },
+  'packaging-dispatch': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'Packaging & Dispatch',
+    subSlug: 'packaging-dispatch',
+  },
+  'office-pantry-essentials': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Office Pantry Essentials',
+    subSlug: 'office-pantry-essentials',
+  },
+  'office-furniture-accessories': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Office Furniture & Accessories',
+    subSlug: 'office-furniture-accessories',
+  },
+  'safety-maintenance': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Safety & Maintenance',
+    subSlug: 'safety-maintenance',
+  },
+
+  // Legacy subcategory slugs
+  'desk-stationery-files': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Files & Office Organization',
+    subSlug: 'files-office-organization',
+  },
+  'boards-accessories': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Files & Office Organization',
+    subSlug: 'files-office-organization',
+  },
+  'display-stands-nameplates': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Files & Office Organization',
+    subSlug: 'files-office-organization',
+  },
+  'laser-toners-cartridges': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Printing & IT Supplies',
+    subSlug: 'printing-it-supplies',
+  },
+  'computer-consumables-peripherals': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Printing & IT Supplies',
+    subSlug: 'printing-it-supplies',
+  },
+  'paper-shredders-currency-counters': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Printing & IT Supplies',
+    subSlug: 'printing-it-supplies',
+  },
+  'housekeeping-equipment-tools': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning & Hygiene Essentials',
+    subSlug: 'cleaning-hygiene-essentials',
+  },
+  'cleaning-chemicals-taski': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning & Hygiene Essentials',
+    subSlug: 'cleaning-hygiene-essentials',
+  },
+  'industrial-garbage-bins': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning & Hygiene Essentials',
+    subSlug: 'cleaning-hygiene-essentials',
+  },
+  'housekeeping-accessories-sprays': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning & Hygiene Essentials',
+    subSlug: 'cleaning-hygiene-essentials',
+  },
+  'tissue-paper-napkins': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning & Hygiene Essentials',
+    subSlug: 'cleaning-hygiene-essentials',
+  },
+  'packaging-materials-tapes': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'Packaging & Dispatch',
+    subSlug: 'packaging-dispatch',
+  },
+  'packaging-tapes-adhesives': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'Packaging & Dispatch',
+    subSlug: 'packaging-dispatch',
+  },
+  'protective-strapping-materials': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'Packaging & Dispatch',
+    subSlug: 'packaging-dispatch',
   },
 };
+
+export function isProductInSubcategory(p: Product, subSlug: string): boolean {
+  if (!p.isActive) return false;
+  const slug = subSlug.toLowerCase().trim();
+
+  if (p.subcategoryId?.toLowerCase() === slug) return true;
+  if (p.subcategoryName?.toLowerCase() === slug) return true;
+
+  const mapped = CATEGORY_MAP[p.subcategoryId || ''] || CATEGORY_MAP[p.categoryId || ''];
+  if (mapped?.subSlug === slug || mapped?.subName?.toLowerCase() === slug) {
+    return true;
+  }
+
+  if (slug === 'files-office-organization') {
+    return [
+      'cat-stationery',
+      'cat-boards',
+      'cat-display-stand',
+      'desk-stationery-files',
+      'boards-accessories',
+      'display-stands-nameplates',
+    ].includes(p.subcategoryId || '');
+  }
+
+  if (slug === 'printing-it-supplies') {
+    return [
+      'cat-printer-cartridges',
+      'cat-computer-consumables',
+      'cat-shredders-currency',
+      'laser-toners-cartridges',
+      'computer-consumables-peripherals',
+      'paper-shredders-currency-counters',
+    ].includes(p.subcategoryId || '');
+  }
+
+  if (slug === 'cleaning-hygiene-essentials') {
+    return [
+      'cat-housekeeping',
+      'cat-cleaning-chemicals',
+      'cat-garbage-bin',
+      'cat-housekeeping-accessories',
+      'cat-tissue-napkin',
+      'housekeeping-equipment-tools',
+      'cleaning-chemicals-taski',
+      'industrial-garbage-bins',
+      'housekeeping-accessories-sprays',
+      'tissue-paper-napkins',
+    ].includes(p.subcategoryId || '');
+  }
+
+  if (slug === 'packaging-dispatch') {
+    return [
+      'cat-packaging',
+      'cat-packaging-tapes',
+      'cat-protective-materials',
+      'packaging-materials-tapes',
+      'packaging-tapes-adhesives',
+      'protective-strapping-materials',
+    ].includes(p.subcategoryId || '');
+  }
+
+  return false;
+}
 
 export function resolveMainCategory(slugOrId?: string): Category | undefined {
   if (!slugOrId) return undefined;
@@ -487,66 +610,32 @@ export function resolveMainCategory(slugOrId?: string): Category | undefined {
   const direct = MAIN_CATEGORIES.find((c) => c.id === s || c.slug === s);
   if (direct) return direct;
 
-  // 2. Legacy main slug aliases
-  if (s === 'office-stationery' || s === 'cat-stationery') {
-    return MAIN_CATEGORIES.find((c) => c.id === 'files-office-organization');
-  }
-  if (s === 'printers-technology' || s === 'printers-tech') {
-    return MAIN_CATEGORIES.find((c) => c.id === 'printing-it-supplies');
-  }
-  if (s === 'packaging-supplies' || s === 'cat-packaging') {
-    return MAIN_CATEGORIES.find((c) => c.id === 'packaging-dispatch');
+  // 2. Direct match on category map
+  const fromMap = CATEGORY_MAP[s];
+  if (fromMap) {
+    const matched = MAIN_CATEGORIES.find((c) => c.id === fromMap.mainId || c.slug === fromMap.mainSlug);
+    if (matched) return matched;
   }
 
-  // 3. Direct match on subcategory id
-  const fromSub = CATEGORY_MAP[s];
-  if (fromSub) {
-    return MAIN_CATEGORIES.find((c) => c.id === fromSub.mainId || c.slug === fromSub.mainSlug);
-  }
-
-  // 4. Match on any subcategory in MAIN_CATEGORIES
+  // 3. Match on any subcategory in MAIN_CATEGORIES
   for (const cat of MAIN_CATEGORIES) {
     if (cat.subcategories?.some((sub) => sub.slug === s || sub.id === s)) {
       return cat;
     }
   }
 
-  // 5. Match on legacy categories
-  const legacyMatch = LEGACY_CATEGORIES.find((c) => c.slug === s || c.id === s);
-  if (legacyMatch) {
-    const fromLegacy = CATEGORY_MAP[legacyMatch.id];
-    if (fromLegacy) {
-      return MAIN_CATEGORIES.find((c) => c.id === fromLegacy.mainId || c.slug === fromLegacy.mainSlug);
-    }
+  // 4. Substring heuristics
+  if (s.includes('stationer') || s.includes('file') || s.includes('paper') || s.includes('writing') || s.includes('pen') || s.includes('board') || s.includes('pantry') || s.includes('furniture')) {
+    return MAIN_CATEGORIES.find((c) => c.id === 'office-stationery');
   }
-
-  // 6. Substring heuristics
-  if (s.includes('writing') || s.includes('pen') || s.includes('marker')) {
-    return MAIN_CATEGORIES.find((c) => c.id === 'writing-instruments');
-  }
-  if (s.includes('paper') || s.includes('notebook') || s.includes('register') || s.includes('copier')) {
-    return MAIN_CATEGORIES.find((c) => c.id === 'paper-notebooks');
-  }
-  if (s.includes('file') || s.includes('stationer') || s.includes('folder') || s.includes('board') || s.includes('organizer')) {
-    return MAIN_CATEGORIES.find((c) => c.id === 'files-office-organization');
-  }
-  if (s.includes('printer') || s.includes('tech') || s.includes('toner') || s.includes('cartridge') || s.includes('shredder')) {
-    return MAIN_CATEGORIES.find((c) => c.id === 'printing-it-supplies');
-  }
-  if (s.includes('housekeep') || s.includes('hygiene') || s.includes('clean') || s.includes('garbage') || s.includes('bin') || s.includes('tissue')) {
+  if (s.includes('housekeep') || s.includes('hygiene') || s.includes('clean') || s.includes('taski') || s.includes('garbage') || s.includes('bin') || s.includes('tissue')) {
     return MAIN_CATEGORIES.find((c) => c.id === 'housekeeping-hygiene');
   }
-  if (s.includes('packag') || s.includes('dispatch') || s.includes('tape') || s.includes('bubble')) {
-    return MAIN_CATEGORIES.find((c) => c.id === 'packaging-dispatch');
+  if (s.includes('printer') || s.includes('tech') || s.includes('toner') || s.includes('cartridge') || s.includes('consumable') || s.includes('shredder')) {
+    return MAIN_CATEGORIES.find((c) => c.id === 'printers-technology');
   }
-  if (s.includes('pantry') || s.includes('tea') || s.includes('coffee') || s.includes('beverage')) {
-    return MAIN_CATEGORIES.find((c) => c.id === 'office-pantry-essentials');
-  }
-  if (s.includes('furniture') || s.includes('chair') || s.includes('desk') || s.includes('ergonomic')) {
-    return MAIN_CATEGORIES.find((c) => c.id === 'office-furniture-accessories');
-  }
-  if (s.includes('safety') || s.includes('maintenance') || s.includes('glove') || s.includes('ppe')) {
-    return MAIN_CATEGORIES.find((c) => c.id === 'safety-maintenance');
+  if (s.includes('packag') || s.includes('dispatch') || s.includes('tape') || s.includes('bubble') || s.includes('box')) {
+    return MAIN_CATEGORIES.find((c) => c.id === 'packaging-supplies');
   }
 
   return undefined;
