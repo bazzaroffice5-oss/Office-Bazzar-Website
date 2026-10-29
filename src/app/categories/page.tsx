@@ -1,9 +1,7 @@
 import React from 'react';
 import { redirect } from 'next/navigation';
-import { getCategories, getProducts } from '@/lib/db/store';
+import { getProducts } from '@/lib/db/store';
 import {
-  CATEGORY_MAP,
-  APPROVED_CATEGORIES,
   NINE_SUBCATEGORIES,
   isProductInSubcategory,
 } from '@/lib/data/catalog';
@@ -13,7 +11,7 @@ import { getCanonicalUrl, SITE_CONFIG } from '@/lib/seo/config';
 export async function generateMetadata() {
   const metaTitle = 'All Categories | Workplace Procurement | OfficeBazzar Chennai';
   const metaDescription =
-    'Explore all 4 core procurement divisions and 9 specialized workplace categories at OfficeBazzar: Writing Instruments, Paper & Notebooks, Files & Office Organization, Printing & IT Supplies, Cleaning & Hygiene Essentials, Packaging & Dispatch, Pantry, Furniture, and Safety.';
+    'Explore all 9 workplace procurement categories at OfficeBazzar: Writing Instruments, Paper & Notebooks, Files & Office Organization, Printing & IT Supplies, Cleaning & Hygiene Essentials, Packaging & Dispatch, Office Pantry Essentials, Office Furniture & Accessories, and Safety & Maintenance.';
   const canonical = getCanonicalUrl('/categories');
 
   return {
@@ -50,39 +48,15 @@ export default async function AllCategoriesPage({
     redirect(`/categories/${targetSlug}${query}`);
   }
 
-  // 1. Fetch products and categories
+  // 1. Fetch products
   const { products: allProducts } = await getProducts();
-  const allCategories = await getCategories();
 
-  // 2. The 4 approved main categories
-  const categories = APPROVED_CATEGORIES.map((slug) =>
-    allCategories.find((c) => c.slug === slug || c.id === slug)
-  ).filter((c): c is NonNullable<typeof c> => Boolean(c));
+  // 2. The 9 specialized categories
+  const categories = NINE_SUBCATEGORIES;
 
-  // 3. The 9 specialized categories
-  const subcategories = NINE_SUBCATEGORIES;
-
-  // 4. Compute accurate product counts for main categories AND subcategories
+  // 3. Compute accurate product counts based on actual active products
   const productCounts: Record<string, number> = {};
-
-  // Counts for 4 main categories
-  categories.forEach((cat) => {
-    const count = allProducts.filter((p) => {
-      if (!p.isActive) return false;
-      if (p.categoryId === cat.id || p.categoryId === cat.slug) return true;
-      if (p.categoryName?.toLowerCase() === cat.name.toLowerCase()) return true;
-      const mapped = CATEGORY_MAP[p.subcategoryId || ''] || CATEGORY_MAP[p.categoryId || ''];
-      if (mapped && (mapped.mainId === cat.id || mapped.mainSlug === cat.slug)) {
-        return true;
-      }
-      return false;
-    }).length;
-    productCounts[cat.id] = count;
-    productCounts[cat.slug] = count;
-  });
-
-  // Counts for 9 subcategories
-  subcategories.forEach((sub) => {
+  categories.forEach((sub) => {
     const count = allProducts.filter((p) => isProductInSubcategory(p, sub.slug)).length;
     productCounts[sub.id] = count;
     productCounts[sub.slug] = count;
@@ -92,7 +66,6 @@ export default async function AllCategoriesPage({
     <main className="min-h-screen bg-slate-50">
       <AllCategoriesClient
         categories={categories}
-        subcategories={subcategories}
         productCounts={productCounts}
       />
     </main>
