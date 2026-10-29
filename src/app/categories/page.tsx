@@ -1,14 +1,19 @@
 import React from 'react';
 import { redirect } from 'next/navigation';
 import { getCategories, getProducts } from '@/lib/db/store';
-import { CATEGORY_MAP, APPROVED_CATEGORIES } from '@/lib/data/catalog';
+import {
+  CATEGORY_MAP,
+  APPROVED_CATEGORIES,
+  NINE_SUBCATEGORIES,
+  isProductInSubcategory,
+} from '@/lib/data/catalog';
 import AllCategoriesClient from '@/components/category/AllCategoriesClient';
 import { getCanonicalUrl, SITE_CONFIG } from '@/lib/seo/config';
 
 export async function generateMetadata() {
   const metaTitle = 'All Categories | Workplace Procurement | OfficeBazzar Chennai';
   const metaDescription =
-    'Explore all 4 corporate procurement categories at OfficeBazzar: Office Stationery, Housekeeping & Hygiene, Printers & Technology, and Packaging Supplies.';
+    'Explore all 4 core procurement divisions and 9 specialized workplace categories at OfficeBazzar: Writing Instruments, Paper & Notebooks, Files & Office Organization, Printing & IT Supplies, Cleaning & Hygiene Essentials, Packaging & Dispatch, Pantry, Furniture, and Safety.';
   const canonical = getCanonicalUrl('/categories');
 
   return {
@@ -45,17 +50,22 @@ export default async function AllCategoriesPage({
     redirect(`/categories/${targetSlug}${query}`);
   }
 
-  // 1. Fetch products and calculate accurate counts per category
+  // 1. Fetch products and categories
   const { products: allProducts } = await getProducts();
   const allCategories = await getCategories();
 
-  // 2. Filter and order strictly to the 9 approved categories
+  // 2. The 4 approved main categories
   const categories = APPROVED_CATEGORIES.map((slug) =>
     allCategories.find((c) => c.slug === slug || c.id === slug)
   ).filter((c): c is NonNullable<typeof c> => Boolean(c));
 
-  // 3. Compute accurate product counts based on actual active products
+  // 3. The 9 specialized categories
+  const subcategories = NINE_SUBCATEGORIES;
+
+  // 4. Compute accurate product counts for main categories AND subcategories
   const productCounts: Record<string, number> = {};
+
+  // Counts for 4 main categories
   categories.forEach((cat) => {
     const count = allProducts.filter((p) => {
       if (!p.isActive) return false;
@@ -65,25 +75,24 @@ export default async function AllCategoriesPage({
       if (mapped && (mapped.mainId === cat.id || mapped.mainSlug === cat.slug)) {
         return true;
       }
-      if (cat.id === 'files-office-organization' && (p.categoryId === 'office-stationery' || mapped?.mainId === 'office-stationery')) {
-        return true;
-      }
-      if (cat.id === 'printing-it-supplies' && (p.categoryId === 'printers-technology' || mapped?.mainId === 'printers-technology')) {
-        return true;
-      }
-      if (cat.id === 'packaging-dispatch' && (p.categoryId === 'packaging-supplies' || mapped?.mainId === 'packaging-supplies')) {
-        return true;
-      }
       return false;
     }).length;
     productCounts[cat.id] = count;
     productCounts[cat.slug] = count;
   });
 
+  // Counts for 9 subcategories
+  subcategories.forEach((sub) => {
+    const count = allProducts.filter((p) => isProductInSubcategory(p, sub.slug)).length;
+    productCounts[sub.id] = count;
+    productCounts[sub.slug] = count;
+  });
+
   return (
     <main className="min-h-screen bg-slate-50">
       <AllCategoriesClient
         categories={categories}
+        subcategories={subcategories}
         productCounts={productCounts}
       />
     </main>

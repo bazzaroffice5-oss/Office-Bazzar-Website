@@ -23,8 +23,13 @@ export async function generateMetadata({
     };
   }
 
+  const matchedSub = category.subcategories?.find(
+    (s) => s.slug === slug || s.id === slug
+  );
+  const effectiveSub = resolvedSearchParams?.sub || matchedSub?.slug;
+
   const activeSub = category.subcategories?.find(
-    (s) => s.slug === resolvedSearchParams?.sub || s.id === resolvedSearchParams?.sub
+    (s) => s.slug === effectiveSub || s.id === effectiveSub
   );
 
   const titlePrefix = activeSub ? `${activeSub.name} - ` : '';
@@ -90,15 +95,20 @@ export default async function CategoryPage({
   // Fetch all products across database
   const { products: allProducts } = await getProducts();
 
+  const matchedSub = category.subcategories?.find(
+    (s) => s.slug === slug || s.id === slug
+  );
+  const effectiveSub = resolvedSearchParams?.sub || matchedSub?.slug;
+
   const breadcrumbItems = [
     { name: 'Home', url: '/' },
     { name: 'All Categories', url: '/categories' },
     { name: category.name, url: `/categories/${category.slug}` },
   ];
 
-  if (resolvedSearchParams?.sub) {
+  if (effectiveSub) {
     const activeSub = category.subcategories?.find(
-      (s) => s.slug === resolvedSearchParams.sub || s.id === resolvedSearchParams.sub
+      (s) => s.slug === effectiveSub || s.id === effectiveSub
     );
     if (activeSub) {
       breadcrumbItems.push({
@@ -122,7 +132,7 @@ export default async function CategoryPage({
         category={category}
         allProducts={allProducts}
         initialView={resolvedSearchParams?.view}
-        initialSub={resolvedSearchParams?.sub}
+        initialSub={effectiveSub}
         baseRoute="/categories"
       />
     </main>

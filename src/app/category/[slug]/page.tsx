@@ -10,7 +10,7 @@ export async function generateMetadata({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ sub?: string; query?: string; brand?: string; view?: string }>;
+  searchParams?: Promise<{ sub?: string; view?: string }>;
 }) {
   const { slug } = await params;
   const resolvedSearchParams = searchParams ? await searchParams : undefined;
@@ -23,8 +23,13 @@ export async function generateMetadata({
     };
   }
 
+  const matchedSub = category.subcategories?.find(
+    (s) => s.slug === slug || s.id === slug
+  );
+  const effectiveSub = resolvedSearchParams?.sub || matchedSub?.slug;
+
   const activeSub = category.subcategories?.find(
-    (s) => s.slug === resolvedSearchParams?.sub || s.id === resolvedSearchParams?.sub
+    (s) => s.slug === effectiveSub || s.id === effectiveSub
   );
 
   const titlePrefix = activeSub ? `${activeSub.name} - ` : '';
@@ -34,7 +39,11 @@ export async function generateMetadata({
     category.description ||
     `Procure bulk ${category.name} for corporate offices, IT parks, and institutions in Chennai. Guaranteed 100% GST input tax credit with same-day dispatch.`;
 
-  const canonicalUrl = getCanonicalUrl(`/category/${category.slug}`);
+  const canonicalUrl = getCanonicalUrl(
+    activeSub
+      ? `/category/${category.slug}?sub=${activeSub.slug}`
+      : `/category/${category.slug}`
+  );
 
   return {
     title: metaTitle,
@@ -73,7 +82,7 @@ export default async function CategoryPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ sub?: string; query?: string; brand?: string; view?: string }>;
+  searchParams?: Promise<{ sub?: string; view?: string }>;
 }) {
   const { slug } = await params;
   const resolvedSearchParams = searchParams ? await searchParams : undefined;
@@ -86,15 +95,20 @@ export default async function CategoryPage({
   // Fetch all products across database
   const { products: allProducts } = await getProducts();
 
+  const matchedSub = category.subcategories?.find(
+    (s) => s.slug === slug || s.id === slug
+  );
+  const effectiveSub = resolvedSearchParams?.sub || matchedSub?.slug;
+
   const breadcrumbItems = [
     { name: 'Home', url: '/' },
     { name: 'All Categories', url: '/categories' },
     { name: category.name, url: `/category/${category.slug}` },
   ];
 
-  if (resolvedSearchParams?.sub) {
+  if (effectiveSub) {
     const activeSub = category.subcategories?.find(
-      (s) => s.slug === resolvedSearchParams.sub || s.id === resolvedSearchParams.sub
+      (s) => s.slug === effectiveSub || s.id === effectiveSub
     );
     if (activeSub) {
       breadcrumbItems.push({
@@ -118,7 +132,7 @@ export default async function CategoryPage({
         category={category}
         allProducts={allProducts}
         initialView={resolvedSearchParams?.view}
-        initialSub={resolvedSearchParams?.sub}
+        initialSub={effectiveSub}
         baseRoute="/category"
       />
     </main>
