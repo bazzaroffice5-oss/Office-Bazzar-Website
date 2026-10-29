@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation';
 import {
   ChevronRight,
   ArrowLeft,
@@ -28,7 +28,6 @@ export default function CategoryLandingClient({
   initialSub,
   baseRoute = '/categories',
 }: CategoryLandingClientProps) {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
@@ -183,7 +182,7 @@ export default function CategoryLandingClient({
             {/* Product Count Badge at Top-Right */}
             <div className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-10 flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-semibold text-slate-800 shadow-sm border border-slate-200/60 pointer-events-none">
               <Package className="w-3.5 h-3.5 text-[#004b87]" />
-              <span>{categoryProducts.length} Products</span>
+              <span>{categoryProducts.length > 0 ? `${categoryProducts.length} Products` : 'Available on RFQ'}</span>
             </div>
 
             {/* Subcategory Name near bottom */}
@@ -218,7 +217,7 @@ export default function CategoryLandingClient({
                 {/* Product Count Badge at Top-Right */}
                 <div className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-10 flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-semibold text-slate-800 shadow-sm border border-slate-200/60 pointer-events-none">
                   <Package className="w-3.5 h-3.5 text-[#004b87]" />
-                  <span>{count} Products</span>
+                  <span>{count > 0 ? `${count} Products` : 'Available on RFQ'}</span>
                 </div>
 
                 {/* Subcategory Name near bottom */}
@@ -348,20 +347,32 @@ export default function CategoryLandingClient({
 
       {/* Responsive Product Cards Grid */}
       {paginatedProducts.length === 0 ? (
-        <div className="w-full bg-white rounded-2xl border border-gray-200 p-12 text-center space-y-4 my-8">
-          <div className="w-12 h-12 rounded-full bg-blue-50 text-[#004b87] mx-auto flex items-center justify-center">
-            <Package className="w-6 h-6 text-slate-400" />
+        <div className="w-full bg-white rounded-2xl border border-gray-200 p-8 sm:p-12 text-center space-y-4 my-8">
+          <div className="w-14 h-14 rounded-full bg-blue-50 text-[#004b87] mx-auto flex items-center justify-center">
+            <Package className="w-7 h-7 text-[#004b87]" />
           </div>
-          <h3 className="text-lg font-bold text-gray-900">No products available</h3>
-          <p className="text-xs sm:text-sm text-gray-500 max-w-md mx-auto">
-            There are currently no products available in this selection.
+          <h3 className="text-xl font-bold text-gray-900">
+            {categoryProducts.length === 0 ? 'Corporate Catalogue Available on RFQ' : 'No products found in this subcategory'}
+          </h3>
+          <p className="text-sm text-gray-600 max-w-lg mx-auto">
+            {categoryProducts.length === 0
+              ? `${category.name} supplies are available under our Annual Rate Contract (ARC) and bulk B2B procurement agreements. Submit an RFQ with your requirement specs.`
+              : `There are currently no catalog items matching this filter. You can request custom quotes or view all items in ${category.name}.`}
           </p>
-          <Link
-            href={`${categoryBaseUrl}?view=all`}
-            className="inline-flex items-center gap-2 bg-[#004b87] hover:bg-[#003866] text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-colors cursor-pointer"
-          >
-            <span>View All {category.name} Products</span>
-          </Link>
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <Link
+              href="/request-quote"
+              className="inline-flex items-center gap-2 bg-[#004b87] hover:bg-[#003866] text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl shadow-sm transition-colors cursor-pointer"
+            >
+              <span>Request Corporate Quote</span>
+            </Link>
+            <Link
+              href={allCategoriesUrl}
+              className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors cursor-pointer"
+            >
+              <span>Browse All Categories</span>
+            </Link>
+          </div>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">

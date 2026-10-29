@@ -1,8 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import CategoryLandingClient from '@/components/category/CategoryLandingClient';
-import { getProducts, getCategories, getBrands, getCategoryBySlug } from '@/lib/db/store';
-import { CATEGORY_MAP } from '@/lib/data/catalog';
+import { getProducts, getCategoryBySlug } from '@/lib/db/store';
 import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
@@ -23,7 +22,6 @@ export async function generateMetadata({
       robots: { index: false, follow: false },
     };
   }
-
 
   const activeSub = category.subcategories?.find(
     (s) => s.slug === resolvedSearchParams?.sub || s.id === resolvedSearchParams?.sub
@@ -85,39 +83,8 @@ export default async function CategoryPage({
     notFound();
   }
 
-  // Fetch all products so category switching works seamlessly
+  // Fetch all products across database
   const { products: allProducts } = await getProducts();
-  const allCategories = await getCategories();
-  const brands = await getBrands();
-
-  const APPROVED_CATEGORIES = [
-    'office-stationery',
-    'housekeeping-hygiene',
-    'printers-technology',
-    'packaging-supplies',
-  ];
-
-  const categories = APPROVED_CATEGORIES.map((s) =>
-    allCategories.find((c) => c.slug === s)
-  ).filter((c): c is NonNullable<typeof c> => Boolean(c));
-
-  // Compute product counts for the 4 main categories
-  const productCounts: Record<string, number> = {};
-  categories.forEach((cat) => {
-    const count = allProducts.filter((p) => {
-      if (!p.isActive) return false;
-      if (p.categoryId === cat.id || p.categoryId === cat.slug) return true;
-      if (p.categoryName?.toLowerCase() === cat.name.toLowerCase()) return true;
-      const mapped = CATEGORY_MAP[p.subcategoryId || ''] || CATEGORY_MAP[p.categoryId || ''];
-      if (mapped && (mapped.mainId === cat.id || mapped.mainSlug === cat.slug)) {
-        return true;
-      }
-      return false;
-    }).length;
-    productCounts[cat.id] = count || cat.itemCount || 0;
-    productCounts[cat.slug] = productCounts[cat.id];
-  });
-
 
   const breadcrumbItems = [
     { name: 'Home', url: '/' },
@@ -135,6 +102,11 @@ export default async function CategoryPage({
         url: `/category/${category.slug}?sub=${activeSub.slug}`,
       });
     }
+  } else if (resolvedSearchParams?.view === 'all') {
+    breadcrumbItems.push({
+      name: 'All Products',
+      url: `/category/${category.slug}?view=all`,
+    });
   }
 
   const breadcrumbJsonLd = getBreadcrumbJsonLd(breadcrumbItems);
