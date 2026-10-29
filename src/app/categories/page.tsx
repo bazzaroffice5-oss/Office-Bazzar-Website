@@ -58,8 +58,9 @@ export default async function AllCategoriesPage({
   const productCounts: Record<string, number> = {};
   categories.forEach((sub) => {
     const count = allProducts.filter((p) => isProductInSubcategory(p, sub.slug)).length;
-    productCounts[sub.id] = count;
-    productCounts[sub.slug] = count;
+    const resolvedCount = count > 0 ? count : (sub.itemCount || 0);
+    productCounts[sub.id] = resolvedCount;
+    productCounts[sub.slug] = resolvedCount;
   });
 
   return (

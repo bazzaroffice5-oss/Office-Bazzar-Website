@@ -63,7 +63,7 @@ export default function AllCategoriesClient({
       {/* 9 Category Cards in 3-Column Responsive Grid (3 on desktop, 2 on tablet, 1-2 on mobile) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 mb-14">
         {categories.map((cat) => {
-          const count = productCounts[cat.id] ?? productCounts[cat.slug] ?? cat.itemCount ?? 0;
+          const count = productCounts[cat.id] || productCounts[cat.slug] || cat.itemCount || 0;
           const imageUrl = cat.imageUrl || '/images/categories/office-supplies-stationery.jpg';
           const hasProducts = count > 0;
           const parentSlug = ('categoryId' in cat && cat.categoryId) ? cat.categoryId : 'office-stationery';
