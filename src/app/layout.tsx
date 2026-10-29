@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     'OfficeBazzar',
     'Corporate Procurement Partner',
   ],
-  authors: [{ name: SITE_CONFIG.legalName, url: SITE_CONFIG.url }],
+  authors: [{ name: SITE_CONFIG.legalName, url: `${SITE_CONFIG.url}/` }],
   creator: SITE_CONFIG.legalName,
   publisher: SITE_CONFIG.legalName,
   formatDetection: {
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: SITE_CONFIG.url,
+    canonical: `${SITE_CONFIG.url}/`,
   },
   robots: {
     index: true,
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'OfficeBazzar — Dynamic Workplace E-Commerce & Corporate Procurement',
     description: SITE_CONFIG.description,
-    url: SITE_CONFIG.url,
+    url: `${SITE_CONFIG.url}/`,
     siteName: SITE_CONFIG.name,
     locale: 'en_IN',
     type: 'website',

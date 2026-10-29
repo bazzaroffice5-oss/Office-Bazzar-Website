@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getCategories, getProducts } from '@/lib/db/store';
 import { BLOG_POSTS } from '@/lib/data/blog';
-import { SITE_CONFIG } from '@/lib/seo/config';
+import { getCanonicalUrl, SITE_CONFIG } from '@/lib/seo/config';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.url;
@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const staticRoutes: MetadataRoute.Sitemap = staticPages.map((page) => ({
-    url: `${baseUrl}${page.path}`,
+    url: getCanonicalUrl(page.path),
     lastModified: new Date('2026-07-22T00:00:00.000Z'),
     changeFrequency: page.changeFrequency,
     priority: page.priority,
@@ -35,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 2. Dynamic Categories
   const categories = await getCategories();
   const categoryRoutes: MetadataRoute.Sitemap = categories.map((cat) => ({
-    url: `${baseUrl}/category/${cat.slug}`,
+    url: getCanonicalUrl(`/category/${cat.slug}`),
     lastModified: new Date('2026-07-22T00:00:00.000Z'),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
@@ -46,7 +46,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const productRoutes: MetadataRoute.Sitemap = products
     .filter((prod) => prod.isActive !== false)
     .map((prod) => ({
-      url: `${baseUrl}/product/${prod.slug}`,
+      url: getCanonicalUrl(`/product/${prod.slug}`),
       lastModified: new Date('2026-07-22T00:00:00.000Z'),
       changeFrequency: 'daily' as const,
       priority: prod.featured ? 0.9 : 0.8,
@@ -54,7 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 4. Published Blog Posts (Canonical: /blogs/${slug})
   const blogRoutes: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
-    url: `${baseUrl}/blogs/${post.slug}`,
+    url: getCanonicalUrl(`/blogs/${post.slug}`),
     lastModified: new Date(post.publishedDate),
     changeFrequency: 'monthly' as const,
     priority: 0.7,

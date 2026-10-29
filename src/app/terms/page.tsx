@@ -49,7 +49,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-base font-bold text-slate-900 mb-2">1. Acceptance of Terms</h2>
               <p>
-                By accessing, browsing, or placing orders on OfficeBazzar (officebazzar.co.in or associated subdomains), you agree to be bound by these Terms and Conditions. These terms constitute a legally binding agreement between you (&quot;Buyer&quot;, &quot;Customer&quot;) and OFFICEBAZZAR E-STORE PRIVATE LIMITED (&quot;OfficeBazzar&quot;, &quot;Company&quot;).
+                By accessing, browsing, or placing orders on OfficeBazzar (officebazzar.com, officebazzar.co.in or associated subdomains), you agree to be bound by these Terms and Conditions. These terms constitute a legally binding agreement between you (&quot;Buyer&quot;, &quot;Customer&quot;) and OFFICEBAZZAR E-STORE PRIVATE LIMITED (&quot;OfficeBazzar&quot;, &quot;Company&quot;).
               </p>
             </section>
 

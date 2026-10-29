@@ -93,7 +93,7 @@ export function buildQuotationEmailText(
   salesEmail: string = 'sales4@officebazzar.com',
   marketingEmail: string = 'marketing@officebazzar.com'
 ): string {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://officebazzar.co.in';
+  const siteUrl = BUSINESS_CONFIG.websiteUrl;
   const adminUrl = `${siteUrl}/admin?tab=quotations&quote=${encodeURIComponent(quotation.quotationNumber)}`;
 
   const itemsText = quotation.items
@@ -165,7 +165,7 @@ export function buildQuotationEmailHtml(
   salesEmail: string = 'sales4@officebazzar.com',
   marketingEmail: string = 'marketing@officebazzar.com'
 ): string {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://officebazzar.co.in';
+  const siteUrl = BUSINESS_CONFIG.websiteUrl;
   const adminUrl = `${siteUrl}/admin?tab=quotations&quote=${encodeURIComponent(quotation.quotationNumber)}`;
 
   const itemsRows = quotation.items
@@ -544,7 +544,7 @@ async function sendEmailNotification(
 ): Promise<{ success: boolean; error?: string }> {
   try {
     const providerApiKey = process.env.EMAIL_API_KEY || process.env.RESEND_API_KEY;
-    const fromAddress = process.env.EMAIL_FROM_ADDRESS || 'noreply@officebazzar.co.in';
+    const fromAddress = process.env.EMAIL_FROM_ADDRESS || 'noreply@officebazzar.com';
 
     if (providerApiKey && process.env.EMAIL_SIMULATION_MODE !== 'true') {
       const response = await fetch('https://api.resend.com/emails', {

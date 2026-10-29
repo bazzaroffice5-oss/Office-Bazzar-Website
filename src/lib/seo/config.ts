@@ -2,10 +2,25 @@ import { Metadata } from 'next';
 import { Product } from '@/types';
 import { BlogPost } from '@/lib/data/blog';
 
+/**
+ * Resolves the verified production domain:
+ * 1. Honors process.env.NEXT_PUBLIC_SITE_URL if configured.
+ * 2. Intercepts and excludes deprecated domains (e.g. officebazzar.co.in).
+ * 3. Enforces primary production domain fallback: https://officebazzar.com
+ * 4. Ensures no trailing slash on the base URL.
+ */
+function resolveProductionSiteUrl(): string {
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (envUrl && !envUrl.includes('officebazzar.co.in')) {
+    return envUrl.replace(/\/+$/, '');
+  }
+  return 'https://officebazzar.com';
+}
+
 export const SITE_CONFIG = {
   name: 'OfficeBazzar',
   legalName: 'Officebazzar E-Store Private Limited',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://officebazzar.co.in',
+  url: resolveProductionSiteUrl(),
   description:
     'Officebazzar E-Store Private Limited is Chennai’s leading corporate procurement partner for office stationery, Diversey Taski housekeeping chemicals, mobile garbage bins, toner cartridges, and paper shredders with 100% GST input tax credit.',
   foundingYear: 2005,
@@ -35,12 +50,17 @@ export const SITE_CONFIG = {
 };
 
 /**
- * Normalizes any route path into an absolute canonical URL on the verified production domain
+ * Normalizes any route path into an absolute canonical URL on the verified production domain.
+ * - Homepage ('/' or '') -> https://officebazzar.com/
+ * - Subpages ('/products', '/product/xyz') -> https://officebazzar.com/products, https://officebazzar.com/product/xyz
  */
 export function getCanonicalUrl(path: string = ''): string {
+  if (!path || path === '/' || path.trim() === '') {
+    return `${SITE_CONFIG.url}/`;
+  }
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  // Strip trailing slashes except for root
-  const normalized = cleanPath === '/' ? '' : cleanPath.replace(/\/+$/, '');
+  // Strip trailing slashes for subpages to avoid duplicate canonical variations
+  const normalized = cleanPath.replace(/\/+$/, '');
   return `${SITE_CONFIG.url}${normalized}`;
 }
 
@@ -139,7 +159,7 @@ export function getOrganizationJsonLd() {
     '@id': `${SITE_CONFIG.url}/#organization`,
     name: SITE_CONFIG.legalName,
     alternateName: SITE_CONFIG.name,
-    url: SITE_CONFIG.url,
+    url: `${SITE_CONFIG.url}/`,
     logo: {
       '@type': 'ImageObject',
       url: `${SITE_CONFIG.url}${SITE_CONFIG.logoUrl}`,
@@ -189,7 +209,7 @@ export function getLocalBusinessJsonLd() {
     name: SITE_CONFIG.legalName,
     alternateName: SITE_CONFIG.name,
     image: `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`,
-    url: SITE_CONFIG.url,
+    url: `${SITE_CONFIG.url}/`,
     telephone: SITE_CONFIG.contact.phone,
     priceRange: '₹₹',
     address: {

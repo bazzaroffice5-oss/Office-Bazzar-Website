@@ -52,7 +52,10 @@ export interface BusinessConfig {
 export const BUSINESS_CONFIG: BusinessConfig = {
   legalEntityName: 'Officebazzar E-Store Private Limited',
   brandName: 'OfficeBazzar',
-  websiteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://officebazzar.co.in',
+  websiteUrl:
+    process.env.NEXT_PUBLIC_SITE_URL && !process.env.NEXT_PUBLIC_SITE_URL.includes('officebazzar.co.in')
+      ? process.env.NEXT_PUBLIC_SITE_URL.replace(/\/+$/, '')
+      : 'https://officebazzar.com',
   headquarters: {
     address: '"Officebazzar Tower", No. 29/15, Subbedar Hussain street, Royapettah',
     city: 'Chennai',
