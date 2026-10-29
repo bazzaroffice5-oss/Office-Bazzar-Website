@@ -1,13 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Package, ArrowLeft, ChevronRight } from 'lucide-react';
+import { Package, ChevronRight } from 'lucide-react';
 import { Category, Subcategory } from '@/types';
 
 interface CategorySubcategoryGridProps {
   category: Category;
   subcategories: Subcategory[];
-  totalProducts: number;
+  totalProducts?: number;
   basePath?: string;
   backHref?: string;
 }
@@ -15,58 +15,32 @@ interface CategorySubcategoryGridProps {
 export default function CategorySubcategoryGrid({
   category,
   subcategories,
-  totalProducts,
   basePath = `/category/${category.slug}`,
-  backHref = '/categories',
 }: CategorySubcategoryGridProps) {
   const separator = basePath.includes('?') ? '&' : '?';
 
-  // Construct card list starting with "All Products" card, followed by real catalogue subcategories
-  const cards = [
-    {
-      id: 'all-products',
-      name: 'All Products',
-      href: `${basePath}${separator}view=products`,
-      imageUrl: category.imageUrl || '/images/categories/office-supplies-stationery.jpg',
-      itemCount: totalProducts,
-    },
-    ...subcategories.map((sub) => ({
-      id: sub.id,
-      name: sub.name,
-      href: `${basePath}${separator}sub=${sub.slug}`,
-      imageUrl: sub.imageUrl || category.imageUrl || '/images/categories/office-supplies-stationery.jpg',
-      itemCount: sub.itemCount || 0,
-    })),
-  ];
+  // Construct card list of catalogue subcategories
+  const cards = subcategories.map((sub) => ({
+    id: sub.id,
+    name: sub.name,
+    href: `${basePath}${separator}sub=${sub.slug}`,
+    imageUrl: sub.imageUrl || category.imageUrl || '/images/categories/office-supplies-stationery.jpg',
+    itemCount: sub.itemCount || 0,
+  }));
 
   return (
     <main className="min-h-screen bg-white py-6 sm:py-10">
       <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs sm:text-sm text-slate-500 mb-4">
+        <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs sm:text-sm text-slate-500 mb-6">
           <Link href="/" className="hover:text-[#004b87] transition-colors font-medium">
             Home
-          </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-          <Link href="/categories" className="hover:text-[#004b87] transition-colors font-medium">
-            All Categories
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
           <span className="font-semibold text-slate-900 truncate">
             {category.name}
           </span>
         </nav>
-
-        {/* Back to All Categories Action */}
-        <div className="mb-6">
-          <Link
-            href={backHref}
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#004b87] hover:text-[#003866] transition-colors group"
-          >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            <span>Back to All Categories</span>
-          </Link>
-        </div>
 
         {/* Centered Main Category Heading matching Reference */}
         <div className="text-center mb-10 sm:mb-14">
@@ -81,8 +55,8 @@ export default function CategorySubcategoryGrid({
           )}
         </div>
 
-        {/* 4-Column Responsive Subcategory Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+        {/* 3-Column Responsive Subcategory Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
           {cards.map((card) => (
             <Link
               key={card.id}

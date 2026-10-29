@@ -102,7 +102,6 @@ export default async function CategoryPage({
 
   const breadcrumbItems = [
     { name: 'Home', url: '/' },
-    { name: 'All Categories', url: '/categories' },
     { name: category.name, url: `/categories/${category.slug}` },
   ];
 
