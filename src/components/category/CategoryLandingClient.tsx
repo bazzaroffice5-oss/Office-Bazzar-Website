@@ -170,10 +170,12 @@ export default function CategoryLandingClient({
             <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/20 transition-colors duration-300" />
 
             {/* Product Count Badge at Top-Right */}
-            <div className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-10 flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-semibold text-slate-800 shadow-sm border border-slate-200/60 pointer-events-none">
-              <Package className="w-3.5 h-3.5 text-[#004b87]" />
-              <span>{categoryProducts.length > 0 ? `${categoryProducts.length} Products` : 'Available on RFQ'}</span>
-            </div>
+            {categoryProducts.length > 0 && (
+              <div className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-10 flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-semibold text-slate-800 shadow-sm border border-slate-200/60 pointer-events-none">
+                <Package className="w-3.5 h-3.5 text-[#004b87]" />
+                <span>{categoryProducts.length} Products</span>
+              </div>
+            )}
 
             {/* Subcategory Name near bottom */}
             <div className="absolute inset-x-0 bottom-0 z-10 pt-16 pb-4 sm:pb-5 px-4 sm:px-5 bg-gradient-to-t from-black/80 via-black/35 to-transparent">
@@ -205,10 +207,12 @@ export default function CategoryLandingClient({
                 <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/20 transition-colors duration-300" />
 
                 {/* Product Count Badge at Top-Right */}
-                <div className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-10 flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-semibold text-slate-800 shadow-sm border border-slate-200/60 pointer-events-none">
-                  <Package className="w-3.5 h-3.5 text-[#004b87]" />
-                  <span>{count > 0 ? `${count} Products` : 'Available on RFQ'}</span>
-                </div>
+                {count > 0 && (
+                  <div className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-10 flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-semibold text-slate-800 shadow-sm border border-slate-200/60 pointer-events-none">
+                    <Package className="w-3.5 h-3.5 text-[#004b87]" />
+                    <span>{count} Products</span>
+                  </div>
+                )}
 
                 {/* Subcategory Name near bottom */}
                 <div className="absolute inset-x-0 bottom-0 z-10 pt-16 pb-4 sm:pb-5 px-4 sm:px-5 bg-gradient-to-t from-black/80 via-black/35 to-transparent">

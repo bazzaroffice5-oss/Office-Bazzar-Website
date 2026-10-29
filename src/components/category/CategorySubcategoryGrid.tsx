@@ -99,11 +99,13 @@ export default function CategorySubcategoryGrid({
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               />
 
-              {/* Product-count badge with small package icon at top-right */}
-              <div className="absolute top-3.5 right-3.5 z-20 flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm border border-slate-200/60">
-                <Package className="w-3.5 h-3.5 text-slate-600" />
-                <span>{card.itemCount}</span>
-              </div>
+              {/* Product-count badge with small package icon at top-right (only when itemCount > 0) */}
+              {card.itemCount > 0 && (
+                <div className="absolute top-3.5 right-3.5 z-20 flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm border border-slate-200/60">
+                  <Package className="w-3.5 h-3.5 text-slate-600" />
+                  <span>{card.itemCount}</span>
+                </div>
+              )}
 
               {/* Dark Gradient Overlay for Maximum Title Legibility */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 via-40% to-transparent pointer-events-none" />

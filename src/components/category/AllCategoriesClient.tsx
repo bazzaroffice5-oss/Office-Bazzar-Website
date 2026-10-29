@@ -88,11 +88,13 @@ export default function AllCategoriesClient({
               {/* Subtle Overall Gradient/Tint on Hover */}
               <div className="absolute inset-0 bg-slate-900/15 group-hover:bg-slate-900/25 transition-colors duration-300" />
 
-              {/* Product Count Badge at Top-Right */}
-              <div className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-10 flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-semibold text-slate-800 shadow-sm border border-slate-200/60 pointer-events-none">
-                <Package className={`w-3.5 h-3.5 ${hasProducts ? 'text-[#004b87]' : 'text-amber-600'}`} />
-                <span>{hasProducts ? `${count} Products` : 'Available on RFQ'}</span>
-              </div>
+              {/* Product Count Badge at Top-Right (rendered only when hasProducts) */}
+              {hasProducts && (
+                <div className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-10 flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-semibold text-slate-800 shadow-sm border border-slate-200/60 pointer-events-none">
+                  <Package className="w-3.5 h-3.5 text-[#004b87]" />
+                  <span>{count} Products</span>
+                </div>
+              )}
 
               {/* Bottom Gradient Overlay with Category Name & Description */}
               <div className="absolute inset-x-0 bottom-0 z-10 pt-16 pb-4 sm:pb-5 px-4 sm:px-5 bg-gradient-to-t from-black/85 via-black/45 to-transparent">
