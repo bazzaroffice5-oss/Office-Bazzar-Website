@@ -191,169 +191,24 @@ export async function syncContactEnquiryToZoho(
   }
 }
 
+import { syncQuotationToZohoQuote } from './quotes';
+
 /**
- * Synchronize an authoritative Request for Quotation (RFQ) into Zoho CRM.
- *
- * 1. Creates/Upserts a Lead in Zoho CRM with full customer and order details.
- * 2. ONLY creates a formal Quotes module record if valid Zoho Product catalog IDs
- *    are supplied and all line-item requirements are satisfied.
+ * Synchronize an authoritative Request for Quotation (RFQ) into Zoho CRM Quotes module
+ * Links to Contacts, Accounts, and maps line items to the 101 Zoho catalog products.
  */
 export async function syncQuotationToZoho(
   quotation: Quotation,
-  zohoProductMapping?: Record<string, string>
+  _zohoProductMapping?: Record<string, string>
 ): Promise<ZohoSyncResult> {
-  if (!(await isZohoConfigured())) {
-    console.log('[ZohoCRM] Service unconfigured. Skipping CRM sync for quotation:', quotation.quotationNumber);
-    return {
-      success: false,
-      action: 'skipped',
-      reason: 'Zoho CRM credentials (ZOHO_CLIENT_ID / ZOHO_CLIENT_SECRET / ZOHO_REFRESH_TOKEN) not set in environment.',
-    };
-  }
-
-  try {
-    const { firstName, lastName } = parseCustomerName(quotation.customerName);
-    const description = buildQuotationDescription(quotation);
-
-    // 1. Create Lead in Zoho CRM
-    const leadPayload = {
-      data: [
-        {
-          First_Name: firstName || undefined,
-          Last_Name: lastName,
-          Company: quotation.companyName?.trim() || 'Corporate RFQ Customer',
-          Email: quotation.email.trim().toLowerCase(),
-          Phone: quotation.phone.trim(),
-          Lead_Source: 'Website RFQ',
-          Zip_Code: quotation.pincode?.trim() || undefined,
-          Street: quotation.deliveryLocation?.trim() || undefined,
-          Description: description,
-        },
-      ],
-      trigger: ['approval', 'workflow', 'blueprint'],
-    };
-
-    const leadResponse = await zohoFetch<ZohoModuleResponse>('/Leads', {
-      method: 'POST',
-      body: JSON.stringify(leadPayload),
-    });
-
-    const leadItem = leadResponse.data?.[0];
-    const leadId = leadItem?.details?.id;
-
-    if (!leadItem || (leadItem.code !== 'SUCCESS' && leadItem.status !== 'success')) {
-      const errDetail = leadItem?.message || JSON.stringify(leadResponse);
-      console.warn(`[ZohoCRM] Failed to create lead for quotation ${quotation.quotationNumber}:`, errDetail);
-      return {
-        success: false,
-        action: 'failed',
-        error: `Zoho CRM Lead creation failed: ${errDetail}`,
-        details: leadResponse,
-      };
-    }
-
-    console.log(`[ZohoCRM] Created Lead [${leadId}] for RFQ ${quotation.quotationNumber}`);
-
-    // 2. Formal Zoho Quotes Module evaluation
-    // STRICT REQUIREMENT: "Do not create formal Zoho Quotes unless valid Zoho Product
-    // mappings and required line-item information exist."
-    const hasProductMapping = Boolean(
-      zohoProductMapping && Object.keys(zohoProductMapping).length > 0
-    );
-
-    let canCreateFormalQuote = false;
-    if (hasProductMapping && quotation.items.length > 0) {
-      // Check if every line item has a mapped Zoho Product ID
-      canCreateFormalQuote = quotation.items.every(
-        (it) => zohoProductMapping![it.productId] || (it.sku && zohoProductMapping![it.sku])
-      );
-    }
-
-    if (!canCreateFormalQuote) {
-      console.log(
-        `[ZohoCRM] RFQ ${quotation.quotationNumber} preserved in Zoho Leads. Skipping formal Quotes record creation because direct Zoho Product catalog IDs are not mapped.`
-      );
-      return {
-        success: true,
-        action: 'created',
-        leadId,
-        reason: 'Quotation details and full product list preserved in Zoho Lead Description. Formal Quote creation deferred until Zoho Product catalog mappings are configured.',
-      };
-    }
-
-    // 3. If products are mapped, create formal Quote in Zoho CRM
-    try {
-      const quotedItems = quotation.items.map((it) => {
-        const zohoProdId =
-          zohoProductMapping![it.productId] || (it.sku ? zohoProductMapping![it.sku] : undefined);
-        return {
-          Product_Name: { id: zohoProdId },
-          Quantity: it.quantity,
-          List_Price: it.indicativeUnitPrice,
-          Net_Total: it.indicativeTotalPrice,
-          Tax: it.indicativeTotalPrice * (it.gstPercent / 100),
-        };
-      });
-
-      const quotePayload = {
-        data: [
-          {
-            Subject: `RFQ ${quotation.quotationNumber} - ${quotation.companyName}`,
-            Quote_Stage: 'Draft',
-            Valid_Till: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
-            Contact_Name: leadId ? { id: leadId } : undefined,
-            Quoted_Items: quotedItems,
-            Sub_Total: quotation.indicativeSubtotal,
-            Tax: quotation.indicativeGstAmount,
-            Grand_Total: quotation.indicativeTotal,
-            Description: description,
-          },
-        ],
-        trigger: ['approval', 'workflow'],
-      };
-
-      const quoteResponse = await zohoFetch<ZohoModuleResponse>('/Quotes', {
-        method: 'POST',
-        body: JSON.stringify(quotePayload),
-      });
-
-      const quoteItem = quoteResponse.data?.[0];
-      const quoteId = quoteItem?.details?.id;
-
-      if (quoteItem && (quoteItem.code === 'SUCCESS' || quoteItem.status === 'success')) {
-        console.log(`[ZohoCRM] Created formal Quote [${quoteId}] for RFQ ${quotation.quotationNumber}`);
-        return {
-          success: true,
-          action: 'created',
-          leadId,
-          quoteId,
-        };
-      }
-
-      console.warn(`[ZohoCRM] Formal Quote creation rejected, Lead [${leadId}] retained:`, quoteItem?.message);
-      return {
-        success: true,
-        action: 'created',
-        leadId,
-        reason: `Lead created, but formal Quote could not be created: ${quoteItem?.message}`,
-      };
-    } catch (quoteErr) {
-      console.warn(`[ZohoCRM] Error generating formal Quote, Lead [${leadId}] retained:`, quoteErr);
-      return {
-        success: true,
-        action: 'created',
-        leadId,
-        reason: 'Lead created successfully. Formal Quote creation failed gracefully.',
-      };
-    }
-  } catch (err) {
-    const errMsg = err instanceof Error ? err.message : String(err);
-    console.error(`[ZohoCRM] Exception during quotation sync [${quotation.quotationNumber}]:`, err);
-    return {
-      success: false,
-      action: 'failed',
-      error: errMsg,
-    };
-  }
+  const quoteRes = await syncQuotationToZohoQuote(quotation);
+  return {
+    success: quoteRes.success,
+    action: quoteRes.action,
+    quoteId: quoteRes.quoteId,
+    error: quoteRes.error,
+    reason: quoteRes.error,
+    details: quoteRes.details,
+  };
 }
 

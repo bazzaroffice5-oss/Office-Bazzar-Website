@@ -1,8 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { CustomerUser, Address } from '@/types';
-import { supabase, isSupabaseConfigured } from '@/lib/db/supabase';
 
 interface AuthContextType {
   user: CustomerUser | null;
@@ -10,12 +9,15 @@ interface AuthContextType {
   isAdmin: boolean;
   isLoading: boolean;
   isAuthConfigured: boolean;
-  login: (email: string, password?: string) => Promise<{ success: boolean; message?: string }>;
+  login: (email: string, password?: string) => Promise<{ success: boolean; requiresOtp?: boolean; message?: string }>;
+  verifyOtp: (email: string, otp: string) => Promise<{ success: boolean; message?: string }>;
+  sendOtp: (email: string, name?: string) => Promise<{ success: boolean; message?: string; cooldown?: number }>;
   register: (userData: Partial<CustomerUser>, password?: string) => Promise<{ success: boolean; message?: string }>;
   logout: () => Promise<void>;
   savedAddresses: Address[];
   addAddress: (address: Address) => Promise<void>;
   removeAddress: (index: number) => Promise<void>;
+  refreshSession: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -25,233 +27,215 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [savedAddresses, setSavedAddresses] = useState<Address[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Initialize and listen to active Supabase authentication session
+  // Load session from server-side HttpOnly cookie and Zoho CRM Contacts
+  const refreshSession = useCallback(async () => {
+    try {
+      const res = await fetch('/api/auth/session', {
+        method: 'GET',
+        headers: { 'Cache-Control': 'no-cache' },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.authenticated && data.user) {
+          setUser(data.user);
+          setSavedAddresses(data.addresses || []);
+          return;
+        }
+      }
+      setUser(null);
+      setSavedAddresses([]);
+    } catch (err) {
+      console.warn('[AuthContext] Session fetch error:', err);
+      setUser(null);
+      setSavedAddresses([]);
+    }
+  }, []);
+
   useEffect(() => {
     let mounted = true;
 
-    async function initializeAuth() {
-      if (!isSupabaseConfigured || !supabase) {
-        if (mounted) {
-          setIsLoading(false);
-        }
-        return;
-      }
-
-      try {
-        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        if (sessionError) throw sessionError;
-
-        if (session?.user && mounted) {
-          await loadUserProfile(session.user.id, session.user.email || '');
-        }
-      } catch (err) {
-        console.warn('Error fetching Supabase auth session:', err);
-      } finally {
-        if (mounted) {
-          setIsLoading(false);
-        }
+    async function init() {
+      await refreshSession();
+      if (mounted) {
+        setIsLoading(false);
       }
     }
 
-    initializeAuth();
-
-    // Setup real-time auth state listener
-    let subscription: { unsubscribe: () => void } | null = null;
-    if (isSupabaseConfigured && supabase) {
-      const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
-        if (!mounted) return;
-        if (session?.user) {
-          await loadUserProfile(session.user.id, session.user.email || '');
-        } else {
-          setUser(null);
-          setSavedAddresses([]);
-        }
-        if (mounted) {
-          setIsLoading(false);
-        }
-      });
-      subscription = data?.subscription || null;
-    }
+    init();
 
     return () => {
       mounted = false;
-      subscription?.unsubscribe();
     };
-  }, []);
+  }, [refreshSession]);
 
-  // Fetch verified profile and role from PostgreSQL profiles table
-  async function loadUserProfile(userId: string, email: string) {
-    if (!supabase) return;
-
-    try {
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .maybeSingle();
-
-      const customerUser: CustomerUser = {
-        id: userId,
-        name: profile?.full_name || email.split('@')[0],
-        email: email,
-        phone: profile?.phone,
-        companyName: profile?.company_name,
-        gstin: profile?.gstin,
-        role: profile?.role === 'admin' ? 'admin' : 'customer',
-      };
-
-      setUser(customerUser);
-
-      // Load saved addresses
-      const { data: addresses } = await supabase
-        .from('customer_addresses')
-        .select('*')
-        .eq('profile_id', userId)
-        .order('is_default', { ascending: false });
-
-      if (addresses && addresses.length > 0) {
-        setSavedAddresses(
-          addresses.map((a) => ({
-            fullName: a.contact_name,
-            phone: a.contact_phone,
-            companyName: a.company_name,
-            gstin: a.gstin,
-            addressLine1: a.address_line1,
-            addressLine2: a.address_line2,
-            city: a.city,
-            state: a.state,
-            pincode: a.pincode,
-            isDefault: a.is_default,
-          }))
-        );
-      }
-    } catch (err) {
-      console.warn('Error fetching user profile:', err);
-    }
-  }
-
-  const login = async (email: string, password?: string): Promise<{ success: boolean; message?: string }> => {
-    if (!isSupabaseConfigured || !supabase) {
-      return {
-        success: false,
-        message: 'Database authentication is not connected. Please provide NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in environment configuration.',
-      };
-    }
-
-    if (!password) {
-      return { success: false, message: 'Password is required to sign in.' };
+  const login = async (
+    email: string,
+    password?: string
+  ): Promise<{ success: boolean; requiresOtp?: boolean; message?: string }> => {
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail) {
+      return { success: false, message: 'Email address is required.' };
     }
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email.trim().toLowerCase(),
-        password,
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: cleanEmail, password }),
       });
 
-      if (error) {
-        return { success: false, message: error.message };
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        return {
+          success: false,
+          message: data.error || data.message || 'Login failed. Please verify your credentials.',
+        };
+      }
+
+      if (data.requiresOtp) {
+        return {
+          success: false,
+          requiresOtp: true,
+          message: data.message || 'Verification code sent to your email.',
+        };
       }
 
       if (data.user) {
-        await loadUserProfile(data.user.id, data.user.email || email);
+        setUser(data.user);
+        await refreshSession();
       }
 
-      return { success: true, message: 'Signed in successfully.' };
+      return { success: true, message: data.message || 'Signed in successfully.' };
     } catch (err: unknown) {
-      return { success: false, message: err instanceof Error ? err.message : 'Authentication error.' };
+      return {
+        success: false,
+        message: err instanceof Error ? err.message : 'Authentication network error.',
+      };
+    }
+  };
+
+  const sendOtp = async (
+    email: string,
+    name?: string
+  ): Promise<{ success: boolean; message?: string; cooldown?: number }> => {
+    try {
+      const res = await fetch('/api/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim().toLowerCase(), name }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        return { success: false, message: data.error || 'Failed to dispatch verification code.' };
+      }
+      return { success: true, message: data.message, cooldown: data.cooldown };
+    } catch (err: unknown) {
+      return {
+        success: false,
+        message: err instanceof Error ? err.message : 'Error sending code.',
+      };
+    }
+  };
+
+  const verifyOtp = async (
+    email: string,
+    otp: string
+  ): Promise<{ success: boolean; message?: string }> => {
+    try {
+      const res = await fetch('/api/auth/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim().toLowerCase(), otp }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        return { success: false, message: data.error || 'Invalid verification code.' };
+      }
+      if (data.user) {
+        setUser(data.user);
+        await refreshSession();
+      }
+      return { success: true, message: data.message || 'Verification successful.' };
+    } catch (err: unknown) {
+      return {
+        success: false,
+        message: err instanceof Error ? err.message : 'Verification network error.',
+      };
     }
   };
 
   const register = async (
     userData: Partial<CustomerUser>,
-    password?: string
+    _password?: string
   ): Promise<{ success: boolean; message?: string }> => {
-    if (!isSupabaseConfigured || !supabase) {
-      return {
-        success: false,
-        message: 'Database authentication is not connected. Please provide NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in environment configuration.',
-      };
-    }
-
-    if (!userData.email || !userData.name || !password) {
-      return { success: false, message: 'Full name, email, and password are required.' };
+    if (!userData.email || !userData.name) {
+      return { success: false, message: 'Full name and business email are required.' };
     }
 
     try {
-      const cleanEmail = userData.email.trim().toLowerCase();
-
-      const { data, error } = await supabase.auth.signUp({
-        email: cleanEmail,
-        password,
-        options: {
-          data: {
-            full_name: userData.name,
-            phone: userData.phone,
-            company_name: userData.companyName,
-            gstin: userData.gstin,
-          },
-        },
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: userData.name,
+          email: userData.email,
+          phone: userData.phone,
+          companyName: userData.companyName,
+          gstin: userData.gstin,
+        }),
       });
 
-      if (error) {
-        return { success: false, message: error.message };
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        return { success: false, message: data.error || 'Registration failed.' };
       }
 
-      // Upsert profile in PostgreSQL profiles table
       if (data.user) {
-        await supabase.from('profiles').upsert({
-          id: data.user.id,
-          email: cleanEmail,
-          full_name: userData.name,
-          phone: userData.phone,
-          company_name: userData.companyName,
-          gstin: userData.gstin,
-          role: 'customer',
-        });
-
-        await loadUserProfile(data.user.id, cleanEmail);
+        setUser(data.user);
+        await refreshSession();
       }
 
       return {
         success: true,
-        message: data.session
-          ? 'Account registered successfully.'
-          : 'Registration successful! Please check your email to verify your account.',
+        message: data.message || 'Account registered successfully.',
       };
     } catch (err: unknown) {
-      return { success: false, message: err instanceof Error ? err.message : 'Registration error.' };
+      return {
+        success: false,
+        message: err instanceof Error ? err.message : 'Registration network error.',
+      };
     }
   };
 
   const logout = async () => {
-    if (supabase) {
-      await supabase.auth.signOut();
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch (err) {
+      console.warn('[AuthContext] Logout fetch warning:', err);
     }
     setUser(null);
     setSavedAddresses([]);
   };
 
   const addAddress = async (address: Address) => {
+    // Optimistic UI update
     setSavedAddresses((prev) => [address, ...prev]);
 
-    if (isSupabaseConfigured && supabase && user) {
-      try {
-        await supabase.from('customer_addresses').insert({
-          profile_id: user.id,
-          contact_name: address.fullName,
-          contact_phone: address.phone,
-          company_name: address.companyName,
-          gstin: address.gstin,
-          address_line1: address.addressLine1,
-          address_line2: address.addressLine2,
-          city: address.city,
-          state: address.state,
-          pincode: address.pincode,
-          is_default: Boolean(address.isDefault),
-        });
-      } catch (err) {
-        console.warn('Could not persist address to database:', err);
+    try {
+      const res = await fetch('/api/auth/address', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(address),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.addresses) {
+          setSavedAddresses(data.addresses);
+        }
       }
+    } catch (err) {
+      console.warn('[AuthContext] Could not persist address to Zoho CRM:', err);
     }
   };
 
@@ -266,13 +250,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isAuthenticated: Boolean(user),
         isAdmin: user?.role === 'admin',
         isLoading,
-        isAuthConfigured: isSupabaseConfigured,
+        isAuthConfigured: true,
         login,
+        sendOtp,
+        verifyOtp,
         register,
         logout,
         savedAddresses,
         addAddress,
         removeAddress,
+        refreshSession,
       }}
     >
       {children}

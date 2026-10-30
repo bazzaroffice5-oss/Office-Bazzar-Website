@@ -1,0 +1,810 @@
+{
+  "prod-cardboard-tag-file": {
+    "zohoId": "1476900000000567001",
+    "sku": "OB-STA-1001",
+    "websiteId": "prod-cardboard-tag-file",
+    "name": "Cardboard Tag File",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-3025-box-file": {
+    "zohoId": "1476900000000567002",
+    "sku": "OB-STA-1002",
+    "websiteId": "prod-3025-box-file",
+    "name": "3025 Box File",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-a4-punch-folder": {
+    "zohoId": "1476900000000567003",
+    "sku": "OB-STA-1003",
+    "websiteId": "prod-a4-punch-folder",
+    "name": "A/4 Punch Folder",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-a4-report-file": {
+    "zohoId": "1476900000000567004",
+    "sku": "OB-STA-1004",
+    "websiteId": "prod-a4-report-file",
+    "name": "A/4 Report File",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-a4-stick-file": {
+    "zohoId": "1476900000000567005",
+    "sku": "OB-STA-1005",
+    "websiteId": "prod-a4-stick-file",
+    "name": "A/4 Stick File",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-visiting-card-folder": {
+    "zohoId": "1476900000000567006",
+    "sku": "OB-STA-1006",
+    "websiteId": "prod-visiting-card-folder",
+    "name": "Visiting Card Folder",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-fs-expanding-file": {
+    "zohoId": "1476900000000567007",
+    "sku": "OB-STA-1007",
+    "websiteId": "prod-fs-expanding-file",
+    "name": "F/S Expanding File",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-punching-machine-dp-600-kangaroo": {
+    "zohoId": "1476900000000567008",
+    "sku": "OB-STA-1008",
+    "websiteId": "prod-punching-machine-dp-600-kangaroo",
+    "name": "Punching Machine DP 600 Kangaroo",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-kangaro-staplers-hd-10d": {
+    "zohoId": "1476900000000567009",
+    "sku": "OB-STA-1009",
+    "websiteId": "prod-kangaro-staplers-hd-10d",
+    "name": "Kangaro Staplers HD 10D",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-white-banian-cloth": {
+    "zohoId": "1476900000000567010",
+    "sku": "OB-HOU-1010",
+    "websiteId": "prod-white-banian-cloth",
+    "name": "White Banian Cloth",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-scrubbing-pad": {
+    "zohoId": "1476900000000567011",
+    "sku": "OB-HOU-1011",
+    "websiteId": "prod-scrubbing-pad",
+    "name": "Scrubbing Pad",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-housekeeping-cleaning-chemicals": {
+    "zohoId": "1476900000000567012",
+    "sku": "OB-HOU-1012",
+    "websiteId": "prod-housekeeping-cleaning-chemicals",
+    "name": "Housekeeping Cleaning Chemicals",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-tissue-paper-napkin": {
+    "zohoId": "1476900000000567013",
+    "sku": "OB-HOU-1013",
+    "websiteId": "prod-tissue-paper-napkin",
+    "name": "Tissue Paper Napkin",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-table-wiper": {
+    "zohoId": "1476900000000567014",
+    "sku": "OB-HOU-1014",
+    "websiteId": "prod-table-wiper",
+    "name": "Table Wiper",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-toilet-cleaning-brush": {
+    "zohoId": "1476900000000567015",
+    "sku": "OB-HOU-1015",
+    "websiteId": "prod-toilet-cleaning-brush",
+    "name": "Toilet Cleaning Brush",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-checked-cloth": {
+    "zohoId": "1476900000000567016",
+    "sku": "OB-HOU-1016",
+    "websiteId": "prod-checked-cloth",
+    "name": "Checked Cloth",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-rubber-gloves": {
+    "zohoId": "1476900000000567017",
+    "sku": "OB-HOU-1017",
+    "websiteId": "prod-rubber-gloves",
+    "name": "Rubber Gloves",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-kangaro-staplers-hd-10d-1": {
+    "zohoId": "1476900000000564003",
+    "sku": "OB-HOU-1018",
+    "websiteId": "prod-kangaro-staplers-hd-10d-1",
+    "name": "Kangaro Staplers HD 10D",
+    "price": 0,
+    "action": "insert"
+  },
+  "prod-glass-wiper": {
+    "zohoId": "1476900000000567019",
+    "sku": "OB-HOU-1019",
+    "websiteId": "prod-glass-wiper",
+    "name": "Glass Wiper",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-caddy-basket": {
+    "zohoId": "1476900000000567020",
+    "sku": "OB-HOU-1020",
+    "websiteId": "prod-caddy-basket",
+    "name": "Caddy Basket",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-wringer-trolley": {
+    "zohoId": "1476900000000567021",
+    "sku": "OB-HOU-1021",
+    "websiteId": "prod-wringer-trolley",
+    "name": "Wringer Trolley",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-stainess-steel-hand-soap-dispenser": {
+    "zohoId": "1476900000000567022",
+    "sku": "OB-HOU-1022",
+    "websiteId": "prod-stainess-steel-hand-soap-dispenser",
+    "name": "Stainess Steel Hand Soap Dispenser",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-abs-hand-dryer-machine": {
+    "zohoId": "1476900000000567023",
+    "sku": "OB-HOU-1023",
+    "websiteId": "prod-abs-hand-dryer-machine",
+    "name": "ABS Hand Dryer Machine",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-stainless-steel-hand-dryer-machine": {
+    "zohoId": "1476900000000567024",
+    "sku": "OB-HOU-1024",
+    "websiteId": "prod-stainless-steel-hand-dryer-machine",
+    "name": "Stainless Steel Hand Dryer Machine",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-air-freshener-dispenser-led": {
+    "zohoId": "1476900000000567025",
+    "sku": "OB-HOU-1025",
+    "websiteId": "prod-air-freshener-dispenser-led",
+    "name": "Air Freshener Dispenser LED",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-copper-water-bottle": {
+    "zohoId": "1476900000000567026",
+    "sku": "OB-HOU-1026",
+    "websiteId": "prod-copper-water-bottle",
+    "name": "Copper Water Bottle",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-toilet-roll-dispenser": {
+    "zohoId": "1476900000000567027",
+    "sku": "OB-HOU-1027",
+    "websiteId": "prod-toilet-roll-dispenser",
+    "name": "Toilet Roll Dispenser",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-stainless-steel-dustbin": {
+    "zohoId": "1476900000000567028",
+    "sku": "OB-GAR-1028",
+    "websiteId": "prod-stainless-steel-dustbin",
+    "name": "Stainless Steel Dustbin",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-aristo-wheeled-dust-bin-120-litre-with-pedal": {
+    "zohoId": "1476900000000567029",
+    "sku": "OB-GAR-1029",
+    "websiteId": "prod-aristo-wheeled-dust-bin-120-litre-with-pedal",
+    "name": "Aristo Wheeled Dust Bin 120 Litre With Pedal",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-green-biodegradable-garbage-bag": {
+    "zohoId": "1476900000000567030",
+    "sku": "OB-GAR-1030",
+    "websiteId": "prod-green-biodegradable-garbage-bag",
+    "name": "Green Biodegradable Garbage Bag",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-garbage-bag-small": {
+    "zohoId": "1476900000000567031",
+    "sku": "OB-GAR-1031",
+    "websiteId": "prod-garbage-bag-small",
+    "name": "Garbage Bag - Small",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-silver-stainless-steel-ss-lobby-ashtray-bin-capacity-8x24": {
+    "zohoId": "1476900000000567032",
+    "sku": "OB-GAR-1032",
+    "websiteId": "prod-silver-stainless-steel-ss-lobby-ashtray-bin-capacity-8x24",
+    "name": "Silver Stainless Steel SS Lobby Ashtray Bin, Capacity: 8x24",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-cartoon-character-dustbin": {
+    "zohoId": "1476900000000567033",
+    "sku": "OB-GAR-1033",
+    "websiteId": "prod-cartoon-character-dustbin",
+    "name": "Cartoon Character Dustbin",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-external-hard-disk": {
+    "zohoId": "1476900000000567034",
+    "sku": "OB-COM-1034",
+    "websiteId": "prod-external-hard-disk",
+    "name": "External Hard Disk",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-epson-ecotank-l6160-wi-fi-duplex-multi-function-ink-tank-printer": {
+    "zohoId": "1476900000000567035",
+    "sku": "OB-COM-1035",
+    "websiteId": "prod-epson-ecotank-l6160-wi-fi-duplex-multi-function-ink-tank-printer",
+    "name": "Epson Ecotank L6160 Wi-Fi Duplex Multi Function Ink Tank Printer",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-kent-ks-12-lamination-machine": {
+    "zohoId": "1476900000000567036",
+    "sku": "OB-COM-1036",
+    "websiteId": "prod-kent-ks-12-lamination-machine",
+    "name": "Kent KS 12 Lamination Machine",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-keyboard-tray-metal": {
+    "zohoId": "1476900000000567037",
+    "sku": "OB-COM-1037",
+    "websiteId": "prod-keyboard-tray-metal",
+    "name": "Keyboard Tray Metal",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-sandisk-pen-drive": {
+    "zohoId": "1476900000000567038",
+    "sku": "OB-COM-1038",
+    "websiteId": "prod-sandisk-pen-drive",
+    "name": "SanDisk Pen Drive",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-spiral-binding-machine": {
+    "zohoId": "1476900000000567039",
+    "sku": "OB-COM-1039",
+    "websiteId": "prod-spiral-binding-machine",
+    "name": "spiral binding machine",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-barcode-printer": {
+    "zohoId": "1476900000000567040",
+    "sku": "OB-COM-1040",
+    "websiteId": "prod-barcode-printer",
+    "name": "Barcode Printer",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-adaptor-cable": {
+    "zohoId": "1476900000000567041",
+    "sku": "OB-COM-1041",
+    "websiteId": "prod-adaptor-cable",
+    "name": "Adaptor Cable",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-white-board-for-school": {
+    "zohoId": "1476900000000567042",
+    "sku": "OB-BOA-1042",
+    "websiteId": "prod-white-board-for-school",
+    "name": "White Board For School",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-golden-letter-for-welcome-board": {
+    "zohoId": "1476900000000567043",
+    "sku": "OB-BOA-1043",
+    "websiteId": "prod-golden-letter-for-welcome-board",
+    "name": "Golden Letter for Welcome Board",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-alkosign-motorized-dependent-up-down-boards": {
+    "zohoId": "1476900000000567044",
+    "sku": "OB-BOA-1044",
+    "websiteId": "prod-alkosign-motorized-dependent-up-down-boards",
+    "name": "Alkosign Motorized Dependent Up Down Boards",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-alkosign-horizontal-sliding-board": {
+    "zohoId": "1476900000000567045",
+    "sku": "OB-BOA-1045",
+    "websiteId": "prod-alkosign-horizontal-sliding-board",
+    "name": "Alkosign Horizontal Sliding Board",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-pin-up-notice-board": {
+    "zohoId": "1476900000000567046",
+    "sku": "OB-BOA-1046",
+    "websiteId": "prod-pin-up-notice-board",
+    "name": "Pin Up / Notice Board",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-alkosign-pegboard": {
+    "zohoId": "1476900000000567047",
+    "sku": "OB-BOA-1047",
+    "websiteId": "prod-alkosign-pegboard",
+    "name": "Alkosign Pegboard",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-ms-black-magazine-rack": {
+    "zohoId": "1476900000000567048",
+    "sku": "OB-BOA-1048",
+    "websiteId": "prod-ms-black-magazine-rack",
+    "name": "Ms Black Magazine Rack",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-white-board-duster": {
+    "zohoId": "1476900000000567049",
+    "sku": "OB-BOA-1049",
+    "websiteId": "prod-white-board-duster",
+    "name": "White Board Duster",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-a4-display-folders": {
+    "zohoId": "1476900000000567050",
+    "sku": "OB-BOA-1050",
+    "websiteId": "prod-a4-display-folders",
+    "name": "A4 Display Folders",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-cello-tape": {
+    "zohoId": "1476900000000567051",
+    "sku": "OB-PAC-1051",
+    "websiteId": "prod-cello-tape",
+    "name": "Cello Tape",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-cello-brown-tape": {
+    "zohoId": "1476900000000567052",
+    "sku": "OB-PAC-1052",
+    "websiteId": "prod-cello-brown-tape",
+    "name": "Cello Brown Tape",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-floor-marking-tapes": {
+    "zohoId": "1476900000000567053",
+    "sku": "OB-PAC-1053",
+    "websiteId": "prod-floor-marking-tapes",
+    "name": "Floor Marking Tapes",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-bubble-sheet": {
+    "zohoId": "1476900000000567054",
+    "sku": "OB-PAC-1054",
+    "websiteId": "prod-bubble-sheet",
+    "name": "Bubble Sheet",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-foam-thermocol": {
+    "zohoId": "1476900000000567055",
+    "sku": "OB-PAC-1055",
+    "websiteId": "prod-foam-thermocol",
+    "name": "Foam Thermocol",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-packing-patti-roll": {
+    "zohoId": "1476900000000567056",
+    "sku": "OB-PAC-1056",
+    "websiteId": "prod-packing-patti-roll",
+    "name": "Packing Patti Roll",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-magic-tape-with-dispenser": {
+    "zohoId": "1476900000000567057",
+    "sku": "OB-PAC-1057",
+    "websiteId": "prod-magic-tape-with-dispenser",
+    "name": "Magic Tape With Dispenser",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-paper-cutter-big": {
+    "zohoId": "1476900000000567058",
+    "sku": "OB-PAC-1058",
+    "websiteId": "prod-paper-cutter-big",
+    "name": "Paper Cutter Big",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-gum-paste": {
+    "zohoId": "1476900000000567059",
+    "sku": "OB-PAC-1059",
+    "websiteId": "prod-gum-paste",
+    "name": "Gum Paste",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-double-sided-newspaper-stand": {
+    "zohoId": "1476900000000567060",
+    "sku": "OB-DIS-1060",
+    "websiteId": "prod-double-sided-newspaper-stand",
+    "name": "Double Sided Newspaper Stand",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-wooden-stand-for-boards": {
+    "zohoId": "1476900000000567061",
+    "sku": "OB-DIS-1061",
+    "websiteId": "prod-wooden-stand-for-boards",
+    "name": "Wooden Stand for Boards",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-tripod-stand": {
+    "zohoId": "1476900000000567062",
+    "sku": "OB-DIS-1062",
+    "websiteId": "prod-tripod-stand",
+    "name": "Tripod Stand",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-name-plate-plain-innofitt": {
+    "zohoId": "1476900000000567063",
+    "sku": "OB-DIS-1063",
+    "websiteId": "prod-name-plate-plain-innofitt",
+    "name": "Name Plate Plain -Innofitt",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-gobbler-gs8cd-paper-shredding-machine": {
+    "zohoId": "1476900000000567064",
+    "sku": "OB-SHR-1064",
+    "websiteId": "prod-gobbler-gs8cd-paper-shredding-machine",
+    "name": "Gobbler GS8CD Paper Shredding Machine",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-gobbler-gs15cd-paper-shredding-machine": {
+    "zohoId": "1476900000000567065",
+    "sku": "OB-SHR-1065",
+    "websiteId": "prod-gobbler-gs15cd-paper-shredding-machine",
+    "name": "Gobbler GS15CD Paper Shredding Machine",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-gobbler-a2326-paper-shredding-machine": {
+    "zohoId": "1476900000000567066",
+    "sku": "OB-SHR-1066",
+    "websiteId": "prod-gobbler-a2326-paper-shredding-machine",
+    "name": "Gobbler A2326 Paper Shredding Machine",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-gobbler-s3135-heavy-duty-paper-shredding-machine": {
+    "zohoId": "1476900000000567067",
+    "sku": "OB-SHR-1067",
+    "websiteId": "prod-gobbler-s3135-heavy-duty-paper-shredding-machine",
+    "name": "Gobbler S3135 Heavy Duty Paper Shredding Machine",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-gobbler-gs-10-cd-paper-shredding-machine": {
+    "zohoId": "1476900000000567068",
+    "sku": "OB-SHR-1068",
+    "websiteId": "prod-gobbler-gs-10-cd-paper-shredding-machine",
+    "name": "Gobbler GS 10 CD Paper Shredding Machine",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-gobbler-px9900-currency-counting-machine": {
+    "zohoId": "1476900000000567069",
+    "sku": "OB-SHR-1069",
+    "websiteId": "prod-gobbler-px9900-currency-counting-machine",
+    "name": "Gobbler PX9900 Currency Counting Machine",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-royal-napkins": {
+    "zohoId": "1476900000000567070",
+    "sku": "OB-HOU-1070",
+    "websiteId": "prod-royal-napkins",
+    "name": "Royal Napkins",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-colin-glass-cleaner-500-ml": {
+    "zohoId": "1476900000000567071",
+    "sku": "OB-HOU-1071",
+    "websiteId": "prod-colin-glass-cleaner-500-ml",
+    "name": "Colin Glass Cleaner 500 Ml",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-plastic-storage-box": {
+    "zohoId": "1476900000000567072",
+    "sku": "OB-HOU-1072",
+    "websiteId": "prod-plastic-storage-box",
+    "name": "Plastic Storage Box",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-butter-paper": {
+    "zohoId": "1476900000000567073",
+    "sku": "OB-HOU-1073",
+    "websiteId": "prod-butter-paper",
+    "name": "Butter Paper",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-dettol-disinfectant-spray": {
+    "zohoId": "1476900000000567074",
+    "sku": "OB-HOU-1074",
+    "websiteId": "prod-dettol-disinfectant-spray",
+    "name": "Dettol Disinfectant Spray",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-best-print-12a-compatible-toner-cartridge": {
+    "zohoId": "1476900000000567075",
+    "sku": "OB-PRI-1075",
+    "websiteId": "prod-best-print-12a-compatible-toner-cartridge",
+    "name": "Best Print 12A Compatible Toner Cartridge",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-canon-ep-303-toner-cartridge": {
+    "zohoId": "1476900000000567076",
+    "sku": "OB-PRI-1076",
+    "websiteId": "prod-canon-ep-303-toner-cartridge",
+    "name": "Canon EP 303 Toner Cartridge",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-canon-308-toner-cartridge": {
+    "zohoId": "1476900000000567077",
+    "sku": "OB-PRI-1077",
+    "websiteId": "prod-canon-308-toner-cartridge",
+    "name": "Canon 308 Toner Cartridge",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-label-cartridges": {
+    "zohoId": "1476900000000567078",
+    "sku": "OB-PRI-1078",
+    "websiteId": "prod-label-cartridges",
+    "name": "Label Cartridges",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-canon-refilling-cartridge": {
+    "zohoId": "1476900000000567079",
+    "sku": "OB-PRI-1079",
+    "websiteId": "prod-canon-refilling-cartridge",
+    "name": "Canon Refilling Cartridge",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-compatible-toner-cartridge": {
+    "zohoId": "1476900000000567080",
+    "sku": "OB-PRI-1080",
+    "websiteId": "prod-compatible-toner-cartridge",
+    "name": "Compatible Toner Cartridge",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-samsung-mlt-d116s-black-toner-cartridge-packaging-type-box": {
+    "zohoId": "1476900000000567081",
+    "sku": "OB-PRI-1081",
+    "websiteId": "prod-samsung-mlt-d116s-black-toner-cartridge-packaging-type-box",
+    "name": "Samsung MLT-D116S Black Toner Cartridge, Packaging Type: Box",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-hp-126a-laser-jet-toner-cartridge": {
+    "zohoId": "1476900000000567082",
+    "sku": "OB-PRI-1082",
+    "websiteId": "prod-hp-126a-laser-jet-toner-cartridge",
+    "name": "HP 126A Laser Jet Toner Cartridge",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-canon-npg-51-toner-cartridge": {
+    "zohoId": "1476900000000567083",
+    "sku": "OB-PRI-1083",
+    "websiteId": "prod-canon-npg-51-toner-cartridge",
+    "name": "Canon Npg 51 Toner Cartridge",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-best-print-88a-compatible-toner-cartridge": {
+    "zohoId": "1476900000000567084",
+    "sku": "OB-PRI-1084",
+    "websiteId": "prod-best-print-88a-compatible-toner-cartridge",
+    "name": "Best Print 88A Compatible Toner Cartridge",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-hp-802-small-black-ink-cartridge-ch561zz": {
+    "zohoId": "1476900000000567085",
+    "sku": "OB-PRI-1085",
+    "websiteId": "prod-hp-802-small-black-ink-cartridge-ch561zz",
+    "name": "HP 802 Small Black Ink Cartridge - CH561ZZ",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-hp-678-tri-color-ink-cartridge-cz108aa": {
+    "zohoId": "1476900000000567086",
+    "sku": "OB-PRI-1086",
+    "websiteId": "prod-hp-678-tri-color-ink-cartridge-cz108aa",
+    "name": "HP 678 Tri-Color Ink Cartridge - CZ108AA",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-taski-r4-furniture-maintainer": {
+    "zohoId": "1476900000000567087",
+    "sku": "OB-CLE-1087",
+    "websiteId": "prod-taski-r4-furniture-maintainer",
+    "name": "Taski R4 Furniture Maintainer",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-taski-r6-toilet-cleaner": {
+    "zohoId": "1476900000000567088",
+    "sku": "OB-CLE-1088",
+    "websiteId": "prod-taski-r6-toilet-cleaner",
+    "name": "Taski R6 Toilet Cleaner",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-liquid-white-phenyl": {
+    "zohoId": "1476900000000567089",
+    "sku": "OB-CLE-1089",
+    "websiteId": "prod-liquid-white-phenyl",
+    "name": "Liquid White Phenyl",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-humic-acid-liquid": {
+    "zohoId": "1476900000000567090",
+    "sku": "OB-CLE-1090",
+    "websiteId": "prod-humic-acid-liquid",
+    "name": "Humic Acid Liquid",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-vim-liquid-dish-wash": {
+    "zohoId": "1476900000000567091",
+    "sku": "OB-CLE-1091",
+    "websiteId": "prod-vim-liquid-dish-wash",
+    "name": "Vim Liquid Dish Wash",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-lizol-liquid-cleaner": {
+    "zohoId": "1476900000000567092",
+    "sku": "OB-CLE-1092",
+    "websiteId": "prod-lizol-liquid-cleaner",
+    "name": "Lizol Liquid Cleaner",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-harpic-toilet-cleaner": {
+    "zohoId": "1476900000000567093",
+    "sku": "OB-CLE-1093",
+    "websiteId": "prod-harpic-toilet-cleaner",
+    "name": "Harpic Toilet Cleaner",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-hi-clean-floor-cleaner-5-ltr": {
+    "zohoId": "1476900000000567094",
+    "sku": "OB-CLE-1094",
+    "websiteId": "prod-hi-clean-floor-cleaner-5-ltr",
+    "name": "Hi Clean Floor Cleaner 5 ltr",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-hi-clean-liquid-soap-oil": {
+    "zohoId": "1476900000000567095",
+    "sku": "OB-CLE-1095",
+    "websiteId": "prod-hi-clean-liquid-soap-oil",
+    "name": "Hi Clean Liquid Soap Oil",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-tissue-paper-napkin-1": {
+    "zohoId": "1476900000000564004",
+    "sku": "OB-TIS-1096",
+    "websiteId": "prod-tissue-paper-napkin-1",
+    "name": "Tissue Paper Napkin",
+    "price": 0,
+    "action": "insert"
+  },
+  "prod-royal-napkins-tissue-paper": {
+    "zohoId": "1476900000000567097",
+    "sku": "OB-TIS-1097",
+    "websiteId": "prod-royal-napkins-tissue-paper",
+    "name": "Royal Napkins Tissue Paper",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-c-fold-tissue": {
+    "zohoId": "1476900000000567098",
+    "sku": "OB-TIS-1098",
+    "websiteId": "prod-c-fold-tissue",
+    "name": "C Fold Tissue",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-m-fold-tissue": {
+    "zohoId": "1476900000000567099",
+    "sku": "OB-TIS-1099",
+    "websiteId": "prod-m-fold-tissue",
+    "name": "M Fold Tissue",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-kimsoft-smile-c-fold-towels-180-towels-30-sleeves-031500": {
+    "zohoId": "1476900000000567100",
+    "sku": "OB-TIS-1100",
+    "websiteId": "prod-kimsoft-smile-c-fold-towels-180-towels-30-sleeves-031500",
+    "name": "KIMSOFT Smile C Fold Towels 180 Towels 30 Sleeves 031500",
+    "price": 0,
+    "action": "update"
+  },
+  "prod-toilet-roll-big": {
+    "zohoId": "1476900000000565003",
+    "sku": "OB-TIS-1101",
+    "websiteId": "prod-toilet-roll-big",
+    "name": "Toilet Roll Big",
+    "price": 0,
+    "action": "update"
+  }
+}

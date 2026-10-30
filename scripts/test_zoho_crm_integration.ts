@@ -225,6 +225,42 @@ async function runTestSuite() {
         } as Response;
       }
 
+      if (url.includes('/crm/v6/Contacts')) {
+        return {
+          ok: true,
+          status: 200,
+          text: async () =>
+            JSON.stringify({
+              data: [
+                {
+                  code: 'SUCCESS',
+                  status: 'success',
+                  message: 'contact created',
+                  details: { id: 'zoho_contact_9876543210' },
+                },
+              ],
+            }),
+        } as Response;
+      }
+
+      if (url.includes('/crm/v6/Accounts')) {
+        return {
+          ok: true,
+          status: 200,
+          text: async () =>
+            JSON.stringify({
+              data: [
+                {
+                  code: 'SUCCESS',
+                  status: 'success',
+                  message: 'account created',
+                  details: { id: 'zoho_account_9876543210' },
+                },
+              ],
+            }),
+        } as Response;
+      }
+
       if (url.includes('/crm/v6/Leads')) {
         return {
           ok: true,
@@ -302,25 +338,13 @@ async function runTestSuite() {
       ],
     };
 
-    // Case 4A: Without Zoho Product ID mapping -> Lead created, formal Quote skipped as required
-    const resultNoMapping = await syncQuotationToZoho(mockQuotation);
+    // Formal Quote Creation with line items and contact linking
+    const resultSync = await syncQuotationToZoho(mockQuotation);
     assert(
-      resultNoMapping.success === true &&
-        resultNoMapping.leadId === 'zoho_lead_9876543210' &&
-        !resultNoMapping.quoteId,
-      'Requirement 9: Formal Quote Skipped When Product Unmapped',
-      `Lead created (ID: ${resultNoMapping.leadId}), Quotes creation deferred safely: "${resultNoMapping.reason}"`
-    );
-
-    // Case 4B: With valid Zoho Product ID mapping -> Creates Lead AND formal Quote
-    const productMapping = { 'prod-copier': 'zoho_prod_778899' };
-    const resultWithMapping = await syncQuotationToZoho(mockQuotation, productMapping);
-    assert(
-      resultWithMapping.success === true &&
-        resultWithMapping.leadId === 'zoho_lead_9876543210' &&
-        resultWithMapping.quoteId === 'zoho_quote_1122334455',
-      'Requirement 9: Formal Quote Created When Products Mapped',
-      `Lead ID: ${resultWithMapping.leadId}, Quote ID: ${resultWithMapping.quoteId}`
+      resultSync.success === true &&
+        resultSync.quoteId === 'zoho_quote_1122334455',
+      'Phase 3: Formal Zoho Quote Created for RFQ',
+      `Quote ID: ${resultSync.quoteId}`
     );
 
     // Restore original fetch and clean test env

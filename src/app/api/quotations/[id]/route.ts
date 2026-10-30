@@ -1,5 +1,9 @@
 import { NextResponse } from 'next/server';
+import { getQuoteByReferenceFromZoho } from '@/lib/zoho/quotes';
 import { getQuotationById, getQuotationByNumber } from '@/lib/db/store';
+import { Quotation } from '@/types';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET(
   req: Request,
@@ -11,9 +15,22 @@ export async function GET(
       return NextResponse.json({ error: 'Quotation reference is required' }, { status: 400 });
     }
 
-    let quotation = await getQuotationById(id);
+    const cleanId = decodeURIComponent(id).trim();
+
+    // 1. Primary: Look up directly from Zoho CRM Quotes
+    let quotation: Quotation | null = null;
+    try {
+      quotation = await getQuoteByReferenceFromZoho(cleanId);
+    } catch (crmErr) {
+      console.warn('[Quotation API] Zoho CRM lookup error:', crmErr);
+    }
+
+    // 2. Secondary: Fallback to local store
     if (!quotation) {
-      quotation = await getQuotationByNumber(id);
+      quotation = await getQuotationById(cleanId);
+      if (!quotation) {
+        quotation = await getQuotationByNumber(cleanId);
+      }
     }
 
     if (!quotation) {

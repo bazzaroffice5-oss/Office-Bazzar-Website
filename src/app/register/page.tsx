@@ -3,19 +3,18 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { UserPlus, ShieldCheck, AlertCircle, Database } from 'lucide-react';
+import { UserPlus, ShieldCheck, AlertCircle, Building2, Shield } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { register, isAuthConfigured } = useAuth();
+  const { register } = useAuth();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [gstin, setGstin] = useState('');
-  const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -23,18 +22,13 @@ export default function RegisterPage() {
     e.preventDefault();
     setErrorMsg(null);
 
-    if (!name || !email || !password) {
-      setErrorMsg('Please complete all mandatory fields (Name, Business Email, and Password).');
-      return;
-    }
-
-    if (password.length < 6) {
-      setErrorMsg('Password must be at least 6 characters.');
+    if (!name || !email) {
+      setErrorMsg('Please complete all mandatory fields (Name and Business Email).');
       return;
     }
 
     setIsSubmitting(true);
-    const res = await register({ name, email, phone, companyName, gstin }, password);
+    const res = await register({ name, email, phone, companyName, gstin });
     setIsSubmitting(false);
 
     if (res.success) {
@@ -58,18 +52,6 @@ export default function RegisterPage() {
             Create an enterprise profile for tax invoicing and wholesale bulk quotes.
           </p>
         </div>
-
-        {!isAuthConfigured && (
-          <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-start gap-2.5">
-            <Database className="w-4 h-4 shrink-0 text-amber-600 mt-0.5" />
-            <div>
-              <p className="font-semibold text-xs">Database Auth Notice</p>
-              <p className="text-[11px] text-amber-800 mt-0.5">
-                Database authentication requires <code>NEXT_PUBLIC_SUPABASE_URL</code> and <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>.
-              </p>
-            </div>
-          </div>
-        )}
 
         {errorMsg && (
           <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-800 flex items-center gap-2">
@@ -138,18 +120,6 @@ export default function RegisterPage() {
                 className="w-full px-3.5 py-2.5 text-xs border border-slate-300 rounded-xl uppercase font-mono text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-blue-900"
               />
             </div>
-
-            <div className="sm:col-span-2">
-              <label className="block text-xs font-bold text-slate-700 mb-1">Create Password *</label>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Minimum 6 characters"
-                className="w-full px-3.5 py-2.5 text-xs border border-slate-300 rounded-xl text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-blue-900"
-              />
-            </div>
           </div>
 
           <div className="p-3 bg-emerald-50 rounded-2xl border border-emerald-100 flex items-center space-x-2 text-[11px] text-emerald-800">
@@ -160,11 +130,16 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-3 bg-blue-900 hover:bg-blue-950 disabled:opacity-50 text-white font-semibold text-sm rounded-xl transition-all shadow-md"
+            className="w-full py-3 bg-blue-900 hover:bg-blue-950 disabled:opacity-50 text-white font-semibold text-sm rounded-xl transition-all shadow-md cursor-pointer"
           >
             {isSubmitting ? 'Creating Corporate Account...' : 'Complete Registration'}
           </button>
         </form>
+
+        <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-[11px] text-slate-600 flex items-center gap-2">
+          <Shield className="w-4 h-4 text-blue-900 shrink-0" />
+          <span>Profile records are securely managed in enterprise Zoho CRM Contacts &amp; Accounts.</span>
+        </div>
 
         <div className="text-center text-xs text-slate-500 pt-2">
           Already registered?{' '}

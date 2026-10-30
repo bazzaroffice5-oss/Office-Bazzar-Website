@@ -297,6 +297,8 @@ export async function POST(req: Request) {
         quotation: safeQuotation,
         notificationStatus: isEmailSent ? 'sent' : 'pending_retry',
         zohoStatus: zohoSyncResult ? (zohoSyncResult.success ? 'synced' : zohoSyncResult.action || 'failed') : 'unconfigured',
+        zohoQuoteId: zohoSyncResult?.quoteId,
+        zohoError: zohoSyncResult?.error,
         message: 'Request for Quotation submitted successfully. Our sales team will contact you shortly.',
       },
       { status: 201 }

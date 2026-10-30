@@ -13,6 +13,7 @@ import {
 } from '@/types';
 import { CATEGORIES, BRANDS, INITIAL_PRODUCTS, COUPONS, resolveMainCategory } from '@/lib/data/catalog';
 import { supabase, supabaseAdmin, isSupabaseConfigured } from './supabase';
+import { getProductsFromZoho } from '@/lib/zoho/products';
 
 // Shared store state attached to globalThis to prevent process/worker boundary divergence in Next.js
 interface GlobalStoreState {
@@ -298,71 +299,12 @@ function mapDbNotificationLog(row: any): NotificationLog {
 // ----------------------------------------------------------------------
 
 export async function getProducts(filters?: FilterParams): Promise<{ products: Product[]; total: number }> {
-  if (isSupabaseConfigured && supabase) {
-    try {
-      let query = supabase.from('products').select('*', { count: 'exact' });
-
-      if (filters?.inStockOnly) {
-        query = query.gt('stock_quantity', 0);
-      }
-      if (filters?.category) {
-        const resolved = resolveMainCategory(filters.category);
-        if (resolved) {
-          query = query.or(`category_id.eq.${resolved.id},category_name.ilike.%${resolved.name}%`);
-        } else {
-          query = query.or(`category_id.eq.${filters.category},subcategory_id.eq.${filters.category},category_name.ilike.%${filters.category}%`);
-        }
-      }
-      if (filters?.subcategory) {
-        query = query.or(`subcategory_id.eq.${filters.subcategory},subcategory_name.ilike.%${filters.subcategory}%`);
-      }
-      if (filters?.brand) {
-        query = query.eq('brand_id', filters.brand);
-      }
-      if (filters?.minPrice !== undefined) {
-        query = query.gte('price', filters.minPrice);
-      }
-      if (filters?.maxPrice !== undefined) {
-        query = query.lte('price', filters.maxPrice);
-      }
-      if (filters?.query) {
-        query = query.ilike('name', `%${filters.query.trim()}%`);
-      }
-
-      // Sort
-      if (filters?.sortBy === 'price_asc') {
-        query = query.order('price', { ascending: true });
-      } else if (filters?.sortBy === 'price_desc') {
-        query = query.order('price', { ascending: false });
-      } else if (filters?.sortBy === 'rating') {
-        query = query.order('rating', { ascending: false });
-      } else {
-        query = query.order('is_bestseller', { ascending: false });
-      }
-
-      const page = filters?.page || 1;
-      const limit = filters?.limit || 24;
-      const from = (page - 1) * limit;
-      const to = from + limit - 1;
-
-      query = query.range(from, to);
-
-      const { data, count, error } = await query;
-
-      if (!error && data && data.length > 0) {
-        return {
-          products: data.map(mapDbProduct),
-          total: count || data.length,
-        };
-      }
-    } catch {
-      // Safely fall back to in-memory catalogue if Supabase experiences connection issues
-    }
-  }
-
-  // Fallback: In-memory store
+  // Primary: Authoritative catalog sourced directly from Zoho CRM (with server-side edge caching)
   syncCustomProducts();
-  let result = [...storeState.productsList].filter((p) => p.isActive !== false);
+  const zohoProducts = await getProductsFromZoho();
+  let result = (zohoProducts && zohoProducts.length > 0 ? zohoProducts : storeState.productsList).filter(
+    (p) => p.isActive !== false
+  );
 
   if (filters?.query) {
     const q = filters.query.toLowerCase().trim();
@@ -451,67 +393,37 @@ export async function getProducts(filters?: FilterParams): Promise<{ products: P
 }
 
 export async function getAdminProducts(): Promise<Product[]> {
-  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-    try {
-      const client = supabaseAdmin || supabase!;
-      const { data, error } = await client.from('products').select('*').order('created_at', { ascending: false });
-      if (!error && data && data.length > 0) {
-        return data.map(mapDbProduct);
-      }
-    } catch {
-      // Fallback
-    }
-  }
-  syncCustomProducts();
-  return [...storeState.productsList];
+  const products = await getProductsFromZoho();
+  return products && products.length > 0 ? products : [...storeState.productsList];
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   const cleanSlug = decodeURIComponent(slug).toLowerCase().trim();
+  const products = await getProductsFromZoho();
+  const pool = products && products.length > 0 ? products : storeState.productsList;
 
-  if (isSupabaseConfigured && supabase) {
-    try {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .or(`slug.eq.${cleanSlug},sku.ilike.${cleanSlug},id.eq.${cleanSlug}`)
-        .eq('is_active', true)
-        .maybeSingle();
-
-      if (!error && data) {
-        return mapDbProduct(data);
-      }
-    } catch {
-      // Fallback
-    }
-  }
-
-  syncCustomProducts();
-  const product = storeState.productsList.find(
+  const product = pool.find(
     (p) =>
       (p.slug.toLowerCase() === cleanSlug ||
         p.sku.toLowerCase() === cleanSlug ||
-        p.id.toLowerCase() === cleanSlug) &&
+        p.id.toLowerCase() === cleanSlug ||
+        ((p as any).zohoProductId && (p as any).zohoProductId === cleanSlug)) &&
       p.isActive !== false
   );
   return product || null;
 }
 
 export async function getProductById(id: string): Promise<Product | null> {
-  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-    try {
-      const client = supabaseAdmin || supabase!;
-      const { data, error } = await client.from('products').select('*').eq('id', id).maybeSingle();
-      if (!error && data) {
-        return mapDbProduct(data);
-      }
-    } catch {
-      // Fallback
-    }
-  }
+  const cleanId = id.trim();
+  const products = await getProductsFromZoho();
+  const pool = products && products.length > 0 ? products : storeState.productsList;
 
-  syncCustomProducts();
-  const product = storeState.productsList.find((p) => p.id === id);
+  const product = pool.find(
+    (p) =>
+      p.id === cleanId ||
+      p.sku.toLowerCase() === cleanId.toLowerCase() ||
+      ((p as any).zohoProductId && (p as any).zohoProductId === cleanId)
+  );
   return product || null;
 }
 
