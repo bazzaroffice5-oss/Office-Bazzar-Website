@@ -1,3 +1,4 @@
+import { Resend } from 'resend';
 import { Quotation, NotificationLog } from '@/types';
 import { BUSINESS_CONFIG } from '@/lib/config/business';
 import {
@@ -44,6 +45,22 @@ export interface ContactEmailNotificationResult {
   error?: string;
 }
 
+let resendClient: Resend | null = null;
+let cachedApiKey: string | null = null;
+
+/**
+ * Get or initialize the official Resend SDK client
+ */
+export function getResendClient(): Resend | null {
+  const apiKey = (process.env.RESEND_API_KEY || process.env.EMAIL_API_KEY || '').trim();
+  if (!apiKey) return null;
+  if (!resendClient || cachedApiKey !== apiKey) {
+    resendClient = new Resend(apiKey);
+    cachedApiKey = apiKey;
+  }
+  return resendClient;
+}
+
 /**
  * Resolve verified sender address for transactional & administrative alerts
  */
@@ -52,7 +69,7 @@ export function getEmailFromAddress(): string {
   if (configuredFrom) {
     return configuredFrom;
   }
-  return 'Office Bazzar <onboarding@resend.dev>';
+  return 'Office Bazzar <quotes@officebazzar.com>';
 }
 
 /**
@@ -83,6 +100,20 @@ const sentQuoteEmailKeys = new Set<string>();
  */
 export function clearSentQuoteEmailKeys(): void {
   sentQuoteEmailKeys.clear();
+}
+
+/**
+ * Format safe error diagnostics from Resend API responses without exposing secrets
+ */
+function formatResendError(error: { message: string; name?: string; statusCode?: number | null }): string {
+  const status = error.statusCode;
+  if (status === 401 || (error.name === 'validation_error' && /api key/i.test(error.message))) {
+    return `Resend authentication failed (401 Invalid API Key): ${error.message}`;
+  }
+  if (status === 403 || /domain.*not verified/i.test(error.message)) {
+    return `Resend domain verification error (403): ${error.message}`;
+  }
+  return `Resend error${status ? ` (${status})` : ''}: ${error.message}`;
 }
 
 /**
@@ -532,10 +563,10 @@ export async function sendCustomerQuotationEmail(
   const html = buildCustomerQuotationEmailHtml(quotation);
   const text = buildCustomerQuotationEmailText(quotation);
 
-  const providerApiKey = (process.env.EMAIL_API_KEY || process.env.RESEND_API_KEY || '').trim();
+  const resend = getResendClient();
   const fromAddress = getEmailFromAddress();
 
-  if (!providerApiKey) {
+  if (!resend) {
     if (process.env.EMAIL_SIMULATION_MODE === 'true') {
       console.log(`[NotificationService:CustomerEmail:Simulated] Simulated send to ${customerEmail}`);
       sentQuoteEmailKeys.add(dedupKey);
@@ -560,48 +591,52 @@ export async function sendCustomerQuotationEmail(
   }
 
   try {
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${providerApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+    const { data, error } = await resend.emails.send(
+      {
         from: fromAddress,
         to: [customerEmail],
-        reply_to: 'sales4@officebazzar.com',
+        replyTo: 'sales4@officebazzar.com',
         subject,
         html,
         text,
-      }),
-    });
+      },
+      { idempotencyKey: `ob-cust-${dedupKey}` }
+    );
 
-    const resData = await response.json();
-
-    if (response.ok && resData?.id) {
-      sentQuoteEmailKeys.add(dedupKey);
-      console.log(`[NotificationService:CustomerEmail] Email accepted by Resend (ID: ${resData.id}) for ${customerEmail}`);
+    if (error) {
+      const formattedErr = formatResendError(error);
+      console.error(`[NotificationService:CustomerEmail] Resend rejected email to ${customerEmail}:`, formattedErr);
       return {
-        success: true,
-        messageId: resData.id,
+        success: false,
+        error: formattedErr,
         provider: 'resend',
         to: customerEmail,
         cc: '',
       };
     }
 
-    const errorDetails = resData?.message || resData?.error || `HTTP ${response.status}`;
-    console.error(`[NotificationService:CustomerEmail] Resend rejected email to ${customerEmail}:`, errorDetails);
+    if (data?.id) {
+      sentQuoteEmailKeys.add(dedupKey);
+      console.log(`[NotificationService:CustomerEmail] Email accepted by Resend (ID: ${data.id}) for ${customerEmail}`);
+      return {
+        success: true,
+        messageId: data.id,
+        provider: 'resend',
+        to: customerEmail,
+        cc: '',
+      };
+    }
+
     return {
       success: false,
-      error: `Resend error: ${errorDetails}`,
+      error: 'Resend did not return a message ID',
       provider: 'resend',
       to: customerEmail,
       cc: '',
     };
   } catch (err) {
     const errorMsg = err instanceof Error ? err.message : String(err);
-    console.error(`[NotificationService:CustomerEmail] Fetch exception:`, errorMsg);
+    console.error(`[NotificationService:CustomerEmail] SDK exception:`, errorMsg);
     return {
       success: false,
       error: errorMsg,
@@ -645,11 +680,11 @@ export async function sendQuoteEmailNotification(
   const html = buildQuotationEmailHtml(quotation, quoteSalesEmail, quoteMarketingEmail);
   const text = buildQuotationEmailText(quotation, quoteSalesEmail, quoteMarketingEmail);
 
-  const providerApiKey = (process.env.EMAIL_API_KEY || process.env.RESEND_API_KEY || '').trim();
+  const resend = getResendClient();
   const fromAddress = getEmailFromAddress();
 
   // If no email API key is configured
-  if (!providerApiKey) {
+  if (!resend) {
     if (process.env.EMAIL_SIMULATION_MODE === 'true') {
       console.log(
         `[NotificationService:QuoteEmail:Simulated] Simulation mode active. Email accepted for ${quotation.quotationNumber}`
@@ -679,134 +714,129 @@ export async function sendQuoteEmailNotification(
   }
 
   // Live Resend API Integration when API key is provided
-  if (providerApiKey && process.env.EMAIL_SIMULATION_MODE !== 'true') {
-    try {
-      // 1. Try sending one unified notification with TO: sales and CC: marketing
-      const response = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${providerApiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: fromAddress,
-          to: [quoteSalesEmail],
-          cc: [quoteMarketingEmail],
-          reply_to: quotation.email,
-          subject,
-          html,
-          text,
-        }),
-      });
+  try {
+    // 1. Try sending one unified notification with TO: sales and CC: marketing
+    const { data, error } = await resend.emails.send(
+      {
+        from: fromAddress,
+        to: [quoteSalesEmail],
+        cc: [quoteMarketingEmail],
+        replyTo: quotation.email,
+        subject,
+        html,
+        text,
+      },
+      { idempotencyKey: `ob-admin-${dedupKey}` }
+    );
 
-      if (response.ok) {
-        const resData = await response.json();
-        sentQuoteEmailKeys.add(dedupKey);
-        sentQuoteEmailKeys.add(quotation.quotationNumber);
-        if (quotation.id) sentQuoteEmailKeys.add(quotation.id);
-
-        return {
-          success: true,
-          messageId: resData.id,
-          provider: 'resend',
-          to: quoteSalesEmail,
-          cc: quoteMarketingEmail,
-        };
-      }
-
-      // If unified notification with CC fails (e.g. provider limitation or CC restriction),
-      // fallback to separate messages to both addresses as requested
-      console.warn(
-        `[NotificationService:QuoteEmail] Unified TO/CC send failed (${response.status}). Retrying with separate messages...`
-      );
-
-      const [salesRes, marketingRes] = await Promise.all([
-        fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${providerApiKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            from: fromAddress,
-            to: [quoteSalesEmail],
-            reply_to: quotation.email,
-            subject,
-            html,
-            text,
-          }),
-        }),
-        fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${providerApiKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            from: fromAddress,
-            to: [quoteMarketingEmail],
-            reply_to: quotation.email,
-            subject,
-            html,
-            text,
-          }),
-        }),
-      ]);
-
-      if (salesRes.ok && marketingRes.ok) {
-        const salesData = await salesRes.json();
-        sentQuoteEmailKeys.add(dedupKey);
-        sentQuoteEmailKeys.add(quotation.quotationNumber);
-        if (quotation.id) sentQuoteEmailKeys.add(quotation.id);
-
-        return {
-          success: true,
-          messageId: salesData.id,
-          provider: 'resend',
-          to: quoteSalesEmail,
-          cc: quoteMarketingEmail,
-        };
-      }
-
-      const salesErr = !salesRes.ok ? await salesRes.text() : '';
-      const marketingErr = !marketingRes.ok ? await marketingRes.text() : '';
-      const combinedErr = [salesErr, marketingErr].filter(Boolean).join('; ');
+    if (data?.id) {
+      sentQuoteEmailKeys.add(dedupKey);
+      sentQuoteEmailKeys.add(quotation.quotationNumber);
+      if (quotation.id) sentQuoteEmailKeys.add(quotation.id);
 
       return {
-        success: false,
-        error: `Email delivery failed: ${combinedErr}`,
-        provider: 'resend',
-        to: quoteSalesEmail,
-        cc: quoteMarketingEmail,
-      };
-    } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : String(err);
-      return {
-        success: false,
-        error: errorMsg,
+        success: true,
+        messageId: data.id,
         provider: 'resend',
         to: quoteSalesEmail,
         cc: quoteMarketingEmail,
       };
     }
+
+    if (error) {
+      const formattedPrimaryErr = formatResendError(error);
+      // Do not retry with separate messages if API key is invalid (401) or sender domain is unverified (403)
+      if (
+        error.statusCode === 401 ||
+        error.statusCode === 403 ||
+        /domain.*not verified/i.test(error.message) ||
+        /api key/i.test(error.message)
+      ) {
+        console.error(`[NotificationService:QuoteEmail] ${formattedPrimaryErr}`);
+        return {
+          success: false,
+          error: formattedPrimaryErr,
+          provider: 'resend',
+          to: quoteSalesEmail,
+          cc: quoteMarketingEmail,
+        };
+      }
+
+      console.warn(
+        `[NotificationService:QuoteEmail] Unified TO/CC send failed (${formattedPrimaryErr}). Retrying with separate messages...`
+      );
+
+      const [salesRes, marketingRes] = await Promise.all([
+        resend.emails.send(
+          {
+            from: fromAddress,
+            to: [quoteSalesEmail],
+            replyTo: quotation.email,
+            subject,
+            html,
+            text,
+          },
+          { idempotencyKey: `ob-sales-${dedupKey}` }
+        ),
+        resend.emails.send(
+          {
+            from: fromAddress,
+            to: [quoteMarketingEmail],
+            replyTo: quotation.email,
+            subject,
+            html,
+            text,
+          },
+          { idempotencyKey: `ob-mktg-${dedupKey}` }
+        ),
+      ]);
+
+      if (salesRes.data?.id && marketingRes.data?.id) {
+        sentQuoteEmailKeys.add(dedupKey);
+        sentQuoteEmailKeys.add(quotation.quotationNumber);
+        if (quotation.id) sentQuoteEmailKeys.add(quotation.id);
+
+        return {
+          success: true,
+          messageId: salesRes.data.id,
+          provider: 'resend',
+          to: quoteSalesEmail,
+          cc: quoteMarketingEmail,
+        };
+      }
+
+      const errors = [
+        salesRes.error ? formatResendError(salesRes.error) : null,
+        marketingRes.error ? formatResendError(marketingRes.error) : null,
+      ]
+        .filter(Boolean)
+        .join('; ');
+      return {
+        success: false,
+        error: errors || formattedPrimaryErr,
+        provider: 'resend',
+        to: quoteSalesEmail,
+        cc: quoteMarketingEmail,
+      };
+    }
+
+    return {
+      success: false,
+      error: 'Resend did not return a message ID',
+      provider: 'resend',
+      to: quoteSalesEmail,
+      cc: quoteMarketingEmail,
+    };
+  } catch (err) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    return {
+      success: false,
+      error: errorMsg,
+      provider: 'resend',
+      to: quoteSalesEmail,
+      cc: quoteMarketingEmail,
+    };
   }
-
-  // Explicit simulation mode when EMAIL_SIMULATION_MODE=true
-  console.log(
-    `[NotificationService:QuoteEmail:Simulated] Email simulated for ${quotation.quotationNumber} to ${quoteSalesEmail} / ${quoteMarketingEmail}`
-  );
-
-  sentQuoteEmailKeys.add(dedupKey);
-  sentQuoteEmailKeys.add(quotation.quotationNumber);
-  if (quotation.id) sentQuoteEmailKeys.add(quotation.id);
-
-  return {
-    success: true,
-    messageId: `sim_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`,
-    provider: 'simulated',
-    to: quoteSalesEmail,
-    cc: quoteMarketingEmail,
-  };
 }
 
 /**
@@ -818,28 +848,21 @@ async function sendEmailNotification(
   roleLabel: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const providerApiKey = process.env.EMAIL_API_KEY || process.env.RESEND_API_KEY;
-    const fromAddress = process.env.EMAIL_FROM_ADDRESS || 'noreply@officebazzar.com';
+    const resend = getResendClient();
+    const fromAddress = getEmailFromAddress();
 
-    if (providerApiKey && process.env.EMAIL_SIMULATION_MODE !== 'true') {
-      const response = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${providerApiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: fromAddress,
-          to: [toEmail],
-          subject: `[RFQ Alert] ${quotation.quotationNumber} - ${quotation.companyName} (${roleLabel})`,
-          html: buildQuotationEmailHtml(quotation),
-          text: buildQuotationEmailText(quotation),
-        }),
+    if (resend && process.env.EMAIL_SIMULATION_MODE !== 'true') {
+      const { data, error } = await resend.emails.send({
+        from: fromAddress,
+        to: [toEmail],
+        replyTo: quotation.email,
+        subject: `[RFQ Alert] ${quotation.quotationNumber} - ${quotation.companyName} (${roleLabel})`,
+        html: buildQuotationEmailHtml(quotation),
+        text: buildQuotationEmailText(quotation),
       });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        return { success: false, error: `Email API error (${response.status}): ${errorText}` };
+      if (error) {
+        return { success: false, error: `Resend error: ${error.message}` };
       }
       return { success: true };
     }
@@ -1175,14 +1198,14 @@ export async function sendContactUsEmailNotification(
 ): Promise<ContactEmailNotificationResult> {
   const { salesEmail, marketingEmail } = getNotificationRecipients();
   const fromAddress = getEmailFromAddress();
-  const providerApiKey = (process.env.EMAIL_API_KEY || process.env.RESEND_API_KEY || '').trim();
+  const resend = getResendClient();
 
   const subject = `New Contact Enquiry — Office Bazzar [Ref: ${submission.referenceNumber}]`;
   const html = buildContactUsEmailHtml(submission, salesEmail, marketingEmail);
   const text = buildContactUsEmailText(submission, salesEmail, marketingEmail);
 
   // If no email provider key is configured
-  if (!providerApiKey) {
+  if (!resend) {
     if (process.env.EMAIL_SIMULATION_MODE === 'true') {
       console.log(
         `[NotificationService:ContactEmail:Simulated] Contact enquiry simulated for ${submission.referenceNumber} to ${salesEmail} / ${marketingEmail}`
@@ -1209,90 +1232,73 @@ export async function sendContactUsEmailNotification(
 
   // Live Resend API Integration
   try {
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${providerApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: fromAddress,
-        to: [salesEmail],
-        cc: [marketingEmail],
-        reply_to: submission.email,
-        subject,
-        html,
-        text,
-      }),
+    const { data, error } = await resend.emails.send({
+      from: fromAddress,
+      to: [salesEmail],
+      cc: [marketingEmail],
+      replyTo: submission.email,
+      subject,
+      html,
+      text,
     });
 
-    if (response.ok) {
-      const resData = await response.json();
+    if (data?.id) {
       return {
         success: true,
-        messageId: resData.id,
+        messageId: data.id,
         provider: 'resend',
         to: salesEmail,
         cc: marketingEmail,
       };
     }
 
-    // If unified TO/CC fails, fallback to separate messages
-    console.warn(
-      `[NotificationService:ContactEmail] Unified TO/CC send failed (${response.status}). Retrying with separate messages...`
-    );
+    if (error) {
+      console.warn(
+        `[NotificationService:ContactEmail] Unified TO/CC send failed (${error.message}). Retrying with separate messages...`
+      );
 
-    const [salesRes, marketingRes] = await Promise.all([
-      fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${providerApiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      const [salesRes, marketingRes] = await Promise.all([
+        resend.emails.send({
           from: fromAddress,
           to: [salesEmail],
-          reply_to: submission.email,
+          replyTo: submission.email,
           subject,
           html,
           text,
         }),
-      }),
-      fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${providerApiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+        resend.emails.send({
           from: fromAddress,
           to: [marketingEmail],
-          reply_to: submission.email,
+          replyTo: submission.email,
           subject,
           html,
           text,
         }),
-      }),
-    ]);
+      ]);
 
-    if (salesRes.ok && marketingRes.ok) {
-      const salesData = await salesRes.json();
+      if (salesRes.data?.id && marketingRes.data?.id) {
+        return {
+          success: true,
+          messageId: salesRes.data.id,
+          provider: 'resend',
+          to: salesEmail,
+          cc: marketingEmail,
+        };
+      }
+
+      const combinedErr = [salesRes.error?.message, marketingRes.error?.message].filter(Boolean).join('; ');
       return {
-        success: true,
-        messageId: salesData.id,
+        success: false,
+        error: `Resend API error: ${combinedErr || error.message}`,
         provider: 'resend',
         to: salesEmail,
         cc: marketingEmail,
       };
     }
-
-    const salesErr = !salesRes.ok ? await salesRes.text() : '';
-    const marketingErr = !marketingRes.ok ? await marketingRes.text() : '';
-    const combinedErr = [salesErr, marketingErr].filter(Boolean).join('; ');
 
     return {
       success: false,
-      error: `Resend API error: ${combinedErr}`,
+      error: 'Resend did not return a message ID',
       provider: 'resend',
       to: salesEmail,
       cc: marketingEmail,

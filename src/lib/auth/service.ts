@@ -11,7 +11,7 @@
 
 import crypto from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
-import { getEmailFromAddress } from '@/lib/notifications/service';
+import { getEmailFromAddress, getResendClient } from '@/lib/notifications/service';
 
 const SESSION_COOKIE_NAME = 'ob_session';
 const OTP_TICKET_COOKIE_NAME = 'ob_auth_ticket';
@@ -171,8 +171,8 @@ export function verifyOtpTicket(
  * Send branded HTML email containing the OTP verification code
  */
 async function sendOtpEmail(email: string, otp: string, name?: string): Promise<void> {
-  const resendApiKey = process.env.RESEND_API_KEY?.trim();
-  if (!resendApiKey) {
+  const resend = getResendClient();
+  if (!resend) {
     console.log(`[AuthService] RESEND_API_KEY not configured. OTP for ${email}: ${otp}`);
     return;
   }
@@ -211,23 +211,15 @@ async function sendOtpEmail(email: string, otp: string, name?: string): Promise<
 </body>
 </html>`;
 
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${resendApiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: fromAddress,
-      to: [email],
-      subject: `Your Office Bazzar Verification Code: ${otp}`,
-      html,
-    }),
+  const { data, error } = await resend.emails.send({
+    from: fromAddress,
+    to: [email],
+    subject: `Your Office Bazzar Verification Code: ${otp}`,
+    html,
   });
 
-  if (!res.ok) {
-    const errorText = await res.text();
-    throw new Error(`Resend API error (${res.status}): ${errorText}`);
+  if (error) {
+    throw new Error(`Resend API error: ${error.message}${error.statusCode ? ` (${error.statusCode})` : ''}`);
   }
 }
 
