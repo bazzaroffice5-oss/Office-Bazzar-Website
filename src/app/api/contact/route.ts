@@ -5,6 +5,7 @@ import {
   ContactUsSubmission,
 } from '@/lib/notifications/service';
 import { createBulkRFQ } from '@/lib/db/store';
+import { syncContactEnquiryToZoho } from '@/lib/zoho/crm';
 
 // In-memory sliding window rate limiter for Contact Us submissions
 const contactRateMap = new Map<string, number[]>();
@@ -150,6 +151,23 @@ export async function POST(req: Request) {
     };
 
     const emailResult = await sendContactUsEmailNotification(submission);
+
+    // 8. Server-side Zoho CRM synchronization (non-blocking fallback)
+    // Strictly executes after database write and email notifications succeed
+    try {
+      await syncContactEnquiryToZoho({
+        referenceNumber,
+        name: cleanName,
+        companyName: cleanCompany,
+        email: cleanEmail,
+        phone: cleanPhone,
+        message: cleanMessage,
+        submittedAt,
+        deliveryLocation: 'officebazzar.com/contact',
+      });
+    } catch (zohoErr) {
+      console.error('[Contact API] Unexpected error during Zoho CRM synchronization:', zohoErr);
+    }
 
     return NextResponse.json(
       {

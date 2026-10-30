@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createQuotation, getProductById, getProducts, createNotificationLog } from '@/lib/db/store';
 import { QuotationItem } from '@/types';
 import { dispatchQuotationNotifications, NotificationResult } from '@/lib/notifications/service';
+import { syncQuotationToZoho, ZohoSyncResult } from '@/lib/zoho/crm';
 
 // In-memory sliding window rate limiter to protect public quotation submission
 const submissionRateMap = new Map<string, number[]>();
@@ -257,7 +258,16 @@ export async function POST(req: Request) {
     const quoteEmailResult = notificationResults.find((r) => r.channel === 'email_quote');
     const isEmailSent = quoteEmailResult ? quoteEmailResult.status === 'sent' : !notificationError;
 
-    // 6. Return safe customer response (Internal notes and staff details excluded)
+    // 6. Asynchronous / Non-blocking Zoho CRM Synchronization
+    // Strictly executes after database persistence and email notification dispatch
+    let zohoSyncResult: ZohoSyncResult | undefined;
+    try {
+      zohoSyncResult = await syncQuotationToZoho(savedQuotation);
+    } catch (zohoErr) {
+      console.error('[Quotation API] Unexpected error during Zoho CRM synchronization:', zohoErr);
+    }
+
+    // 7. Return safe customer response (Internal notes and staff details excluded)
     const safeQuotation = {
       id: savedQuotation.id,
       quotationNumber: savedQuotation.quotationNumber,
@@ -286,6 +296,7 @@ export async function POST(req: Request) {
         quotationId: savedQuotation.id,
         quotation: safeQuotation,
         notificationStatus: isEmailSent ? 'sent' : 'pending_retry',
+        zohoStatus: zohoSyncResult ? (zohoSyncResult.success ? 'synced' : zohoSyncResult.action || 'failed') : 'unconfigured',
         message: 'Request for Quotation submitted successfully. Our sales team will contact you shortly.',
       },
       { status: 201 }

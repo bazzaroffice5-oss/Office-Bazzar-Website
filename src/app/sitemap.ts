@@ -1,11 +1,9 @@
 import { MetadataRoute } from 'next';
 import { getCategories, getProducts } from '@/lib/db/store';
 import { BLOG_POSTS } from '@/lib/data/blog';
-import { getCanonicalUrl, SITE_CONFIG } from '@/lib/seo/config';
+import { getCanonicalUrl } from '@/lib/seo/config';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = SITE_CONFIG.url;
-
   // 1. Core Public Static Pages
   const staticPages = [
     { path: '', changeFrequency: 'daily' as const, priority: 1.0 },
