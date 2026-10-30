@@ -53,7 +53,15 @@ export default function CustomerQuotationsPage() {
 
   const handleGuestLookup = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!lookupRef.trim()) return;
+    if (!lookupRef.trim()) {
+      setLookupError('Please enter a quotation reference number.');
+      return;
+    }
+
+    if (!lookupEmail.trim()) {
+      setLookupError('Please enter the customer email address used during quotation submission.');
+      return;
+    }
 
     setLookupLoading(true);
     setLookupError(null);
@@ -68,8 +76,8 @@ export default function CustomerQuotationsPage() {
       }
 
       const q = data.quotation;
-      if (lookupEmail && q.email.toLowerCase() !== lookupEmail.trim().toLowerCase()) {
-        setLookupError('Email address does not match the quotation record.');
+      if (!q.email || q.email.toLowerCase() !== lookupEmail.trim().toLowerCase()) {
+        setLookupError('Security verification failed: Email address does not match the quotation record.');
         return;
       }
 
@@ -225,7 +233,7 @@ export default function CustomerQuotationsPage() {
             <div>
               <h3 className="text-base font-bold text-slate-900">No Quotations Found</h3>
               <p className="text-xs text-slate-500 max-w-sm mx-auto mt-1">
-                You have not submitted any Requests for Quotation yet, or your past quotes are registered under a different email.
+                You have not submitted any quotation requests yet.
               </p>
             </div>
             <Link

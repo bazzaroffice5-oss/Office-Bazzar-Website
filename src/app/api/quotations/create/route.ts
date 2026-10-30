@@ -225,47 +225,42 @@ export async function POST(req: Request) {
       status: 'new',
     });
 
-    // 5. Trigger notifications to Sales and Marketing recipients
-    // The database write has succeeded; dispatch notifications and record delivery status
-    let notificationResults: NotificationResult[] = [];
-    let notificationError: string | undefined;
-
-    try {
-      notificationResults = await dispatchQuotationNotifications(savedQuotation);
-    } catch (notifyErr) {
-      notificationError = notifyErr instanceof Error ? notifyErr.message : String(notifyErr);
-      console.error('[Quotation API] Notification dispatch error:', notifyErr);
-
-      // Record dispatch failure in notification_logs so staff can retry without losing the quote
-      try {
-        await createNotificationLog({
-          quotationId: savedQuotation.id,
-          quotationNumber: savedQuotation.quotationNumber,
-          channel: 'email_quote',
-          recipient: `${process.env.QUOTE_SALES_EMAIL || 'sales4@officebazzar.com'}; cc: ${process.env.QUOTE_MARKETING_EMAIL || 'marketing@officebazzar.com'}`,
-          status: 'failed',
-          errorMessage: notificationError,
-          metadata: {
-            error: notificationError,
-            stage: 'dispatch_exception',
-          },
-        });
-      } catch (logErr) {
-        console.error('[Quotation API] Failed to record notification failure log:', logErr);
-      }
-    }
-
-    const quoteEmailResult = notificationResults.find((r) => r.channel === 'email_quote');
-    const isEmailSent = quoteEmailResult ? quoteEmailResult.status === 'sent' : !notificationError;
-
-    // 6. Asynchronous / Non-blocking Zoho CRM Synchronization
-    // Strictly executes after database persistence and email notification dispatch
+    // 5. Synchronous Zoho CRM Registration (Primary Business Database)
+    // Business rule: Do not confirm quotation unless successfully saved in Zoho CRM Quotes
     let zohoSyncResult: ZohoSyncResult | undefined;
     try {
       zohoSyncResult = await syncQuotationToZoho(savedQuotation);
     } catch (zohoErr) {
       console.error('[Quotation API] Unexpected error during Zoho CRM synchronization:', zohoErr);
     }
+
+    if (!zohoSyncResult || !zohoSyncResult.success) {
+      const crmErrMsg = zohoSyncResult?.error || 'Unable to register formal quotation in Zoho CRM.';
+      console.error('[Quotation API] Submission rejected because Zoho CRM sync failed:', crmErrMsg);
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Quotation could not be saved to Zoho CRM: ${crmErrMsg}`,
+          zohoStatus: 'failed',
+          details: zohoSyncResult?.details,
+        },
+        { status: 502 }
+      );
+    }
+
+    // 6. Trigger transactional email notifications to both Customer and Sales/Marketing Desk
+    let notificationResults: NotificationResult[] = [];
+    try {
+      notificationResults = await dispatchQuotationNotifications(savedQuotation);
+    } catch (notifyErr) {
+      console.error('[Quotation API] Notification dispatch error:', notifyErr);
+    }
+
+    const customerEmailRes = notificationResults.find((r) => r.recipient === savedQuotation.email);
+    const adminEmailRes = notificationResults.find((r) => r.channel === 'email_quote' && r.recipient !== savedQuotation.email);
+
+    const isCustomerEmailSent = customerEmailRes ? customerEmailRes.status === 'sent' : false;
+    const isAdminEmailSent = adminEmailRes ? adminEmailRes.status === 'sent' : false;
 
     // 7. Return safe customer response (Internal notes and staff details excluded)
     const safeQuotation = {
@@ -294,12 +289,15 @@ export async function POST(req: Request) {
         success: true,
         quotationNumber: savedQuotation.quotationNumber,
         quotationId: savedQuotation.id,
+        zohoQuoteId: zohoSyncResult.quoteId,
+        zohoStatus: 'synced',
+        customerEmailStatus: isCustomerEmailSent ? 'accepted' : 'failed',
+        customerEmailError: customerEmailRes?.errorMessage,
+        adminEmailStatus: isAdminEmailSent ? 'accepted' : 'failed',
+        adminEmailError: adminEmailRes?.errorMessage,
+        notificationStatus: isCustomerEmailSent && isAdminEmailSent ? 'sent' : 'partial_or_pending',
         quotation: safeQuotation,
-        notificationStatus: isEmailSent ? 'sent' : 'pending_retry',
-        zohoStatus: zohoSyncResult ? (zohoSyncResult.success ? 'synced' : zohoSyncResult.action || 'failed') : 'unconfigured',
-        zohoQuoteId: zohoSyncResult?.quoteId,
-        zohoError: zohoSyncResult?.error,
-        message: 'Request for Quotation submitted successfully. Our sales team will contact you shortly.',
+        message: 'Request for Quotation confirmed and registered in Zoho CRM.',
       },
       { status: 201 }
     );

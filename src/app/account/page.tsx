@@ -3,10 +3,8 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
-  LayoutDashboard,
-  Package,
   FileText,
   User as UserIcon,
   MapPin,
@@ -14,71 +12,88 @@ import {
   LogOut,
   Trash2,
   Plus,
+  Building2,
+  Phone,
+  Mail,
+  ShieldCheck,
+  Package,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useWishlist } from '@/context/WishlistContext';
-import { Quotation, Order } from '@/types';
-
-interface AccountOrderSummary {
-  id: string;
-  orderNumber: string;
-  createdAt: string;
-  orderStatus: string;
-  totalAmount: number;
-}
-
-interface AccountRfqSummary {
-  id: string;
-  quotationNumber: string;
-  createdAt: string;
-  status: string;
-  items?: unknown[];
-  itemsCount?: number;
-}
+import { Quotation, Address } from '@/types';
 
 function CustomerAccountDashboardContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const { user, logout, savedAddresses, addAddress, removeAddress } = useAuth();
+  const { user, isAuthenticated, isLoading, logout, savedAddresses, addAddress, removeAddress } = useAuth();
   const { wishlist, removeFromWishlist } = useWishlist();
 
-  const tabParam = searchParams.get('tab') || 'dashboard';
+  const tabParam = searchParams.get('tab') || 'rfqs';
   const [activeTab, setActiveTab] = useState<string>(tabParam);
 
   const [rfqs, setRfqs] = useState<Quotation[]>([]);
-  const [orders] = useState<Order[]>([]);
+  const [rfqsLoading, setRfqsLoading] = useState(true);
 
   // Address form modal state
   const [showAddressModal, setShowAddressModal] = useState(false);
-  const [fullName, setFullName] = useState(user?.name || '');
-  const [phone, setPhone] = useState(user?.phone || '');
+  const [fullName, setFullName] = useState('');
+  const [phone, setPhone] = useState('');
   const [addressLine1, setAddressLine1] = useState('');
   const city = 'Chennai';
   const state = 'Tamil Nadu';
   const [pincode, setPincode] = useState('600014');
 
+  // Sync tab with URL param
   useEffect(() => {
-    if (tabParam) {
+    if (tabParam && ['rfqs', 'profile', 'addresses', 'wishlist'].includes(tabParam)) {
       setActiveTab(tabParam);
     }
   }, [tabParam]);
 
-  // Fetch real RFQs for current customer
+  // Auth gate: redirect to login if session is unauthenticated
   useEffect(() => {
-    async function loadCustomerData() {
+    if (!isLoading && !isAuthenticated) {
+      router.replace('/login?redirect=/account');
+    }
+  }, [isLoading, isAuthenticated, router]);
+
+  // Pre-fill address form with authenticated user details
+  useEffect(() => {
+    if (user) {
+      setFullName(user.name || '');
+      setPhone(user.phone || '');
+    }
+  }, [user]);
+
+  // Fetch real RFQs from Zoho CRM for current authenticated customer
+  useEffect(() => {
+    async function loadCustomerRfqs() {
+      if (!user?.email && !user?.id) {
+        setRfqsLoading(false);
+        return;
+      }
+
+      setRfqsLoading(true);
       try {
-        const query = user?.id ? `customerId=${user.id}` : `email=${encodeURIComponent(user?.email || 'sales@officebazzar.co.in')}`;
+        const query = user?.id ? `customerId=${encodeURIComponent(user.id)}` : `email=${encodeURIComponent(user?.email || '')}`;
         const res = await fetch(`/api/quotations/customer?${query}`);
         if (res.ok) {
           const data = await res.json();
-          if (data.quotations) setRfqs(data.quotations);
+          if (data.quotations && Array.isArray(data.quotations)) {
+            setRfqs(data.quotations);
+          }
         }
       } catch (e) {
-        console.error('Error fetching customer quotations', e);
+        console.error('[Account] Error fetching customer quotations from Zoho CRM:', e);
+      } finally {
+        setRfqsLoading(false);
       }
     }
 
-    loadCustomerData();
-  }, [user]);
+    if (isAuthenticated && user) {
+      loadCustomerRfqs();
+    }
+  }, [user, isAuthenticated]);
 
   const handleAddAddressSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -98,68 +113,26 @@ function CustomerAccountDashboardContent() {
     setAddressLine1('');
   };
 
-  // Mock initial demo orders if empty to demonstrate real table layout
-  const displayOrders = orders.length > 0 ? orders : [
-    {
-      id: 'ord-1',
-      orderNumber: '#OB-2024-001',
-      createdAt: '10 Mar 2026',
-      orderStatus: 'delivered',
-      totalAmount: 12320,
-    },
-    {
-      id: 'ord-2',
-      orderNumber: '#OB-2024-002',
-      createdAt: '28 Feb 2026',
-      orderStatus: 'processing',
-      totalAmount: 8150,
-    },
-    {
-      id: 'ord-3',
-      orderNumber: '#OB-2024-003',
-      createdAt: '14 Feb 2026',
-      orderStatus: 'delivered',
-      totalAmount: 15340,
-    },
-  ];
+  if (isLoading || (!isAuthenticated && !user)) {
+    return (
+      <main className="min-h-[60vh] bg-slate-50/70 py-16 flex items-center justify-center">
+        <div className="text-center space-y-3">
+          <div className="w-8 h-8 border-2 border-[#004b87] border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-xs text-slate-500 font-medium">Verifying customer credentials...</p>
+        </div>
+      </main>
+    );
+  }
 
-  // RFQ rows
-  const displayRfqs = rfqs.length > 0 ? rfqs : [
-    {
-      id: 'rfq-1',
-      quotationNumber: '#RFQ-2024-001',
-      createdAt: '12 Mar 2026',
-      status: 'under_review',
-      itemsCount: 12,
-    },
-    {
-      id: 'rfq-2',
-      quotationNumber: '#RFQ-2024-002',
-      createdAt: '05 Mar 2026',
-      status: 'quoted',
-      itemsCount: 8,
-    },
-    {
-      id: 'rfq-3',
-      quotationNumber: '#RFQ-2024-003',
-      createdAt: '20 Feb 2026',
-      status: 'closed',
-      itemsCount: 5,
-    },
-  ];
-
-  const displayName = user?.name || 'John Doe';
-  const displayEmail = user?.email || 'john@company.com';
+  const displayName = user?.name || user?.email?.split('@')[0] || 'Customer';
+  const displayEmail = user?.email || '';
   const initials = displayName
     .split(' ')
+    .filter(Boolean)
     .map((n) => n[0])
     .join('')
     .substring(0, 2)
-    .toUpperCase();
-
-  const totalOrdersCount = displayOrders.length;
-  const totalRfqsCount = displayRfqs.length;
-  const savedItemsCount = wishlist.length > 0 ? wishlist.length : 5;
+    .toUpperCase() || 'OB';
 
   return (
     <main className="min-h-screen bg-slate-50/70 py-8 sm:py-10">
@@ -173,90 +146,83 @@ function CustomerAccountDashboardContent() {
           <span className="text-slate-900 font-bold">My Account</span>
         </nav>
 
-        {/* Top Header Card matching Panel 6 of Reference */}
+        {/* Top Header Card: Authenticated Customer Details */}
         <div className="bg-white rounded-2xl border border-slate-200/90 p-5 sm:p-6 shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-6">
-          {/* User Profile Info */}
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-[#004b87] text-white flex items-center justify-center font-bold text-xl shadow-xs shrink-0">
               {initials}
             </div>
-            <div className="min-w-0">
-              <h1 className="text-xl sm:text-2xl font-bold text-slate-900 leading-snug truncate">
-                {displayName}
-              </h1>
-              <p className="text-xs sm:text-sm text-slate-500 truncate">{displayEmail}</p>
+            <div className="min-w-0 space-y-1">
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl sm:text-2xl font-bold text-slate-900 leading-snug truncate">
+                  {displayName}
+                </h1>
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <ShieldCheck className="w-3 h-3" />
+                  Verified
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500">
+                <span className="flex items-center gap-1">
+                  <Mail className="w-3.5 h-3.5 text-slate-400" />
+                  {displayEmail}
+                </span>
+                {user?.companyName && (
+                  <span className="flex items-center gap-1 font-medium text-slate-700">
+                    <Building2 className="w-3.5 h-3.5 text-slate-400" />
+                    {user.companyName}
+                  </span>
+                )}
+                {user?.phone && (
+                  <span className="flex items-center gap-1">
+                    <Phone className="w-3.5 h-3.5 text-slate-400" />
+                    {user.phone}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* 3 Metric Summary Cards matching Reference */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-4 shrink-0">
-            {/* 1. Total Orders */}
-            <div className="bg-rose-50/50 border border-rose-100 rounded-xl p-3 sm:px-4 text-center min-w-[90px] sm:min-w-[110px]">
-              <div className="text-lg sm:text-xl font-bold text-rose-600">{totalOrdersCount}</div>
-              <div className="text-[11px] font-medium text-slate-500 mt-0.5 whitespace-nowrap">
-                Total Orders
-              </div>
-            </div>
-
-            {/* 2. RFQ Requests */}
-            <div className="bg-blue-50/50 border border-blue-100 rounded-xl p-3 sm:px-4 text-center min-w-[90px] sm:min-w-[110px]">
-              <div className="text-lg sm:text-xl font-bold text-[#004b87]">{totalRfqsCount}</div>
-              <div className="text-[11px] font-medium text-slate-500 mt-0.5 whitespace-nowrap">
-                RFQ Requests
-              </div>
-            </div>
-
-            {/* 3. Saved Items */}
-            <div className="bg-emerald-50/50 border border-emerald-100 rounded-xl p-3 sm:px-4 text-center min-w-[90px] sm:min-w-[110px]">
-              <div className="text-lg sm:text-xl font-bold text-[#16a34a]">{savedItemsCount}</div>
-              <div className="text-[11px] font-medium text-slate-500 mt-0.5 whitespace-nowrap">
-                Saved Items
-              </div>
-            </div>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/request-quote"
+              className="px-4 py-2 bg-[#16a34a] hover:bg-[#15803d] text-white text-xs font-bold rounded-xl transition-colors shadow-xs"
+            >
+              + New RFQ
+            </Link>
+            <button
+              type="button"
+              onClick={() => logout()}
+              className="px-4 py-2 border border-slate-200 hover:bg-slate-100 text-slate-700 text-xs font-semibold rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <LogOut className="w-3.5 h-3.5 text-slate-500" />
+              <span>Sign Out</span>
+            </button>
           </div>
         </div>
 
         {/* Dashboard Grid: Left Sidebar + Right Content Area */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Left Sidebar Menu (3 cols) */}
+          {/* Left Sidebar Menu */}
           <div className="lg:col-span-3 bg-white rounded-2xl border border-slate-200/90 p-3 shadow-2xs space-y-1">
             <button
               type="button"
-              onClick={() => setActiveTab('dashboard')}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors text-left cursor-pointer ${
-                activeTab === 'dashboard'
-                  ? 'bg-emerald-50 text-[#16a34a] font-bold'
-                  : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
-              }`}
-            >
-              <LayoutDashboard className="w-4 h-4" />
-              <span>Dashboard</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('orders')}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors text-left cursor-pointer ${
-                activeTab === 'orders'
-                  ? 'bg-emerald-50 text-[#16a34a] font-bold'
-                  : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
-              }`}
-            >
-              <Package className="w-4 h-4" />
-              <span>My Orders</span>
-            </button>
-
-            <button
-              type="button"
               onClick={() => setActiveTab('rfqs')}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors text-left cursor-pointer ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors text-left cursor-pointer ${
                 activeTab === 'rfqs'
-                  ? 'bg-emerald-50 text-[#16a34a] font-bold'
+                  ? 'bg-blue-50 text-[#004b87] font-bold'
                   : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
               }`}
             >
-              <FileText className="w-4 h-4" />
-              <span>My RFQs</span>
+              <div className="flex items-center gap-3">
+                <FileText className="w-4 h-4" />
+                <span>My Quotation Requests</span>
+              </div>
+              {rfqs.length > 0 && (
+                <span className="text-[11px] px-2 py-0.5 rounded-full bg-blue-100 font-bold">
+                  {rfqs.length}
+                </span>
+              )}
             </button>
 
             <button
@@ -264,328 +230,229 @@ function CustomerAccountDashboardContent() {
               onClick={() => setActiveTab('profile')}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors text-left cursor-pointer ${
                 activeTab === 'profile'
-                  ? 'bg-emerald-50 text-[#16a34a] font-bold'
+                  ? 'bg-blue-50 text-[#004b87] font-bold'
                   : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
               }`}
             >
               <UserIcon className="w-4 h-4" />
-              <span>My Profile</span>
+              <span>Business Profile</span>
             </button>
 
             <button
               type="button"
               onClick={() => setActiveTab('addresses')}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors text-left cursor-pointer ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors text-left cursor-pointer ${
                 activeTab === 'addresses'
-                  ? 'bg-emerald-50 text-[#16a34a] font-bold'
+                  ? 'bg-blue-50 text-[#004b87] font-bold'
                   : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
               }`}
             >
-              <MapPin className="w-4 h-4" />
-              <span>My Addresses</span>
+              <div className="flex items-center gap-3">
+                <MapPin className="w-4 h-4" />
+                <span>Delivery Locations</span>
+              </div>
+              {savedAddresses.length > 0 && (
+                <span className="text-[11px] px-2 py-0.5 rounded-full bg-slate-100 font-bold">
+                  {savedAddresses.length}
+                </span>
+              )}
             </button>
 
             <button
               type="button"
               onClick={() => setActiveTab('wishlist')}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors text-left cursor-pointer ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors text-left cursor-pointer ${
                 activeTab === 'wishlist'
-                  ? 'bg-blue-50 text-[#004b87]'
+                  ? 'bg-blue-50 text-[#004b87] font-bold'
                   : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
               }`}
             >
-              <Heart className="w-4 h-4" />
-              <span>Wishlist</span>
+              <div className="flex items-center gap-3">
+                <Heart className="w-4 h-4" />
+                <span>Saved Items</span>
+              </div>
+              {wishlist.length > 0 && (
+                <span className="text-[11px] px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 font-bold">
+                  {wishlist.length}
+                </span>
+              )}
             </button>
-
-            <div className="pt-2 border-t border-slate-100">
-              <button
-                type="button"
-                onClick={() => logout()}
-                className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-rose-600 hover:bg-rose-50 transition-colors text-left cursor-pointer"
-              >
-                <LogOut className="w-4 h-4" />
-                <span>Logout</span>
-              </button>
-            </div>
           </div>
 
-          {/* Right Main Content Panel (9 cols) */}
+          {/* Right Content Area */}
           <div className="lg:col-span-9 space-y-6">
-            {/* 1. Dashboard View (Recent Orders + Recent RFQs matching Reference) */}
-            {activeTab === 'dashboard' && (
-              <div className="space-y-6">
-                {/* Recent Orders Section */}
-                <div className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden">
-                  <div className="p-5 border-b border-slate-100 flex items-center justify-between">
-                    <div>
-                      <h2 className="text-base font-bold text-slate-900">Recent Orders</h2>
-                      <p className="text-xs text-slate-400">Track and review your corporate purchases</p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setActiveTab('orders')}
-                      className="text-xs font-bold text-[#004b87] hover:underline"
-                    >
-                      View All
-                    </button>
-                  </div>
-
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left text-xs">
-                      <thead className="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] tracking-wider border-b border-slate-100">
-                        <tr>
-                          <th className="py-3 px-4 sm:px-6">Order #</th>
-                          <th className="py-3 px-4 sm:px-6">Date</th>
-                          <th className="py-3 px-4 sm:px-6">Status</th>
-                          <th className="py-3 px-4 sm:px-6">Total</th>
-                          <th className="py-3 px-4 sm:px-6 text-right">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-100">
-                        {displayOrders.slice(0, 3).map((ord: AccountOrderSummary) => (
-                          <tr key={ord.id} className="hover:bg-slate-50/50 transition-colors">
-                            <td className="py-3.5 px-4 sm:px-6 font-bold text-slate-900 font-mono">
-                              {ord.orderNumber}
-                            </td>
-                            <td className="py-3.5 px-4 sm:px-6 text-slate-500">{ord.createdAt}</td>
-                            <td className="py-3.5 px-4 sm:px-6">
-                              <span
-                                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold ${
-                                  ord.orderStatus === 'delivered'
-                                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                                    : 'bg-amber-50 text-amber-700 border border-amber-200'
-                                }`}
-                              >
-                                {ord.orderStatus === 'delivered' ? 'Delivered' : 'Processing'}
-                              </span>
-                            </td>
-                            <td className="py-3.5 px-4 sm:px-6 font-bold text-slate-900">
-                              ₹{ord.totalAmount?.toLocaleString('en-IN')}
-                            </td>
-                            <td className="py-3.5 px-4 sm:px-6 text-right">
-                              <button
-                                type="button"
-                                onClick={() => setActiveTab('orders')}
-                                className="text-xs font-bold text-[#004b87] hover:underline cursor-pointer"
-                              >
-                                View
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                {/* Recent RFQs Section */}
-                <div className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden">
-                  <div className="p-5 border-b border-slate-100 flex items-center justify-between">
-                    <div>
-                      <h2 className="text-base font-bold text-slate-900">Recent RFQs</h2>
-                      <p className="text-xs text-slate-400">Custom quotations and volume pricing requests</p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setActiveTab('rfqs')}
-                      className="text-xs font-bold text-[#004b87] hover:underline"
-                    >
-                      View All
-                    </button>
-                  </div>
-
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left text-xs">
-                      <thead className="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] tracking-wider border-b border-slate-100">
-                        <tr>
-                          <th className="py-3 px-4 sm:px-6">RFQ #</th>
-                          <th className="py-3 px-4 sm:px-6">Date</th>
-                          <th className="py-3 px-4 sm:px-6">Status</th>
-                          <th className="py-3 px-4 sm:px-6">Items</th>
-                          <th className="py-3 px-4 sm:px-6 text-right">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-100">
-                        {displayRfqs.slice(0, 3).map((rfq: AccountRfqSummary) => (
-                          <tr key={rfq.id} className="hover:bg-slate-50/50 transition-colors">
-                            <td className="py-3.5 px-4 sm:px-6 font-bold text-slate-900 font-mono">
-                              {rfq.quotationNumber}
-                            </td>
-                            <td className="py-3.5 px-4 sm:px-6 text-slate-500">
-                              {typeof rfq.createdAt === 'string' && rfq.createdAt.includes('T')
-                                ? new Date(rfq.createdAt).toLocaleDateString('en-IN')
-                                : rfq.createdAt}
-                            </td>
-                            <td className="py-3.5 px-4 sm:px-6">
-                              <span
-                                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold ${
-                                  rfq.status === 'quoted'
-                                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                                    : rfq.status === 'under_review' || rfq.status === 'new'
-                                    ? 'bg-blue-50 text-blue-700 border border-blue-200'
-                                    : 'bg-slate-100 text-slate-700 border border-slate-200'
-                                }`}
-                              >
-                                {rfq.status === 'quoted'
-                                  ? 'Quoted'
-                                  : rfq.status === 'under_review' || rfq.status === 'new'
-                                  ? 'Under Review'
-                                  : 'Closed'}
-                              </span>
-                            </td>
-                            <td className="py-3.5 px-4 sm:px-6 text-slate-600 font-medium">
-                              {rfq.items?.length || rfq.itemsCount || 1} items
-                            </td>
-                            <td className="py-3.5 px-4 sm:px-6 text-right">
-                              <button
-                                type="button"
-                                onClick={() => setActiveTab('rfqs')}
-                                className="text-xs font-bold text-[#004b87] hover:underline cursor-pointer"
-                              >
-                                View
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* 2. My Orders View */}
-            {activeTab === 'orders' && (
-              <div className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs p-6 space-y-4">
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                  <h2 className="text-lg font-bold text-slate-900">My Orders &amp; Invoices</h2>
-                  <span className="text-xs text-slate-500">{displayOrders.length} total orders</span>
-                </div>
-
-                <div className="space-y-3">
-                  {displayOrders.map((ord: AccountOrderSummary) => (
-                    <div
-                      key={ord.id}
-                      className="p-4 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-slate-300 transition-colors"
-                    >
-                      <div className="space-y-1">
-                        <div className="font-bold text-slate-900 font-mono text-sm">{ord.orderNumber}</div>
-                        <div className="text-xs text-slate-500">Ordered on {ord.createdAt} • GST Tax Invoice Available</div>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <span className="text-base font-bold text-slate-900">
-                          ₹{ord.totalAmount?.toLocaleString('en-IN')}
-                        </span>
-                        <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                          {ord.orderStatus === 'delivered' ? 'Delivered' : 'Processing'}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* 3. My RFQs View */}
+            {/* 1. My RFQs View */}
             {activeTab === 'rfqs' && (
               <div className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs p-6 space-y-4">
                 <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                   <div>
                     <h2 className="text-lg font-bold text-slate-900">My Quotation Requests (RFQs)</h2>
-                    <p className="text-xs text-slate-400">Formal bulk pricing proposals prepared by our desk</p>
+                    <p className="text-xs text-slate-400">Formal bulk proposals registered in Zoho CRM</p>
                   </div>
                   <Link
                     href="/request-quote"
-                    className="px-4 py-2 bg-[#16a34a] hover:bg-[#15803d] text-white text-xs font-bold rounded-xl transition-colors"
+                    className="px-4 py-2 bg-[#16a34a] hover:bg-[#15803d] text-white text-xs font-bold rounded-xl transition-colors shadow-xs"
                   >
-                    + New RFQ
+                    + Request Quote
                   </Link>
                 </div>
 
-                <div className="space-y-3">
-                  {displayRfqs.map((rfq: AccountRfqSummary) => (
-                    <div
-                      key={rfq.id}
-                      className="p-4 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-slate-300 transition-colors"
-                    >
-                      <div className="space-y-1">
-                        <div className="font-bold text-slate-900 font-mono text-sm">{rfq.quotationNumber}</div>
-                        <div className="text-xs text-slate-500">
-                          Submitted on{' '}
-                          {typeof rfq.createdAt === 'string' && rfq.createdAt.includes('T')
-                            ? new Date(rfq.createdAt).toLocaleDateString('en-IN')
-                            : rfq.createdAt}
-                          {' '}• {rfq.items?.length || rfq.itemsCount || 1} Products Requested
+                {rfqsLoading ? (
+                  <div className="py-12 text-center">
+                    <div className="w-6 h-6 border-2 border-[#004b87] border-t-transparent rounded-full animate-spin mx-auto mb-2" />
+                    <p className="text-xs text-slate-500">Retrieving quotation records from Zoho CRM...</p>
+                  </div>
+                ) : rfqs.length === 0 ? (
+                  <div className="py-12 text-center space-y-3">
+                    <div className="w-14 h-14 rounded-full bg-slate-100 text-slate-400 mx-auto flex items-center justify-center">
+                      <FileText className="w-7 h-7" />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-bold text-slate-900">No Quotations Found</h3>
+                      <p className="text-xs text-slate-500 max-w-sm mx-auto mt-1">
+                        You have not submitted any quotation requests yet.
+                      </p>
+                    </div>
+                    <div className="pt-2">
+                      <Link
+                        href="/products"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#004b87] hover:bg-[#0a355c] text-white text-xs font-bold rounded-xl transition-colors shadow-xs"
+                      >
+                        <Package className="w-4 h-4" />
+                        <span>Browse Products &amp; Request Quote</span>
+                      </Link>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {rfqs.map((rfq) => (
+                      <div
+                        key={rfq.id}
+                        className="p-4 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-slate-300 transition-colors"
+                      >
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <span className="font-bold text-slate-900 font-mono text-sm">
+                              {rfq.quotationNumber}
+                            </span>
+                            <span
+                              className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                                rfq.status === 'quotation_prepared' || rfq.status === 'sent_to_customer'
+                                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                                  : rfq.status === 'accepted'
+                                  ? 'bg-emerald-100 text-emerald-900 border border-emerald-300'
+                                  : rfq.status === 'rejected' || rfq.status === 'closed'
+                                  ? 'bg-slate-100 text-slate-700 border border-slate-200'
+                                  : 'bg-blue-50 text-[#004b87] border border-blue-200'
+                              }`}
+                            >
+                              {rfq.status === 'sent_to_customer' || rfq.status === 'quotation_prepared'
+                                ? 'Quote Prepared'
+                                : rfq.status === 'accepted'
+                                ? 'Accepted'
+                                : rfq.status === 'closed'
+                                ? 'Closed'
+                                : 'Under Sales Review'}
+                            </span>
+                          </div>
+                          <div className="text-xs text-slate-500">
+                            Submitted on{' '}
+                            {typeof rfq.createdAt === 'string' && rfq.createdAt.includes('T')
+                              ? new Date(rfq.createdAt).toLocaleDateString('en-IN', {
+                                  day: 'numeric',
+                                  month: 'short',
+                                  year: 'numeric',
+                                })
+                              : rfq.createdAt}{' '}
+                            &bull; {rfq.items?.length || 1} Products Requested
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                          <div className="text-right">
+                            <div className="text-[10px] text-slate-400 uppercase">
+                              {rfq.quotedAmount ? 'Confirmed Total' : 'Indicative Total'}
+                            </div>
+                            <div className="text-sm font-bold text-slate-900">
+                              ₹{(rfq.quotedAmount || rfq.indicativeTotal).toLocaleString('en-IN')}
+                            </div>
+                          </div>
+                          <Link
+                            href="/account/quotations"
+                            className="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold rounded-lg transition-colors"
+                          >
+                            Details &rarr;
+                          </Link>
                         </div>
                       </div>
-
-                      <div className="flex items-center gap-3">
-                        <span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#004b87] border border-blue-200">
-                          {rfq.status === 'quoted'
-                            ? 'Quoted'
-                            : rfq.status === 'under_review' || rfq.status === 'new'
-                            ? 'Under Review'
-                            : 'Closed'}
-                        </span>
-                        <Link
-                          href={`/account/quotations`}
-                          className="text-xs font-bold text-[#004b87] hover:underline"
-                        >
-                          Details &rarr;
-                        </Link>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
 
-            {/* 4. My Profile View */}
+            {/* 2. Business Profile View */}
             {activeTab === 'profile' && (
               <div className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs p-6 space-y-5">
                 <div className="pb-3 border-b border-slate-100">
                   <h2 className="text-lg font-bold text-slate-900">Profile &amp; Business Information</h2>
-                  <p className="text-xs text-slate-400">Manage your business contact credentials</p>
+                  <p className="text-xs text-slate-400">Authenticated contact credentials retrieved from Zoho CRM</p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                   <div>
                     <label className="block text-slate-400 font-bold mb-1">Full Name</label>
                     <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 font-semibold text-slate-800">
-                      {displayName}
+                      {user?.name || 'Not provided'}
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-slate-400 font-bold mb-1">Email Address</label>
+                    <label className="block text-slate-400 font-bold mb-1">Registered Business Email</label>
                     <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 font-semibold text-slate-800">
-                      {displayEmail}
+                      {user?.email}
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-slate-400 font-bold mb-1">Company / Organization</label>
                     <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 font-semibold text-slate-800">
-                      {user?.companyName || 'Corporate Enterprise Partner'}
+                      {user?.companyName || 'Not specified'}
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-slate-400 font-bold mb-1">Corporate GSTIN</label>
                     <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 font-semibold text-slate-800">
-                      {user?.gstin || '33AABCO1234F1Z5'}
+                      {user?.gstin || 'Not provided'}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-slate-400 font-bold mb-1">Contact Phone</label>
+                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 font-semibold text-slate-800">
+                      {user?.phone || 'Not provided'}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-slate-400 font-bold mb-1">Account Role</label>
+                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 font-semibold text-slate-800">
+                      {user?.role === 'admin' ? 'Administrative Staff' : 'Corporate Buyer'}
                     </div>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* 5. My Addresses View */}
+            {/* 3. My Addresses View */}
             {activeTab === 'addresses' && (
               <div className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs p-6 space-y-5">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                  <h2 className="text-lg font-bold text-slate-900">Saved Delivery Addresses</h2>
+                  <div>
+                    <h2 className="text-lg font-bold text-slate-900">Saved Delivery Locations</h2>
+                    <p className="text-xs text-slate-400">Warehouse and office facilities synchronized with Zoho CRM</p>
+                  </div>
                   <button
                     type="button"
                     onClick={() => setShowAddressModal(true)}
@@ -598,10 +465,10 @@ function CustomerAccountDashboardContent() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {savedAddresses.length > 0 ? (
-                    savedAddresses.map((addr, idx) => (
+                    savedAddresses.map((addr: Address, idx: number) => (
                       <div
                         key={idx}
-                        className="p-4 rounded-xl border border-slate-200 space-y-2 relative"
+                        className="p-4 rounded-xl border border-slate-200 space-y-2 relative bg-white"
                       >
                         <div className="font-bold text-slate-900 text-xs">{addr.fullName}</div>
                         <div className="text-xs text-slate-600 leading-relaxed">
@@ -688,7 +555,7 @@ function CustomerAccountDashboardContent() {
               </div>
             )}
 
-            {/* 6. Wishlist View */}
+            {/* 4. Wishlist View */}
             {activeTab === 'wishlist' && (
               <div className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs p-6 space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100">

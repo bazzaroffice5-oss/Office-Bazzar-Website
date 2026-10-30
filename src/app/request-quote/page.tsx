@@ -241,13 +241,17 @@ export default function RequestQuotePage() {
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (!response.ok || data.success === false) {
         throw new Error(data.error || 'Failed to submit quotation. Please try again.');
+      }
+
+      if (data.zohoStatus !== 'synced') {
+        throw new Error(data.error || 'Quotation could not be saved to Zoho CRM. Please try again.');
       }
 
       setSubmittedQuotation({
         id: data.quotation?.id || data.id,
-        quotationNumber: data.quotation?.quotationNumber || data.quotationNumber || 'OB-RFQ-CONFIRMED',
+        quotationNumber: data.quotation?.quotationNumber || data.quotationNumber,
       });
       clearCart();
     } catch (err: unknown) {
@@ -307,20 +311,7 @@ export default function RequestQuotePage() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <Link
-              href="/account?tab=rfqs"
-              className="w-full sm:w-auto px-6 py-2.5 bg-[#004b87] hover:bg-[#0a355c] text-white text-xs font-semibold rounded-xl transition-colors text-center"
-            >
-              View in My RFQs
-            </Link>
-            <Link
-              href="/products"
-              className="w-full sm:w-auto px-6 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition-colors text-center"
-            >
-              Back to Products
-            </Link>
-          </div>
+
         </div>
       </main>
     );

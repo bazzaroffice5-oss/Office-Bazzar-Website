@@ -238,14 +238,17 @@ export async function syncQuotationToZohoQuote(
     for (const item of quotation.items) {
       const zohoProdId = resolveZohoProductId(item.productId, item.sku);
 
+      const defaultZohoProdId = Object.values(typedProductMapping).find((e) => e.zohoId)?.zohoId;
+      const effectiveZohoProdId = zohoProdId || defaultZohoProdId;
+
       if (!zohoProdId) {
-        console.warn(`[ZohoQuotes] Product [${item.productName}] (SKU: ${item.sku}) could not be resolved to a Zoho Product ID.`);
+        console.warn(`[ZohoQuotes] Product [${item.productName}] (SKU: ${item.sku}) could not be resolved directly. Using catalog fallback ID: ${defaultZohoProdId}`);
       }
 
       const lineTax = (item.indicativeTotalPrice * (item.gstPercent || 18)) / 100;
 
       quotedItems.push({
-        Product_Name: zohoProdId ? { id: zohoProdId } : undefined,
+        Product_Name: effectiveZohoProdId ? { id: effectiveZohoProdId } : undefined,
         Quantity: Number(item.quantity) || 1,
         List_Price: Number(item.indicativeUnitPrice) || 0,
         Discount: 0,
