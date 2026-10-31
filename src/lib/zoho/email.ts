@@ -29,7 +29,32 @@ export interface ZohoEmailDispatchResult {
 }
 
 let cachedFromAddress: ZohoFromAddress | null = null;
+let cachedQuoteInventoryTemplateId: string | null = null;
 let cachedZohoMailAccountId: string | null = null;
+
+/**
+ * Resolve the Zoho CRM Quotes Inventory Template ID from /crm/v6/settings/inventory_templates?module=Quotes
+ */
+async function resolveQuoteInventoryTemplateId(): Promise<string> {
+  if (cachedQuoteInventoryTemplateId) {
+    return cachedQuoteInventoryTemplateId;
+  }
+
+  try {
+    const res = await zohoFetch<{ inventory_templates?: Array<{ id: string }> }>(
+      '/settings/inventory_templates?module=Quotes'
+    );
+    const firstId = res?.inventory_templates?.[0]?.id;
+    if (firstId) {
+      cachedQuoteInventoryTemplateId = String(firstId);
+      return cachedQuoteInventoryTemplateId;
+    }
+  } catch {
+    // Fallback to known Quote Template ID
+  }
+
+  return '1476900000000552714';
+}
 
 /**
  * Resolve the authorized Zoho CRM sender address from /crm/v6/settings/emails/actions/from_addresses
@@ -154,24 +179,33 @@ export async function sendZohoEmail(params: {
 
     if (targetModule && targetRecordId) {
       try {
-        const crmMailPayload = {
-          data: [
+        const mailItem: Record<string, unknown> = {
+          from: {
+            user_name: fromAddr.user_name,
+            email: fromAddr.email,
+          },
+          to: [
             {
-              from: {
-                user_name: fromAddr.user_name,
-                email: fromAddr.email,
-              },
-              to: [
-                {
-                  user_name: params.toName || recipient,
-                  email: recipient,
-                },
-              ],
-              subject: params.subject,
-              content: params.html,
-              mail_format: 'html',
+              user_name: params.toName || recipient,
+              email: recipient,
             },
           ],
+          subject: params.subject,
+          content: params.html,
+          mail_format: 'html',
+        };
+
+        if (targetModule === 'Quotes') {
+          const templateId = await resolveQuoteInventoryTemplateId();
+          mailItem.inventory_details = {
+            inventory_template: {
+              id: templateId,
+            },
+          };
+        }
+
+        const crmMailPayload = {
+          data: [mailItem],
         };
 
         const crmRes = await zohoFetch<any>(

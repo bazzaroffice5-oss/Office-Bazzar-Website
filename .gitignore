@@ -43,6 +43,7 @@ yarn-error.log*
 .zoho_token_cache.json
 .zoho_grant_code.txt
 .zoho_vercel_refresh_token.txt
+.zoho_authorize_url.txt
 
 # vercel
 .vercel
