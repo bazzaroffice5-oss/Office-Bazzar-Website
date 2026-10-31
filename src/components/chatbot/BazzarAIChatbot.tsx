@@ -143,11 +143,20 @@ export default function BazzarAIChatbot() {
     setInputMessage('');
     setIsTyping(true);
 
+    // Prepare conversation history (last 8 turns) for multi-turn Gemini context
+    const historyPayload = messages
+      .filter((m) => m.id !== 'msg-welcome' && m.text && m.text.trim())
+      .slice(-8)
+      .map((m) => ({
+        role: m.sender,
+        content: m.text,
+      }));
+
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: trimmed }),
+        body: JSON.stringify({ message: trimmed, history: historyPayload }),
       });
 
       const data = await res.json();
