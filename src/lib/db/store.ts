@@ -1272,101 +1272,29 @@ export async function updateBulkRFQStatus(
 }
 
 // ----------------------------------------------------------------------
-// CORPORATE QUOTATION (RFQ) METHODS (Supabase with In-Memory Resilient Fallback)
+// CORPORATE QUOTATION (RFQ) METHODS (Authoritative Primary Database: Zoho CRM)
+// Do NOT write or read customer/quotation business records to/from Supabase.
 // ----------------------------------------------------------------------
 
 function generateFallbackQuotationNumber(): string {
-  const year = new Date().getFullYear();
-  const formattedCount = String(quotationCounter++).padStart(5, '0');
-  return `OB-RFQ-${year}-${formattedCount}`;
+  const now = new Date();
+  const y = String(now.getFullYear()).slice(-2);
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  const seq = String(quotationCounter++).padStart(4, '0');
+  return `OB-RFQ-${y}${m}${d}-${seq}`;
 }
 
 export async function createQuotation(
-  quoteData: Omit<Quotation, 'id' | 'quotationNumber' | 'createdAt'>
+  quoteData: Omit<Quotation, 'id' | 'quotationNumber' | 'createdAt'> & { quotationNumber?: string }
 ): Promise<Quotation> {
   // 1. Idempotency check to prevent duplicate submissions
   if (quoteData.idempotencyKey && quotationIdempotencyStore.has(quoteData.idempotencyKey)) {
     return quotationIdempotencyStore.get(quoteData.idempotencyKey)!;
   }
 
-  // 2. Persistent Supabase Insertion
-  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-    try {
-      const client = supabaseAdmin || supabase!;
-
-      let quotationNumber: string | null = null;
-      try {
-        const { data: numData } = await client.rpc('generate_quotation_number');
-        if (numData) quotationNumber = String(numData);
-      } catch {
-        // Fallback to client sequential generator if RPC is unprovisioned
-      }
-
-      if (!quotationNumber) {
-        quotationNumber = generateFallbackQuotationNumber();
-      }
-
-      const { data: dbQuote, error: quoteError } = await client
-        .from('quotations')
-        .insert({
-          quotation_number: quotationNumber,
-          idempotency_key: quoteData.idempotencyKey || null,
-          customer_id: quoteData.customerId || null,
-          customer_name: quoteData.customerName,
-          company_name: quoteData.companyName,
-          email: quoteData.email,
-          phone: quoteData.phone,
-          gstin: quoteData.gstin || null,
-          delivery_location: quoteData.deliveryLocation || null,
-          pincode: quoteData.pincode,
-          photo_urls: quoteData.photoUrls || null,
-          preferred_contact_method: quoteData.preferredContactMethod || 'email',
-          additional_requirements: quoteData.additionalRequirements || null,
-          indicative_subtotal: quoteData.indicativeSubtotal,
-          indicative_gst_amount: quoteData.indicativeGstAmount,
-          indicative_total: quoteData.indicativeTotal,
-          status: quoteData.status || 'new',
-          assigned_to: quoteData.assignedTo || null,
-          internal_notes: quoteData.internalNotes || null,
-          quoted_amount: quoteData.quotedAmount || null,
-          quotation_document_url: quoteData.quotationDocumentUrl || null,
-        })
-        .select()
-        .single();
-
-      if (!quoteError && dbQuote) {
-        const itemsPayload = quoteData.items.map((it) => ({
-          quotation_id: dbQuote.id,
-          product_id: it.productId && it.productId.length > 20 ? it.productId : null,
-          product_name: it.productName,
-          sku: it.sku,
-          indicative_unit_price: it.indicativeUnitPrice,
-          hsn_code: it.hsnCode || null,
-          gst_percent: it.gstPercent,
-          quantity: it.quantity,
-          indicative_total_price: it.indicativeTotalPrice,
-          product_image: it.productImage || null,
-          pack_size: it.packSize || null,
-        }));
-
-        const { data: dbItems } = await client
-          .from('quotation_items')
-          .insert(itemsPayload)
-          .select();
-
-        const savedQuote = mapDbQuotation(dbQuote, dbItems || itemsPayload);
-        if (quoteData.idempotencyKey) {
-          quotationIdempotencyStore.set(quoteData.idempotencyKey, savedQuote);
-        }
-        return savedQuote;
-      }
-    } catch {
-      // In case of Supabase failure, seamlessly proceed with in-memory execution
-    }
-  }
-
-  // 3. In-Memory Resilient Fallback (Does NOT decrement stock as per RFQ business rules)
-  const quotationNumber = generateFallbackQuotationNumber();
+  // 2. Construct Quotation object for authoritative Zoho CRM registration (No Supabase write)
+  const quotationNumber = quoteData.quotationNumber?.trim() || generateFallbackQuotationNumber();
   const newQuote: Quotation = {
     ...quoteData,
     id: `quote-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`,
@@ -1388,71 +1316,18 @@ export async function createQuotation(
 }
 
 export async function getQuotationById(id: string): Promise<Quotation | null> {
-  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-    try {
-      const client = supabaseAdmin || supabase!;
-      const { data, error } = await client
-        .from('quotations')
-        .select('*, quotation_items(*)')
-        .eq('id', id)
-        .maybeSingle();
-
-      if (!error && data) {
-        return mapDbQuotation(data, data.quotation_items || []);
-      }
-    } catch {
-      // Fallback
-    }
-  }
-
-  const quote = quotationsList.find((q) => q.id === id);
+  const quote = quotationsList.find((q) => q.id === id || q.quotationNumber === id);
   return quote || null;
 }
 
 export async function getQuotationByNumber(quotationNumber: string): Promise<Quotation | null> {
   const cleanNumber = quotationNumber.trim().toUpperCase();
-
-  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-    try {
-      const client = supabaseAdmin || supabase!;
-      const { data, error } = await client
-        .from('quotations')
-        .select('*, quotation_items(*)')
-        .eq('quotation_number', cleanNumber)
-        .maybeSingle();
-
-      if (!error && data) {
-        return mapDbQuotation(data, data.quotation_items || []);
-      }
-    } catch {
-      // Fallback
-    }
-  }
-
   const quote = quotationsList.find((q) => q.quotationNumber.trim().toUpperCase() === cleanNumber);
   return quote || null;
 }
 
 export async function getQuotationsByCustomer(customerIdOrEmail: string): Promise<Quotation[]> {
   const cleanParam = customerIdOrEmail.trim().toLowerCase();
-
-  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-    try {
-      const client = supabaseAdmin || supabase!;
-      const { data, error } = await client
-        .from('quotations')
-        .select('*, quotation_items(*)')
-        .or(`customer_id.eq.${customerIdOrEmail},email.ilike.${cleanParam}`)
-        .order('created_at', { ascending: false });
-
-      if (!error && data && data.length > 0) {
-        return data.map((d) => mapDbQuotation(d, d.quotation_items || []));
-      }
-    } catch {
-      // Fallback
-    }
-  }
-
   return quotationsList.filter(
     (q) =>
       (q.customerId && q.customerId === customerIdOrEmail) ||
@@ -1461,27 +1336,6 @@ export async function getQuotationsByCustomer(customerIdOrEmail: string): Promis
 }
 
 export async function getAllQuotations(statusFilter?: QuotationStatus): Promise<Quotation[]> {
-  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-    try {
-      const client = supabaseAdmin || supabase!;
-      let query = client
-        .from('quotations')
-        .select('*, quotation_items(*)')
-        .order('created_at', { ascending: false });
-
-      if (statusFilter) {
-        query = query.eq('status', statusFilter);
-      }
-
-      const { data, error } = await query;
-      if (!error && data && data.length > 0) {
-        return data.map((d) => mapDbQuotation(d, d.quotation_items || []));
-      }
-    } catch {
-      // Fallback
-    }
-  }
-
   if (statusFilter) {
     return quotationsList.filter((q) => q.status === statusFilter);
   }
@@ -1492,36 +1346,7 @@ export async function updateQuotation(
   id: string,
   updates: Partial<Quotation>
 ): Promise<Quotation | null> {
-  const updatePayload: Record<string, unknown> = {
-    updated_at: new Date().toISOString(),
-  };
-
-  if (updates.status !== undefined) updatePayload.status = updates.status;
-  if (updates.assignedTo !== undefined) updatePayload.assigned_to = updates.assignedTo;
-  if (updates.internalNotes !== undefined) updatePayload.internal_notes = updates.internalNotes;
-  if (updates.quotedAmount !== undefined) updatePayload.quoted_amount = updates.quotedAmount;
-  if (updates.quotationDocumentUrl !== undefined)
-    updatePayload.quotation_document_url = updates.quotationDocumentUrl;
-
-  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-    try {
-      const client = supabaseAdmin || supabase!;
-      const { data, error } = await client
-        .from('quotations')
-        .update(updatePayload)
-        .eq('id', id)
-        .select('*, quotation_items(*)')
-        .maybeSingle();
-
-      if (!error && data) {
-        return mapDbQuotation(data, data.quotation_items || []);
-      }
-    } catch {
-      // Fallback
-    }
-  }
-
-  const quote = quotationsList.find((q) => q.id === id);
+  const quote = quotationsList.find((q) => q.id === id || q.quotationNumber === id);
   if (!quote) return null;
 
   if (updates.status !== undefined) quote.status = updates.status;
@@ -1536,7 +1361,7 @@ export async function updateQuotation(
 }
 
 // ----------------------------------------------------------------------
-// NOTIFICATION LOGS METHODS
+// NOTIFICATION LOGS METHODS (Runtime Store — No Supabase Business Writes)
 // ----------------------------------------------------------------------
 
 export async function createNotificationLog(
@@ -1546,33 +1371,6 @@ export async function createNotificationLog(
   }
 ): Promise<NotificationLog> {
   const now = new Date().toISOString();
-
-  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-    try {
-      const client = supabaseAdmin || supabase!;
-      const { data: dbLog, error } = await client
-        .from('notification_logs')
-        .insert({
-          quotation_id: data.quotationId,
-          quotation_number: data.quotationNumber,
-          channel: data.channel,
-          recipient: data.recipient,
-          status: data.status,
-          attempts: data.attempts || 1,
-          last_attempt_at: data.lastAttemptAt || now,
-          error_message: data.errorMessage || null,
-          metadata: data.metadata || {},
-        })
-        .select()
-        .single();
-
-      if (!error && dbLog) {
-        return mapDbNotificationLog(dbLog);
-      }
-    } catch {
-      // Fallback
-    }
-  }
 
   const newLog: NotificationLog = {
     id: `notif-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`,
@@ -1596,30 +1394,6 @@ export async function updateNotificationLog(
   id: string,
   updates: Partial<NotificationLog>
 ): Promise<NotificationLog | null> {
-  const updatePayload: Record<string, unknown> = {};
-  if (updates.status !== undefined) updatePayload.status = updates.status;
-  if (updates.attempts !== undefined) updatePayload.attempts = updates.attempts;
-  if (updates.lastAttemptAt !== undefined) updatePayload.last_attempt_at = updates.lastAttemptAt;
-  if (updates.errorMessage !== undefined) updatePayload.error_message = updates.errorMessage;
-
-  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-    try {
-      const client = supabaseAdmin || supabase!;
-      const { data, error } = await client
-        .from('notification_logs')
-        .update(updatePayload)
-        .eq('id', id)
-        .select()
-        .maybeSingle();
-
-      if (!error && data) {
-        return mapDbNotificationLog(data);
-      }
-    } catch {
-      // Fallback
-    }
-  }
-
   const log = notificationLogsList.find((l) => l.id === id);
   if (!log) return null;
 
@@ -1632,30 +1406,8 @@ export async function updateNotificationLog(
 }
 
 export async function getNotificationLogs(quotationId?: string): Promise<NotificationLog[]> {
-  if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-    try {
-      const client = supabaseAdmin || supabase!;
-      let query = client
-        .from('notification_logs')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (quotationId) {
-        query = query.eq('quotation_id', quotationId);
-      }
-
-      const { data, error } = await query;
-      if (!error && data && data.length > 0) {
-        return data.map(mapDbNotificationLog);
-      }
-    } catch {
-      // Fallback
-    }
-  }
-
   if (quotationId) {
     return notificationLogsList.filter((l) => l.quotationId === quotationId);
   }
   return notificationLogsList;
 }
-

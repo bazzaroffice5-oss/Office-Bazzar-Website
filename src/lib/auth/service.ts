@@ -11,7 +11,7 @@
 
 import crypto from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
-import { getEmailFromAddress, getResendClient } from '@/lib/notifications/service';
+import { sendZohoEmail } from '@/lib/zoho/email';
 
 const SESSION_COOKIE_NAME = 'ob_session';
 const OTP_TICKET_COOKIE_NAME = 'ob_auth_ticket';
@@ -85,15 +85,13 @@ export async function createAndSendOtp(
   const signature = signPayload(serialized, secret);
   const ticket = `${serialized}.${signature}`;
 
-  // 2. Dispatch OTP Email
+  // 2. Dispatch OTP Email via Zoho Email API
   try {
     await sendOtpEmail(cleanEmail, otp, name);
   } catch (emailErr) {
     console.error('[AuthService] Failed to send OTP email:', emailErr);
-    // In local development or testing, do not block
   }
 
-  // Safe server log for diagnostics (redacted in production unless in dev)
   if (process.env.NODE_ENV !== 'production') {
     console.log(`[AuthService Dev] Generated OTP for ${cleanEmail}: ${otp}`);
   }
@@ -121,7 +119,6 @@ export function verifyOtpTicket(
   const secret = getAuthSecret();
   const expectedSig = signPayload(serialized, secret);
 
-  // Constant-time signature comparison to prevent timing attacks
   if (
     signature.length !== expectedSig.length ||
     !crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSig))
@@ -136,17 +133,14 @@ export function verifyOtpTicket(
     return { success: false, error: 'Malformed ticket payload.' };
   }
 
-  // Check expiration
   if (Date.now() > payload.expiresAt) {
     return { success: false, error: 'Verification code has expired. Please request a new code.' };
   }
 
-  // Check attempt limit (Rate limiting & Replay protection)
   if (payload.attempts >= 3) {
     return { success: false, error: 'Too many incorrect attempts. Please request a new code.' };
   }
 
-  // Verify OTP hash
   const [expectedHash, salt] = payload.otpHash.split(':');
   const computedHash = crypto
     .createHash('sha256')
@@ -168,25 +162,18 @@ export function verifyOtpTicket(
 }
 
 /**
- * Send branded HTML email containing the OTP verification code
+ * Send branded HTML email containing the OTP verification code via Zoho Email API
  */
 async function sendOtpEmail(email: string, otp: string, name?: string): Promise<void> {
-  const resend = getResendClient();
-  if (!resend) {
-    console.log(`[AuthService] RESEND_API_KEY not configured. OTP for ${email}: ${otp}`);
-    return;
-  }
-
-  const fromAddress = getEmailFromAddress();
   const customerGreeting = name ? `Hello ${name},` : 'Hello,';
 
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="utf-8"></head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8fafc; margin: 0; padding: 24px; color: #0f172a;">
-  <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+  <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden;">
     <div style="background-color: #0f172a; padding: 24px 32px; text-align: center;">
-      <h1 style="margin: 0; font-size: 20px; font-weight: 700; color: #ffffff; letter-spacing: -0.02em;">Office Bazzar</h1>
+      <h1 style="margin: 0; font-size: 20px; font-weight: 700; color: #ffffff;">Office Bazzar</h1>
       <p style="margin: 4px 0 0; font-size: 13px; color: #94a3b8;">Customer Account Verification</p>
     </div>
     <div style="padding: 32px;">
@@ -197,30 +184,21 @@ async function sendOtpEmail(email: string, otp: string, name?: string): Promise<
       <div style="background-color: #f1f5f9; border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 24px; border: 1px dashed #cbd5e1;">
         <span style="font-size: 32px; font-weight: 800; letter-spacing: 6px; color: #0f172a; font-family: monospace;">${otp}</span>
       </div>
-      <p style="font-size: 12px; color: #64748b; margin: 0 0 8px;">
-        <strong>Security Notice:</strong> Never share this code with anyone. Office Bazzar representatives will never ask for your verification code.
+      <p style="font-size: 12px; color: #64748b; margin: 0;">
+        <strong>Security Notice:</strong> Never share this code with anyone.
       </p>
-      <p style="font-size: 12px; color: #94a3b8; margin: 0;">
-        If you did not request this login code, you can safely ignore this email.
-      </p>
-    </div>
-    <div style="background-color: #f8fafc; border-top: 1px solid #e2e8f0; padding: 16px 32px; text-align: center; font-size: 12px; color: #94a3b8;">
-      Office Bazzar &bull; Chennai, Tamil Nadu, India &bull; <a href="https://officebazzar.com" style="color: #0284c7; text-decoration: none;">officebazzar.com</a>
     </div>
   </div>
 </body>
 </html>`;
 
-  const { data, error } = await resend.emails.send({
-    from: fromAddress,
-    to: [email],
+  await sendZohoEmail({
+    toEmail: email,
+    toName: name,
     subject: `Your Office Bazzar Verification Code: ${otp}`,
     html,
+    text: `${customerGreeting}\n\nYour Office Bazzar verification code is: ${otp}\nValid for 10 minutes.`,
   });
-
-  if (error) {
-    throw new Error(`Resend API error: ${error.message}${error.statusCode ? ` (${error.statusCode})` : ''}`);
-  }
 }
 
 /**
@@ -299,7 +277,6 @@ export function setSessionCookie(response: NextResponse, user: SessionUser): voi
     path: '/',
   });
 
-  // Clear any active OTP ticket cookie
   response.cookies.set({
     name: OTP_TICKET_COOKIE_NAME,
     value: '',
@@ -385,7 +362,6 @@ export function verifyAdminCredentials(
     return { success: false, error: 'Password is required for administrative access.' };
   }
 
-  // Check specific or general admin passwords
   let expectedPassword = process.env.ADMIN_PASSWORD;
   if (cleanEmail === 'sales4@officebazzar.com' && process.env.ADMIN_PASSWORD_SALES4) {
     expectedPassword = process.env.ADMIN_PASSWORD_SALES4;

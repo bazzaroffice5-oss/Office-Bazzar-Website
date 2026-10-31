@@ -1,7 +1,11 @@
 import { NextResponse } from 'next/server';
-import { createQuotation, getProductById, getProducts, createNotificationLog } from '@/lib/db/store';
+import { createQuotation, getProductById, getProducts } from '@/lib/db/store';
 import { QuotationItem } from '@/types';
-import { dispatchQuotationNotifications, NotificationResult } from '@/lib/notifications/service';
+import {
+  dispatchQuotationNotifications,
+  NotificationResult,
+  getNotificationRecipients,
+} from '@/lib/notifications/service';
 import { syncQuotationToZoho, ZohoSyncResult } from '@/lib/zoho/crm';
 
 // In-memory sliding window rate limiter to protect public quotation submission
@@ -85,7 +89,8 @@ export async function POST(req: Request) {
 
     // Phone validation (Indian 10-digit mobile)
     const cleanPhone = phone ? String(phone).replace(/[^0-9]/g, '') : '';
-    const phoneValid = cleanPhone.length === 10 || (cleanPhone.length > 10 && cleanPhone.endsWith(cleanPhone.slice(-10)));
+    const phoneValid =
+      cleanPhone.length === 10 || (cleanPhone.length > 10 && cleanPhone.endsWith(cleanPhone.slice(-10)));
     if (!phone || !phoneValid) {
       return NextResponse.json(
         { error: 'A valid 10-digit Indian mobile contact number is required.' },
@@ -102,7 +107,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // Optional delivery location (not mandatory)
+    // Optional delivery location (billing/shipping address)
     const cleanDeliveryLocation =
       deliveryLocation && typeof deliveryLocation === 'string' && deliveryLocation.trim().length > 0
         ? deliveryLocation.trim()
@@ -119,7 +124,10 @@ export async function POST(req: Request) {
       const gstinRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
       if (!gstinRegex.test(cleanGstin)) {
         return NextResponse.json(
-          { error: 'Provided GSTIN does not match standard 15-character Indian GST format (e.g., 33AABCO1234F1Z5).' },
+          {
+            error:
+              'Provided GSTIN does not match standard 15-character Indian GST format (e.g., 33AABCO1234F1Z5).',
+          },
           { status: 400 }
         );
       }
@@ -133,7 +141,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // 3. Server-side authoritative product verification & pricing
+    // 3. Server-side authoritative product verification & pricing from Zoho CRM Products
     const validatedItems: QuotationItem[] = [];
     let indicativeSubtotal = 0;
     let indicativeGstAmount = 0;
@@ -176,7 +184,6 @@ export async function POST(req: Request) {
         );
       }
 
-      // Authoritative pricing from catalog
       const unitPrice = prod.price ?? 0;
       const lineTotal = unitPrice * qty;
       const gstRate = prod.gstPercent || 18;
@@ -202,7 +209,7 @@ export async function POST(req: Request) {
 
     const indicativeTotal = indicativeSubtotal + indicativeGstAmount;
 
-    // 4. Save Quotation Persistently (Does NOT decrement stock as per RFQ requirements)
+    // 4. Construct Quotation Record in Memory (No Supabase write — Zoho CRM is the primary database)
     const savedQuotation = await createQuotation({
       idempotencyKey: idempotencyKey || undefined,
       customerId: customerId || undefined,
@@ -225,8 +232,7 @@ export async function POST(req: Request) {
       status: 'new',
     });
 
-    // 5. Synchronous Zoho CRM Registration (Primary Business Database)
-    // Business rule: Do not confirm quotation unless successfully saved in Zoho CRM Quotes
+    // 5. Save Quotation in Zoho CRM FIRST (Contacts, Accounts, Quotes & Quoted_Items)
     let zohoSyncResult: ZohoSyncResult | undefined;
     try {
       zohoSyncResult = await syncQuotationToZoho(savedQuotation);
@@ -248,23 +254,37 @@ export async function POST(req: Request) {
       );
     }
 
-    // 6. Trigger transactional email notifications to both Customer and Sales/Marketing Desk
+    // Attach authoritative Zoho Quote ID to the quotation record
+    if (zohoSyncResult.quoteId) {
+      savedQuotation.id = zohoSyncResult.quoteId;
+    }
+
+    // 6. Send TWO ADMIN EMAIL NOTIFICATIONS ONLY AFTER Zoho CRM save succeeds
+    // ADMIN 1: sales4@officebazzar.com
+    // ADMIN 2: marketing@officebazzar.com
     let notificationResults: NotificationResult[] = [];
     try {
-      notificationResults = await dispatchQuotationNotifications(savedQuotation);
+      notificationResults = await dispatchQuotationNotifications(savedQuotation, {
+        zohoQuoteId: zohoSyncResult.quoteId,
+        zohoContactId: zohoSyncResult.contactId,
+      });
     } catch (notifyErr) {
       console.error('[Quotation API] Notification dispatch error:', notifyErr);
     }
 
-    const customerEmailRes = notificationResults.find((r) => r.recipient === savedQuotation.email);
-    const adminEmailRes = notificationResults.find((r) => r.channel === 'email_quote' && r.recipient !== savedQuotation.email);
+    const { salesEmail, marketingEmail } = getNotificationRecipients();
+    const admin1Res = notificationResults.find(
+      (r) => r.recipient.toLowerCase() === salesEmail.toLowerCase()
+    );
+    const admin2Res = notificationResults.find(
+      (r) => r.recipient.toLowerCase() === marketingEmail.toLowerCase()
+    );
 
-    const isCustomerEmailSent = customerEmailRes ? customerEmailRes.status === 'sent' : false;
-    const isAdminEmailSent = adminEmailRes ? adminEmailRes.status === 'sent' : false;
+    const isAdmin1Sent = admin1Res?.status === 'sent';
+    const isAdmin2Sent = admin2Res?.status === 'sent';
 
-    // 7. Return safe customer response (Internal notes and staff details excluded)
     const safeQuotation = {
-      id: savedQuotation.id,
+      id: zohoSyncResult.quoteId || savedQuotation.id,
       quotationNumber: savedQuotation.quotationNumber,
       customerName: savedQuotation.customerName,
       companyName: savedQuotation.companyName,
@@ -288,14 +308,33 @@ export async function POST(req: Request) {
       {
         success: true,
         quotationNumber: savedQuotation.quotationNumber,
-        quotationId: savedQuotation.id,
+        quotationId: zohoSyncResult.quoteId || savedQuotation.id,
         zohoQuoteId: zohoSyncResult.quoteId,
+        zohoContactId: zohoSyncResult.contactId,
+        zohoAccountId: zohoSyncResult.accountId,
         zohoStatus: 'synced',
-        customerEmailStatus: isCustomerEmailSent ? 'accepted' : 'failed',
-        customerEmailError: customerEmailRes?.errorMessage,
-        adminEmailStatus: isAdminEmailSent ? 'accepted' : 'failed',
-        adminEmailError: adminEmailRes?.errorMessage,
-        notificationStatus: isCustomerEmailSent && isAdminEmailSent ? 'sent' : 'partial_or_pending',
+        admin1Email: {
+          recipient: salesEmail,
+          status: isAdmin1Sent ? 'sent' : 'failed',
+          provider: admin1Res?.provider,
+          messageId: admin1Res?.messageId,
+          error: admin1Res?.errorMessage,
+          missingScopes: admin1Res?.missingScopes,
+        },
+        admin2Email: {
+          recipient: marketingEmail,
+          status: isAdmin2Sent ? 'sent' : 'failed',
+          provider: admin2Res?.provider,
+          messageId: admin2Res?.messageId,
+          error: admin2Res?.errorMessage,
+          missingScopes: admin2Res?.missingScopes,
+        },
+        notificationStatus:
+          isAdmin1Sent && isAdmin2Sent
+            ? 'sent'
+            : isAdmin1Sent || isAdmin2Sent
+            ? 'partial'
+            : 'failed',
         quotation: safeQuotation,
         message: 'Request for Quotation confirmed and registered in Zoho CRM.',
       },
@@ -304,7 +343,12 @@ export async function POST(req: Request) {
   } catch (error: unknown) {
     console.error('[Quotation API Error]:', error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to submit quotation. Please check your connection and try again.' },
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to submit quotation. Please check your connection and try again.',
+      },
       { status: 500 }
     );
   }

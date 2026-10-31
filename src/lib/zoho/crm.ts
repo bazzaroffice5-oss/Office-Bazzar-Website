@@ -1,17 +1,21 @@
 /**
  * Zoho CRM High-Level Synchronization Service
  *
- * Handles creation and mapping of Leads, Inquiries, and Quotations
+ * Handles creation and mapping of Leads, Inquiries, Contacts, Accounts, and Quotations
  * into Zoho CRM standard modules with full data integrity.
  */
 
 import { Quotation } from '@/types';
 import { isZohoConfigured, zohoFetch } from './client';
+import { syncQuotationToZohoQuote } from './quotes';
 
 export interface ZohoSyncResult {
   success: boolean;
   leadId?: string;
   quoteId?: string;
+  quoteNumber?: string;
+  contactId?: string;
+  accountId?: string;
   action?: 'created' | 'updated' | 'skipped' | 'failed';
   error?: string;
   reason?: string;
@@ -46,7 +50,7 @@ interface ZohoModuleResponse {
 
 /**
  * Split a full name into First_Name and Last_Name.
- * Zoho CRM strictly requires `Last_Name` on the Leads module.
+ * Zoho CRM strictly requires `Last_Name` on the Leads and Contacts modules.
  */
 export function parseCustomerName(fullName: string = ''): { firstName: string; lastName: string } {
   const clean = fullName.trim().replace(/\s+/g, ' ');
@@ -82,42 +86,6 @@ function buildContactDescription(enquiry: ContactEnquiryPayload): string {
     enquiry.message,
     `================================`,
   ];
-
-  return lines.filter(Boolean).join('\n');
-}
-
-/**
- * Format a comprehensive RFQ product manifest description
- */
-function buildQuotationDescription(quotation: Quotation): string {
-  const lines: string[] = [
-    `=== WEBSITE REQUEST FOR QUOTATION (RFQ) ===`,
-    `RFQ Number: ${quotation.quotationNumber}`,
-    `Submitted At: ${quotation.createdAt || new Date().toISOString()}`,
-    `Customer: ${quotation.customerName}`,
-    `Company: ${quotation.companyName || 'Not Specified'}`,
-    `Email: ${quotation.email}`,
-    `Phone: ${quotation.phone}`,
-    quotation.gstin ? `GSTIN: ${quotation.gstin}` : '',
-    quotation.pincode ? `Delivery PIN Code: ${quotation.pincode}` : '',
-    quotation.deliveryLocation ? `Delivery Address: ${quotation.deliveryLocation}` : '',
-    quotation.preferredContactMethod ? `Preferred Contact: ${quotation.preferredContactMethod}` : '',
-    quotation.additionalRequirements ? `\n--- Special Requirements ---\n${quotation.additionalRequirements}` : '',
-    ``,
-    `--- Requested Products & Quantities (${quotation.items.length} items) ---`,
-  ];
-
-  quotation.items.forEach((item, index) => {
-    lines.push(
-      `${index + 1}. [${item.sku || 'SKU-N/A'}] ${item.productName} | Qty: ${item.quantity} ${item.packSize || 'Units'} | Indicative Unit: ₹${item.indicativeUnitPrice} (+${item.gstPercent}% GST) | Total: ₹${item.indicativeTotalPrice}`
-    );
-  });
-
-  lines.push(``);
-  lines.push(`Subtotal: ₹${quotation.indicativeSubtotal.toFixed(2)}`);
-  lines.push(`GST Amount: ₹${quotation.indicativeGstAmount.toFixed(2)}`);
-  lines.push(`Indicative Total: ₹${quotation.indicativeTotal.toFixed(2)}`);
-  lines.push(`===========================================`);
 
   return lines.filter(Boolean).join('\n');
 }
@@ -191,11 +159,10 @@ export async function syncContactEnquiryToZoho(
   }
 }
 
-import { syncQuotationToZohoQuote } from './quotes';
-
 /**
- * Synchronize an authoritative Request for Quotation (RFQ) into Zoho CRM Quotes module
- * Links to Contacts, Accounts, and maps line items to the 101 Zoho catalog products.
+ * Synchronize an authoritative Request for Quotation (RFQ) into Zoho CRM Quotes module.
+ * Creates/updates Contact (by Email) and Account (by Company Name), links them,
+ * and creates the Quote with all Quoted_Items mapped to Zoho Products.
  */
 export async function syncQuotationToZoho(
   quotation: Quotation,
@@ -206,9 +173,11 @@ export async function syncQuotationToZoho(
     success: quoteRes.success,
     action: quoteRes.action,
     quoteId: quoteRes.quoteId,
+    quoteNumber: quoteRes.quoteNumber,
+    contactId: quoteRes.contactId,
+    accountId: quoteRes.accountId,
     error: quoteRes.error,
     reason: quoteRes.error,
     details: quoteRes.details,
   };
 }
-

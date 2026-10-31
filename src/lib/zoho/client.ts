@@ -3,7 +3,8 @@
  *
  * Securely manages Zoho OAuth 2.0 access tokens via the offline refresh token grant
  * and exchanges authorization codes from the OAuth callback.
- * Automatically retrieves the refresh token from persistent Supabase storage across cold starts.
+ * Persists the short-lived access token in a local/tmp file cache so concurrent build workers
+ * and serverless invocations do not hit Zoho's token refresh rate limit.
  * All credentials execute strictly on the server tier and are never exposed to the browser.
  */
 
@@ -13,6 +14,20 @@ import {
   clearTokenStoreCache,
   setCachedRefreshToken,
 } from './token-store';
+
+function getServerNodeFs(): { fs: any; path: any; os: any } | null {
+  if (typeof window !== 'undefined') return null;
+  try {
+    const req = eval('require');
+    return {
+      fs: req('fs'),
+      path: req('path'),
+      os: req('os'),
+    };
+  } catch {
+    return null;
+  }
+}
 
 interface ZohoTokenResponse {
   access_token: string;
@@ -37,6 +52,55 @@ export interface ZohoConfigDiagnostics {
 let cachedAccessToken: string | null = null;
 let tokenExpiresAt = 0; // Unix timestamp in milliseconds
 let activeRefreshPromise: Promise<string> | null = null;
+
+function getTokenCacheFilePath(): string | null {
+  const mod = getServerNodeFs();
+  if (!mod) return null;
+  const { fs, path, os } = mod;
+  const localPath = path.join(process.cwd(), '.zoho_token_cache.json');
+  try {
+    fs.accessSync(process.cwd(), fs.constants.W_OK);
+    return localPath;
+  } catch {
+    return path.join(os.tmpdir(), '.zoho_token_cache.json');
+  }
+}
+
+function readDiskCachedAccessToken(): { accessToken: string; expiresAt: number } | null {
+  try {
+    const mod = getServerNodeFs();
+    const filePath = getTokenCacheFilePath();
+    if (!mod || !filePath || !mod.fs.existsSync(filePath)) return null;
+    const raw = mod.fs.readFileSync(filePath, 'utf8');
+    const parsed = JSON.parse(raw);
+    if (
+      parsed &&
+      typeof parsed.accessToken === 'string' &&
+      typeof parsed.expiresAt === 'number' &&
+      Date.now() < parsed.expiresAt - 300 * 1000
+    ) {
+      return { accessToken: parsed.accessToken, expiresAt: parsed.expiresAt };
+    }
+  } catch {
+    // Ignore disk cache read errors
+  }
+  return null;
+}
+
+function writeDiskCachedAccessToken(accessToken: string, expiresAt: number): void {
+  try {
+    const mod = getServerNodeFs();
+    const filePath = getTokenCacheFilePath();
+    if (!mod || !filePath) return;
+    mod.fs.writeFileSync(
+      filePath,
+      JSON.stringify({ accessToken, expiresAt, updatedAt: new Date().toISOString() }),
+      'utf8'
+    );
+  } catch {
+    // Ignore disk cache write errors
+  }
+}
 
 /**
  * Clean URL string by trimming whitespace and trailing slashes
@@ -140,18 +204,26 @@ export function clearZohoTokenCache(): void {
 
 /**
  * Obtain a valid Zoho CRM OAuth 2.0 access token.
- * Access tokens are cached in memory as an optimization.
+ * Access tokens are cached in memory and on disk (.zoho_token_cache.json) across workers.
  * If expired or missing, a fresh access token is requested from Zoho using the persistent refresh token.
  */
 export async function getZohoAccessToken(): Promise<string> {
   const now = Date.now();
 
-  // Return cached access token if valid and not within 5-minute expiry threshold
+  // 1. Return in-memory cached access token if valid and not within 5-minute expiry threshold
   if (cachedAccessToken && now < tokenExpiresAt - 300 * 1000) {
     return cachedAccessToken;
   }
 
-  // If a refresh is already in flight, reuse the promise to prevent duplicate API hits
+  // 2. Check cross-worker disk cache (.zoho_token_cache.json)
+  const diskCached = readDiskCachedAccessToken();
+  if (diskCached) {
+    cachedAccessToken = diskCached.accessToken;
+    tokenExpiresAt = diskCached.expiresAt;
+    return cachedAccessToken;
+  }
+
+  // 3. If a refresh is already in flight, reuse the promise to prevent duplicate API hits
   if (activeRefreshPromise) {
     return activeRefreshPromise;
   }
@@ -190,9 +262,9 @@ export async function getZohoAccessToken(): Promise<string> {
       }
 
       cachedAccessToken = data.access_token;
-      // Expires_in is in seconds (e.g. 3600)
       const validDurationSec = Number(data.expires_in) || 3600;
       tokenExpiresAt = Date.now() + validDurationSec * 1000;
+      writeDiskCachedAccessToken(cachedAccessToken, tokenExpiresAt);
 
       return cachedAccessToken;
     } finally {
@@ -205,7 +277,6 @@ export async function getZohoAccessToken(): Promise<string> {
 
 /**
  * Exchange an OAuth authorization code for Zoho access and refresh tokens.
- * Persists the refresh token to persistent storage (Supabase app_settings) and caches access token.
  */
 export async function exchangeAuthorizationCode(
   code: string,
@@ -264,12 +335,12 @@ export async function exchangeAuthorizationCode(
       };
     }
 
-    // Cache the access token in memory as optimization
+    // Cache the access token in memory and disk
     cachedAccessToken = data.access_token;
     const validDurationSec = Number(data.expires_in) || 3600;
     tokenExpiresAt = Date.now() + validDurationSec * 1000;
+    writeDiskCachedAccessToken(cachedAccessToken, tokenExpiresAt);
 
-    // Persist refresh token securely in Supabase storage
     if (data.refresh_token) {
       await persistZohoRefreshToken(data.refresh_token, {
         apiDomain: data.api_domain,
@@ -308,7 +379,7 @@ export class ZohoApiError extends Error {
 
 /**
  * Execute an authenticated request against the Zoho CRM v6 API.
- * Automatically handles Bearer header injection and retries once if access token expired.
+ * Automatically handles Bearer header injection and retries once ONLY if access token expired (not on OAUTH_SCOPE_MISMATCH).
  */
 export async function zohoFetch<T = unknown>(
   endpoint: string,
@@ -316,7 +387,9 @@ export async function zohoFetch<T = unknown>(
 ): Promise<T> {
   const apiDomain = getZohoApiDomain();
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
-  const fullUrl = `${apiDomain}/crm/v6${cleanEndpoint}`;
+  const fullUrl = cleanEndpoint.startsWith('/crm/v')
+    ? `${apiDomain}${cleanEndpoint}`
+    : `${apiDomain}/crm/v6${cleanEndpoint}`;
 
   let token = await getZohoAccessToken();
 
@@ -330,10 +403,26 @@ export async function zohoFetch<T = unknown>(
     },
   });
 
-  // If unauthorized (token invalidated prematurely), clear cache and retry once
-  if (response.status === 401) {
+  let rawText = await response.text();
+  let parsed: any = null;
+  try {
+    parsed = rawText ? JSON.parse(rawText) : {};
+  } catch {
+    parsed = { raw: rawText };
+  }
+
+  // Only refresh token on 401 if it is an expired/invalid token, NOT an OAUTH_SCOPE_MISMATCH
+  if (response.status === 401 && parsed?.code !== 'OAUTH_SCOPE_MISMATCH') {
     cachedAccessToken = null;
     tokenExpiresAt = 0;
+    try {
+      const mod = getServerNodeFs();
+      const cacheFile = getTokenCacheFilePath();
+      if (mod && cacheFile && mod.fs.existsSync(cacheFile)) mod.fs.unlinkSync(cacheFile);
+    } catch {
+      // Ignore
+    }
+
     token = await getZohoAccessToken();
 
     response = await fetch(fullUrl, {
@@ -345,14 +434,13 @@ export async function zohoFetch<T = unknown>(
         ...options.headers,
       },
     });
-  }
 
-  const rawText = await response.text();
-  let parsed: unknown = null;
-  try {
-    parsed = rawText ? JSON.parse(rawText) : {};
-  } catch {
-    parsed = { raw: rawText };
+    rawText = await response.text();
+    try {
+      parsed = rawText ? JSON.parse(rawText) : {};
+    } catch {
+      parsed = { raw: rawText };
+    }
   }
 
   if (!response.ok) {

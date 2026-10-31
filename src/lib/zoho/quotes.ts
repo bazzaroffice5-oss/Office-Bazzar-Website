@@ -134,14 +134,14 @@ function buildZohoQuoteDescription(quotation: Quotation): string {
  */
 export async function findExistingQuoteByReference(
   quotationNumber: string
-): Promise<{ id: string; quoteNumber?: string; subject: string } | null> {
+): Promise<{ id: string; quoteNumber?: string; subject: string; contactId?: string; accountId?: string } | null> {
   const cleanRef = quotationNumber.trim();
   if (!cleanRef) return null;
 
   // 1. Check recent records directly from database (instant, zero search-index lag)
   try {
     const recentRes = await zohoFetch<any>(
-      '/Quotes?fields=id,Subject,Quote_Number,Created_Time&per_page=50'
+      '/Quotes?fields=id,Subject,Quote_Number,Contact_Name,Account_Name,Created_Time&per_page=50'
     );
     if (Array.isArray(recentRes?.data)) {
       const match = recentRes.data.find(
@@ -152,6 +152,8 @@ export async function findExistingQuoteByReference(
           id: match.id,
           quoteNumber: match.Quote_Number,
           subject: match.Subject,
+          contactId: match.Contact_Name?.id,
+          accountId: match.Account_Name?.id,
         };
       }
     }
@@ -162,7 +164,7 @@ export async function findExistingQuoteByReference(
   // 2. Search by criteria across all historical records
   try {
     const res = await zohoFetch<any>(
-      `/Quotes/search?criteria=(Subject:starts_with:${encodeURIComponent(cleanRef)})&fields=id,Subject,Quote_Number,Created_Time`
+      `/Quotes/search?criteria=(Subject:starts_with:${encodeURIComponent(cleanRef)})&fields=id,Subject,Quote_Number,Contact_Name,Account_Name,Created_Time`
     );
     const existing = res?.data?.[0];
     if (existing?.id) {
@@ -170,6 +172,8 @@ export async function findExistingQuoteByReference(
         id: existing.id,
         quoteNumber: existing.Quote_Number,
         subject: existing.Subject,
+        contactId: existing.Contact_Name?.id,
+        accountId: existing.Account_Name?.id,
       };
     }
   } catch (err: any) {
@@ -206,6 +210,8 @@ export async function syncQuotationToZohoQuote(
         action: 'skipped',
         quoteId: existingQuote.id,
         quoteNumber: existingQuote.quoteNumber,
+        contactId: existingQuote.contactId,
+        accountId: existingQuote.accountId,
       };
     }
 
