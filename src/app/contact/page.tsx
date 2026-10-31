@@ -125,6 +125,9 @@ export default function ContactPage() {
                 <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/70">
                   <div className="font-bold text-slate-900">Chennai Branch</div>
                   <div className="text-[11px] text-slate-500 mt-0.5">Royapettah, Chennai – 600014</div>
+                  <div className="text-[11px] text-[#004b87] font-semibold mt-1">
+                    <a href="tel:7200800040" className="hover:underline">7200800040</a>
+                  </div>
                 </div>
 
                 <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/70">
