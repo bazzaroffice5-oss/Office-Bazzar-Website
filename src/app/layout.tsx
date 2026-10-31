@@ -27,22 +27,13 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
+  applicationName: SITE_CONFIG.name,
   title: {
-    default: 'OfficeBazzar | Office Supplies & Corporate Procurement Partner',
-    template: '%s | OfficeBazzar India',
+    default: SITE_CONFIG.defaultTitle,
+    template: '%s | Office Bazzar',
   },
   description: SITE_CONFIG.description,
-  keywords: [
-    'Office Stationery Chennai',
-    'Housekeeping Materials Chennai',
-    'Industrial Dustbin Suppliers',
-    'Office Supplies Wholesale',
-    'JK Copier Paper',
-    'Taski Chemicals Supplier Chennai',
-    'Computer Consumables',
-    'OfficeBazzar',
-    'Corporate Procurement Partner',
-  ],
+  keywords: SITE_CONFIG.primaryKeywords,
   authors: [{ name: SITE_CONFIG.legalName, url: `${SITE_CONFIG.url}/` }],
   creator: SITE_CONFIG.legalName,
   publisher: SITE_CONFIG.legalName,
@@ -50,9 +41,6 @@ export const metadata: Metadata = {
     email: false,
     address: false,
     telephone: false,
-  },
-  alternates: {
-    canonical: `${SITE_CONFIG.url}/`,
   },
   robots: {
     index: true,
@@ -66,7 +54,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'OfficeBazzar — Dynamic Workplace E-Commerce & Corporate Procurement',
+    title: SITE_CONFIG.defaultTitle,
     description: SITE_CONFIG.description,
     url: `${SITE_CONFIG.url}/`,
     siteName: SITE_CONFIG.name,
@@ -77,13 +65,13 @@ export const metadata: Metadata = {
         url: `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`,
         width: 1200,
         height: 630,
-        alt: `${SITE_CONFIG.name} Corporate Procurement`,
+        alt: 'Office Bazzar — Office Supplies & Corporate Procurement India',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'OfficeBazzar — Corporate Procurement Partner',
+    title: SITE_CONFIG.defaultTitle,
     description: SITE_CONFIG.description,
     images: [`${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`],
   },

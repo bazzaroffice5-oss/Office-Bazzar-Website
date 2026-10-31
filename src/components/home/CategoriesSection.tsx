@@ -41,14 +41,14 @@ export default function CategoriesSection({
           {displayCategories.map((cat) => (
             <Link
               key={cat.id}
-              href={`/categories/${cat.slug}`}
+              href={`/category/${cat.slug}`}
               className="group relative flex flex-col bg-white rounded-2xl border border-slate-200/90 hover:border-slate-300 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004b87] focus-visible:ring-offset-2"
             >
               {/* Category Image Banner with Consistent Sizing and Smooth Hover */}
               <div className="relative w-full h-44 sm:h-48 bg-slate-100 overflow-hidden flex items-center justify-center">
                 <Image
                   src={cat.imageUrl || '/images/categories/office-supplies-stationery.jpg'}
-                  alt={`${cat.name} wholesale catalog`}
+                  alt={`${cat.name} Supplier India — Corporate Procurement Catalogue`}
                   fill
                   className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"

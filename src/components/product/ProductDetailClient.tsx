@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ShoppingCart, Check, Heart, ShieldCheck, CheckCircle } from 'lucide-react';
 import { Brand, Product } from '@/types';
+import { CATEGORY_MAP } from '@/lib/data/catalog';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { getBrandLogoUrl } from '@/lib/utils/brandLogos';
@@ -38,10 +39,16 @@ export default function ProductDetailClient({
   // Resolve brand logo
   const brandLogo = getBrandLogoUrl(product.brandName, brand?.logoUrl);
 
-  // Navigation Links
-  const categoryHref = `/category/${product.categoryId}`;
-  const subcategoryHref = product.subcategoryId
-    ? `/category/${product.categoryId}?sub=${product.subcategoryId}`
+  // Navigation Links (Resolve legacy category IDs to canonical 4 main categories)
+  const mappedCategory =
+    (product.subcategoryId ? CATEGORY_MAP[product.subcategoryId] : undefined) ||
+    (product.categoryId ? CATEGORY_MAP[product.categoryId] : undefined);
+  const canonicalCategorySlug = mappedCategory ? mappedCategory.mainSlug : (product.categoryId || 'office-stationery');
+  const categoryHref = `/category/${canonicalCategorySlug}`;
+  const subcategoryHref = mappedCategory?.subSlug
+    ? `/category/${canonicalCategorySlug}?sub=${mappedCategory.subSlug}`
+    : product.subcategoryId
+    ? `/category/${canonicalCategorySlug}?sub=${product.subcategoryId}`
     : null;
   const brandHref = brand?.slug
     ? `/products?brand=${brand.slug}`
@@ -99,7 +106,7 @@ export default function ProductDetailClient({
           <div className="w-full aspect-square rounded-2xl border border-gray-200 bg-white p-6 flex items-center justify-center relative overflow-hidden shadow-xs">
             <Image
               src={activeImage}
-              alt={product.name}
+              alt={`${product.name} — ${product.brandName || 'Office Bazzar'} Bulk Corporate Supply`}
               fill
               priority
               sizes="(max-width: 768px) 100vw, 480px"

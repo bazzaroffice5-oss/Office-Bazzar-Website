@@ -28,13 +28,15 @@ export async function generateMetadata({
     };
   }
 
-  const metaTitle = `${post.title} | OfficeBazzar Insights`;
+  const metaTitle = `${post.title} | Office Bazzar`;
   const metaDescription = post.excerpt;
   const canonicalUrl = getCanonicalUrl(`/blogs/${post.slug}`);
   const publishedTime = new Date(post.publishedDate).toISOString();
 
   return {
-    title: metaTitle,
+    title: {
+      absolute: metaTitle,
+    },
     description: metaDescription,
     alternates: {
       canonical: canonicalUrl,

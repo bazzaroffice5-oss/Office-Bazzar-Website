@@ -2,7 +2,12 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import CategoryLandingClient from '@/components/category/CategoryLandingClient';
 import { getProducts, getCategoryBySlug } from '@/lib/db/store';
-import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG } from '@/lib/seo/config';
+import {
+  getCanonicalUrl,
+  getBreadcrumbJsonLd,
+  SITE_CONFIG,
+  CATEGORY_SEO_CONFIG,
+} from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export async function generateMetadata({
@@ -18,7 +23,7 @@ export async function generateMetadata({
 
   if (!category) {
     return {
-      title: 'Category Not Found | OfficeBazzar',
+      title: { absolute: 'Category Not Found | Office Bazzar' },
       robots: { index: false, follow: false },
     };
   }
@@ -32,12 +37,18 @@ export async function generateMetadata({
     (s) => s.slug === effectiveSub || s.id === effectiveSub
   );
 
-  const titlePrefix = activeSub ? `${activeSub.name} - ` : '';
-  const metaTitle = `${titlePrefix}${category.name} Wholesale Suppliers in Chennai | OfficeBazzar`;
+  const catSeo = CATEGORY_SEO_CONFIG[category.slug];
+
+  const metaTitle = activeSub
+    ? `${activeSub.name} — ${category.name} Supplier India | Office Bazzar`
+    : catSeo?.title || `${category.name} Supplier India | Bulk Corporate Procurement | Office Bazzar`;
+
   const metaDescription =
-    activeSub?.description ||
-    category.description ||
-    `Procure bulk ${category.name} for corporate offices, IT parks, and institutions in Chennai. Guaranteed 100% GST input tax credit with same-day dispatch.`;
+    activeSub?.description
+      ? `${activeSub.description} Procure bulk ${activeSub.name.toLowerCase()} across India from Office Bazzar with 100% GST Input Tax Credit.`
+      : catSeo?.description ||
+        category.description ||
+        `Procure bulk ${category.name} for corporate offices, IT parks, and institutions across India. Guaranteed 100% GST input tax credit and pan-India dispatch.`;
 
   const canonicalUrl = getCanonicalUrl(
     activeSub
@@ -46,8 +57,11 @@ export async function generateMetadata({
   );
 
   return {
-    title: metaTitle,
+    title: {
+      absolute: metaTitle,
+    },
     description: metaDescription,
+    keywords: catSeo?.keywords || SITE_CONFIG.primaryKeywords,
     alternates: {
       canonical: canonicalUrl,
     },
@@ -62,10 +76,10 @@ export async function generateMetadata({
         {
           url: category.imageUrl?.startsWith('http')
             ? category.imageUrl
-            : `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`,
-          width: 800,
-          height: 600,
-          alt: category.name,
+            : `${SITE_CONFIG.url}${category.imageUrl || SITE_CONFIG.defaultOgImage}`,
+          width: 1200,
+          height: 630,
+          alt: `${category.name} Supplier India — Office Bazzar`,
         },
       ],
     },
@@ -102,6 +116,7 @@ export default async function CategoryPage({
 
   const breadcrumbItems = [
     { name: 'Home', url: '/' },
+    { name: 'Categories', url: '/categories' },
     { name: category.name, url: `/category/${category.slug}` },
   ];
 

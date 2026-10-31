@@ -8,9 +8,11 @@ import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG } from '@/lib/seo/con
 import JsonLd from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = {
-  title: 'Latest Insights & Corporate Procurement Guides | OfficeBazzar India',
+  title: {
+    absolute: 'Corporate Procurement Insights & Workplace Guides | Office Bazzar',
+  },
   description:
-    'Expert procurement insights, workplace housekeeping guidelines, industrial dustbin sizing, Diversey Taski chemical manuals, and GST input tax credit tips for commercial offices.',
+    'Expert B2B procurement guides, workplace housekeeping checklists, industrial dustbin sizing, Diversey Taski chemical manuals, and GST Input Tax Credit tips for businesses across India.',
   alternates: {
     canonical: getCanonicalUrl('/blogs'),
   },

@@ -83,16 +83,16 @@ export default function HeroSection() {
               <span className="text-slate-700">Corporate Procurement</span>
             </motion.div>
 
-            {/* Main Headline */}
+            {/* Main Headline (Phase 2 H1) */}
             <motion.h1
               initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.08, ease: 'easeOut' }}
-              className="text-left font-bold tracking-tight text-[#0f172a] text-[28px] xs:text-[32px] sm:text-4xl lg:text-[42px] xl:text-[48px] leading-[1.18] sm:leading-[1.16] mb-4 sm:mb-5"
+              className="text-left font-bold tracking-tight text-[#0f172a] text-[26px] xs:text-[30px] sm:text-4xl lg:text-[38px] xl:text-[44px] leading-[1.2] sm:leading-[1.18] mb-4 sm:mb-5"
             >
-              <span className="block font-bold whitespace-nowrap">Everything Your</span>
-              <span className="block font-bold whitespace-nowrap">Workplace Needs.</span>
-              <span className="block font-bold whitespace-nowrap text-[#057a3b]">All in One Place.</span>
+              <span className="block font-bold">Complete Office Supplies &amp;</span>
+              <span className="block font-bold">Corporate Procurement</span>
+              <span className="block font-bold text-[#057a3b]">Solutions Across India</span>
             </motion.h1>
 
             {/* Subtitle / Supporting text */}
@@ -100,9 +100,9 @@ export default function HeroSection() {
               initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.16, ease: 'easeOut' }}
-              className="text-sm sm:text-base lg:text-[17px] text-slate-600 max-w-[480px] leading-relaxed mb-7 sm:mb-8 font-normal"
+              className="text-sm sm:text-base lg:text-[17px] text-slate-600 max-w-[520px] leading-relaxed mb-7 sm:mb-8 font-normal"
             >
-              Discover office stationery, printing essentials, housekeeping products and workplace supplies for your business.
+              Discover office stationery, housekeeping and hygiene products, printer consumables, and packaging supplies for corporate and bulk procurement across India.
             </motion.p>
 
             {/* Action Buttons */}

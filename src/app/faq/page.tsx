@@ -62,9 +62,11 @@ const faqs: FAQItem[] = [
 ];
 
 export const metadata: Metadata = {
-  title: 'Frequently Asked Questions (FAQ) | OfficeBazzar India',
+  title: {
+    absolute: 'Corporate Procurement FAQ | Bulk Office Supplies India | Office Bazzar',
+  },
   description:
-    'Find clear answers on 18% GST Input Tax Credit invoicing, bulk order quotations, Royapettah Chennai warehouse dispatch timelines, and 7-day return policy.',
+    'Find clear answers on 18% GST Input Tax Credit invoicing, corporate bulk order quotations (RFQ), pan-India delivery timelines, and 30-day institutional credit terms at Office Bazzar.',
   alternates: {
     canonical: getCanonicalUrl('/faq'),
   },

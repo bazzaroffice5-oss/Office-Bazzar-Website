@@ -10,20 +10,23 @@ export async function generateMetadata({
   searchParams: Promise<{ query?: string; category?: string; brand?: string; sub?: string }>;
 }) {
   const resolved = await searchParams;
-  let title = 'All Products & Wholesale Catalogue | OfficeBazzar Chennai';
+  let title = 'Office Supplies & Corporate Procurement Catalogue India | Office Bazzar';
   let description =
-    'Browse our comprehensive catalog of 8000+ corporate office supplies, stationery, Diversey Taski chemicals, mobile dustbins, and toner cartridges in Chennai with 100% GST ITC.';
+    'Browse the complete Office Bazzar B2B catalogue of office stationery, housekeeping & hygiene products, printer consumables, and packaging materials for corporate procurement across India.';
 
   if (resolved?.query) {
-    title = `Search results for "${resolved.query}" | OfficeBazzar Products`;
-    description = `Explore wholesale pricing and bulk packaging for ${resolved.query} at OfficeBazzar India.`;
+    title = `Search Results for "${resolved.query}" | Office Bazzar Catalogue`;
+    description = `Explore corporate bulk procurement and wholesale packaging for ${resolved.query} at Office Bazzar India.`;
   }
 
   const canonicalUrl = getCanonicalUrl('/products');
 
   return {
-    title,
+    title: {
+      absolute: title,
+    },
     description,
+    keywords: SITE_CONFIG.primaryKeywords,
     alternates: {
       canonical: canonicalUrl,
     },

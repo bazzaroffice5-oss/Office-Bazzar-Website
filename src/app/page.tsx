@@ -7,27 +7,16 @@ import ProcurementBenefitsSection from '@/components/home/ProcurementBenefitsSec
 import AboutSummarySection from '@/components/home/AboutSummarySection';
 import HomeBlogSection from '@/components/home/HomeBlogSection';
 import HomeFaqSection from '@/components/home/HomeFaqSection';
-
-import { constructMetadata } from '@/lib/seo/config';
+import { constructMetadata, SITE_CONFIG } from '@/lib/seo/config';
+import { getCategories } from '@/lib/db/store';
 
 export const metadata = constructMetadata({
-  title: 'Corporate Procurement Partner for Office Supplies, Stationery & Housekeeping',
+  title: 'Office Bazzar | Office Supplies & Corporate Procurement India',
   description:
-    'Officebazzar E-Store Private Limited: Chennai’s corporate procurement partner for office stationery, Diversey Taski chemicals, mobile dustbins, and computer consumables with 100% GST input credit.',
+    'Office Bazzar provides office stationery, housekeeping and hygiene products, printer consumables and packaging supplies for businesses across India. Explore corporate and bulk procurement solutions.',
   path: '/',
-  keywords: [
-    'Office Supplies Chennai',
-    'Corporate Procurement Partner',
-    'Corporate Stationery Suppliers',
-    'Diversey Taski Chemicals',
-    'Hi-Clean Chemical Suppliers',
-    'Industrial Dustbin Wholesale',
-    'Office Supplies Royapettah',
-    'OfficeBazzar',
-  ],
+  keywords: SITE_CONFIG.primaryKeywords,
 });
-
-import { getCategories } from '@/lib/db/store';
 
 export default async function HomePage() {
   const categories = await getCategories();
@@ -60,4 +49,3 @@ export default async function HomePage() {
     </main>
   );
 }
-

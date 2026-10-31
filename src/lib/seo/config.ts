@@ -18,11 +18,13 @@ function resolveProductionSiteUrl(): string {
 }
 
 export const SITE_CONFIG = {
-  name: 'OfficeBazzar',
+  name: 'Office Bazzar',
+  brandAlias: 'OfficeBazzar',
   legalName: 'Officebazzar E-Store Private Limited',
   url: resolveProductionSiteUrl(),
+  defaultTitle: 'Office Bazzar | Office Supplies & Corporate Procurement India',
   description:
-    'Officebazzar E-Store Private Limited is Chennai’s leading corporate procurement partner for office stationery, Diversey Taski housekeeping chemicals, mobile garbage bins, toner cartridges, and paper shredders with 100% GST input tax credit.',
+    'Office Bazzar provides office stationery, housekeeping and hygiene products, printer consumables and packaging supplies for businesses across India. Explore corporate and bulk procurement solutions.',
   foundingYear: 2005,
   corporateHeadquarters: {
     building: 'Officebazzar Tower',
@@ -47,6 +49,87 @@ export const SITE_CONFIG = {
   },
   defaultOgImage: '/android-chrome-512x512.png',
   logoUrl: '/images/brand-logo.svg',
+  primaryKeywords: [
+    'Office Supplies Supplier India',
+    'Office Stationery Supplier India',
+    'Corporate Office Supplies India',
+    'Housekeeping Products Supplier India',
+    'Cleaning Materials Supplier India',
+    'Printer Consumables Supplier India',
+    'Packaging Materials Supplier India',
+    'Bulk Office Supplies India',
+    'Corporate Procurement Solutions India',
+  ],
+};
+
+/**
+ * Category-Specific SEO Configuration (Phase 6)
+ */
+export const CATEGORY_SEO_CONFIG: Record<
+  string,
+  {
+    title: string;
+    description: string;
+    h1: string;
+    keywords: string[];
+  }
+> = {
+  'office-stationery': {
+    title: 'Office Stationery Supplier India | Bulk Corporate Stationery | Office Bazzar',
+    description:
+      'Leading office stationery supplier in India for corporate offices and institutions. Procure bulk JK Copier paper, box files, registers, writing instruments, and desk organizers with GST tax invoices.',
+    h1: 'Office Stationery & Workplace Organization Supplies',
+    keywords: [
+      'Office Stationery Supplier India',
+      'Bulk Office Stationery India',
+      'Corporate Office Supplies India',
+      'JK Copier Paper Supplier India',
+      'Box Files Wholesale India',
+      'Office Desk Organizers B2B',
+    ],
+  },
+  'housekeeping-hygiene': {
+    title: 'Housekeeping Products & Cleaning Materials Supplier India | Office Bazzar',
+    description:
+      'Trusted housekeeping products and cleaning materials supplier across India. Source Diversey Taski chemicals, Hi-Clean floor cleaners, tissue paper napkins, wringer trolleys, and industrial dustbins in bulk.',
+    h1: 'Housekeeping & Hygiene Products for Corporate Facilities',
+    keywords: [
+      'Housekeeping Products Supplier India',
+      'Cleaning Materials Supplier India',
+      'Diversey Taski Chemicals Supplier India',
+      'Hi-Clean Cleaning Products',
+      'Industrial Dustbins Wholesale India',
+      'Commercial Hygiene Supplies B2B',
+    ],
+  },
+  'printers-technology': {
+    title: 'Printer Consumables & Office Technology Supplier India | Office Bazzar',
+    description:
+      'Corporate printer consumables supplier in India. Procure genuine HP, Canon, Epson, and compatible laser toner cartridges, ink supplies, heavy-duty paper shredders, and IT accessories with GST invoicing.',
+    h1: 'Printer Consumables & Office Technology Solutions',
+    keywords: [
+      'Printer Consumables Supplier India',
+      'Laser Toner Cartridges Wholesale India',
+      'Corporate IT Consumables India',
+      'Heavy Duty Paper Shredders Supplier',
+      'Currency Counting Machines India',
+      'Bulk Printer Ink & Toner B2B',
+    ],
+  },
+  'packaging-supplies': {
+    title: 'Packaging Materials & Dispatch Supplies Supplier India | Office Bazzar',
+    description:
+      'Bulk packaging materials supplier across India for warehouses and corporate dispatch hubs. Order BOPP brown packing tapes, floor marking tapes, bubble wrap rolls, corrugated cartons, and strapping rolls.',
+    h1: 'Packaging Supplies & Warehouse Dispatch Materials',
+    keywords: [
+      'Packaging Materials Supplier India',
+      'BOPP Packing Tape Wholesale India',
+      'Bubble Wrap Rolls Supplier India',
+      'Corrugated Shipping Boxes B2B',
+      'Warehouse Packaging Supplies India',
+      'Floor Marking Tape Supplier',
+    ],
+  },
 };
 
 /**
@@ -65,7 +148,8 @@ export function getCanonicalUrl(path: string = ''): string {
 }
 
 /**
- * Reusable metadata constructor adhering to Next.js Metadata API
+ * Reusable metadata constructor adhering to Next.js Metadata API.
+ * Uses { absolute: metaTitle } so root layout template never creates duplicate brand suffixes.
  */
 export function constructMetadata({
   title,
@@ -84,25 +168,26 @@ export function constructMetadata({
   type?: 'website' | 'article';
   keywords?: string[];
 }): Metadata {
-  const metaTitle = title
-    ? `${title} | OfficeBazzar India`
-    : 'OfficeBazzar | Corporate Procurement Partner for Office Supplies & Housekeeping';
+  const hasBrandSuffix =
+    title && (/office\s*bazzar/i.test(title) || title.includes('|'));
+  const metaTitle = !title
+    ? SITE_CONFIG.defaultTitle
+    : hasBrandSuffix
+    ? title
+    : `${title} | Office Bazzar`;
 
   const metaDescription = description || SITE_CONFIG.description;
   const canonicalUrl = getCanonicalUrl(path);
-  const ogImageUrl = image?.startsWith('http') ? image : getCanonicalUrl(image || SITE_CONFIG.defaultOgImage);
+  const ogImageUrl = image?.startsWith('http')
+    ? image
+    : getCanonicalUrl(image || SITE_CONFIG.defaultOgImage);
 
   return {
-    title: metaTitle,
+    title: {
+      absolute: metaTitle,
+    },
     description: metaDescription,
-    keywords: keywords || [
-      'Office Supplies Chennai',
-      'Corporate Stationery Wholesale',
-      'Taski Chemicals Chennai',
-      'Industrial Dustbin Suppliers',
-      'GST Invoice Procurement',
-      'OfficeBazzar',
-    ],
+    keywords: keywords || SITE_CONFIG.primaryKeywords,
     metadataBase: new URL(SITE_CONFIG.url),
     alternates: {
       canonical: canonicalUrl,
@@ -158,7 +243,7 @@ export function getOrganizationJsonLd() {
     '@type': 'Organization',
     '@id': `${SITE_CONFIG.url}/#organization`,
     name: SITE_CONFIG.legalName,
-    alternateName: SITE_CONFIG.name,
+    alternateName: [SITE_CONFIG.name, SITE_CONFIG.brandAlias],
     url: `${SITE_CONFIG.url}/`,
     logo: {
       '@type': 'ImageObject',
@@ -166,10 +251,15 @@ export function getOrganizationJsonLd() {
     },
     description: SITE_CONFIG.description,
     foundingDate: `${SITE_CONFIG.foundingYear}`,
+    areaServed: {
+      '@type': 'Country',
+      name: 'India',
+    },
     contactPoint: [
       {
         '@type': 'ContactPoint',
         telephone: SITE_CONFIG.contact.phone,
+        email: SITE_CONFIG.contact.email,
         contactType: 'sales',
         areaServed: 'IN',
         availableLanguage: ['English', 'Tamil', 'Hindi'],
@@ -177,9 +267,10 @@ export function getOrganizationJsonLd() {
       {
         '@type': 'ContactPoint',
         telephone: SITE_CONFIG.contact.phoneSecondary,
+        email: SITE_CONFIG.contact.corporateEmail,
         contactType: 'customer support',
         areaServed: 'IN',
-        availableLanguage: ['English', 'Tamil'],
+        availableLanguage: ['English', 'Tamil', 'Hindi'],
       },
     ],
     address: {
@@ -199,19 +290,21 @@ export function getOrganizationJsonLd() {
 }
 
 /**
- * LocalBusiness Schema (schema.org/LocalBusiness)
+ * OnlineStore & LocalBusiness Schema (schema.org/OnlineStore)
  */
 export function getLocalBusinessJsonLd() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': ['OnlineStore', 'LocalBusiness'],
     '@id': `${SITE_CONFIG.url}/#localbusiness`,
     name: SITE_CONFIG.legalName,
     alternateName: SITE_CONFIG.name,
     image: `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`,
     url: `${SITE_CONFIG.url}/`,
     telephone: SITE_CONFIG.contact.phone,
+    email: SITE_CONFIG.contact.email,
     priceRange: '₹₹',
+    areaServed: 'IN',
     address: {
       '@type': 'PostalAddress',
       streetAddress: `${SITE_CONFIG.corporateHeadquarters.building}, ${SITE_CONFIG.corporateHeadquarters.streetAddress}`,
@@ -229,8 +322,8 @@ export function getLocalBusinessJsonLd() {
       {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        opens: '09:00',
-        closes: '19:00',
+        opens: '09:30',
+        closes: '18:30',
       },
     ],
   };
@@ -244,8 +337,9 @@ export function getWebSiteJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     '@id': `${SITE_CONFIG.url}/#website`,
-    url: SITE_CONFIG.url,
+    url: `${SITE_CONFIG.url}/`,
     name: SITE_CONFIG.name,
+    alternateName: [SITE_CONFIG.legalName, SITE_CONFIG.brandAlias],
     publisher: {
       '@id': `${SITE_CONFIG.url}/#organization`,
     },
@@ -283,42 +377,51 @@ export function getBreadcrumbJsonLd(
 
 /**
  * Product Schema (schema.org/Product)
- * Strictly adheres to verified data without fake review counts or credentials
+ * Strictly adheres to Google Merchant/Product structured data requirements:
+ * - Only emits valid price when actual price (> 0) is available.
+ * - Never emits fake star ratings or fabricated reviews.
  */
 export function getProductJsonLd(product: Product) {
+  const images =
+    product.images && product.images.length > 0
+      ? product.images.map((img) => (img.startsWith('http') ? img : getCanonicalUrl(img)))
+      : [`${SITE_CONFIG.url}/images/brand-logo.svg`];
+
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
-    image: product.images && product.images.length > 0 ? product.images : [`${SITE_CONFIG.url}/images/brand-logo.svg`],
-    description: product.description || product.shortDescription || `${product.name} wholesale supply in Chennai.`,
+    image: images,
+    description:
+      product.description ||
+      product.shortDescription ||
+      `${product.name} (${product.brandName || 'Office Bazzar'}) available for bulk corporate procurement across India with GST tax invoice.`,
     sku: product.sku || product.id,
+    mpn: product.sku || product.id,
+    category: product.categoryName || 'Office Supplies',
     url: getCanonicalUrl(`/product/${product.slug}`),
     brand: {
       '@type': 'Brand',
       name: product.brandName || SITE_CONFIG.name,
     },
-    offers: {
+  };
+
+  if (typeof product.price === 'number' && product.price > 0) {
+    schema.offers = {
       '@type': 'Offer',
       priceCurrency: 'INR',
-      price: product.price,
+      price: product.price.toFixed(2),
       priceValidUntil: '2027-12-31',
       itemCondition: 'https://schema.org/NewCondition',
-      availability: product.stockQuantity > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      availability:
+        product.stockQuantity > 0
+          ? 'https://schema.org/InStock'
+          : 'https://schema.org/OutOfStock',
       url: getCanonicalUrl(`/product/${product.slug}`),
       seller: {
         '@type': 'Organization',
         name: SITE_CONFIG.legalName,
       },
-    },
-  };
-
-  // Only attach AggregateRating if authentic rating and reviews exist (no fake 25 review defaults!)
-  if (product.rating && product.reviewCount && product.reviewCount > 0) {
-    schema.aggregateRating = {
-      '@type': 'AggregateRating',
-      ratingValue: product.rating,
-      reviewCount: product.reviewCount,
     };
   }
 
