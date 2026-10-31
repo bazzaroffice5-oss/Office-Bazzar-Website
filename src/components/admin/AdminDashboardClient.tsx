@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   LayoutDashboard,
@@ -18,8 +18,7 @@ import {
   ShieldAlert,
   FileText,
   Send,
-  UserCheck,
-  ExternalLink,
+  Printer,
 } from 'lucide-react';
 import {
   Product,
@@ -29,11 +28,11 @@ import {
   Brand,
   OrderStatus,
   Quotation,
-  QuotationStatus,
   NotificationLog,
 } from '@/types';
 import { saveProduct, deleteProduct, updateOrderStatus, updateBulkRFQStatus } from '@/lib/db/store';
 import { useAuth } from '@/context/AuthContext';
+import AdminQuotationEditor from './AdminQuotationEditor';
 
 interface AdminDashboardClientProps {
   initialProducts: Product[];
@@ -64,19 +63,12 @@ export default function AdminDashboardClient({
   const [quotations, setQuotations] = useState<Quotation[]>(initialQuotations);
   const [notificationLogs, setNotificationLogs] = useState<NotificationLog[]>(initialNotificationLogs);
 
-  // Quotation search & filter state
+  // Quotation search & workflow bucket state
   const [quotationSearch, setQuotationSearch] = useState('');
-  const [quotationStatusFilter, setQuotationStatusFilter] = useState<string>('all');
+  const [quotationBucket, setQuotationBucket] = useState<
+    'all' | 'pending_rfqs' | 'draft_quotations' | 'approved_quotations' | 'sent_quotations'
+  >('all');
   const [selectedQuotation, setSelectedQuotation] = useState<Quotation | null>(null);
-
-  // Form states for selected quotation editing
-  const [editQuoteStatus, setEditQuoteStatus] = useState<QuotationStatus>('new');
-  const [editQuoteAssignee, setEditQuoteAssignee] = useState('');
-  const [editQuoteNotes, setEditQuoteNotes] = useState('');
-  const [editQuoteAmount, setEditQuoteAmount] = useState('');
-  const [editQuoteDocUrl, setEditQuoteDocUrl] = useState('');
-  const [isUpdatingQuote, setIsUpdatingQuote] = useState(false);
-  const [quoteFeedback, setQuoteFeedback] = useState<string | null>(null);
 
   // Notification retry state
   const [retryingLogId, setRetryingLogId] = useState<string | null>(null);
@@ -89,58 +81,67 @@ export default function AdminDashboardClient({
   // CSV Import feedback
   const [csvFeedback, setCsvFeedback] = useState<string | null>(null);
 
-  // Metrics
+  // Deep-link support for ?tab=quotations&quote=OB-RFQ-...
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get('tab');
+      const quoteParam = params.get('quote');
+      if (tabParam === 'quotations' || quoteParam) {
+        setActiveTab('quotations');
+      }
+      if (quoteParam && quotations.length > 0) {
+        const match = quotations.find(
+          (q) =>
+            q.quotationNumber.toLowerCase() === quoteParam.toLowerCase() ||
+            q.id === quoteParam
+        );
+        if (match) {
+          setSelectedQuotation(match);
+        }
+      }
+    }
+  }, [quotations]);
+
+  // Metrics & Quotation Workflow Bucket Counts
   const totalRevenue = orders
     .filter((o) => o.paymentStatus === 'paid')
     .reduce((sum, o) => sum + o.totalAmount, 0);
   const totalOrdersCount = orders.length;
   const activeProductsCount = products.filter((p) => p.isActive).length;
   const pendingRFQsCount = rfqs.filter((r) => r.status === 'pending' || r.status === 'in_review').length;
-  const pendingQuotationsCount = quotations.filter((q) => q.status === 'new' || q.status === 'under_review').length;
+
+  const pendingQuotationsCount = quotations.filter(
+    (q) => q.status === 'new' || q.status === 'under_review'
+  ).length;
+  const draftQuotationsCount = quotations.filter(
+    (q) => q.status === 'quotation_prepared'
+  ).length;
+  const approvedQuotationsCount = quotations.filter(
+    (q) => q.status === 'approved'
+  ).length;
+  const sentQuotationsCount = quotations.filter(
+    (q) => q.status === 'sent_to_customer' || q.status === 'accepted'
+  ).length;
 
   const handleOpenQuotation = (q: Quotation) => {
     setSelectedQuotation(q);
-    setEditQuoteStatus(q.status);
-    setEditQuoteAssignee(q.assignedTo || '');
-    setEditQuoteNotes(q.internalNotes || '');
-    setEditQuoteAmount(q.quotedAmount !== undefined ? String(q.quotedAmount) : '');
-    setEditQuoteDocUrl(q.quotationDocumentUrl || '');
-    setQuoteFeedback(null);
   };
 
-  const handleSaveQuotationUpdates = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedQuotation) return;
-
-    setIsUpdatingQuote(true);
-    setQuoteFeedback(null);
-
-    try {
-      const res = await fetch('/api/admin/quotations/update', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: selectedQuotation.id,
-          status: editQuoteStatus,
-          assignedTo: editQuoteAssignee,
-          internalNotes: editQuoteNotes,
-          quotedAmount: editQuoteAmount ? Number(editQuoteAmount) : undefined,
-          quotationDocumentUrl: editQuoteDocUrl,
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to update quotation');
-
-      setQuotations((prev) =>
-        prev.map((q) => (q.id === selectedQuotation.id ? data.quotation : q))
-      );
-      setSelectedQuotation(data.quotation);
-      setQuoteFeedback('Quotation successfully updated and synchronized!');
-    } catch (err: unknown) {
-      setQuoteFeedback(`Error: ${err instanceof Error ? err.message : String(err)}`);
-    } finally {
-      setIsUpdatingQuote(false);
+  const handleQuotationUpdated = (
+    updated: Quotation,
+    updatedLogs?: NotificationLog[]
+  ) => {
+    setQuotations((prev) =>
+      prev.map((q) =>
+        q.id === updated.id || q.quotationNumber === updated.quotationNumber
+          ? updated
+          : q
+      )
+    );
+    setSelectedQuotation(updated);
+    if (updatedLogs) {
+      setNotificationLogs(updatedLogs);
     }
   };
 
@@ -174,7 +175,20 @@ export default function AdminDashboardClient({
   };
 
   const filteredQuotations = quotations.filter((q) => {
-    if (quotationStatusFilter !== 'all' && q.status !== quotationStatusFilter) {
+    if (quotationBucket === 'pending_rfqs' && q.status !== 'new' && q.status !== 'under_review') {
+      return false;
+    }
+    if (quotationBucket === 'draft_quotations' && q.status !== 'quotation_prepared') {
+      return false;
+    }
+    if (quotationBucket === 'approved_quotations' && q.status !== 'approved') {
+      return false;
+    }
+    if (
+      quotationBucket === 'sent_quotations' &&
+      q.status !== 'sent_to_customer' &&
+      q.status !== 'accepted'
+    ) {
       return false;
     }
     if (quotationSearch.trim()) {
@@ -792,20 +806,157 @@ export default function AdminDashboardClient({
         </div>
       )}
 
-      {/* TAB: QUOTATIONS (Cart-to-Quotation System) */}
+      {/* TAB: QUOTATIONS (Admin Quotation Editor & Zoho CRM Workflow) */}
       {activeTab === 'quotations' && (
         <div className="space-y-6 animate-in fade-in duration-200">
-          {/* Header & Filter Controls */}
+          {/* 4 Workflow Bucket Cards / Sub-Tabs */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+            <button
+              type="button"
+              onClick={() => setQuotationBucket('all')}
+              className={`p-4 rounded-2xl border text-left transition-all ${
+                quotationBucket === 'all'
+                  ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
+                  : 'bg-white text-slate-800 border-slate-200 hover:border-slate-300'
+              }`}
+            >
+              <span
+                className={`text-[11px] font-bold uppercase tracking-wider block ${
+                  quotationBucket === 'all' ? 'text-slate-300' : 'text-slate-500'
+                }`}
+              >
+                All Quotations
+              </span>
+              <div className="text-2xl font-extrabold mt-1">{quotations.length}</div>
+              <span
+                className={`text-[10px] ${
+                  quotationBucket === 'all' ? 'text-slate-400' : 'text-slate-400'
+                }`}
+              >
+                Synced with Zoho CRM
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setQuotationBucket('pending_rfqs')}
+              className={`p-4 rounded-2xl border text-left transition-all ${
+                quotationBucket === 'pending_rfqs'
+                  ? 'bg-red-600 text-white border-red-600 shadow-sm'
+                  : 'bg-white text-slate-800 border-slate-200 hover:border-red-300'
+              }`}
+            >
+              <span
+                className={`text-[11px] font-bold uppercase tracking-wider block ${
+                  quotationBucket === 'pending_rfqs' ? 'text-red-100' : 'text-red-600'
+                }`}
+              >
+                1. Pending RFQs
+              </span>
+              <div className="text-2xl font-extrabold mt-1">{pendingQuotationsCount}</div>
+              <span
+                className={`text-[10px] ${
+                  quotationBucket === 'pending_rfqs' ? 'text-red-100' : 'text-slate-400'
+                }`}
+              >
+                Awaiting price editing
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setQuotationBucket('draft_quotations')}
+              className={`p-4 rounded-2xl border text-left transition-all ${
+                quotationBucket === 'draft_quotations'
+                  ? 'bg-amber-500 text-white border-amber-500 shadow-sm'
+                  : 'bg-white text-slate-800 border-slate-200 hover:border-amber-300'
+              }`}
+            >
+              <span
+                className={`text-[11px] font-bold uppercase tracking-wider block ${
+                  quotationBucket === 'draft_quotations' ? 'text-amber-50' : 'text-amber-700'
+                }`}
+              >
+                2. Draft Quotations
+              </span>
+              <div className="text-2xl font-extrabold mt-1">{draftQuotationsCount}</div>
+              <span
+                className={`text-[10px] ${
+                  quotationBucket === 'draft_quotations' ? 'text-amber-50' : 'text-slate-400'
+                }`}
+              >
+                Saved drafts in progress
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setQuotationBucket('approved_quotations')}
+              className={`p-4 rounded-2xl border text-left transition-all ${
+                quotationBucket === 'approved_quotations'
+                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
+                  : 'bg-white text-slate-800 border-slate-200 hover:border-emerald-300'
+              }`}
+            >
+              <span
+                className={`text-[11px] font-bold uppercase tracking-wider block ${
+                  quotationBucket === 'approved_quotations'
+                    ? 'text-emerald-100'
+                    : 'text-emerald-700'
+                }`}
+              >
+                3. Approved Quotations
+              </span>
+              <div className="text-2xl font-extrabold mt-1">{approvedQuotationsCount}</div>
+              <span
+                className={`text-[10px] ${
+                  quotationBucket === 'approved_quotations'
+                    ? 'text-emerald-100'
+                    : 'text-slate-400'
+                }`}
+              >
+                Approved &amp; ready to send
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setQuotationBucket('sent_quotations')}
+              className={`p-4 rounded-2xl border text-left transition-all ${
+                quotationBucket === 'sent_quotations'
+                  ? 'bg-blue-900 text-white border-blue-900 shadow-sm'
+                  : 'bg-white text-slate-800 border-slate-200 hover:border-blue-300'
+              }`}
+            >
+              <span
+                className={`text-[11px] font-bold uppercase tracking-wider block ${
+                  quotationBucket === 'sent_quotations' ? 'text-blue-200' : 'text-blue-900'
+                }`}
+              >
+                4. Sent Quotations
+              </span>
+              <div className="text-2xl font-extrabold mt-1">{sentQuotationsCount}</div>
+              <span
+                className={`text-[10px] ${
+                  quotationBucket === 'sent_quotations' ? 'text-blue-200' : 'text-slate-400'
+                }`}
+              >
+                Final quote emailed to customer
+              </span>
+            </button>
+          </div>
+
+          {/* Header & Search Controls */}
           <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <h2 className="text-sm font-bold text-slate-900 flex items-center space-x-2">
-                <span>Request for Quotations (RFQs)</span>
+                <span>Admin Quotations &amp; Pricing Editor</span>
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-red-100 text-red-800">
-                  {filteredQuotations.length} {filteredQuotations.length === 1 ? 'Quotation' : 'Quotations'}
+                  {filteredQuotations.length} {filteredQuotations.length === 1 ? 'Record' : 'Records'}
                 </span>
               </h2>
               <p className="text-xs text-slate-500 mt-0.5">
-                Review incoming corporate requests, assign sales reps, prepare official quotes, and monitor notification delivery.
+                Open any customer RFQ to edit unit prices, quantities, discounts, GST, and charges, preview the Office Bazzar PDF, approve, and send to the customer via Zoho CRM.
               </p>
             </div>
 
@@ -814,24 +965,9 @@ export default function AdminDashboardClient({
                 type="text"
                 value={quotationSearch}
                 onChange={(e) => setQuotationSearch(e.target.value)}
-                placeholder="Search reference, company, phone..."
-                className="px-3 py-1.5 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-hidden text-slate-900 w-full sm:w-60"
+                placeholder="Search RFQ ref, company, email, phone..."
+                className="px-3.5 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-hidden text-slate-900 w-full sm:w-72"
               />
-
-              <select
-                value={quotationStatusFilter}
-                onChange={(e) => setQuotationStatusFilter(e.target.value)}
-                className="px-3 py-1.5 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-hidden text-slate-900 font-semibold"
-              >
-                <option value="all">All Statuses</option>
-                <option value="new">New</option>
-                <option value="under_review">Under Review</option>
-                <option value="quotation_prepared">Quotation Prepared</option>
-                <option value="sent_to_customer">Sent to Customer</option>
-                <option value="accepted">Accepted</option>
-                <option value="rejected">Rejected</option>
-                <option value="closed">Closed</option>
-              </select>
             </div>
           </div>
 
@@ -843,87 +979,114 @@ export default function AdminDashboardClient({
                   <tr>
                     <th className="py-3 px-4">RFQ Reference</th>
                     <th className="py-3 px-4">Date</th>
-                    <th className="py-3 px-4">Company &amp; Contact</th>
+                    <th className="py-3 px-4">Company &amp; Customer</th>
                     <th className="py-3 px-4">Delivery Location</th>
                     <th className="py-3 px-4 text-center">Items</th>
-                    <th className="py-3 px-4 text-right">Indicative Total</th>
-                    <th className="py-3 px-4 text-right">Quoted Amount</th>
-                    <th className="py-3 px-4 text-center">Status</th>
-                    <th className="py-3 px-4">Assignee</th>
-                    <th className="py-3 px-4 text-right">Action</th>
+                    <th className="py-3 px-4 text-right">Final / Quoted Total</th>
+                    <th className="py-3 px-4 text-center">Workflow Stage</th>
+                    <th className="py-3 px-4 text-center">Rev</th>
+                    <th className="py-3 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 font-medium">
                   {filteredQuotations.length === 0 ? (
                     <tr>
-                      <td colSpan={10} className="py-8 text-center text-slate-400">
-                        No quotations match your search criteria.
+                      <td colSpan={9} className="py-8 text-center text-slate-400">
+                        No quotations match the selected workflow filter or search query.
                       </td>
                     </tr>
                   ) : (
-                    filteredQuotations.map((q) => (
-                      <tr key={q.id} className="hover:bg-slate-50/60 transition-colors">
-                        <td className="py-3 px-4 font-mono font-bold text-red-600">
-                          {q.quotationNumber}
-                        </td>
-                        <td className="py-3 px-4 text-slate-500 whitespace-nowrap">
-                          {new Date(q.createdAt).toLocaleDateString('en-IN', {
-                            day: '2-digit',
-                            month: 'short',
-                            year: 'numeric',
-                          })}
-                        </td>
-                        <td className="py-3 px-4">
-                          <div className="font-bold text-slate-900">{q.companyName}</div>
-                          <div className="text-[11px] text-slate-500">{q.customerName} &bull; {q.phone}</div>
-                        </td>
-                        <td className="py-3 px-4 text-slate-600 max-w-xs truncate">
-                          {q.deliveryLocation ? `${q.deliveryLocation} (PIN: ${q.pincode})` : `PIN: ${q.pincode}`}
-                          {q.photoUrls && q.photoUrls.length > 0 && (
-                            <span className="ml-2 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">
-                              📷 {q.photoUrls.length}
+                    filteredQuotations.map((q) => {
+                      const finalTotal = q.grandTotal ?? q.quotedAmount ?? q.indicativeTotal ?? 0;
+                      const pdfUrl = `/api/admin/quotations/${encodeURIComponent(q.quotationNumber)}/pdf`;
+                      return (
+                        <tr key={q.id} className="hover:bg-slate-50/60 transition-colors">
+                          <td className="py-3 px-4 font-mono font-bold text-red-600 whitespace-nowrap">
+                            {q.quotationNumber}
+                          </td>
+                          <td className="py-3 px-4 text-slate-500 whitespace-nowrap">
+                            {new Date(q.createdAt).toLocaleDateString('en-IN', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                            })}
+                          </td>
+                          <td className="py-3 px-4">
+                            <div className="font-bold text-slate-900">{q.companyName}</div>
+                            <div className="text-[11px] text-slate-500">
+                              {q.customerName}
+                              {q.email ? ` • ${q.email}` : ''}
+                              {q.phone ? ` • ${q.phone}` : ''}
+                            </div>
+                          </td>
+                          <td className="py-3 px-4 text-slate-600 max-w-xs truncate">
+                            {q.deliveryLocation
+                              ? `${q.deliveryLocation} (PIN: ${q.pincode})`
+                              : `PIN: ${q.pincode}`}
+                          </td>
+                          <td className="py-3 px-4 text-center">
+                            <span className="px-2 py-0.5 rounded-full bg-slate-100 font-bold text-slate-800">
+                              {q.items.length}
                             </span>
-                          )}
-                        </td>
-                        <td className="py-3 px-4 text-center">
-                          <span className="px-2 py-0.5 rounded-full bg-slate-100 font-bold text-slate-800">
-                            {q.items.length}
-                          </span>
-                        </td>
-                        <td className="py-3 px-4 text-right font-bold text-slate-900">
-                          ₹{q.indicativeTotal.toLocaleString('en-IN')}
-                        </td>
-                        <td className="py-3 px-4 text-right">
-                          {q.quotedAmount ? (
-                            <span className="font-bold text-emerald-700">
-                              ₹{q.quotedAmount.toLocaleString('en-IN')}
+                          </td>
+                          <td className="py-3 px-4 text-right">
+                            {finalTotal > 0 ? (
+                              <span className="font-bold font-mono text-slate-900">
+                                ₹{finalTotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                              </span>
+                            ) : (
+                              <span className="text-amber-600 font-semibold italic">
+                                Pending Price Entry
+                              </span>
+                            )}
+                          </td>
+                          <td className="py-3 px-4 text-center">
+                            <span
+                              className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                                q.status === 'approved'
+                                  ? 'bg-emerald-100 text-emerald-800'
+                                  : q.status === 'sent_to_customer' || q.status === 'accepted'
+                                  ? 'bg-blue-100 text-blue-900'
+                                  : q.status === 'quotation_prepared'
+                                  ? 'bg-amber-100 text-amber-900'
+                                  : 'bg-red-100 text-red-800'
+                              }`}
+                            >
+                              {q.status === 'new' || q.status === 'under_review'
+                                ? 'Pending RFQ'
+                                : q.status === 'quotation_prepared'
+                                ? 'Draft Quotation'
+                                : q.status === 'approved'
+                                ? 'Approved'
+                                : q.status === 'sent_to_customer'
+                                ? 'Sent to Customer'
+                                : q.status.replace(/_/g, ' ')}
                             </span>
-                          ) : (
-                            <span className="text-slate-400 italic">Pending quote</span>
-                          )}
-                        </td>
-                        <td className="py-3 px-4 text-center">
-                          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-800">
-                            {q.status.replace(/_/g, ' ')}
-                          </span>
-                        </td>
-                        <td className="py-3 px-4 text-slate-700">
-                          {q.assignedTo ? (
-                            <span className="font-semibold text-blue-900">{q.assignedTo}</span>
-                          ) : (
-                            <span className="text-amber-600 font-semibold italic">Unassigned</span>
-                          )}
-                        </td>
-                        <td className="py-3 px-4 text-right">
-                          <button
-                            onClick={() => handleOpenQuotation(q)}
-                            className="px-3 py-1 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold rounded-lg transition-colors"
-                          >
-                            Review &amp; Edit
-                          </button>
-                        </td>
-                      </tr>
-                    ))
+                          </td>
+                          <td className="py-3 px-4 text-center font-mono text-[11px] text-slate-500">
+                            v{q.version || 1}
+                          </td>
+                          <td className="py-3 px-4 text-right whitespace-nowrap space-x-1.5">
+                            <a
+                              href={pdfUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center space-x-1 px-2.5 py-1 border border-slate-300 hover:bg-slate-100 text-slate-700 text-[11px] font-bold rounded-lg transition-colors"
+                              title="Preview / Download Branded Quotation PDF"
+                            >
+                              <Printer className="w-3 h-3" />
+                              <span>PDF</span>
+                            </a>
+                            <button
+                              onClick={() => handleOpenQuotation(q)}
+                              className="px-3 py-1 bg-slate-900 hover:bg-red-600 text-white text-[11px] font-bold rounded-lg transition-colors"
+                            >
+                              Open Quotation Editor
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })
                   )}
                 </tbody>
               </table>
@@ -1134,276 +1297,14 @@ export default function AdminDashboardClient({
           </div>
         </div>
       )}
-      {/* Quotation Review & Action Modal */}
+      {/* Full-Featured Admin Quotation Editor Modal */}
       {selectedQuotation && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="w-full max-w-3xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] flex flex-col">
-            {/* Modal Header */}
-            <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-              <div className="flex items-center space-x-3">
-                <FileText className="w-5 h-5 text-red-600" />
-                <div>
-                  <h3 className="text-sm font-bold text-slate-900">
-                    Quotation Review: <span className="text-red-600 font-mono">{selectedQuotation.quotationNumber}</span>
-                  </h3>
-                  <span className="text-[11px] text-slate-500">
-                    Submitted on {new Date(selectedQuotation.createdAt).toLocaleString('en-IN')}
-                  </span>
-                </div>
-              </div>
-              <button
-                onClick={() => setSelectedQuotation(null)}
-                className="text-slate-400 hover:text-slate-700 text-base font-bold p-1"
-              >
-                ✕
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            <div className="p-6 overflow-y-auto space-y-6 text-xs">
-              
-              {/* Feedback Alert */}
-              {quoteFeedback && (
-                <div className={`p-3 rounded-xl font-semibold ${quoteFeedback.startsWith('Error') ? 'bg-rose-50 text-rose-800 border border-rose-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'}`}>
-                  {quoteFeedback}
-                </div>
-              )}
-
-              {/* Customer Contact Details Grid */}
-              <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-2">
-                <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                  Enterprise Client Information
-                </h4>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  <div>
-                    <span className="text-[10px] text-slate-400 block">Company Name</span>
-                    <span className="font-bold text-slate-900">{selectedQuotation.companyName}</span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-slate-400 block">Contact Person</span>
-                    <span className="font-bold text-slate-900">{selectedQuotation.customerName}</span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-slate-400 block">Phone</span>
-                    <span className="font-semibold text-slate-900">{selectedQuotation.phone}</span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-slate-400 block">Email</span>
-                    <span className="font-semibold text-slate-900">{selectedQuotation.email}</span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-slate-400 block">GSTIN</span>
-                    <span className="font-mono font-bold text-slate-900">{selectedQuotation.gstin || 'Not Provided'}</span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-slate-400 block">Preferred Contact</span>
-                    <span className="uppercase font-bold text-red-600">{selectedQuotation.preferredContactMethod}</span>
-                  </div>
-                  <div className="col-span-2 sm:col-span-3">
-                    <span className="text-[10px] text-slate-400 block">Delivery Destination</span>
-                    <span className="text-slate-800">
-                      {selectedQuotation.deliveryLocation ? `${selectedQuotation.deliveryLocation} - ` : ''}
-                      PIN: <strong>{selectedQuotation.pincode}</strong>
-                    </span>
-                  </div>
-                </div>
-
-                {/* Uploaded Product or Facility Photos */}
-                {selectedQuotation.photoUrls && selectedQuotation.photoUrls.length > 0 && (
-                  <div className="mt-3 pt-3 border-t border-slate-200">
-                    <span className="text-[10px] text-slate-500 block font-bold uppercase tracking-wider mb-2">
-                      Customer Uploaded Photos ({selectedQuotation.photoUrls.length})
-                    </span>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                      {selectedQuotation.photoUrls.map((url, i) => (
-                        <a
-                          key={i}
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group relative aspect-square bg-slate-100 rounded-xl overflow-hidden border border-slate-200 hover:border-blue-500 transition-all flex items-center justify-center p-1"
-                        >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={url}
-                            alt={`Quotation photo ${i + 1}`}
-                            className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform"
-                          />
-                          <span className="absolute bottom-1 right-1 bg-slate-900/75 text-white text-[9px] px-1.5 py-0.5 rounded font-mono">
-                            View ↗
-                          </span>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {selectedQuotation.additionalRequirements && (
-                  <div className="mt-2 pt-2 border-t border-slate-200 text-slate-700">
-                    <span className="text-[10px] text-slate-400 block font-bold">Customer Notes:</span>
-                    <p className="mt-0.5 italic">{selectedQuotation.additionalRequirements}</p>
-                  </div>
-                )}
-              </div>
-
-              {/* Line Items Table */}
-              <div>
-                <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
-                  Requested Line Items ({selectedQuotation.items.length})
-                </h4>
-                <div className="border border-slate-200 rounded-xl overflow-hidden">
-                  <table className="w-full text-left text-xs">
-                    <thead className="bg-slate-50 text-slate-500 border-b border-slate-200 text-[10px] uppercase">
-                      <tr>
-                        <th className="py-2 px-3">Product Name</th>
-                        <th className="py-2 px-3 text-center">SKU</th>
-                        <th className="py-2 px-3 text-center">Pack</th>
-                        <th className="py-2 px-3 text-center">Quantity</th>
-                        <th className="py-2 px-3 text-right">Indicative Unit (₹)</th>
-                        <th className="py-2 px-3 text-right">Indicative Total (₹)</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {selectedQuotation.items.map((it) => (
-                        <tr key={it.id || it.sku}>
-                          <td className="py-2.5 px-3 font-semibold text-slate-900">{it.productName}</td>
-                          <td className="py-2.5 px-3 text-center font-mono text-slate-500">{it.sku}</td>
-                          <td className="py-2.5 px-3 text-center text-slate-600">{it.packSize || 'Standard'}</td>
-                          <td className="py-2.5 px-3 text-center font-bold text-slate-900">{it.quantity}</td>
-                          <td className="py-2.5 px-3 text-right text-slate-600">₹{it.indicativeUnitPrice.toLocaleString('en-IN')}</td>
-                          <td className="py-2.5 px-3 text-right font-bold text-slate-900">₹{it.indicativeTotalPrice.toLocaleString('en-IN')}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                    <tfoot className="bg-slate-50 border-t border-slate-200 text-slate-700 font-bold">
-                      <tr>
-                        <td colSpan={5} className="py-2 px-3 text-right">Indicative Total (Excl. Final Discounts):</td>
-                        <td className="py-2 px-3 text-right text-red-600 font-bold">
-                          ₹{selectedQuotation.indicativeTotal.toLocaleString('en-IN')}
-                        </td>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-              </div>
-
-              {/* Staff Action & Updates Form */}
-              <form onSubmit={handleSaveQuotationUpdates} className="border-t border-slate-200 pt-4 space-y-4">
-                <div className="flex items-center space-x-2">
-                  <UserCheck className="w-4 h-4 text-blue-900" />
-                  <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-                    Sales Desk Actions &amp; Quote Finalization
-                  </h4>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">
-                      Quotation Status *
-                    </label>
-                    <select
-                      value={editQuoteStatus}
-                      onChange={(e) => setEditQuoteStatus(e.target.value as QuotationStatus)}
-                      className="w-full p-2.5 border border-slate-300 rounded-xl bg-white font-semibold text-slate-900"
-                    >
-                      <option value="new">New (Awaiting Review)</option>
-                      <option value="under_review">Under Review</option>
-                      <option value="quotation_prepared">Quotation Prepared</option>
-                      <option value="sent_to_customer">Sent to Customer</option>
-                      <option value="accepted">Accepted (PO Received)</option>
-                      <option value="rejected">Rejected</option>
-                      <option value="closed">Closed</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">
-                      Assigned Sales Manager / Representative
-                    </label>
-                    <input
-                      type="text"
-                      value={editQuoteAssignee}
-                      onChange={(e) => setEditQuoteAssignee(e.target.value)}
-                      placeholder="e.g. Anand R. (Sales Manager)"
-                      className="w-full p-2.5 border border-slate-300 rounded-xl"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">
-                      Final Quoted Amount (₹)
-                    </label>
-                    <input
-                      type="number"
-                      value={editQuoteAmount}
-                      onChange={(e) => setEditQuoteAmount(e.target.value)}
-                      placeholder="Official quoted price after discount"
-                      className="w-full p-2.5 border border-slate-300 rounded-xl font-bold text-slate-900"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">
-                      Quotation Document URL / PDF Link
-                    </label>
-                    <input
-                      type="url"
-                      value={editQuoteDocUrl}
-                      onChange={(e) => setEditQuoteDocUrl(e.target.value)}
-                      placeholder="https://.../quote.pdf"
-                      className="w-full p-2.5 border border-slate-300 rounded-xl"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center space-x-1.5 mb-1">
-                    <Lock className="w-3.5 h-3.5 text-amber-600" />
-                    <label className="block font-bold text-slate-700">
-                      Internal Notes <span className="text-[10px] text-amber-700 font-semibold">(Protected &bull; Hidden from Customer)</span>
-                    </label>
-                  </div>
-                  <textarea
-                    rows={3}
-                    value={editQuoteNotes}
-                    onChange={(e) => setEditQuoteNotes(e.target.value)}
-                    placeholder="Enter internal pricing margin notes, supplier stock reservation, or delivery logistics remarks..."
-                    className="w-full p-2.5 border border-slate-300 rounded-xl bg-amber-50/40 text-slate-900"
-                  />
-                </div>
-
-                <div className="flex justify-between items-center pt-2">
-                  <a
-                    href={`/quotation-success/${encodeURIComponent(selectedQuotation.quotationNumber)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1 text-slate-600 hover:text-red-600 font-bold"
-                  >
-                    <span>View Customer Receipt</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-
-                  <div className="flex items-center space-x-2">
-                    <button
-                      type="button"
-                      onClick={() => setSelectedQuotation(null)}
-                      className="px-4 py-2 border border-slate-300 rounded-xl font-bold text-slate-700 hover:bg-slate-50"
-                    >
-                      Close
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={isUpdatingQuote}
-                      className="px-6 py-2 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white font-bold rounded-xl transition-colors shadow-xs"
-                    >
-                      {isUpdatingQuote ? 'Saving...' : 'Save Quotation Updates'}
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+        <AdminQuotationEditor
+          key={`${selectedQuotation.id}-v${selectedQuotation.version || 1}`}
+          quotation={selectedQuotation}
+          onClose={() => setSelectedQuotation(null)}
+          onQuotationUpdated={handleQuotationUpdated}
+        />
       )}
     </div>
   );

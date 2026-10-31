@@ -14,6 +14,11 @@ import {
 import { CATEGORIES, BRANDS, INITIAL_PRODUCTS, COUPONS, resolveMainCategory } from '@/lib/data/catalog';
 import { supabase, supabaseAdmin, isSupabaseConfigured } from './supabase';
 import { getProductsFromZoho } from '@/lib/zoho/products';
+import {
+  getAllQuotationsFromZoho,
+  getQuoteByReferenceFromZoho,
+  getCustomerQuotationsFromZoho,
+} from '@/lib/zoho/quotes';
 
 // Shared store state attached to globalThis to prevent process/worker boundary divergence in Next.js
 interface GlobalStoreState {
@@ -1295,15 +1300,45 @@ export async function createQuotation(
 
   // 2. Construct Quotation object for authoritative Zoho CRM registration (No Supabase write)
   const quotationNumber = quoteData.quotationNumber?.trim() || generateFallbackQuotationNumber();
+  const mappedItems = quoteData.items.map((item, idx) => ({
+    ...item,
+    id: item.id || `qitem-${Date.now()}-${idx}`,
+    originalQuantity: item.originalQuantity ?? item.quantity,
+    originalUnitPrice: item.originalUnitPrice ?? item.indicativeUnitPrice,
+  }));
+
+  const originalItems =
+    quoteData.originalItems && quoteData.originalItems.length > 0
+      ? quoteData.originalItems
+      : mappedItems.map((it) => ({
+          id: it.id,
+          productId: it.productId,
+          productName: it.productName,
+          sku: it.sku,
+          hsnCode: it.hsnCode,
+          packSize: it.packSize,
+          originalQuantity: it.quantity,
+          indicativeUnitPrice: it.indicativeUnitPrice,
+          gstPercent: it.gstPercent,
+          indicativeTotalPrice: it.indicativeTotalPrice,
+        }));
+
   const newQuote: Quotation = {
     ...quoteData,
     id: `quote-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`,
     quotationNumber,
     status: quoteData.status || 'new',
-    items: quoteData.items.map((item, idx) => ({
-      ...item,
-      id: item.id || `qitem-${Date.now()}-${idx}`,
-    })),
+    items: mappedItems,
+    originalItems,
+    subtotal: quoteData.indicativeSubtotal,
+    discountPercent: 0,
+    discountAmount: 0,
+    gstPercent: 18,
+    gstAmount: quoteData.indicativeGstAmount,
+    deliveryCharges: 0,
+    additionalCharges: 0,
+    grandTotal: quoteData.indicativeTotal,
+    version: 1,
     createdAt: new Date().toISOString(),
   };
 
@@ -1316,18 +1351,41 @@ export async function createQuotation(
 }
 
 export async function getQuotationById(id: string): Promise<Quotation | null> {
+  // 1. Primary authoritative lookup in Zoho CRM
+  const zohoQuote = await getQuoteByReferenceFromZoho(id);
+  if (zohoQuote) {
+    const idx = quotationsList.findIndex(
+      (q) => q.id === zohoQuote.id || q.quotationNumber === zohoQuote.quotationNumber
+    );
+    if (idx !== -1) {
+      quotationsList[idx] = zohoQuote;
+    } else {
+      quotationsList.unshift(zohoQuote);
+    }
+    return zohoQuote;
+  }
+
+  // 2. Fallback to runtime list
   const quote = quotationsList.find((q) => q.id === id || q.quotationNumber === id);
   return quote || null;
 }
 
 export async function getQuotationByNumber(quotationNumber: string): Promise<Quotation | null> {
   const cleanNumber = quotationNumber.trim().toUpperCase();
+  const zohoQuote = await getQuoteByReferenceFromZoho(cleanNumber);
+  if (zohoQuote) {
+    return zohoQuote;
+  }
   const quote = quotationsList.find((q) => q.quotationNumber.trim().toUpperCase() === cleanNumber);
   return quote || null;
 }
 
 export async function getQuotationsByCustomer(customerIdOrEmail: string): Promise<Quotation[]> {
   const cleanParam = customerIdOrEmail.trim().toLowerCase();
+  const zohoQuotes = await getCustomerQuotationsFromZoho(cleanParam);
+  if (zohoQuotes.length > 0) {
+    return zohoQuotes;
+  }
   return quotationsList.filter(
     (q) =>
       (q.customerId && q.customerId === customerIdOrEmail) ||
@@ -1336,10 +1394,26 @@ export async function getQuotationsByCustomer(customerIdOrEmail: string): Promis
 }
 
 export async function getAllQuotations(statusFilter?: QuotationStatus): Promise<Quotation[]> {
-  if (statusFilter) {
-    return quotationsList.filter((q) => q.status === statusFilter);
+  const zohoQuotes = await getAllQuotationsFromZoho();
+  const mergedMap = new Map<string, Quotation>();
+
+  for (const zq of zohoQuotes) {
+    mergedMap.set(zq.quotationNumber, zq);
   }
-  return quotationsList;
+  for (const mq of quotationsList) {
+    if (!mergedMap.has(mq.quotationNumber)) {
+      mergedMap.set(mq.quotationNumber, mq);
+    }
+  }
+
+  const all = Array.from(mergedMap.values()).sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+
+  if (statusFilter) {
+    return all.filter((q) => q.status === statusFilter);
+  }
+  return all;
 }
 
 export async function updateQuotation(
@@ -1349,14 +1423,7 @@ export async function updateQuotation(
   const quote = quotationsList.find((q) => q.id === id || q.quotationNumber === id);
   if (!quote) return null;
 
-  if (updates.status !== undefined) quote.status = updates.status;
-  if (updates.assignedTo !== undefined) quote.assignedTo = updates.assignedTo;
-  if (updates.internalNotes !== undefined) quote.internalNotes = updates.internalNotes;
-  if (updates.quotedAmount !== undefined) quote.quotedAmount = updates.quotedAmount;
-  if (updates.quotationDocumentUrl !== undefined)
-    quote.quotationDocumentUrl = updates.quotationDocumentUrl;
-  quote.updatedAt = new Date().toISOString();
-
+  Object.assign(quote, updates, { updatedAt: new Date().toISOString() });
   return quote;
 }
 

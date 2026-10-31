@@ -638,3 +638,322 @@ export async function sendContactUsEmailNotification(
     error: error || undefined,
   };
 }
+
+/**
+ * Build plain-text Final Quotation email for Customer (dispatched ONLY after Admin approval)
+ */
+export function buildCustomerFinalQuotationEmailText(quotation: Quotation): string {
+  const siteUrl = BUSINESS_CONFIG.websiteUrl;
+  const pdfUrl = `${siteUrl}/api/admin/quotations/${encodeURIComponent(quotation.quotationNumber)}/pdf`;
+
+  const subtotal = quotation.subtotal ?? quotation.indicativeSubtotal ?? 0;
+  const discountAmount = quotation.discountAmount ?? 0;
+  const discountPercent = quotation.discountPercent ?? 0;
+  const gstPercent = quotation.gstPercent ?? 18;
+  const gstAmount = quotation.gstAmount ?? quotation.indicativeGstAmount ?? 0;
+  const deliveryCharges = quotation.deliveryCharges ?? 0;
+  const additionalCharges = quotation.additionalCharges ?? 0;
+  const grandTotal = quotation.grandTotal ?? quotation.quotedAmount ?? quotation.indicativeTotal ?? 0;
+
+  const itemsText = quotation.items
+    .map((item, idx) => {
+      const lineTotal = item.lineSubtotal ?? item.quantity * item.indicativeUnitPrice;
+      return `${idx + 1}. ${item.productName} (SKU: ${item.sku}${item.packSize ? ` | ${item.packSize}` : ''})
+   Quantity: ${item.quantity} | Unit Price: ₹${item.indicativeUnitPrice.toLocaleString('en-IN')} | Line Total: ₹${lineTotal.toLocaleString('en-IN')}`;
+    })
+    .join('\n\n');
+
+  return `OFFICIAL COMMERCIAL QUOTATION — ${BUSINESS_CONFIG.legalEntityName.toUpperCase()}
+======================================================================
+Quotation Reference : ${quotation.quotationNumber} (Rev v${quotation.version || 1})
+Quotation Date      : ${new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
+Valid Until         : ${quotation.validUntil || '30 Days from Issue'}
+
+PREPARED FOR:
+----------------------------------------------------------------------
+Customer Name       : ${quotation.customerName}
+Company Name        : ${quotation.companyName}
+Email               : ${quotation.email}
+Phone               : ${quotation.phone}
+Customer GSTIN      : ${quotation.gstin || 'Not Provided'}
+Delivery Address    : ${quotation.deliveryLocation ? `${quotation.deliveryLocation} - ` : ''}PIN ${quotation.pincode}
+
+QUOTED LINE ITEMS (${quotation.items.length} Items):
+----------------------------------------------------------------------
+${itemsText}
+
+COMMERCIAL SUMMARY:
+----------------------------------------------------------------------
+Subtotal (Excl. Tax)          : ₹${subtotal.toLocaleString('en-IN')}
+Discount (${discountPercent}%)              : -₹${discountAmount.toLocaleString('en-IN')}
+Taxable Amount                : ₹${Math.max(0, subtotal - discountAmount).toLocaleString('en-IN')}
+GST (${gstPercent}%)                    : +₹${gstAmount.toLocaleString('en-IN')}
+Delivery & Transport Charges  : +₹${deliveryCharges.toLocaleString('en-IN')}
+Additional Charges            : +₹${additionalCharges.toLocaleString('en-IN')}
+----------------------------------------------------------------------
+FINAL GRAND TOTAL (INR)       : ₹${grandTotal.toLocaleString('en-IN')}
+======================================================================
+
+PAYMENT TERMS:
+${quotation.paymentTerms || '100% Advance against Proforma Invoice or as mutually agreed.'}
+
+TERMS & CONDITIONS:
+${quotation.termsAndConditions || 'Standard Office Bazzar B2B commercial terms apply.'}
+
+PRINT / DOWNLOAD OFFICIAL QUOTATION PDF:
+${pdfUrl}
+
+For order confirmation or queries, contact:
+${BUSINESS_CONFIG.legalEntityName}
+${BUSINESS_CONFIG.headquarters.address}, ${BUSINESS_CONFIG.headquarters.city} - ${BUSINESS_CONFIG.headquarters.pincode}
+Phone: ${BUSINESS_CONFIG.contact.salesPhone} | Email: ${BUSINESS_CONFIG.contact.salesEmail}
+`;
+}
+
+/**
+ * Build rich Office Bazzar Branded HTML Final Quotation email for Customer
+ */
+export function buildCustomerFinalQuotationEmailHtml(quotation: Quotation): string {
+  const siteUrl = BUSINESS_CONFIG.websiteUrl;
+  const pdfUrl = `${siteUrl}/api/admin/quotations/${encodeURIComponent(quotation.quotationNumber)}/pdf`;
+
+  const subtotal = quotation.subtotal ?? quotation.indicativeSubtotal ?? 0;
+  const discountAmount = quotation.discountAmount ?? 0;
+  const discountPercent = quotation.discountPercent ?? 0;
+  const taxableSubtotal = Math.max(0, subtotal - discountAmount);
+  const gstPercent = quotation.gstPercent ?? 18;
+  const gstAmount = quotation.gstAmount ?? quotation.indicativeGstAmount ?? 0;
+  const deliveryCharges = quotation.deliveryCharges ?? 0;
+  const additionalCharges = quotation.additionalCharges ?? 0;
+  const grandTotal = quotation.grandTotal ?? quotation.quotedAmount ?? quotation.indicativeTotal ?? 0;
+
+  const itemsRows = quotation.items
+    .map((item, idx) => {
+      const lineSub = item.lineSubtotal ?? item.quantity * item.indicativeUnitPrice;
+      return `
+      <tr style="border-bottom: 1px solid #e2e8f0;">
+        <td style="padding: 10px 8px; font-size: 12px; color: #64748b; text-align: center;">${idx + 1}</td>
+        <td style="padding: 10px 8px; font-size: 13px; color: #0f172a;">
+          <div style="font-weight: 700;">${item.productName}</div>
+          <div style="font-size: 11px; color: #64748b;">SKU: ${item.sku} &bull; Pack: ${item.packSize || 'Standard'}${item.hsnCode ? ` &bull; HSN: ${item.hsnCode}` : ''}</div>
+        </td>
+        <td style="padding: 10px 8px; font-size: 13px; text-align: center; color: #0f172a; font-weight: 700;">${item.quantity}</td>
+        <td style="padding: 10px 8px; font-size: 13px; text-align: right; color: #0f172a;">₹${item.indicativeUnitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td style="padding: 10px 8px; font-size: 13px; text-align: right; color: #0f172a; font-weight: 700;">₹${lineSub.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+      </tr>`;
+    })
+    .join('');
+
+  return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Final Quotation ${quotation.quotationNumber} | Office Bazzar</title>
+</head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f1f5f9; margin: 0; padding: 24px;">
+  <div style="max-width: 720px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #cbd5e1; box-shadow: 0 4px 12px rgba(15,23,42,0.06);">
+    <!-- Branded Header -->
+    <div style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); padding: 24px 28px; color: #ffffff;">
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td>
+            <div style="font-size: 22px; font-weight: 800; letter-spacing: -0.5px;">OFFICE BAZZAR</div>
+            <div style="font-size: 12px; color: #cbd5e1; margin-top: 2px;">${BUSINESS_CONFIG.legalEntityName}</div>
+            <div style="font-size: 11px; color: #94a3b8; margin-top: 4px;">
+              ${BUSINESS_CONFIG.headquarters.address}, ${BUSINESS_CONFIG.headquarters.city} – ${BUSINESS_CONFIG.headquarters.pincode}
+            </div>
+          </td>
+          <td style="text-align: right; vertical-align: top;">
+            <span style="background-color: #dc2626; color: #ffffff; font-size: 11px; font-weight: 800; padding: 5px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px;">
+              OFFICIAL QUOTATION
+            </span>
+            <div style="font-size: 16px; font-weight: 800; color: #ffffff; margin-top: 8px;">${quotation.quotationNumber}</div>
+            <div style="font-size: 11px; color: #cbd5e1;">Valid Till: <strong>${quotation.validUntil || '30 Days'}</strong></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div style="padding: 28px;">
+      <!-- Customer & Quotation Metadata -->
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+        <tr>
+          <td style="padding: 16px; width: 55%; vertical-align: top; border-right: 1px solid #e2e8f0;">
+            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; margin-bottom: 6px;">Quotation Prepared For</div>
+            <div style="font-size: 15px; font-weight: 800; color: #0f172a;">${quotation.companyName}</div>
+            <div style="font-size: 13px; color: #334155; margin-top: 2px;">Attn: <strong>${quotation.customerName}</strong></div>
+            <div style="font-size: 12px; color: #475569; margin-top: 4px;">Email: ${quotation.email} &bull; Phone: ${quotation.phone}</div>
+            ${quotation.gstin ? `<div style="font-size: 12px; color: #0f172a; margin-top: 4px;"><strong>Customer GSTIN:</strong> ${quotation.gstin}</div>` : ''}
+            <div style="font-size: 12px; color: #475569; margin-top: 4px;">
+              <strong>Delivery Address:</strong> ${quotation.deliveryLocation ? `${quotation.deliveryLocation}, ` : ''}PIN: ${quotation.pincode}
+            </div>
+          </td>
+          <td style="padding: 16px; width: 45%; vertical-align: top; font-size: 12px; color: #334155;">
+            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; margin-bottom: 6px;">Quotation Details</div>
+            <div style="margin-bottom: 4px;"><strong>Original RFQ Ref:</strong> ${quotation.quotationNumber}</div>
+            <div style="margin-bottom: 4px;"><strong>Revision:</strong> Version ${quotation.version || 1}</div>
+            <div style="margin-bottom: 4px;"><strong>Issue Date:</strong> ${new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
+            <div style="margin-bottom: 4px;"><strong>Valid Until:</strong> <span style="color: #dc2626; font-weight: 700;">${quotation.validUntil || '30 Days'}</span></div>
+            <div><strong>Sales Desk:</strong> ${BUSINESS_CONFIG.contact.salesPhone}</div>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Line Items Table -->
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+        <thead>
+          <tr style="background-color: #0f172a; color: #ffffff;">
+            <th style="padding: 10px 8px; font-size: 11px; text-transform: uppercase; text-align: center; width: 40px;">#</th>
+            <th style="padding: 10px 8px; font-size: 11px; text-transform: uppercase; text-align: left;">Product Description &amp; SKU</th>
+            <th style="padding: 10px 8px; font-size: 11px; text-transform: uppercase; text-align: center; width: 70px;">Qty</th>
+            <th style="padding: 10px 8px; font-size: 11px; text-transform: uppercase; text-align: right; width: 110px;">Unit Price (₹)</th>
+            <th style="padding: 10px 8px; font-size: 11px; text-transform: uppercase; text-align: right; width: 120px;">Amount (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${itemsRows}
+        </tbody>
+      </table>
+
+      <!-- Totals Breakdown -->
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+        <tr>
+          <td style="width: 50%; vertical-align: top; padding-right: 16px;">
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; font-size: 12px; color: #334155;">
+              <div style="font-weight: 700; color: #0f172a; text-transform: uppercase; font-size: 11px; margin-bottom: 4px;">Payment Terms</div>
+              <div style="white-space: pre-wrap;">${quotation.paymentTerms || '100% Advance against Proforma Invoice or as mutually agreed.'}</div>
+            </div>
+          </td>
+          <td style="width: 50%; vertical-align: top;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+              <tr>
+                <td style="padding: 5px 8px; text-align: right; color: #475569;">Subtotal:</td>
+                <td style="padding: 5px 8px; text-align: right; font-weight: 600; color: #0f172a;">₹${subtotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              </tr>
+              ${
+                discountAmount > 0
+                  ? `<tr>
+                <td style="padding: 5px 8px; text-align: right; color: #16a34a;">Discount (${discountPercent}%):</td>
+                <td style="padding: 5px 8px; text-align: right; font-weight: 600; color: #16a34a;">-₹${discountAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              </tr>
+              <tr>
+                <td style="padding: 5px 8px; text-align: right; color: #475569;">Taxable Subtotal:</td>
+                <td style="padding: 5px 8px; text-align: right; font-weight: 600; color: #0f172a;">₹${taxableSubtotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              </tr>`
+                  : ''
+              }
+              <tr>
+                <td style="padding: 5px 8px; text-align: right; color: #475569;">GST (${gstPercent}%):</td>
+                <td style="padding: 5px 8px; text-align: right; font-weight: 600; color: #0f172a;">+₹${gstAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              </tr>
+              ${
+                deliveryCharges > 0
+                  ? `<tr>
+                <td style="padding: 5px 8px; text-align: right; color: #475569;">Delivery &amp; Transport Charges:</td>
+                <td style="padding: 5px 8px; text-align: right; font-weight: 600; color: #0f172a;">+₹${deliveryCharges.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              </tr>`
+                  : ''
+              }
+              ${
+                additionalCharges > 0
+                  ? `<tr>
+                <td style="padding: 5px 8px; text-align: right; color: #475569;">Additional Charges:</td>
+                <td style="padding: 5px 8px; text-align: right; font-weight: 600; color: #0f172a;">+₹${additionalCharges.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              </tr>`
+                  : ''
+              }
+              <tr style="border-top: 2px solid #0f172a; background-color: #fef2f2;">
+                <td style="padding: 10px 8px; text-align: right; font-size: 14px; font-weight: 800; color: #0f172a;">Grand Total (INR):</td>
+                <td style="padding: 10px 8px; text-align: right; font-size: 16px; font-weight: 800; color: #dc2626;">₹${grandTotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Terms & Conditions -->
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; font-size: 11px; color: #475569; margin-bottom: 24px;">
+        <div style="font-weight: 700; color: #0f172a; text-transform: uppercase; margin-bottom: 6px;">Terms &amp; Conditions</div>
+        <div style="white-space: pre-wrap; line-height: 1.5;">${quotation.termsAndConditions || 'Standard Office Bazzar commercial terms apply.'}</div>
+      </div>
+
+      <!-- View / Print PDF Button -->
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="${pdfUrl}" target="_blank" style="background-color: #1e3a8a; color: #ffffff; text-decoration: none; padding: 12px 28px; font-size: 13px; font-weight: 700; border-radius: 6px; display: inline-block;">
+          View &amp; Download Official Quotation PDF &rarr;
+        </a>
+      </div>
+    </div>
+
+    <div style="background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 14px 28px; text-align: center; font-size: 11px; color: #64748b;">
+      ${BUSINESS_CONFIG.legalEntityName} &bull; ${BUSINESS_CONFIG.contact.salesEmail} &bull; ${BUSINESS_CONFIG.contact.salesPhone} &bull; <a href="${siteUrl}" style="color: #1e3a8a;">officebazzar.com</a>
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+/**
+ * Send the approved Final Quotation to the Customer via Zoho CRM Send Mail API
+ */
+export async function sendFinalQuotationToCustomer(
+  quotation: Quotation
+): Promise<{
+  success: boolean;
+  recipient: string;
+  provider: string;
+  messageId?: string;
+  error?: string;
+}> {
+  const customerEmail = (quotation.email || '').trim().toLowerCase();
+  if (!customerEmail || !customerEmail.includes('@')) {
+    return {
+      success: false,
+      recipient: customerEmail,
+      provider: 'zoho_crm_send_mail',
+      error: 'Customer email address is missing or invalid on this quotation.',
+    };
+  }
+
+  const { salesEmail } = getNotificationRecipients();
+  const subject = `Official Quotation ${quotation.quotationNumber} from Office Bazzar (${quotation.companyName || quotation.customerName})`;
+  const html = buildCustomerFinalQuotationEmailHtml(quotation);
+  const text = buildCustomerFinalQuotationEmailText(quotation);
+  const zohoQuoteId = quotation.zohoQuoteId || (/^\d+$/.test(quotation.id) ? quotation.id : undefined);
+
+  const zohoRes = await sendZohoEmail({
+    toEmail: customerEmail,
+    toName: quotation.customerName || quotation.companyName,
+    replyTo: salesEmail,
+    subject,
+    html,
+    text,
+    quoteId: zohoQuoteId,
+    contactId: quotation.zohoContactId,
+  });
+
+  await createNotificationLog({
+    quotationId: quotation.id,
+    quotationNumber: quotation.quotationNumber,
+    channel: 'email_quote',
+    recipient: customerEmail,
+    status: zohoRes.success ? 'sent' : 'failed',
+    errorMessage: zohoRes.error,
+    metadata: {
+      role: 'CUSTOMER_FINAL_QUOTATION',
+      provider: zohoRes.provider,
+      messageId: zohoRes.messageId,
+      zohoQuoteId,
+      version: quotation.version || 1,
+      grandTotal: quotation.grandTotal ?? quotation.quotedAmount,
+    },
+  });
+
+  return {
+    success: zohoRes.success,
+    recipient: customerEmail,
+    provider: zohoRes.provider,
+    messageId: zohoRes.messageId,
+    error: zohoRes.error,
+  };
+}

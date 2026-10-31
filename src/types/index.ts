@@ -208,10 +208,43 @@ export type QuotationStatus =
   | 'new'
   | 'under_review'
   | 'quotation_prepared'
+  | 'approved'
   | 'sent_to_customer'
   | 'accepted'
   | 'rejected'
   | 'closed';
+
+export interface OriginalRFQItem {
+  id: string;
+  productId: string;
+  productName: string;
+  sku: string;
+  hsnCode?: string;
+  packSize?: string;
+  originalQuantity: number;
+  indicativeUnitPrice: number;
+  gstPercent: number;
+  indicativeTotalPrice: number;
+}
+
+export interface QuotationAuditEntry {
+  version: number;
+  timestamp: string;
+  action: 'rfq_submitted' | 'draft_saved' | 'quotation_edited' | 'approved' | 'sent_to_customer';
+  actor: string;
+  summary: string;
+  grandTotal: number;
+  itemSnapshot?: Array<{
+    sku: string;
+    productName: string;
+    originalQuantity: number;
+    quotedQuantity: number;
+    unitPrice: number;
+    discountPercent: number;
+    gstPercent: number;
+    lineTotal: number;
+  }>;
+}
 
 export interface QuotationItem {
   id: string;
@@ -220,9 +253,17 @@ export interface QuotationItem {
   productName: string;
   sku: string;
   indicativeUnitPrice: number;
+  originalUnitPrice?: number;
   hsnCode?: string;
   gstPercent: number;
   quantity: number;
+  originalQuantity?: number;
+  discountPercent?: number;
+  discountAmount?: number;
+  taxAmount?: number;
+  lineSubtotal?: number;
+  lineTaxableAmount?: number;
+  lineGrandTotal?: number;
   indicativeTotalPrice: number;
   productImage?: string;
   packSize?: string;
@@ -230,6 +271,9 @@ export interface QuotationItem {
 
 export interface Quotation {
   id: string;
+  zohoQuoteId?: string;
+  zohoContactId?: string;
+  zohoAccountId?: string;
   quotationNumber: string; // Sequential identifier e.g. OB-RFQ-2026-00001
   idempotencyKey?: string;
   customerId?: string;
@@ -244,14 +288,34 @@ export interface Quotation {
   preferredContactMethod: 'phone' | 'whatsapp' | 'email';
   additionalRequirements?: string;
   items: QuotationItem[];
+  originalItems?: OriginalRFQItem[];
   indicativeSubtotal: number;
   indicativeGstAmount: number;
   indicativeTotal: number;
+  // Editable Final Quotation Commercial Breakdown
+  subtotal?: number;
+  discountPercent?: number;
+  discountAmount?: number;
+  gstPercent?: number;
+  gstAmount?: number;
+  deliveryCharges?: number;
+  additionalCharges?: number;
+  grandTotal?: number;
+  validUntil?: string;
+  paymentTerms?: string;
+  termsAndConditions?: string;
   status: QuotationStatus;
   assignedTo?: string; // Designated sales manager / rep
   internalNotes?: string; // Protected internal notes hidden from customers
   quotedAmount?: number; // Official final amount quoted by sales team
   quotationDocumentUrl?: string; // Link to generated quote document
+  version?: number;
+  approvedAt?: string;
+  approvedBy?: string;
+  sentAt?: string;
+  sentBy?: string;
+  sentMessageId?: string;
+  auditHistory?: QuotationAuditEntry[];
   createdAt: string;
   updatedAt?: string;
 }
@@ -269,4 +333,3 @@ export interface NotificationLog {
   metadata?: Record<string, unknown>;
   createdAt: string;
 }
-
