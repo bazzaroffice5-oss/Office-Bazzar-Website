@@ -123,9 +123,8 @@ export default function ContactPage() {
                 </div>
 
                 <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/70">
-                  <div className="font-bold text-slate-900">Kolkata Branch</div>
-                  <div className="text-[11px] text-slate-500 mt-0.5">Salt Lake City, Sector -2 - 700091</div>
-                  <div className="text-[11px] text-[#004b87] font-semibold mt-1">7991097759</div>
+                  <div className="font-bold text-slate-900">Chennai Branch</div>
+                  <div className="text-[11px] text-slate-500 mt-0.5">Royapettah, Chennai – 600014</div>
                 </div>
 
                 <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/70">
@@ -191,4 +190,3 @@ export default function ContactPage() {
     </main>
   );
 }
-
