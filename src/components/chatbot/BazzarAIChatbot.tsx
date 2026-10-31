@@ -42,7 +42,6 @@ const DEFAULT_SUGGESTIONS = [
 export default function BazzarAIChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [hasUnreadPrompt, setHasUnreadPrompt] = useState(true);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -95,7 +94,6 @@ export default function BazzarAIChatbot() {
   const handleOpen = () => {
     setIsOpen(true);
     setIsMinimized(false);
-    setHasUnreadPrompt(false);
   };
 
   const handleClose = () => {
@@ -203,48 +201,23 @@ export default function BazzarAIChatbot() {
 
   return (
     <>
-      {/* 1. FLOATING LAUNCHER BUTTON (Bottom-Right) */}
+      {/* 1. FLOATING LAUNCHER (Bottom-Right: ONLY the transparent 3D robot character, no decorative elements) */}
       {!isOpen && (
-        <div className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center space-x-3 select-none">
-          {/* Enticing Speech Bubble Tooltip */}
-          {hasUnreadPrompt && (
-            <div
-              onClick={handleOpen}
-              className="hidden sm:flex items-center space-x-2 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-xl border border-blue-200/80 cursor-pointer animate-in fade-in slide-in-from-right-4 duration-300 hover:border-blue-400 group"
-            >
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <div className="text-xs font-bold text-slate-800 group-hover:text-blue-900 transition-colors">
-                Chat with <span className="text-blue-900 font-extrabold">Bazzar AI</span> 👋
-              </div>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setHasUnreadPrompt(false);
-                }}
-                className="text-slate-400 hover:text-slate-600 p-0.5 rounded-full hover:bg-slate-100 transition-colors"
-                title="Dismiss"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          )}
-
-          {/* Floating Robot Avatar (Standalone 3D character, no circular background, border, glow or green dot) */}
+        <div className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 select-none">
           <button
             type="button"
             onClick={handleOpen}
             aria-label="Open Bazzar AI Chatbot"
             aria-expanded={isOpen}
-            className="group relative w-16 h-22 sm:w-20 sm:h-28 bg-transparent border-0 p-0 animate-bazzar-float hover:scale-105 active:scale-95 transition-transform duration-200 cursor-pointer flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500/50 rounded-2xl"
+            className="group relative w-16 h-20 sm:w-20 sm:h-24 bg-transparent border-0 p-0 outline-hidden focus:outline-hidden animate-bazzar-float hover:scale-105 active:scale-95 transition-transform duration-200 cursor-pointer flex items-center justify-center"
           >
             <Image
               src="/assets/bazzar-ai-avatar.png"
               alt="Bazzar AI 3D Robot Assistant"
-              width={80}
-              height={112}
+              width={90}
+              height={100}
               priority
-              className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_10px_20px_rgba(0,0,0,0.28)] group-hover:drop-shadow-[0_14px_28px_rgba(0,0,0,0.38)] transition-all duration-200"
+              className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_12px_24px_rgba(0,0,0,0.3)] group-hover:drop-shadow-[0_16px_32px_rgba(0,0,0,0.4)] transition-all duration-200"
             />
           </button>
         </div>
