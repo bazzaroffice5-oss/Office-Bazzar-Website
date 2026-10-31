@@ -6,9 +6,9 @@ import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Terms & Conditions | Officebazzar E-Store Private Limited',
+  title: 'Terms & Conditions for Corporate Procurement',
   description:
-    'Commercial terms, purchase conditions, pricing policies, and institutional supply guidelines for Officebazzar E-Store Private Limited, Chennai.',
+    'Review commercial terms, B2B purchase conditions, GST tax invoicing policies, and institutional supply guidelines for Office Bazzar across India.',
   path: '/terms',
 });
 

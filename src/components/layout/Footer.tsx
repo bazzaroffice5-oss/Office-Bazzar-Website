@@ -10,7 +10,7 @@ const GOOGLE_MAPS_DIRECTIONS_URL =
 const GOOGLE_MAPS_VIEW_URL =
   'https://www.google.com/maps/search/?api=1&query=Officebazzar+Tower,+No.+29/15,+Subbedar+Hussain+Street,+Royapettah,+Chennai,+Tamil+Nadu+600014';
 const GOOGLE_MAPS_EMBED_URL =
-  'https://maps.google.com/maps?q=Officebazzar+Tower%2C+29%2F15+Subbedar+Hussain+Street%2C+Royapettah%2C+Chennai%2C+Tamil+Nadu+600014&t=&z=15&ie=UTF8&iwloc=&output=embed';
+  'https://www.google.com/maps?q=Officebazzar+Tower%2C+29%2F15+Subbedar+Hussain+Street%2C+Royapettah%2C+Chennai%2C+Tamil+Nadu+600014&t=&z=15&ie=UTF8&iwloc=&output=embed';
 
 const SOCIAL_LINKS = [
   {
@@ -48,6 +48,7 @@ const SOCIAL_LINKS = [
 export default function Footer() {
   return (
     <footer id="footer" className="w-full bg-[#0a192f] text-slate-300 pt-12 sm:pt-14 pb-8 sm:pb-10 border-t border-slate-800">
+      <h2 className="sr-only">Footer Navigation and Corporate Contact Information</h2>
       <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main 4-Column Grid with Consistent Top Alignment */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 pb-8 sm:pb-10 border-b border-slate-800 items-start">
@@ -149,6 +150,16 @@ export default function Footer() {
               <li>
                 <Link href="/contact" className="hover:text-emerald-400 transition-colors">
                   Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/bulk-orders" className="hover:text-emerald-400 transition-colors">
+                  Bulk Orders &amp; RFQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="hover:text-emerald-400 transition-colors">
+                  Procurement FAQ
                 </Link>
               </li>
             </ul>
@@ -281,6 +292,10 @@ export default function Footer() {
             <span className="text-slate-700">•</span>
             <Link href="/returns-refunds" className="hover:text-slate-300 transition-colors">
               Returns &amp; Refunds
+            </Link>
+            <span className="text-slate-700">•</span>
+            <Link href="/cancellation-policy" className="hover:text-slate-300 transition-colors">
+              Cancellation Policy
             </Link>
           </div>
         </div>

@@ -6,9 +6,9 @@ import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Privacy Policy | Officebazzar E-Store Private Limited',
+  title: 'Privacy Policy & Corporate Data Protection',
   description:
-    'Our privacy commitment to corporate customers, data retention policies, and secure transaction protocols at Officebazzar E-Store Private Limited.',
+    'Read the Office Bazzar privacy policy covering corporate customer data protection, RFQ confidentiality, data retention, and secure B2B transaction protocols.',
   path: '/privacy-policy',
 });
 

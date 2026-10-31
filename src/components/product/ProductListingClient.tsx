@@ -336,8 +336,13 @@ export default function ProductListingClient({
           {/* Live Search Input */}
           <div className="relative flex-1 min-w-[240px]">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <label htmlFor="catalog-search-input" className="sr-only">
+              Search products, brands, SKUs or specifications
+            </label>
             <input
+              id="catalog-search-input"
               type="text"
+              aria-label="Search products, brands, SKUs or specifications"
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder="Search products, brands, SKUs or specifications..."
@@ -433,6 +438,7 @@ export default function ProductListingClient({
       </div>
 
       {/* Product Cards Grid: Desktop 4 cols, Medium screens 3 cols, Tablets 2 cols, Mobile 1 col */}
+      <h2 className="sr-only">Product Catalogue Grid</h2>
       {paginatedProducts.length === 0 ? (
         <div className="w-full bg-white rounded-2xl border border-slate-200/90 p-12 sm:p-16 text-center space-y-4 my-6">
           <div className="w-14 h-14 rounded-full bg-blue-50 text-[#004b87] mx-auto flex items-center justify-center">
@@ -509,9 +515,9 @@ export default function ProductListingClient({
       {/* Corporate Procurement Quotation CTA Banner */}
       <div className="mt-14 p-6 sm:p-8 bg-gradient-to-r from-slate-900 to-[#002f57] rounded-2xl text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
         <div className="space-y-1 text-center md:text-left">
-          <h3 className="text-lg sm:text-xl font-bold tracking-tight">
+          <h2 className="text-lg sm:text-xl font-bold tracking-tight">
             Need Bulk Enterprise Pricing or Custom Invoicing?
-          </h3>
+          </h2>
           <p className="text-xs sm:text-sm text-slate-300 max-w-xl font-normal leading-relaxed">
             Submit your itemized bill of quantities or product requirements to receive institutional corporate quotes with pre-negotiated volume pricing and full GST ITC credit.
           </p>

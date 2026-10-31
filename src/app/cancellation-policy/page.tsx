@@ -6,9 +6,9 @@ import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Cancellation Policy | Officebazzar E-Store Private Limited',
+  title: 'Order Cancellation Policy for B2B Orders',
   description:
-    'Order cancellation rules prior to dispatch from our Royapettah Chennai warehouse, custom fabrication guidelines, and post-dispatch procedures.',
+    'Review Office Bazzar order cancellation guidelines prior to warehouse dispatch, custom corporate procurement rules, and post-dispatch support procedures.',
   path: '/cancellation-policy',
 });
 

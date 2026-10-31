@@ -41,6 +41,7 @@ yarn-error.log*
 .env*
 !.env.example
 .zoho_token_cache.json
+.zoho_lead_round_robin.json
 .zoho_grant_code.txt
 .zoho_vercel_refresh_token.txt
 .zoho_authorize_url.txt

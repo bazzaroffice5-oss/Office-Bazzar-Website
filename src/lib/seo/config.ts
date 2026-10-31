@@ -54,6 +54,42 @@ export const SITE_CONFIG = {
  * - Homepage ('/' or '') -> https://officebazzar.com/
  * - Subpages ('/products', '/product/xyz') -> https://officebazzar.com/products, https://officebazzar.com/product/xyz
  */
+
+export const SEO_CONFIG = {
+  ...SITE_CONFIG,
+  baseUrl: SITE_CONFIG.url,
+  siteName: SITE_CONFIG.name,
+  ogImage: SITE_CONFIG.defaultOgImage,
+};
+
+/**
+ * Formats a page title to ensure a single brand suffix ("| Office Bazzar")
+ * and optimal length (<= 60 characters where possible).
+ */
+export function formatSeoTitle(rawTitle?: string): string {
+  const brand = 'Office Bazzar';
+  if (!rawTitle || !rawTitle.trim()) {
+    return 'Office Bazzar | Office Supplies & Corporate Procurement India';
+  }
+  const stripped = rawTitle
+    .replace(/\s*[|–-]\s*Office\s*Bazzar(\s+India)?(\s*[|–-]\s*Office\s*Bazzar(\s+India)?)*\s*$/i, '')
+    .replace(/\s*[|–-]\s*Officebazzar[^|]*$/i, '')
+    .trim();
+
+  if (!stripped || stripped.toLowerCase() === 'office bazzar' || stripped.toLowerCase() === 'officebazzar') {
+    return 'Office Bazzar | Office Supplies & Corporate Procurement India';
+  }
+
+  const withBrand = `${stripped} | ${brand}`;
+  if (withBrand.length <= 60) {
+    return withBrand;
+  }
+
+  const maxBaseLen = 60 - ` | ${brand}`.length;
+  const shortened = stripped.slice(0, maxBaseLen).replace(/\s+\S*$/, '').trim();
+  return `${shortened || stripped.slice(0, maxBaseLen).trim()} | ${brand}`;
+}
+
 export function getCanonicalUrl(path: string = ''): string {
   if (!path || path === '/' || path.trim() === '') {
     return `${SITE_CONFIG.url}/`;
@@ -71,6 +107,7 @@ export function constructMetadata({
   title,
   description,
   path = '',
+  canonicalUrl: customCanonicalPath,
   image,
   noIndex = false,
   type = 'website',
@@ -79,17 +116,15 @@ export function constructMetadata({
   title?: string;
   description?: string;
   path?: string;
+  canonicalUrl?: string;
   image?: string;
   noIndex?: boolean;
   type?: 'website' | 'article';
   keywords?: string[];
 }): Metadata {
-  const metaTitle = title
-    ? `${title} | OfficeBazzar India`
-    : 'OfficeBazzar | Corporate Procurement Partner for Office Supplies & Housekeeping';
-
+  const metaTitle = formatSeoTitle(title);
   const metaDescription = description || SITE_CONFIG.description;
-  const canonicalUrl = getCanonicalUrl(path);
+  const canonicalUrl = getCanonicalUrl(customCanonicalPath || path);
   const ogImageUrl = image?.startsWith('http') ? image : getCanonicalUrl(image || SITE_CONFIG.defaultOgImage);
 
   return {
@@ -132,8 +167,7 @@ export function constructMetadata({
     robots: noIndex
       ? {
           index: false,
-          follow: false,
-          nocache: true,
+          follow: true,
         }
       : {
           index: true,
@@ -264,17 +298,17 @@ export function getWebSiteJsonLd() {
  * BreadcrumbList Schema (schema.org/BreadcrumbList)
  */
 export function getBreadcrumbJsonLd(
-  items: { name: string; url?: string; path?: string }[]
+  items: { name: string; url?: string; path?: string; item?: string }[]
 ) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => {
-      const link = item.url || item.path || '/';
+    itemListElement: items.map((entry, index) => {
+      const link = entry.url || entry.path || entry.item || '/';
       return {
         '@type': 'ListItem',
         position: index + 1,
-        name: item.name,
+        name: entry.name,
         item: link.startsWith('http') ? link : getCanonicalUrl(link),
       };
     }),
@@ -286,39 +320,45 @@ export function getBreadcrumbJsonLd(
  * Strictly adheres to verified data without fake review counts or credentials
  */
 export function getProductJsonLd(product: Product) {
+  const hasValidPrice = typeof product.price === 'number' && product.price > 0;
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
-    image: product.images && product.images.length > 0 ? product.images : [`${SITE_CONFIG.url}/images/brand-logo.svg`],
-    description: product.description || product.shortDescription || `${product.name} wholesale supply in Chennai.`,
+    image:
+      product.images && product.images.length > 0
+        ? product.images.map((img) => (img.startsWith('http') ? img : `${SITE_CONFIG.url}${img}`))
+        : [`${SITE_CONFIG.url}/images/brand-logo.svg`],
+    description:
+      product.description ||
+      product.shortDescription ||
+      `${product.name} supplied by Office Bazzar for corporate and bulk procurement across India.`,
     sku: product.sku || product.id,
+    mpn: product.sku || product.id,
+    category: product.categoryName,
     url: getCanonicalUrl(`/product/${product.slug}`),
     brand: {
       '@type': 'Brand',
       name: product.brandName || SITE_CONFIG.name,
     },
-    offers: {
+  };
+
+  if (hasValidPrice) {
+    schema.offers = {
       '@type': 'Offer',
       priceCurrency: 'INR',
       price: product.price,
       priceValidUntil: '2027-12-31',
       itemCondition: 'https://schema.org/NewCondition',
-      availability: product.stockQuantity > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      availability:
+        product.stockQuantity > 0
+          ? 'https://schema.org/InStock'
+          : 'https://schema.org/OutOfStock',
       url: getCanonicalUrl(`/product/${product.slug}`),
       seller: {
         '@type': 'Organization',
         name: SITE_CONFIG.legalName,
       },
-    },
-  };
-
-  // Only attach AggregateRating if authentic rating and reviews exist (no fake 25 review defaults!)
-  if (product.rating && product.reviewCount && product.reviewCount > 0) {
-    schema.aggregateRating = {
-      '@type': 'AggregateRating',
-      ratingValue: product.rating,
-      reviewCount: product.reviewCount,
     };
   }
 
@@ -329,16 +369,22 @@ export function getProductJsonLd(product: Product) {
  * Article Schema (schema.org/BlogPosting)
  */
 export function getArticleJsonLd(post: BlogPost) {
+  const cleanDescription = post.excerpt.replace(/\s*\[\.\.\.\]\s*$/, '').trim();
+  const imageUrl = post.imageUrl
+    ? post.imageUrl.startsWith('http')
+      ? post.imageUrl
+      : `${SITE_CONFIG.url}${post.imageUrl}`
+    : `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`;
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
-    description: post.excerpt,
-    image: post.imageUrl ? [post.imageUrl] : [`${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`],
+    description: cleanDescription,
+    image: [imageUrl],
     datePublished: new Date(post.publishedDate).toISOString(),
     dateModified: new Date(post.publishedDate).toISOString(),
     author: {
-      '@type': 'Person',
+      '@type': 'Organization',
       name: post.author || 'Office Bazzar Editorial Team',
     },
     publisher: {

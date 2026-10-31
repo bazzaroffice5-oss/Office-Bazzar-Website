@@ -7,6 +7,7 @@ import {
   getNotificationRecipients,
 } from '@/lib/notifications/service';
 import { syncQuotationToZoho, ZohoSyncResult } from '@/lib/zoho/crm';
+import { getNextLeadAssignee } from '@/lib/zoho/round-robin';
 
 // In-memory sliding window rate limiter to protect public quotation submission
 const submissionRateMap = new Map<string, number[]>();
@@ -209,7 +210,13 @@ export async function POST(req: Request) {
 
     const indicativeTotal = indicativeSubtotal + indicativeGstAmount;
 
-    // 4. Construct Quotation Record in Memory (No Supabase write — Zoho CRM is the primary database)
+    // 4. Concurrency-Safe Round-Robin Customer Lead Assignment
+    // Customer 1 -> Sales (sales4@officebazzar.com)
+    // Customer 2 -> Marketing (marketing@officebazzar.com)
+    // Alternates sequentially with atomic serialization and persistent storage.
+    const leadAssignee = await getNextLeadAssignee();
+
+    // 5. Construct Quotation Record in Memory (No Supabase write — Zoho CRM is the primary database)
     const savedQuotation = await createQuotation({
       idempotencyKey: idempotencyKey || undefined,
       customerId: customerId || undefined,
@@ -230,9 +237,13 @@ export async function POST(req: Request) {
       indicativeGstAmount,
       indicativeTotal,
       status: 'new',
+      assignedTo: leadAssignee.label,
+      assignedEmail: leadAssignee.email,
+      assignedAt: leadAssignee.assignedAt,
+      assignedSequence: leadAssignee.sequenceNumber,
     });
 
-    // 5. Save Quotation in Zoho CRM FIRST (Contacts, Accounts, Quotes & Quoted_Items)
+    // 6. Save Quotation in Zoho CRM FIRST (Contacts, Accounts, Quotes & Quoted_Items)
     let zohoSyncResult: ZohoSyncResult | undefined;
     try {
       zohoSyncResult = await syncQuotationToZoho(savedQuotation);
@@ -259,9 +270,9 @@ export async function POST(req: Request) {
       savedQuotation.id = zohoSyncResult.quoteId;
     }
 
-    // 6. Send TWO ADMIN EMAIL NOTIFICATIONS ONLY AFTER Zoho CRM save succeeds
-    // ADMIN 1: sales4@officebazzar.com
-    // ADMIN 2: marketing@officebazzar.com
+    // 7. Send Notification ONLY to the assigned Admin recipient (Round-Robin)
+    // Sales leads go strictly to sales4@officebazzar.com
+    // Marketing leads go strictly to marketing@officebazzar.com
     let notificationResults: NotificationResult[] = [];
     try {
       notificationResults = await dispatchQuotationNotifications(savedQuotation, {
@@ -273,15 +284,10 @@ export async function POST(req: Request) {
     }
 
     const { salesEmail, marketingEmail } = getNotificationRecipients();
-    const admin1Res = notificationResults.find(
-      (r) => r.recipient.toLowerCase() === salesEmail.toLowerCase()
+    const assignedRes = notificationResults.find(
+      (r) => r.recipient.toLowerCase() === leadAssignee.email.toLowerCase()
     );
-    const admin2Res = notificationResults.find(
-      (r) => r.recipient.toLowerCase() === marketingEmail.toLowerCase()
-    );
-
-    const isAdmin1Sent = admin1Res?.status === 'sent';
-    const isAdmin2Sent = admin2Res?.status === 'sent';
+    const isAssignedSent = assignedRes?.status === 'sent';
 
     const safeQuotation = {
       id: zohoSyncResult.quoteId || savedQuotation.id,
@@ -301,6 +307,10 @@ export async function POST(req: Request) {
       indicativeGstAmount: savedQuotation.indicativeGstAmount,
       indicativeTotal: savedQuotation.indicativeTotal,
       status: savedQuotation.status,
+      assignedTo: savedQuotation.assignedTo,
+      assignedEmail: savedQuotation.assignedEmail,
+      assignedAt: savedQuotation.assignedAt,
+      assignedSequence: savedQuotation.assignedSequence,
       createdAt: savedQuotation.createdAt,
     };
 
@@ -313,30 +323,47 @@ export async function POST(req: Request) {
         zohoContactId: zohoSyncResult.contactId,
         zohoAccountId: zohoSyncResult.accountId,
         zohoStatus: 'synced',
-        admin1Email: {
-          recipient: salesEmail,
-          status: isAdmin1Sent ? 'sent' : 'failed',
-          provider: admin1Res?.provider,
-          messageId: admin1Res?.messageId,
-          error: admin1Res?.errorMessage,
-          missingScopes: admin1Res?.missingScopes,
+        assignedAdmin: {
+          name: leadAssignee.name,
+          email: leadAssignee.email,
+          label: leadAssignee.label,
+          role: leadAssignee.role,
+          sequenceNumber: leadAssignee.sequenceNumber,
+          assignedAt: leadAssignee.assignedAt,
         },
-        admin2Email: {
-          recipient: marketingEmail,
-          status: isAdmin2Sent ? 'sent' : 'failed',
-          provider: admin2Res?.provider,
-          messageId: admin2Res?.messageId,
-          error: admin2Res?.errorMessage,
-          missingScopes: admin2Res?.missingScopes,
-        },
-        notificationStatus:
-          isAdmin1Sent && isAdmin2Sent
-            ? 'sent'
-            : isAdmin1Sent || isAdmin2Sent
-            ? 'partial'
-            : 'failed',
+        admin1Email:
+          leadAssignee.role === 'ADMIN_1_SALES'
+            ? {
+                recipient: salesEmail,
+                status: isAssignedSent ? 'sent' : 'failed',
+                provider: assignedRes?.provider,
+                messageId: assignedRes?.messageId,
+                error: assignedRes?.errorMessage,
+                missingScopes: assignedRes?.missingScopes,
+              }
+            : {
+                recipient: salesEmail,
+                status: 'not_assigned',
+                reason: 'Customer lead assigned to Marketing via Round-Robin sequence',
+              },
+        admin2Email:
+          leadAssignee.role === 'ADMIN_2_MARKETING'
+            ? {
+                recipient: marketingEmail,
+                status: isAssignedSent ? 'sent' : 'failed',
+                provider: assignedRes?.provider,
+                messageId: assignedRes?.messageId,
+                error: assignedRes?.errorMessage,
+                missingScopes: assignedRes?.missingScopes,
+              }
+            : {
+                recipient: marketingEmail,
+                status: 'not_assigned',
+                reason: 'Customer lead assigned to Sales via Round-Robin sequence',
+              },
+        notificationStatus: isAssignedSent ? 'sent' : 'failed',
         quotation: safeQuotation,
-        message: 'Request for Quotation confirmed and registered in Zoho CRM.',
+        message: `Request for Quotation confirmed, registered in Zoho CRM, and assigned to ${leadAssignee.label}.`,
       },
       { status: 201 }
     );

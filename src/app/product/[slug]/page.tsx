@@ -1,8 +1,13 @@
 import React from 'react';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import ProductDetailClient from '@/components/product/ProductDetailClient';
 import { getProductBySlug, getRelatedProducts, getBrands } from '@/lib/db/store';
-import { getProductJsonLd, getBreadcrumbJsonLd, getCanonicalUrl, SITE_CONFIG } from '@/lib/seo/config';
+import { getProductJsonLd, getBreadcrumbJsonLd, getCanonicalUrl, SITE_CONFIG, formatSeoTitle } from '@/lib/seo/config';
+
+const DUPLICATE_PRODUCT_REDIRECTS: Record<string, string> = {
+  'kangaro-staplers-hd-10d-1': '/product/kangaro-staplers-hd-10d',
+  'tissue-paper-napkin-1': '/product/tissue-paper-napkin',
+};
 import JsonLd from '@/components/seo/JsonLd';
 
 export async function generateMetadata({
@@ -11,20 +16,36 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (DUPLICATE_PRODUCT_REDIRECTS[slug]) {
+    return {
+      alternates: {
+        canonical: getCanonicalUrl(DUPLICATE_PRODUCT_REDIRECTS[slug]),
+      },
+    };
+  }
   const product = await getProductBySlug(slug);
 
   if (!product) {
     return {
-      title: 'Product Not Found | OfficeBazzar India',
+      title: 'Product Not Found | Office Bazzar',
       robots: { index: false, follow: false },
     };
   }
 
-  const metaTitle = product.metaTitle || `${product.name} Wholesale Suppliers Chennai | OfficeBazzar`;
+  const cleanName = product.name.trim();
+  const brandName = (product.brandName || 'Office Bazzar').trim();
+  const nameIncludesBrand = cleanName.toLowerCase().includes(brandName.toLowerCase());
+  const rawTitle =
+    !nameIncludesBrand && brandName.toLowerCase() !== 'officebazzar' && brandName.toLowerCase() !== 'office bazzar'
+      ? `${cleanName} (${brandName})`
+      : `${cleanName} (${product.sku})`;
+  const metaTitle = formatSeoTitle(rawTitle);
+
+  const rawDesc = `Buy ${cleanName} (SKU: ${product.sku}) by ${brandName} under ${product.categoryName}. ${product.packSize || 'Standard Pack'} with ${product.gstPercent}% GST invoice & bulk B2B supply in India.`;
   const metaDescription =
-    product.metaDescription ||
-    product.shortDescription ||
-    `Buy ${product.name} (${product.brandName}) in bulk wholesale packs. Includes ${product.gstPercent}% GST invoice for 100% Input Tax Credit. Fast dispatch across Chennai.`;
+    rawDesc.length <= 158
+      ? rawDesc
+      : `Source ${cleanName} (${product.sku}) from ${brandName}. ${product.packSize || 'Standard Pack'}, ${product.gstPercent}% GST tax invoice, and bulk corporate supply across India.`.slice(0, 158);
 
   const canonicalUrl = getCanonicalUrl(`/product/${product.slug}`);
   const ogImage = product.images && product.images.length > 0 ? product.images[0] : `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`;
@@ -66,6 +87,9 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (DUPLICATE_PRODUCT_REDIRECTS[slug]) {
+    permanentRedirect(DUPLICATE_PRODUCT_REDIRECTS[slug]);
+  }
   const product = await getProductBySlug(slug);
 
   if (!product) {

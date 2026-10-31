@@ -2,7 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import CategoryLandingClient from '@/components/category/CategoryLandingClient';
 import { getProducts, getCategoryBySlug } from '@/lib/db/store';
-import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG } from '@/lib/seo/config';
+import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG, formatSeoTitle } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export async function generateMetadata({
@@ -32,18 +32,16 @@ export async function generateMetadata({
     (s) => s.slug === effectiveSub || s.id === effectiveSub
   );
 
-  const titlePrefix = activeSub ? `${activeSub.name} - ` : '';
-  const metaTitle = `${titlePrefix}${category.name} Wholesale Suppliers in Chennai | OfficeBazzar`;
-  const metaDescription =
-    activeSub?.description ||
-    category.description ||
-    `Procure bulk ${category.name} for corporate offices, IT parks, and institutions in Chennai. Guaranteed 100% GST input tax credit with same-day dispatch.`;
+  const rawTitle = activeSub
+    ? `${activeSub.name} - ${category.name}`
+    : `${category.name} & Bulk Corporate Supplies`;
+  const metaTitle = formatSeoTitle(rawTitle);
+  const metaDescription = activeSub?.description
+    ? activeSub.description
+    : `${category.description} Request bulk B2B quotes and GST tax invoicing across India.`;
 
-  const canonicalUrl = getCanonicalUrl(
-    activeSub
-      ? `/category/${category.slug}?sub=${activeSub.slug}`
-      : `/category/${category.slug}`
-  );
+  // Always canonicalize ?sub= filter views to the primary category URL present in sitemap.xml
+  const canonicalUrl = getCanonicalUrl(`/category/${category.slug}`);
 
   return {
     title: metaTitle,

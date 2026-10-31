@@ -5,9 +5,9 @@ import JsonLd from '@/components/seo/JsonLd';
 import CareersClient from '@/components/careers/CareersClient';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Careers | Officebazzar E-Store Private Limited, Royapettah, Chennai',
+  title: 'Careers in Corporate Procurement & Supply Chain',
   description:
-    'Join the transformation at Officebazzar E-Store Private Limited. Help shape the future of workplace supplies and business procurement with Office Bazzar in Royapettah, Chennai.',
+    'Explore career opportunities at Office Bazzar across B2B sales, enterprise account management, warehouse operations, and supply chain fulfillment in India.',
   path: '/careers',
   keywords: [
     'Careers OfficeBazzar',

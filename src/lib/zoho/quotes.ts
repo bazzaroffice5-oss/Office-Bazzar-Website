@@ -92,6 +92,9 @@ export interface ZohoQuoteStructuredMeta {
     paymentTerms: string;
     termsAndConditions: string;
     assignedTo?: string;
+    assignedEmail?: string;
+    assignedAt?: string;
+    assignedSequence?: number;
     internalNotes?: string;
     quotationDocumentUrl?: string;
     version: number;
@@ -128,6 +131,9 @@ export interface AdminQuotationUpdateInput {
   paymentTerms?: string;
   termsAndConditions?: string;
   assignedTo?: string;
+  assignedEmail?: string;
+  assignedAt?: string;
+  assignedSequence?: number;
   internalNotes?: string;
   quotationDocumentUrl?: string;
   sentMessageId?: string;
@@ -300,6 +306,10 @@ function buildZohoQuoteDescriptionWithMeta(meta: ZohoQuoteStructuredMeta): strin
     `=== WEBSITE REQUEST FOR QUOTATION (RFQ) ===`,
     `Website Quotation Reference: ${meta.quotationNumber}`,
     `Submitted At: ${orig.submittedAt}`,
+    edit.assignedTo ? `Assigned Lead Owner: ${edit.assignedTo}` : '',
+    edit.assignedEmail ? `Assigned Email: ${edit.assignedEmail}` : '',
+    edit.assignedAt ? `Assignment Timestamp: ${edit.assignedAt}` : '',
+    edit.assignedSequence ? `Lead Sequence #: ${edit.assignedSequence}` : '',
     `Customer Name: ${orig.customerName}`,
     `Company: ${orig.companyName || 'Not Specified'}`,
     `Email: ${orig.email}`,
@@ -510,6 +520,9 @@ function buildInitialStructuredMeta(quotation: Quotation, validTill: string): Zo
       paymentTerms: quotation.paymentTerms || DEFAULT_PAYMENT_TERMS,
       termsAndConditions: quotation.termsAndConditions || DEFAULT_TERMS_AND_CONDITIONS,
       assignedTo: quotation.assignedTo,
+      assignedEmail: quotation.assignedEmail,
+      assignedAt: quotation.assignedAt,
+      assignedSequence: quotation.assignedSequence,
       internalNotes: quotation.internalNotes,
       quotationDocumentUrl: quotation.quotationDocumentUrl,
       version: 1,
@@ -647,7 +660,7 @@ export async function syncQuotationToZohoQuote(
       await appendZohoQuoteAuditNote(
         quoteId,
         `${cleanRef} — Original Customer RFQ (Immutable Record)`,
-        `Original Customer RFQ Reference: ${cleanRef}\nSubmitted At: ${meta.originalRfq.submittedAt}\nCustomer: ${meta.originalRfq.customerName} (${meta.originalRfq.companyName})\nEmail: ${meta.originalRfq.email} | Phone: ${meta.originalRfq.phone}\nGSTIN: ${meta.originalRfq.gstin || 'N/A'}\nDelivery Address: ${meta.originalRfq.deliveryLocation || ''} - PIN ${meta.originalRfq.pincode}\n\nOriginal Requested Products:\n` +
+        `Original Customer RFQ Reference: ${cleanRef}\nSubmitted At: ${meta.originalRfq.submittedAt}\nAssigned Lead Owner: ${meta.editableQuote.assignedTo || 'Unassigned'}\nCustomer: ${meta.originalRfq.customerName} (${meta.originalRfq.companyName})\nEmail: ${meta.originalRfq.email} | Phone: ${meta.originalRfq.phone}\nGSTIN: ${meta.originalRfq.gstin || 'N/A'}\nDelivery Address: ${meta.originalRfq.deliveryLocation || ''} - PIN ${meta.originalRfq.pincode}\n\nOriginal Requested Products:\n` +
           meta.originalRfq.items
             .map(
               (it, i) =>
@@ -736,6 +749,9 @@ export function mapZohoQuoteToQuotation(quoteRecord: any, defaultEmail?: string)
       termsAndConditions: edit.termsAndConditions || DEFAULT_TERMS_AND_CONDITIONS,
       status: edit.status || mapZohoStageToStatus(quoteRecord.Quote_Stage),
       assignedTo: edit.assignedTo,
+      assignedEmail: edit.assignedEmail,
+      assignedAt: edit.assignedAt,
+      assignedSequence: edit.assignedSequence,
       internalNotes: edit.internalNotes,
       quotedAmount: edit.grandTotal,
       quotationDocumentUrl: edit.quotationDocumentUrl,
@@ -1165,6 +1181,12 @@ export async function saveAdminQuotationInZoho(
     const assignedTo =
       input.assignedTo !== undefined ? input.assignedTo.trim() : existingQuotation.assignedTo;
 
+    const assignedEmail =
+      input.assignedEmail !== undefined ? input.assignedEmail.trim() : existingQuotation.assignedEmail;
+
+    const assignedAt = input.assignedAt || existingQuotation.assignedAt;
+    const assignedSequence = input.assignedSequence ?? existingQuotation.assignedSequence;
+
     const internalNotes =
       input.internalNotes !== undefined ? input.internalNotes.trim() : existingQuotation.internalNotes;
 
@@ -1208,6 +1230,9 @@ export async function saveAdminQuotationInZoho(
         paymentTerms,
         termsAndConditions,
         assignedTo,
+        assignedEmail,
+        assignedAt,
+        assignedSequence,
         internalNotes,
         quotationDocumentUrl,
         version: nextVersion,

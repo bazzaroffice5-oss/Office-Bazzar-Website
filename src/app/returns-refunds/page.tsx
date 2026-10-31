@@ -6,9 +6,9 @@ import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Returns & Refunds Policy | Officebazzar E-Store Private Limited',
+  title: 'Returns, Replacements & Refunds Policy',
   description:
-    '7-day return policy for defective, transit-damaged, or incorrect office supplies and transparent credit note and refund processing.',
+    'Read the Office Bazzar 7-day return and replacement policy for defective, transit-damaged, or incorrect office supplies, plus GST credit note processing.',
   path: '/returns-refunds',
 });
 

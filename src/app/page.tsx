@@ -8,7 +8,8 @@ import ProcurementBenefitsSection from '@/components/home/ProcurementBenefitsSec
 import AboutSummarySection from '@/components/home/AboutSummarySection';
 import HomeBlogSection from '@/components/home/HomeBlogSection';
 import HomeFaqSection from '@/components/home/HomeFaqSection';
-import { SITE_CONFIG } from '@/lib/seo/config';
+import { SITE_CONFIG, getLocalBusinessJsonLd } from '@/lib/seo/config';
+import JsonLd from '@/components/seo/JsonLd';
 import { getCategories } from '@/lib/db/store';
 
 const HOMEPAGE_TITLE = 'Office Bazzar | Office Supplies & Corporate Procurement India';
@@ -53,6 +54,7 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen bg-white">
+      <JsonLd data={getLocalBusinessJsonLd()} id="local-business-schema-home" />
       {/* 1. Hero Section + Trust Highlights Bar */}
       <HeroSection />
 

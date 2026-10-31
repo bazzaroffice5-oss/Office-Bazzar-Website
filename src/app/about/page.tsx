@@ -17,9 +17,9 @@ import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'About Us | Officebazzar E-Store Private Limited, Chennai',
+  title: 'About Us - Corporate Office & Facility Supplier',
   description:
-    'Co-founded in 2005, Officebazzar E-Store Private Limited is headquartered at Officebazzar Tower, Royapettah, Chennai. We manufacture Hi-Clean products and supply complete office stationery, housekeeping essentials, and institutional consumables.',
+    'Learn about Office Bazzar (Officebazzar E-Store Pvt Ltd). We manufacture Hi-Clean products and supply corporate office stationery and housekeeping essentials across India.',
   path: '/about',
   keywords: [
     'Officebazzar E-Store Private Limited',
@@ -238,7 +238,6 @@ export default function AboutPage() {
                   fill
                   sizes="(max-width: 768px) 100vw, 420px"
                   className="object-cover object-[70%_25%]"
-                  priority
                 />
               </div>
               <div className="space-y-1">
@@ -259,7 +258,6 @@ export default function AboutPage() {
                   fill
                   sizes="(max-width: 768px) 100vw, 420px"
                   className="object-cover object-[50%_20%]"
-                  priority
                 />
               </div>
               <div className="space-y-1">

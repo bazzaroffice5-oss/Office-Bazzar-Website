@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, Clock, Tag, ArrowRight, Package } from 'lucide-react';
 import { BLOG_POSTS } from '@/lib/data/blog';
-import { getArticleJsonLd, getBreadcrumbJsonLd, getCanonicalUrl, SITE_CONFIG } from '@/lib/seo/config';
+import { getArticleJsonLd, getBreadcrumbJsonLd, getCanonicalUrl, SITE_CONFIG, formatSeoTitle } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export function generateStaticParams() {
@@ -28,10 +28,11 @@ export async function generateMetadata({
     };
   }
 
-  const metaTitle = `${post.title} | OfficeBazzar Insights`;
-  const metaDescription = post.excerpt;
+  const metaTitle = formatSeoTitle(post.title);
+  const metaDescription = post.excerpt.replace(/\s*\[\.\.\.\]\s*$/, '').trim();
   const canonicalUrl = getCanonicalUrl(`/blogs/${post.slug}`);
   const publishedTime = new Date(post.publishedDate).toISOString();
+  const ogImageUrl = post.imageUrl.startsWith('http') ? post.imageUrl : `${SITE_CONFIG.url}${post.imageUrl}`;
 
   return {
     title: metaTitle,
@@ -50,7 +51,7 @@ export async function generateMetadata({
       authors: [post.author || 'Office Bazzar Team'],
       images: [
         {
-          url: post.imageUrl,
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -61,7 +62,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: metaTitle,
       description: metaDescription,
-      images: [post.imageUrl],
+      images: [ogImageUrl],
     },
   };
 }
@@ -78,7 +79,7 @@ export default async function BlogDetailPage({
     notFound();
   }
 
-  const related = BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, 2);
+  const related = BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, 4);
 
   // Structured Data (BlogPosting & Breadcrumbs)
   const articleJsonLd = getArticleJsonLd(post);
@@ -97,12 +98,12 @@ export default async function BlogDetailPage({
   const relatedCategoryLink = isHousekeeping
     ? {
         name: 'Housekeeping & Facility Supplies',
-        href: '/category/housekeeping-facility-supplies',
+        href: '/category/housekeeping-hygiene',
         desc: 'Buy Diversey Taski chemicals, industrial dustbins, and housekeeping tools wholesale.',
       }
     : {
         name: 'Office Stationery & Desk Supplies',
-        href: '/category/office-supplies-stationery',
+        href: '/category/office-stationery',
         desc: 'Explore bulk copy paper, filing folders, ballpoint pens, and desktop essentials.',
       };
 
@@ -198,9 +199,9 @@ export default async function BlogDetailPage({
               <Package className="w-3.5 h-3.5" />
               Related Procurement Supplies
             </div>
-            <h3 className="text-sm sm:text-base font-semibold text-slate-900">
+            <h2 className="text-sm sm:text-base font-semibold text-slate-900">
               {relatedCategoryLink.name}
-            </h3>
+            </h2>
             <p className="text-xs text-slate-600 max-w-lg">
               {relatedCategoryLink.desc}
             </p>

@@ -128,7 +128,8 @@ export function buildQuotationEmailText(
 ==================================================
 RFQ Reference    : ${quotation.quotationNumber}
 Submission Date  : ${new Date(quotation.createdAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST (${quotation.createdAt})
-Admin Recipient  : ${recipientEmail} (Also notified: ${partnerEmail})
+Assigned Lead Owner: ${quotation.assignedTo || recipientEmail} (Round-Robin Customer Lead Assignment)
+Admin Recipient  : ${recipientEmail}
 Zoho CRM Status  : Saved in Zoho CRM (Contacts, Accounts, Quotes & Quoted_Items)
 
 CUSTOMER & BUSINESS DETAILS:
@@ -209,7 +210,7 @@ export function buildQuotationEmailHtml(
     </div>
 
     <div style="background-color: #eff6ff; border-bottom: 1px solid #dbeafe; padding: 10px 24px; font-size: 12px; color: #1e40af;">
-      <strong>Admin Notification Recipient:</strong> ${recipientEmail} &nbsp;&bull;&nbsp; Also Notified: ${partnerEmail}
+      <strong>Assigned Lead Owner:</strong> ${quotation.assignedTo || recipientEmail} &nbsp;&bull;&nbsp; Round-Robin Customer Lead Assignment
     </div>
 
     <div style="background-color: #fef2f2; border-bottom: 1px solid #fee2e2; padding: 14px 24px;">
@@ -398,11 +399,11 @@ export async function sendQuoteEmailNotification(
 }
 
 /**
- * Dispatch notifications ONLY to the two required Admin recipients after Zoho CRM saves the quotation:
- * - ADMIN 1: sales4@officebazzar.com
- * - ADMIN 2: marketing@officebazzar.com
- * Does NOT send a customer email notification.
- * Tracks each admin recipient independently and allows retry without duplicating the CRM quotation.
+ * Dispatch notification ONLY to the designated assigned Admin recipient (Round-Robin):
+ * - If assigned to Sales: sales4@officebazzar.com ONLY
+ * - If assigned to Marketing: marketing@officebazzar.com ONLY
+ * Does NOT send to both admins. Does NOT send a customer email notification.
+ * Tracks the assigned admin recipient independently and allows retry without duplicating CRM records.
  */
 export async function dispatchQuotationNotifications(
   quotation: Quotation,
@@ -411,75 +412,86 @@ export async function dispatchQuotationNotifications(
   const results: NotificationResult[] = [];
   const { salesEmail, marketingEmail } = getNotificationRecipients();
 
-  // 1. Dispatch ADMIN 1 Notification (sales4@officebazzar.com)
-  const admin1Res = await sendAdminQuotationEmail(
-    quotation,
-    salesEmail,
-    marketingEmail,
-    'ADMIN 1 (Sales)',
-    crmContext
-  );
+  // Determine assigned admin from quotation metadata
+  const isMarketing =
+    (quotation.assignedEmail && quotation.assignedEmail.toLowerCase().includes('marketing')) ||
+    (quotation.assignedTo && /marketing/i.test(quotation.assignedTo));
 
-  await createNotificationLog({
-    quotationId: quotation.id,
-    quotationNumber: quotation.quotationNumber,
-    channel: 'email_sales',
-    recipient: admin1Res.recipient,
-    status: admin1Res.status,
-    errorMessage: admin1Res.error,
-    metadata: {
-      role: 'ADMIN_1_SALES',
-      provider: admin1Res.provider,
-      messageId: admin1Res.messageId,
-      zohoQuoteId: crmContext?.zohoQuoteId,
-      missingScopes: admin1Res.missingScopes,
-    },
-  });
+  if (isMarketing) {
+    // Dispatch ONLY to ADMIN 2: marketing@officebazzar.com
+    const admin2Res = await sendAdminQuotationEmail(
+      quotation,
+      marketingEmail,
+      salesEmail,
+      'ADMIN 2 (Marketing)',
+      crmContext
+    );
 
-  results.push({
-    channel: 'email_sales',
-    recipient: admin1Res.recipient,
-    status: admin1Res.status,
-    provider: admin1Res.provider,
-    messageId: admin1Res.messageId,
-    errorMessage: admin1Res.error,
-    missingScopes: admin1Res.missingScopes,
-  });
+    await createNotificationLog({
+      quotationId: quotation.id,
+      quotationNumber: quotation.quotationNumber,
+      channel: 'email_admin',
+      recipient: admin2Res.recipient,
+      status: admin2Res.status,
+      errorMessage: admin2Res.error,
+      metadata: {
+        role: 'ADMIN_2_MARKETING',
+        assignedTo: quotation.assignedTo,
+        sequence: quotation.assignedSequence,
+        provider: admin2Res.provider,
+        messageId: admin2Res.messageId,
+        zohoQuoteId: crmContext?.zohoQuoteId,
+        missingScopes: admin2Res.missingScopes,
+      },
+    });
 
-  // 2. Dispatch ADMIN 2 Notification (marketing@officebazzar.com)
-  const admin2Res = await sendAdminQuotationEmail(
-    quotation,
-    marketingEmail,
-    salesEmail,
-    'ADMIN 2 (Marketing)',
-    crmContext
-  );
-
-  await createNotificationLog({
-    quotationId: quotation.id,
-    quotationNumber: quotation.quotationNumber,
-    channel: 'email_admin',
-    recipient: admin2Res.recipient,
-    status: admin2Res.status,
-    errorMessage: admin2Res.error,
-    metadata: {
-      role: 'ADMIN_2_MARKETING',
+    results.push({
+      channel: 'email_admin',
+      recipient: admin2Res.recipient,
+      status: admin2Res.status,
       provider: admin2Res.provider,
       messageId: admin2Res.messageId,
-      zohoQuoteId: crmContext?.zohoQuoteId,
+      errorMessage: admin2Res.error,
       missingScopes: admin2Res.missingScopes,
-    },
-  });
+    });
+  } else {
+    // Dispatch ONLY to ADMIN 1: sales4@officebazzar.com
+    const admin1Res = await sendAdminQuotationEmail(
+      quotation,
+      salesEmail,
+      marketingEmail,
+      'ADMIN 1 (Sales)',
+      crmContext
+    );
 
-  results.push({
-    channel: 'email_admin',
-    recipient: admin2Res.recipient,
-    status: admin2Res.status,
-    provider: admin2Res.provider,
-    messageId: admin2Res.messageId,
-    errorMessage: admin2Res.error,
-    missingScopes: admin2Res.missingScopes,
-  });
+    await createNotificationLog({
+      quotationId: quotation.id,
+      quotationNumber: quotation.quotationNumber,
+      channel: 'email_sales',
+      recipient: admin1Res.recipient,
+      status: admin1Res.status,
+      errorMessage: admin1Res.error,
+      metadata: {
+        role: 'ADMIN_1_SALES',
+        assignedTo: quotation.assignedTo,
+        sequence: quotation.assignedSequence,
+        provider: admin1Res.provider,
+        messageId: admin1Res.messageId,
+        zohoQuoteId: crmContext?.zohoQuoteId,
+        missingScopes: admin1Res.missingScopes,
+      },
+    });
+
+    results.push({
+      channel: 'email_sales',
+      recipient: admin1Res.recipient,
+      status: admin1Res.status,
+      provider: admin1Res.provider,
+      messageId: admin1Res.messageId,
+      errorMessage: admin1Res.error,
+      missingScopes: admin1Res.missingScopes,
+    });
+  }
 
   return results;
 }

@@ -404,9 +404,20 @@ export default function AdminQuotationEditor({
                     Customer &amp; Company Information
                   </h3>
                 </div>
-                <span className="text-[10px] font-mono font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
-                  Original RFQ: {quotation.quotationNumber}
-                </span>
+                <div className="flex items-center space-x-2">
+                  <span className="text-[10px] font-mono font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
+                    Original RFQ: {quotation.quotationNumber}
+                  </span>
+                  {quotation.assignedTo && /marketing/i.test(quotation.assignedTo) ? (
+                    <span className="text-[10px] font-bold text-purple-800 bg-purple-100 border border-purple-200 px-2 py-0.5 rounded-full">
+                      Assigned: Marketing
+                    </span>
+                  ) : quotation.assignedTo && /sales/i.test(quotation.assignedTo) ? (
+                    <span className="text-[10px] font-bold text-blue-800 bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-full">
+                      Assigned: Sales
+                    </span>
+                  ) : null}
+                </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">

@@ -198,7 +198,9 @@ export default function AdminDashboardClient({
         q.companyName.toLowerCase().includes(term) ||
         q.customerName.toLowerCase().includes(term) ||
         q.phone.includes(term) ||
-        q.email.toLowerCase().includes(term)
+        q.email.toLowerCase().includes(term) ||
+        (q.assignedTo && q.assignedTo.toLowerCase().includes(term)) ||
+        (q.assignedEmail && q.assignedEmail.toLowerCase().includes(term))
       );
     }
     return true;
@@ -980,6 +982,7 @@ export default function AdminDashboardClient({
                     <th className="py-3 px-4">RFQ Reference</th>
                     <th className="py-3 px-4">Date</th>
                     <th className="py-3 px-4">Company &amp; Customer</th>
+                    <th className="py-3 px-4 text-center">Assigned Admin</th>
                     <th className="py-3 px-4">Delivery Location</th>
                     <th className="py-3 px-4 text-center">Items</th>
                     <th className="py-3 px-4 text-right">Final / Quoted Total</th>
@@ -991,7 +994,7 @@ export default function AdminDashboardClient({
                 <tbody className="divide-y divide-slate-100 font-medium">
                   {filteredQuotations.length === 0 ? (
                     <tr>
-                      <td colSpan={9} className="py-8 text-center text-slate-400">
+                      <td colSpan={10} className="py-8 text-center text-slate-400">
                         No quotations match the selected workflow filter or search query.
                       </td>
                     </tr>
@@ -999,6 +1002,12 @@ export default function AdminDashboardClient({
                     filteredQuotations.map((q) => {
                       const finalTotal = q.grandTotal ?? q.quotedAmount ?? q.indicativeTotal ?? 0;
                       const pdfUrl = `/api/admin/quotations/${encodeURIComponent(q.quotationNumber)}/pdf`;
+                      const isMarketing =
+                        (q.assignedTo && /marketing/i.test(q.assignedTo)) ||
+                        (q.assignedEmail && q.assignedEmail.toLowerCase().includes('marketing'));
+                      const isSales =
+                        (q.assignedTo && /sales/i.test(q.assignedTo)) ||
+                        (q.assignedEmail && q.assignedEmail.toLowerCase().includes('sales'));
                       return (
                         <tr key={q.id} className="hover:bg-slate-50/60 transition-colors">
                           <td className="py-3 px-4 font-mono font-bold text-red-600 whitespace-nowrap">
@@ -1018,6 +1027,29 @@ export default function AdminDashboardClient({
                               {q.email ? ` • ${q.email}` : ''}
                               {q.phone ? ` • ${q.phone}` : ''}
                             </div>
+                          </td>
+                          <td className="py-3 px-4 text-center whitespace-nowrap">
+                            {isMarketing ? (
+                              <span
+                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-purple-50 text-purple-800 border border-purple-200"
+                                title={q.assignedTo || 'Marketing (marketing@officebazzar.com)'}
+                              >
+                                <span className="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
+                                Marketing
+                              </span>
+                            ) : isSales ? (
+                              <span
+                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-50 text-blue-800 border border-blue-200"
+                                title={q.assignedTo || 'Sales (sales4@officebazzar.com)'}
+                              >
+                                <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                                Sales (sales4)
+                              </span>
+                            ) : (
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-500">
+                                Unassigned
+                              </span>
+                            )}
                           </td>
                           <td className="py-3 px-4 text-slate-600 max-w-xs truncate">
                             {q.deliveryLocation

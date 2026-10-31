@@ -6,7 +6,8 @@ import {
   isProductInSubcategory,
 } from '@/lib/data/catalog';
 import AllCategoriesClient from '@/components/category/AllCategoriesClient';
-import { getCanonicalUrl, SITE_CONFIG } from '@/lib/seo/config';
+import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG, formatSeoTitle } from '@/lib/seo/config';
+import JsonLd from '@/components/seo/JsonLd';
 import { Subcategory } from '@/types';
 
 export const ALL_PRODUCTS_CARD: Subcategory = {
@@ -20,10 +21,11 @@ export const ALL_PRODUCTS_CARD: Subcategory = {
 };
 
 export async function generateMetadata() {
-  const metaTitle = 'All Categories & Products | Workplace Procurement | OfficeBazzar Chennai';
+  const metaTitle = formatSeoTitle('Workplace Procurement Categories');
   const metaDescription =
-    'Explore our complete workplace procurement catalog and 9 specialized categories at OfficeBazzar: All Products, Writing Instruments, Paper & Notebooks, Files & Office Organization, Printing & IT Supplies, Cleaning & Hygiene Essentials, Packaging & Dispatch, Office Pantry Essentials, Office Furniture & Accessories, and Safety & Maintenance.';
+    'Explore Office Bazzar workplace procurement categories: Office Stationery, Housekeeping & Hygiene, Printers & Technology, and Packaging Supplies across India.';
   const canonical = getCanonicalUrl('/categories');
+  const ogImageUrl = `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`;
 
   return {
     title: metaTitle,
@@ -34,11 +36,22 @@ export async function generateMetadata() {
       description: metaDescription,
       url: canonical,
       siteName: SITE_CONFIG.name,
+      locale: 'en_IN',
+      type: 'website',
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: metaTitle,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: metaTitle,
       description: metaDescription,
+      images: [ogImageUrl],
     },
   };
 }
@@ -56,7 +69,7 @@ export default async function AllCategoriesPage({
     const subQuery = resolvedSearchParams.sub ? `?sub=${resolvedSearchParams.sub}` : '';
     const viewQuery = resolvedSearchParams.view ? `?view=${resolvedSearchParams.view}` : '';
     const query = subQuery || viewQuery;
-    redirect(`/categories/${targetSlug}${query}`);
+    redirect(`/category/${targetSlug}${query}`);
   }
 
   // 1. Fetch products
@@ -76,6 +89,7 @@ export default async function AllCategoriesPage({
 
   return (
     <main className="min-h-screen bg-slate-50">
+      <JsonLd data={getBreadcrumbJsonLd([{ name: 'Home', url: '/' }, { name: 'All Categories', url: '/categories' }])} />
       <AllCategoriesClient
         categories={categories}
         productCounts={productCounts}

@@ -503,10 +503,11 @@ export default function RequestQuotePage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
                 {/* Company Name */}
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-700 mb-0.5">
+                  <label htmlFor="rfq-company-name" className="block text-[11px] font-semibold text-slate-700 mb-0.5">
                     Company Name <span className="text-rose-500">*</span>
                   </label>
                   <input
+                    id="rfq-company-name"
                     type="text"
                     required
                     value={companyName}
@@ -518,10 +519,11 @@ export default function RequestQuotePage() {
 
                 {/* GST Number */}
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-700 mb-0.5">
+                  <label htmlFor="rfq-gstin" className="block text-[11px] font-semibold text-slate-700 mb-0.5">
                     GST Number (Optional)
                   </label>
                   <input
+                    id="rfq-gstin"
                     type="text"
                     value={gstin}
                     onChange={(e) => setGstin(e.target.value.toUpperCase())}
@@ -532,10 +534,11 @@ export default function RequestQuotePage() {
 
                 {/* Contact Person */}
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-700 mb-0.5">
+                  <label htmlFor="rfq-contact-person" className="block text-[11px] font-semibold text-slate-700 mb-0.5">
                     Contact Person <span className="text-rose-500">*</span>
                   </label>
                   <input
+                    id="rfq-contact-person"
                     type="text"
                     required
                     value={contactPerson}
@@ -547,10 +550,11 @@ export default function RequestQuotePage() {
 
                 {/* Email Address */}
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-700 mb-0.5">
+                  <label htmlFor="rfq-email" className="block text-[11px] font-semibold text-slate-700 mb-0.5">
                     Email Address <span className="text-rose-500">*</span>
                   </label>
                   <input
+                    id="rfq-email"
                     type="email"
                     required
                     value={email}
@@ -562,10 +566,11 @@ export default function RequestQuotePage() {
 
                 {/* Phone Number */}
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-700 mb-0.5">
+                  <label htmlFor="rfq-phone" className="block text-[11px] font-semibold text-slate-700 mb-0.5">
                     Phone Number <span className="text-rose-500">*</span>
                   </label>
                   <input
+                    id="rfq-phone"
                     type="tel"
                     required
                     value={phone}
@@ -577,10 +582,11 @@ export default function RequestQuotePage() {
 
                 {/* Delivery PIN Code */}
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-700 mb-0.5">
+                  <label htmlFor="rfq-pincode" className="block text-[11px] font-semibold text-slate-700 mb-0.5">
                     Delivery PIN Code <span className="text-rose-500">*</span>
                   </label>
                   <input
+                    id="rfq-pincode"
                     type="text"
                     required
                     value={pincode}
@@ -594,7 +600,7 @@ export default function RequestQuotePage() {
               {/* Upload Photos Section (Compact Dropzone) */}
               <div className="space-y-1.5 pt-0.5">
                 <div className="flex items-center justify-between">
-                  <label className="block text-[11px] font-semibold text-slate-700">
+                  <label htmlFor="quote-photo-upload" className="block text-[11px] font-semibold text-slate-700">
                     Upload Photos <span className="text-slate-400 font-normal">(Optional)</span>
                   </label>
                   <span className="text-[10px] text-slate-400">
@@ -713,10 +719,11 @@ export default function RequestQuotePage() {
 
               {/* Additional Notes */}
               <div>
-                <label className="block text-[11px] font-semibold text-slate-700 mb-0.5">
+                <label htmlFor="rfq-additional-notes" className="block text-[11px] font-semibold text-slate-700 mb-0.5">
                   Additional Notes
                 </label>
                 <textarea
+                  id="rfq-additional-notes"
                   rows={2}
                   value={additionalNotes}
                   onChange={(e) => setAdditionalNotes(e.target.value)}

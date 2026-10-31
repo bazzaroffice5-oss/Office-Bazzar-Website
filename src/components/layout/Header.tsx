@@ -14,10 +14,10 @@ import { useCart } from '@/context/CartContext';
 
 
 const PRODUCT_CATEGORIES = [
-  { name: 'Office Stationery', href: '/categories/office-stationery' },
-  { name: 'Housekeeping & Hygiene', href: '/categories/housekeeping-hygiene' },
-  { name: 'Printers & Technology', href: '/categories/printers-technology' },
-  { name: 'Packaging Supplies', href: '/categories/packaging-supplies' },
+  { name: 'Office Stationery', href: '/category/office-stationery' },
+  { name: 'Housekeeping & Hygiene', href: '/category/housekeeping-hygiene' },
+  { name: 'Printers & Technology', href: '/category/printers-technology' },
+  { name: 'Packaging Supplies', href: '/category/packaging-supplies' },
 ];
 
 export default function Header() {

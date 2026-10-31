@@ -6,9 +6,9 @@ import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Shipping & Delivery Policy | Officebazzar E-Store Private Limited',
+  title: 'Shipping & Corporate Delivery Policy India',
   description:
-    'Dispatch timelines, free shipping thresholds, Royapettah Chennai hub dispatch schedules, and pan-India corporate logistics coverage.',
+    'Learn about Office Bazzar dispatch timelines, free corporate delivery thresholds, multi-branch fulfillment hubs, and pan-India B2B logistics coverage.',
   path: '/shipping-policy',
 });
 

@@ -33,8 +33,10 @@ export interface ZohoProductMappingItem {
 }
 
 // In-memory cache for high-speed edge retrieval
+const DUPLICATE_INACTIVE_SLUGS = new Set(['kangaro-staplers-hd-10d-1', 'tissue-paper-napkin-1']);
 let cachedProducts: Product[] | null = null;
 let lastCacheSync = 0;
+let inflightSyncPromise: Promise<Product[]> | null = null;
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes TTL
 
 // Fast SKU & ID lookup maps
@@ -79,23 +81,19 @@ export function getAllZohoProductMappings(): Record<string, string> {
  * Fetch all active products directly from Zoho CRM Products module.
  * Automatically synchronizes with website catalog metadata (images, categories, slugs).
  */
-export async function getProductsFromZoho(forceRefresh = false): Promise<Product[]> {
+async function syncProductsFromZohoInternal(): Promise<Product[]> {
   const now = Date.now();
-  if (!forceRefresh && cachedProducts && now - lastCacheSync < CACHE_TTL_MS) {
-    return cachedProducts;
-  }
-
-  // Base products list initialized from catalog
   const productsMap = new Map<string, Product>();
   for (const p of INITIAL_PRODUCTS) {
     const zohoInfo = mappingByWebsiteId.get(p.id) || mappingBySku.get(p.sku);
+    const isDup = DUPLICATE_INACTIVE_SLUGS.has(p.slug);
     productsMap.set(p.sku, {
       ...p,
+      isActive: isDup ? false : p.isActive,
       zohoProductId: zohoInfo?.zohoId,
     } as Product & { zohoProductId?: string });
   }
 
-  // If Zoho CRM is configured, query Zoho CRM Products API
   if (await isZohoConfigured()) {
     try {
       let hasMore = true;
@@ -117,17 +115,16 @@ export async function getProductsFromZoho(forceRefresh = false): Promise<Product
         pageToken = res?.info?.next_page_token;
       }
 
-      // Merge Zoho CRM authoritative live state into product catalog
       for (const zRec of zohoRecords) {
         const sku = zRec.Product_Code?.trim();
         if (!sku) continue;
 
         const existing = productsMap.get(sku);
         if (existing) {
-          // Update live pricing and stock from Zoho CRM
           const price = zRec.Unit_Price !== undefined ? Number(zRec.Unit_Price) : (Number(existing.price) || 0);
           const stock = zRec.Qty_in_Stock !== undefined ? Number(zRec.Qty_in_Stock) : (Number(existing.stockQuantity) || 0);
-          const isActive = zRec.Product_Active !== undefined ? zRec.Product_Active : existing.isActive;
+          const isDup = DUPLICATE_INACTIVE_SLUGS.has(existing.slug);
+          const isActive = isDup ? false : (zRec.Product_Active !== undefined ? zRec.Product_Active : existing.isActive);
 
           productsMap.set(sku, {
             ...existing,
@@ -137,7 +134,6 @@ export async function getProductsFromZoho(forceRefresh = false): Promise<Product
             zohoProductId: zRec.id,
           } as Product & { zohoProductId?: string });
 
-          // Update memory mapping index
           mappingBySku.set(sku, {
             zohoId: zRec.id,
             sku,
@@ -168,10 +164,35 @@ export async function getProductsFromZoho(forceRefresh = false): Promise<Product
   return cachedProducts;
 }
 
+export async function getProductsFromZoho(forceRefresh = false): Promise<Product[]> {
+  const now = Date.now();
+  if (!forceRefresh && cachedProducts && now - lastCacheSync < CACHE_TTL_MS) {
+    return cachedProducts;
+  }
+
+  // Stale-While-Revalidate: return stale cachedProducts immediately and refresh in background
+  if (!forceRefresh && cachedProducts) {
+    if (!inflightSyncPromise) {
+      inflightSyncPromise = syncProductsFromZohoInternal().finally(() => {
+        inflightSyncPromise = null;
+      });
+    }
+    return cachedProducts;
+  }
+
+  if (!inflightSyncPromise || forceRefresh) {
+    inflightSyncPromise = syncProductsFromZohoInternal().finally(() => {
+      inflightSyncPromise = null;
+    });
+  }
+  return inflightSyncPromise;
+}
+
 /**
  * Invalidate the product cache to force fresh retrieval from Zoho CRM on next request
  */
 export function invalidateZohoProductCache(): void {
   cachedProducts = null;
   lastCacheSync = 0;
+  inflightSyncPromise = null;
 }

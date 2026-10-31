@@ -151,8 +151,9 @@ export default function BulkOrdersClient() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Company / Organization *</label>
+                    <label htmlFor="bulk-company-name" className="block text-xs font-bold text-slate-700 mb-1">Company / Organization *</label>
                     <input
+                      id="bulk-company-name"
                       type="text"
                       required
                       placeholder="e.g., Tech Solutions Pvt Ltd"
@@ -162,8 +163,9 @@ export default function BulkOrdersClient() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Contact Person *</label>
+                    <label htmlFor="bulk-contact-person" className="block text-xs font-bold text-slate-700 mb-1">Contact Person *</label>
                     <input
+                      id="bulk-contact-person"
                       type="text"
                       required
                       placeholder="e.g., Rajesh Kumar (Procurement Mgr)"
@@ -176,8 +178,9 @@ export default function BulkOrdersClient() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Official Email *</label>
+                    <label htmlFor="bulk-official-email" className="block text-xs font-bold text-slate-700 mb-1">Official Email *</label>
                     <input
+                      id="bulk-official-email"
                       type="email"
                       required
                       placeholder="procurement@company.com"
@@ -187,8 +190,9 @@ export default function BulkOrdersClient() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Direct Phone / Mobile *</label>
+                    <label htmlFor="bulk-phone" className="block text-xs font-bold text-slate-700 mb-1">Direct Phone / Mobile *</label>
                     <input
+                      id="bulk-phone"
                       type="tel"
                       required
                       placeholder="+91 98765 43210"
@@ -201,8 +205,9 @@ export default function BulkOrdersClient() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Corporate GSTIN (Optional)</label>
+                    <label htmlFor="bulk-gstin" className="block text-xs font-bold text-slate-700 mb-1">Corporate GSTIN (Optional)</label>
                     <input
+                      id="bulk-gstin"
                       type="text"
                       placeholder="33AAAAA0000A1Z5"
                       value={gstin}
@@ -211,8 +216,9 @@ export default function BulkOrdersClient() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Primary Category</label>
+                    <label htmlFor="bulk-primary-category" className="block text-xs font-bold text-slate-700 mb-1">Primary Category</label>
                     <select
+                      id="bulk-primary-category"
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
                       className="w-full text-xs px-3.5 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none bg-white"
@@ -228,8 +234,9 @@ export default function BulkOrdersClient() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Specific SKUs / Quantities / Brands *</label>
+                  <label htmlFor="bulk-requirements" className="block text-xs font-bold text-slate-700 mb-1">Specific SKUs / Quantities / Brands *</label>
                   <textarea
+                    id="bulk-requirements"
                     required
                     rows={4}
                     placeholder="List required items, pack sizes, and brands (e.g. 100 Cartons JK Copier Paper A4, 20 Units Taski R2 5L, 10 Units 120L Mobile Garbage Bins...)"
@@ -241,8 +248,9 @@ export default function BulkOrdersClient() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Estimated Quantity / Frequency</label>
+                    <label htmlFor="bulk-estimated-quantity" className="block text-xs font-bold text-slate-700 mb-1">Estimated Quantity / Frequency</label>
                     <input
+                      id="bulk-estimated-quantity"
                       type="text"
                       value={estimatedQuantity}
                       onChange={(e) => setEstimatedQuantity(e.target.value)}
@@ -250,8 +258,9 @@ export default function BulkOrdersClient() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Delivery Destination</label>
+                    <label htmlFor="bulk-delivery-destination" className="block text-xs font-bold text-slate-700 mb-1">Delivery Destination</label>
                     <input
+                      id="bulk-delivery-destination"
                       type="text"
                       value={deliveryLocation}
                       onChange={(e) => setDeliveryLocation(e.target.value)}

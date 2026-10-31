@@ -4,37 +4,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react';
 import { BLOG_POSTS } from '@/lib/data/blog';
-import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG } from '@/lib/seo/config';
+import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
-export const metadata: Metadata = {
-  title: 'Latest Insights & Corporate Procurement Guides | OfficeBazzar India',
+export const metadata: Metadata = constructMetadata({
+  title: 'Corporate Procurement & Facility Guides',
   description:
-    'Expert procurement insights, workplace housekeeping guidelines, industrial dustbin sizing, Diversey Taski chemical manuals, and GST input tax credit tips for commercial offices.',
-  alternates: {
-    canonical: getCanonicalUrl('/blogs'),
-  },
-  openGraph: {
-    title: 'Latest Insights & Corporate Procurement Guides | OfficeBazzar',
-    description:
-      'Expert advice on corporate office stationery, commercial cleaning chemicals, heavy-duty paper shredders, and GST input tax credit procurement.',
-    url: getCanonicalUrl('/blogs'),
-    siteName: SITE_CONFIG.name,
-    locale: 'en_IN',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Latest Insights & Procurement Guides | OfficeBazzar',
-    description:
-      'Expert advice on corporate office stationery, commercial cleaning chemicals, and GST procurement.',
-  },
-};
+    'Read expert guides on corporate office stationery procurement, workplace housekeeping checklists, industrial hygiene supplies, and B2B facility management in India.',
+  path: '/blogs',
+});
 
 export default function BlogsPage() {
   const displayedBlogs = [...BLOG_POSTS]
     .sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime())
-    .slice(0, 2);
+    ;
 
   const breadcrumbJsonLd = getBreadcrumbJsonLd([
     { name: 'Home', url: '/' },

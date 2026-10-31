@@ -15,7 +15,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/contact', changeFrequency: 'monthly' as const, priority: 0.7 },
     { path: '/faq', changeFrequency: 'monthly' as const, priority: 0.7 },
     { path: '/careers', changeFrequency: 'monthly' as const, priority: 0.65 },
-    { path: '/track-order', changeFrequency: 'monthly' as const, priority: 0.6 },
     { path: '/shipping-policy', changeFrequency: 'yearly' as const, priority: 0.5 },
     { path: '/returns-refunds', changeFrequency: 'yearly' as const, priority: 0.5 },
     { path: '/cancellation-policy', changeFrequency: 'yearly' as const, priority: 0.5 },
@@ -41,8 +40,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 3. Dynamic Products
   const { products } = await getProducts({ limit: 1000 });
+  const seenSlugs = new Set<string>(['kangaro-staplers-hd-10d-1', 'tissue-paper-napkin-1']);
   const productRoutes: MetadataRoute.Sitemap = products
-    .filter((prod) => prod.isActive !== false)
+    .filter((prod) => {
+      if (prod.isActive === false || seenSlugs.has(prod.slug)) return false;
+      seenSlugs.add(prod.slug);
+      return true;
+    })
     .map((prod) => ({
       url: getCanonicalUrl(`/product/${prod.slug}`),
       lastModified: new Date('2026-07-22T00:00:00.000Z'),

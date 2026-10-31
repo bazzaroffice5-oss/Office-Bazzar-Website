@@ -9,7 +9,6 @@ import {
   SITE_CONFIG,
   getOrganizationJsonLd,
   getWebSiteJsonLd,
-  getLocalBusinessJsonLd,
 } from '@/lib/seo/config';
 
 const inter = Inter({
@@ -27,22 +26,18 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
-  title: {
-    default: 'Office Bazzar | Office Supplies & Corporate Procurement India',
-    template: '%s | OfficeBazzar India',
-  },
+  title: 'Office Bazzar | Office Supplies & Corporate Procurement India',
   description:
     'Office Bazzar provides office stationery, housekeeping and hygiene products, printer consumables and packaging supplies for businesses across India. Explore corporate and bulk procurement solutions.',
   keywords: [
-    'Office Stationery Chennai',
-    'Housekeeping Materials Chennai',
+    'Office Supplies India',
+    'Corporate Procurement India',
+    'Office Stationery Wholesale',
+    'Housekeeping & Hygiene Products',
     'Industrial Dustbin Suppliers',
-    'Office Supplies Wholesale',
-    'JK Copier Paper',
-    'Taski Chemicals Supplier Chennai',
-    'Computer Consumables',
-    'OfficeBazzar',
-    'Corporate Procurement Partner',
+    'Printer Consumables & Toner',
+    'Packaging Supplies Wholesale',
+    'Office Bazzar',
   ],
   authors: [{ name: SITE_CONFIG.legalName, url: `${SITE_CONFIG.url}/` }],
   creator: SITE_CONFIG.legalName,
@@ -107,7 +102,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const organizationSchema = getOrganizationJsonLd();
   const websiteSchema = getWebSiteJsonLd();
-  const localBusinessSchema = getLocalBusinessJsonLd();
 
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`} data-scroll-behavior="smooth">
@@ -116,7 +110,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <JsonLd data={organizationSchema} id="organization-schema-root" />
         <JsonLd data={websiteSchema} id="website-schema-root" />
-        <JsonLd data={localBusinessSchema} id="local-business-schema-root" />
         <Providers>
           <Header />
           <div className="flex-1">{children}</div>

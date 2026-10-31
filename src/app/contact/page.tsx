@@ -7,9 +7,9 @@ import { constructMetadata, getBreadcrumbJsonLd, getLocalBusinessJsonLd } from '
 import JsonLd from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Contact Us | Officebazzar E-Store Private Limited, Royapettah, Chennai',
+  title: 'Contact Us - Corporate Procurement & Branch Offices',
   description:
-    'Get in touch with Officebazzar E-Store Private Limited. Visit our headquarters at Officebazzar Tower, Royapettah, Chennai, or call our procurement desk at +91 72008 00040 / sales4@officebazzar.com.',
+    'Contact Office Bazzar headquarters in Chennai or regional branches in Bangalore, Mumbai, and Hyderabad. Call +91 72008 00040 or email sales4@officebazzar.com.',
   path: '/contact',
   keywords: [
     'contact Office Bazzar',

@@ -5,7 +5,7 @@ import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Corporate Bulk Orders & B2B RFQ | Wholesale Institutional Supply',
+  title: 'Corporate Bulk Orders & B2B Rate Contracts',
   description:
     'Submit wholesale RFQ and corporate bulk supply inquiries to Office Bazzar. Tiered enterprise pricing, GST tax compliance, and scheduled deliveries across India.',
   path: '/bulk-orders',

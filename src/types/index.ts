@@ -305,7 +305,10 @@ export interface Quotation {
   paymentTerms?: string;
   termsAndConditions?: string;
   status: QuotationStatus;
-  assignedTo?: string; // Designated sales manager / rep
+  assignedTo?: string; // Designated sales manager / rep (e.g. Sales or Marketing)
+  assignedEmail?: string; // Designated admin email (sales4@officebazzar.com or marketing@officebazzar.com)
+  assignedAt?: string; // ISO timestamp of initial lead assignment
+  assignedSequence?: number; // Sequential assignment index
   internalNotes?: string; // Protected internal notes hidden from customers
   quotedAmount?: number; // Official final amount quoted by sales team
   quotationDocumentUrl?: string; // Link to generated quote document

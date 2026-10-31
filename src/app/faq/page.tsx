@@ -1,7 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import FAQClient, { FAQItem } from '@/components/faq/FAQClient';
-import { getCanonicalUrl, getFaqJsonLd, getBreadcrumbJsonLd, SITE_CONFIG } from '@/lib/seo/config';
+import { constructMetadata, getFaqJsonLd, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 const faqs: FAQItem[] = [
@@ -61,29 +61,12 @@ const faqs: FAQItem[] = [
   },
 ];
 
-export const metadata: Metadata = {
-  title: 'Frequently Asked Questions (FAQ) | OfficeBazzar India',
+export const metadata: Metadata = constructMetadata({
+  title: 'Frequently Asked Questions (FAQ)',
   description:
-    'Find clear answers on 18% GST Input Tax Credit invoicing, bulk order quotations, Royapettah Chennai warehouse dispatch timelines, and 7-day return policy.',
-  alternates: {
-    canonical: getCanonicalUrl('/faq'),
-  },
-  openGraph: {
-    title: 'Frequently Asked Questions (FAQ) | OfficeBazzar',
-    description:
-      'Got questions about GST invoices, corporate bulk quotes, or Chennai delivery timelines? Check our comprehensive procurement FAQ.',
-    url: getCanonicalUrl('/faq'),
-    siteName: SITE_CONFIG.name,
-    locale: 'en_IN',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Frequently Asked Questions | OfficeBazzar',
-    description:
-      'Answers to corporate procurement questions: GST invoices, delivery timelines, and bulk discounts.',
-  },
-};
+    'Find clear answers on 18% GST Input Tax Credit invoicing, corporate bulk order quotations, warehouse dispatch timelines across India, and our 7-day return policy.',
+  path: '/faq',
+});
 
 export default function FAQPage() {
   const faqJsonLd = getFaqJsonLd(faqs);

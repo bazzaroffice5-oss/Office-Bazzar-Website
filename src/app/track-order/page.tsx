@@ -5,10 +5,11 @@ import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Track Your Order | Live Dispatch & Shipment Status',
+  title: 'Track Corporate Order & Shipment Status',
   description:
-    'Track your Office Bazzar institutional orders and corporate consignments with your order number. Live dispatch status from our Royapettah Chennai hub.',
+    'Track your Office Bazzar institutional orders and corporate consignments with your order number. Live dispatch status and pan-India B2B delivery tracking.',
   path: '/track-order',
+  noIndex: true,
 });
 
 export default function TrackOrderPage() {

@@ -27,7 +27,7 @@ export default function CategoryLandingClient({
   allProducts,
   initialView,
   initialSub,
-  baseRoute = '/categories',
+  baseRoute = '/category',
 }: CategoryLandingClientProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -197,6 +197,29 @@ export default function CategoryLandingClient({
             </Link>
           ))}
         </div>
+        {/* Category B2B Procurement Overview */}
+        <section className="mt-10 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-2xs space-y-4">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+            Bulk {category.name} Procurement &amp; Corporate Supply Across India
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            {category.description} Office Bazzar supplies 100% genuine {category.name.toLowerCase()} products for corporate offices, IT parks, manufacturing units, healthcare institutions, and educational campuses across India, backed by our corporate headquarters in Chennai and regional branches in Bangalore, Mumbai, and Hyderabad.
+          </p>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Every institutional order includes a compliant GST tax invoice with HSN codes for full Input Tax Credit (ITC). Procurement teams can add individual SKUs to their quotation cart or request an Annual Rate Contract (ARC) for recurring monthly branch deliveries.
+          </p>
+          <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-semibold">
+            <Link href="/bulk-orders" className="text-[#004b87] hover:underline">
+              Request Bulk Rate Contract →
+            </Link>
+            <Link href="/request-quote" className="text-[#16a34a] hover:underline">
+              Submit Custom RFQ →
+            </Link>
+            <Link href="/faq" className="text-slate-600 hover:text-slate-900 hover:underline">
+              GST &amp; Delivery FAQ →
+            </Link>
+          </div>
+        </section>
       </div>
     );
   }
@@ -205,7 +228,7 @@ export default function CategoryLandingClient({
   // VIEW 2: PRODUCT LISTING PAGE
   // Opens ONLY after user selects "All Products" or a Subcategory
   // ==========================================
-  const activeTitle = isViewingAll ? `All ${category.name} Products` : (activeSubcategory?.name || category.name);
+  const activeTitle = isViewingAll ? `All ${category.name} Products` : (activeSubcategory ? `${activeSubcategory.name} — ${category.name}` : category.name);
   const activeSubtitle = isViewingAll
     ? `Displaying all ${displayedProducts.length} products across ${category.subcategories?.length || 0} subcategories in ${category.name}`
     : `Displaying all ${displayedProducts.length} products in ${activeSubcategory?.name}`;
@@ -309,14 +332,15 @@ export default function CategoryLandingClient({
       </div>
 
       {/* Responsive Product Cards Grid */}
+      <h2 className="sr-only">{activeTitle} Catalogue</h2>
       {paginatedProducts.length === 0 ? (
         <div className="w-full bg-white rounded-2xl border border-gray-200 p-8 sm:p-12 text-center space-y-4 my-8">
           <div className="w-14 h-14 rounded-full bg-blue-50 text-[#004b87] mx-auto flex items-center justify-center">
             <Package className="w-7 h-7 text-[#004b87]" />
           </div>
-          <h3 className="text-xl font-bold text-gray-900">
+          <h2 className="text-xl font-bold text-gray-900">
             {categoryProducts.length === 0 ? 'Corporate Catalogue Available on RFQ' : 'No products found in this subcategory'}
-          </h3>
+          </h2>
           <p className="text-sm text-gray-600 max-w-lg mx-auto">
             {categoryProducts.length === 0
               ? `${category.name} supplies are available under our Annual Rate Contract (ARC) and bulk B2B procurement agreements. Submit an RFQ with your requirement specs.`
@@ -392,6 +416,29 @@ export default function CategoryLandingClient({
           </button>
         </div>
       )}
+        {/* Category B2B Procurement Overview */}
+        <section className="mt-10 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-2xs space-y-4">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+            Bulk {category.name} Procurement &amp; Corporate Supply Across India
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            {category.description} Office Bazzar supplies 100% genuine {category.name.toLowerCase()} products for corporate offices, IT parks, manufacturing units, healthcare institutions, and educational campuses across India, backed by our corporate headquarters in Chennai and regional branches in Bangalore, Mumbai, and Hyderabad.
+          </p>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Every institutional order includes a compliant GST tax invoice with HSN codes for full Input Tax Credit (ITC). Procurement teams can add individual SKUs to their quotation cart or request an Annual Rate Contract (ARC) for recurring monthly branch deliveries.
+          </p>
+          <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-semibold">
+            <Link href="/bulk-orders" className="text-[#004b87] hover:underline">
+              Request Bulk Rate Contract →
+            </Link>
+            <Link href="/request-quote" className="text-[#16a34a] hover:underline">
+              Submit Custom RFQ →
+            </Link>
+            <Link href="/faq" className="text-slate-600 hover:text-slate-900 hover:underline">
+              GST &amp; Delivery FAQ →
+            </Link>
+          </div>
+        </section>
     </div>
   );
 }

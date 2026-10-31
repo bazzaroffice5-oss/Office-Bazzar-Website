@@ -279,6 +279,62 @@ export default function ProductDetailClient({
         </div>
       </div>
 
+
+      {/* Corporate B2B Procurement & GST Invoicing Specifications */}
+      <section
+        className="mt-12 pt-8 border-t border-gray-100"
+        aria-labelledby="b2b-procurement-specs-heading"
+      >
+        <div className="bg-slate-50/80 rounded-2xl border border-slate-200/90 p-6 sm:p-8 space-y-4">
+          <h2
+            id="b2b-procurement-specs-heading"
+            className="text-lg sm:text-xl font-bold text-gray-900"
+          >
+            Corporate Bulk Supply &amp; GST Invoicing for {product.name}
+          </h2>
+          <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+            <strong>{product.name}</strong> (Product Code: <span className="font-mono">{product.sku || product.id}</span>) by <strong>{product.brandName}</strong> is supplied in <strong>{product.packSize || 'Standard Pack'}</strong> units under our <strong>{product.categoryName}</strong> corporate catalogue. Office Bazzar supports single-location and multi-branch enterprise procurement across India—with direct warehouse dispatch from Chennai and regional branches in Bangalore, Mumbai, and Hyderabad.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+            <div className="bg-white p-4 rounded-xl border border-slate-200/80">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1">
+                GST Tax Invoice ({product.gstPercent || 18}% GST)
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Supplied with a 100% compliant B2B GST tax invoice and HSN code so your finance team can claim full Input Tax Credit (ITC).
+              </p>
+            </div>
+            <div className="bg-white p-4 rounded-xl border border-slate-200/80">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1">
+                Volume RFQ &amp; Rate Contracts
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Add {product.name} to your Quote Cart or include it in an Annual Rate Contract (ARC) for locked-in wholesale corporate pricing.
+              </p>
+            </div>
+            <div className="bg-white p-4 rounded-xl border border-slate-200/80">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1">
+                Pan-India Corporate Delivery
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Fast 24–48 hour dispatch for in-stock items across major business corridors and scheduled monthly replenishment for enterprise accounts.
+              </p>
+            </div>
+          </div>
+          <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-semibold">
+            <Link href="/request-quote" className="text-[#ea580c] hover:underline">
+              Submit Quotation Request (RFQ) →
+            </Link>
+            <Link href="/bulk-orders" className="text-[#004b87] hover:underline">
+              Explore Corporate Bulk Orders →
+            </Link>
+            <Link href="/faq" className="text-slate-600 hover:text-slate-900 hover:underline">
+              View GST &amp; Procurement FAQ →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* 3. Similar Products Section */}
       {relatedProducts.length > 0 && (
         <section

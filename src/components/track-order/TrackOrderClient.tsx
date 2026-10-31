@@ -76,9 +76,14 @@ export default function TrackOrderClient() {
           className="flex items-center max-w-md mx-auto pt-2"
         >
           <div className="relative flex-1">
+            <label htmlFor="track-order-number-input" className="sr-only">
+              Order Reference Number
+            </label>
             <input
+              id="track-order-number-input"
               type="text"
               required
+              aria-label="Enter Order Reference Number (e.g. OB-2026-1001)"
               value={orderQuery}
               onChange={(e) => setOrderQuery(e.target.value.toUpperCase())}
               placeholder="e.g. OB-2026-1001"
