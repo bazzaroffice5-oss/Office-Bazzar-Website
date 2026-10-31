@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { exchangeAuthorizationCode } from '@/lib/zoho/client';
+import { exchangeAuthorizationCode, buildZohoAuthorizationUrl, ZOHO_REQUIRED_SCOPES } from '@/lib/zoho/client';
+import { getZohoTokenStoreStatus } from '@/lib/zoho/token-store';
 
 export const dynamic = 'force-dynamic';
 
@@ -7,7 +8,9 @@ function renderHtmlResponse(
   status: 'success' | 'error',
   title: string,
   message: string,
-  httpStatus: number = 200
+  httpStatus: number = 200,
+  actionUrl: string = '/',
+  actionLabel: string = 'Return to Office Bazzar'
 ): Response {
   const isSuccess = status === 'success';
   const iconColor = isSuccess ? '#059669' : '#dc2626';
@@ -37,7 +40,7 @@ function renderHtmlResponse(
     }
     .card {
       background: #ffffff;
-      max-width: 500px;
+      max-width: 520px;
       width: 100%;
       border-radius: 16px;
       box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
@@ -83,9 +86,6 @@ function renderHtmlResponse(
     .btn:hover {
       background: #0369a1;
     }
-    .btn:active {
-      transform: scale(0.98);
-    }
     .footer {
       margin-top: 24px;
       font-size: 12px;
@@ -100,7 +100,7 @@ function renderHtmlResponse(
     </div>
     <h1>${title}</h1>
     <p>${message}</p>
-    <a href="/" class="btn">Return to Office Bazzar</a>
+    <a href="${actionUrl}" class="btn">${actionLabel}</a>
     <div class="footer">
       Officebazzar E-Store Private Limited &bull; Secure Backend Integration
     </div>
@@ -118,18 +118,14 @@ function renderHtmlResponse(
 }
 
 function resolveRedirectUri(req: Request): string {
-  // If explicitly configured in environment, prefer it
   if (process.env.ZOHO_REDIRECT_URI?.trim()) {
     return process.env.ZOHO_REDIRECT_URI.trim();
   }
 
-  // Registered production redirect URI
   const defaultProductionUri = 'https://officebazzar.com/api/zoho/callback';
-
   const host = req.headers.get('host') || '';
   if (host.includes('localhost') || host.includes('127.0.0.1')) {
-    const proto = host.includes('localhost') ? 'http' : 'http';
-    return `${proto}://${host}/api/zoho/callback`;
+    return `http://${host}/api/zoho/callback`;
   }
 
   return defaultProductionUri;
@@ -138,12 +134,25 @@ function resolveRedirectUri(req: Request): string {
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
+    const action = searchParams.get('action');
     const code = searchParams.get('code');
     const error = searchParams.get('error');
     const accountsServer = searchParams.get('accounts-server');
     const acceptsJson = req.headers.get('accept')?.includes('application/json');
 
-    // 1. Handle user cancellation or Zoho OAuth errors
+    // Safe diagnostic status check (never exposes secret values)
+    if (action === 'status') {
+      const storeStatus = await getZohoTokenStoreStatus();
+      return NextResponse.json({
+        success: true,
+        activeSource: storeStatus.activeSource,
+        vaultUpdatedAt: storeStatus.vaultUpdatedAt,
+        tokenFingerprint: storeStatus.tokenFingerprint,
+        requiredScopes: ZOHO_REQUIRED_SCOPES,
+        authorizeEndpoint: 'https://officebazzar.com/api/zoho/authorize',
+      });
+    }
+
     if (error) {
       console.warn(`[Zoho OAuth Callback] Error reported by Zoho: ${error}`);
       if (acceptsJson) {
@@ -155,32 +164,37 @@ export async function GET(req: Request) {
       return renderHtmlResponse(
         'error',
         'Zoho Authorization Cancelled',
-        'The Zoho CRM authorization request was cancelled or denied. Please retry authorization from the Zoho API Console if this was unexpected.',
-        400
+        'The Zoho CRM authorization request was cancelled or denied. Click below to retry authorization with the required scopes.',
+        400,
+        '/api/zoho/authorize',
+        'Retry Zoho Authorization'
       );
     }
 
-    // 2. Validate authorization code
     if (!code || !code.trim()) {
-      console.warn('[Zoho OAuth Callback] Callback invoked without authorization code.');
+      const redirectUri = resolveRedirectUri(req);
+      const authUrl = buildZohoAuthorizationUrl(redirectUri);
       if (acceptsJson) {
         return NextResponse.json(
-          { success: false, error: 'Missing authorization code in request.' },
+          {
+            success: false,
+            error: 'Missing authorization code in request.',
+            authorizeEndpoint: '/api/zoho/authorize',
+          },
           { status: 400 }
         );
       }
       return renderHtmlResponse(
         'error',
         'Authorization Code Missing',
-        'No authorization grant code was provided in the callback. Please initiate authorization from your Zoho Developer Console.',
-        400
+        'No authorization grant code was provided in the callback. Click the button below to initiate Zoho OAuth authorization with offline access and consent.',
+        400,
+        authUrl,
+        'Authorize Zoho CRM Now'
       );
     }
 
-    // 3. Resolve registered redirect URI
     const redirectUri = resolveRedirectUri(req);
-
-    // 4. Server-side token exchange
     const exchangeResult = await exchangeAuthorizationCode(
       code,
       redirectUri,
@@ -198,28 +212,37 @@ export async function GET(req: Request) {
       return renderHtmlResponse(
         'error',
         'Zoho Authorization Failed',
-        'We were unable to exchange the authorization code with Zoho CRM. Please verify that your Client ID, Client Secret, and Registered Redirect URI match the Zoho API Console settings.',
-        502
+        'We were unable to exchange the authorization code with Zoho CRM. Click below to initiate a fresh authorization grant.',
+        502,
+        '/api/zoho/authorize',
+        'Retry Zoho Authorization'
       );
     }
 
-    // 5. Successful authorization
-    console.log('[Zoho OAuth Callback] Authorization code successfully exchanged for tokens.');
+    const storeStatus = await getZohoTokenStoreStatus();
 
     if (acceptsJson) {
       return NextResponse.json(
         {
           success: true,
-          message: 'Zoho CRM authorization successfully completed and verified.',
+          hasNewRefreshToken: exchangeResult.hasNewRefreshToken,
+          persistenceSource: exchangeResult.persistenceSource,
+          activeSource: storeStatus.activeSource,
+          tokenFingerprint: storeStatus.tokenFingerprint,
+          message: 'Zoho CRM authorization successfully completed and persisted in encrypted vault.',
         },
         { status: 200 }
       );
     }
 
+    const statusDetail = exchangeResult.hasNewRefreshToken
+      ? `A new offline refresh token was issued and securely persisted in the encrypted backend vault (${exchangeResult.persistenceSource}). All serverless containers are now synchronized.`
+      : `Access token synchronized (${exchangeResult.persistenceSource}). Note: Zoho did not return a new refresh_token because prompt=consent was not set on the authorization request. Use /api/zoho/authorize to force a new offline refresh token.`;
+
     return renderHtmlResponse(
       'success',
       'Zoho CRM Authorization Successful',
-      'Office Bazzar has been successfully connected with Zoho CRM. The authorization grant has been securely exchanged and synchronized with the backend.',
+      `Office Bazzar has been connected with Zoho CRM. ${statusDetail}`,
       200
     );
   } catch (err: unknown) {
@@ -236,14 +259,14 @@ export async function GET(req: Request) {
     return renderHtmlResponse(
       'error',
       'Authorization Error',
-      'An unexpected error occurred while processing the Zoho CRM authorization. Please check server logs and try again.',
-      500
+      'An unexpected error occurred while processing the Zoho CRM authorization. Please try again.',
+      500,
+      '/api/zoho/authorize',
+      'Retry Zoho Authorization'
     );
   }
 }
 
 export async function POST(req: Request) {
-  // Delegate POST to same handler logic in case token/code is forwarded as form-data
   return GET(req);
 }
-

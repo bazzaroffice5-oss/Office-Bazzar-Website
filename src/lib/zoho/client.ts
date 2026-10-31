@@ -3,17 +3,24 @@
  *
  * Securely manages Zoho OAuth 2.0 access tokens via the offline refresh token grant
  * and exchanges authorization codes from the OAuth callback.
- * Persists the short-lived access token in a local/tmp file cache so concurrent build workers
- * and serverless invocations do not hit Zoho's token refresh rate limit.
+ * Persists refresh and access tokens in the AES-256-GCM Encrypted Persistent Vault
+ * (`src/lib/zoho/token-store.ts`) as well as a local disk cache so all Vercel serverless
+ * containers, cold starts, and build workers share the active credentials without
+ * hitting Zoho's token refresh rate limit.
  * All credentials execute strictly on the server tier and are never exposed to the browser.
  */
 
 import {
   getPersistedZohoRefreshToken,
   persistZohoRefreshToken,
+  persistZohoAccessTokenInVault,
+  getVaultCachedAccessToken,
   clearTokenStoreCache,
   setCachedRefreshToken,
 } from './token-store';
+
+export const ZOHO_REQUIRED_SCOPES =
+  'ZohoCRM.modules.ALL,ZohoCRM.settings.ALL,ZohoCRM.send_mail.all.CREATE';
 
 function getServerNodeFs(): { fs: any; path: any; os: any } | null {
   if (typeof window !== 'undefined') return null;
@@ -125,7 +132,34 @@ export function getZohoApiDomain(): string {
 }
 
 /**
- * Get the active refresh token from persistent storage, runtime cache, or environment
+ * Construct the Zoho OAuth 2.0 Authorization URL for the existing Office Bazzar Website Integration app.
+ * Enforces:
+ * - scope=ZohoCRM.modules.ALL,ZohoCRM.settings.ALL,ZohoCRM.send_mail.all.CREATE
+ * - access_type=offline
+ * - prompt=consent (mandatory so Zoho always issues a fresh refresh_token with the updated scopes)
+ */
+export function buildZohoAuthorizationUrl(redirectUriOverride?: string): string {
+  const clientId = (process.env.ZOHO_CLIENT_ID || '').trim();
+  const accountsUrl = getZohoAccountsUrl();
+  const redirectUri =
+    redirectUriOverride ||
+    (process.env.ZOHO_REDIRECT_URI || '').trim() ||
+    'https://officebazzar.com/api/zoho/callback';
+
+  const params = new URLSearchParams({
+    scope: ZOHO_REQUIRED_SCOPES,
+    client_id: clientId,
+    response_type: 'code',
+    access_type: 'offline',
+    prompt: 'consent',
+    redirect_uri: redirectUri,
+  });
+
+  return `${accountsUrl}/oauth/v2/auth?${params.toString()}`;
+}
+
+/**
+ * Get the active refresh token from persistent encrypted vault, runtime cache, or environment
  */
 export async function getZohoRefreshToken(): Promise<string | null> {
   return getPersistedZohoRefreshToken();
@@ -148,11 +182,11 @@ export async function isZohoConfigured(): Promise<boolean> {
 
   return Boolean(
     clientId &&
-    clientSecret &&
-    refreshToken &&
-    !clientId.includes('your-') &&
-    !clientSecret.includes('your-') &&
-    !refreshToken.includes('your-')
+      clientSecret &&
+      refreshToken &&
+      !clientId.includes('your-') &&
+      !clientSecret.includes('your-') &&
+      !refreshToken.includes('your-')
   );
 }
 
@@ -166,11 +200,11 @@ export function isZohoConfiguredSync(): boolean {
 
   return Boolean(
     clientId &&
-    clientSecret &&
-    refreshToken &&
-    !clientId.includes('your-') &&
-    !clientSecret.includes('your-') &&
-    !refreshToken.includes('your-')
+      clientSecret &&
+      refreshToken &&
+      !clientId.includes('your-') &&
+      !clientSecret.includes('your-') &&
+      !refreshToken.includes('your-')
   );
 }
 
@@ -200,11 +234,20 @@ export function clearZohoTokenCache(): void {
   tokenExpiresAt = 0;
   activeRefreshPromise = null;
   clearTokenStoreCache();
+  try {
+    const mod = getServerNodeFs();
+    const cacheFile = getTokenCacheFilePath();
+    if (mod && cacheFile && mod.fs.existsSync(cacheFile)) {
+      mod.fs.unlinkSync(cacheFile);
+    }
+  } catch {
+    // Ignore
+  }
 }
 
 /**
  * Obtain a valid Zoho CRM OAuth 2.0 access token.
- * Access tokens are cached in memory and on disk (.zoho_token_cache.json) across workers.
+ * Access tokens are cached in memory, in the AES-256-GCM encrypted vault, and on disk (.zoho_token_cache.json).
  * If expired or missing, a fresh access token is requested from Zoho using the persistent refresh token.
  */
 export async function getZohoAccessToken(): Promise<string> {
@@ -223,7 +266,16 @@ export async function getZohoAccessToken(): Promise<string> {
     return cachedAccessToken;
   }
 
-  // 3. If a refresh is already in flight, reuse the promise to prevent duplicate API hits
+  // 3. Check persistent AES-256-GCM encrypted vault for a valid non-expired access token
+  const vaultCached = await getVaultCachedAccessToken();
+  if (vaultCached) {
+    cachedAccessToken = vaultCached.accessToken;
+    tokenExpiresAt = vaultCached.expiresAt;
+    writeDiskCachedAccessToken(cachedAccessToken, tokenExpiresAt);
+    return cachedAccessToken;
+  }
+
+  // 4. If a refresh is already in flight, reuse the promise to prevent duplicate API hits
   if (activeRefreshPromise) {
     return activeRefreshPromise;
   }
@@ -236,7 +288,9 @@ export async function getZohoAccessToken(): Promise<string> {
       const accountsUrl = getZohoAccountsUrl();
 
       if (!clientId || !clientSecret || !refreshToken) {
-        throw new Error('Zoho CRM credentials missing: ZOHO_CLIENT_ID, ZOHO_CLIENT_SECRET, or ZOHO_REFRESH_TOKEN is not available.');
+        throw new Error(
+          'Zoho CRM credentials missing: ZOHO_CLIENT_ID, ZOHO_CLIENT_SECRET, or ZOHO_REFRESH_TOKEN is not available.'
+        );
       }
 
       const params = new URLSearchParams({
@@ -257,7 +311,10 @@ export async function getZohoAccessToken(): Promise<string> {
       const data: ZohoTokenResponse = await response.json();
 
       if (!response.ok || data.error || !data.access_token) {
-        const errMsg = data.error_description || data.error || `HTTP ${response.status} failed to obtain access token`;
+        const errMsg =
+          data.error_description ||
+          data.error ||
+          `HTTP ${response.status} failed to obtain access token`;
         throw new Error(`Zoho OAuth token refresh failed: ${errMsg}`);
       }
 
@@ -265,6 +322,7 @@ export async function getZohoAccessToken(): Promise<string> {
       const validDurationSec = Number(data.expires_in) || 3600;
       tokenExpiresAt = Date.now() + validDurationSec * 1000;
       writeDiskCachedAccessToken(cachedAccessToken, tokenExpiresAt);
+      await persistZohoAccessTokenInVault(cachedAccessToken, tokenExpiresAt);
 
       return cachedAccessToken;
     } finally {
@@ -276,7 +334,8 @@ export async function getZohoAccessToken(): Promise<string> {
 }
 
 /**
- * Exchange an OAuth authorization code for Zoho access and refresh tokens.
+ * Exchange an OAuth authorization code for Zoho access and refresh tokens,
+ * and persist them immediately in the AES-256-GCM Encrypted Persistent Vault.
  */
 export async function exchangeAuthorizationCode(
   code: string,
@@ -284,8 +343,8 @@ export async function exchangeAuthorizationCode(
   accountsServerOverride?: string
 ): Promise<{
   success: boolean;
-  refreshToken?: string;
-  accessToken?: string;
+  hasNewRefreshToken?: boolean;
+  persistenceSource?: 'encrypted_vault' | 'runtime_memory';
   apiDomain?: string;
   expiresIn?: number;
   error?: string;
@@ -298,7 +357,8 @@ export async function exchangeAuthorizationCode(
     if (!clientId || !clientSecret) {
       return {
         success: false,
-        error: 'Zoho OAuth Client ID (ZOHO_CLIENT_ID) or Client Secret (ZOHO_CLIENT_SECRET) is missing in server environment variables.',
+        error:
+          'Zoho OAuth Client ID (ZOHO_CLIENT_ID) or Client Secret (ZOHO_CLIENT_SECRET) is missing in server environment variables.',
       };
     }
 
@@ -328,31 +388,45 @@ export async function exchangeAuthorizationCode(
     const data: ZohoTokenResponse & { refresh_token?: string } = await response.json();
 
     if (!response.ok || data.error || !data.access_token) {
-      const errMsg = data.error_description || data.error || `HTTP ${response.status} failed to exchange authorization code`;
+      const errMsg =
+        data.error_description ||
+        data.error ||
+        `HTTP ${response.status} failed to exchange authorization code`;
       return {
         success: false,
         error: `Zoho token exchange failed: ${errMsg}`,
       };
     }
 
-    // Cache the access token in memory and disk
+    // Cache the new access token in memory and disk
     cachedAccessToken = data.access_token;
     const validDurationSec = Number(data.expires_in) || 3600;
     tokenExpiresAt = Date.now() + validDurationSec * 1000;
     writeDiskCachedAccessToken(cachedAccessToken, tokenExpiresAt);
 
+    let persistenceSource: 'encrypted_vault' | 'runtime_memory' = 'runtime_memory';
+
     if (data.refresh_token) {
-      await persistZohoRefreshToken(data.refresh_token, {
+      const persistRes = await persistZohoRefreshToken(data.refresh_token, {
         apiDomain: data.api_domain,
         source: 'oauth_callback',
+        accessToken: cachedAccessToken,
+        expiresAt: tokenExpiresAt,
       });
-      console.log('[Zoho OAuth] New refresh token persisted securely.');
+      persistenceSource = persistRes.source;
+      console.log(
+        `[Zoho OAuth] New refresh token persisted securely (storage: ${persistRes.source}).`
+      );
+    } else {
+      // Even if Zoho only returned an access_token (e.g. if prompt=consent was omitted),
+      // persist the newly scoped access_token in the encrypted vault so other containers can use it.
+      await persistZohoAccessTokenInVault(cachedAccessToken, tokenExpiresAt);
     }
 
     return {
       success: true,
-      refreshToken: data.refresh_token,
-      accessToken: data.access_token,
+      hasNewRefreshToken: Boolean(data.refresh_token),
+      persistenceSource,
       apiDomain: data.api_domain,
       expiresIn: data.expires_in,
     };

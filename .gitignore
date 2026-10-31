@@ -41,6 +41,8 @@ yarn-error.log*
 .env*
 !.env.example
 .zoho_token_cache.json
+.zoho_grant_code.txt
+.zoho_vercel_refresh_token.txt
 
 # vercel
 .vercel
