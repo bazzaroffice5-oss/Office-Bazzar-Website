@@ -212,11 +212,12 @@ export default function BazzarAIChatbot() {
             className="group relative w-16 h-20 sm:w-20 sm:h-24 bg-transparent border-0 p-0 outline-hidden focus:outline-hidden animate-bazzar-float hover:scale-105 active:scale-95 transition-transform duration-200 cursor-pointer flex items-center justify-center"
           >
             <Image
-              src="/assets/bazzar-ai-avatar.png"
+              src="/assets/bazzar-ai-avatar.png?v=transparent"
               alt="Bazzar AI 3D Robot Assistant"
               width={90}
               height={100}
               priority
+              unoptimized
               className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_12px_24px_rgba(0,0,0,0.3)] group-hover:drop-shadow-[0_16px_32px_rgba(0,0,0,0.4)] transition-all duration-200"
             />
           </button>
@@ -238,17 +239,17 @@ export default function BazzarAIChatbot() {
           {/* A. HEADER */}
           <div className="bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-950 text-white p-3.5 sm:p-4 border-b border-blue-800/60 shadow-xs flex items-center justify-between shrink-0">
             <div className="flex items-center space-x-3 min-w-0">
-              {/* 3D Robot Header Avatar */}
-              <div className="relative w-11 h-11 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 to-blue-600 ring-2 ring-sky-300/40 shadow-inner shrink-0 flex items-center justify-center bg-slate-950">
+              {/* 3D Robot Header Avatar (Clean transparent background) */}
+              <div className="relative w-10 h-10 bg-transparent shrink-0 flex items-center justify-center">
                 <Image
-                  src="/assets/bazzar-ai-avatar.png"
+                  src="/assets/bazzar-ai-avatar.png?v=transparent"
                   alt="Bazzar AI"
-                  width={44}
-                  height={44}
+                  width={40}
+                  height={40}
                   priority
+                  unoptimized
                   className="w-full h-full object-contain select-none"
                 />
-                <span className="w-3 h-3 bg-emerald-400 rounded-full absolute bottom-0 right-0 border-2 border-blue-950 shadow-xs" />
               </div>
 
               {/* Title & Tagline */}
@@ -312,14 +313,15 @@ export default function BazzarAIChatbot() {
                       msg.sender === 'user' ? 'justify-end' : 'justify-start'
                     }`}
                   >
-                    {/* Assistant Avatar Thumbnail */}
+                    {/* Assistant Avatar Thumbnail (Clean transparent background) */}
                     {msg.sender === 'assistant' && (
-                      <div className="w-8 h-8 rounded-full overflow-hidden p-0.5 bg-gradient-to-tr from-slate-900 to-blue-950 border border-sky-400/40 shadow-xs shrink-0 mt-0.5">
+                      <div className="w-8 h-8 bg-transparent shrink-0 mt-0.5 flex items-center justify-center">
                         <Image
-                          src="/assets/bazzar-ai-avatar.png"
+                          src="/assets/bazzar-ai-avatar.png?v=transparent"
                           alt="Bazzar AI"
                           width={32}
                           height={32}
+                          unoptimized
                           className="w-full h-full object-contain"
                         />
                       </div>
@@ -419,12 +421,13 @@ export default function BazzarAIChatbot() {
                 {/* Assistant Typing Indicator */}
                 {isTyping && (
                   <div className="flex items-center space-x-2 text-slate-400 animate-in fade-in">
-                    <div className="w-7 h-7 rounded-full overflow-hidden p-0.5 bg-slate-900 border border-sky-400/40">
+                    <div className="w-7 h-7 bg-transparent shrink-0 flex items-center justify-center">
                       <Image
-                        src="/assets/bazzar-ai-avatar.png"
+                        src="/assets/bazzar-ai-avatar.png?v=transparent"
                         alt="Bazzar AI"
                         width={28}
                         height={28}
+                        unoptimized
                         className="w-full h-full object-contain"
                       />
                     </div>
