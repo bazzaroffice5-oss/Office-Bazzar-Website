@@ -230,33 +230,21 @@ export default function BazzarAIChatbot() {
             </div>
           )}
 
-          {/* Floating Robot Avatar Container */}
+          {/* Floating Robot Avatar (Standalone 3D character, no circular background, border, glow or green dot) */}
           <button
             type="button"
             onClick={handleOpen}
             aria-label="Open Bazzar AI Chatbot"
             aria-expanded={isOpen}
-            className="group relative w-16 h-16 sm:w-18 sm:h-18 rounded-full p-1.5 bg-gradient-to-tr from-slate-950 via-blue-950 to-sky-900 border-2 border-sky-400/60 shadow-2xl animate-bazzar-float animate-bazzar-glow hover:scale-105 active:scale-95 transition-transform duration-200 cursor-pointer flex items-center justify-center focus:outline-hidden focus:ring-4 focus:ring-blue-400/50"
+            className="group relative w-16 h-22 sm:w-20 sm:h-28 bg-transparent border-0 p-0 animate-bazzar-float hover:scale-105 active:scale-95 transition-transform duration-200 cursor-pointer flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500/50 rounded-2xl"
           >
-            {/* Subtle rotating glow ring */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-sky-400/20 to-blue-600/30 blur-xs group-hover:opacity-100 transition-opacity" />
-
-            {/* Custom 3D Robot Image (Full Asset Visible, object-fit: contain) */}
-            <div className="relative w-full h-full rounded-full overflow-hidden flex items-center justify-center">
-              <Image
-                src="/assets/bazzar-ai-avatar.png"
-                alt="Bazzar AI 3D Robot Assistant"
-                width={80}
-                height={80}
-                priority
-                className="w-full h-full object-contain select-none pointer-events-none drop-shadow-md"
-              />
-            </div>
-
-            {/* Online Green Beacon */}
-            <span
-              className="absolute bottom-0 right-0 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white ring-2 ring-emerald-400/40 shadow-xs"
-              title="Online"
+            <Image
+              src="/assets/bazzar-ai-avatar.png"
+              alt="Bazzar AI 3D Robot Assistant"
+              width={80}
+              height={112}
+              priority
+              className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_10px_20px_rgba(0,0,0,0.28)] group-hover:drop-shadow-[0_14px_28px_rgba(0,0,0,0.38)] transition-all duration-200"
             />
           </button>
         </div>
@@ -587,3 +575,4 @@ function renderFormattedText(rawText: string) {
     );
   });
 }
+
