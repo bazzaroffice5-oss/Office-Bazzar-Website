@@ -2,12 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import CategoryLandingClient from '@/components/category/CategoryLandingClient';
 import { getProducts, getCategoryBySlug } from '@/lib/db/store';
-import {
-  getCanonicalUrl,
-  getBreadcrumbJsonLd,
-  SITE_CONFIG,
-  CATEGORY_SEO_CONFIG,
-} from '@/lib/seo/config';
+import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export async function generateMetadata({
@@ -23,7 +18,7 @@ export async function generateMetadata({
 
   if (!category) {
     return {
-      title: { absolute: 'Category Not Found | Office Bazzar' },
+      title: 'Category Not Found | OfficeBazzar',
       robots: { index: false, follow: false },
     };
   }
@@ -37,31 +32,22 @@ export async function generateMetadata({
     (s) => s.slug === effectiveSub || s.id === effectiveSub
   );
 
-  const catSeo = CATEGORY_SEO_CONFIG[category.slug];
-
-  const metaTitle = activeSub
-    ? `${activeSub.name} — ${category.name} Supplier India | Office Bazzar`
-    : catSeo?.title || `${category.name} Supplier India | Bulk Corporate Procurement | Office Bazzar`;
-
+  const titlePrefix = activeSub ? `${activeSub.name} - ` : '';
+  const metaTitle = `${titlePrefix}${category.name} Wholesale Suppliers in Chennai | OfficeBazzar`;
   const metaDescription =
-    activeSub?.description
-      ? `${activeSub.description} Procure bulk ${activeSub.name.toLowerCase()} across India from Office Bazzar with 100% GST Input Tax Credit.`
-      : catSeo?.description ||
-        category.description ||
-        `Procure bulk ${category.name} for corporate offices, IT parks, and institutions across India. Guaranteed 100% GST input tax credit and pan-India dispatch.`;
+    activeSub?.description ||
+    category.description ||
+    `Procure bulk ${category.name} for corporate offices, IT parks, and institutions in Chennai. Guaranteed 100% GST input tax credit with same-day dispatch.`;
 
   const canonicalUrl = getCanonicalUrl(
     activeSub
-      ? `/category/${category.slug}?sub=${activeSub.slug}`
-      : `/category/${category.slug}`
+      ? `/categories/${category.slug}?sub=${activeSub.slug}`
+      : `/categories/${category.slug}`
   );
 
   return {
-    title: {
-      absolute: metaTitle,
-    },
+    title: metaTitle,
     description: metaDescription,
-    keywords: catSeo?.keywords || SITE_CONFIG.primaryKeywords,
     alternates: {
       canonical: canonicalUrl,
     },
@@ -76,10 +62,10 @@ export async function generateMetadata({
         {
           url: category.imageUrl?.startsWith('http')
             ? category.imageUrl
-            : `${SITE_CONFIG.url}${category.imageUrl || SITE_CONFIG.defaultOgImage}`,
-          width: 1200,
-          height: 630,
-          alt: `${category.name} Supplier India — Office Bazzar`,
+            : `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`,
+          width: 800,
+          height: 600,
+          alt: category.name,
         },
       ],
     },
@@ -116,8 +102,7 @@ export default async function CategoryPage({
 
   const breadcrumbItems = [
     { name: 'Home', url: '/' },
-    { name: 'Categories', url: '/categories' },
-    { name: category.name, url: `/category/${category.slug}` },
+    { name: category.name, url: `/categories/${category.slug}` },
   ];
 
   if (effectiveSub) {
@@ -127,13 +112,13 @@ export default async function CategoryPage({
     if (activeSub) {
       breadcrumbItems.push({
         name: activeSub.name,
-        url: `/category/${category.slug}?sub=${activeSub.slug}`,
+        url: `/categories/${category.slug}?sub=${activeSub.slug}`,
       });
     }
   } else if (resolvedSearchParams?.view === 'all') {
     breadcrumbItems.push({
       name: 'All Products',
-      url: `/category/${category.slug}?view=all`,
+      url: `/categories/${category.slug}?view=all`,
     });
   }
 
@@ -147,7 +132,7 @@ export default async function CategoryPage({
         allProducts={allProducts}
         initialView={resolvedSearchParams?.view}
         initialSub={effectiveSub}
-        baseRoute="/category"
+        baseRoute="/categories"
       />
     </main>
   );

@@ -17,16 +17,16 @@ import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'About Office Bazzar | Officebazzar E-Store Private Limited India',
+  title: 'About Us | Officebazzar E-Store Private Limited, Chennai',
   description:
-    'Co-founded in 2005, Officebazzar E-Store Private Limited is a leading B2B corporate procurement partner across India. Manufacturers of Hi-Clean formulations and suppliers of office stationery, housekeeping products, and printer consumables.',
+    'Co-founded in 2005, Officebazzar E-Store Private Limited is headquartered at Officebazzar Tower, Royapettah, Chennai. We manufacture Hi-Clean products and supply complete office stationery, housekeeping essentials, and institutional consumables.',
   path: '/about',
   keywords: [
     'Officebazzar E-Store Private Limited',
-    'Office Bazzar India',
-    'Corporate Office Supplies Supplier India',
-    'Hi-Clean Cleaning Products Manufacturer',
-    'Corporate Procurement Solutions India',
+    'office supplies manufacturer Chennai',
+    'Hi-Clean cleaning chemicals',
+    'institutional stationery supplier Royapettah',
+    'corporate procurement Tamil Nadu',
   ],
 });
 

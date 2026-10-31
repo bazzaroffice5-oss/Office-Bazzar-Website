@@ -79,6 +79,7 @@ export default function AboutSummarySection() {
                 quality={95}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 500px, 500px"
                 className="object-cover object-[center_45%]"
+                priority
               />
             </div>
           </div>

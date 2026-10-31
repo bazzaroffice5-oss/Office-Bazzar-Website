@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import HeroSection from '@/components/home/HeroSection';
 import CategoriesSection from '@/components/home/CategoriesSection';
 import OurBrandsSection from '@/components/home/OurBrandsSection';
@@ -7,16 +8,45 @@ import ProcurementBenefitsSection from '@/components/home/ProcurementBenefitsSec
 import AboutSummarySection from '@/components/home/AboutSummarySection';
 import HomeBlogSection from '@/components/home/HomeBlogSection';
 import HomeFaqSection from '@/components/home/HomeFaqSection';
-import { constructMetadata, SITE_CONFIG } from '@/lib/seo/config';
+import { SITE_CONFIG } from '@/lib/seo/config';
 import { getCategories } from '@/lib/db/store';
 
-export const metadata = constructMetadata({
-  title: 'Office Bazzar | Office Supplies & Corporate Procurement India',
-  description:
-    'Office Bazzar provides office stationery, housekeeping and hygiene products, printer consumables and packaging supplies for businesses across India. Explore corporate and bulk procurement solutions.',
-  path: '/',
-  keywords: SITE_CONFIG.primaryKeywords,
-});
+const HOMEPAGE_TITLE = 'Office Bazzar | Office Supplies & Corporate Procurement India';
+const HOMEPAGE_DESCRIPTION =
+  'Office Bazzar provides office stationery, housekeeping and hygiene products, printer consumables and packaging supplies for businesses across India. Explore corporate and bulk procurement solutions.';
+const HOMEPAGE_CANONICAL = 'https://officebazzar.com/';
+
+export const metadata: Metadata = {
+  title: {
+    absolute: HOMEPAGE_TITLE,
+  },
+  description: HOMEPAGE_DESCRIPTION,
+  alternates: {
+    canonical: HOMEPAGE_CANONICAL,
+  },
+  openGraph: {
+    title: HOMEPAGE_TITLE,
+    description: HOMEPAGE_DESCRIPTION,
+    url: HOMEPAGE_CANONICAL,
+    siteName: SITE_CONFIG.name,
+    locale: 'en_IN',
+    type: 'website',
+    images: [
+      {
+        url: `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`,
+        width: 1200,
+        height: 630,
+        alt: HOMEPAGE_TITLE,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: HOMEPAGE_TITLE,
+    description: HOMEPAGE_DESCRIPTION,
+    images: [`${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`],
+  },
+};
 
 export default async function HomePage() {
   const categories = await getCategories();

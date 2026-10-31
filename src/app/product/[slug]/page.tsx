@@ -3,34 +3,7 @@ import { notFound } from 'next/navigation';
 import ProductDetailClient from '@/components/product/ProductDetailClient';
 import { getProductBySlug, getRelatedProducts, getBrands } from '@/lib/db/store';
 import { getProductJsonLd, getBreadcrumbJsonLd, getCanonicalUrl, SITE_CONFIG } from '@/lib/seo/config';
-import { CATEGORY_MAP } from '@/lib/data/catalog';
 import JsonLd from '@/components/seo/JsonLd';
-
-function resolveCanonicalCategory(product: { categoryId?: string; subcategoryId?: string; categoryName?: string }) {
-  const mapped =
-    (product.subcategoryId && CATEGORY_MAP[product.subcategoryId]) ||
-    (product.categoryId && CATEGORY_MAP[product.categoryId]);
-
-  if (mapped) {
-    return {
-      slug: mapped.mainSlug,
-      name: mapped.mainName,
-    };
-  }
-
-  const validMainSlugs = ['office-stationery', 'housekeeping-hygiene', 'printers-technology', 'packaging-supplies'];
-  if (product.categoryId && validMainSlugs.includes(product.categoryId)) {
-    return {
-      slug: product.categoryId,
-      name: product.categoryName || 'Office Stationery',
-    };
-  }
-
-  return {
-    slug: 'office-stationery',
-    name: product.categoryName || 'Office Stationery',
-  };
-}
 
 export async function generateMetadata({
   params,
@@ -42,42 +15,23 @@ export async function generateMetadata({
 
   if (!product) {
     return {
-      title: { absolute: 'Product Not Found | Office Bazzar' },
+      title: 'Product Not Found | OfficeBazzar India',
       robots: { index: false, follow: false },
     };
   }
 
-  const metaTitle =
-    product.metaTitle ||
-    `${product.name} | Bulk Corporate Supply India | Office Bazzar`;
-
-  const brandPart = product.brandName ? ` (${product.brandName})` : '';
-  const packPart = product.packSize ? ` Pack size: ${product.packSize}.` : '';
+  const metaTitle = product.metaTitle || `${product.name} Wholesale Suppliers Chennai | OfficeBazzar`;
   const metaDescription =
     product.metaDescription ||
     product.shortDescription ||
-    `Procure ${product.name}${brandPart} in bulk for corporate and institutional offices across India.${packPart} Includes ${product.gstPercent || 18}% GST tax invoice for 100% Input Tax Credit.`;
+    `Buy ${product.name} (${product.brandName}) in bulk wholesale packs. Includes ${product.gstPercent}% GST invoice for 100% Input Tax Credit. Fast dispatch across Chennai.`;
 
   const canonicalUrl = getCanonicalUrl(`/product/${product.slug}`);
-  const rawOgImage =
-    product.images && product.images.length > 0
-      ? product.images[0]
-      : SITE_CONFIG.defaultOgImage;
-  const ogImage = rawOgImage.startsWith('http') ? rawOgImage : getCanonicalUrl(rawOgImage);
+  const ogImage = product.images && product.images.length > 0 ? product.images[0] : `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`;
 
   return {
-    title: {
-      absolute: metaTitle,
-    },
+    title: metaTitle,
     description: metaDescription,
-    keywords: [
-      product.name,
-      `${product.name} Wholesale India`,
-      product.brandName ? `${product.brandName} Supplier India` : 'Corporate Office Supplies India',
-      product.categoryName || 'Office Supplies Supplier India',
-      'Bulk Office Supplies India',
-      'Office Bazzar',
-    ],
     alternates: {
       canonical: canonicalUrl,
     },
@@ -93,7 +47,7 @@ export async function generateMetadata({
           url: ogImage,
           width: 800,
           height: 800,
-          alt: `${product.name} — Corporate Procurement India | Office Bazzar`,
+          alt: product.name,
         },
       ],
     },
@@ -131,14 +85,12 @@ export default async function ProductPage({
         b.name.toLowerCase() === product.brandName.toLowerCase()
     ) || null;
 
-  const resolvedCategory = resolveCanonicalCategory(product);
-
   // Authentic Schema.org Product & Breadcrumb Structured Data
   const productJsonLd = getProductJsonLd(product);
   const breadcrumbJsonLd = getBreadcrumbJsonLd([
     { name: 'Home', url: '/' },
     { name: 'Products', url: '/products' },
-    { name: resolvedCategory.name, url: `/category/${resolvedCategory.slug}` },
+    { name: product.categoryName || 'Office Supplies', url: `/category/${product.categoryId || 'office-supplies-stationery'}` },
     { name: product.name, url: `/product/${product.slug}` },
   ]);
 

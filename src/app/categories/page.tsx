@@ -6,8 +6,7 @@ import {
   isProductInSubcategory,
 } from '@/lib/data/catalog';
 import AllCategoriesClient from '@/components/category/AllCategoriesClient';
-import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG } from '@/lib/seo/config';
-import JsonLd from '@/components/seo/JsonLd';
+import { getCanonicalUrl, SITE_CONFIG } from '@/lib/seo/config';
 import { Subcategory } from '@/types';
 
 export const ALL_PRODUCTS_CARD: Subcategory = {
@@ -15,23 +14,20 @@ export const ALL_PRODUCTS_CARD: Subcategory = {
   name: 'All Products',
   slug: 'all-products',
   categoryId: 'all',
-  description: 'Browse our complete workplace catalogue across all categories with direct corporate bulk pricing and GST input credit across India.',
+  description: 'Browse our complete workplace catalogue across all 9 categories with direct wholesale pricing and GST input credit.',
   imageUrl: '/images/categories/office-supplies-stationery.jpg',
   itemCount: 0,
 };
 
 export async function generateMetadata() {
-  const metaTitle = 'Workplace Procurement Categories | Office Supplies India | Office Bazzar';
+  const metaTitle = 'All Categories & Products | Workplace Procurement | OfficeBazzar Chennai';
   const metaDescription =
-    'Explore specialized B2B workplace procurement categories at Office Bazzar India: Office Stationery, Housekeeping & Hygiene, Printers & Technology, and Packaging Supplies with 100% GST Input Tax Credit.';
+    'Explore our complete workplace procurement catalog and 9 specialized categories at OfficeBazzar: All Products, Writing Instruments, Paper & Notebooks, Files & Office Organization, Printing & IT Supplies, Cleaning & Hygiene Essentials, Packaging & Dispatch, Office Pantry Essentials, Office Furniture & Accessories, and Safety & Maintenance.';
   const canonical = getCanonicalUrl('/categories');
 
   return {
-    title: {
-      absolute: metaTitle,
-    },
+    title: metaTitle,
     description: metaDescription,
-    keywords: SITE_CONFIG.primaryKeywords,
     alternates: { canonical },
     openGraph: {
       title: metaTitle,
@@ -54,13 +50,13 @@ export default async function AllCategoriesPage({
 }) {
   const resolvedSearchParams = searchParams ? await searchParams : undefined;
 
-  // Handle legacy query params by redirecting directly to canonical /category/[slug]
+  // Handle legacy query params by redirecting to category-specific landing page
   if (resolvedSearchParams?.category) {
     const targetSlug = resolvedSearchParams.category;
     const subQuery = resolvedSearchParams.sub ? `?sub=${resolvedSearchParams.sub}` : '';
     const viewQuery = resolvedSearchParams.view ? `?view=${resolvedSearchParams.view}` : '';
     const query = subQuery || viewQuery;
-    redirect(`/category/${targetSlug}${query}`);
+    redirect(`/categories/${targetSlug}${query}`);
   }
 
   // 1. Fetch products
@@ -78,14 +74,8 @@ export default async function AllCategoriesPage({
     productCounts[sub.slug] = resolvedCount;
   });
 
-  const breadcrumbJsonLd = getBreadcrumbJsonLd([
-    { name: 'Home', url: '/' },
-    { name: 'Categories', url: '/categories' },
-  ]);
-
   return (
     <main className="min-h-screen bg-slate-50">
-      <JsonLd data={breadcrumbJsonLd} />
       <AllCategoriesClient
         categories={categories}
         productCounts={productCounts}

@@ -27,13 +27,23 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
-  applicationName: SITE_CONFIG.name,
   title: {
-    default: SITE_CONFIG.defaultTitle,
-    template: '%s | Office Bazzar',
+    default: 'Office Bazzar | Office Supplies & Corporate Procurement India',
+    template: '%s | OfficeBazzar India',
   },
-  description: SITE_CONFIG.description,
-  keywords: SITE_CONFIG.primaryKeywords,
+  description:
+    'Office Bazzar provides office stationery, housekeeping and hygiene products, printer consumables and packaging supplies for businesses across India. Explore corporate and bulk procurement solutions.',
+  keywords: [
+    'Office Stationery Chennai',
+    'Housekeeping Materials Chennai',
+    'Industrial Dustbin Suppliers',
+    'Office Supplies Wholesale',
+    'JK Copier Paper',
+    'Taski Chemicals Supplier Chennai',
+    'Computer Consumables',
+    'OfficeBazzar',
+    'Corporate Procurement Partner',
+  ],
   authors: [{ name: SITE_CONFIG.legalName, url: `${SITE_CONFIG.url}/` }],
   creator: SITE_CONFIG.legalName,
   publisher: SITE_CONFIG.legalName,
@@ -41,6 +51,9 @@ export const metadata: Metadata = {
     email: false,
     address: false,
     telephone: false,
+  },
+  alternates: {
+    canonical: 'https://officebazzar.com/',
   },
   robots: {
     index: true,
@@ -54,9 +67,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: SITE_CONFIG.defaultTitle,
-    description: SITE_CONFIG.description,
-    url: `${SITE_CONFIG.url}/`,
+    title: 'Office Bazzar | Office Supplies & Corporate Procurement India',
+    description:
+      'Office Bazzar provides office stationery, housekeeping and hygiene products, printer consumables and packaging supplies for businesses across India. Explore corporate and bulk procurement solutions.',
+    url: 'https://officebazzar.com/',
     siteName: SITE_CONFIG.name,
     locale: 'en_IN',
     type: 'website',
@@ -65,14 +79,15 @@ export const metadata: Metadata = {
         url: `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`,
         width: 1200,
         height: 630,
-        alt: 'Office Bazzar — Office Supplies & Corporate Procurement India',
+        alt: `${SITE_CONFIG.name} Corporate Procurement`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: SITE_CONFIG.defaultTitle,
-    description: SITE_CONFIG.description,
+    title: 'Office Bazzar | Office Supplies & Corporate Procurement India',
+    description:
+      'Office Bazzar provides office stationery, housekeeping and hygiene products, printer consumables and packaging supplies for businesses across India. Explore corporate and bulk procurement solutions.',
     images: [`${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`],
   },
   icons: {
