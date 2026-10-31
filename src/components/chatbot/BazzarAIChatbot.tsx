@@ -62,7 +62,6 @@ function clampPosition(
 
 export default function BazzarAIChatbot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
@@ -106,14 +105,14 @@ export default function BazzarAIChatbot() {
   };
 
   useEffect(() => {
-    if (isOpen && !isMinimized) {
+    if (isOpen) {
       scrollToBottom();
       // Auto-focus input on desktop
       if (window.innerWidth > 768) {
         inputRef.current?.focus();
       }
     }
-  }, [messages, isOpen, isMinimized, isTyping]);
+  }, [messages, isOpen, isTyping]);
 
   // Handle ESC key to close/minimize chat
   useEffect(() => {
@@ -128,16 +127,14 @@ export default function BazzarAIChatbot() {
 
   const handleOpen = () => {
     setIsOpen(true);
-    setIsMinimized(false);
   };
 
   const handleClose = () => {
     setIsOpen(false);
-    setIsMinimized(false);
   };
 
-  const handleToggleMinimize = () => {
-    setIsMinimized((prev) => !prev);
+  const handleMinimize = () => {
+    setIsOpen(false);
   };
 
   // Restore and clamp position from localStorage
@@ -444,11 +441,7 @@ export default function BazzarAIChatbot() {
           role="dialog"
           aria-modal="true"
           aria-label="Bazzar AI Chat Assistant"
-          className={`fixed z-50 transition-all duration-300 ease-out ${
-            isMinimized
-              ? 'bottom-4 right-4 sm:bottom-6 sm:right-6 w-72 h-14 bg-gradient-to-r from-blue-950 to-indigo-950 rounded-2xl shadow-2xl border border-sky-400/40 flex items-center px-3.5 justify-between text-white'
-              : 'bottom-2 right-2 left-2 sm:left-auto sm:bottom-6 sm:right-6 w-auto sm:w-[420px] h-[88vh] sm:h-[620px] max-h-[700px] bg-slate-50 rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200'
-          }`}
+          className="fixed z-50 bottom-2 right-2 left-2 sm:left-auto sm:bottom-6 sm:right-6 w-auto sm:w-[420px] h-[88vh] sm:h-[620px] max-h-[700px] bg-slate-50 rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200"
         >
           {/* A. HEADER */}
           <div className="bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-950 text-white p-3.5 sm:p-4 border-b border-blue-800/60 shadow-xs flex items-center justify-between shrink-0">
@@ -496,10 +489,10 @@ export default function BazzarAIChatbot() {
               </button>
               <button
                 type="button"
-                onClick={handleToggleMinimize}
+                onClick={handleMinimize}
                 className="p-1.5 text-sky-200 hover:text-white hover:bg-blue-800/60 rounded-lg transition-colors"
-                title={isMinimized ? 'Expand Chat' : 'Minimize Chat'}
-                aria-label={isMinimized ? 'Expand Chat' : 'Minimize Chat'}
+                title="Minimize Chat"
+                aria-label="Minimize Chat"
               >
                 <Minus className="w-4 h-4" />
               </button>
@@ -515,11 +508,9 @@ export default function BazzarAIChatbot() {
             </div>
           </div>
 
-          {/* B. EXPANDED CHAT BODY */}
-          {!isMinimized && (
-            <>
-              {/* Messages Container */}
-              <div className="flex-1 overflow-y-auto p-3.5 sm:p-4 space-y-3.5 text-xs bg-gradient-to-b from-slate-50 via-slate-50 to-blue-50/30">
+          {/* B. CHAT BODY */}
+          {/* Messages Container */}
+          <div className="flex-1 overflow-y-auto p-3.5 sm:p-4 space-y-3.5 text-xs bg-gradient-to-b from-slate-50 via-slate-50 to-blue-50/30">
                 {messages.map((msg) => (
                   <div
                     key={msg.id}
@@ -709,8 +700,6 @@ export default function BazzarAIChatbot() {
                 <span>&bull;</span>
                 <span className="text-emerald-600 font-semibold">100% Verified Catalog</span>
               </div>
-            </>
-          )}
         </div>
       )}
     </>
