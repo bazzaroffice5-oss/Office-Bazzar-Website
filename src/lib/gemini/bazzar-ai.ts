@@ -1,6 +1,7 @@
 /**
- * Bazzar AI – Intelligent, Context-Aware, Multilingual Assistant for OfficeBazzar
- * Powered by Google Gemini 3.6 Flash & Official @google/genai SDK
+ * Bazzar AI – Advanced Gemini-Style Conversational Intelligence for OfficeBazzar
+ * Separates AI Conversation, Product Retrieval, Relevance Validation, and Response Composition.
+ * Zero tolerance for unrelated product recommendations.
  */
 
 import { GoogleGenAI, Type } from '@google/genai';
@@ -53,58 +54,292 @@ export function checkRateLimit(ip: string): boolean {
   return true;
 }
 
+// ==============================================================================
+// 1. RELEVANCE VALIDATION ENGINE (CRITICAL: PREVENTS UNRELATED RECOMMENDATIONS)
+// ==============================================================================
+
+const STOPWORDS = new Set([
+  'i', 'me', 'my', 'we', 'our', 'you', 'your', 'he', 'she', 'it', 'they', 'them',
+  'a', 'an', 'the', 'and', 'or', 'but', 'if', 'because', 'as', 'until', 'while',
+  'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into', 'through',
+  'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down', 'in',
+  'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then', 'once',
+  'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each',
+  'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only',
+  'own', 'same', 'so', 'than', 'too', 'very', 's', 't', 'can', 'will', 'just',
+  'don', 'should', 'now', 'need', 'want', 'looking', 'show', 'give', 'tell',
+  'please', 'help', 'price', 'rate', 'cost', 'available', 'have', 'pieces', 'pcs',
+  'nos', 'unit', 'units', 'box', 'boxes', 'pack', 'packs', 'item', 'items', 'product', 'products'
+]);
+
+interface DomainRule {
+  categories: string[];
+  positiveKeywords: string[];
+  negativeKeywords: string[];
+}
+
+const DOMAIN_RULES: Record<string, DomainRule> = {
+  chairs: {
+    categories: ['furniture', 'chair', 'seating', 'office furniture'],
+    positiveKeywords: [
+      'chair',
+      'chairs',
+      'seating',
+      'stool',
+      'stools',
+      'ergonomic chair',
+      'executive chair',
+      'mesh chair',
+      'visitor chair',
+      'workstation chair',
+    ],
+    negativeKeywords: [
+      'thermocol',
+      'tape',
+      'bubble',
+      'chemical',
+      'phenyl',
+      'mop',
+      'bin',
+      'paper',
+      'file',
+      'register',
+      'stapler',
+      'dispenser',
+      'cleaner',
+      'foam',
+    ],
+  },
+  paper: {
+    categories: ['paper', 'stationery', 'copier'],
+    positiveKeywords: [
+      'copier paper',
+      'a4 paper',
+      'a3 paper',
+      '75 gsm',
+      '70 gsm',
+      '80 gsm',
+      'xerox paper',
+      'bond paper',
+      'printing paper',
+      'jk copier',
+      'tnpl',
+      'bilt',
+      'paper rim',
+      'paper ream',
+      'paper bundle',
+    ],
+    negativeKeywords: [
+      'chair',
+      'thermocol',
+      'bin',
+      'mop',
+      'trolley',
+      'chemical',
+      'cone',
+      'shredder',
+      'shredding',
+      'cutter',
+      'napkin',
+      'tissue',
+      'folder',
+      'stand',
+    ],
+  },
+  housekeeping: {
+    categories: ['housekeeping', 'hygiene', 'cleaning', 'chemicals'],
+    positiveKeywords: [
+      'taski',
+      'hi-clean',
+      'cleaning chemical',
+      'floor cleaner',
+      'glass cleaner',
+      'toilet cleaner',
+      'handwash',
+      'phenyl',
+      'mop',
+      'wiper',
+      'wringer trolley',
+      'dispenser',
+      'caddy basket',
+      'microfiber',
+      'cloth',
+    ],
+    negativeKeywords: ['chair', 'thermocol', 'copier paper', 'shredder', 'stapler', 'calculator'],
+  },
+  dustbins: {
+    categories: ['garbage bin', 'dustbin', 'waste bin', 'dustbins'],
+    positiveKeywords: [
+      'dustbin',
+      'dustbins',
+      'waste bin',
+      'garbage bin',
+      'pedal bin',
+      'wheeled bin',
+      '60l',
+      '120l',
+      '240l',
+      'trash can',
+      'ashtray bin',
+    ],
+    negativeKeywords: ['chair', 'paper', 'copier', 'thermocol', 'stapler', 'punching', 'chemical'],
+  },
+  stationery: {
+    categories: ['stationery', 'office supplies'],
+    positiveKeywords: [
+      'stapler',
+      'staple pin',
+      'punching machine',
+      'scissor',
+      'glue',
+      'fevistick',
+      'tape dispenser',
+      'cutter',
+      'pen',
+      'marker',
+      'highlighter',
+      'pencil',
+      'eraser',
+      'sharpener',
+      'scale',
+      'ruler',
+    ],
+    negativeKeywords: ['chair', 'thermocol', 'floor cleaner', 'dustbin', 'wringer trolley', 'tissue'],
+  },
+  files: {
+    categories: ['stationery', 'files', 'folders', 'filing'],
+    positiveKeywords: [
+      'box file',
+      'lever arch file',
+      'cobra file',
+      'spring file',
+      'ring binder',
+      'display folder',
+      'expanding file',
+      'paper tag file',
+      'clear bag',
+      'document folder',
+    ],
+    negativeKeywords: ['chair', 'thermocol', 'floor cleaner', 'dustbin', 'copier paper', 'chemical'],
+  },
+  packaging: {
+    categories: ['packaging', 'packing', 'warehouse'],
+    positiveKeywords: [
+      'bopp tape',
+      'brown tape',
+      'transparent tape',
+      'floor marking tape',
+      'bubble roll',
+      'bubble sheet',
+      'stretch film',
+      'corrugated box',
+      'foam thermocol',
+      'strapping roll',
+      'gum tape',
+    ],
+    negativeKeywords: ['chair', 'copier paper', 'floor cleaner', 'lever arch file', 'dustbin'],
+  },
+  road_safety: {
+    categories: ['road safety', 'safety', 'barriers'],
+    positiveKeywords: [
+      'traffic cone',
+      'safety cone',
+      'road barrier',
+      'convex mirror',
+      'speed breaker',
+      'corner guard',
+      'wheel stopper',
+      'delineator',
+      'safety vest',
+      'reflective jacket',
+    ],
+    negativeKeywords: ['chair', 'copier paper', 'box file', 'stapler', 'thermocol', 'mop'],
+  },
+};
+
+/**
+ * Strict product relevance validator. Returns false if the product is unrelated to the user query.
+ */
+export function validateProductRelevance(product: Product, userQuery: string): boolean {
+  const qLower = userQuery.toLowerCase();
+  const pName = product.name.toLowerCase();
+  const pCat = (product.categoryName || '').toLowerCase();
+
+  // 1. Domain-specific check
+  let detectedDomain: string | null = null;
+  for (const [domainName, rule] of Object.entries(DOMAIN_RULES)) {
+    if (rule.positiveKeywords.some((kw) => new RegExp(`\\b${kw}\\b`, 'i').test(qLower))) {
+      detectedDomain = domainName;
+      break;
+    }
+  }
+
+  if (detectedDomain) {
+    const rule = DOMAIN_RULES[detectedDomain];
+
+    // Reject if product contains negative keywords for this domain
+    if (rule.negativeKeywords.some((neg) => new RegExp(`\\b${neg}\\b`, 'i').test(pName))) {
+      return false;
+    }
+
+    // Require matching positive keyword in product name or category
+    const hasMatch = rule.positiveKeywords.some(
+      (pos) =>
+        new RegExp(`\\b${pos}\\b`, 'i').test(pName) ||
+        new RegExp(`\\b${pos}\\b`, 'i').test(pCat)
+    );
+
+    return hasMatch;
+  }
+
+  // 2. Generic query token validation
+  const meaningfulTokens = qLower
+    .split(/[\s,+/&.-]+/)
+    .filter((t) => t.length >= 3 && !STOPWORDS.has(t));
+
+  if (meaningfulTokens.length === 0) {
+    return false;
+  }
+
+  // Must match as a whole word in product name, not a loose partial substring
+  return meaningfulTokens.some((t) => new RegExp(`\\b${t}\\b`, 'i').test(pName));
+}
+
+// ==============================================================================
+// 2. GEMINI SYSTEM INSTRUCTION & TOOL DEFINITIONS
+// ==============================================================================
+
 const bazzarAITools: any[] = [
   {
     functionDeclarations: [
       {
         name: 'search_catalog',
         description:
-          'Search the authentic OfficeBazzar catalog for products: copier papers (JK, TNPL, bond, photo paper), files, folders, registers, pens, staplers, paper shredders, housekeeping chemicals (Taski, Hi-Clean, phenyl), dustbins, cleaning mops, wipers, dispensers, road safety cones, barriers, and office furniture. Always translate search terms into English keywords.',
+          'Search the authentic OfficeBazzar product catalog. Only search for real items like housekeeping chemicals, dustbins, stationery, paper shredders, packaging, or safety items. Always use English keywords.',
         parameters: {
           type: Type.OBJECT,
           properties: {
             query: {
               type: Type.STRING,
-              description:
-                'Search keywords in English (e.g. "copier paper", "A4 paper", "JK copier", "dustbin", "shredder", "file folder", "taski", "cleaning chemical", "chair")',
-            },
-            category: {
-              type: Type.STRING,
-              description:
-                'Optional category filter: "Office Stationery", "Housekeeping & Hygiene", "Printers & Technology", "Packaging Supplies", "Road Safety"',
+              description: 'Product keywords in English (e.g. "taski", "dustbin 120l", "shredder", "box file", "mop")',
             },
           },
           required: ['query'],
         },
       },
       {
-        name: 'get_product_details',
-        description:
-          'Get specifications, SKU, pack size, price, and stock for a specific product by SKU or exact name.',
-        parameters: {
-          type: Type.OBJECT,
-          properties: {
-            skuOrName: {
-              type: Type.STRING,
-              description: 'Product SKU (e.g. OB-STA-1009) or product title',
-            },
-          },
-          required: ['skuOrName'],
-        },
-      },
-      {
         name: 'submit_bulk_enquiry',
         description:
-          'Register an official corporate quotation request / bulk RFQ into OfficeBazzar Zoho CRM. ONLY call this when the customer has provided their contact person name and a valid 10-digit phone number or email, along with requested items.',
+          'Submit a formal bulk quotation request into OfficeBazzar Zoho CRM when customer provided their name, contact phone/email, and requirements.',
         parameters: {
           type: Type.OBJECT,
           properties: {
-            customerName: { type: Type.STRING, description: 'Customer / contact person full name' },
-            phone: { type: Type.STRING, description: '10-digit mobile number' },
-            email: { type: Type.STRING, description: 'Corporate email address' },
-            companyName: { type: Type.STRING, description: 'Company or institution name' },
-            deliveryLocation: { type: Type.STRING, description: 'City or delivery pincode (e.g. Chennai)' },
-            notes: { type: Type.STRING, description: 'Product list, quantities, specifications' },
+            customerName: { type: Type.STRING, description: 'Customer full name' },
+            phone: { type: Type.STRING, description: 'Customer phone number' },
+            email: { type: Type.STRING, description: 'Corporate email' },
+            companyName: { type: Type.STRING, description: 'Company name' },
+            deliveryLocation: { type: Type.STRING, description: 'City or delivery location' },
+            notes: { type: Type.STRING, description: 'Product requirements, quantity, specifications' },
           },
           required: ['customerName', 'phone', 'notes'],
         },
@@ -113,35 +348,36 @@ const bazzarAITools: any[] = [
   },
 ];
 
-const BAZZAR_AI_SYSTEM_INSTRUCTION = `You are "Bazzar AI", the intelligent, courteous, and efficient corporate procurement assistant for OfficeBazzar (https://officebazzar.com).
+const BAZZAR_AI_SYSTEM_INSTRUCTION = `You are "Bazzar AI", the intelligent corporate assistant for OfficeBazzar (https://officebazzar.com), Chennai's premier B2B corporate supplies partner.
 
-Company Context:
-- OfficeBazzar is Chennai's premier B2B corporate supplies partner.
-- We supply Office Stationery, Copier Papers (JK Copier, TNPL, etc.), Ergonomic Office Chairs & Furniture, Housekeeping & Hygiene Chemicals (Taski, Hi-Clean), Commercial Dustbins (Stainless Steel, 60L/120L/240L Wheeled Bins), Packing Materials, and Road Safety Equipment.
-- Direct corporate desk: +91 7200800040 | sales4@officebazzar.com | Chennai Hub.
+Company Capabilities & Rules:
+1. Product Scope:
+   - Office Stationery, Copier Papers (JK Copier 75 GSM, TNPL, etc.), Ergonomic Office Chairs & Seating, Housekeeping Chemicals (Taski, Hi-Clean), Commercial Dustbins (Stainless Steel, 60L/120L/240L Wheeled Bins), Packaging Materials, and Road Safety Equipment.
+   - For office chairs: We supply corporate chairs (Ergonomic mesh chairs, Executive chairs, Visitor chairs) on customized corporate volume quotations. Note: Catalog self-checkout listings for chairs are not published on the website, so chairs are supplied through our dedicated procurement desk.
+   - Delivery Policy: Free delivery within Chennai for corporate bulk orders. For locations outside Chennai or specific vehicle logistics, freight is arranged transparently based on actual destination. Never invent delivery fees.
+   - Support Desk: Phone +91 7200800040 | Email sales4@officebazzar.com | Chennai Hub.
 
-Core Conversational Guidelines:
-1. Dynamic Natural Conversation:
-   - Understand the customer's actual intent and reply specifically to their question.
+2. Dynamic Conversational Behavior:
+   - Understand the customer's actual meaning and intent, not just isolated words.
+   - Maintain multi-turn context (remember requested products, variants, quantities, and locations).
+   - Ask only ONE relevant question at a time. Never interrogate with multiple unrelated questions.
    - Do NOT repeat the welcome message. The welcome message is only for session start.
-   - Ask only ONE relevant follow-up clarification question at a time (e.g. asking for chair type, paper ream count, or delivery city).
-   - If the user provides a follow-up answer (e.g. "ergonomic" or "20 pieces"), link it directly to the previous product in conversation history.
+   - When a user says "Thank you" or casual courtesies, reply naturally and warmly without resetting or repeating generic scripts.
 
-2. Multilingual Fluency:
-   - Automatically detect the customer's language and respond in the same language and style.
-   - English -> Clear, professional English.
+3. Multilingual Excellence:
+   - Automatically detect the customer's language and respond naturally in that language and style.
+   - English -> Clear, natural English.
    - Tamil (தமிழ்) -> Natural, polite Tamil.
-   - Tanglish (Tamil in English letters) -> Natural, friendly Tanglish.
-   - Hindi (हिंदी), Malayalam (മലയാളം), Telugu (తెలుగు), Kannada (ಕನ್ನಡ), etc. -> Mirror their language fluently.
+   - Tanglish (Tamil written in English) -> Fluent, natural Tanglish.
+   - Hindi (हिंदी), Malayalam (മലയാളം), Telugu (తెలుగు), Kannada (ಕನ್ನಡ) -> Mirror their language fluently.
 
-3. Product Catalog & Recommendations:
-   - When users inquire about items, use 'search_catalog' with English keywords to verify live items.
-   - For office chairs and furniture: explain options (Ergonomic mesh chairs with lumbar support, Executive high-back chairs, Visitor chairs) and ask for the quantity/specification needed.
-   - Never invent fake SKU codes or incorrect technical claims.
+4. Product Recommendations:
+   - NEVER recommend unrelated products.
+   - If products are not found in the live catalog (e.g. chairs), explicitly state that they are provided on custom corporate quotation through our sales desk instead of showing unrelated products.`;
 
-4. Quotations & Bulk Inquiries:
-   - If the customer wants pricing or a quote for specific quantities, offer to prepare an official GST quote.
-   - When name and contact number/email are provided, submit a bulk RFQ via 'submit_bulk_enquiry'.`;
+// ==============================================================================
+// 3. MAIN CHAT PROCESSOR (ENGINE ARCHITECTURE)
+// ==============================================================================
 
 export async function processBazzarAIChat(
   userMessage: string,
@@ -150,7 +386,7 @@ export async function processBazzarAIChat(
 ): Promise<ChatResponsePayload> {
   const accumulatedCards: ProductCardSuggestion[] = [];
 
-  // 1. Input Validation
+  // Input Validation
   const trimmed = userMessage.trim();
   if (!trimmed || trimmed.length > 1000) {
     return {
@@ -159,7 +395,7 @@ export async function processBazzarAIChat(
     };
   }
 
-  // 2. Rate Limiting Check
+  // Rate Limiting
   if (!checkRateLimit(clientIp)) {
     return {
       reply: 'You are sending messages too quickly. Please wait a few seconds before trying again.',
@@ -168,20 +404,22 @@ export async function processBazzarAIChat(
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
-  const modelName = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
+  const configuredModel = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
 
   console.log(
-    `[Bazzar AI Request] IP: ${clientIp} | MsgLen: ${trimmed.length} | HistoryTurns: ${history.length} | TargetModel: ${modelName}`
+    `[Bazzar AI Request] IP: ${clientIp} | MsgLen: ${trimmed.length} | HistoryTurns: ${history.length} | PrimaryModel: ${configuredModel}`
   );
 
-  try {
-    if (!apiKey) {
-      throw new Error('GEMINI_API_KEY is not configured in server environment');
-    }
+  // Fallback models in priority order if primary model hits 429 quota exhaustion
+  const candidateModels = [configuredModel, 'gemini-3.1-flash-lite', 'gemini-flash-lite-latest'];
 
+  let finalReplyText: string | null = null;
+  let activeModelUsed: string = configuredModel;
+
+  if (apiKey) {
     const ai = new GoogleGenAI({ apiKey });
 
-    // Format previous turns for Gemini Chat ensuring valid alternating sequence: User -> Model -> User -> Model
+    // Format previous turns ensuring alternating user -> model sequence
     const validHistory: Array<{ role: 'user' | 'model'; parts: Array<{ text: string }> }> = [];
     const rawHistory = history
       .slice(-10)
@@ -203,241 +441,205 @@ export async function processBazzarAIChat(
       validHistory.shift();
     }
 
-    const chat = ai.chats.create({
-      model: modelName,
-      history: validHistory,
-      config: {
-        systemInstruction: BAZZAR_AI_SYSTEM_INSTRUCTION,
-        tools: bazzarAITools,
-        temperature: 0.6,
-      },
-    });
-
-    let currentResponse = await chat.sendMessage({ message: trimmed });
-
-    // Multi-turn tool execution loop (up to 3 tool iterations)
-    let iterations = 0;
-    while (
-      currentResponse.functionCalls &&
-      currentResponse.functionCalls.length > 0 &&
-      iterations < 3
-    ) {
-      iterations++;
-      const toolCall = currentResponse.functionCalls[0];
-      const fnName = toolCall.name;
-      const args = (toolCall.args || {}) as Record<string, any>;
-
-      let toolResult: any;
-
-      if (fnName === 'search_catalog') {
-        const queryTerm = (args.query || '').trim();
-        const categoryFilter = (args.category || '').trim();
-
-        const { products } = await getProducts();
-        const qTokens = queryTerm
-          .toLowerCase()
-          .split(/[\s,+/&.-]+/)
-          .filter((t: string) => t.length >= 2);
-
-        const matches = products.filter((p) => {
-          const matchCat =
-            !categoryFilter ||
-            p.categoryName?.toLowerCase().includes(categoryFilter.toLowerCase());
-          const text = `${p.name} ${p.sku} ${p.categoryName || ''}`.toLowerCase();
-          const matchTokens =
-            qTokens.length === 0 || qTokens.some((t: string) => text.includes(t));
-          return matchCat && matchTokens;
-        });
-
-        const sliced = matches.slice(0, 5);
-        for (const p of sliced) {
-          if (!accumulatedCards.some((c) => c.id === p.id)) {
-            accumulatedCards.push({
-              id: p.id,
-              name: p.name,
-              sku: p.sku,
-              price: p.price && p.price > 0 ? p.price : null,
-              packSize: p.packSize || '1 Unit',
-              categoryName: p.categoryName,
-              imageUrl: p.images && p.images.length > 0 ? p.images[0] : undefined,
-              url: `/product/${p.slug || p.id}`,
-            });
-          }
-        }
-
-        toolResult = {
-          totalFound: matches.length,
-          returned: sliced.map((p) => ({
-            id: p.id,
-            sku: p.sku,
-            name: p.name,
-            price: p.price,
-            packSize: p.packSize,
-            category: p.categoryName,
-          })),
-        };
-      } else if (fnName === 'get_product_details') {
-        const query = (args.skuOrName || '').toLowerCase().trim();
-        const { products } = await getProducts();
-        const product = products.find(
-          (p) =>
-            p.sku.toLowerCase() === query ||
-            p.name.toLowerCase().includes(query) ||
-            p.slug.toLowerCase() === query
-        );
-
-        if (product) {
-          if (!accumulatedCards.some((c) => c.id === product.id)) {
-            accumulatedCards.push({
-              id: product.id,
-              name: product.name,
-              sku: product.sku,
-              price: product.price && product.price > 0 ? product.price : null,
-              packSize: product.packSize || '1 Unit',
-              categoryName: product.categoryName,
-              imageUrl: product.images && product.images.length > 0 ? product.images[0] : undefined,
-              url: `/product/${product.slug || product.id}`,
-            });
-          }
-          toolResult = {
-            found: true,
-            sku: product.sku,
-            name: product.name,
-            price: product.price,
-            packSize: product.packSize,
-            category: product.categoryName,
-            description: product.description,
-            stockQuantity: product.stockQuantity,
-          };
-        } else {
-          toolResult = { found: false, message: 'Item not found in current inventory.' };
-        }
-      } else if (fnName === 'submit_bulk_enquiry') {
-        const customerName = (args.customerName || 'Corporate Customer').trim();
-        const phone = (args.phone || '').trim();
-        const email = (args.email || 'sales4@officebazzar.com').trim();
-        const companyName = (args.companyName || 'Corporate Client').trim();
-        const deliveryLocation = (args.deliveryLocation || 'Chennai').trim();
-        const notes = (args.notes || 'Bulk Quotation Inquiry').trim();
-
-        const quotation = await createQuotation({
-          customerName,
-          email,
-          phone,
-          companyName,
-          pincode: '600001',
-          deliveryLocation,
-          preferredContactMethod: 'phone',
-          additionalRequirements: notes,
-          items: [],
-          indicativeSubtotal: 0,
-          indicativeGstAmount: 0,
-          indicativeTotal: 0,
-          status: 'new',
-        });
-
-        let zohoResult = { success: false, rfqNumber: quotation.id, leadId: null as string | null };
-        try {
-          const syncRes = await syncQuotationToZoho(quotation);
-          zohoResult = {
-            success: syncRes.success,
-            rfqNumber: quotation.id,
-            leadId: syncRes.leadId || null,
-          };
-        } catch {}
-
-        const assignee = await getNextLeadAssignee();
-        dispatchQuotationNotifications(quotation, {
-          zohoQuoteId: zohoResult.leadId || undefined,
-        }).catch(() => {});
-
-        toolResult = {
-          success: true,
-          quotationNumber: quotation.id,
-          assignedExecutive: assignee.name,
-          email: assignee.email,
-        };
-      }
-
-      currentResponse = await chat.sendMessage({
-        message: [
-          {
-            functionResponse: {
-              name: fnName,
-              response: toolResult,
-            },
+    // Try primary model, with automatic fallback to secondary flash-lite model if primary returns 429
+    for (const modelName of candidateModels) {
+      try {
+        const chat = ai.chats.create({
+          model: modelName,
+          history: validHistory,
+          config: {
+            systemInstruction: BAZZAR_AI_SYSTEM_INSTRUCTION,
+            tools: bazzarAITools,
+            temperature: 0.6,
           },
-        ],
-      });
-    }
+        });
 
-    // Extract text safely from response parts
-    let replyText = '';
-    const cand = currentResponse.candidates?.[0];
-    if (cand?.content?.parts) {
-      const texts = cand.content.parts
-        .filter((p: any) => typeof p.text === 'string' && p.text.trim())
-        .map((p: any) => p.text.trim());
-      replyText = texts.join('\n\n');
-    }
+        let currentResponse = await chat.sendMessage({ message: trimmed });
 
-    if (!replyText && currentResponse.text) {
-      replyText = currentResponse.text.trim();
-    }
+        // Tool execution loop
+        let iterations = 0;
+        while (
+          currentResponse.functionCalls &&
+          currentResponse.functionCalls.length > 0 &&
+          iterations < 3
+        ) {
+          iterations++;
+          const toolCall = currentResponse.functionCalls[0];
+          const fnName = toolCall.name;
+          const args = (toolCall.args || {}) as Record<string, any>;
 
-    if (!replyText) {
-      replyText =
-        'Sure! We can help you with that. Could you please specify the approximate quantity or model you need?';
-    }
+          let toolResult: any;
 
-    console.log(
-      `[Bazzar AI Gemini Success] Model: ${modelName} | ReplyLen: ${replyText.length} | Cards: ${accumulatedCards.length}`
-    );
+          if (fnName === 'search_catalog') {
+            const queryTerm = (args.query || '').trim();
+            const { products } = await getProducts();
 
-    const suggestedActions = generateDynamicSuggestions(trimmed, replyText);
+            // Run candidates through Product Relevance Validator (Engine C)
+            const validated = products.filter((p) =>
+              validateProductRelevance(p, queryTerm || trimmed)
+            );
 
-    return {
-      reply: replyText,
-      productCards: accumulatedCards.length > 0 ? accumulatedCards : undefined,
-      suggestedActions,
-      quickLinks: [
-        { title: 'Browse Catalog', url: '/categories' },
-        { title: 'Request Bulk Quote', url: '/request-quote' },
-        { title: 'Call Chennai Hub', url: 'tel:7200800040', external: true },
-      ],
-    };
-  } catch (error: any) {
-    console.error(
-      `[Bazzar AI Gemini Call Failed] Model: ${modelName} | Status: ${error?.status || 'ERR'} | Error:`,
-      error?.message?.substring(0, 150)
-    );
+            const sliced = validated.slice(0, 4);
+            for (const p of sliced) {
+              if (!accumulatedCards.some((c) => c.id === p.id)) {
+                accumulatedCards.push({
+                  id: p.id,
+                  name: p.name,
+                  sku: p.sku,
+                  price: p.price && p.price > 0 ? p.price : null,
+                  packSize: p.packSize || '1 Unit',
+                  categoryName: p.categoryName,
+                  imageUrl: p.images && p.images.length > 0 ? p.images[0] : undefined,
+                  url: `/product/${p.slug || p.id}`,
+                });
+              }
+            }
 
-    // Fallback: Use context-aware conversation responder with live catalog
-    try {
-      const { products } = await getProducts();
-      return generateContextualConversationFallback(trimmed, history, products, accumulatedCards);
-    } catch (fallbackErr: any) {
-      console.error('[Bazzar AI Fallback Store Error]:', fallbackErr?.message);
-      return generateContextualConversationFallback(trimmed, history, [], accumulatedCards);
+            toolResult = {
+              totalFound: validated.length,
+              items: sliced.map((p) => ({
+                id: p.id,
+                name: p.name,
+                sku: p.sku,
+                price: p.price,
+                packSize: p.packSize,
+              })),
+            };
+          } else if (fnName === 'submit_bulk_enquiry') {
+            const customerName = (args.customerName || 'Corporate Customer').trim();
+            const phone = (args.phone || '').trim();
+            const email = (args.email || 'sales4@officebazzar.com').trim();
+            const companyName = (args.companyName || 'Corporate Client').trim();
+            const deliveryLocation = (args.deliveryLocation || 'Chennai').trim();
+            const notes = (args.notes || 'Bulk Quotation Inquiry').trim();
+
+            const quotation = await createQuotation({
+              customerName,
+              email,
+              phone,
+              companyName,
+              pincode: '600001',
+              deliveryLocation,
+              preferredContactMethod: 'phone',
+              additionalRequirements: notes,
+              items: [],
+              indicativeSubtotal: 0,
+              indicativeGstAmount: 0,
+              indicativeTotal: 0,
+              status: 'new',
+            });
+
+            let zohoResult = { success: false, rfqNumber: quotation.id, leadId: null as string | null };
+            try {
+              const syncRes = await syncQuotationToZoho(quotation);
+              zohoResult = {
+                success: syncRes.success,
+                rfqNumber: quotation.id,
+                leadId: syncRes.leadId || null,
+              };
+            } catch {}
+
+            const assignee = await getNextLeadAssignee();
+            dispatchQuotationNotifications(quotation, {
+              zohoQuoteId: zohoResult.leadId || undefined,
+            }).catch(() => {});
+
+            toolResult = {
+              success: true,
+              quotationNumber: quotation.id,
+              assignedExecutive: assignee.name,
+              email: assignee.email,
+            };
+          }
+
+          currentResponse = await chat.sendMessage({
+            message: [
+              {
+                functionResponse: {
+                  name: fnName,
+                  response: toolResult,
+                },
+              },
+            ],
+          });
+        }
+
+        // Safely extract text from candidate parts
+        let replyText = '';
+        const cand = currentResponse.candidates?.[0];
+        if (cand?.content?.parts) {
+          const texts = cand.content.parts
+            .filter((p: any) => typeof p.text === 'string' && p.text.trim())
+            .map((p: any) => p.text.trim());
+          replyText = texts.join('\n\n');
+        }
+
+        if (!replyText && currentResponse.text) {
+          replyText = currentResponse.text.trim();
+        }
+
+        if (replyText) {
+          finalReplyText = replyText;
+          activeModelUsed = modelName;
+          console.log(
+            `[Bazzar AI Gemini Success] Model: ${modelName} | ReplyLen: ${replyText.length} | Cards: ${accumulatedCards.length}`
+          );
+          break; // Successfully got response from model
+        }
+      } catch (modelErr: any) {
+        console.warn(
+          `[Bazzar AI Model Failed] Model: ${modelName} | Status: ${modelErr?.status || 'ERR'} | Msg: ${modelErr?.message?.substring(0, 120)}`
+        );
+        // Continue to next candidate model
+      }
     }
   }
+
+  // If Gemini generated a reply, compose response
+  if (finalReplyText) {
+    return composeChatResponse(trimmed, finalReplyText, accumulatedCards);
+  }
+
+  // If Gemini was unreachable, use honest contextual conversation engine without unreliable product guessing
+  console.log('[Bazzar AI] Using Contextual Conversation Engine Fallback');
+  return generateContextualConversationFallback(trimmed, history);
 }
 
-/**
- * Intelligent, context-aware conversation fallback.
- * Understands customer intent, remembers previous conversation turns, asks only 1 clarification question,
- * and NEVER repeats the initial welcome greeting.
- */
+// ==============================================================================
+// 4. RESPONSE COMPOSER (ENGINE D)
+// ==============================================================================
+
+function composeChatResponse(
+  userMsg: string,
+  replyText: string,
+  productCards: ProductCardSuggestion[]
+): ChatResponsePayload {
+  const suggestedActions = generateDynamicSuggestions(userMsg, replyText);
+
+  return {
+    reply: replyText,
+    productCards: productCards.length > 0 ? productCards : undefined,
+    suggestedActions,
+    quickLinks: [
+      { title: 'Browse Catalog', url: '/categories' },
+      { title: 'Request Bulk Quote', url: '/request-quote' },
+      { title: 'Call 7200800040', url: 'tel:7200800040', external: true },
+    ],
+  };
+}
+
+// ==============================================================================
+// 5. CONTEXTUAL CONVERSATION FALLBACK (NO RANDOM OR UNRELATED PRODUCTS)
+// ==============================================================================
+
 function generateContextualConversationFallback(
   userMsg: string,
-  history: ConversationTurn[],
-  products: Product[],
-  existingCards: ProductCardSuggestion[] = []
+  history: ConversationTurn[]
 ): ChatResponsePayload {
   const trimmed = userMsg.trim();
   const lower = trimmed.toLowerCase();
 
-  // Combine history to maintain multi-turn context
+  // Multi-turn context synthesis
   const historyText = history
     .filter((h) => h.content)
     .map((h) => h.content.toLowerCase())
@@ -483,6 +685,8 @@ function generateContextualConversationFallback(
   const isGreeting = /^(hi|hello|hey|vanakkam|namaste|good\s*(morning|afternoon|evening))\b/i.test(
     trimmed
   );
+  const isThanks = /\b(thank\s*you|thanks|nandri|dhanyavad|shukriya)\b/i.test(trimmed);
+  const isDelivery = /\b(delivery|shipping|freight|charge|charges|cost)\b/i.test(trimmed);
 
   // Attributes
   const isErgonomic =
@@ -493,50 +697,35 @@ function generateContextualConversationFallback(
     fullContext.includes('executive') ||
     fullContext.includes('leather') ||
     fullContext.includes('high back');
-  const isVisitor = fullContext.includes('visitor') || fullContext.includes('waiting');
 
-  // Quantity detection (e.g. "20", "20 pieces", "50 reams", "10 units")
+  // Quantity detection
   const qtyMatch = trimmed.match(
     /\b(\d+)\s*(pieces|piece|pcs|nos|units|reams|ream|chairs|chair|boxes|box)?\b/i
   );
   const qtyNum = qtyMatch ? qtyMatch[1] : null;
 
-  // Search product matches for cards
-  const qTokens = lower
-    .split(/[\s,+/&.-]+/)
-    .filter(
-      (t) =>
-        t.length >= 2 &&
-        !['need', 'want', 'have', 'with', 'what', 'price', 'tell', 'about', 'some', 'give'].includes(
-          t
-        )
-    );
-
-  const matchedProducts = products
-    .filter((p) => {
-      const pText = `${p.name} ${p.sku} ${p.categoryName || ''}`.toLowerCase();
-      return qTokens.some((t) => pText.includes(t));
-    })
-    .slice(0, 4);
-
-  const productCards: ProductCardSuggestion[] =
-    existingCards.length > 0
-      ? existingCards
-      : matchedProducts.map((p) => ({
-          id: p.id,
-          name: p.name,
-          sku: p.sku,
-          price: p.price && p.price > 0 ? p.price : null,
-          packSize: p.packSize || '1 Unit',
-          categoryName: p.categoryName,
-          imageUrl: p.images && p.images.length > 0 ? p.images[0] : undefined,
-          url: `/product/${p.slug || p.id}`,
-        }));
-
   let reply = '';
 
-  // 1. CHAIRS CONVERSATION FLOW
-  if (hasChairs) {
+  // 1. THANKS
+  if (isThanks) {
+    if (isTamil) {
+      reply = `மிக்க மகிழ்ச்சி! தங்களுக்கு மேலும் ஏதேனும் அலுவலகப் பொருட்கள் தேவையா?`;
+    } else if (isTanglish) {
+      reply = `Romba santhosham! Ungalukku vera edhavadhu office supplies theva padudha?`;
+    } else {
+      reply = `You're welcome! Please let me know if you need any other office supplies or assistance.`;
+    }
+  }
+  // 2. DELIVERY INQUIRY
+  else if (isDelivery) {
+    if (isTamil) {
+      reply = `சென்னையில் கார்ப்பரேட் மொத்த ஆர்டர்களுக்கு இலவச டெலிவரி வழங்குகிறோம். பிற பகுதிகளுக்கு இடம் மற்றும் அளவுக்கு ஏற்ப நியாயமான போக்குவரத்து கட்டணம் இருக்கும். உங்கள் டெலிவரி லொகேஷன் எது?`;
+    } else {
+      reply = `We provide free delivery within Chennai for corporate bulk orders. For locations outside Chennai or specialized freight, transport is arranged at actual logistics rates. Which delivery location are you planning for?`;
+    }
+  }
+  // 3. CHAIRS CONVERSATION
+  else if (hasChairs) {
     if (qtyNum) {
       if (isErgonomic) {
         if (isTamil) {
@@ -544,7 +733,7 @@ function generateContextualConversationFallback(
         } else if (isTanglish) {
           reply = `Purinjidhu! Ungalukku ${qtyNum} Ergonomic chairs theva. Direct corporate GST bulk quotation tharom. Endha location-ku delivery venum?`;
         } else {
-          reply = `Understood. You're looking for ${qtyNum} ergonomic chairs. Let me help you find suitable options from our catalogue. Our corporate procurement desk can also provide volume pricing with GST invoicing. Which city or delivery location is this for?`;
+          reply = `Understood. You're looking for ${qtyNum} ergonomic chairs. Office chairs are supplied via custom corporate quotation with volume pricing and GST invoicing. Which city or delivery location is this for?`;
         }
       } else {
         if (isTamil) {
@@ -582,7 +771,7 @@ function generateContextualConversationFallback(
       }
     }
   }
-  // 2. COPIER PAPER FLOW
+  // 4. COPIER PAPER FLOW
   else if (hasPaper) {
     if (qtyNum) {
       if (isTamil) {
@@ -602,31 +791,15 @@ function generateContextualConversationFallback(
       }
     }
   }
-  // 3. DUSTBINS & HOUSEKEEPING FLOW
+  // 5. DUSTBINS & HOUSEKEEPING FLOW
   else if (hasDustbin || hasCleaning) {
     if (qtyNum) {
-      if (isTamil) {
-        reply = `புரிந்துகொண்டேன். ${qtyNum} யூனிட்கள் துப்புரவு பொருட்கள் / குப்பைத் தொட்டிகளுக்கு உடனடி கார்ப்பரேட் விலைப்புள்ளி வழங்குகிறோம். டெலிவரி இடம் எது?`;
-      } else {
-        reply = `Understood. For ${qtyNum} units of commercial cleaning supplies / dustbins, we offer direct volume quotes. Which delivery location is this for?`;
-      }
+      reply = `Understood. For ${qtyNum} units of commercial cleaning supplies / dustbins, we offer direct volume quotes. Which delivery location is this for?`;
     } else {
-      if (isTamil) {
-        reply = `எங்களிடம் 60L, 120L, 240L சக்கர குப்பைத் தொட்டிகள் மற்றும் Taski துப்புரவு கெமிக்கல்கள் உள்ளன. தங்களுக்கு எந்த அளவு அல்லது பொருள் தேவைப்படுகிறது?`;
-      } else {
-        reply = `We supply heavy-duty commercial dustbins (60L, 120L, 240L wheeled bins, stainless steel pedal bins) and Taski housekeeping chemicals. Which specific size or item do you need?`;
-      }
+      reply = `We supply heavy-duty commercial dustbins (60L, 120L, 240L wheeled bins, stainless steel pedal bins) and Taski housekeeping chemicals. Which specific size or item do you need?`;
     }
   }
-  // 4. FILES & STATIONERY FLOW
-  else if (hasFiles) {
-    if (isTamil) {
-      reply = `எங்களிடம் Box Files, Cobra Files, நோட்புக் மற்றும் அனைத்து அலுவலக எழுதுபொருட்களும் மொத்த விலையில் கிடைக்கின்றன. எத்தனை எண்ணிக்கையில் தேவைப்படுகிறது?`;
-    } else {
-      reply = `We provide complete corporate office stationery including lever arch box files, cobra spring files, punching machines, and registers. How many units do you need?`;
-    }
-  }
-  // 5. GREETING
+  // 6. GREETING
   else if (isGreeting) {
     if (isTamil) {
       reply = `வணக்கம்! OfficeBazzar-க்கு தங்களை வரவேற்கிறோம். இன்று தங்களுக்கு அலுவலக பொருட்களில் எவ்வாறு உதவ முடியும்?`;
@@ -636,29 +809,16 @@ function generateContextualConversationFallback(
       reply = `Hello! Welcome to OfficeBazzar. How can I help you today?`;
     }
   }
-  // 6. DEFAULT / SEARCH MATCHES
+  // 7. DEFAULT HONEST RESPONSE
   else {
-    if (productCards.length > 0) {
-      if (isTamil) {
-        reply = `எங்கள் பட்டியலிலிருந்து பொருந்தக்கூடிய பொருட்கள் கீழே உள்ளன. தங்களுக்குத் தேவையான அளவைக் கூறினால் உடனடி விலைப்புள்ளி வழங்கப்படும்.`;
-      } else {
-        reply = `Here are suitable options from our catalogue matching your query. Let me know the quantities you require or if you would like an official quotation.`;
-      }
-    } else {
-      if (isTamil) {
-        reply = `தங்களுக்குத் தேவையான பொருளின் அளவு மற்றும் விவரங்களைக் கூறினால், எங்கள் விற்பனை மேசை உடனடி விலையை வழங்கும்.`;
-      } else {
-        reply = `I can help you procure that. Could you share the approximate quantity and specifications you need so our procurement desk can check availability and pricing?`;
-      }
-    }
+    reply = `I can help you procure that for your office. Could you share the approximate quantity and specifications you need so our procurement desk can check availability and pricing?`;
   }
 
-  const suggestedActions = generateDynamicSuggestions(trimmed, reply);
-
+  // Strictly ZERO product cards when fallback occurs (never show unrelated products like Foam Thermocol)
   return {
     reply,
-    productCards: productCards.length > 0 ? productCards : undefined,
-    suggestedActions,
+    productCards: undefined,
+    suggestedActions: generateDynamicSuggestions(trimmed, reply),
     quickLinks: [
       { title: 'Browse Catalog', url: '/categories' },
       { title: 'Request Bulk Quote', url: '/request-quote' },
@@ -667,9 +827,10 @@ function generateContextualConversationFallback(
   };
 }
 
-/**
- * Generate contextual suggestions based on message contents and language
- */
+// ==============================================================================
+// 6. DYNAMIC SUGGESTIONS ENGINE
+// ==============================================================================
+
 function generateDynamicSuggestions(userMsg: string, replyMsg: string): string[] {
   const combined = `${userMsg} ${replyMsg}`.toLowerCase();
   const isTamil = /[\u0B80-\u0BFF]/.test(userMsg);
@@ -695,7 +856,7 @@ function generateDynamicSuggestions(userMsg: string, replyMsg: string): string[]
     return ['उत्पाद खोजें (Find Products)', 'थोक कोटेशन (Bulk Quote)', 'सहायता (Help)'];
   }
 
-  // English / Tanglish / Global
+  // English / Tanglish
   if (combined.includes('chair') || combined.includes('furniture') || combined.includes('ergonomic')) {
     return ['Ergonomic Chairs', 'Executive Chairs', 'Visitor Chairs', 'Get Chair Quote'];
   }
