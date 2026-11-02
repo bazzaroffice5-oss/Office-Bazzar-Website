@@ -602,7 +602,7 @@ export async function processBazzarAIChat(
 
   // If Gemini was unreachable, use honest contextual conversation engine without unreliable product guessing
   console.log('[Bazzar AI] Using Contextual Conversation Engine Fallback');
-  return generateContextualConversationFallback(trimmed, history);
+  return await generateContextualConversationFallback(trimmed, history);
 }
 
 // ==============================================================================
@@ -632,10 +632,10 @@ function composeChatResponse(
 // 5. CONTEXTUAL CONVERSATION FALLBACK (NO RANDOM OR UNRELATED PRODUCTS)
 // ==============================================================================
 
-function generateContextualConversationFallback(
+async function generateContextualConversationFallback(
   userMsg: string,
   history: ConversationTurn[]
-): ChatResponsePayload {
+): Promise<ChatResponsePayload> {
   const trimmed = userMsg.trim();
   const lower = trimmed.toLowerCase();
 
@@ -645,6 +645,23 @@ function generateContextualConversationFallback(
     .map((h) => h.content.toLowerCase())
     .join(' ');
   const fullContext = `${historyText} ${lower}`;
+
+  // Retrieve strictly validated product cards (if genuinely matching)
+  let validatedCards: ProductCardSuggestion[] = [];
+  try {
+    const { products } = await getProducts();
+    const matches = products.filter((p) => validateProductRelevance(p, trimmed));
+    validatedCards = matches.slice(0, 4).map((p) => ({
+      id: p.id,
+      name: p.name,
+      sku: p.sku,
+      price: p.price && p.price > 0 ? p.price : null,
+      packSize: p.packSize || '1 Unit',
+      categoryName: p.categoryName,
+      imageUrl: p.images && p.images.length > 0 ? p.images[0] : undefined,
+      url: `/product/${p.slug || p.id}`,
+    }));
+  } catch {}
 
   // Language detection
   const isTamil = /[\u0B80-\u0BFF]/.test(userMsg);
@@ -796,7 +813,7 @@ function generateContextualConversationFallback(
     if (qtyNum) {
       reply = `Understood. For ${qtyNum} units of commercial cleaning supplies / dustbins, we offer direct volume quotes. Which delivery location is this for?`;
     } else {
-      reply = `We supply heavy-duty commercial dustbins (60L, 120L, 240L wheeled bins, stainless steel pedal bins) and Taski housekeeping chemicals. Which specific size or item do you need?`;
+      reply = `We supply commercial housekeeping & hygiene supplies, including Taski cleaning chemicals, heavy-duty wheeled dustbins (60L, 120L, 240L), cleaning cloths, and wipers. Which specific item do you need?`;
     }
   }
   // 6. GREETING
@@ -814,10 +831,10 @@ function generateContextualConversationFallback(
     reply = `I can help you procure that for your office. Could you share the approximate quantity and specifications you need so our procurement desk can check availability and pricing?`;
   }
 
-  // Strictly ZERO product cards when fallback occurs (never show unrelated products like Foam Thermocol)
+  // Returns ONLY strictly validated product cards (never unrelated products like Foam Thermocol)
   return {
     reply,
-    productCards: undefined,
+    productCards: validatedCards.length > 0 ? validatedCards : undefined,
     suggestedActions: generateDynamicSuggestions(trimmed, reply),
     quickLinks: [
       { title: 'Browse Catalog', url: '/categories' },
