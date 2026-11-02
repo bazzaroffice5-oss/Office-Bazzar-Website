@@ -70,3 +70,4 @@ for (let i = 0; i < existing.length; i++) {
 console.log('\nTotal existing matched:', matchedExisting.size, 'Unique manifest items matched:', matchedManifest.size);
 console.log('Unmatched existing products count:', existing.length - matchedExisting.size);
 console.log('Unmatched manifest products (new additions):', manifest.length - matchedManifest.size);
+

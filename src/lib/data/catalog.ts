@@ -3542,8 +3542,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-003-shoe-cover-dispenser.webp"
@@ -3559,7 +3561,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -3577,8 +3582,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-004-paper-cup-dispenser.webp"
@@ -3594,7 +3601,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -3612,8 +3622,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-005-jet-hand-dryer.webp"
@@ -3629,7 +3641,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -3647,8 +3662,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-006-commercial-vacuum-cleaner.webp"
@@ -3664,7 +3681,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -3682,8 +3702,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-007-shoe-polish-machine.webp"
@@ -3699,7 +3721,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -3717,8 +3742,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-008-feather-duster.webp"
@@ -3734,7 +3761,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -3752,8 +3782,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-009-queue-manager.webp"
@@ -3769,7 +3801,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -3787,8 +3822,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-011-abs-soap-dispenser-500ml.webp"
@@ -3804,7 +3841,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -3822,8 +3862,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-012-abs-soap-dispenser-curved.webp"
@@ -3839,7 +3881,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -3857,8 +3902,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-013-abs-soap-dispenser-single-clear.webp"
@@ -3874,7 +3921,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -3892,8 +3942,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-014-abs-soap-dispenser-250ml.webp"
@@ -3909,7 +3961,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -3927,8 +3982,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-015-abs-double-soap-dispenser-clear.webp"
@@ -3944,7 +4001,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -3962,8 +4022,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-016-double-soap-dispenser-white.webp"
@@ -3979,7 +4041,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -3997,8 +4062,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-017-automatic-soap-dispenser.webp"
@@ -4014,7 +4081,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4032,8 +4102,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-018-touch-free-soap-dispenser.webp"
@@ -4049,7 +4121,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4067,8 +4142,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-019-ss-c-m-fold-tissue-dispenser.webp"
@@ -4084,7 +4161,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4102,8 +4182,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-020-abs-tissue-dispenser-m-fold.webp"
@@ -4119,7 +4201,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4137,8 +4222,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-021-ss-jumbo-roll-tissue-dispenser.webp"
@@ -4154,7 +4241,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4172,8 +4262,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-023-ss-toilet-roll-dispenser.webp"
@@ -4189,7 +4281,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4207,8 +4302,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-024-mini-toilet-roll-dispenser.webp"
@@ -4224,7 +4321,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4242,8 +4342,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-025-hrt-roll-dispenser-automatic.webp"
@@ -4259,7 +4361,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4277,8 +4382,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-026-hrt-roll-dispenser-autocut.webp"
@@ -4294,7 +4401,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4312,8 +4422,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-027-kitchen-roll-dispenser.webp"
@@ -4329,7 +4441,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4347,8 +4462,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-030-premier-face-tissue.webp"
@@ -4364,7 +4481,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Premier",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4382,8 +4502,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-033-hrt-tissue-roll.webp"
@@ -4399,7 +4521,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4417,8 +4542,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-035-kitchen-tissue-roll.webp"
@@ -4434,7 +4561,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4452,8 +4582,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-036-greenlime-tissue.webp"
@@ -4469,7 +4601,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Greenlime",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4487,8 +4622,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-038-glass-cloth.webp"
@@ -4504,7 +4641,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4522,8 +4662,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-039-gada-cloth.webp"
@@ -4539,7 +4681,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4557,8 +4702,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-041-micro-fiber-cloth-all-size.webp"
@@ -4574,7 +4721,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4592,8 +4742,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-042-banian-cloth.webp"
@@ -4609,7 +4761,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4627,8 +4782,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-043-banian-cloth-white.webp"
@@ -4644,7 +4801,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4662,8 +4822,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-044-blue-duster-cloth.webp"
@@ -4679,7 +4841,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4697,8 +4862,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-045-cotton-towel-small-big.webp"
@@ -4714,7 +4881,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4732,8 +4902,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-047-scrub-pad-with-sponge.webp"
@@ -4749,7 +4921,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4767,8 +4942,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-048-nylon-scrubber.webp"
@@ -4784,7 +4961,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4802,8 +4982,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-049-steel-scrubber.webp"
@@ -4819,7 +5001,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4837,8 +5022,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-050-exo-round-bar.webp"
@@ -4854,7 +5041,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Exo",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4872,8 +5062,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-051-pril-dishwash-liquid.webp"
@@ -4889,7 +5081,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Pril",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4907,8 +5102,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-052-vim-dishwash-gel-250ml-500ml-1-8-ltr.webp"
@@ -4924,7 +5121,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Vim",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4942,8 +5142,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-053-hi-clean-dishwash-liquid.webp"
@@ -4959,7 +5161,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Clean",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -4977,8 +5182,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-054-vim-pril-dishwash-soap.webp"
@@ -4994,7 +5201,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Vim",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5012,8 +5222,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-055-toilet-brush-double-hockey.webp"
@@ -5029,7 +5241,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5047,8 +5262,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-057-toilet-brush-round.webp"
@@ -5064,7 +5281,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5082,8 +5302,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-058-carpet-brush-hard-soft.webp"
@@ -5099,7 +5321,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5117,8 +5342,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-059-road-cleaning-brush.webp"
@@ -5134,7 +5361,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5152,8 +5382,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-060-cloth-washing-brush.webp"
@@ -5169,7 +5401,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5187,8 +5422,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-061-washbasin-brush.webp"
@@ -5204,7 +5441,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5222,8 +5462,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-062-cobweb-stick-sunflower.webp"
@@ -5239,7 +5481,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5257,8 +5502,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-063-dust-pan-with-brush-set.webp"
@@ -5274,7 +5521,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5292,8 +5542,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-065-pedal-plastic-dustbin.webp"
@@ -5309,7 +5561,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5327,8 +5582,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-066-swing-plastic-dustbin.webp"
@@ -5344,7 +5601,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5362,8 +5622,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-067-single-mop-wringer-bucket.webp"
@@ -5379,7 +5641,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5397,8 +5662,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-069-stainless-steel-pedal-dustbin.webp"
@@ -5414,7 +5681,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5432,8 +5702,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-070-ss-perforated-dustbin.webp"
@@ -5449,7 +5721,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5467,8 +5742,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-071-ss-push-can-dustbin.webp"
@@ -5484,7 +5761,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5502,8 +5782,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-072-ss-swing-dustbin.webp"
@@ -5519,7 +5801,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5537,8 +5822,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-073-commercial-glass-wiper.webp"
@@ -5554,7 +5841,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5572,8 +5862,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-074-glass-combi-wiper-with-sponge.webp"
@@ -5589,7 +5881,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5607,8 +5902,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-075-kitchen-counter-wiper.webp"
@@ -5624,7 +5921,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5642,8 +5942,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-076-versa-wiper.webp"
@@ -5659,7 +5961,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5677,8 +5982,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-077-floor-wiper-with-long-stick.webp"
@@ -5694,7 +6001,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5712,8 +6022,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-078-table-top-wiper.webp"
@@ -5729,7 +6041,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5747,8 +6062,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-080-clip-mop-head-colour-coded.webp"
@@ -5764,7 +6081,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5782,8 +6102,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-081-cob-web-brush-curved.webp"
@@ -5799,7 +6121,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5817,8 +6142,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-083-heavy-duty-mop-stick-handle.webp"
@@ -5834,7 +6161,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5852,8 +6182,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-084-twist-floor-mop.webp"
@@ -5869,7 +6201,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5887,8 +6222,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-085-clip-fit-wet-mop-refill.webp"
@@ -5904,7 +6241,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5922,8 +6262,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-086-rubber-welcome-mat.webp"
@@ -5939,7 +6281,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5957,8 +6302,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-087-cotton-door-mat.webp"
@@ -5974,7 +6321,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -5992,8 +6342,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-089-plastic-handheld-dustpan.webp"
@@ -6009,7 +6361,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6027,8 +6382,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-090-round-cotton-floor-mop.webp"
@@ -6044,7 +6401,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6062,8 +6422,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-092-godrej-aer-room-freshener-spray.webp"
@@ -6079,7 +6441,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Godrej aer",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6097,8 +6462,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-094-odonil-room-air-freshener-spray.webp"
@@ -6114,7 +6481,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Odonil",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6132,8 +6502,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-095-airwick-room-freshener-spray.webp"
@@ -6149,7 +6521,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Airwick",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6167,8 +6542,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-096-ambi-pur-air-freshener-spray.webp"
@@ -6184,7 +6561,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Ambi Pur",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6202,8 +6582,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-097-automatic-air-freshener-dispenser-refill.webp"
@@ -6219,7 +6601,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6237,8 +6622,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-098-hi-clean-air-freshener-liquid-5-litre.webp"
@@ -6254,7 +6641,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Clean",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6272,8 +6662,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-099-godrej-aer-pocket-bathroom-freshener.webp"
@@ -6289,7 +6681,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Godrej aer",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6307,8 +6702,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-100-telescopic-aluminum-extension-pole.webp"
@@ -6324,7 +6721,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6342,8 +6742,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-101-caution-wet-floor-sign-board.webp"
@@ -6359,7 +6761,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6377,8 +6782,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-102-cleaning-caddy-basket-organizer.webp"
@@ -6394,7 +6801,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6412,8 +6822,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-103-professional-glass-cleaning-kit-box.webp"
@@ -6429,7 +6841,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6447,8 +6862,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-104-commercial-insect-killer-fly-catcher-machine.webp"
@@ -6464,7 +6881,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6482,8 +6902,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-105-abs-wall-mounted-broom-mop-holder.webp"
@@ -6499,7 +6921,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6517,8 +6942,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-106-upright-lobby-dustpan-with-broom.webp"
@@ -6534,7 +6961,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6552,8 +6982,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-107-floor-and-glass-scraper-tool.webp"
@@ -6569,7 +7001,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6587,8 +7022,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-108-chemical-trigger-spray-bottle.webp"
@@ -6604,7 +7041,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6622,8 +7062,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-109-goodknight-mosquito-repellent-machine-set.webp"
@@ -6639,7 +7081,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Goodknight",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6657,8 +7102,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-110-hit-cockroach-insect-spray.webp"
@@ -6674,7 +7121,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "HIT",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6692,8 +7142,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-111-caustic-soda-flakes.webp"
@@ -6709,7 +7161,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6727,8 +7182,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-112-pvc-hard-broom.webp"
@@ -6744,7 +7201,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6762,8 +7222,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-113-hard-broom-stick-big-small.webp"
@@ -6779,7 +7241,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6797,8 +7262,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-114-all-out-mosquito-repellent-machine-set.webp"
@@ -6814,7 +7281,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "All Out",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6832,8 +7302,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-115-grass-soft-broom-big-small.webp"
@@ -6849,7 +7321,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6867,8 +7342,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-116-steel-handle-broom.webp"
@@ -6884,7 +7361,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6902,8 +7382,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-117-gala-no-dust-broom.webp"
@@ -6919,7 +7401,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Gala",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6937,8 +7422,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-119-hi-clean-liquid-soap-1l-5l.webp"
@@ -6954,7 +7441,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Clean",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -6972,8 +7462,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-120-hi-clean-toilet-cleaner-500ml-5l.webp"
@@ -6989,7 +7481,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Clean",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7007,8 +7502,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-121-hi-clean-perfumed-phenyl-multicolor.webp"
@@ -7024,7 +7521,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Clean",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7042,8 +7542,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-122-hi-clean-glass-cleaner-500ml-5l.webp"
@@ -7059,7 +7561,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Clean",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7077,8 +7582,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-123-hi-clean-black-disinfectant-concentrate-phenyl.webp"
@@ -7094,7 +7601,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Clean",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7112,8 +7622,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-124-hi-clean-hand-wash-250ml-500ml-5l.webp"
@@ -7129,7 +7641,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Clean",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7147,8 +7662,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-125-hi-clean-bathroom-cleaner-500ml.webp"
@@ -7164,7 +7681,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Clean",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7182,8 +7702,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-126-sodium-hypochlorite-disinfectant-solution-5l.webp"
@@ -7199,7 +7721,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Clean",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7217,8 +7742,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-128-lifebuoy-antibacterial-handwash.webp"
@@ -7234,7 +7761,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Lifebuoy",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7252,8 +7782,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-129-cleaning-thinner-nc-thinner.webp"
@@ -7269,7 +7801,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7287,8 +7822,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-130-urinal-screen-anti-splash-mats.webp"
@@ -7304,7 +7841,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7322,8 +7862,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-131-disposable-heavy-garbage-bags-all-sizes.webp"
@@ -7339,7 +7881,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7357,8 +7902,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-132-industrial-rubber-anti-fatigue-mat-roll.webp"
@@ -7374,7 +7921,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7392,8 +7942,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-133-heavy-duty-rubber-cleaning-hand-gloves.webp"
@@ -7409,7 +7961,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7427,8 +7982,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-134-cotton-knitted-safety-hand-gloves.webp"
@@ -7444,7 +8001,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7462,8 +8022,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-135-pure-white-naphthalene-balls.webp"
@@ -7479,7 +8041,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7497,8 +8062,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-137-wringer-trolley-double-bucket.webp"
@@ -7514,7 +8081,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7532,8 +8102,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-138-wringer-trolley-triple-bucket.webp"
@@ -7549,7 +8121,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7567,8 +8142,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-139-handheld-shopping-basket-trolley.webp"
@@ -7584,7 +8161,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7602,8 +8182,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-140-metal-supermarket-shopping-cart-trolley.webp"
@@ -7619,7 +8201,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7637,8 +8222,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-141-industrial-heavy-duty-platform-trolley.webp"
@@ -7654,7 +8241,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Yogo",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7672,8 +8262,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-142-janitor-cleaning-service-trolley-cart.webp"
@@ -7689,7 +8281,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7707,8 +8302,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-143-multipurpose-wringer-janitor-trolley.webp"
@@ -7724,7 +8321,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7742,8 +8342,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-144-double-bucket-wringer-trolley-black.webp"
@@ -7759,7 +8361,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7777,8 +8382,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-145-bio-medical-waste-segregation-dustbins-set.webp"
@@ -7794,7 +8401,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7812,8 +8422,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-146-duo-wet-dry-plastic-dustbin.webp"
@@ -7829,7 +8441,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Kleend",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7847,8 +8462,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-147-ss-duo-waste-recycling-dustbin.webp"
@@ -7864,7 +8481,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Clean-In",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7882,8 +8502,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-149-frp-duo-outdoor-waste-bins.webp"
@@ -7899,7 +8521,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7917,8 +8542,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-152-heavy-duty-wheeled-dustbin-660-litre.webp"
@@ -7934,7 +8561,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Aristo",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7952,8 +8582,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-153-industrial-plastic-storage-drum-barrel-all-sizes.webp"
@@ -7969,7 +8601,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -7987,8 +8622,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-203-diversey-taski-r3-glass-cleaner-concentrate.webp"
@@ -8004,7 +8641,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Diversey Taski",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8022,8 +8662,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-157-diversey-taski-r4-wood-furniture-polish.webp"
@@ -8039,7 +8681,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Diversey Taski",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8057,8 +8702,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-158-diversey-taski-r5-air-freshener-concentrate.webp"
@@ -8074,7 +8721,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Diversey Taski",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8092,8 +8742,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-159-diversey-taski-r6-toilet-bowl-cleaner.webp"
@@ -8109,7 +8761,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Diversey Taski",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8127,8 +8782,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-160-diversey-taski-r7-floor-cleaner-concentrate.webp"
@@ -8144,7 +8801,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Diversey Taski",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8162,8 +8822,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-161-diversey-taski-r9-hard-water-limescale-cleaner.webp"
@@ -8179,7 +8841,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Diversey Taski",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8197,8 +8862,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/housekeeping/ob-162-diversey-suma-inox-d7-1-stainless-steel-polish.webp"
@@ -8214,7 +8881,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Diversey",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8232,8 +8902,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-01-jk-max-copier-paper-67-gsm-a4.webp"
@@ -8249,7 +8921,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "JK Paper",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8267,8 +8942,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-02-jk-cmax-copier-paper-72-gsm-a4.webp"
@@ -8284,7 +8961,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "JK Paper",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8302,8 +8982,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-03-jk-easy-copier-paper-70-gsm-a4.webp"
@@ -8319,7 +9001,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "JK Paper",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8337,8 +9022,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-04-jk-copier-paper-75-gsm-a4.webp"
@@ -8354,7 +9041,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "JK Paper",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8372,8 +9062,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-05-jk-excel-bond-paper-70-80-90-100-gsm-a4.webp"
@@ -8389,7 +9081,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "JK Paper",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8407,8 +9102,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-06-jk-cedar-copier-paper-80-100-gsm-a4.webp"
@@ -8424,7 +9121,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "JK Paper",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8442,8 +9142,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-07-jk-sparkle-multipurpose-paper-70-75-80-gsm-a4.webp"
@@ -8459,7 +9161,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "JK Paper",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8477,8 +9182,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-08-jk-eco-rise-copier-paper-70-gsm-a4.webp"
@@ -8494,7 +9201,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "JK Paper",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8512,8 +9222,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-09-tnpl-copier-paper-70-gsm-a4.webp"
@@ -8529,7 +9241,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "TNPL",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8547,8 +9262,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-10-tnpl-platinum-copier-paper-75-gsm-a4.webp"
@@ -8564,7 +9281,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "TNPL",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8582,8 +9302,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-11-tnpl-copier-paper-80-gsm-a4.webp"
@@ -8599,7 +9321,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "TNPL",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8617,8 +9342,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-12-jk-max-copier-paper-67-gsm-a4-ekent-pack.webp"
@@ -8634,7 +9361,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "JK Paper",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8652,8 +9382,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-13-koopee-premium-glossy-photo-paper-a4.webp"
@@ -8669,7 +9401,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Koopee",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8687,8 +9422,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-14-royal-executive-bond-paper-a4.webp"
@@ -8704,7 +9441,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Royal",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8722,8 +9462,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-15-compu-color-a4-color-paper-200-gsm.webp"
@@ -8739,7 +9481,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Compu",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8757,8 +9502,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/copier-papers/ob-pap-16-novajet-inkjet-true-picture-paper-a4.webp"
@@ -8774,7 +9521,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "NovaJet",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8792,8 +9542,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-fil-19-a4-sheet-protector-clear-sheet.webp"
@@ -8809,7 +9561,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8827,8 +9582,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-fil-20-a4-plastic-stick-file.webp"
@@ -8844,7 +9601,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8862,8 +9622,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-fil-24-spring-file-plastic-body.webp"
@@ -8879,7 +9641,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8897,8 +9662,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-fil-26-officebazzar-box-file.webp"
@@ -8914,7 +9681,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8932,8 +9702,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-fil-28-ordinary-urgent-document-file.webp"
@@ -8949,7 +9721,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -8967,8 +9742,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-fil-29-1-to-10-index-file-separator.webp"
@@ -8984,7 +9761,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9002,8 +9782,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-fil-30-a-to-z-alphabetical-file-separator.webp"
@@ -9019,7 +9801,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9037,8 +9822,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-fil-31-2-d-ring-binder-file-1501.webp"
@@ -9054,7 +9841,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9072,8 +9862,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-fil-32-diamond-ring-binder-file-2302.webp"
@@ -9089,7 +9881,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Diamond",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9107,8 +9902,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-33-bitco-ballpoint-pen-pack.webp"
@@ -9124,7 +9921,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Bitco",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9142,8 +9942,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-34-cello-finegrip-ballpoint-pen.webp"
@@ -9159,7 +9961,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Cello",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9177,8 +9982,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-35-montex-ballpoint-pen.webp"
@@ -9194,7 +10001,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Montex",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9212,8 +10022,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-36-add-gel-achiever-pen.webp"
@@ -9229,7 +10041,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Add Gel",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9247,8 +10062,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-37-pilot-v5-v7-liquid-ink-rollerball-pen.webp"
@@ -9264,7 +10081,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Pilot",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9282,8 +10102,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-38-rorito-045-classic-ballpoint-pen-pack.webp"
@@ -9299,7 +10121,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Rorito",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9317,8 +10142,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-39-rorito-flymax-gel-pen.webp"
@@ -9334,7 +10161,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Rorito",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9352,8 +10182,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-40-natraj-spark-ball-pen-set.webp"
@@ -9369,7 +10201,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Natraj",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9387,8 +10222,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-41-ohp-cd-dvd-permanent-marker.webp"
@@ -9404,7 +10241,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9422,8 +10262,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-42-fluorescent-highlighter-marker-pack.webp"
@@ -9439,7 +10281,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Cello",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9457,8 +10302,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-43-chisel-tip-permanent-marker.webp"
@@ -9474,7 +10321,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9492,8 +10342,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-44-dry-erase-whiteboard-marker.webp"
@@ -9509,7 +10361,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9527,8 +10382,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-45-luxor-color-sketch-pen-pack.webp"
@@ -9544,7 +10401,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Luxor",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9562,8 +10422,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-46-nataraj-hb-wooden-pencils-pack.webp"
@@ -9579,7 +10441,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Nataraj",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9597,8 +10462,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-47-apsara-dust-free-nataraj-plasto-eraser-pack.webp"
@@ -9614,7 +10481,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Apsara",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9632,8 +10502,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-pen-48-desk-pencil-sharpener-pack.webp"
@@ -9649,7 +10521,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Nataraj",
       "category": "Office Stationery",
       "subcategory": "Writing Instruments",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9667,8 +10542,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-des-51-fevicol-mr-adhesive-tube.webp"
@@ -9684,7 +10561,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Fevicol",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9702,8 +10582,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/packaging-supplies/ob-des-52-double-sided-foam-tape-1-inch.webp"
@@ -9719,7 +10601,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Packaging Supplies",
       "subcategory": "Packaging & Dispatch",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9737,8 +10622,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/packaging-supplies/ob-des-53-double-sided-transparent-tissue-tape.webp"
@@ -9754,7 +10641,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Packaging Supplies",
       "subcategory": "Packaging & Dispatch",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9772,8 +10662,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/packaging-supplies/ob-des-55-heavy-duty-tape-dispenser-1-inch-2-inch.webp"
@@ -9789,7 +10681,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Packaging Supplies",
       "subcategory": "Packaging & Dispatch",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9807,8 +10702,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-des-56-retractable-paper-cutter-medium.webp"
@@ -9824,7 +10721,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9842,8 +10742,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/packaging-supplies/ob-des-57-box-packaging-strapping-roll.webp"
@@ -9859,7 +10761,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Packaging Supplies",
       "subcategory": "Packaging & Dispatch",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9877,8 +10782,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-des-60-stapler-pins-pack-no-10-24-6.webp"
@@ -9894,7 +10801,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Kangaro",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9912,8 +10822,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-des-62-faber-castell-office-stamp-pad.webp"
@@ -9929,7 +10841,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Faber-Castell",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9947,8 +10862,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-des-63-stamp-pad-ink-bottle.webp"
@@ -9964,7 +10881,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -9982,8 +10902,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-65-color-plastic-paper-clips-pack.webp"
@@ -9999,7 +10921,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10017,8 +10942,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-66-metal-binder-clips-all-sizes.webp"
@@ -10034,7 +10961,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10052,8 +10982,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-67-metal-notice-board-push-pins.webp"
@@ -10069,7 +11001,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10087,8 +11022,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-68-steel-wire-gem-clips-pack.webp"
@@ -10104,7 +11041,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10122,8 +11062,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-69-kores-sapphire-carbon-paper-pack.webp"
@@ -10139,7 +11081,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Kores",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10157,8 +11102,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-70-nylon-rubber-bands-pack.webp"
@@ -10174,7 +11121,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10192,8 +11142,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-71-post-it-self-adhesive-sticky-notes-pad.webp"
@@ -10209,7 +11161,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "3M Post-it",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10227,8 +11182,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-72-office-steel-paper-pins-box.webp"
@@ -10244,7 +11201,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10262,8 +11222,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/printers-technology/ob-not-73-casio-electronic-desk-calculator.webp"
@@ -10279,7 +11241,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Casio",
       "category": "Printers & Technology",
       "subcategory": "Printing & IT Supplies",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10297,8 +11262,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-74-document-paper-tray-tier-set-2-3-4-tier.webp"
@@ -10314,7 +11281,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10332,8 +11302,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-75-stainless-steel-measuring-scale-ruler.webp"
@@ -10349,7 +11321,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10367,8 +11342,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-76-office-hardbound-note-book.webp"
@@ -10384,7 +11361,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10402,8 +11382,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-77-itc-classmate-corporate-notebooks.webp"
@@ -10419,7 +11401,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "ITC Classmate",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10437,8 +11422,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-78-white-mailing-envelopes-pack.webp"
@@ -10454,7 +11441,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10472,8 +11462,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-79-brown-kraft-paper-envelopes-pack.webp"
@@ -10489,7 +11481,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10507,8 +11502,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-not-80-cloth-lined-courier-security-envelope.webp"
@@ -10524,7 +11521,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10542,8 +11542,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-eqp-81-marshal-quality-scribbling-writing-pad.webp"
@@ -10559,7 +11561,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Marshal",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10577,8 +11582,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-eqp-82-scholar-wirebound-spiral-notepad.webp"
@@ -10594,7 +11601,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Scholar",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10612,8 +11622,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-eqp-83-corporate-accounts-entry-register.webp"
@@ -10629,7 +11641,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10647,8 +11662,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-eqp-84-desk-visiting-card-holder-book.webp"
@@ -10664,7 +11681,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10682,8 +11702,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-eqp-85-executive-hardbound-daily-diary.webp"
@@ -10699,7 +11721,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Paper & Notebooks",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10717,8 +11742,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/printers-technology/ob-eqp-87-high-definition-conference-projector.webp"
@@ -10734,7 +11761,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Printers & Technology",
       "subcategory": "Printing & IT Supplies",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10752,8 +11782,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/stationery/ob-eqp-89-acrylic-id-card-badge-holder-with-lanyard.webp"
@@ -10769,7 +11801,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Files & Office Organization",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10787,8 +11822,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-01-3-ply-surgical-disposable-face-mask.webp"
@@ -10804,7 +11841,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10822,8 +11862,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-02-venus-v4400-n95-protective-respirator-mask.webp"
@@ -10839,7 +11881,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Venus",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10857,8 +11902,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-03-reusable-washable-cotton-face-mask.webp"
@@ -10874,7 +11921,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10892,8 +11942,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-04-medi-dispo-n95-protective-face-mask.webp"
@@ -10909,7 +11961,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Medi Dispo",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10927,8 +11982,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-05-yellow-disposable-protective-mask.webp"
@@ -10944,7 +12001,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10962,8 +12022,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-06-cotton-knitted-safety-gloves-pack.webp"
@@ -10979,7 +12041,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -10997,8 +12062,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-08-hi-safe-powder-free-latex-gloves-box.webp"
@@ -11014,7 +12081,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Safe",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11032,8 +12102,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-09-hi-safe-medical-grade-nitrile-gloves-box.webp"
@@ -11049,7 +12121,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Safe",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11067,8 +12142,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-10-full-body-coverall-ppe-safety-kit.webp"
@@ -11084,7 +12161,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11102,8 +12182,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-11-pristin-instant-hand-sanitizer-pump-5l.webp"
@@ -11119,7 +12201,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Pristin",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11137,8 +12222,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-12-digital-fingertip-pulse-oximeter.webp"
@@ -11154,7 +12241,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Jziki",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11172,8 +12262,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-13-lifebuoy-alcohol-based-hand-sanitizer-500ml-5l.webp"
@@ -11189,7 +12281,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Lifebuoy",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11207,8 +12302,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-14-lifebuoy-germ-protection-liquid-hand-wash.webp"
@@ -11224,7 +12321,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Lifebuoy",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11242,8 +12342,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-15-viroff-alcohol-hand-sanitizer-5l.webp"
@@ -11259,7 +12361,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Viroff",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11277,8 +12382,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-16-hi-clean-antibacterial-hand-wash-5l.webp"
@@ -11294,7 +12401,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Clean",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11312,8 +12422,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-17-strerill-g-hand-sanitizer-500ml-5l.webp"
@@ -11329,7 +12441,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Sterill G",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11347,8 +12462,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-18-hi-clean-hand-cleansing-liquid-soap-5l.webp"
@@ -11364,7 +12481,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Hi-Clean",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11382,8 +12502,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-19-medical-oxygen-concentrator-machine.webp"
@@ -11399,7 +12521,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11417,8 +12542,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-20-automatic-touchless-soap-sanitizer-dispenser.webp"
@@ -11434,7 +12561,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11452,8 +12582,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-21-foot-pedal-operated-sanitizer-stand.webp"
@@ -11469,7 +12601,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11487,8 +12622,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-22-disposable-non-woven-bouffant-head-caps-pack.webp"
@@ -11504,7 +12641,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11522,8 +12662,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-23-disposable-non-woven-shoe-covers-pack.webp"
@@ -11539,7 +12681,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11557,8 +12702,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-24-automatic-shoe-cover-dispenser-machine.webp"
@@ -11574,7 +12721,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11592,8 +12742,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-25-contactless-infrared-forehead-thermometer.webp"
@@ -11609,7 +12761,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11627,8 +12782,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-26-social-distancing-queue-barrier-stanchion.webp"
@@ -11644,7 +12801,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11662,8 +12822,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-27-reflective-safety-traffic-cone.webp"
@@ -11679,7 +12841,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11697,8 +12862,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-28-wet-floor-caution-warning-board.webp"
@@ -11714,7 +12881,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11732,8 +12902,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-30-manual-pressure-sanitizer-sprayer-2-litre.webp"
@@ -11749,7 +12921,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "KisanKraft",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11767,8 +12942,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-31-garden-sanitizer-pressure-sprayer-5-litre.webp"
@@ -11784,7 +12961,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "KisanKraft",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11802,8 +12982,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-32-backpack-knapsack-sanitizer-sprayer-18-litre.webp"
@@ -11819,7 +13001,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "KisanKraft",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11837,8 +13022,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-33-full-protective-face-shield-mask.webp"
@@ -11854,7 +13041,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11872,8 +13062,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/covid-products/ob-cov-34-dettol-original-antiseptic-liquid-5-litre.webp"
@@ -11889,7 +13081,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "Dettol",
       "category": "Housekeeping & Hygiene",
       "subcategory": "Cleaning & Hygiene Essentials",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11907,8 +13102,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-01-flexible-traffic-cone-750mm.webp"
@@ -11950,7 +13147,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -11968,8 +13168,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-02-hexagonal-traffic-cone-750mm-1000mm.webp"
@@ -12007,7 +13209,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12025,8 +13230,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-03-traffic-cone-with-rubberized-plastic-base.webp"
@@ -12086,7 +13293,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12104,8 +13314,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-04-economical-traffic-cone-and-chain-set.webp"
@@ -12138,7 +13350,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12156,8 +13371,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-05-collapsible-pop-up-traffic-cone-650mm.webp"
@@ -12186,7 +13403,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12204,8 +13424,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-06-retractable-cone-q-manager-ribbon.webp"
@@ -12236,7 +13458,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12254,8 +13479,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-07-telescopic-cone-connecting-rod-1-3m-to-2-1m.webp"
@@ -12304,7 +13531,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12322,8 +13552,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-08-led-traffic-baton-light-rechargeable.webp"
@@ -12383,7 +13615,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12401,8 +13636,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-09-outdoor-convex-security-mirror-18-24-32-40-inch.webp"
@@ -12445,7 +13682,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12463,8 +13703,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-10-acrylic-dome-safety-mirror-full-half-quarter.webp"
@@ -12507,7 +13749,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12525,8 +13770,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-11-warning-bollard-delineator-post.webp"
@@ -12565,7 +13812,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12583,8 +13833,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-12-flexible-polyurethane-spring-post-750mm.webp"
@@ -12631,7 +13883,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12649,8 +13904,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-13-floor-stand-warning-sign-600mm.webp"
@@ -12694,7 +13951,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12712,8 +13972,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-14-heavy-duty-road-rumble-strips.webp"
@@ -12758,7 +14020,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12776,8 +14041,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-15-heavy-duty-rubber-wheel-chock.webp"
@@ -12828,7 +14095,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12846,8 +14116,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-16-rubber-cable-protector-ramp-2-3-4-5-channel.webp"
@@ -12885,7 +14157,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12903,8 +14178,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-17-high-visibility-reflective-safety-jacket.webp"
@@ -12960,7 +14237,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -12978,8 +14258,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-18-aluminum-road-stud-and-solar-led-stud.webp"
@@ -13029,7 +14311,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13047,8 +14332,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-19-handheld-security-metal-detector-scanner.webp"
@@ -13088,7 +14375,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13106,8 +14396,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-20-stainless-steel-retractable-belt-stanchion-3m.webp"
@@ -13157,7 +14449,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13175,8 +14470,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-21-q-manager-a4-sign-board-display-frame.webp"
@@ -13222,7 +14519,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13240,8 +14540,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-22-classic-velvet-rope-stanchion-post-gold-ss.webp"
@@ -13289,7 +14591,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13307,8 +14612,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-23-plastic-chain-q-manager-barrier-post-1000mm.webp"
@@ -13362,7 +14669,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13380,8 +14690,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-24-microprismatic-reflective-warning-tape-50mm-x-50m.webp"
@@ -13421,7 +14733,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Packaging Supplies",
       "subcategory": "Packaging & Dispatch",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13439,8 +14754,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-25-heavy-duty-rubber-speed-breakers.webp"
@@ -13499,7 +14816,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13517,8 +14837,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-26-plastic-modular-speed-breakers.webp"
@@ -13561,7 +14883,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13579,8 +14904,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-27-rubber-corner-guards-square-edge.webp"
@@ -13632,7 +14959,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13650,8 +14980,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-28-rubber-corner-guards-curved-edge.webp"
@@ -13702,7 +15034,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13720,8 +15055,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-29-rubber-car-wheel-stopper-600mm.webp"
@@ -13767,7 +15104,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13785,8 +15125,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-30-rubber-car-wheel-stopper-500mm.webp"
@@ -13832,7 +15174,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13850,8 +15195,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-31-rubber-car-wheel-stopper-commercial-1650mm.webp"
@@ -13898,7 +15245,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13916,8 +15266,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-32-solar-warning-blinker-light.webp"
@@ -13958,7 +15310,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -13976,8 +15331,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-33-solar-traffic-flasher-light.webp"
@@ -14020,7 +15377,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -14038,8 +15398,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-34-solar-chevron-directional-warning-board.webp"
@@ -14078,7 +15440,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -14096,8 +15461,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-35-under-vehicle-search-inspection-mirror-uvsm.webp"
@@ -14156,7 +15523,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -14174,8 +15544,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-36-heavy-duty-anti-theft-car-wheel-lock-clamp.webp"
@@ -14220,7 +15592,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -14238,8 +15613,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-37-led-emergency-magnetic-beacon-flare-light.webp"
@@ -14292,7 +15669,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -14310,8 +15690,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-38-heavy-duty-anti-slip-traction-safety-tapes.webp"
@@ -14354,7 +15736,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Packaging Supplies",
       "subcategory": "Packaging & Dispatch",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -14372,8 +15757,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-39-interlocking-plastic-water-filled-road-barrier.webp"
@@ -14420,7 +15807,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -14438,8 +15828,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-40-galvanized-steel-crowd-control-barricade-barrier.webp"
@@ -14485,7 +15877,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -14503,8 +15898,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-41-portable-expandable-scissor-road-barrier-max-2m.webp"
@@ -14561,7 +15958,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -14579,8 +15979,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-42-rechargeable-search-light-megaphone-siren.webp"
@@ -14631,7 +16033,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   },
   {
@@ -14649,8 +16054,10 @@ const RAW_PRODUCTS: Product[] = [
     "price": 0,
     "mrp": 0,
     "gstPercent": 18,
-    "stockQuantity": 100,
+    "stockQuantity": 0,
     "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/road-safety/ob-rds-43-metal-signage-post-stands-parking-directional.webp"
@@ -14702,7 +16109,10 @@ const RAW_PRODUCTS: Product[] = [
       "brand": "OfficeBazzar",
       "category": "Office Stationery",
       "subcategory": "Safety & Maintenance",
-      "source": "OfficeBazzar Master Catalogue"
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Pending physical inventory audit"
     }
   }
 ];

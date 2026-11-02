@@ -6,7 +6,7 @@ const catalogContent = fs.readFileSync('src/lib/data/catalog.ts', 'utf8');
 const startIdx = catalogContent.indexOf('const RAW_PRODUCTS: Product[] = [');
 const endIdx = catalogContent.indexOf('export const INITIAL_PRODUCTS: Product[]');
 const rawSlice = catalogContent.substring(startIdx + 'const RAW_PRODUCTS: Product[] = '.length, endIdx).trim();
-const existingProducts = eval(rawSlice.replace(/;\s*$/, ''));
+const existingProducts = eval(rawSlice.replace(/;\s*$/, '')).slice(0, 101);
 
 // 2. Read extraction manifest
 const manifest = JSON.parse(fs.readFileSync('public/assets/products/extraction_manifest.json', 'utf8'));
@@ -144,8 +144,10 @@ manifest.forEach(m => {
     price: 0,
     mrp: 0,
     gstPercent: 18,
-    stockQuantity: 100,
+    stockQuantity: 0,
     minOrderQuantity: 1,
+    isPriceVerified: false,
+    requiresManualReview: true,
     packSize: (m.specs && m.specs.size) ? m.specs.size : 'Standard Pack',
     images: [m.imagePath],
     featured: false,
@@ -160,6 +162,9 @@ manifest.forEach(m => {
       category: categoryName,
       subcategory: subcategoryName,
       source: 'OfficeBazzar Master Catalogue',
+      availability: 'Available on Quotation',
+      inventoryStatus: 'On Demand / RFQ',
+      stockVerification: 'Pending physical inventory audit',
       ...(m.specs || {})
     }
   };
@@ -215,3 +220,4 @@ if (dupId === 0 && dupSku === 0) {
   fs.writeFileSync('src/lib/data/catalog.ts', newCatalogContent);
   console.log('Successfully updated src/lib/data/catalog.ts and extraction_manifest.json!');
 }
+
