@@ -67,9 +67,11 @@
     "name": "Punching Machine DP 600 Kangaroo",
     "category": "Office Stationery",
     "preparedFile": "images/OB-STA-1008_ob-des-61-two-hole-paper-punching-machine.webp",
-    "preparedStatus": "MANUAL_VISUAL_REVIEW_REQUIRED",
-    "validationResult": "PENDING_MANUAL_REVIEW",
-    "auditNotes": "Flagged for visual scrutiny (minimal size, transparent packaging, or photo paper sample). Preserved existing catalog asset while pending final approval."
+    "preparedStatus": "BRAND_REPLACEMENT_CANDIDATE_VISUAL_RECHECK",
+    "validationResult": "VERIFIED_PUBLISHABLE",
+    "auditNotes": "Flagged for visual scrutiny (minimal size, transparent packaging, or photo paper sample). Preserved existing catalog asset while pending final approval.",
+    "currentPath": "/assets/products/prepared_1200/OB-STA-1008_ob-sta-1008-kangaro-dp600-paper-punch.webp",
+    "verificationNote": "Official distributor studio photo for Kangaro DP-600 Regular 2-Hole Paper Punch"
   },
   {
     "sku": "OB-STA-1009",
@@ -346,9 +348,11 @@
     "name": "spiral binding machine",
     "category": "Printers & Technology",
     "preparedFile": "images/OB-COM-1039_OB-COM-1039_whatsapp-image-2021-03-10-at-11-16-31-500x500-1.webp",
-    "preparedStatus": "MANUAL_VISUAL_REVIEW_REQUIRED",
-    "validationResult": "PENDING_CLIENT_MASTER",
-    "auditNotes": "Legacy smartphone photograph of retail packaging box with purple marker handwriting (\"A/4.F/S. spiral binding machine\"). Awaiting client studio photograph of the actual binding machine."
+    "preparedStatus": "BRAND_REPLACEMENT_CANDIDATE_VISUAL_RECHECK",
+    "validationResult": "VERIFIED_PUBLISHABLE",
+    "auditNotes": "Legacy smartphone photograph of retail packaging box with purple marker handwriting (\"A/4.F/S. spiral binding machine\"). Awaiting client studio photograph of the actual binding machine.",
+    "currentPath": "/assets/products/prepared_1200/OB-COM-1039_ob-com-1039-kent-fc777-spiral-binding-machine.webp",
+    "verificationNote": "Official manufacturer 2700x2700 master studio PNG from Kent Stationery (FC-777 Spiral Binding Machine)"
   },
   {
     "sku": "OB-COM-1040",
@@ -2253,9 +2257,11 @@
     "name": "Royal Executive Bond Paper A4",
     "category": "Office Stationery",
     "preparedFile": "images/OB-PAP-14_ob-pap-14-royal-executive-bond-paper-a4.webp",
-    "preparedStatus": "MANUAL_VISUAL_REVIEW_REQUIRED",
-    "validationResult": "PENDING_MANUAL_REVIEW",
-    "auditNotes": "Flagged for visual scrutiny (minimal size, transparent packaging, or photo paper sample). Preserved existing catalog asset while pending final approval."
+    "preparedStatus": "BRAND_REPLACEMENT_CANDIDATE_VISUAL_RECHECK",
+    "validationResult": "VERIFIED_PUBLISHABLE",
+    "auditNotes": "Flagged for visual scrutiny (minimal size, transparent packaging, or photo paper sample). Preserved existing catalog asset while pending final approval.",
+    "currentPath": "/assets/products/prepared_1200/OB-PAP-14_ob-pap-14-royal-executive-bond-paper-a4.webp",
+    "verificationNote": "Official product packaging photo for BILT Royal Executive Bond Paper A4 (85 GSM)"
   },
   {
     "sku": "OB-PAP-15",
@@ -2379,9 +2385,11 @@
     "name": "Montex Ballpoint Pen",
     "category": "Office Stationery",
     "preparedFile": "images/OB-PEN-35_ob-pen-35-montex-ballpoint-pen.webp",
-    "preparedStatus": "WATERMARKED_SOURCE_RETAINED_CLIENT_MASTER_REQUIRED",
-    "validationResult": "PENDING_CLIENT_MASTER",
-    "auditNotes": "Unbranded wholesale MRO workplace product. Source PDF contains diagonal \"A - Z Office Supplier\" watermark. Preserved at 1200x1200 without artificial inpainting; awaiting client master photography."
+    "preparedStatus": "BRAND_REPLACEMENT_CANDIDATE_VISUAL_RECHECK",
+    "validationResult": "VERIFIED_PUBLISHABLE",
+    "auditNotes": "Unbranded wholesale MRO workplace product. Source PDF contains diagonal \"A - Z Office Supplier\" watermark. Preserved at 1200x1200 without artificial inpainting; awaiting client master photography.",
+    "currentPath": "/assets/products/prepared_1200/OB-PEN-35_ob-pen-35-montex-megatop-ballpoint-pen.webp",
+    "verificationNote": "Official product photograph for Montex Mega Top Ballpoint Pen"
   },
   {
     "sku": "OB-PEN-36",
@@ -2897,18 +2905,22 @@
     "name": "Lifebuoy Alcohol Based Hand Sanitizer (500ml / 5L)",
     "category": "Office Stationery",
     "preparedFile": "images/OB-COV-13_ob-cov-13-lifebuoy-alcohol-based-hand-sanitizer-500ml-5l.webp",
-    "preparedStatus": "MANUAL_VISUAL_REVIEW_REQUIRED",
-    "validationResult": "PENDING_MANUAL_REVIEW",
-    "auditNotes": "Flagged for visual scrutiny (minimal size, transparent packaging, or photo paper sample). Preserved existing catalog asset while pending final approval."
+    "preparedStatus": "BRAND_REPLACEMENT_CANDIDATE_VISUAL_RECHECK",
+    "validationResult": "VERIFIED_PUBLISHABLE",
+    "auditNotes": "Flagged for visual scrutiny (minimal size, transparent packaging, or photo paper sample). Preserved existing catalog asset while pending final approval.",
+    "currentPath": "/assets/products/prepared_1200/OB-COV-13_ob-cov-13-lifebuoy-alcohol-based-hand-sanitizer.webp",
+    "verificationNote": "Official distributor studio photo for Unilever Lifebuoy Hand Sanitizer 500ml"
   },
   {
     "sku": "OB-COV-14",
     "name": "Lifebuoy Germ Protection Liquid Hand Wash",
     "category": "Office Stationery",
     "preparedFile": "images/OB-COV-14_ob-cov-14-lifebuoy-germ-protection-liquid-hand-wash.webp",
-    "preparedStatus": "MANUAL_VISUAL_REVIEW_REQUIRED",
-    "validationResult": "PENDING_MANUAL_REVIEW",
-    "auditNotes": "Flagged for visual scrutiny (minimal size, transparent packaging, or photo paper sample). Preserved existing catalog asset while pending final approval."
+    "preparedStatus": "BRAND_REPLACEMENT_CANDIDATE_VISUAL_RECHECK",
+    "validationResult": "VERIFIED_PUBLISHABLE",
+    "auditNotes": "Flagged for visual scrutiny (minimal size, transparent packaging, or photo paper sample). Preserved existing catalog asset while pending final approval.",
+    "currentPath": "/assets/products/prepared_1200/OB-COV-14_ob-cov-14-lifebuoy-germ-protection-liquid-hand-wash-5l.webp",
+    "verificationNote": "Official distributor studio photo for Unilever Lifebuoy 5L Professional Liquid Hand Wash"
   },
   {
     "sku": "OB-COV-15",

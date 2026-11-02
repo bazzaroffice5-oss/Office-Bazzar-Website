@@ -1340,7 +1340,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-des-61-two-hole-paper-punching-machine.webp"
+      "/assets/products/prepared_1200/OB-STA-1008_ob-sta-1008-kangaro-dp600-paper-punch.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1354,7 +1354,7 @@ const RAW_PRODUCTS: Product[] = [
     },
     "subcategoryId": "desk-accessories-tools",
     "subcategoryName": "Desk Organization & Tools",
-    "requiresManualReview": true
+    "requiresManualReview": false
   },
   {
     "id": "prod-kangaro-staplers-hd-10d",
@@ -2327,7 +2327,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/whatsapp-image-2021-03-10-at-11-16-31-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-COM-1039_ob-com-1039-kent-fc777-spiral-binding-machine.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2337,7 +2337,7 @@ const RAW_PRODUCTS: Product[] = [
     "specifications": {},
     "subcategoryId": "it-peripherals-machines",
     "subcategoryName": "IT Peripherals & Office Machines",
-    "requiresManualReview": true
+    "requiresManualReview": false
   },
   {
     "id": "prod-barcode-printer",
@@ -10103,10 +10103,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-14-royal-executive-bond-paper-a4.webp"
+      "/assets/products/prepared_1200/OB-PAP-14_ob-pap-14-royal-executive-bond-paper-a4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10663,10 +10663,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-35-montex-ballpoint-pen.webp"
+      "/assets/products/prepared_1200/OB-PEN-35_ob-pen-35-montex-megatop-ballpoint-pen.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12943,10 +12943,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-13-lifebuoy-alcohol-based-hand-sanitizer-500ml-5l.webp"
+      "/assets/products/prepared_1200/OB-COV-13_ob-cov-13-lifebuoy-alcohol-based-hand-sanitizer.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12983,10 +12983,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-14-lifebuoy-germ-protection-liquid-hand-wash.webp"
+      "/assets/products/prepared_1200/OB-COV-14_ob-cov-14-lifebuoy-germ-protection-liquid-hand-wash-5l.webp"
     ],
     "featured": false,
     "bestseller": false,
