@@ -283,7 +283,7 @@ export default function BazzarAIChatbot() {
   const handleResetConversation = () => {
     setMessages([
       {
-        id: `msg-${Date.now()}`,
+        id: 'msg-welcome',
         sender: 'assistant',
         text: INITIAL_WELCOME_TEXT,
         timestamp: new Date().toLocaleTimeString('en-IN', {

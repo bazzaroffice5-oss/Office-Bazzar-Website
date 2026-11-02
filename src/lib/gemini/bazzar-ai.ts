@@ -6,6 +6,7 @@
 
 import { GoogleGenAI, Type } from '@google/genai';
 import { getProducts, createQuotation } from '@/lib/db/store';
+import { INITIAL_PRODUCTS } from '@/lib/data/catalog';
 import { Product } from '@/types';
 import { syncQuotationToZoho } from '@/lib/zoho/crm';
 import { dispatchQuotationNotifications } from '@/lib/notifications/service';
@@ -22,11 +23,24 @@ export interface ProductCardSuggestion {
   url: string;
 }
 
+export interface ChatDiagnostics {
+  engine: 'gemini' | 'contextual_fallback' | 'product_retrieval' | 'api_error';
+  modelUsed: string | null;
+  geminiCalled: boolean;
+  geminiStatus: string | null;
+  geminiValidText: boolean;
+  fallbackActivated: boolean;
+  fallbackReason?: string;
+  productsAttached: number;
+  historyTurnsReceived: number;
+}
+
 export interface ChatResponsePayload {
   reply: string;
   suggestedActions?: string[];
   productCards?: ProductCardSuggestion[];
   quickLinks?: Array<{ title: string; url: string; external?: boolean }>;
+  diagnostics?: ChatDiagnostics;
 }
 
 export interface ConversationTurn {
@@ -391,6 +405,17 @@ export async function processBazzarAIChat(
     return {
       reply: 'Please provide a valid message between 1 and 1000 characters.',
       suggestedActions: ['Find Products', 'Bulk Order Enquiry', 'Get a Quotation', 'Contact Support'],
+      diagnostics: {
+        engine: 'api_error',
+        modelUsed: null,
+        geminiCalled: false,
+        geminiStatus: 'INVALID_INPUT',
+        geminiValidText: false,
+        fallbackActivated: false,
+        fallbackReason: 'Invalid message length or empty',
+        productsAttached: 0,
+        historyTurnsReceived: history.length,
+      },
     };
   }
 
@@ -399,21 +424,49 @@ export async function processBazzarAIChat(
     return {
       reply: 'You are sending messages too quickly. Please wait a few seconds before trying again.',
       suggestedActions: ['Find Products', 'Contact Support'],
+      diagnostics: {
+        engine: 'api_error',
+        modelUsed: null,
+        geminiCalled: false,
+        geminiStatus: 'RATE_LIMITED',
+        geminiValidText: false,
+        fallbackActivated: false,
+        fallbackReason: 'Rate limit exceeded for IP',
+        productsAttached: 0,
+        historyTurnsReceived: history.length,
+      },
     };
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
-  const configuredModel = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
+  const configuredModel = process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite';
 
   console.log(
     `[Bazzar AI Request] IP: ${clientIp} | MsgLen: ${trimmed.length} | HistoryTurns: ${history.length} | PrimaryModel: ${configuredModel}`
   );
 
-  // Fallback models in priority order if primary model hits 429 quota exhaustion
-  const candidateModels = [configuredModel, 'gemini-3.1-flash-lite', 'gemini-flash-lite-latest'];
+  // Models in priority order: prioritizing verified active flash-lite models
+  const candidateModels = Array.from(
+    new Set([
+      configuredModel,
+      'gemini-3.1-flash-lite',
+      'gemini-flash-lite-latest',
+      'gemini-3.6-flash',
+    ])
+  ).filter(Boolean);
 
   let finalReplyText: string | null = null;
-  let activeModelUsed: string = configuredModel;
+  let activeModelUsed: string | null = null;
+  let lastGeminiStatus: string | null = null;
+  let lastGeminiError: string | null = null;
+
+  const executeWithTimeout = <T>(promise: Promise<T>, ms: number, desc: string): Promise<T> =>
+    Promise.race([
+      promise,
+      new Promise<T>((_, reject) =>
+        setTimeout(() => reject(new Error(`${desc} timed out after ${ms}ms`)), ms)
+      ),
+    ]);
 
   if (apiKey) {
     const ai = new GoogleGenAI({ apiKey });
@@ -440,7 +493,7 @@ export async function processBazzarAIChat(
       validHistory.shift();
     }
 
-    // Try primary model, with automatic fallback to secondary flash-lite model if primary returns 429
+    // Try primary models with strict 7s timeout per attempt
     for (const modelName of candidateModels) {
       try {
         const chat = ai.chats.create({
@@ -453,9 +506,13 @@ export async function processBazzarAIChat(
           },
         });
 
-        let currentResponse = await chat.sendMessage({ message: trimmed });
+        let currentResponse = await executeWithTimeout(
+          chat.sendMessage({ message: trimmed }),
+          7000,
+          `Gemini [${modelName}] sendMessage`
+        );
 
-        // Tool execution loop
+        // Tool execution loop with per-call timeout
         let iterations = 0;
         while (
           currentResponse.functionCalls &&
@@ -471,10 +528,20 @@ export async function processBazzarAIChat(
 
           if (fnName === 'search_catalog') {
             const queryTerm = (args.query || '').trim();
-            const { products } = await getProducts();
+            let catalogProducts: Product[] = [];
+            try {
+              const pRes = await executeWithTimeout(
+                getProducts(),
+                3000,
+                'Catalog retrieval'
+              );
+              catalogProducts = pRes.products;
+            } catch {
+              catalogProducts = INITIAL_PRODUCTS.filter((p: Product) => p.isActive !== false);
+            }
 
             // Run candidates through Product Relevance Validator (Engine C)
-            const validated = products.filter((p) =>
+            const validated = catalogProducts.filter((p) =>
               validateProductRelevance(p, queryTerm || trimmed)
             );
 
@@ -530,7 +597,11 @@ export async function processBazzarAIChat(
 
             let zohoResult = { success: false, rfqNumber: quotation.id, leadId: null as string | null };
             try {
-              const syncRes = await syncQuotationToZoho(quotation);
+              const syncRes = await executeWithTimeout(
+                syncQuotationToZoho(quotation),
+                3000,
+                'Zoho quotation sync'
+              );
               zohoResult = {
                 success: syncRes.success,
                 rfqNumber: quotation.id,
@@ -551,16 +622,20 @@ export async function processBazzarAIChat(
             };
           }
 
-          currentResponse = await chat.sendMessage({
-            message: [
-              {
-                functionResponse: {
-                  name: fnName,
-                  response: toolResult,
+          currentResponse = await executeWithTimeout(
+            chat.sendMessage({
+              message: [
+                {
+                  functionResponse: {
+                    name: fnName,
+                    response: toolResult,
+                  },
                 },
-              },
-            ],
-          });
+              ],
+            }),
+            7000,
+            `Gemini [${modelName}] functionResponse`
+          );
         }
 
         // Safely extract text from candidate parts
@@ -580,28 +655,57 @@ export async function processBazzarAIChat(
         if (replyText) {
           finalReplyText = replyText;
           activeModelUsed = modelName;
+          lastGeminiStatus = '200';
           console.log(
             `[Bazzar AI Gemini Success] Model: ${modelName} | ReplyLen: ${replyText.length} | Cards: ${accumulatedCards.length}`
           );
           break; // Successfully got response from model
         }
       } catch (modelErr: any) {
+        lastGeminiStatus = String(modelErr?.status || 'ERROR');
+        lastGeminiError = modelErr?.message?.substring(0, 140) || 'Model failed';
         console.warn(
-          `[Bazzar AI Model Failed] Model: ${modelName} | Status: ${modelErr?.status || 'ERR'} | Msg: ${modelErr?.message?.substring(0, 120)}`
+          `[Bazzar AI Model Failed] Model: ${modelName} | Status: ${lastGeminiStatus} | Msg: ${lastGeminiError}`
         );
         // Continue to next candidate model
       }
     }
+  } else {
+    lastGeminiStatus = 'KEY_MISSING';
+    lastGeminiError = 'GEMINI_API_KEY environment variable not configured';
   }
 
-  // If Gemini generated a reply, compose response
+  // If Gemini generated a reply, compose verified AI response
   if (finalReplyText) {
-    return composeChatResponse(trimmed, finalReplyText, accumulatedCards);
+    return composeChatResponse(trimmed, finalReplyText, accumulatedCards, {
+      engine: 'gemini',
+      modelUsed: activeModelUsed,
+      geminiCalled: true,
+      geminiStatus: '200',
+      geminiValidText: true,
+      fallbackActivated: false,
+      productsAttached: accumulatedCards.length,
+      historyTurnsReceived: history.length,
+    });
   }
 
-  // If Gemini was unreachable, use honest contextual conversation engine without unreliable product guessing
+  // If Gemini was unreachable, use honest contextual conversation engine
   console.log('[Bazzar AI] Using Contextual Conversation Engine Fallback');
-  return await generateContextualConversationFallback(trimmed, history);
+  const fallbackResult = await generateContextualConversationFallback(trimmed, history);
+  return {
+    ...fallbackResult,
+    diagnostics: {
+      engine: 'contextual_fallback',
+      modelUsed: null,
+      geminiCalled: Boolean(apiKey),
+      geminiStatus: lastGeminiStatus || (apiKey ? 'MODELS_EXHAUSTED' : 'KEY_MISSING'),
+      geminiValidText: false,
+      fallbackActivated: true,
+      fallbackReason: lastGeminiError || 'Gemini API models unavailable or quota exhausted',
+      productsAttached: fallbackResult.productCards?.length || 0,
+      historyTurnsReceived: history.length,
+    },
+  };
 }
 
 // ==============================================================================
@@ -611,7 +715,8 @@ export async function processBazzarAIChat(
 function composeChatResponse(
   userMsg: string,
   replyText: string,
-  productCards: ProductCardSuggestion[]
+  productCards: ProductCardSuggestion[],
+  diagnostics?: ChatDiagnostics
 ): ChatResponsePayload {
   const suggestedActions = generateDynamicSuggestions(userMsg, replyText);
 
@@ -624,6 +729,7 @@ function composeChatResponse(
       { title: 'Request Bulk Quote', url: '/request-quote' },
       { title: 'Call 7200800040', url: 'tel:7200800040', external: true },
     ],
+    diagnostics,
   };
 }
 
@@ -762,10 +868,22 @@ async function generateContextualConversationFallback(
 
   const state = parseConversationState(history, trimmed);
 
-  // Retrieve strictly validated product cards (if genuinely matching)
+  // Retrieve strictly validated product cards (with fast 2.5s timeout)
   let validatedCards: ProductCardSuggestion[] = [];
   try {
-    const { products } = await getProducts();
+    let products: Product[] = [];
+    try {
+      const pRes = await Promise.race([
+        getProducts(),
+        new Promise<{ products: Product[]; total: number }>((_, reject) =>
+          setTimeout(() => reject(new Error('getProducts timeout')), 2500)
+        ),
+      ]);
+      products = pRes.products;
+    } catch {
+      products = INITIAL_PRODUCTS.filter((p: Product) => p.isActive !== false);
+    }
+
     const matches = products.filter((p) => validateProductRelevance(p, trimmed));
     validatedCards = matches.slice(0, 4).map((p) => ({
       id: p.id,

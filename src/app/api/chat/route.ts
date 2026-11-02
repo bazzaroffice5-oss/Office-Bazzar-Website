@@ -9,8 +9,17 @@ export async function POST(req: Request) {
     const forwarded = req.headers.get('x-forwarded-for');
     const clientIp = forwarded ? forwarded.split(',')[0].trim() : '127.0.0.1';
 
-    const body = await req.json();
-    const { message, history } = body;
+    let body: any;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json(
+        { error: 'Invalid JSON body provided.' },
+        { status: 400 }
+      );
+    }
+
+    const { message, history } = body || {};
 
     console.log(
       `[Chat API Incoming] IP: ${clientIp} | MsgLen: ${message?.length || 0} | HistoryTurns: ${
@@ -66,6 +75,17 @@ export async function POST(req: Request) {
           { title: 'Explore Catalog', url: '/categories' },
           { title: 'Request Bulk Quote', url: '/request-quote' },
         ],
+        diagnostics: {
+          engine: 'api_error',
+          modelUsed: null,
+          geminiCalled: false,
+          geminiStatus: '500',
+          geminiValidText: false,
+          fallbackActivated: true,
+          fallbackReason: error?.message || 'Server error in chat route',
+          productsAttached: 0,
+          historyTurnsReceived: 0,
+        },
       },
       { status: 200 }
     );
