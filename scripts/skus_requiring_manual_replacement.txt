@@ -1,7 +1,7 @@
 # OFFICEBAZZAR IMAGE REPLACEMENT MANIFEST (AUDITED 115 SKUS)
-# Total Audited: 115 | Verified Brand Replacements Done: 19 | Pending Client Master: 96
+# Total Audited: 115 | Verified Brand Replacements Done: 22 | Pending Client Master: 93
 
-## SECTION 1: VERIFIED BRAND MASTER REPLACEMENTS (19 SKUS COMPLETED)
+## SECTION 1: VERIFIED BRAND MASTER REPLACEMENTS (22 SKUS COMPLETED)
 [REPLACED] OB-030 | Premier Face Tissue | Housekeeping & Hygiene | Source: Premier Tissues Official Retail Packaging Photo | Path: /assets/products/housekeeping/ob-030-premier-face-tissue.webp
 [REPLACED] OB-050 | Exo Round Bar | Housekeeping & Hygiene | Source: Jyothy Labs Official Packaging Asset | Path: /assets/products/housekeeping/ob-050-exo-round-bar.webp
 [REPLACED] OB-051 | Pril Dishwash Liquid | Housekeeping & Hygiene | Source: Jyothy Labs / Henkel Official Packaging Asset | Path: /assets/products/housekeeping/ob-051-pril-dishwash-liquid.webp
@@ -15,15 +15,20 @@
 [REPLACED] OB-160 | Diversey Taski R7 (Floor Cleaner Concentrate) | Housekeeping & Hygiene | Source: Diversey Taski Authorized Indian Distributor Asset | Path: /assets/products/housekeeping/ob-160-diversey-taski-r7-floor-cleaner-concentrate.webp
 [REPLACED] OB-161 | Diversey Taski R9 (Hard Water Limescale Cleaner) | Housekeeping & Hygiene | Source: Diversey Taski Authorized Indian Distributor Asset | Path: /assets/products/housekeeping/ob-161-diversey-taski-r9-hard-water-limescale-cleaner.webp
 [REPLACED] OB-PAP-03 | JK Easy Copier Paper 70 GSM A4 | Office Stationery | Source: JK Paper Authorized Packaging Photography | Path: /assets/products/copier-papers/ob-pap-03-jk-easy-copier-paper-70-gsm-a4.webp
+[REPLACED] OB-PAP-06 | JK Cedar Copier Paper (80/100 GSM) A4 | Office Stationery | Source: JK Paper Official Manufacturer Master Asset | Path: /assets/products/copier-papers/ob-pap-06-jk-cedar-copier-paper-80-100-gsm-a4.webp
 [REPLACED] OB-PAP-07 | JK Sparkle Multipurpose Paper (70/75/80 GSM) A4 | Office Stationery | Source: JK Paper Official Manufacturer Website Render | Path: /assets/products/copier-papers/ob-pap-07-jk-sparkle-multipurpose-paper-70-75-80-gsm-a4.webp
 [REPLACED] OB-PAP-09 | TNPL Copier Paper 70 GSM A4 | Office Stationery | Source: TNPL Authorized Distributor Asset | Path: /assets/products/copier-papers/ob-pap-09-tnpl-copier-paper-70-gsm-a4.webp
+[REPLACED] OB-PAP-10 | TNPL Platinum Copier Paper 75 GSM A4 | Office Stationery | Source: TNPL Platinum Authorized Catalog Photography | Path: /assets/products/copier-papers/ob-pap-10-tnpl-platinum-copier-paper-75-gsm-a4.webp
 [REPLACED] OB-PEN-38 | Rorito 045 Classic Ballpoint Pen Pack | Office Stationery | Source: Rorito Authorized Distributor Product Photography | Path: /assets/products/stationery/ob-pen-38-rorito-045-classic-ballpoint-pen-pack.webp
+[REPLACED] OB-PEN-39 | Rorito Flymax Gel Pen | Office Stationery | Source: Rorito Official Manufacturer Website Asset | Path: /assets/products/stationery/ob-pen-39-rorito-flymax-gel-pen.webp
 [REPLACED] OB-DES-51 | Fevicol MR Adhesive Tube | Office Stationery | Source: Pidilite Industries Official Product Photography | Path: /assets/products/stationery/ob-des-51-fevicol-mr-adhesive-tube.webp
 [REPLACED] OB-NOT-71 | Post-it Self Adhesive Sticky Notes Pad | Office Stationery | Source: 3M Official Corporate Multimedia Repository | Path: /assets/products/stationery/ob-not-71-post-it-self-adhesive-sticky-notes-pad.webp
 [REPLACED] OB-NOT-73 | Casio Electronic Desk Calculator | Printers & Technology | Source: Casio India Official Product Catalog Photography | Path: /assets/products/stationery/ob-not-73-casio-electronic-desk-calculator.webp
 
-## SECTION 2: GENERIC WHOLESALE SUPPLIES PENDING CLIENT STUDIO MASTER (96 SKUS)
-[PENDING] OB-COM-1039 | spiral binding machine | Printers & Technology | Legacy WhatsApp upload with handwritten overlay | Current: https://officebazzar.co.in/wp-content/uploads/2022/12/whatsapp-image-2021-03-10-at-11-16-31-500x500-1.jpg
+## SECTION 2: SPECIAL ATTENTION - SMARTPHONE PHOTOGRAPH (1 SKU)
+[PENDING] OB-COM-1039 | spiral binding machine | Printers & Technology | Smartphone snapshot of cardboard box with handwritten purple ink | Current: https://officebazzar.co.in/wp-content/uploads/2022/12/whatsapp-image-2021-03-10-at-11-16-31-500x500-1.jpg
+
+## SECTION 3: GENERIC WHOLESALE SUPPLIES PENDING CLIENT STUDIO MASTER (92 SKUS)
 [PENDING] OB-003 | Shoe Cover Dispenser | Housekeeping & Hygiene | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/housekeeping/ob-003-shoe-cover-dispenser.webp
 [PENDING] OB-005 | Jet Hand Dryer | Housekeeping & Hygiene | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/housekeeping/ob-005-jet-hand-dryer.webp
 [PENDING] OB-006 | Commercial Vacuum Cleaner | Housekeeping & Hygiene | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/housekeeping/ob-006-commercial-vacuum-cleaner.webp
@@ -94,12 +99,9 @@
 [PENDING] OB-147 | SS Duo Waste Recycling Dustbin | Housekeeping & Hygiene | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/housekeeping/ob-147-ss-duo-waste-recycling-dustbin.webp
 [PENDING] OB-149 | FRP Duo Outdoor Waste Bins | Housekeeping & Hygiene | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/housekeeping/ob-149-frp-duo-outdoor-waste-bins.webp
 [PENDING] OB-152 | Heavy Duty Wheeled Dustbin 660 Litre | Housekeeping & Hygiene | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/housekeeping/ob-152-heavy-duty-wheeled-dustbin-660-litre.webp
-[PENDING] OB-PAP-06 | JK Cedar Copier Paper (80/100 GSM) A4 | Office Stationery | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/copier-papers/ob-pap-06-jk-cedar-copier-paper-80-100-gsm-a4.webp
-[PENDING] OB-PAP-10 | TNPL Platinum Copier Paper 75 GSM A4 | Office Stationery | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/copier-papers/ob-pap-10-tnpl-platinum-copier-paper-75-gsm-a4.webp
 [PENDING] OB-FIL-19 | A4 Sheet Protector Clear Sheet | Office Stationery | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/stationery/ob-fil-19-a4-sheet-protector-clear-sheet.webp
 [PENDING] OB-FIL-26 | OfficeBazzar Box File | Office Stationery | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/stationery/ob-fil-26-officebazzar-box-file.webp
 [PENDING] OB-PEN-35 | Montex Ballpoint Pen | Office Stationery | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/stationery/ob-pen-35-montex-ballpoint-pen.webp
-[PENDING] OB-PEN-39 | Rorito Flymax Gel Pen | Office Stationery | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/stationery/ob-pen-39-rorito-flymax-gel-pen.webp
 [PENDING] OB-PEN-41 | OHP CD/DVD Permanent Marker | Office Stationery | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/stationery/ob-pen-41-ohp-cd-dvd-permanent-marker.webp
 [PENDING] OB-PEN-42 | Fluorescent Highlighter Marker Pack | Office Stationery | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/stationery/ob-pen-42-fluorescent-highlighter-marker-pack.webp
 [PENDING] OB-DES-55 | Heavy Duty Tape Dispenser (1 inch / 2 inch) | Packaging Supplies | Source PDF contains diagonal "A-Z Office Supplier" watermark | Current: /assets/products/packaging-supplies/ob-des-55-heavy-duty-tape-dispenser-1-inch-2-inch.webp

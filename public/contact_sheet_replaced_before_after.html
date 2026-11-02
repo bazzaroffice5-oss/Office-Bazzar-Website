@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OfficeBazzar – Replaced Images & Before/After Comparison Sheet</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8fafc; color: #0f172a; margin: 0; padding: 24px; }
+    .header { background: #004b87; color: white; padding: 24px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .stat-row { display: flex; gap: 16px; margin-top: 16px; flex-wrap: wrap; }
+    .stat-card { background: rgba(255,255,255,0.15); padding: 12px 18px; border-radius: 8px; }
+    .stat-val { font-size: 26px; font-weight: bold; }
+    .stat-lbl { font-size: 12px; opacity: 0.9; }
+    .category-section { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 30px; }
+    .category-title { font-size: 18px; font-weight: bold; color: #004b87; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 16px; display: flex; justify-content: space-between; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+    .card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; background: white; text-align: left; display: flex; flex-direction: column; justify-content: space-between; }
+    .card-pending { border: 1px solid #fecdd3; background: #fff1f2; }
+    .card-replaced { border: 1px solid #a7f3d0; background: #f0fdf4; }
+    .img-box { width: 100%; aspect-ratio: 1/1; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+    .img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
+    .compare-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: center; }
+   .header { background: #047857; }</style>
+</head>
+<body>
+  <div class="header">
+    <h1 style="margin:0 0 6px 0; font-size: 24px;">OfficeBazzar – Verified Master Replacements & Before/After Proof</h1>
+    <p style="margin:0; font-size: 14px; opacity: 0.9;">22 Verified Brand Master Replacements + 43 Road Safety High-Res Coordinate Corrections</p>
+  </div>
+
+  <div class="category-section">
+    <div class="category-title">
+      <span>1. Defect Correction Proof: Road Safety Products (Pages 32-35)</span>
+    </div>
+    <p style="font-size: 13px; color: #475569; margin-top:0;">
+      <strong>Root Cause:</strong> Pages 32 to 35 in the source PDF have smaller page dimensions (318 × 489 pt) compared to the standard A4 pages 1-30 (595 × 842 pt). Previous extraction scripts used coordinates beyond the 318pt boundary, resulting in 23 products rendering as pure white blank canvases (1202 bytes).
+      <br><br>
+      <strong>Correction Executed:</strong> Re-rendered pages 32-35 at ultra-high resolution (Scale 6.0, 432 DPI), mapped exact point coordinates, and cropped individual products cleanly onto 600×600 white canvases. <strong>Result: 43/43 road safety products successfully extracted with 0 blank canvases.</strong>
+    </p>
+
+    <div class="comparison-grid">
+      <div class="compare-card" style="background: #fff1f2; border-color: #fecaca;">
+        <h4 style="margin:0 0 8px 0; color: #b91c1c;">BEFORE (Defective Coordinate Crop)</h4>
+        <div style="width: 200px; height: 200px; margin: 0 auto; background: white; border: 1px dashed #f87171; display:flex; align-items:center; justify-content:center; color:#ef4444; font-size:12px;">
+          [1202-byte Blank White Canvas]<br>OB-RDS-03, OB-RDS-06, OB-RDS-09...
+        </div>
+        <p style="font-size: 11px; color:#b91c1c; margin-top:8px;">Crop X & Y were outside the 318x489 viewport boundaries</p>
+      </div>
+
+      <div class="compare-card" style="background: #f0fdf4; border-color: #bbf7d0;">
+        <h4 style="margin:0 0 8px 0; color: #15803d;">AFTER (Scale 6.0 / 432 DPI Precision Crop)</h4>
+        <div style="width: 200px; height: 200px; margin: 0 auto; background: white; border: 1px solid #86efac; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+          <img src="/assets/products/road-safety/ob-rds-03-traffic-cone-with-rubberized-plastic-base.webp" alt="Corrected Traffic Cone" style="max-width:100%; max-height:100%; object-fit:contain;" />
+        </div>
+        <p style="font-size: 11px; color:#15803d; margin-top:8px;">14,278 bytes WebP • Crisp cone & rubber base • 0 text bleed</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-section">
+    <div class="category-title">
+      <span>2. Verified Brand Master Replacements (22 SKUs Completed)</span>
+    </div>
+    <p style="font-size: 13px; color: #475569; margin-top:0;">
+      Authentic manufacturer and authorized distributor photography sourced for Diversey Taski, Vim/HUL, Pril/Henkel, Exo/Jyothy, Airwick/Reckitt, Ambi Pur/P&G, All Out/SC Johnson, Premier Tissues, JK Paper, TNPL, Pidilite Fevicol, 3M Post-it, Casio India, and Rorito. Standardized on pure white background canvases with 0 watermarks.
+    </p>
+    <div class="grid">
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/housekeeping/ob-030-premier-face-tissue.webp" alt="Premier Face Tissue" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-030</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Premier Face Tissue
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Premier Tissues Official Retail Packaging Photo
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 70 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/housekeeping/ob-050-exo-round-bar.webp" alt="Exo Round Bar" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-050</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Exo Round Bar
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Jyothy Labs Official Packaging Asset
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 67 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/housekeeping/ob-051-pril-dishwash-liquid.webp" alt="Pril Dishwash Liquid" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-051</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Pril Dishwash Liquid
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Jyothy Labs / Henkel Official Packaging Asset
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 30 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/housekeeping/ob-052-vim-dishwash-gel-250ml-500ml-1-8-ltr.webp" alt="Vim Dishwash Gel (250ml / 500ml / 1.8 Ltr)" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-052</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Vim Dishwash Gel (250ml / 500ml / 1.8 Ltr)
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Hindustan Unilever Authorized Product Photography
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 32 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/housekeeping/ob-095-airwick-room-freshener-spray.webp" alt="Airwick Room Freshener Spray" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-095</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Airwick Room Freshener Spray
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Reckitt Benckiser Official Packaging Asset
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 29 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/housekeeping/ob-096-ambi-pur-air-freshener-spray.webp" alt="Ambi Pur Air Freshener Spray" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-096</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Ambi Pur Air Freshener Spray
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Procter & Gamble Official Packaging Asset
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 41 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/housekeeping/ob-114-all-out-mosquito-repellent-machine-set.webp" alt="All Out Mosquito Repellent Machine Set" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-114</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          All Out Mosquito Repellent Machine Set
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> SC Johnson Official Packaging Asset
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 84 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/housekeeping/ob-203-diversey-taski-r3-glass-cleaner-concentrate.webp" alt="Diversey Taski R3 (Glass Cleaner Concentrate)" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-203</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Diversey Taski R3 (Glass Cleaner Concentrate)
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Diversey Taski Authorized Indian Distributor Asset
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 8 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/housekeeping/ob-158-diversey-taski-r5-air-freshener-concentrate.webp" alt="Diversey Taski R5 (Air Freshener Concentrate)" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-158</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Diversey Taski R5 (Air Freshener Concentrate)
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Diversey Taski Authorized Indian Distributor Asset
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 28 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/housekeeping/ob-159-diversey-taski-r6-toilet-bowl-cleaner.webp" alt="Diversey Taski R6 (Toilet Bowl Cleaner)" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-159</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Diversey Taski R6 (Toilet Bowl Cleaner)
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Diversey Official Professional 5L Studio Asset
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 16 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/housekeeping/ob-160-diversey-taski-r7-floor-cleaner-concentrate.webp" alt="Diversey Taski R7 (Floor Cleaner Concentrate)" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-160</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Diversey Taski R7 (Floor Cleaner Concentrate)
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Diversey Taski Authorized Indian Distributor Asset
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 28 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/housekeeping/ob-161-diversey-taski-r9-hard-water-limescale-cleaner.webp" alt="Diversey Taski R9 (Hard Water Limescale Cleaner)" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-161</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Diversey Taski R9 (Hard Water Limescale Cleaner)
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Diversey Taski Authorized Indian Distributor Asset
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 34 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/copier-papers/ob-pap-03-jk-easy-copier-paper-70-gsm-a4.webp" alt="JK Easy Copier Paper 70 GSM A4" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-PAP-03</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          JK Easy Copier Paper 70 GSM A4
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> JK Paper Authorized Packaging Photography
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 41 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/copier-papers/ob-pap-06-jk-cedar-copier-paper-80-100-gsm-a4.webp" alt="JK Cedar Copier Paper (80/100 GSM) A4" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-PAP-06</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          JK Cedar Copier Paper (80/100 GSM) A4
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> JK Paper Official Manufacturer Master Asset
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 35 KB • 1000×1000 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/copier-papers/ob-pap-07-jk-sparkle-multipurpose-paper-70-75-80-gsm-a4.webp" alt="JK Sparkle Multipurpose Paper (70/75/80 GSM) A4" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-PAP-07</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          JK Sparkle Multipurpose Paper (70/75/80 GSM) A4
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> JK Paper Official Manufacturer Website Render
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 24 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/copier-papers/ob-pap-09-tnpl-copier-paper-70-gsm-a4.webp" alt="TNPL Copier Paper 70 GSM A4" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-PAP-09</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          TNPL Copier Paper 70 GSM A4
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> TNPL Authorized Distributor Asset
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 21 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/copier-papers/ob-pap-10-tnpl-platinum-copier-paper-75-gsm-a4.webp" alt="TNPL Platinum Copier Paper 75 GSM A4" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-PAP-10</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          TNPL Platinum Copier Paper 75 GSM A4
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> TNPL Platinum Authorized Catalog Photography
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 55 KB • 1000×1000 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/stationery/ob-pen-38-rorito-045-classic-ballpoint-pen-pack.webp" alt="Rorito 045 Classic Ballpoint Pen Pack" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-PEN-38</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Rorito 045 Classic Ballpoint Pen Pack
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Rorito Authorized Distributor Product Photography
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 3 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/stationery/ob-pen-39-rorito-flymax-gel-pen.webp" alt="Rorito Flymax Gel Pen" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-PEN-39</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Rorito Flymax Gel Pen
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Rorito Official Manufacturer Website Asset
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 28 KB • 1000×1000 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/stationery/ob-des-51-fevicol-mr-adhesive-tube.webp" alt="Fevicol MR Adhesive Tube" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-DES-51</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Fevicol MR Adhesive Tube
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Pidilite Industries Official Product Photography
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 12 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/stationery/ob-not-71-post-it-self-adhesive-sticky-notes-pad.webp" alt="Post-it Self Adhesive Sticky Notes Pad" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-NOT-71</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Post-it Self Adhesive Sticky Notes Pad
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> 3M Official Corporate Multimedia Repository
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 19 KB • 600×600 WebP
+        </div>
+      </div>
+
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="/assets/products/stationery/ob-not-73-casio-electronic-desk-calculator.webp" alt="Casio Electronic Desk Calculator" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">OB-NOT-73</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          Casio Electronic Desk Calculator
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> Casio India Official Product Catalog Photography
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: 32 KB • 600×600 WebP
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

@@ -22,3 +22,4 @@ console.log(`Found ${allImgs.length} images in public/`);
 const nonProductImgs = allImgs.filter(f => !f.includes('/public/assets/products/'));
 console.log(`Non-product images (${nonProductImgs.length}):`);
 nonProductImgs.forEach(f => console.log(' ', f));
+

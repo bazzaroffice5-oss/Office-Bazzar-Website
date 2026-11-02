@@ -38,3 +38,4 @@ for (const [brand, items] of Object.entries(byBrand)) {
 }
 
 fs.writeFileSync('scripts/replacement_detailed_manifest.json', JSON.stringify(fullInfo, null, 2), 'utf8');
+

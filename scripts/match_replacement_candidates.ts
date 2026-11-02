@@ -34,3 +34,4 @@ for (const rep of replacementSkus) {
 
 console.log(`Found ${directMatches.length} candidate matches from legacy WordPress CDN assets:`);
 directMatches.forEach(m => console.log(`[${m.sku}] "${m.name}" <---> [${m.legacySku}] "${m.legacyName}": ${m.legacyImg}`));
+
