@@ -130,7 +130,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "cleaning-chemicals",
     "categoryId": "housekeeping-hygiene",
     "description": "Commercial Diversey Taski concentrates (R1-R9), Colin, Lizol, Harpic, dishwash liquids, phenyl, and floor cleaners.",
-    "imageUrl": "/images/subcategories/cleaning-chemicals.webp"
+    "imageUrl": "/images/subcategories/cleaning-chemicals.webp",
+    "itemCount": 31
   },
   {
     "id": "washroom-dispensers",
@@ -138,7 +139,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "washroom-dispensers",
     "categoryId": "housekeeping-hygiene",
     "description": "Stainless steel and ABS soap dispensers, jet hand dryers, paper cup dispensers, shoe cover dispensers, and shoe polish machines.",
-    "imageUrl": "/images/categories/housekeeping-facility.jpg"
+    "imageUrl": "/images/categories/housekeeping-facility.jpg",
+    "itemCount": 23
   },
   {
     "id": "tissue-papers-rolls",
@@ -146,7 +148,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "tissue-papers-rolls",
     "categoryId": "housekeeping-hygiene",
     "description": "Commercial C-fold towels, M-fold tissues, HRT rolls, jumbo toilet rolls, paper napkins, and Kimberly-Clark Kimsoft products.",
-    "imageUrl": "/images/subcategories/tissue-paper.webp"
+    "imageUrl": "/images/subcategories/tissue-paper.webp",
+    "itemCount": 12
   },
   {
     "id": "dustbins-waste-handling",
@@ -154,7 +157,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "dustbins-waste-handling",
     "categoryId": "housekeeping-hygiene",
     "description": "Stainless steel pedal dustbins, perforated bins, lobby ashtray bins, mobile wheeled garbage bins (60L-240L), and biodegradable garbage bags.",
-    "imageUrl": "/images/subcategories/industrial-dustbins.jpg"
+    "imageUrl": "/images/subcategories/industrial-dustbins.jpg",
+    "itemCount": 19
   },
   {
     "id": "mops-floor-wipers",
@@ -162,7 +166,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "mops-floor-wipers",
     "categoryId": "housekeeping-hygiene",
     "description": "Cotton floor mops, clip mop heads, Kentucky mops, glass combi wipers, kitchen counter wipers, and floor wipers with long handles.",
-    "imageUrl": "/images/subcategories/housekeeping-tools.jpg"
+    "imageUrl": "/images/subcategories/housekeeping-tools.jpg",
+    "itemCount": 35
   },
   {
     "id": "cloths-scrubbers-brushes",
@@ -170,7 +175,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "cloths-scrubbers-brushes",
     "categoryId": "housekeeping-hygiene",
     "description": "Microfiber duster cloths, checked cloths, white banian waste cloths, sponge scrub pads, steel scrubbers, and toilet cleaning brushes.",
-    "imageUrl": "/images/subcategories/housekeeping-accessories.webp"
+    "imageUrl": "/images/subcategories/housekeeping-accessories.webp",
+    "itemCount": 28
   },
   {
     "id": "cleaning-equipment-trolleys",
@@ -178,7 +184,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "cleaning-equipment-trolleys",
     "categoryId": "housekeeping-hygiene",
     "description": "Commercial wet & dry vacuum cleaners, single and double bucket wringer trolleys, janitor service trolleys, and caddy baskets.",
-    "imageUrl": "/images/categories/housekeeping-facility.jpg"
+    "imageUrl": "/images/categories/housekeeping-facility.jpg",
+    "itemCount": 12
   },
   {
     "id": "air-fresheners-care",
@@ -186,7 +193,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "air-fresheners-care",
     "categoryId": "housekeeping-hygiene",
     "description": "Automatic LED/LCD air freshener dispensers, aerosol fragrance refills, room freshener sprays, urinal screens, and naphthalene balls.",
-    "imageUrl": "/images/categories/pantry-hygiene.jpg"
+    "imageUrl": "/images/categories/pantry-hygiene.jpg",
+    "itemCount": 14
   },
   {
     "id": "writing-instruments",
@@ -194,7 +202,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "writing-instruments",
     "categoryId": "office-stationery",
     "description": "Corporate writing instruments including ballpoint pens, gel pens, permanent markers, whiteboard markers, highlighters, and pencils.",
-    "imageUrl": "/images/hero-collage/colored-pens.jpg"
+    "imageUrl": "/images/hero-collage/colored-pens.jpg",
+    "itemCount": 18
   },
   {
     "id": "paper-notebooks",
@@ -202,7 +211,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "paper-notebooks",
     "categoryId": "office-stationery",
     "description": "High-brightness A4/A3 copier paper reams (JK Copier, TNPL, Bond), executive notebooks, attendance registers, and sticky notes.",
-    "imageUrl": "/images/banners/jk-copier.jpg"
+    "imageUrl": "/images/banners/jk-copier.jpg",
+    "itemCount": 20
   },
   {
     "id": "files-office-organization",
@@ -210,7 +220,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "files-office-organization",
     "categoryId": "office-stationery",
     "description": "Box files 3025, lever arch folders, paper tag files, expanding files, report files, stick files, ring binders, and index separators.",
-    "imageUrl": "/images/banners/stationery-files-workspace.jpg"
+    "imageUrl": "/images/banners/stationery-files-workspace.jpg",
+    "itemCount": 18
   },
   {
     "id": "desk-accessories-tools",
@@ -218,7 +229,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "desk-accessories-tools",
     "categoryId": "office-stationery",
     "description": "Kangaro heavy duty staplers, paper punches DP-600, binder clips, gem clips, paper pins, stamp pads, scissors, and paper trays.",
-    "imageUrl": "/images/subcategories/desk-stationery.jpg"
+    "imageUrl": "/images/subcategories/desk-stationery.jpg",
+    "itemCount": 23
   },
   {
     "id": "boards-visual-display",
@@ -226,7 +238,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "boards-visual-display",
     "categoryId": "office-stationery",
     "description": "Magnetic whiteboards, pin-up notice boards, sliding boards, pegboards, white board dusters, magazine stands, and display stands.",
-    "imageUrl": "/images/categories/boards-displays.jpg"
+    "imageUrl": "/images/categories/boards-displays.jpg",
+    "itemCount": 12
   },
   {
     "id": "office-pantry-essentials",
@@ -234,7 +247,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "office-pantry-essentials",
     "categoryId": "office-stationery",
     "description": "Corporate pantry consumables including paper cups, napkins, copper water bottles, and cafeteria refreshments.",
-    "imageUrl": "/images/categories/pantry-hygiene.jpg"
+    "imageUrl": "/images/categories/pantry-hygiene.jpg",
+    "itemCount": 2
   },
   {
     "id": "safety-maintenance",
@@ -242,7 +256,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "safety-maintenance",
     "categoryId": "office-stationery",
     "description": "Workplace traffic safety cones, convex security mirrors, speed breakers, PPE safety kits, N95 masks, sanitizers, and caution boards.",
-    "imageUrl": "/images/categories/safety-ppe-equipment.jpg"
+    "imageUrl": "/images/categories/safety-ppe-equipment.jpg",
+    "itemCount": 73
   },
   {
     "id": "laser-toner-cartridges",
@@ -250,7 +265,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "laser-toner-cartridges",
     "categoryId": "printers-technology",
     "description": "Laser toner cartridges for HP, Canon, Samsung, and Best Print compatible toners with crisp output and high page yields.",
-    "imageUrl": "/images/subcategories/laser-toners.webp"
+    "imageUrl": "/images/subcategories/laser-toners.webp",
+    "itemCount": 8
   },
   {
     "id": "ink-cartridges-supplies",
@@ -258,7 +274,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "ink-cartridges-supplies",
     "categoryId": "printers-technology",
     "description": "Original and compatible ink cartridges, tri-color inks, Dymo label cartridges, True Picture media, and printer refilling supplies.",
-    "imageUrl": "/images/categories/printer-supplies-toner.jpg"
+    "imageUrl": "/images/categories/printer-supplies-toner.jpg",
+    "itemCount": 4
   },
   {
     "id": "paper-shredders",
@@ -266,7 +283,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "paper-shredders",
     "categoryId": "printers-technology",
     "description": "Commercial heavy-duty cross-cut and strip-cut paper shredders for confidential office document security and destruction.",
-    "imageUrl": "/images/subcategories/paper-shredders.webp"
+    "imageUrl": "/images/subcategories/paper-shredders.webp",
+    "itemCount": 5
   },
   {
     "id": "currency-counting-machines",
@@ -274,7 +292,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "currency-counting-machines",
     "categoryId": "printers-technology",
     "description": "Intelligent high-speed currency counting machines with counterfeit detection (UV/MG/IR) for finance and retail operations.",
-    "imageUrl": "/images/categories/office-machines-tools.jpg"
+    "imageUrl": "/images/categories/office-machines-tools.jpg",
+    "itemCount": 1
   },
   {
     "id": "it-peripherals-machines",
@@ -282,7 +301,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "it-peripherals-machines",
     "categoryId": "printers-technology",
     "description": "Barcode printers, Epson ink tank printers, Kent KS-12 lamination machines, spiral binding machines, hard disks, pen drives, and projectors.",
-    "imageUrl": "/images/subcategories/computer-consumables.jpg"
+    "imageUrl": "/images/subcategories/computer-consumables.jpg",
+    "itemCount": 10
   },
   {
     "id": "bopp-packaging-tapes",
@@ -290,7 +310,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "bopp-packaging-tapes",
     "categoryId": "packaging-supplies",
     "description": "High-strength BOPP brown cello packing tapes, transparent sealing tapes, Wonder 555 clear tapes, and double-sided foam tapes.",
-    "imageUrl": "/images/subcategories/packaging-tapes.webp"
+    "imageUrl": "/images/subcategories/packaging-tapes.webp",
+    "itemCount": 4
   },
   {
     "id": "protective-packaging-cushioning",
@@ -298,7 +319,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "protective-packaging-cushioning",
     "categoryId": "packaging-supplies",
     "description": "Shock-absorbing air bubble wrap rolls, bubble sheets, and protective foam thermocol sheets for fragile dispatch items.",
-    "imageUrl": "/images/subcategories/protective-packaging.jpg"
+    "imageUrl": "/images/subcategories/protective-packaging.jpg",
+    "itemCount": 2
   },
   {
     "id": "box-strapping-banding",
@@ -306,7 +328,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "box-strapping-banding",
     "categoryId": "packaging-supplies",
     "description": "Heavy-duty plastic packing patti rolls, manual strapping bands, and box strapping rolls for secure carton bundling.",
-    "imageUrl": "/images/categories/packaging-materials.jpg"
+    "imageUrl": "/images/categories/packaging-materials.jpg",
+    "itemCount": 2
   },
   {
     "id": "floor-marking-safety-tapes",
@@ -314,7 +337,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "floor-marking-safety-tapes",
     "categoryId": "packaging-supplies",
     "description": "Durable yellow & black zebra floor marking caution tapes, safety hazard tapes, and anti-slip traction tapes.",
-    "imageUrl": "/images/categories/safety-ppe-equipment.jpg"
+    "imageUrl": "/images/categories/safety-ppe-equipment.jpg",
+    "itemCount": 3
   },
   {
     "id": "adhesives-packaging-tools",
@@ -322,7 +346,8 @@ export const ALL_SUBCATEGORIES: Subcategory[] = [
     "slug": "adhesives-packaging-tools",
     "categoryId": "packaging-supplies",
     "description": "Heavy duty tape dispensers (1-inch & 2-inch), Camel gum liquid adhesive paste, and carton cutters.",
-    "imageUrl": "/images/categories/packaging-materials.jpg"
+    "imageUrl": "/images/categories/packaging-materials.jpg",
+    "itemCount": 4
   }
 ];
 
@@ -345,7 +370,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "cleaning-chemicals",
         "categoryId": "housekeeping-hygiene",
         "description": "Commercial Diversey Taski concentrates (R1-R9), Colin, Lizol, Harpic, dishwash liquids, phenyl, and floor cleaners.",
-        "imageUrl": "/images/subcategories/cleaning-chemicals.webp"
+        "imageUrl": "/images/subcategories/cleaning-chemicals.webp",
+    "itemCount": 31
       },
       {
         "id": "washroom-dispensers",
@@ -353,7 +379,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "washroom-dispensers",
         "categoryId": "housekeeping-hygiene",
         "description": "Stainless steel and ABS soap dispensers, jet hand dryers, paper cup dispensers, shoe cover dispensers, and shoe polish machines.",
-        "imageUrl": "/images/categories/housekeeping-facility.jpg"
+        "imageUrl": "/images/categories/housekeeping-facility.jpg",
+    "itemCount": 23
       },
       {
         "id": "tissue-papers-rolls",
@@ -361,7 +388,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "tissue-papers-rolls",
         "categoryId": "housekeeping-hygiene",
         "description": "Commercial C-fold towels, M-fold tissues, HRT rolls, jumbo toilet rolls, paper napkins, and Kimberly-Clark Kimsoft products.",
-        "imageUrl": "/images/subcategories/tissue-paper.webp"
+        "imageUrl": "/images/subcategories/tissue-paper.webp",
+    "itemCount": 12
       },
       {
         "id": "dustbins-waste-handling",
@@ -369,7 +397,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "dustbins-waste-handling",
         "categoryId": "housekeeping-hygiene",
         "description": "Stainless steel pedal dustbins, perforated bins, lobby ashtray bins, mobile wheeled garbage bins (60L-240L), and biodegradable garbage bags.",
-        "imageUrl": "/images/subcategories/industrial-dustbins.jpg"
+        "imageUrl": "/images/subcategories/industrial-dustbins.jpg",
+    "itemCount": 19
       },
       {
         "id": "mops-floor-wipers",
@@ -377,7 +406,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "mops-floor-wipers",
         "categoryId": "housekeeping-hygiene",
         "description": "Cotton floor mops, clip mop heads, Kentucky mops, glass combi wipers, kitchen counter wipers, and floor wipers with long handles.",
-        "imageUrl": "/images/subcategories/housekeeping-tools.jpg"
+        "imageUrl": "/images/subcategories/housekeeping-tools.jpg",
+    "itemCount": 35
       },
       {
         "id": "cloths-scrubbers-brushes",
@@ -385,7 +415,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "cloths-scrubbers-brushes",
         "categoryId": "housekeeping-hygiene",
         "description": "Microfiber duster cloths, checked cloths, white banian waste cloths, sponge scrub pads, steel scrubbers, and toilet cleaning brushes.",
-        "imageUrl": "/images/subcategories/housekeeping-accessories.webp"
+        "imageUrl": "/images/subcategories/housekeeping-accessories.webp",
+    "itemCount": 28
       },
       {
         "id": "cleaning-equipment-trolleys",
@@ -393,7 +424,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "cleaning-equipment-trolleys",
         "categoryId": "housekeeping-hygiene",
         "description": "Commercial wet & dry vacuum cleaners, single and double bucket wringer trolleys, janitor service trolleys, and caddy baskets.",
-        "imageUrl": "/images/categories/housekeeping-facility.jpg"
+        "imageUrl": "/images/categories/housekeeping-facility.jpg",
+    "itemCount": 12
       },
       {
         "id": "air-fresheners-care",
@@ -401,7 +433,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "air-fresheners-care",
         "categoryId": "housekeeping-hygiene",
         "description": "Automatic LED/LCD air freshener dispensers, aerosol fragrance refills, room freshener sprays, urinal screens, and naphthalene balls.",
-        "imageUrl": "/images/categories/pantry-hygiene.jpg"
+        "imageUrl": "/images/categories/pantry-hygiene.jpg",
+    "itemCount": 14
       }
     ]
   },
@@ -421,7 +454,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "writing-instruments",
         "categoryId": "office-stationery",
         "description": "Corporate writing instruments including ballpoint pens, gel pens, permanent markers, whiteboard markers, highlighters, and pencils.",
-        "imageUrl": "/images/hero-collage/colored-pens.jpg"
+        "imageUrl": "/images/hero-collage/colored-pens.jpg",
+    "itemCount": 18
       },
       {
         "id": "paper-notebooks",
@@ -429,7 +463,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "paper-notebooks",
         "categoryId": "office-stationery",
         "description": "High-brightness A4/A3 copier paper reams (JK Copier, TNPL, Bond), executive notebooks, attendance registers, and sticky notes.",
-        "imageUrl": "/images/banners/jk-copier.jpg"
+        "imageUrl": "/images/banners/jk-copier.jpg",
+    "itemCount": 20
       },
       {
         "id": "files-office-organization",
@@ -437,7 +472,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "files-office-organization",
         "categoryId": "office-stationery",
         "description": "Box files 3025, lever arch folders, paper tag files, expanding files, report files, stick files, ring binders, and index separators.",
-        "imageUrl": "/images/banners/stationery-files-workspace.jpg"
+        "imageUrl": "/images/banners/stationery-files-workspace.jpg",
+    "itemCount": 18
       },
       {
         "id": "desk-accessories-tools",
@@ -445,7 +481,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "desk-accessories-tools",
         "categoryId": "office-stationery",
         "description": "Kangaro heavy duty staplers, paper punches DP-600, binder clips, gem clips, paper pins, stamp pads, scissors, and paper trays.",
-        "imageUrl": "/images/subcategories/desk-stationery.jpg"
+        "imageUrl": "/images/subcategories/desk-stationery.jpg",
+    "itemCount": 23
       },
       {
         "id": "boards-visual-display",
@@ -453,7 +490,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "boards-visual-display",
         "categoryId": "office-stationery",
         "description": "Magnetic whiteboards, pin-up notice boards, sliding boards, pegboards, white board dusters, magazine stands, and display stands.",
-        "imageUrl": "/images/categories/boards-displays.jpg"
+        "imageUrl": "/images/categories/boards-displays.jpg",
+    "itemCount": 12
       },
       {
         "id": "office-pantry-essentials",
@@ -461,7 +499,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "office-pantry-essentials",
         "categoryId": "office-stationery",
         "description": "Corporate pantry consumables including paper cups, napkins, copper water bottles, and cafeteria refreshments.",
-        "imageUrl": "/images/categories/pantry-hygiene.jpg"
+        "imageUrl": "/images/categories/pantry-hygiene.jpg",
+    "itemCount": 2
       },
       {
         "id": "safety-maintenance",
@@ -469,7 +508,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "safety-maintenance",
         "categoryId": "office-stationery",
         "description": "Workplace traffic safety cones, convex security mirrors, speed breakers, PPE safety kits, N95 masks, sanitizers, and caution boards.",
-        "imageUrl": "/images/categories/safety-ppe-equipment.jpg"
+        "imageUrl": "/images/categories/safety-ppe-equipment.jpg",
+    "itemCount": 73
       }
     ]
   },
@@ -489,7 +529,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "laser-toner-cartridges",
         "categoryId": "printers-technology",
         "description": "Laser toner cartridges for HP, Canon, Samsung, and Best Print compatible toners with crisp output and high page yields.",
-        "imageUrl": "/images/subcategories/laser-toners.webp"
+        "imageUrl": "/images/subcategories/laser-toners.webp",
+    "itemCount": 8
       },
       {
         "id": "ink-cartridges-supplies",
@@ -497,7 +538,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "ink-cartridges-supplies",
         "categoryId": "printers-technology",
         "description": "Original and compatible ink cartridges, tri-color inks, Dymo label cartridges, True Picture media, and printer refilling supplies.",
-        "imageUrl": "/images/categories/printer-supplies-toner.jpg"
+        "imageUrl": "/images/categories/printer-supplies-toner.jpg",
+    "itemCount": 4
       },
       {
         "id": "paper-shredders",
@@ -505,7 +547,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "paper-shredders",
         "categoryId": "printers-technology",
         "description": "Commercial heavy-duty cross-cut and strip-cut paper shredders for confidential office document security and destruction.",
-        "imageUrl": "/images/subcategories/paper-shredders.webp"
+        "imageUrl": "/images/subcategories/paper-shredders.webp",
+    "itemCount": 5
       },
       {
         "id": "currency-counting-machines",
@@ -513,7 +556,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "currency-counting-machines",
         "categoryId": "printers-technology",
         "description": "Intelligent high-speed currency counting machines with counterfeit detection (UV/MG/IR) for finance and retail operations.",
-        "imageUrl": "/images/categories/office-machines-tools.jpg"
+        "imageUrl": "/images/categories/office-machines-tools.jpg",
+    "itemCount": 1
       },
       {
         "id": "it-peripherals-machines",
@@ -521,7 +565,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "it-peripherals-machines",
         "categoryId": "printers-technology",
         "description": "Barcode printers, Epson ink tank printers, Kent KS-12 lamination machines, spiral binding machines, hard disks, pen drives, and projectors.",
-        "imageUrl": "/images/subcategories/computer-consumables.jpg"
+        "imageUrl": "/images/subcategories/computer-consumables.jpg",
+    "itemCount": 10
       }
     ]
   },
@@ -541,7 +586,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "bopp-packaging-tapes",
         "categoryId": "packaging-supplies",
         "description": "High-strength BOPP brown cello packing tapes, transparent sealing tapes, Wonder 555 clear tapes, and double-sided foam tapes.",
-        "imageUrl": "/images/subcategories/packaging-tapes.webp"
+        "imageUrl": "/images/subcategories/packaging-tapes.webp",
+    "itemCount": 4
       },
       {
         "id": "protective-packaging-cushioning",
@@ -549,7 +595,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "protective-packaging-cushioning",
         "categoryId": "packaging-supplies",
         "description": "Shock-absorbing air bubble wrap rolls, bubble sheets, and protective foam thermocol sheets for fragile dispatch items.",
-        "imageUrl": "/images/subcategories/protective-packaging.jpg"
+        "imageUrl": "/images/subcategories/protective-packaging.jpg",
+    "itemCount": 2
       },
       {
         "id": "box-strapping-banding",
@@ -557,7 +604,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "box-strapping-banding",
         "categoryId": "packaging-supplies",
         "description": "Heavy-duty plastic packing patti rolls, manual strapping bands, and box strapping rolls for secure carton bundling.",
-        "imageUrl": "/images/categories/packaging-materials.jpg"
+        "imageUrl": "/images/categories/packaging-materials.jpg",
+    "itemCount": 2
       },
       {
         "id": "floor-marking-safety-tapes",
@@ -565,7 +613,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "floor-marking-safety-tapes",
         "categoryId": "packaging-supplies",
         "description": "Durable yellow & black zebra floor marking caution tapes, safety hazard tapes, and anti-slip traction tapes.",
-        "imageUrl": "/images/categories/safety-ppe-equipment.jpg"
+        "imageUrl": "/images/categories/safety-ppe-equipment.jpg",
+    "itemCount": 3
       },
       {
         "id": "adhesives-packaging-tools",
@@ -573,7 +622,8 @@ export const MAIN_CATEGORIES: Category[] = [
         "slug": "adhesives-packaging-tools",
         "categoryId": "packaging-supplies",
         "description": "Heavy duty tape dispensers (1-inch & 2-inch), Camel gum liquid adhesive paste, and carton cutters.",
-        "imageUrl": "/images/categories/packaging-materials.jpg"
+        "imageUrl": "/images/categories/packaging-materials.jpg",
+    "itemCount": 4
       }
     ]
   }

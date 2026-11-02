@@ -507,3 +507,4 @@ ALL_SUBCATEGORIES.forEach(sub => {
   }
 });
 console.log(`\nEmpty subcategories: ${unassignedSub}`);
+

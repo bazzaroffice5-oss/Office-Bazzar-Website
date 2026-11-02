@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { CATEGORIES } from '@/lib/data/catalog';
 
 const TRENDING_CATEGORIES = [
   {
@@ -119,7 +120,7 @@ export default function TrendingCategoriesSection() {
                     {/* Count & Category Pill Tag */}
                     <div className="flex items-center justify-between gap-2 mb-2">
                       <span className="text-xs font-medium text-slate-500">
-                        {cat.itemCount}
+                        {CATEGORIES.find((c) => c.id === cat.id)?.itemCount ? `${CATEGORIES.find((c) => c.id === cat.id)?.itemCount} Products` : cat.itemCount}
                       </span>
                       <span
                         className={`text-[11px] font-medium px-2 py-0.5 rounded-full border ${cat.badgeBg} ${cat.badgeText} ${cat.badgeBorder}`}

@@ -1,0 +1,329 @@
+{
+  "total": 383,
+  "localWebP": 328,
+  "remoteCdn": 55,
+  "standard600x600": 328,
+  "needsManualReview": 40,
+  "reviewDetails": [
+    {
+      "sku": "OB-HOU-1027",
+      "name": "Toilet Roll Dispenser",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-COM-1039",
+      "name": "spiral binding machine",
+      "flags": [
+        "Legacy WordPress CDN Asset",
+        "WhatsApp mobile upload - Supplier photo"
+      ]
+    },
+    {
+      "sku": "OB-TIS-1101",
+      "name": "Toilet Roll Big",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-004",
+      "name": "Paper Cup Dispenser",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-008",
+      "name": "Feather Duster",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-020",
+      "name": "ABS Tissue Dispenser M-Fold",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-035",
+      "name": "Kitchen Tissue Roll",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-073",
+      "name": "Commercial Glass Wiper",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-074",
+      "name": "Glass Combi Wiper with Sponge",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-FIL-19",
+      "name": "A4 Sheet Protector Clear Sheet",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-NOT-67",
+      "name": "Metal Notice Board Push Pins",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-NOT-78",
+      "name": "White Mailing Envelopes Pack",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-NOT-80",
+      "name": "Cloth Lined Courier Security Envelope",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-EQP-89",
+      "name": "Acrylic ID Card Badge Holder with Lanyard",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-COV-03",
+      "name": "Reusable Washable Cotton Face Mask",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-03",
+      "name": "Traffic Cone with Rubberized Plastic Base",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-06",
+      "name": "Retractable Cone Q-Manager Ribbon",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-09",
+      "name": "Outdoor Convex Security Mirror (18/24/32/40 inch)",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-10",
+      "name": "Acrylic Dome Safety Mirror (Full / Half / Quarter)",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-11",
+      "name": "Warning Bollard Delineator Post",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-12",
+      "name": "Flexible Polyurethane Spring Post 750mm",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-15",
+      "name": "Heavy Duty Rubber Wheel Chock",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-18",
+      "name": "Aluminum Road Stud and Solar LED Stud",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-20",
+      "name": "Stainless Steel Retractable Belt Stanchion (3m)",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-21",
+      "name": "Q-Manager A4 Sign Board Display Frame",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-22",
+      "name": "Classic Velvet Rope Stanchion Post (Gold / SS)",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-23",
+      "name": "Plastic Chain Q-Manager Barrier Post 1000mm",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-24",
+      "name": "Microprismatic Reflective Warning Tape (50mm x 50m)",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-26",
+      "name": "Plastic Modular Speed Breakers",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-28",
+      "name": "Rubber Corner Guards Curved Edge",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-29",
+      "name": "Rubber Car Wheel Stopper 600mm",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-30",
+      "name": "Rubber Car Wheel Stopper 500mm",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-31",
+      "name": "Rubber Car Wheel Stopper Commercial 1650mm",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-34",
+      "name": "Solar Chevron Directional Warning Board",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-37",
+      "name": "LED Emergency Magnetic Beacon Flare Light",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-39",
+      "name": "Interlocking Plastic Water Filled Road Barrier",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-40",
+      "name": "Galvanized Steel Crowd Control Barricade Barrier",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-41",
+      "name": "Portable Expandable Scissor Road Barrier (Max 2m)",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-42",
+      "name": "Rechargeable Search Light & Megaphone Siren",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    },
+    {
+      "sku": "OB-RDS-43",
+      "name": "Metal Signage Post Stands (Parking / Directional)",
+      "flags": [
+        "Standard 600x600 Canvas",
+        "Low file size (<5KB) - potential low detail"
+      ]
+    }
+  ]
+}
