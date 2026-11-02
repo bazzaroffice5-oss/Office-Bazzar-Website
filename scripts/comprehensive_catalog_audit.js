@@ -125,3 +125,4 @@ rawProducts.forEach(p => {
   else positiveStockCount++;
 });
 console.log(`[Stock Status] Products with stockQuantity === 0: ${zeroStockCount}, > 0: ${positiveStockCount}`);
+

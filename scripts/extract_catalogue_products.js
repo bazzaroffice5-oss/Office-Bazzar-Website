@@ -650,6 +650,10 @@ async function extractAll() {
   console.log(`Extraction Complete: ${successCount}/${PRODUCTS_DATA.length} images created successfully.`);
   console.log(`Manifest saved to public/assets/products/extraction_manifest.json`);
   console.log(`======================================================\n`);
+  module.exports = { PRODUCTS_DATA };
+  if (require.main === module) {
+    extractAll().catch(console.error);
+  }
 }
 
-extractAll().catch(console.error);
+module.exports = { PRODUCTS_DATA };
