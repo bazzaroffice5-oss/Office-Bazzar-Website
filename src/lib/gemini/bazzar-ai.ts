@@ -1030,22 +1030,65 @@ async function generateContextualConversationFallback(
       reply = `We supply premium copier papers including JK Copier 75 GSM, TNPL Copier, and Bilt. Approximately how many reams or boxes do you need?`;
     }
   }
-  // 6. HOUSEKEEPING & DUSTBINS
+  // 6. HOUSEKEEPING & CHEMICALS
   else if (
+    lower.includes('taski') ||
     lower.includes('clean') ||
-    lower.includes('housekeeping') ||
-    lower.includes('dustbin') ||
-    lower.includes('taski')
+    lower.includes('chemical') ||
+    lower.includes('phenyl') ||
+    lower.includes('mop') ||
+    lower.includes('wiper') ||
+    lower.includes('handwash')
   ) {
-    reply = `We supply commercial housekeeping & hygiene supplies, including Taski cleaning chemicals, heavy-duty wheeled dustbins (60L, 120L, 240L), cleaning cloths, and wipers. Which specific item do you need?`;
+    const quantMatch = trimmed.match(/(\d+)\s*(ltr|liters|can|cans|pcs|pieces|units|packs)?/i);
+    if (quantMatch && parseInt(quantMatch[1], 10) > 0) {
+      reply = `I have noted your requirement for ${quantMatch[1]} ${quantMatch[2] || 'units'} of cleaning supplies. We supply Diversey Taski (R1 to R9) and commercial hygiene solutions. Which delivery location is this for?`;
+    } else {
+      reply = `We supply authentic commercial cleaning solutions including Diversey Taski (R1 to R9), floor cleaners, disinfectant phenyls, and microfiber mops. Which cleaning chemicals or equipment do you require?`;
+    }
   }
-  // 7. GREETING
+  // 7. DUSTBINS & WASTE MANAGEMENT
+  else if (lower.includes('dustbin') || lower.includes('bin') || lower.includes('garbage')) {
+    const quantMatch = trimmed.match(/(\d+)\s*(pcs|pieces|units|nos)?/i);
+    if (quantMatch && parseInt(quantMatch[1], 10) > 0) {
+      reply = `Noted your requirement for ${quantMatch[1]} dustbins. We supply heavy-duty 60L, 120L, and 240L wheeled bins as well as pedal and stainless steel bins. Which delivery location should we quote for?`;
+    } else {
+      reply = `We supply industrial and office dustbins, including 60L/120L/240L wheeled bins, stainless steel pedal bins, and push-can bins. How many units and what capacity do you need?`;
+    }
+  }
+  // 8. OFFICE STATIONERY, FILES & DESK SUPPLIES
+  else if (
+    lower.includes('stationery') ||
+    lower.includes('file') ||
+    lower.includes('folder') ||
+    lower.includes('pen') ||
+    lower.includes('marker') ||
+    lower.includes('stapler') ||
+    lower.includes('calculator') ||
+    lower.includes('tape')
+  ) {
+    const quantMatch = trimmed.match(/(\d+)\s*(pcs|pieces|units|boxes|nos|packs)?/i);
+    if (quantMatch && parseInt(quantMatch[1], 10) > 0) {
+      reply = `I have noted your requirement for ${quantMatch[1]} ${quantMatch[2] || 'units'} of stationery items. We supply corporate box files, markers, desk supplies, and packaging materials. Would you like a formal quotation for Chennai delivery?`;
+    } else {
+      reply = `We supply comprehensive office stationery, including lever arch files, white board markers, heavy-duty staplers, and packaging tapes. Which specific supplies do you need?`;
+    }
+  }
+  // 9. FAQ / CORPORATE INQUIRIES
+  else if (lower.includes('gst') || lower.includes('invoice') || lower.includes('tax')) {
+    reply = `All corporate orders from OfficeBazzar are accompanied by official GST tax invoices with 100% Input Tax Credit (ITC) eligibility. We support standard 18% GST across supplies and 12% on paper lines.`;
+  } else if (lower.includes('contact') || lower.includes('support') || lower.includes('call') || lower.includes('phone') || lower.includes('sales')) {
+    reply = `You can reach our corporate procurement desk directly by phone at **+91 7200800040** or by email at **sales4@officebazzar.com** (Monday to Saturday, 9:00 AM - 6:30 PM).`;
+  } else if (lower.includes('quotation') || lower.includes('quote') || lower.includes('rfq')) {
+    reply = `I can help arrange an official corporate quotation. Please tell me which products and quantities you need, or share your company name and delivery location so our sales desk can generate it.`;
+  }
+  // 10. GREETING
   else if (/^(hi|hello|hey|vanakkam|namaste)\b/i.test(trimmed)) {
-    reply = `Hello! Welcome to OfficeBazzar. How can I help you today?`;
+    reply = `Hello! Welcome to OfficeBazzar. How can I help you with your office supplies and corporate procurement today?`;
   }
-  // 8. GENERAL
+  // 11. TRANSPARENT SPECIFIC FALLBACK (NEVER BLIND GENERIC PROCUREMENT TEMPLATE)
   else {
-    reply = `I can help you procure that for your office. Could you share the approximate quantity and specifications you need so our procurement desk can check availability and pricing?`;
+    reply = `I am ready to assist with your requirement for "${trimmed}". To ensure our procurement desk provides accurate availability and corporate pricing, could you specify which product or category you need?`;
   }
 
   // Returns ONLY strictly validated product cards (never unrelated products like Foam Thermocol)
