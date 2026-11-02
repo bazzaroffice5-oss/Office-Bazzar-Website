@@ -28,3 +28,4 @@ for (const [subId, count] of Object.entries(subCounts)) {
 
 fs.writeFileSync('src/lib/data/catalog.ts', content, 'utf8');
 console.log('Successfully updated src/lib/data/catalog.ts with exact subcategory item counts.');
+
