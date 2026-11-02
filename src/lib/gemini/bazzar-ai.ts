@@ -1,3 +1,8 @@
+/**
+ * Bazzar AI – Intelligent, Context-Aware, Multilingual Assistant for OfficeBazzar
+ * Powered by Google Gemini 3.6 Flash & Official @google/genai SDK
+ */
+
 import { GoogleGenAI, Type } from '@google/genai';
 import { getProducts, createQuotation } from '@/lib/db/store';
 import { Product } from '@/types';
@@ -28,10 +33,10 @@ export interface ConversationTurn {
   content: string;
 }
 
-// In-memory sliding window rate limiter
+// In-memory sliding window rate limiter (30 requests/minute per client IP)
 const ipRateMap = new Map<string, number[]>();
-const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
-const MAX_REQUESTS_PER_MINUTE = 20;
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const MAX_REQUESTS_PER_MINUTE = 30;
 
 export function checkRateLimit(ip: string): boolean {
   const now = Date.now();
@@ -50,19 +55,21 @@ const bazzarAITools: any[] = [
   {
     functionDeclarations: [
       {
-        name: 'search_products',
+        name: 'search_catalog',
         description:
-          'Search the authentic OfficeBazzar catalog for office stationery, files, folders, housekeeping cleaning chemicals, dustbins, tissue paper, paper shredders, packaging, etc. Returns real matched products with SKU, name, price, pack size, stock, category and product URL.',
+          'Search the authentic OfficeBazzar catalog for products: copier papers (JK, TNPL, bond, photo paper), files, folders, registers, pens, staplers, paper shredders, housekeeping chemicals (Taski, Hi-Clean, phenyl), dustbins, cleaning mops, wipers, dispensers, road safety cones, barriers, and office furniture. Always translate search terms into English keywords.',
         parameters: {
           type: Type.OBJECT,
           properties: {
             query: {
               type: Type.STRING,
-              description: 'Product name, brand, or keywords (e.g. "stapler", "dustbin", "shredder", "file", "cleaning chemical")',
+              description:
+                'Search keywords in English (e.g. "copier paper", "A4 paper", "JK copier", "dustbin", "shredder", "file folder", "taski", "cleaning chemical", "chair")',
             },
             category: {
               type: Type.STRING,
-              description: 'Optional category name (e.g. "Office Stationery", "Housekeeping & Hygiene", "Packaging Supplies", "Printers & Technology")',
+              description:
+                'Optional category filter: "Office Stationery", "Housekeeping & Hygiene", "Printers & Technology", "Packaging Supplies", "Road Safety"',
             },
           },
           required: ['query'],
@@ -71,13 +78,13 @@ const bazzarAITools: any[] = [
       {
         name: 'get_product_details',
         description:
-          'Get full authentic specifications, price, pack size and stock of a specific product by its exact SKU or name.',
+          'Get specifications, SKU, pack size, price, and stock for a specific product by SKU or exact name.',
         parameters: {
           type: Type.OBJECT,
           properties: {
             skuOrName: {
               type: Type.STRING,
-              description: 'Exact product SKU (e.g. OB-STA-1009) or product name',
+              description: 'Product SKU (e.g. OB-STA-1009) or product title',
             },
           },
           required: ['skuOrName'],
@@ -86,15 +93,15 @@ const bazzarAITools: any[] = [
       {
         name: 'submit_bulk_enquiry',
         description:
-          'Submit an official corporate quotation request / bulk RFQ to OfficeBazzar sales desk in Zoho CRM. Call this only when the customer has provided their contact details (name and email or phone) and requested products/quantities.',
+          'Register an official corporate quotation request / bulk RFQ into OfficeBazzar Zoho CRM. ONLY call this when the customer has provided their contact person name and a valid 10-digit phone number or email, along with requested items.',
         parameters: {
           type: Type.OBJECT,
           properties: {
-            customerName: { type: Type.STRING, description: 'Customer or contact person full name' },
-            email: { type: Type.STRING, description: 'Corporate email address' },
-            phone: { type: Type.STRING, description: '10-digit mobile or contact number' },
-            companyName: { type: Type.STRING, description: 'Company or institution name' },
-            deliveryLocation: { type: Type.STRING, description: 'City or delivery PIN code' },
+            customerName: { type: Type.STRING, description: 'Customer / contact person full name' },
+            phone: { type: Type.STRING, description: '10-digit mobile or contact telephone number' },
+            email: { type: Type.STRING, description: 'Customer corporate email address (optional if phone provided)' },
+            companyName: { type: Type.STRING, description: 'Company, institution, or school name' },
+            deliveryLocation: { type: Type.STRING, description: 'City, area or PIN code for delivery' },
             requestedItems: {
               type: Type.ARRAY,
               description: 'List of requested items and quantities',
@@ -107,7 +114,7 @@ const bazzarAITools: any[] = [
                 required: ['name', 'quantity'],
               },
             },
-            notes: { type: Type.STRING, description: 'Additional instructions or requirements' },
+            notes: { type: Type.STRING, description: 'Specific requirements or notes' },
           },
           required: ['customerName', 'phone'],
         },
@@ -116,25 +123,61 @@ const bazzarAITools: any[] = [
   },
 ];
 
-const BAZZAR_AI_SYSTEM_INSTRUCTION = `You are Bazzar AI, the official intelligent corporate assistant for OfficeBazzar (Officebazzar E-Store Private Limited) — India's premier B2B corporate supplies portal located at Royapettah, Chennai.
+const BAZZAR_AI_SYSTEM_INSTRUCTION = `You are Bazzar AI, the friendly, intelligent corporate procurement assistant for OfficeBazzar (Officebazzar E-Store Private Limited, Royapettah, Chennai, Tamil Nadu).
 
-CRITICAL OPERATIONAL RULES:
-1. STRICT DOMAIN RESTRICTION: You ONLY answer queries directly related to OfficeBazzar: corporate office stationery, files and folders, housekeeping chemicals (Hi-Clean formulations, commercial sanitizers), mobile dustbins, tissue paper, shredding machines, packaging materials, quotation requests, bulk order pricing, GST invoicing, shipping, delivery and branch contact details.
-   - If asked about ANY unrelated subject (e.g. sports, politics, general coding, homework, cooking recipes, personal opinions, world news, or non-workplace items), politely decline and steer them back: "I am specialized only in OfficeBazzar corporate supplies and procurement. How can I assist with your office requirements today?"
-2. MULTILINGUAL SUPPORT: You seamlessly understand and converse in:
-   - English (professional, courteous B2B tone)
-   - Tamil (தமிழ்) (e.g. "வணக்கம்! OfficeBazzar-க்கு வரவேற்கிறோம். உங்களுக்கு என்ன ஆபீஸ் பொருட்கள் தேவை?")
-   - Tanglish (Tamil in Latin script, e.g. "Vanakkam! Ungal office-ku enna stationery venum?")
-   Always reply in the language or blend of languages the user initiated with.
-3. ZERO HALLUCINATION (NEVER INVENT DATA):
-   - NEVER invent product names, prices, stock levels, or technical specifications.
-   - ALWAYS call 'search_products' or 'get_product_details' to look up products in the authentic database before quoting product info.
-   - In our B2B catalog, items with price ₹0 or unlisted price indicate institutional wholesale pricing. Explain that exact corporate pricing is provided based on order quantity via quotation.
-   - If a product is not found in the search results, honestly state: "We do not currently have [item] in our live catalog. However, our dedicated procurement desk at sales4@officebazzar.com / +91 7200800040 can source this directly for your corporate account."
-4. STRICT RFQ CONFIRMATION RULE:
-   - NEVER confirm that a bulk enquiry or quotation has been submitted unless the 'submit_bulk_enquiry' tool was executed and returned success=true.
-   - Quote the returned Quotation Number (OB-RFQ-...) and assigned sales email upon confirmation.
-5. NO EXTERNAL WEB SEARCH: Strictly rely on your internal tools and authentic OfficeBazzar company facts.`;
+CORE MISSION & PERSONALITY:
+- You are conversational, helpful, natural, and dynamic—never sound like a rigid robotic script or a repetitive FAQ bot.
+- You listen closely to what the customer actually asked and respond specifically to their intent.
+- Do NOT repeat the exact same sentences, greetings, or contact info in every turn.
+- Do NOT force every casual question immediately into a sales lead form.
+
+1. DYNAMIC LANGUAGE DETECTION & MIRRORING:
+- Automatically detect the customer's language and respond naturally in that EXACT language and dialect:
+  * English -> Natural, professional English.
+  * Tamil (தமிழ்) -> Natural Tamil (e.g. "வணக்கம்! உங்களுக்கு எத்தனை ரீம் A4 பேப்பர் தேவைப்படுகிறது?").
+  * Tanglish (Tamil in English letters) -> Natural Tanglish (e.g. "A4 paper-oda current price check pannuren. Ungalukku ethana reams venum?").
+  * Hindi (हिंदी) -> Natural Hindi (e.g. "नमस्ते! आपको किस प्रकार की ऑफिस फाइलें चाहिए?").
+  * Malayalam (മലയാളം) -> Natural Malayalam.
+  * Telugu (తెలుగు), Kannada (ಕನ್ನಡ), Bengali (বাংলা), Marathi, Gujarati, Urdu, Punjabi, etc.
+- For mixed-language messages, match the customer's blend naturally, keeping commonly mixed corporate terms like "A4 paper", "reams", "dustbin", "box", "price", "quotation", "GST bill".
+- Never ask the user to choose or switch languages.
+
+2. CONTEXT-AWARE CONVERSATION MEMORY:
+- Maintain full awareness of earlier conversation turns.
+- When the customer provides a short reply (e.g. "20", "blue", "ergonomic", "yes", "pedal bin"), resolve it in the context of what was just discussed:
+  * Example: Customer asked for A4 paper -> AI asked for quantity -> Customer said "20" -> AI understands "20 reams of A4 paper".
+  * Example: Customer asked about dustbins -> AI mentioned options -> Customer asked "What sizes?" -> AI explains the sizes of dustbins available (e.g. 10L, 50L, 120L, 240L pedal/push/swing bins).
+  * Example: Customer asked for chairs -> AI asked style -> Customer said "ergonomic" -> AI continues specifically about ergonomic office chairs.
+- NEVER ask the customer to repeat information they already shared.
+
+3. PRODUCT CATALOG INTELLIGENCE:
+- OfficeBazzar is Chennai and South India's premier B2B corporate supplies portal providing:
+  * Copier Paper: JK Copier (75/80 GSM), JK Max, JK Easy Copier, TNPL (70/75/80 GSM), bond papers, photo papers.
+  * Office Stationery: Files (box files, ring files, expanding files, stick files, report files), registers, notebooks, pens (gel, ballpoint, Pilot, Rorito, Cello), markers, staplers, punch machines, scissors, desk trays, Casio calculators, envelopes.
+  * Housekeeping & Hygiene: Taski chemicals (R1 to R9, Sumo Inox), Hi-Clean floor cleaners, phenoyl, toilet cleaners, glass cleaners, hand washes (Lifebuoy, Dettol, Hi-Clean), urinal screens, duster cloths, microfibre cloths, banian cloth, scourers, cleaning brushes, mops, wipers, wringer trolleys.
+  * Dustbins: Plastic pedal bins, swing bins, SS perforated bins, SS pedal bins, mesh bins, 120L & 240L heavy-duty wheeled outdoor bins.
+  * Tissue Papers & Dispensers: C-fold towels, M-fold towels, HRT roll towels, toilet rolls, tissue dispensers, automatic sensor dispensers.
+  * Printers & Technology: Gobbler commercial heavy-duty paper shredders, compatible printer cartridges, barcode printers.
+  * Packaging Supplies: BOPP brown/transparent tapes, strapping rolls, bubble wrap, stretch film.
+  * Road Safety: Traffic cones, convex mirrors, rumble strips, speed breakers, warning bollards, Q-managers, queue barriers.
+  * Office Furniture: Executive chairs, ergonomic mesh chairs, visitor chairs, workstation seating, conference tables (provided on customized corporate wholesale volume quotation).
+- Call 'search_catalog' whenever the customer asks about products, availability, or prices. Translate search terms into English keywords for the tool.
+- If products are found, present their authentic names and pack sizes.
+- For prices: Wholesale B2B corporate supplies offer volume tiered pricing. Explain that exact institutional prices are customized per order volume with GST invoices.
+- If an item is not found, state that OfficeBazzar's dedicated procurement desk sources non-catalog corporate supplies upon request.
+
+4. STRICT DOMAIN BOUNDARY:
+- Only answer questions related to OfficeBazzar, office procurement, B2B supplies, orders, delivery, quotations, and corporate services.
+- If asked about non-workplace or off-topic subjects (politics, movies, recipes, general coding, sports, competitor brands), politely steer the conversation back to office supplies in the customer's language.
+
+5. RFQ & QUOTATION REGISTRATION:
+- When a customer wants a quote or bulk order, collect:
+  1. Contact Name
+  2. 10-digit Phone Number (or Email)
+  3. Product & Quantity
+  4. Delivery Location (City / PIN)
+- Call 'submit_bulk_enquiry' only when name and phone/email are provided.
+- Quote the generated quotation number (e.g. OB-RFQ-...) and assigned sales manager on successful submission.`;
 
 export async function processBazzarAIChat(
   userMessage: string,
@@ -170,15 +213,32 @@ export async function processBazzarAIChat(
   try {
     const ai = new GoogleGenAI({ apiKey });
 
-    // Format previous turns for Gemini Chat
-    // Take only the last 6 valid turns for conversation context
-    const validHistory = history
-      .slice(-6)
-      .filter((h) => h.content && h.content.trim())
-      .map((h) => ({
-        role: h.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: h.content }],
-      }));
+    // Format previous turns for Gemini Chat ensuring valid alternating sequence:
+    // User -> Model -> User -> Model
+    const validHistory: Array<{ role: 'user' | 'model'; parts: Array<{ text: string }> }> = [];
+
+    const rawHistory = history
+      .slice(-10)
+      .filter((h) => h && typeof h.content === 'string' && h.content.trim());
+
+    for (const h of rawHistory) {
+      const role = h.role === 'assistant' ? 'model' : 'user';
+      // Ensure alternation: do not push consecutive identical roles
+      if (validHistory.length > 0 && validHistory[validHistory.length - 1].role === role) {
+        // Append text to previous turn
+        validHistory[validHistory.length - 1].parts[0].text += `\n${h.content.trim()}`;
+      } else {
+        validHistory.push({
+          role,
+          parts: [{ text: h.content.trim() }],
+        });
+      }
+    }
+
+    // Ensure history starts with 'user'
+    while (validHistory.length > 0 && validHistory[0].role !== 'user') {
+      validHistory.shift();
+    }
 
     const chat = ai.chats.create({
       model: modelName,
@@ -186,12 +246,13 @@ export async function processBazzarAIChat(
       config: {
         systemInstruction: BAZZAR_AI_SYSTEM_INSTRUCTION,
         tools: bazzarAITools,
+        temperature: 0.6,
       },
     });
 
     let currentResponse = await chat.sendMessage({ message: trimmed });
 
-    // Multi-turn tool execution loop (max 3 tool iterations)
+    // Multi-turn tool execution loop (up to 3 tool iterations)
     let iterations = 0;
     while (
       currentResponse.functionCalls &&
@@ -205,7 +266,7 @@ export async function processBazzarAIChat(
 
       let toolResult: any = { error: 'Unknown function' };
 
-      if (fnName === 'search_products') {
+      if (fnName === 'search_catalog') {
         const query = String(args.query || '').trim().toLowerCase();
         const categoryFilter = args.category ? String(args.category).toLowerCase() : undefined;
         const { products } = await getProducts();
@@ -243,7 +304,6 @@ export async function processBazzarAIChat(
           .map((item) => item.product);
 
         if (scored.length > 0) {
-          // Add to accumulated product cards for frontend display
           for (const sp of scored) {
             if (!accumulatedCards.some((c) => c.sku === sp.sku)) {
               accumulatedCards.push({
@@ -267,7 +327,7 @@ export async function processBazzarAIChat(
               name: p.name,
               category: p.categoryName,
               packSize: p.packSize,
-              price: p.price && p.price > 0 ? `₹${p.price}` : 'Institutional wholesale pricing available on quotation',
+              price: p.price && p.price > 0 ? `₹${p.price}` : 'Institutional wholesale quotation pricing',
               stockStatus: p.stockQuantity > 0 ? 'In Stock (Chennai & Bangalore Hubs)' : 'Available on Corporate Order',
               slug: p.slug || p.id,
             })),
@@ -276,7 +336,7 @@ export async function processBazzarAIChat(
           toolResult = {
             found: false,
             count: 0,
-            message: `No products matching "${query}" were found in the live OfficeBazzar catalog. Our procurement desk can source this item upon request.`,
+            message: `No exact catalog entries matching "${query}" were found. OfficeBazzar procures this directly for corporate clients on request.`,
           };
         }
       } else if (fnName === 'get_product_details') {
@@ -324,24 +384,22 @@ export async function processBazzarAIChat(
         }
       } else if (fnName === 'submit_bulk_enquiry') {
         const customerName = String(args.customerName || '').trim();
-        const phone = String(args.phone || '').trim();
+        const phone = String(args.phone || '').trim().replace(/\D/g, '');
         const email = String(args.email || '').trim();
         const companyName = String(args.companyName || 'Institutional Customer').trim();
-        const deliveryLocation = String(args.deliveryLocation || 'India').trim();
+        const deliveryLocation = String(args.deliveryLocation || 'Chennai').trim();
         const requestedItems = Array.isArray(args.requestedItems) ? args.requestedItems : [];
         const notes = String(args.notes || '').trim();
 
-        if (!customerName || (!phone && !email)) {
+        if (!customerName || phone.length < 10) {
           toolResult = {
             success: false,
-            error: 'Customer name and at least one contact channel (phone or email) are required to register an official RFQ.',
+            error: 'Customer name and a valid 10-digit mobile number are required to submit an official quotation request.',
           };
         } else {
           try {
-            // Determine round-robin assigned admin
             const assignedAdmin = await getNextLeadAssignee();
 
-            // Construct quotation record
             const items = requestedItems.map((it: any, idx: number) => ({
               id: `rfq-item-${Date.now()}-${idx}`,
               productId: `custom-${idx}`,
@@ -358,7 +416,7 @@ export async function processBazzarAIChat(
               customerName,
               companyName,
               email: email || 'enquiry@officebazzar.com',
-              phone: phone || '+91 7200800040',
+              phone: phone.startsWith('91') && phone.length === 12 ? `+${phone}` : `+91 ${phone}`,
               deliveryLocation,
               pincode: '600014',
               preferredContactMethod: 'phone',
@@ -386,12 +444,10 @@ export async function processBazzarAIChat(
               assignedSequence: assignedAdmin.sequenceNumber,
             });
 
-            // Async sync to Zoho CRM in background
             syncQuotationToZoho(newQuote).catch((err) =>
               console.error('[Bazzar AI] Zoho CRM sync notice:', err)
             );
 
-            // Dispatch admin notification
             dispatchQuotationNotifications(newQuote).catch((err) =>
               console.error('[Bazzar AI] Notification dispatch notice:', err)
             );
@@ -401,7 +457,7 @@ export async function processBazzarAIChat(
               quotationNumber: newQuote.quotationNumber,
               assignedAdmin: assignedAdmin.name,
               assignedEmail: assignedAdmin.email,
-              message: `Your RFQ has been successfully registered under reference ${newQuote.quotationNumber} and assigned to ${assignedAdmin.name} (${assignedAdmin.email}).`,
+              message: `Your quotation request is registered under reference ${newQuote.quotationNumber} and assigned to ${assignedAdmin.name} (${assignedAdmin.email}).`,
             };
           } catch (err: any) {
             console.error('[Bazzar AI] Quotation creation error:', err);
@@ -413,7 +469,6 @@ export async function processBazzarAIChat(
         }
       }
 
-      // Send function response back to the model
       currentResponse = await chat.sendMessage({
         message: [
           {
@@ -426,36 +481,43 @@ export async function processBazzarAIChat(
       });
     }
 
-    const replyText =
-      currentResponse.text ||
-      "I'm here to assist you with office supplies, quotations, and corporate catalog orders. How can I help you today?";
+    // Safely extract text from response (handling both response.text and candidate parts)
+    let replyText = '';
+    if (typeof currentResponse.text === 'string' && currentResponse.text.trim()) {
+      replyText = currentResponse.text.trim();
+    } else {
+      const parts = (currentResponse as any)?.candidates?.[0]?.content?.parts;
+      if (Array.isArray(parts)) {
+        const textParts = parts
+          .filter((p: any) => typeof p?.text === 'string' && p.text.trim())
+          .map((p: any) => p.text.trim());
+        if (textParts.length > 0) {
+          replyText = textParts.join('\n\n');
+        }
+      }
+    }
+
+    if (!replyText) {
+      replyText = "I'm here to assist you with office stationery, cleaning supplies, and corporate quotations. How can I help you today?";
+    }
+
+    // Dynamically derive suggested actions based on context and language
+    const suggestedActions = generateDynamicSuggestions(trimmed, replyText);
 
     return {
       reply: replyText,
       productCards: accumulatedCards.length > 0 ? accumulatedCards : undefined,
-      suggestedActions: [
-        'Find Products',
-        'Bulk Order Enquiry',
-        'Get a Quotation',
-        'Contact Support',
-      ],
+      suggestedActions,
       quickLinks: [
-        { title: 'Explore All Categories', url: '/categories' },
+        { title: 'Browse Catalog', url: '/categories' },
         { title: 'Request Bulk Quote', url: '/request-quote' },
-        { title: 'Call Sales: 7200800040', url: 'tel:7200800040', external: true },
+        { title: 'Call Chennai Hub', url: 'tel:7200800040', external: true },
       ],
     };
   } catch (error: any) {
     console.error('[Bazzar AI Gemini API Error]:', error);
 
-    // Handle Quota Exhaustion (429) or Service Outage gracefully with local database fallback
-    const isQuotaError =
-      error?.status === 429 ||
-      error?.message?.includes('429') ||
-      error?.message?.includes('RESOURCE_EXHAUSTED') ||
-      error?.message?.includes('quota');
-
-    // Run local keyword search as fallback
+    // Fallback on quota or unexpected error
     try {
       const { products } = await getProducts();
       const qTokens = trimmed
@@ -481,41 +543,91 @@ export async function processBazzarAIChat(
         url: `/product/${p.slug || p.id}`,
       }));
 
+      // Detect language for fallback response
+      const isTamil = /[\u0B80-\u0BFF]/.test(trimmed);
+      const isHindi = /[\u0900-\u097F]/.test(trimmed);
+      const isMalayalam = /[\u0D00-\u0D7F]/.test(trimmed);
+      const isTelugu = /[\u0C00-\u0C7F]/.test(trimmed);
+
       let reply = '';
-      if (isQuotaError) {
-        reply =
-          "⚡ **Bazzar AI** is currently experiencing high corporate enquiry traffic. " +
-          "Here are the direct catalog matches from our authentic live inventory:\n\n" +
-          "For immediate custom volume pricing, please connect with our Chennai sales desk at **+91 7200800040** or **sales4@officebazzar.com**.";
+      if (isTamil) {
+        reply = `OfficeBazzar-ல் தங்களை வரவேற்கிறோம்! உங்கள் கேள்விக்கு எங்கள் விற்பனைக் குழு நேரடி விலைப்புள்ளி (Quote) வழங்க தயாராக உள்ளது. எங்களைத் தொடர்பு கொள்ளவும்: **+91 7200800040** அல்லது **sales4@officebazzar.com**.`;
+      } else if (isHindi) {
+        reply = `OfficeBazzar में आपका स्वागत है! आपके अनुरोध के लिए हमारी बिक्री टीम सर्वोत्तम कॉर्पोरेट मूल्य उद्धरण (Quote) प्रदान करने के लिए तैयार है। संपर्क करें: **+91 7200800040** या **sales4@officebazzar.com**.`;
+      } else if (isMalayalam) {
+        reply = `OfficeBazzar-ലേക്ക് സ്വാഗതം! നിങ്ങളുടെ ആവശ്യങ്ങൾക്കായുള്ള മികച്ച കോർപ്പറേറ്റ് നിരക്കുകൾ നൽകാൻ ഞങ്ങളുടെ ടീം സന്നദ്ധമാണ്. ബന്ധപ്പെടുക: **+91 7200800040** അല്ലെങ്കിൽ **sales4@officebazzar.com**.`;
+      } else if (isTelugu) {
+        reply = `OfficeBazzar కు స్వాగతం! మీ అవసరాలకు తగిన ఉత్తమ కార్పొరేట్ కొటేషన్ అందించడానికి మా బృందం సిద్ధంగా ఉంది. సంప్రదించండి: **+91 7200800040** లేదా **sales4@officebazzar.com**.`;
       } else {
-        reply =
-          `Here are the verified items from our corporate catalog for **"${trimmed}"**:\n\n` +
-          "You can request an official bulk quotation or speak directly with our team at **+91 7200800040**.";
+        reply = `Thank you for reaching out to **OfficeBazzar**. Our procurement desk in Chennai is ready to assist you with verified pricing and corporate supplies at **+91 7200800040** or **sales4@officebazzar.com**.`;
       }
 
       return {
         reply,
         productCards: fallbackCards.length > 0 ? fallbackCards : undefined,
-        suggestedActions: [
-          'Find Products',
-          'Get a Quotation',
-          'Bulk Order Enquiry',
-          'Contact Support',
-        ],
+        suggestedActions: isTamil
+          ? ['பொருட்கள் தேட', 'மொத்த ஆர்டர்', 'தொடர்பு கொள்ள']
+          : isHindi
+          ? ['उत्पाद खोजें', 'थोक कोटेशन', 'संपर्क करें']
+          : ['Find Products', 'Get a Quotation', 'Contact Support'],
         quickLinks: [
-          { title: 'All Categories', url: '/categories' },
-          { title: 'Request Quote', url: '/request-quote' },
+          { title: 'Catalog', url: '/categories' },
           { title: 'Call 7200800040', url: 'tel:7200800040', external: true },
         ],
       };
     } catch {
       return {
-        reply:
-          "Welcome to **OfficeBazzar**. How can I assist you with office supplies, corporate stationery, or bulk quotations today?",
+        reply: "Welcome to OfficeBazzar. How can I assist you with corporate office supplies and bulk quotations today?",
         suggestedActions: ['Find Products', 'Get a Quotation', 'Contact Support'],
-        quickLinks: [{ title: 'All Categories', url: '/categories' }],
       };
     }
   }
 }
 
+/**
+ * Generate contextual suggestions based on message contents and language
+ */
+function generateDynamicSuggestions(userMsg: string, replyMsg: string): string[] {
+  const combined = `${userMsg} ${replyMsg}`.toLowerCase();
+  const isTamil = /[\u0B80-\u0BFF]/.test(userMsg);
+  const isHindi = /[\u0900-\u097F]/.test(userMsg);
+
+  if (isTamil) {
+    if (combined.includes('paper') || combined.includes('பேப்பர்')) {
+      return ['A4 Copier Paper', '75 GSM Paper', 'மொத்த விலை (Bulk Price)', 'ஆர்டர் செய்ய'];
+    }
+    if (combined.includes('chair') || combined.includes('நாற்காலி') || combined.includes('furniture')) {
+      return ['Ergonomic Chairs', 'Executive Chairs', 'விலை விவரம் (Price)'];
+    }
+    if (combined.includes('clean') || combined.includes('துப்புரவு') || combined.includes('dustbin')) {
+      return ['Housekeeping Supplies', 'Floor Cleaners', 'Dustbins 120L'];
+    }
+    return ['பொருட்கள் தேட (Find Products)', 'மொத்த ஆர்டர் (Bulk Quote)', 'தொடர்பு கொள்ள (Contact)'];
+  }
+
+  if (isHindi) {
+    if (combined.includes('paper') || combined.includes('पेपर')) {
+      return ['A4 Copier Paper', '75 GSM Paper', 'थोक भाव (Bulk Price)', 'कोटेशन प्राप्त करें'];
+    }
+    return ['उत्पाद खोजें (Find Products)', 'थोक कोटेशन (Bulk Quote)', 'सहायता (Help)'];
+  }
+
+  // English / Tanglish / Global
+  if (combined.includes('paper') || combined.includes('copier') || combined.includes('gsm') || combined.includes('ream')) {
+    return ['JK Copier 75 GSM', 'TNPL Copier A4', 'Get Quote for 20 Reams', 'Delivery Details'];
+  }
+  if (combined.includes('chair') || combined.includes('furniture') || combined.includes('ergonomic')) {
+    return ['Ergonomic Mesh Chairs', 'Executive Chairs', 'Get Chair Quotation', 'Visitor Chairs'];
+  }
+  if (combined.includes('dustbin') || combined.includes('bin') || combined.includes('waste')) {
+    return ['Stainless Steel Bins', '120L Wheeled Bin', 'Pedal Bins', 'Get Bin Quote'];
+  }
+  if (combined.includes('clean') || combined.includes('chemical') || combined.includes('taski') || combined.includes('housekeeping')) {
+    return ['Taski Chemicals', 'Hi-Clean Floor Cleaner', 'Wringer Trolley', 'Microfibre Cloths'];
+  }
+  if (combined.includes('quote') || combined.includes('rfq') || combined.includes('bulk') || combined.includes('price')) {
+    return ['Submit RFQ Details', 'Corporate Volume Discount', 'Speak to Sales Desk', 'GST Invoicing Info'];
+  }
+
+  return ['Find Products', 'Bulk Order Enquiry', 'Get a Quotation', 'Corporate Pricing'];
+}
