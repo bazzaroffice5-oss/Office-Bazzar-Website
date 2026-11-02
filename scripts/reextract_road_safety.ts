@@ -140,3 +140,4 @@ async function reextractRoadSafety() {
 }
 
 reextractRoadSafety().catch(console.error);
+

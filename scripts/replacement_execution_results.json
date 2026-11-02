@@ -1,0 +1,151 @@
+[
+  {
+    "sku": "OB-159",
+    "name": "Diversey Taski R6 (Toilet Bowl Cleaner)",
+    "success": true,
+    "path": "/assets/products/housekeeping/ob-159-diversey-taski-r6-toilet-bowl-cleaner.webp",
+    "sizeBytes": 15920,
+    "sourceType": "Diversey Official Professional 5L Studio Asset"
+  },
+  {
+    "sku": "OB-203",
+    "name": "Diversey Taski R3 (Glass Cleaner Concentrate)",
+    "success": true,
+    "path": "/assets/products/housekeeping/ob-203-diversey-taski-r3-glass-cleaner-concentrate.webp",
+    "sizeBytes": 8572,
+    "sourceType": "Diversey Taski Authorized Indian Distributor Asset"
+  },
+  {
+    "sku": "OB-158",
+    "name": "Diversey Taski R5 (Air Freshener Concentrate)",
+    "success": true,
+    "path": "/assets/products/housekeeping/ob-158-diversey-taski-r5-air-freshener-concentrate.webp",
+    "sizeBytes": 29126,
+    "sourceType": "Diversey Taski Authorized Indian Distributor Asset"
+  },
+  {
+    "sku": "OB-160",
+    "name": "Diversey Taski R7 (Floor Cleaner Concentrate)",
+    "success": true,
+    "path": "/assets/products/housekeeping/ob-160-diversey-taski-r7-floor-cleaner-concentrate.webp",
+    "sizeBytes": 29140,
+    "sourceType": "Diversey Taski Authorized Indian Distributor Asset"
+  },
+  {
+    "sku": "OB-161",
+    "name": "Diversey Taski R9 (Hard Water Limescale Cleaner)",
+    "success": true,
+    "path": "/assets/products/housekeeping/ob-161-diversey-taski-r9-hard-water-limescale-cleaner.webp",
+    "sizeBytes": 34788,
+    "sourceType": "Diversey Taski Authorized Indian Distributor Asset"
+  },
+  {
+    "sku": "OB-052",
+    "name": "Vim Dishwash Gel (250ml / 500ml / 1.8 Ltr)",
+    "success": true,
+    "path": "/assets/products/housekeeping/ob-052-vim-dishwash-gel-250ml-500ml-1-8-ltr.webp",
+    "sizeBytes": 32282,
+    "sourceType": "Hindustan Unilever Authorized Product Photography"
+  },
+  {
+    "sku": "OB-051",
+    "name": "Pril Dishwash Liquid",
+    "success": true,
+    "path": "/assets/products/housekeeping/ob-051-pril-dishwash-liquid.webp",
+    "sizeBytes": 30822,
+    "sourceType": "Jyothy Labs / Henkel Official Packaging Asset"
+  },
+  {
+    "sku": "OB-050",
+    "name": "Exo Round Bar",
+    "success": true,
+    "path": "/assets/products/housekeeping/ob-050-exo-round-bar.webp",
+    "sizeBytes": 68698,
+    "sourceType": "Jyothy Labs Official Packaging Asset"
+  },
+  {
+    "sku": "OB-095",
+    "name": "Airwick Room Freshener Spray",
+    "success": true,
+    "path": "/assets/products/housekeeping/ob-095-airwick-room-freshener-spray.webp",
+    "sizeBytes": 29442,
+    "sourceType": "Reckitt Benckiser Official Packaging Asset"
+  },
+  {
+    "sku": "OB-096",
+    "name": "Ambi Pur Air Freshener Spray",
+    "success": true,
+    "path": "/assets/products/housekeeping/ob-096-ambi-pur-air-freshener-spray.webp",
+    "sizeBytes": 42366,
+    "sourceType": "Procter & Gamble Official Packaging Asset"
+  },
+  {
+    "sku": "OB-114",
+    "name": "All Out Mosquito Repellent Machine Set",
+    "success": true,
+    "path": "/assets/products/housekeeping/ob-114-all-out-mosquito-repellent-machine-set.webp",
+    "sizeBytes": 85620,
+    "sourceType": "SC Johnson Official Packaging Asset"
+  },
+  {
+    "sku": "OB-030",
+    "name": "Premier Face Tissue",
+    "success": true,
+    "path": "/assets/products/housekeeping/ob-030-premier-face-tissue.webp",
+    "sizeBytes": 71558,
+    "sourceType": "Premier Tissues Official Retail Packaging Photo"
+  },
+  {
+    "sku": "OB-PAP-03",
+    "name": "JK Easy Copier Paper 70 GSM A4",
+    "success": true,
+    "path": "/assets/products/copier-papers/ob-pap-03-jk-easy-copier-paper-70-gsm-a4.webp",
+    "sizeBytes": 41654,
+    "sourceType": "JK Paper Authorized Packaging Photography"
+  },
+  {
+    "sku": "OB-PAP-07",
+    "name": "JK Sparkle Multipurpose Paper (70/75/80 GSM) A4",
+    "success": true,
+    "path": "/assets/products/copier-papers/ob-pap-07-jk-sparkle-multipurpose-paper-70-75-80-gsm-a4.webp",
+    "sizeBytes": 24912,
+    "sourceType": "JK Paper Official Manufacturer Website Render"
+  },
+  {
+    "sku": "OB-PAP-09",
+    "success": false,
+    "error": "HTTP 404"
+  },
+  {
+    "sku": "OB-DES-51",
+    "name": "Fevicol MR Adhesive Tube",
+    "success": true,
+    "path": "/assets/products/stationery/ob-des-51-fevicol-mr-adhesive-tube.webp",
+    "sizeBytes": 12210,
+    "sourceType": "Pidilite Industries Official Product Photography"
+  },
+  {
+    "sku": "OB-NOT-71",
+    "name": "Post-it Self Adhesive Sticky Notes Pad",
+    "success": true,
+    "path": "/assets/products/stationery/ob-not-71-post-it-self-adhesive-sticky-notes-pad.webp",
+    "sizeBytes": 19328,
+    "sourceType": "3M Official Corporate Multimedia Repository"
+  },
+  {
+    "sku": "OB-NOT-73",
+    "name": "Casio Electronic Desk Calculator",
+    "success": true,
+    "path": "/assets/products/stationery/ob-not-73-casio-electronic-desk-calculator.webp",
+    "sizeBytes": 32394,
+    "sourceType": "Casio India Official Product Catalog Photography"
+  },
+  {
+    "sku": "OB-PEN-38",
+    "name": "Rorito 045 Classic Ballpoint Pen Pack",
+    "success": true,
+    "path": "/assets/products/stationery/ob-pen-38-rorito-045-classic-ballpoint-pen-pack.webp",
+    "sizeBytes": 3000,
+    "sourceType": "Rorito Authorized Distributor Product Photography"
+  }
+]

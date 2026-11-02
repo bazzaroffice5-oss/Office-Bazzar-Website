@@ -82,3 +82,4 @@ async function scanAllLocalImages() {
 }
 
 scanAllLocalImages().catch(console.error);
+

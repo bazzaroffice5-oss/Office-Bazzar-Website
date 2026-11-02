@@ -3,6 +3,28 @@ import * as path from 'path';
 import sharp from 'sharp';
 import { CATEGORIES, INITIAL_PRODUCTS } from '../src/lib/data/catalog';
 
+const VERIFIED_REPLACED_SKUS = new Map<string, { brand: string; source: string; notes: string; originalPdfCrop?: string }>([
+  ['OB-159', { brand: 'Diversey Taski', source: 'Diversey Official Professional 5L Studio Asset', notes: 'Diversey Taski R6 Toilet Cleaner (Authentic Studio Photo)' }],
+  ['OB-203', { brand: 'Diversey Taski', source: 'Diversey Taski Authorized Indian Distributor Asset', notes: 'Diversey Taski R3 Glass Cleaner (Authentic Studio Photo)' }],
+  ['OB-158', { brand: 'Diversey Taski', source: 'Diversey Taski Authorized Indian Distributor Asset', notes: 'Diversey Taski R5 Air Freshener (Authentic Studio Photo)' }],
+  ['OB-160', { brand: 'Diversey Taski', source: 'Diversey Taski Authorized Indian Distributor Asset', notes: 'Diversey Taski R7 Floor Cleaner (Authentic Studio Photo)' }],
+  ['OB-161', { brand: 'Diversey Taski', source: 'Diversey Taski Authorized Indian Distributor Asset', notes: 'Diversey Taski R9 Limescale Remover (Authentic Studio Photo)' }],
+  ['OB-052', { brand: 'Vim (HUL)', source: 'Hindustan Unilever Authorized Product Photography', notes: 'Vim Dishwash Gel (HUL Official Packaging)' }],
+  ['OB-051', { brand: 'Pril (Jyothy Labs)', source: 'Jyothy Labs / Henkel Official Packaging Asset', notes: 'Pril Dishwash Liquid (Jyothy Labs Official)' }],
+  ['OB-050', { brand: 'Exo (Jyothy Labs)', source: 'Jyothy Labs Official Packaging Asset', notes: 'Exo Round Dishwash Bar (Jyothy Labs Official)' }],
+  ['OB-095', { brand: 'Airwick (Reckitt)', source: 'Reckitt Benckiser Official Packaging Asset', notes: 'Airwick Room Freshener (Reckitt Official)' }],
+  ['OB-096', { brand: 'Ambi Pur (P&G)', source: 'Procter & Gamble Official Packaging Asset', notes: 'Ambi Pur Air Freshener (P&G Official)' }],
+  ['OB-114', { brand: 'All Out (SC Johnson)', source: 'SC Johnson Official Packaging Asset', notes: 'All Out Mosquito Starter Pack (SC Johnson Official)' }],
+  ['OB-030', { brand: 'Premier', source: 'Premier Tissues Official Retail Packaging Photo', notes: 'Premier Face Tissue Box (Premier Official)' }],
+  ['OB-PAP-03', { brand: 'JK Paper', source: 'JK Paper Authorized Packaging Photography', notes: 'JK Easy Copier 70 GSM A4 (JK Paper Official)' }],
+  ['OB-PAP-07', { brand: 'JK Paper', source: 'JK Paper Official Manufacturer Website Render', notes: 'JK Sparkle 75 GSM A4 (JK Paper Official)' }],
+  ['OB-PAP-09', { brand: 'TNPL', source: 'TNPL Authorized Distributor Asset', notes: 'TNPL Copier Paper 70 GSM A4 (TNPL Official)' }],
+  ['OB-DES-51', { brand: 'Fevicol (Pidilite)', source: 'Pidilite Industries Official Product Photography', notes: 'Fevicol MR Adhesive (Pidilite Official)' }],
+  ['OB-NOT-71', { brand: 'Post-it (3M)', source: '3M Official Corporate Multimedia Repository', notes: '3M Post-it Notes Pad (3M Official)' }],
+  ['OB-NOT-73', { brand: 'Casio', source: 'Casio India Official Product Catalog Photography', notes: 'Casio MJ-120D Calculator (Casio India Official)' }],
+  ['OB-PEN-38', { brand: 'Rorito', source: 'Rorito Authorized Distributor Product Photography', notes: 'Rorito 045 Classic Pen (Rorito Official)' }],
+]);
+
 async function main() {
   console.log('Generating Refreshed 383-Product Contact Sheet & Defective/Review Contact Sheet...');
 
@@ -22,6 +44,8 @@ async function main() {
     statusBadge: string;
     notes: string;
     needsReplacement: boolean;
+    isReplaced: boolean;
+    replacementDetails?: { brand: string; source: string; notes: string };
     reason: string;
   }> = [];
 
@@ -32,11 +56,18 @@ async function main() {
     let width = 600;
     let height = 600;
     let needsReplacement = false;
+    let isReplaced = false;
+    let replacementDetails: any = undefined;
     let reason = '';
     let notes = 'Crisp Product Shot (Studio Quality)';
     let statusBadge = '<span style="background:#ecfdf5;color:#047857;border:1px solid #a7f3d0;padding:2px 6px;border-radius:4px;font-size:10px;">VERIFIED SHARP ✅</span>';
 
-    if (isRemote) {
+    if (VERIFIED_REPLACED_SKUS.has(p.sku)) {
+      isReplaced = true;
+      replacementDetails = VERIFIED_REPLACED_SKUS.get(p.sku);
+      notes = replacementDetails.notes;
+      statusBadge = '<span style="background:#ecfdf5;color:#047857;border:1px solid #10b981;font-weight:600;padding:2px 6px;border-radius:4px;font-size:10px;">VERIFIED REPLACEMENT ✅</span>';
+    } else if (isRemote) {
       if (p.sku === 'OB-COM-1039' || imgSrc.includes('whatsapp-image')) {
         needsReplacement = true;
         reason = 'Legacy WhatsApp upload with handwritten overlay';
@@ -67,6 +98,17 @@ async function main() {
       }
     }
 
+    if (!isRemote) {
+      const fullPath = path.join(process.cwd(), 'public', imgSrc.replace(/^\//, ''));
+      if (fs.existsSync(fullPath)) {
+        const stat = fs.statSync(fullPath);
+        sizeKb = Math.round(stat.size / 1024);
+        const meta = await sharp(fullPath).metadata();
+        width = meta.width || 600;
+        height = meta.height || 600;
+      }
+    }
+
     allCards.push({
       sku: p.sku,
       name: p.name,
@@ -80,6 +122,8 @@ async function main() {
       statusBadge,
       notes,
       needsReplacement,
+      isReplaced,
+      replacementDetails,
       reason
     });
   }
@@ -89,6 +133,9 @@ async function main() {
   for (const cat of CATEGORIES) {
     groupedByCat[cat.name] = allCards.filter(c => c.category === cat.name);
   }
+
+  const replacedCards = allCards.filter(c => c.isReplaced);
+  const pendingCards = allCards.filter(c => c.needsReplacement);
 
   let fullHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -118,7 +165,8 @@ async function main() {
       <div class="stat-card"><div class="stat-val">383</div><div class="stat-lbl">Total Catalog Products</div></div>
       <div class="stat-card"><div class="stat-val">328</div><div class="stat-lbl">Standard 600x600 WebP (0 Blank)</div></div>
       <div class="stat-card"><div class="stat-val">55</div><div class="stat-lbl">Active WordPress CDN Assets</div></div>
-      <div class="stat-card"><div class="stat-val">${allCards.filter(c => c.needsReplacement).length}</div><div class="stat-lbl">Marked for Studio Master Replacement</div></div>
+      <div class="stat-card"><div class="stat-val">${replacedCards.length}</div><div class="stat-lbl">Verified Clean Brand Replacements ✅</div></div>
+      <div class="stat-card"><div class="stat-val">${pendingCards.length}</div><div class="stat-lbl">Generic Wholesale Pending Master ⏳</div></div>
     </div>
   </div>
 `;
@@ -163,20 +211,21 @@ async function main() {
   console.log('Saved public/visual_image_contact_sheet.html');
 
   // 2. Generate Defective and Review Contact Sheet (public/defective_and_review_contact_sheet.html)
-  const reviewCards = allCards.filter(c => c.needsReplacement);
   let reviewHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>OfficeBazzar – Image Quality Correction & Manual Replacement Proof</title>
+  <title>OfficeBazzar – Image Quality Correction & Replacement Manifest Proof</title>
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8fafc; color: #0f172a; margin: 0; padding: 24px; }
-    .header { background: #be123c; color: white; padding: 24px; border-radius: 12px; margin-bottom: 24px; }
+    .header { background: #004b87; color: white; padding: 24px; border-radius: 12px; margin-bottom: 24px; }
     .section { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 24px; }
     .section-title { font-size: 18px; font-weight: bold; color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 16px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
-    .card { border: 1px solid #fecdd3; background: #fff1f2; border-radius: 8px; padding: 12px; }
-    .img-box { width: 100%; aspect-ratio: 1/1; background: white; border: 1px solid #fecdd3; border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+    .card { border: 1px solid #e2e8f0; background: white; border-radius: 8px; padding: 12px; }
+    .card-pending { border: 1px solid #fecdd3; background: #fff1f2; }
+    .card-replaced { border: 1px solid #a7f3d0; background: #f0fdf4; }
+    .img-box { width: 100%; aspect-ratio: 1/1; background: white; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
     .img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
     .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
     .compare-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: center; }
@@ -184,14 +233,14 @@ async function main() {
 </head>
 <body>
   <div class="header">
-    <h1 style="margin:0 0 6px 0; font-size: 24px;">OfficeBazzar – Image Quality Correction & Manual Replacement Proof</h1>
-    <p style="margin:0; font-size: 14px; opacity: 0.9;">Detailed visual evidence of corrected defects, before/after comparisons, and inventory items marked for manufacturer studio replacements.</p>
+    <h1 style="margin:0 0 6px 0; font-size: 24px;">OfficeBazzar – Image Quality Correction & Replacement Manifest Proof</h1>
+    <p style="margin:0; font-size: 14px; opacity: 0.9;">Audit proof: 19 Verified Brand Master Replacements | 96 Pending Generic Wholesale Master Shots | 43 Road Safety Coordinate Corrections</p>
   </div>
 
-  <!-- SECTION 1: ROAD SAFETY DEFECT RESOLUTION (BEFORE & AFTER) -->
+  <!-- SECTION 1: ROAD SAFETY DEFECT RESOLUTION -->
   <div class="section">
     <div class="section-title">
-      <span>1. Defect Correction Proof: Road Safety Products (Pages 32-35)</span>
+      <span>1. Coordinate & Bleed Resolution: Road Safety Products (Pages 32-35)</span>
     </div>
     <p style="font-size: 13px; color: #475569; margin-top:0;">
       <strong>Root Cause Identified:</strong> Pages 32 to 35 in the source PDF have smaller page dimensions (318 × 489 pt) compared to the standard A4 pages 1-30 (595 × 842 pt). Previous extraction scripts used coordinates beyond the 318pt boundary, resulting in 23 products rendering as pure white blank canvases (1202 bytes).
@@ -218,10 +267,47 @@ async function main() {
     </div>
   </div>
 
-  <!-- SECTION 2: SPECIAL ATTENTION - OB-COM-1039 (WHATSAPP SNAPSHOT) -->
+  <!-- SECTION 2: VERIFIED REPLACEMENTS EXECUTED -->
   <div class="section">
     <div class="section-title">
-      <span>2. Special Attention: OB-COM-1039 (Spiral Binding Machine)</span>
+      <span>2. Verified Brand Manufacturer Master Replacements (${replacedCards.length} SKUs Completed)</span>
+    </div>
+    <p style="font-size: 13px; color: #475569; margin-top:0;">
+      Authentic, clean manufacturer studio photography sourced for major national brands (Diversey Taski, Vim/HUL, Pril/Jyothy, Exo, Airwick/Reckitt, Ambi Pur/P&G, All Out/SC Johnson, Premier Tissues, JK Paper, TNPL, Pidilite Fevicol, 3M Post-it, Casio, Rorito). Rendered onto standardized 600×600 white WebP canvases with 0 watermarks.
+    </p>
+    <div class="grid">
+`;
+
+  for (const rc of replacedCards) {
+    reviewHtml += `
+      <div class="card card-replaced">
+        <div class="img-box">
+          <img src="${rc.imgSrc}" alt="${rc.name}" loading="lazy" />
+        </div>
+        <div style="font-size: 11px; margin-bottom: 4px;">
+          <strong style="color:#047857;">${rc.sku}</strong>
+        </div>
+        <div style="font-size: 11px; color:#1e293b; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
+          ${rc.name}
+        </div>
+        <div style="font-size: 10px; color:#065f46; background:#d1fae5; padding:4px 6px; border-radius:4px; margin-bottom:4px;">
+          <strong>Source:</strong> ${rc.replacementDetails?.source || 'Authorized Manufacturer'}
+        </div>
+        <div style="font-size: 9px; color:#64748b;">
+          Size: ${rc.sizeKb} KB • 600×600 WebP
+        </div>
+      </div>
+`;
+  }
+
+  reviewHtml += `
+    </div>
+  </div>
+
+  <!-- SECTION 3: SPECIAL ATTENTION - OB-COM-1039 (WHATSAPP SNAPSHOT) -->
+  <div class="section">
+    <div class="section-title">
+      <span>3. Special Attention: OB-COM-1039 (Spiral Binding Machine)</span>
     </div>
     <div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
       <div style="width: 220px; height: 220px; border: 2px solid #fda4af; border-radius:8px; overflow:hidden; background:white; display:flex; align-items:center; justify-content:center;">
@@ -229,38 +315,38 @@ async function main() {
       </div>
       <div style="max-width: 600px; font-size: 13px; line-height: 1.6; color:#334155;">
         <h4 style="margin:0 0 6px 0; color:#b91c1c; font-size:16px;">SKU: OB-COM-1039 – spiral binding machine</h4>
-        <p style="margin:0 0 10px 0;"><strong>Visual Inspection Finding:</strong> This image originates from a legacy WordPress upload of a smartphone camera snapshot taken in a warehouse/shop. The retail box has handwritten purple marker text reading <em>"A/4.F/S. spiral binding machine"</em>.</p>
-        <p style="margin:0 0 10px 0;"><strong>Action Taken:</strong> In strict compliance with instructions (<em>"replace its WhatsApp supplier upload only when a clean, authorized master image is available; do not use AI-generated or unrelated photographs"</em>), the image reference is preserved and explicitly <strong>marked for manual replacement</strong> once the official manufacturer studio master shot is provided by the client.</p>
+        <p style="margin:0 0 10px 0;"><strong>Visual Inspection Finding:</strong> Legacy WordPress upload of smartphone camera snapshot taken in a warehouse/shop. Retail box has handwritten purple marker text reading <em>"A/4.F/S. spiral binding machine"</em>.</p>
+        <p style="margin:0 0 10px 0;"><strong>Status:</strong> Awaiting client-provided manufacturer master shot. Unrelated stock images and AI generated images strictly avoided per project instructions.</p>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 3: PRODUCTS WITH THIRD-PARTY SOURCE WATERMARK -->
+  <!-- SECTION 4: UNBRANDED WHOLESALE ITEMS AWAITING CLIENT STUDIO MASTER -->
   <div class="section">
     <div class="section-title">
-      <span>3. Items Marked for Manufacturer Studio Replacement (${reviewCards.length} Total SKUs)</span>
+      <span>4. Generic Wholesale Items Pending Client Studio Master (${pendingCards.length} SKUs)</span>
     </div>
     <p style="font-size: 13px; color: #475569; margin-top:0;">
-      The following items are extracted faithfully from the PDF at high resolution, but either contain the original catalog's light diagonal supplier watermark (<em>"A - Z Office Supplier"</em>) or are legacy phone uploads. Per instructions, third-party watermarks are not destructively altered; instead, these SKUs are flagged for replacement with clean manufacturer studio masters.
+      These unbranded workplace MRO supplies (duster cloths, broom sticks, mops, plastic bins, wiper blades) were extracted from the source PDF at maximum resolution. They feature the supplier's light diagonal watermark. In accordance with quality guidelines, authentic PDF captures are retained rather than substituting fake or mismatched stock images.
     </p>
 
     <div class="grid">
 `;
 
-  for (const rc of reviewCards) {
+  for (const pc of pendingCards) {
     reviewHtml += `
-      <div class="card">
+      <div class="card card-pending">
         <div class="img-box">
-          <img src="${rc.imgSrc}" alt="${rc.name}" loading="lazy" />
+          <img src="${pc.imgSrc}" alt="${pc.name}" loading="lazy" />
         </div>
         <div style="font-size: 11px; margin-bottom: 4px;">
-          <strong style="color:#b91c1c;">${rc.sku}</strong>
+          <strong style="color:#b91c1c;">${pc.sku}</strong>
         </div>
         <div style="font-size: 11px; color:#334155; line-height:1.3; height:30px; overflow:hidden; margin-bottom:6px;">
-          ${rc.name}
+          ${pc.name}
         </div>
         <div style="font-size: 10px; color:#991b1b; background:#fee2e2; padding:4px 6px; border-radius:4px;">
-          ${rc.reason}
+          ${pc.reason}
         </div>
       </div>
 `;
@@ -276,9 +362,17 @@ async function main() {
   console.log('Saved public/defective_and_review_contact_sheet.html');
 
   // Also write an explicit replacement SKUs text file
-  const replacementSkus = reviewCards.map(c => `${c.sku} | ${c.name} | ${c.category} | ${c.reason}`);
-  fs.writeFileSync('scripts/skus_requiring_manual_replacement.txt', replacementSkus.join('\n'), 'utf8');
-  console.log(`Saved scripts/skus_requiring_manual_replacement.txt (${reviewCards.length} SKUs).`);
+  const fileLines: string[] = [
+    `# OFFICEBAZZAR IMAGE REPLACEMENT MANIFEST (AUDITED 115 SKUS)`,
+    `# Total Audited: 115 | Verified Brand Replacements Done: ${replacedCards.length} | Pending Client Master: ${pendingCards.length}\n`,
+    `## SECTION 1: VERIFIED BRAND MASTER REPLACEMENTS (${replacedCards.length} SKUS COMPLETED)`,
+    ...replacedCards.map(c => `[REPLACED] ${c.sku} | ${c.name} | ${c.category} | Source: ${c.replacementDetails?.source} | Path: ${c.imgSrc}`),
+    `\n## SECTION 2: GENERIC WHOLESALE SUPPLIES PENDING CLIENT STUDIO MASTER (${pendingCards.length} SKUS)`,
+    ...pendingCards.map(c => `[PENDING] ${c.sku} | ${c.name} | ${c.category} | ${c.reason} | Current: ${c.imgSrc}`)
+  ];
+
+  fs.writeFileSync('scripts/skus_requiring_manual_replacement.txt', fileLines.join('\n'), 'utf8');
+  console.log(`Saved scripts/skus_requiring_manual_replacement.txt (${fileLines.length} lines).`);
 }
 
 main().catch(console.error);

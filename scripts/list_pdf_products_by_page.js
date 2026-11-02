@@ -11,3 +11,4 @@ for (const p of PRODUCTS_DATA) {
 for (const [page, items] of Object.entries(pageMap)) {
   console.log(`Page ${page}: ${items.length} items (SKUs: ${items[0].code} to ${items[items.length - 1].code})`);
 }
+

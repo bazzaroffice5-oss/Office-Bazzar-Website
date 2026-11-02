@@ -5045,8 +5045,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-030-premier-face-tissue.webp"
-    ],
+        "/assets/products/housekeeping/ob-030-premier-face-tissue.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5605,8 +5605,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-050-exo-round-bar.webp"
-    ],
+        "/assets/products/housekeeping/ob-050-exo-round-bar.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5645,8 +5645,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-051-pril-dishwash-liquid.webp"
-    ],
+        "/assets/products/housekeeping/ob-051-pril-dishwash-liquid.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5685,8 +5685,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-052-vim-dishwash-gel-250ml-500ml-1-8-ltr.webp"
-    ],
+        "/assets/products/housekeeping/ob-052-vim-dishwash-gel-250ml-500ml-1-8-ltr.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7085,8 +7085,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-095-airwick-room-freshener-spray.webp"
-    ],
+        "/assets/products/housekeeping/ob-095-airwick-room-freshener-spray.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7125,8 +7125,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-096-ambi-pur-air-freshener-spray.webp"
-    ],
+        "/assets/products/housekeeping/ob-096-ambi-pur-air-freshener-spray.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7845,8 +7845,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-114-all-out-mosquito-repellent-machine-set.webp"
-    ],
+        "/assets/products/housekeeping/ob-114-all-out-mosquito-repellent-machine-set.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9205,8 +9205,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-203-diversey-taski-r3-glass-cleaner-concentrate.webp"
-    ],
+        "/assets/products/housekeeping/ob-203-diversey-taski-r3-glass-cleaner-concentrate.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9285,8 +9285,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-158-diversey-taski-r5-air-freshener-concentrate.webp"
-    ],
+        "/assets/products/housekeeping/ob-158-diversey-taski-r5-air-freshener-concentrate.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9325,8 +9325,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-159-diversey-taski-r6-toilet-bowl-cleaner.webp"
-    ],
+        "/assets/products/housekeeping/ob-159-diversey-taski-r6-toilet-bowl-cleaner.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9365,8 +9365,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-160-diversey-taski-r7-floor-cleaner-concentrate.webp"
-    ],
+        "/assets/products/housekeeping/ob-160-diversey-taski-r7-floor-cleaner-concentrate.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9405,8 +9405,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-161-diversey-taski-r9-hard-water-limescale-cleaner.webp"
-    ],
+        "/assets/products/housekeeping/ob-161-diversey-taski-r9-hard-water-limescale-cleaner.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9565,8 +9565,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-03-jk-easy-copier-paper-70-gsm-a4.webp"
-    ],
+        "/assets/products/copier-papers/ob-pap-03-jk-easy-copier-paper-70-gsm-a4.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9725,8 +9725,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-07-jk-sparkle-multipurpose-paper-70-75-80-gsm-a4.webp"
-    ],
+        "/assets/products/copier-papers/ob-pap-07-jk-sparkle-multipurpose-paper-70-75-80-gsm-a4.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10685,8 +10685,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-38-rorito-045-classic-ballpoint-pen-pack.webp"
-    ],
+        "/assets/products/stationery/ob-pen-38-rorito-045-classic-ballpoint-pen-pack.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11125,8 +11125,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-des-51-fevicol-mr-adhesive-tube.webp"
-    ],
+        "/assets/products/stationery/ob-des-51-fevicol-mr-adhesive-tube.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11725,8 +11725,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-71-post-it-self-adhesive-sticky-notes-pad.webp"
-    ],
+        "/assets/products/stationery/ob-not-71-post-it-self-adhesive-sticky-notes-pad.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11805,8 +11805,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/printers-technology/ob-not-73-casio-electronic-desk-calculator.webp"
-    ],
+        "/assets/products/stationery/ob-not-73-casio-electronic-desk-calculator.webp"
+      ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,

@@ -29,3 +29,4 @@ async function inspectRoadSafetyPages() {
 }
 
 inspectRoadSafetyPages().catch(console.error);
+
