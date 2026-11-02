@@ -20,3 +20,4 @@ for (const p of INITIAL_PRODUCTS) {
     }
   }
 }
+

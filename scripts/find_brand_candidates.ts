@@ -24,3 +24,4 @@ for (const w of watermarked) {
 
 console.log(`Found ${matches.length} brand matches:`);
 matches.forEach(m => console.log(`- [${m.sku}] ${m.name} (Matched: ${m.brand}) -> ${m.imagePath}`));
+

@@ -1109,7 +1109,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-17-a4-transparent-report-file.webp"
+      "/assets/products/prepared_1200/OB-STA-1001_ob-fil-17-a4-transparent-report-file.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1122,7 +1122,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "files-office-organization",
-    "subcategoryName": "Files & Office Organization"
+    "subcategoryName": "Files & Office Organization",
+    "requiresManualReview": false
   },
   {
     "id": "prod-3025-box-file",
@@ -1141,7 +1142,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-21-a4-button-folder-document-bag.webp"
+      "/assets/products/prepared_1200/OB-STA-1002_ob-fil-21-a4-button-folder-document-bag.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1154,7 +1155,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "files-office-organization",
-    "subcategoryName": "Files & Office Organization"
+    "subcategoryName": "Files & Office Organization",
+    "requiresManualReview": false
   },
   {
     "id": "prod-a4-punch-folder",
@@ -1173,7 +1175,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-23-office-document-tag-file.webp"
+      "/assets/products/prepared_1200/OB-STA-1003_ob-fil-23-office-document-tag-file.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1186,7 +1188,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "files-office-organization",
-    "subcategoryName": "Files & Office Organization"
+    "subcategoryName": "Files & Office Organization",
+    "requiresManualReview": false
   },
   {
     "id": "prod-a4-report-file",
@@ -1205,7 +1208,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-22-lm-plastic-folder-assorted-colours.webp"
+      "/assets/products/prepared_1200/OB-STA-1004_ob-fil-22-lm-plastic-folder-assorted-colours.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1218,7 +1221,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "files-office-organization",
-    "subcategoryName": "Files & Office Organization"
+    "subcategoryName": "Files & Office Organization",
+    "requiresManualReview": false
   },
   {
     "id": "prod-a4-stick-file",
@@ -1237,7 +1241,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-25-classic-cardboard-spring-file.webp"
+      "/assets/products/prepared_1200/OB-STA-1005_ob-fil-25-classic-cardboard-spring-file.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1250,7 +1254,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "files-office-organization",
-    "subcategoryName": "Files & Office Organization"
+    "subcategoryName": "Files & Office Organization",
+    "requiresManualReview": false
   },
   {
     "id": "prod-visiting-card-folder",
@@ -1269,7 +1274,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-27-officebazzar-accounts-voucher-file.webp"
+      "/assets/products/prepared_1200/OB-STA-1006_ob-fil-27-officebazzar-accounts-voucher-file.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1282,7 +1287,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "files-office-organization",
-    "subcategoryName": "Files & Office Organization"
+    "subcategoryName": "Files & Office Organization",
+    "requiresManualReview": false
   },
   {
     "id": "prod-fs-expanding-file",
@@ -1301,7 +1307,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-18-f-s-expanding-file-folder-case.webp"
+      "/assets/products/prepared_1200/OB-STA-1007_ob-fil-18-f-s-expanding-file-folder-case.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1314,7 +1320,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "files-office-organization",
-    "subcategoryName": "Files & Office Organization"
+    "subcategoryName": "Files & Office Organization",
+    "requiresManualReview": false
   },
   {
     "id": "prod-punching-machine-dp-600-kangaroo",
@@ -1346,7 +1353,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "desk-accessories-tools",
-    "subcategoryName": "Desk Organization & Tools"
+    "subcategoryName": "Desk Organization & Tools",
+    "requiresManualReview": true
   },
   {
     "id": "prod-kangaro-staplers-hd-10d",
@@ -1365,7 +1373,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-des-59-desk-stapler-machine-no-10-24-6.webp"
+      "/assets/products/prepared_1200/OB-STA-1009_ob-des-59-desk-stapler-machine-no-10-24-6.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1378,7 +1386,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "desk-accessories-tools",
-    "subcategoryName": "Desk Organization & Tools"
+    "subcategoryName": "Desk Organization & Tools",
+    "requiresManualReview": false
   },
   {
     "id": "prod-white-banian-cloth",
@@ -1397,7 +1406,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-040-yellow-cloth-small-big.webp"
+      "/assets/products/prepared_1200/OB-HOU-1010_ob-040-yellow-cloth-small-big.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1410,7 +1419,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "cloths-scrubbers-brushes",
-    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes"
+    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes",
+    "requiresManualReview": false
   },
   {
     "id": "prod-scrubbing-pad",
@@ -1429,7 +1439,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-046-scrub-pad-green.webp"
+      "/assets/products/prepared_1200/OB-HOU-1011_ob-046-scrub-pad-green.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1442,7 +1452,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "cloths-scrubbers-brushes",
-    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes"
+    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes",
+    "requiresManualReview": false
   },
   {
     "id": "prod-housekeeping-cleaning-chemicals",
@@ -1461,7 +1472,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/housekeeping-cleaning-chemicals-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-HOU-1012_OB-HOU-1012_housekeeping-cleaning-chemicals-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1470,7 +1481,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "cleaning-chemicals",
-    "subcategoryName": "Cleaning Chemicals & Detergents"
+    "subcategoryName": "Cleaning Chemicals & Detergents",
+    "requiresManualReview": false
   },
   {
     "id": "prod-tissue-paper-napkin",
@@ -1489,7 +1501,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-028-hi-soft-tissue-roll.webp"
+      "/assets/products/prepared_1200/OB-HOU-1013_ob-028-hi-soft-tissue-roll.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1502,7 +1514,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "tissue-papers-rolls",
-    "subcategoryName": "Tissue Papers & Rolls"
+    "subcategoryName": "Tissue Papers & Rolls",
+    "requiresManualReview": false
   },
   {
     "id": "prod-table-wiper",
@@ -1521,7 +1534,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-093-premium-room-freshener-aerosol.webp"
+      "/assets/products/prepared_1200/OB-HOU-1014_ob-093-premium-room-freshener-aerosol.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1534,7 +1547,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "mops-floor-wipers",
-    "subcategoryName": "Mops & Floor Wipers"
+    "subcategoryName": "Mops & Floor Wipers",
+    "requiresManualReview": false
   },
   {
     "id": "prod-toilet-cleaning-brush",
@@ -1553,7 +1567,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-056-toilet-brush-single-hockey.webp"
+      "/assets/products/prepared_1200/OB-HOU-1015_ob-056-toilet-brush-single-hockey.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1566,7 +1580,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "cloths-scrubbers-brushes",
-    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes"
+    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes",
+    "requiresManualReview": false
   },
   {
     "id": "prod-checked-cloth",
@@ -1585,7 +1600,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-037-checked-cloth-small-big.webp"
+      "/assets/products/prepared_1200/OB-HOU-1016_ob-037-checked-cloth-small-big.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1598,7 +1613,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "cloths-scrubbers-brushes",
-    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes"
+    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes",
+    "requiresManualReview": false
   },
   {
     "id": "prod-rubber-gloves",
@@ -1617,7 +1633,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-07-rubber-industrial-safety-gloves.webp"
+      "/assets/products/prepared_1200/OB-HOU-1017_ob-cov-07-rubber-industrial-safety-gloves.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1630,7 +1646,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "cloths-scrubbers-brushes",
-    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes"
+    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes",
+    "requiresManualReview": false
   },
   {
     "id": "prod-kangaro-staplers-hd-10d-1",
@@ -1649,7 +1666,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/staplers-machine-kangaroo-hd-10d-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-HOU-1018_OB-HOU-1018_staplers-machine-kangaroo-hd-10d-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1658,7 +1675,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": false,
     "specifications": {},
     "subcategoryId": "desk-accessories-tools",
-    "subcategoryName": "Desk Organization & Tools"
+    "subcategoryName": "Desk Organization & Tools",
+    "requiresManualReview": false
   },
   {
     "id": "prod-glass-wiper",
@@ -1677,7 +1695,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-091-magiccode-room-freshener-spray.webp"
+      "/assets/products/prepared_1200/OB-HOU-1019_ob-091-magiccode-room-freshener-spray.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1690,7 +1708,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "mops-floor-wipers",
-    "subcategoryName": "Mops & Floor Wipers"
+    "subcategoryName": "Mops & Floor Wipers",
+    "requiresManualReview": false
   },
   {
     "id": "prod-caddy-basket",
@@ -1709,7 +1728,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-118-hi-clean-floor-cleaner-500ml-5l.webp"
+      "/assets/products/prepared_1200/OB-HOU-1020_ob-118-hi-clean-floor-cleaner-500ml-5l.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1722,7 +1741,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "cleaning-equipment-trolleys",
-    "subcategoryName": "Cleaning Equipment & Trolleys"
+    "subcategoryName": "Cleaning Equipment & Trolleys",
+    "requiresManualReview": false
   },
   {
     "id": "prod-wringer-trolley",
@@ -1741,7 +1761,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-136-wringer-trolley-single-bucket.webp"
+      "/assets/products/prepared_1200/OB-HOU-1021_ob-136-wringer-trolley-single-bucket.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1754,7 +1774,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "cleaning-equipment-trolleys",
-    "subcategoryName": "Cleaning Equipment & Trolleys"
+    "subcategoryName": "Cleaning Equipment & Trolleys",
+    "requiresManualReview": false
   },
   {
     "id": "prod-stainess-steel-hand-soap-dispenser",
@@ -1773,7 +1794,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-010-ss-soap-dispenser-500ml-800ml-1000ml.webp"
+      "/assets/products/prepared_1200/OB-HOU-1022_ob-010-ss-soap-dispenser-500ml-800ml-1000ml.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1786,7 +1807,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "washroom-dispensers",
-    "subcategoryName": "Washroom Hygiene & Dispensers"
+    "subcategoryName": "Washroom Hygiene & Dispensers",
+    "requiresManualReview": false
   },
   {
     "id": "prod-abs-hand-dryer-machine",
@@ -1805,7 +1827,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-002-abs-hand-dryer-machine.webp"
+      "/assets/products/prepared_1200/OB-HOU-1023_ob-002-abs-hand-dryer-machine.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1818,7 +1840,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "washroom-dispensers",
-    "subcategoryName": "Washroom Hygiene & Dispensers"
+    "subcategoryName": "Washroom Hygiene & Dispensers",
+    "requiresManualReview": false
   },
   {
     "id": "prod-stainless-steel-hand-dryer-machine",
@@ -1837,7 +1860,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-001-ss-hand-dryer-machine.webp"
+      "/assets/products/prepared_1200/OB-HOU-1024_ob-001-ss-hand-dryer-machine.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1850,7 +1873,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "washroom-dispensers",
-    "subcategoryName": "Washroom Hygiene & Dispensers"
+    "subcategoryName": "Washroom Hygiene & Dispensers",
+    "requiresManualReview": false
   },
   {
     "id": "prod-air-freshener-dispenser-led",
@@ -1869,7 +1893,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-127-dettol-antiseptic-disinfectant-liquid.webp"
+      "/assets/products/prepared_1200/OB-HOU-1025_ob-127-dettol-antiseptic-disinfectant-liquid.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1882,7 +1906,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "air-fresheners-care",
-    "subcategoryName": "Air Fresheners & Washroom Care"
+    "subcategoryName": "Air Fresheners & Washroom Care",
+    "requiresManualReview": false
   },
   {
     "id": "prod-copper-water-bottle",
@@ -1901,7 +1926,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/copper-water-bottle-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-HOU-1026_OB-HOU-1026_copper-water-bottle-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1910,7 +1935,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "office-pantry-essentials",
-    "subcategoryName": "Office Pantry Essentials"
+    "subcategoryName": "Office Pantry Essentials",
+    "requiresManualReview": false
   },
   {
     "id": "prod-toilet-roll-dispenser",
@@ -1929,7 +1955,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-022-abs-toilet-roll-dispenser.webp"
+      "/assets/products/prepared_1200/OB-HOU-1027_ob-022-abs-toilet-roll-dispenser.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1942,7 +1968,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "washroom-dispensers",
-    "subcategoryName": "Washroom Hygiene & Dispensers"
+    "subcategoryName": "Washroom Hygiene & Dispensers",
+    "requiresManualReview": false
   },
   {
     "id": "prod-stainless-steel-dustbin",
@@ -1961,7 +1988,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-064-plastic-dustbin-regular.webp"
+      "/assets/products/prepared_1200/OB-GAR-1028_ob-064-plastic-dustbin-regular.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1974,7 +2001,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "dustbins-waste-handling",
-    "subcategoryName": "Dustbins & Waste Handling"
+    "subcategoryName": "Dustbins & Waste Handling",
+    "requiresManualReview": false
   },
   {
     "id": "prod-aristo-wheeled-dust-bin-120-litre-with-pedal",
@@ -1993,7 +2021,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-079-toilet-sink-plunger.webp"
+      "/assets/products/prepared_1200/OB-GAR-1029_ob-079-toilet-sink-plunger.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2006,7 +2034,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "dustbins-waste-handling",
-    "subcategoryName": "Dustbins & Waste Handling"
+    "subcategoryName": "Dustbins & Waste Handling",
+    "requiresManualReview": false
   },
   {
     "id": "prod-green-biodegradable-garbage-bag",
@@ -2025,7 +2054,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-088-plastic-bucket-and-mug-set.webp"
+      "/assets/products/prepared_1200/OB-GAR-1030_ob-088-plastic-bucket-and-mug-set.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2038,7 +2067,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "dustbins-waste-handling",
-    "subcategoryName": "Dustbins & Waste Handling"
+    "subcategoryName": "Dustbins & Waste Handling",
+    "requiresManualReview": false
   },
   {
     "id": "prod-garbage-bag-small",
@@ -2057,7 +2087,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-082-dry-mop-set-with-refill.webp"
+      "/assets/products/prepared_1200/OB-GAR-1031_ob-082-dry-mop-set-with-refill.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2070,7 +2100,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "dustbins-waste-handling",
-    "subcategoryName": "Dustbins & Waste Handling"
+    "subcategoryName": "Dustbins & Waste Handling",
+    "requiresManualReview": false
   },
   {
     "id": "prod-silver-stainless-steel-ss-lobby-ashtray-bin-capacity-8x24",
@@ -2089,7 +2120,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-068-metal-wire-mesh-dustbin.webp"
+      "/assets/products/prepared_1200/OB-GAR-1032_ob-068-metal-wire-mesh-dustbin.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2102,7 +2133,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "dustbins-waste-handling",
-    "subcategoryName": "Dustbins & Waste Handling"
+    "subcategoryName": "Dustbins & Waste Handling",
+    "requiresManualReview": false
   },
   {
     "id": "prod-cartoon-character-dustbin",
@@ -2130,7 +2162,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "dustbins-waste-handling",
-    "subcategoryName": "Dustbins & Waste Handling"
+    "subcategoryName": "Dustbins & Waste Handling",
+    "requiresManualReview": true
   },
   {
     "id": "prod-external-hard-disk",
@@ -2149,7 +2182,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/external-hard-disk-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-COM-1034_OB-COM-1034_external-hard-disk-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2158,7 +2191,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "it-peripherals-machines",
-    "subcategoryName": "IT Peripherals & Office Machines"
+    "subcategoryName": "IT Peripherals & Office Machines",
+    "requiresManualReview": false
   },
   {
     "id": "prod-epson-ecotank-l6160-wi-fi-duplex-multi-function-ink-tank-printer",
@@ -2177,7 +2211,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/epson-l6170-wi-fi-duplex-multifunction-inktank-printer-with-adf-500x500-1-1.jpg"
+      "/assets/products/prepared_1200/OB-COM-1035_OB-COM-1035_epson-l6170-wi-fi-duplex-multifunction-inktank-printer-with-adf-500x500-1-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2186,7 +2220,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "it-peripherals-machines",
-    "subcategoryName": "IT Peripherals & Office Machines"
+    "subcategoryName": "IT Peripherals & Office Machines",
+    "requiresManualReview": false
   },
   {
     "id": "prod-kent-ks-12-lamination-machine",
@@ -2205,7 +2240,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/kent-ks-12-lamination-machine-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-COM-1036_OB-COM-1036_kent-ks-12-lamination-machine-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2214,7 +2249,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "it-peripherals-machines",
-    "subcategoryName": "IT Peripherals & Office Machines"
+    "subcategoryName": "IT Peripherals & Office Machines",
+    "requiresManualReview": false
   },
   {
     "id": "prod-keyboard-tray-metal",
@@ -2233,7 +2269,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/keyboard-drawer-metal-19-innofitt-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-COM-1037_OB-COM-1037_keyboard-drawer-metal-19-innofitt-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2242,7 +2278,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "it-peripherals-machines",
-    "subcategoryName": "IT Peripherals & Office Machines"
+    "subcategoryName": "IT Peripherals & Office Machines",
+    "requiresManualReview": false
   },
   {
     "id": "prod-sandisk-pen-drive",
@@ -2261,7 +2298,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/16-gb-pen-drive-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-COM-1038_OB-COM-1038_16-gb-pen-drive-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2270,7 +2307,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "it-peripherals-machines",
-    "subcategoryName": "IT Peripherals & Office Machines"
+    "subcategoryName": "IT Peripherals & Office Machines",
+    "requiresManualReview": false
   },
   {
     "id": "prod-spiral-binding-machine",
@@ -2298,7 +2336,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "it-peripherals-machines",
-    "subcategoryName": "IT Peripherals & Office Machines"
+    "subcategoryName": "IT Peripherals & Office Machines",
+    "requiresManualReview": true
   },
   {
     "id": "prod-barcode-printer",
@@ -2317,7 +2356,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/canon-mk2500-ferrule-printer-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-COM-1040_OB-COM-1040_canon-mk2500-ferrule-printer-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2326,7 +2365,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "it-peripherals-machines",
-    "subcategoryName": "IT Peripherals & Office Machines"
+    "subcategoryName": "IT Peripherals & Office Machines",
+    "requiresManualReview": false
   },
   {
     "id": "prod-adaptor-cable",
@@ -2345,7 +2385,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/adaptor-cable-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-COM-1041_OB-COM-1041_adaptor-cable-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2354,7 +2394,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "it-peripherals-machines",
-    "subcategoryName": "IT Peripherals & Office Machines"
+    "subcategoryName": "IT Peripherals & Office Machines",
+    "requiresManualReview": false
   },
   {
     "id": "prod-white-board-for-school",
@@ -2373,7 +2414,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/white-board-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-BOA-1042_OB-BOA-1042_white-board-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2382,7 +2423,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "boards-visual-display",
-    "subcategoryName": "Boards & Visual Display"
+    "subcategoryName": "Boards & Visual Display",
+    "requiresManualReview": false
   },
   {
     "id": "prod-golden-letter-for-welcome-board",
@@ -2401,7 +2443,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/golden-letter-for-welcome-board-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-BOA-1043_OB-BOA-1043_golden-letter-for-welcome-board-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2410,7 +2452,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "boards-visual-display",
-    "subcategoryName": "Boards & Visual Display"
+    "subcategoryName": "Boards & Visual Display",
+    "requiresManualReview": false
   },
   {
     "id": "prod-alkosign-motorized-dependent-up-down-boards",
@@ -2429,7 +2472,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/alkosign-motorised-dependent-up-down-boards-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-BOA-1044_OB-BOA-1044_alkosign-motorised-dependent-up-down-boards-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2438,7 +2481,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "writing-instruments",
-    "subcategoryName": "Writing Instruments"
+    "subcategoryName": "Writing Instruments",
+    "requiresManualReview": false
   },
   {
     "id": "prod-alkosign-horizontal-sliding-board",
@@ -2457,7 +2501,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/alkosign-horizantal-sliding-board-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-BOA-1045_OB-BOA-1045_alkosign-horizantal-sliding-board-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2466,7 +2510,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "boards-visual-display",
-    "subcategoryName": "Boards & Visual Display"
+    "subcategoryName": "Boards & Visual Display",
+    "requiresManualReview": false
   },
   {
     "id": "prod-pin-up-notice-board",
@@ -2485,7 +2530,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/pin-up-notice-board-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-BOA-1046_OB-BOA-1046_pin-up-notice-board-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2494,7 +2539,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "boards-visual-display",
-    "subcategoryName": "Boards & Visual Display"
+    "subcategoryName": "Boards & Visual Display",
+    "requiresManualReview": false
   },
   {
     "id": "prod-alkosign-pegboard",
@@ -2513,7 +2559,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/alkosign-pegboard-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-BOA-1047_OB-BOA-1047_alkosign-pegboard-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2522,7 +2568,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "boards-visual-display",
-    "subcategoryName": "Boards & Visual Display"
+    "subcategoryName": "Boards & Visual Display",
+    "requiresManualReview": false
   },
   {
     "id": "prod-ms-black-magazine-rack",
@@ -2541,7 +2588,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/magazine-stand-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-BOA-1048_OB-BOA-1048_magazine-stand-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2550,7 +2597,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "boards-visual-display",
-    "subcategoryName": "Boards & Visual Display"
+    "subcategoryName": "Boards & Visual Display",
+    "requiresManualReview": false
   },
   {
     "id": "prod-white-board-duster",
@@ -2569,7 +2617,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/white-board-duster-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-BOA-1049_OB-BOA-1049_white-board-duster-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2578,7 +2626,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "boards-visual-display",
-    "subcategoryName": "Boards & Visual Display"
+    "subcategoryName": "Boards & Visual Display",
+    "requiresManualReview": false
   },
   {
     "id": "prod-a4-display-folders",
@@ -2597,7 +2646,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/boards-and-accessories-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-BOA-1050_OB-BOA-1050_boards-and-accessories-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2606,7 +2655,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "files-office-organization",
-    "subcategoryName": "Files & Office Organization"
+    "subcategoryName": "Files & Office Organization",
+    "requiresManualReview": false
   },
   {
     "id": "prod-cello-tape",
@@ -2625,7 +2675,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-des-50-office-paper-gum-paste-bottle.webp"
+      "/assets/products/prepared_1200/OB-PAC-1051_ob-des-50-office-paper-gum-paste-bottle.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2638,7 +2688,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "bopp-packaging-tapes",
-    "subcategoryName": "BOPP Packaging Tapes"
+    "subcategoryName": "BOPP Packaging Tapes",
+    "requiresManualReview": false
   },
   {
     "id": "prod-cello-brown-tape",
@@ -2657,7 +2708,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/packaging-supplies/ob-des-54-bopp-packaging-tape-brown-cello-1-2-3-inch.webp"
+      "/assets/products/prepared_1200/OB-PAC-1052_ob-des-54-bopp-packaging-tape-brown-cello-1-2-3-inch.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2670,7 +2721,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "bopp-packaging-tapes",
-    "subcategoryName": "BOPP Packaging Tapes"
+    "subcategoryName": "BOPP Packaging Tapes",
+    "requiresManualReview": false
   },
   {
     "id": "prod-floor-marking-tapes",
@@ -2702,7 +2754,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "floor-marking-safety-tapes",
-    "subcategoryName": "Floor Marking & Safety Tapes"
+    "subcategoryName": "Floor Marking & Safety Tapes",
+    "requiresManualReview": true
   },
   {
     "id": "prod-bubble-sheet",
@@ -2721,7 +2774,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/packaging-supplies/ob-des-58-protective-bubble-wrap-roll.webp"
+      "/assets/products/prepared_1200/OB-PAC-1054_ob-des-58-protective-bubble-wrap-roll.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2734,7 +2787,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "protective-packaging-cushioning",
-    "subcategoryName": "Protective Packaging & Cushioning"
+    "subcategoryName": "Protective Packaging & Cushioning",
+    "requiresManualReview": false
   },
   {
     "id": "prod-foam-thermocol",
@@ -2753,7 +2807,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/foam-and-thermocol-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-PAC-1055_OB-PAC-1055_foam-and-thermocol-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2762,7 +2816,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "protective-packaging-cushioning",
-    "subcategoryName": "Protective Packaging & Cushioning"
+    "subcategoryName": "Protective Packaging & Cushioning",
+    "requiresManualReview": false
   },
   {
     "id": "prod-packing-patti-roll",
@@ -2781,7 +2836,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/packing-patti-roll-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-PAC-1056_OB-PAC-1056_packing-patti-roll-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2790,7 +2845,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "box-strapping-banding",
-    "subcategoryName": "Box Strapping & Banding Rolls"
+    "subcategoryName": "Box Strapping & Banding Rolls",
+    "requiresManualReview": false
   },
   {
     "id": "prod-magic-tape-with-dispenser",
@@ -2809,7 +2865,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/magic-tape-with-dispenser-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-PAC-1057_OB-PAC-1057_magic-tape-with-dispenser-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2818,7 +2874,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "adhesives-packaging-tools",
-    "subcategoryName": "Adhesives & Packaging Tools"
+    "subcategoryName": "Adhesives & Packaging Tools",
+    "requiresManualReview": false
   },
   {
     "id": "prod-paper-cutter-big",
@@ -2837,7 +2894,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-des-64-stainless-steel-office-scissors-all-sizes.webp"
+      "/assets/products/prepared_1200/OB-PAC-1058_ob-des-64-stainless-steel-office-scissors-all-sizes.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2850,7 +2907,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "adhesives-packaging-tools",
-    "subcategoryName": "Adhesives & Packaging Tools"
+    "subcategoryName": "Adhesives & Packaging Tools",
+    "requiresManualReview": false
   },
   {
     "id": "prod-gum-paste",
@@ -2869,7 +2927,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-des-49-fevistik-glue-stick-big.webp"
+      "/assets/products/prepared_1200/OB-PAC-1059_ob-des-49-fevistik-glue-stick-big.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2882,7 +2940,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "adhesives-packaging-tools",
-    "subcategoryName": "Adhesives & Packaging Tools"
+    "subcategoryName": "Adhesives & Packaging Tools",
+    "requiresManualReview": false
   },
   {
     "id": "prod-double-sided-newspaper-stand",
@@ -2901,7 +2960,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/double-sided-newspaper-stand-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-DIS-1060_OB-DIS-1060_double-sided-newspaper-stand-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2910,7 +2969,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "boards-visual-display",
-    "subcategoryName": "Boards & Visual Display"
+    "subcategoryName": "Boards & Visual Display",
+    "requiresManualReview": false
   },
   {
     "id": "prod-wooden-stand-for-boards",
@@ -2929,7 +2989,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/wooden-stand-for-boards-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-DIS-1061_OB-DIS-1061_wooden-stand-for-boards-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2938,7 +2998,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "boards-visual-display",
-    "subcategoryName": "Boards & Visual Display"
+    "subcategoryName": "Boards & Visual Display",
+    "requiresManualReview": false
   },
   {
     "id": "prod-tripod-stand",
@@ -2957,7 +3018,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/tripod-stand-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-DIS-1062_OB-DIS-1062_tripod-stand-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2966,7 +3027,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "boards-visual-display",
-    "subcategoryName": "Boards & Visual Display"
+    "subcategoryName": "Boards & Visual Display",
+    "requiresManualReview": false
   },
   {
     "id": "prod-name-plate-plain-innofitt",
@@ -2985,7 +3047,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/name-plate-innofitt-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-DIS-1063_OB-DIS-1063_name-plate-innofitt-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2994,7 +3056,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "boards-visual-display",
-    "subcategoryName": "Boards & Visual Display"
+    "subcategoryName": "Boards & Visual Display",
+    "requiresManualReview": false
   },
   {
     "id": "prod-gobbler-gs8cd-paper-shredding-machine",
@@ -3013,7 +3076,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/printers-technology/ob-eqp-86-heavy-duty-cross-cut-paper-shredder.webp"
+      "/assets/products/prepared_1200/OB-SHR-1064_ob-eqp-86-heavy-duty-cross-cut-paper-shredder.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3026,7 +3089,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "paper-shredders",
-    "subcategoryName": "Paper Shredding Machines"
+    "subcategoryName": "Paper Shredding Machines",
+    "requiresManualReview": false
   },
   {
     "id": "prod-gobbler-gs15cd-paper-shredding-machine",
@@ -3045,7 +3109,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/gobbler-gs15cd-paper-shredding-machine-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-SHR-1065_OB-SHR-1065_gobbler-gs15cd-paper-shredding-machine-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3054,7 +3118,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "paper-shredders",
-    "subcategoryName": "Paper Shredding Machines"
+    "subcategoryName": "Paper Shredding Machines",
+    "requiresManualReview": false
   },
   {
     "id": "prod-gobbler-a2326-paper-shredding-machine",
@@ -3073,7 +3138,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/gobbler-a2326-paper-shredding-machine-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-SHR-1066_OB-SHR-1066_gobbler-a2326-paper-shredding-machine-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3082,7 +3147,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "paper-shredders",
-    "subcategoryName": "Paper Shredding Machines"
+    "subcategoryName": "Paper Shredding Machines",
+    "requiresManualReview": false
   },
   {
     "id": "prod-gobbler-s3135-heavy-duty-paper-shredding-machine",
@@ -3101,7 +3167,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/gobbler-s3135-heavy-duty-paper-shredding-machine-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-SHR-1067_OB-SHR-1067_gobbler-s3135-heavy-duty-paper-shredding-machine-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3110,7 +3176,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "paper-shredders",
-    "subcategoryName": "Paper Shredding Machines"
+    "subcategoryName": "Paper Shredding Machines",
+    "requiresManualReview": false
   },
   {
     "id": "prod-gobbler-gs-10-cd-paper-shredding-machine",
@@ -3129,7 +3196,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/gobbler-gs10cd-paper-shredding-machine-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-SHR-1068_OB-SHR-1068_gobbler-gs10cd-paper-shredding-machine-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3138,7 +3205,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "paper-shredders",
-    "subcategoryName": "Paper Shredding Machines"
+    "subcategoryName": "Paper Shredding Machines",
+    "requiresManualReview": false
   },
   {
     "id": "prod-gobbler-px9900-currency-counting-machine",
@@ -3157,7 +3225,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-eqp-88-magnetic-notice-display-folder-frame.webp"
+      "/assets/products/prepared_1200/OB-SHR-1069_ob-eqp-88-magnetic-notice-display-folder-frame.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3170,7 +3238,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "currency-counting-machines",
-    "subcategoryName": "Currency Counting Machines"
+    "subcategoryName": "Currency Counting Machines",
+    "requiresManualReview": false
   },
   {
     "id": "prod-royal-napkins",
@@ -3189,7 +3258,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/royal-napkins-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-HOU-1070_OB-HOU-1070_royal-napkins-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3198,7 +3267,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "tissue-papers-rolls",
-    "subcategoryName": "Tissue Papers & Rolls"
+    "subcategoryName": "Tissue Papers & Rolls",
+    "requiresManualReview": false
   },
   {
     "id": "prod-colin-glass-cleaner-500-ml",
@@ -3217,7 +3287,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-151-wheeled-dustbin-120-litre-green.webp"
+      "/assets/products/prepared_1200/OB-HOU-1071_ob-151-wheeled-dustbin-120-litre-green.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3230,7 +3300,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "cleaning-chemicals",
-    "subcategoryName": "Cleaning Chemicals & Detergents"
+    "subcategoryName": "Cleaning Chemicals & Detergents",
+    "requiresManualReview": false
   },
   {
     "id": "prod-plastic-storage-box",
@@ -3249,7 +3320,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/plastic-storage-box-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-HOU-1072_OB-HOU-1072_plastic-storage-box-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3258,7 +3329,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "cloths-scrubbers-brushes",
-    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes"
+    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes",
+    "requiresManualReview": false
   },
   {
     "id": "prod-butter-paper",
@@ -3277,7 +3349,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/butter-paper-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-HOU-1073_OB-HOU-1073_butter-paper-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3286,7 +3358,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "office-pantry-essentials",
-    "subcategoryName": "Office Pantry Essentials"
+    "subcategoryName": "Office Pantry Essentials",
+    "requiresManualReview": false
   },
   {
     "id": "prod-dettol-disinfectant-spray",
@@ -3305,7 +3378,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/dettol-disinfectant-spray-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-HOU-1074_OB-HOU-1074_dettol-disinfectant-spray-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3314,7 +3387,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "cloths-scrubbers-brushes",
-    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes"
+    "subcategoryName": "Cleaning Cloths, Scrubbers & Brushes",
+    "requiresManualReview": false
   },
   {
     "id": "prod-best-print-12a-compatible-toner-cartridge",
@@ -3333,7 +3407,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/best-print-12a-compatible-toner-cartridge-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-PRI-1075_OB-PRI-1075_best-print-12a-compatible-toner-cartridge-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3342,7 +3416,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "laser-toner-cartridges",
-    "subcategoryName": "Laser Toner Cartridges"
+    "subcategoryName": "Laser Toner Cartridges",
+    "requiresManualReview": false
   },
   {
     "id": "prod-canon-ep-303-toner-cartridge",
@@ -3361,7 +3436,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/canon-ep-303-toner-cartridge-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-PRI-1076_OB-PRI-1076_canon-ep-303-toner-cartridge-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3370,7 +3445,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "laser-toner-cartridges",
-    "subcategoryName": "Laser Toner Cartridges"
+    "subcategoryName": "Laser Toner Cartridges",
+    "requiresManualReview": false
   },
   {
     "id": "prod-canon-308-toner-cartridge",
@@ -3389,7 +3465,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/canon-308-toner-cartridge-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-PRI-1077_OB-PRI-1077_canon-308-toner-cartridge-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3398,7 +3474,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "laser-toner-cartridges",
-    "subcategoryName": "Laser Toner Cartridges"
+    "subcategoryName": "Laser Toner Cartridges",
+    "requiresManualReview": false
   },
   {
     "id": "prod-label-cartridges",
@@ -3417,7 +3494,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/dymo-label-cartridges-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-PRI-1078_OB-PRI-1078_dymo-label-cartridges-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3426,7 +3503,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "ink-cartridges-supplies",
-    "subcategoryName": "Ink Cartridges & Print Supplies"
+    "subcategoryName": "Ink Cartridges & Print Supplies",
+    "requiresManualReview": false
   },
   {
     "id": "prod-canon-refilling-cartridge",
@@ -3445,7 +3523,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/canon-refilling-catridge-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-PRI-1079_OB-PRI-1079_canon-refilling-catridge-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3454,7 +3532,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "ink-cartridges-supplies",
-    "subcategoryName": "Ink Cartridges & Print Supplies"
+    "subcategoryName": "Ink Cartridges & Print Supplies",
+    "requiresManualReview": false
   },
   {
     "id": "prod-compatible-toner-cartridge",
@@ -3473,7 +3552,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/cf403a-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-PRI-1080_OB-PRI-1080_cf403a-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3482,7 +3561,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "laser-toner-cartridges",
-    "subcategoryName": "Laser Toner Cartridges"
+    "subcategoryName": "Laser Toner Cartridges",
+    "requiresManualReview": false
   },
   {
     "id": "prod-samsung-mlt-d116s-black-toner-cartridge-packaging-type-box",
@@ -3501,7 +3581,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/samsung-mlt-d116s-black-toner-cartridge-500x500-a-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-PRI-1081_OB-PRI-1081_samsung-mlt-d116s-black-toner-cartridge-500x500-a-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3510,7 +3590,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "laser-toner-cartridges",
-    "subcategoryName": "Laser Toner Cartridges"
+    "subcategoryName": "Laser Toner Cartridges",
+    "requiresManualReview": false
   },
   {
     "id": "prod-hp-126a-laser-jet-toner-cartridge",
@@ -3529,7 +3610,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/hp-126a-laserjet-toner-cartridge-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-PRI-1082_OB-PRI-1082_hp-126a-laserjet-toner-cartridge-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3538,7 +3619,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "laser-toner-cartridges",
-    "subcategoryName": "Laser Toner Cartridges"
+    "subcategoryName": "Laser Toner Cartridges",
+    "requiresManualReview": false
   },
   {
     "id": "prod-canon-npg-51-toner-cartridge",
@@ -3557,7 +3639,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/npg-51-compatible-toner-cartridge-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-PRI-1083_OB-PRI-1083_npg-51-compatible-toner-cartridge-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3566,7 +3648,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "laser-toner-cartridges",
-    "subcategoryName": "Laser Toner Cartridges"
+    "subcategoryName": "Laser Toner Cartridges",
+    "requiresManualReview": false
   },
   {
     "id": "prod-best-print-88a-compatible-toner-cartridge",
@@ -3585,7 +3668,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/best-india-print-88a-compatible-toner-cartridge-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-PRI-1084_OB-PRI-1084_best-india-print-88a-compatible-toner-cartridge-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3594,7 +3677,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "laser-toner-cartridges",
-    "subcategoryName": "Laser Toner Cartridges"
+    "subcategoryName": "Laser Toner Cartridges",
+    "requiresManualReview": false
   },
   {
     "id": "prod-hp-802-small-black-ink-cartridge-ch561zz",
@@ -3613,7 +3697,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/hp-802-small-black-ink-cartridge-ch561zz-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-PRI-1085_OB-PRI-1085_hp-802-small-black-ink-cartridge-ch561zz-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3622,7 +3706,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "ink-cartridges-supplies",
-    "subcategoryName": "Ink Cartridges & Print Supplies"
+    "subcategoryName": "Ink Cartridges & Print Supplies",
+    "requiresManualReview": false
   },
   {
     "id": "prod-hp-678-tri-color-ink-cartridge-cz108aa",
@@ -3641,7 +3726,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/hp-678-tri-color-ink-cartridge-cz108aa-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-PRI-1086_OB-PRI-1086_hp-678-tri-color-ink-cartridge-cz108aa-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3650,7 +3735,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "ink-cartridges-supplies",
-    "subcategoryName": "Ink Cartridges & Print Supplies"
+    "subcategoryName": "Ink Cartridges & Print Supplies",
+    "requiresManualReview": false
   },
   {
     "id": "prod-taski-r4-furniture-maintainer",
@@ -3669,7 +3755,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-148-ss-trio-waste-recycling-dustbin.webp"
+      "/assets/products/prepared_1200/OB-CLE-1087_ob-148-ss-trio-waste-recycling-dustbin.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3682,7 +3768,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "cleaning-chemicals",
-    "subcategoryName": "Cleaning Chemicals & Detergents"
+    "subcategoryName": "Cleaning Chemicals & Detergents",
+    "requiresManualReview": false
   },
   {
     "id": "prod-taski-r6-toilet-cleaner",
@@ -3701,7 +3788,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-150-frp-trio-segregation-waste-bins.webp"
+      "/assets/products/prepared_1200/OB-CLE-1088_ob-150-frp-trio-segregation-waste-bins.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3714,7 +3801,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "cleaning-chemicals",
-    "subcategoryName": "Cleaning Chemicals & Detergents"
+    "subcategoryName": "Cleaning Chemicals & Detergents",
+    "requiresManualReview": false
   },
   {
     "id": "prod-liquid-white-phenyl",
@@ -3733,7 +3821,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2023/01/liquid-white-phenyl-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-CLE-1089_OB-CLE-1089_liquid-white-phenyl-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3742,7 +3830,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "cleaning-chemicals",
-    "subcategoryName": "Cleaning Chemicals & Detergents"
+    "subcategoryName": "Cleaning Chemicals & Detergents",
+    "requiresManualReview": false
   },
   {
     "id": "prod-humic-acid-liquid",
@@ -3761,7 +3850,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2023/01/liquid-acid-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-CLE-1090_OB-CLE-1090_liquid-acid-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3770,7 +3859,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "cleaning-chemicals",
-    "subcategoryName": "Cleaning Chemicals & Detergents"
+    "subcategoryName": "Cleaning Chemicals & Detergents",
+    "requiresManualReview": false
   },
   {
     "id": "prod-vim-liquid-dish-wash",
@@ -3789,7 +3879,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-155-diversey-taski-r2-hygienic-hard-surface-cleaner.webp"
+      "/assets/products/prepared_1200/OB-CLE-1091_ob-155-diversey-taski-r2-hygienic-hard-surface-cleaner.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3802,7 +3892,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "cleaning-chemicals",
-    "subcategoryName": "Cleaning Chemicals & Detergents"
+    "subcategoryName": "Cleaning Chemicals & Detergents",
+    "requiresManualReview": false
   },
   {
     "id": "prod-lizol-liquid-cleaner",
@@ -3821,7 +3912,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-154-diversey-taski-r1-super-bathroom-cleaner.webp"
+      "/assets/products/prepared_1200/OB-CLE-1092_ob-154-diversey-taski-r1-super-bathroom-cleaner.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3834,7 +3925,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "cleaning-chemicals",
-    "subcategoryName": "Cleaning Chemicals & Detergents"
+    "subcategoryName": "Cleaning Chemicals & Detergents",
+    "requiresManualReview": false
   },
   {
     "id": "prod-harpic-toilet-cleaner",
@@ -3853,7 +3945,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2023/01/harpic-toilet-cleaner-500-ml-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-CLE-1093_OB-CLE-1093_harpic-toilet-cleaner-500-ml-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3862,7 +3954,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "cleaning-chemicals",
-    "subcategoryName": "Cleaning Chemicals & Detergents"
+    "subcategoryName": "Cleaning Chemicals & Detergents",
+    "requiresManualReview": false
   },
   {
     "id": "prod-hi-clean-floor-cleaner-5-ltr",
@@ -3881,7 +3974,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2023/01/hi-clean-floor-cleaner-5-ltr-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-CLE-1094_OB-CLE-1094_hi-clean-floor-cleaner-5-ltr-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3890,7 +3983,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "cleaning-chemicals",
-    "subcategoryName": "Cleaning Chemicals & Detergents"
+    "subcategoryName": "Cleaning Chemicals & Detergents",
+    "requiresManualReview": false
   },
   {
     "id": "prod-hi-clean-liquid-soap-oil",
@@ -3909,7 +4003,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2023/01/hi-clean-liquid-soap-1-ltr-500x500-1.jpg"
+      "/assets/products/prepared_1200/OB-CLE-1095_OB-CLE-1095_hi-clean-liquid-soap-1-ltr-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3918,7 +4012,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "cleaning-chemicals",
-    "subcategoryName": "Cleaning Chemicals & Detergents"
+    "subcategoryName": "Cleaning Chemicals & Detergents",
+    "requiresManualReview": false
   },
   {
     "id": "prod-tissue-paper-napkin-1",
@@ -3937,7 +4032,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-029-hi-soft-tissue-napkin.webp"
+      "/assets/products/prepared_1200/OB-TIS-1096_ob-029-hi-soft-tissue-napkin.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3950,7 +4045,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "tissue-papers-rolls",
-    "subcategoryName": "Tissue Papers & Rolls"
+    "subcategoryName": "Tissue Papers & Rolls",
+    "requiresManualReview": false
   },
   {
     "id": "prod-royal-napkins-tissue-paper",
@@ -3969,7 +4065,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2023/01/royal-napkins-tissue-paper-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-TIS-1097_OB-TIS-1097_royal-napkins-tissue-paper-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3978,7 +4074,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "tissue-papers-rolls",
-    "subcategoryName": "Tissue Papers & Rolls"
+    "subcategoryName": "Tissue Papers & Rolls",
+    "requiresManualReview": false
   },
   {
     "id": "prod-c-fold-tissue",
@@ -3997,7 +4094,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-031-c-fold-tissue.webp"
+      "/assets/products/prepared_1200/OB-TIS-1098_ob-031-c-fold-tissue.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4010,7 +4107,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "tissue-papers-rolls",
-    "subcategoryName": "Tissue Papers & Rolls"
+    "subcategoryName": "Tissue Papers & Rolls",
+    "requiresManualReview": false
   },
   {
     "id": "prod-m-fold-tissue",
@@ -4029,7 +4127,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-032-m-fold-tissue.webp"
+      "/assets/products/prepared_1200/OB-TIS-1099_ob-032-m-fold-tissue.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4042,7 +4140,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "tissue-papers-rolls",
-    "subcategoryName": "Tissue Papers & Rolls"
+    "subcategoryName": "Tissue Papers & Rolls",
+    "requiresManualReview": false
   },
   {
     "id": "prod-kimsoft-smile-c-fold-towels-180-towels-30-sleeves-031500",
@@ -4061,7 +4160,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2023/01/kimsoft-smile-c-fold-towels-180-towels-30-sleeves-031500-500x500-1.webp"
+      "/assets/products/prepared_1200/OB-TIS-1100_OB-TIS-1100_kimsoft-smile-c-fold-towels-180-towels-30-sleeves-031500-500x500-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4070,7 +4169,8 @@ const RAW_PRODUCTS: Product[] = [
     "isActive": true,
     "specifications": {},
     "subcategoryId": "tissue-papers-rolls",
-    "subcategoryName": "Tissue Papers & Rolls"
+    "subcategoryName": "Tissue Papers & Rolls",
+    "requiresManualReview": false
   },
   {
     "id": "prod-toilet-roll-big",
@@ -4089,7 +4189,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-034-jumbo-tissue-roll.webp"
+      "/assets/products/prepared_1200/OB-TIS-1101_ob-034-jumbo-tissue-roll.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -4102,7 +4202,8 @@ const RAW_PRODUCTS: Product[] = [
       "source": "OfficeBazzar Master Catalogue"
     },
     "subcategoryId": "tissue-papers-rolls",
-    "subcategoryName": "Tissue Papers & Rolls"
+    "subcategoryName": "Tissue Papers & Rolls",
+    "requiresManualReview": false
   },
   {
     "id": "prod-ob-003-shoe-cover-dispenser",
@@ -4162,10 +4263,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-004-paper-cup-dispenser.webp"
+      "/assets/products/prepared_1200/OB-004_ob-004-paper-cup-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4362,10 +4463,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-009-queue-manager.webp"
+      "/assets/products/prepared_1200/OB-009_ob-009-queue-manager.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4402,10 +4503,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-011-abs-soap-dispenser-500ml.webp"
+      "/assets/products/prepared_1200/OB-011_ob-011-abs-soap-dispenser-500ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4482,10 +4583,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-013-abs-soap-dispenser-single-clear.webp"
+      "/assets/products/prepared_1200/OB-013_ob-013-abs-soap-dispenser-single-clear.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4682,10 +4783,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-018-touch-free-soap-dispenser.webp"
+      "/assets/products/prepared_1200/OB-018_ob-018-touch-free-soap-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4722,10 +4823,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-019-ss-c-m-fold-tissue-dispenser.webp"
+      "/assets/products/prepared_1200/OB-019_ob-019-ss-c-m-fold-tissue-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4762,10 +4863,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-020-abs-tissue-dispenser-m-fold.webp"
+      "/assets/products/prepared_1200/OB-020_ob-020-abs-tissue-dispenser-m-fold.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5002,10 +5103,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-027-kitchen-roll-dispenser.webp"
+      "/assets/products/prepared_1200/OB-027_ob-027-kitchen-roll-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5042,11 +5143,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/housekeeping/ob-030-premier-face-tissue.webp"
-      ],
+      "/assets/products/prepared_1200/OB-030_ob-030-premier-face-tissue.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5162,10 +5263,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-036-greenlime-tissue.webp"
+      "/assets/products/prepared_1200/OB-036_ob-036-greenlime-tissue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5202,10 +5303,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-038-glass-cloth.webp"
+      "/assets/products/prepared_1200/OB-038_ob-038-glass-cloth.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5442,10 +5543,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-045-cotton-towel-small-big.webp"
+      "/assets/products/prepared_1200/OB-045_ob-045-cotton-towel-small-big.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5482,10 +5583,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-047-scrub-pad-with-sponge.webp"
+      "/assets/products/prepared_1200/OB-047_ob-047-scrub-pad-with-sponge.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5562,10 +5663,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-049-steel-scrubber.webp"
+      "/assets/products/prepared_1200/OB-049_ob-049-steel-scrubber.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5602,11 +5703,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/housekeeping/ob-050-exo-round-bar.webp"
-      ],
+      "/assets/products/prepared_1200/OB-050_ob-050-exo-round-bar.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5642,11 +5743,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/housekeeping/ob-051-pril-dishwash-liquid.webp"
-      ],
+      "/assets/products/prepared_1200/OB-051_ob-051-pril-dishwash-liquid.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5682,11 +5783,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/housekeeping/ob-052-vim-dishwash-gel-250ml-500ml-1-8-ltr.webp"
-      ],
+      "/assets/products/prepared_1200/OB-052_ob-052-vim-dishwash-gel-250ml-500ml-1-8-ltr.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5762,10 +5863,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-054-vim-pril-dishwash-soap.webp"
+      "/assets/products/prepared_1200/OB-054_ob-054-vim-pril-dishwash-soap.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5802,10 +5903,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-055-toilet-brush-double-hockey.webp"
+      "/assets/products/prepared_1200/OB-055_ob-055-toilet-brush-double-hockey.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5882,10 +5983,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-058-carpet-brush-hard-soft.webp"
+      "/assets/products/prepared_1200/OB-058_ob-058-carpet-brush-hard-soft.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6082,10 +6183,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-063-dust-pan-with-brush-set.webp"
+      "/assets/products/prepared_1200/OB-063_ob-063-dust-pan-with-brush-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6122,10 +6223,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-065-pedal-plastic-dustbin.webp"
+      "/assets/products/prepared_1200/OB-065_ob-065-pedal-plastic-dustbin.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6202,10 +6303,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-067-single-mop-wringer-bucket.webp"
+      "/assets/products/prepared_1200/OB-067_ob-067-single-mop-wringer-bucket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6362,10 +6463,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-072-ss-swing-dustbin.webp"
+      "/assets/products/prepared_1200/OB-072_ob-072-ss-swing-dustbin.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6402,10 +6503,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-073-commercial-glass-wiper.webp"
+      "/assets/products/prepared_1200/OB-073_ob-073-commercial-glass-wiper.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6442,10 +6543,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-074-glass-combi-wiper-with-sponge.webp"
+      "/assets/products/prepared_1200/OB-074_ob-074-glass-combi-wiper-with-sponge.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6522,10 +6623,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-076-versa-wiper.webp"
+      "/assets/products/prepared_1200/OB-076_ob-076-versa-wiper.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6682,10 +6783,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-081-cob-web-brush-curved.webp"
+      "/assets/products/prepared_1200/OB-081_ob-081-cob-web-brush-curved.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6722,10 +6823,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-083-heavy-duty-mop-stick-handle.webp"
+      "/assets/products/prepared_1200/OB-083_ob-083-heavy-duty-mop-stick-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6802,10 +6903,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-085-clip-fit-wet-mop-refill.webp"
+      "/assets/products/prepared_1200/OB-085_ob-085-clip-fit-wet-mop-refill.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6962,10 +7063,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-090-round-cotton-floor-mop.webp"
+      "/assets/products/prepared_1200/OB-090_ob-090-round-cotton-floor-mop.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7002,10 +7103,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-092-godrej-aer-room-freshener-spray.webp"
+      "/assets/products/prepared_1200/OB-092_ob-092-godrej-aer-room-freshener-spray.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7042,10 +7143,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-094-odonil-room-air-freshener-spray.webp"
+      "/assets/products/prepared_1200/OB-094_ob-094-odonil-room-air-freshener-spray.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7082,11 +7183,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/housekeeping/ob-095-airwick-room-freshener-spray.webp"
-      ],
+      "/assets/products/prepared_1200/OB-095_ob-095-airwick-room-freshener-spray.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7122,11 +7223,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/housekeeping/ob-096-ambi-pur-air-freshener-spray.webp"
-      ],
+      "/assets/products/prepared_1200/OB-096_ob-096-ambi-pur-air-freshener-spray.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7242,10 +7343,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-099-godrej-aer-pocket-bathroom-freshener.webp"
+      "/assets/products/prepared_1200/OB-099_ob-099-godrej-aer-pocket-bathroom-freshener.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7282,10 +7383,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-100-telescopic-aluminum-extension-pole.webp"
+      "/assets/products/prepared_1200/OB-100_ob-100-telescopic-aluminum-extension-pole.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7322,10 +7423,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-101-caution-wet-floor-sign-board.webp"
+      "/assets/products/prepared_1200/OB-101_ob-101-caution-wet-floor-sign-board.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7402,10 +7503,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-103-professional-glass-cleaning-kit-box.webp"
+      "/assets/products/prepared_1200/OB-103_ob-103-professional-glass-cleaning-kit-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7602,10 +7703,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-108-chemical-trigger-spray-bottle.webp"
+      "/assets/products/prepared_1200/OB-108_ob-108-chemical-trigger-spray-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7642,10 +7743,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-109-goodknight-mosquito-repellent-machine-set.webp"
+      "/assets/products/prepared_1200/OB-109_ob-109-goodknight-mosquito-repellent-machine-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7682,10 +7783,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-110-hit-cockroach-insect-spray.webp"
+      "/assets/products/prepared_1200/OB-110_ob-110-hit-cockroach-insect-spray.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7762,10 +7863,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-112-pvc-hard-broom.webp"
+      "/assets/products/prepared_1200/OB-112_ob-112-pvc-hard-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7842,11 +7943,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/housekeeping/ob-114-all-out-mosquito-repellent-machine-set.webp"
-      ],
+      "/assets/products/prepared_1200/OB-114_ob-114-all-out-mosquito-repellent-machine-set.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7962,10 +8063,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-117-gala-no-dust-broom.webp"
+      "/assets/products/prepared_1200/OB-117_ob-117-gala-no-dust-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8002,10 +8103,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-119-hi-clean-liquid-soap-1l-5l.webp"
+      "/assets/products/prepared_1200/OB-119_ob-119-hi-clean-liquid-soap-1l-5l.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8082,10 +8183,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-121-hi-clean-perfumed-phenyl-multicolor.webp"
+      "/assets/products/prepared_1200/OB-121_ob-121-hi-clean-perfumed-phenyl-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8282,10 +8383,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-126-sodium-hypochlorite-disinfectant-solution-5l.webp"
+      "/assets/products/prepared_1200/OB-126_ob-126-sodium-hypochlorite-disinfectant-solution-5l.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8322,10 +8423,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-128-lifebuoy-antibacterial-handwash.webp"
+      "/assets/products/prepared_1200/OB-128_ob-128-lifebuoy-antibacterial-handwash.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8402,10 +8503,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-130-urinal-screen-anti-splash-mats.webp"
+      "/assets/products/prepared_1200/OB-130_ob-130-urinal-screen-anti-splash-mats.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8602,10 +8703,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-135-pure-white-naphthalene-balls.webp"
+      "/assets/products/prepared_1200/OB-135_ob-135-pure-white-naphthalene-balls.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8642,10 +8743,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-137-wringer-trolley-double-bucket.webp"
+      "/assets/products/prepared_1200/OB-137_ob-137-wringer-trolley-double-bucket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8722,10 +8823,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-139-handheld-shopping-basket-trolley.webp"
+      "/assets/products/prepared_1200/OB-139_ob-139-handheld-shopping-basket-trolley.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8922,10 +9023,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-144-double-bucket-wringer-trolley-black.webp"
+      "/assets/products/prepared_1200/OB-144_ob-144-double-bucket-wringer-trolley-black.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8962,10 +9063,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-145-bio-medical-waste-segregation-dustbins-set.webp"
+      "/assets/products/prepared_1200/OB-145_ob-145-bio-medical-waste-segregation-dustbins-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9002,10 +9103,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-146-duo-wet-dry-plastic-dustbin.webp"
+      "/assets/products/prepared_1200/OB-146_ob-146-duo-wet-dry-plastic-dustbin.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9162,10 +9263,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-153-industrial-plastic-storage-drum-barrel-all-sizes.webp"
+      "/assets/products/prepared_1200/OB-153_ob-153-industrial-plastic-storage-drum-barrel-all-sizes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9202,11 +9303,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/housekeeping/ob-203-diversey-taski-r3-glass-cleaner-concentrate.webp"
-      ],
+      "/assets/products/prepared_1200/OB-203_ob-203-diversey-taski-r3-glass-cleaner-concentrate.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9242,10 +9343,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-157-diversey-taski-r4-wood-furniture-polish.webp"
+      "/assets/products/prepared_1200/OB-157_ob-157-diversey-taski-r4-wood-furniture-polish.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9282,11 +9383,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/housekeeping/ob-158-diversey-taski-r5-air-freshener-concentrate.webp"
-      ],
+      "/assets/products/prepared_1200/OB-158_ob-158-diversey-taski-r5-air-freshener-concentrate.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9322,11 +9423,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/housekeeping/ob-159-diversey-taski-r6-toilet-bowl-cleaner.webp"
-      ],
+      "/assets/products/prepared_1200/OB-159_ob-159-diversey-taski-r6-toilet-bowl-cleaner.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9362,11 +9463,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/housekeeping/ob-160-diversey-taski-r7-floor-cleaner-concentrate.webp"
-      ],
+      "/assets/products/prepared_1200/OB-160_ob-160-diversey-taski-r7-floor-cleaner-concentrate.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9402,11 +9503,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/housekeeping/ob-161-diversey-taski-r9-hard-water-limescale-cleaner.webp"
-      ],
+      "/assets/products/prepared_1200/OB-161_ob-161-diversey-taski-r9-hard-water-limescale-cleaner.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9442,10 +9543,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-162-diversey-suma-inox-d7-1-stainless-steel-polish.webp"
+      "/assets/products/prepared_1200/OB-162_ob-162-diversey-suma-inox-d7-1-stainless-steel-polish.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9482,10 +9583,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-01-jk-max-copier-paper-67-gsm-a4.webp"
+      "/assets/products/prepared_1200/OB-PAP-01_ob-pap-01-jk-max-copier-paper-67-gsm-a4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9522,10 +9623,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-02-jk-cmax-copier-paper-72-gsm-a4.webp"
+      "/assets/products/prepared_1200/OB-PAP-02_ob-pap-02-jk-cmax-copier-paper-72-gsm-a4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9562,11 +9663,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/copier-papers/ob-pap-03-jk-easy-copier-paper-70-gsm-a4.webp"
-      ],
+      "/assets/products/prepared_1200/OB-PAP-03_ob-pap-03-jk-easy-copier-paper-70-gsm-a4.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9602,10 +9703,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-04-jk-copier-paper-75-gsm-a4.webp"
+      "/assets/products/prepared_1200/OB-PAP-04_ob-pap-04-jk-copier-paper-75-gsm-a4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9642,10 +9743,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-05-jk-excel-bond-paper-70-80-90-100-gsm-a4.webp"
+      "/assets/products/prepared_1200/OB-PAP-05_ob-pap-05-jk-excel-bond-paper-70-80-90-100-gsm-a4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9682,10 +9783,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-06-jk-cedar-copier-paper-80-100-gsm-a4.webp"
+      "/assets/products/prepared_1200/OB-PAP-06_ob-pap-06-jk-cedar-copier-paper-80-100-gsm-a4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9722,11 +9823,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/copier-papers/ob-pap-07-jk-sparkle-multipurpose-paper-70-75-80-gsm-a4.webp"
-      ],
+      "/assets/products/prepared_1200/OB-PAP-07_ob-pap-07-jk-sparkle-multipurpose-paper-70-75-80-gsm-a4.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9762,10 +9863,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-08-jk-eco-rise-copier-paper-70-gsm-a4.webp"
+      "/assets/products/prepared_1200/OB-PAP-08_ob-pap-08-jk-eco-rise-copier-paper-70-gsm-a4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9802,10 +9903,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-09-tnpl-copier-paper-70-gsm-a4.webp"
+      "/assets/products/prepared_1200/OB-PAP-09_ob-pap-09-tnpl-copier-paper-70-gsm-a4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9842,10 +9943,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-10-tnpl-platinum-copier-paper-75-gsm-a4.webp"
+      "/assets/products/prepared_1200/OB-PAP-10_ob-pap-10-tnpl-platinum-copier-paper-75-gsm-a4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9882,10 +9983,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-11-tnpl-copier-paper-80-gsm-a4.webp"
+      "/assets/products/prepared_1200/OB-PAP-11_ob-pap-11-tnpl-copier-paper-80-gsm-a4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9922,10 +10023,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-12-jk-max-copier-paper-67-gsm-a4-ekent-pack.webp"
+      "/assets/products/prepared_1200/OB-PAP-12_ob-pap-12-jk-max-copier-paper-67-gsm-a4-ekent-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10162,10 +10263,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-20-a4-plastic-stick-file.webp"
+      "/assets/products/prepared_1200/OB-FIL-20_ob-fil-20-a4-plastic-stick-file.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10202,10 +10303,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-24-spring-file-plastic-body.webp"
+      "/assets/products/prepared_1200/OB-FIL-24_ob-fil-24-spring-file-plastic-body.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10282,10 +10383,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-28-ordinary-urgent-document-file.webp"
+      "/assets/products/prepared_1200/OB-FIL-28_ob-fil-28-ordinary-urgent-document-file.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10362,10 +10463,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-30-a-to-z-alphabetical-file-separator.webp"
+      "/assets/products/prepared_1200/OB-FIL-30_ob-fil-30-a-to-z-alphabetical-file-separator.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10402,10 +10503,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-31-2-d-ring-binder-file-1501.webp"
+      "/assets/products/prepared_1200/OB-FIL-31_ob-fil-31-2-d-ring-binder-file-1501.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10442,10 +10543,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-32-diamond-ring-binder-file-2302.webp"
+      "/assets/products/prepared_1200/OB-FIL-32_ob-fil-32-diamond-ring-binder-file-2302.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10482,10 +10583,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-33-bitco-ballpoint-pen-pack.webp"
+      "/assets/products/prepared_1200/OB-PEN-33_ob-pen-33-bitco-ballpoint-pen-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10522,10 +10623,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-34-cello-finegrip-ballpoint-pen.webp"
+      "/assets/products/prepared_1200/OB-PEN-34_ob-pen-34-cello-finegrip-ballpoint-pen.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10602,10 +10703,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-36-add-gel-achiever-pen.webp"
+      "/assets/products/prepared_1200/OB-PEN-36_ob-pen-36-add-gel-achiever-pen.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10642,10 +10743,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-37-pilot-v5-v7-liquid-ink-rollerball-pen.webp"
+      "/assets/products/prepared_1200/OB-PEN-37_ob-pen-37-pilot-v5-v7-liquid-ink-rollerball-pen.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10682,11 +10783,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/stationery/ob-pen-38-rorito-045-classic-ballpoint-pen-pack.webp"
-      ],
+      "/assets/products/prepared_1200/OB-PEN-38_ob-pen-38-rorito-045-classic-ballpoint-pen-pack.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10722,10 +10823,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-39-rorito-flymax-gel-pen.webp"
+      "/assets/products/prepared_1200/OB-PEN-39_ob-pen-39-rorito-flymax-gel-pen.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10762,10 +10863,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-40-natraj-spark-ball-pen-set.webp"
+      "/assets/products/prepared_1200/OB-PEN-40_ob-pen-40-natraj-spark-ball-pen-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10882,10 +10983,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-43-chisel-tip-permanent-marker.webp"
+      "/assets/products/prepared_1200/OB-PEN-43_ob-pen-43-chisel-tip-permanent-marker.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10922,10 +11023,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-44-dry-erase-whiteboard-marker.webp"
+      "/assets/products/prepared_1200/OB-PEN-44_ob-pen-44-dry-erase-whiteboard-marker.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10962,10 +11063,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-45-luxor-color-sketch-pen-pack.webp"
+      "/assets/products/prepared_1200/OB-PEN-45_ob-pen-45-luxor-color-sketch-pen-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11002,10 +11103,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-46-nataraj-hb-wooden-pencils-pack.webp"
+      "/assets/products/prepared_1200/OB-PEN-46_ob-pen-46-nataraj-hb-wooden-pencils-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11042,10 +11143,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-47-apsara-dust-free-nataraj-plasto-eraser-pack.webp"
+      "/assets/products/prepared_1200/OB-PEN-47_ob-pen-47-apsara-dust-free-nataraj-plasto-eraser-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11082,10 +11183,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-48-desk-pencil-sharpener-pack.webp"
+      "/assets/products/prepared_1200/OB-PEN-48_ob-pen-48-desk-pencil-sharpener-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11122,11 +11223,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/stationery/ob-des-51-fevicol-mr-adhesive-tube.webp"
-      ],
+      "/assets/products/prepared_1200/OB-DES-51_ob-des-51-fevicol-mr-adhesive-tube.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11162,10 +11263,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/packaging-supplies/ob-des-52-double-sided-foam-tape-1-inch.webp"
+      "/assets/products/prepared_1200/OB-DES-52_ob-des-52-double-sided-foam-tape-1-inch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11202,10 +11303,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/packaging-supplies/ob-des-53-double-sided-transparent-tissue-tape.webp"
+      "/assets/products/prepared_1200/OB-DES-53_ob-des-53-double-sided-transparent-tissue-tape.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11282,10 +11383,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-des-56-retractable-paper-cutter-medium.webp"
+      "/assets/products/prepared_1200/OB-DES-56_ob-des-56-retractable-paper-cutter-medium.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11362,10 +11463,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-des-60-stapler-pins-pack-no-10-24-6.webp"
+      "/assets/products/prepared_1200/OB-DES-60_ob-des-60-stapler-pins-pack-no-10-24-6.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11402,10 +11503,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-des-62-faber-castell-office-stamp-pad.webp"
+      "/assets/products/prepared_1200/OB-DES-62_ob-des-62-faber-castell-office-stamp-pad.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11442,10 +11543,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-des-63-stamp-pad-ink-bottle.webp"
+      "/assets/products/prepared_1200/OB-DES-63_ob-des-63-stamp-pad-ink-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11482,10 +11583,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-65-color-plastic-paper-clips-pack.webp"
+      "/assets/products/prepared_1200/OB-NOT-65_ob-not-65-color-plastic-paper-clips-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11522,10 +11623,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-66-metal-binder-clips-all-sizes.webp"
+      "/assets/products/prepared_1200/OB-NOT-66_ob-not-66-metal-binder-clips-all-sizes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11602,10 +11703,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-68-steel-wire-gem-clips-pack.webp"
+      "/assets/products/prepared_1200/OB-NOT-68_ob-not-68-steel-wire-gem-clips-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11642,10 +11743,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-69-kores-sapphire-carbon-paper-pack.webp"
+      "/assets/products/prepared_1200/OB-NOT-69_ob-not-69-kores-sapphire-carbon-paper-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11722,11 +11823,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/stationery/ob-not-71-post-it-self-adhesive-sticky-notes-pad.webp"
-      ],
+      "/assets/products/prepared_1200/OB-NOT-71_ob-not-71-post-it-self-adhesive-sticky-notes-pad.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11762,10 +11863,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-72-office-steel-paper-pins-box.webp"
+      "/assets/products/prepared_1200/OB-NOT-72_ob-not-72-office-steel-paper-pins-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11802,11 +11903,11 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-        "/assets/products/stationery/ob-not-73-casio-electronic-desk-calculator.webp"
-      ],
+      "/assets/products/prepared_1200/OB-NOT-73_ob-not-73-casio-electronic-desk-calculator.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11882,10 +11983,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-75-stainless-steel-measuring-scale-ruler.webp"
+      "/assets/products/prepared_1200/OB-NOT-75_ob-not-75-stainless-steel-measuring-scale-ruler.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11922,10 +12023,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-76-office-hardbound-note-book.webp"
+      "/assets/products/prepared_1200/OB-NOT-76_ob-not-76-office-hardbound-note-book.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11962,10 +12063,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-77-itc-classmate-corporate-notebooks.webp"
+      "/assets/products/prepared_1200/OB-NOT-77_ob-not-77-itc-classmate-corporate-notebooks.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12002,10 +12103,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-78-white-mailing-envelopes-pack.webp"
+      "/assets/products/prepared_1200/OB-NOT-78_ob-not-78-white-mailing-envelopes-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12042,10 +12143,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-79-brown-kraft-paper-envelopes-pack.webp"
+      "/assets/products/prepared_1200/OB-NOT-79_ob-not-79-brown-kraft-paper-envelopes-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12082,10 +12183,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-80-cloth-lined-courier-security-envelope.webp"
+      "/assets/products/prepared_1200/OB-NOT-80_ob-not-80-cloth-lined-courier-security-envelope.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12122,10 +12223,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-eqp-81-marshal-quality-scribbling-writing-pad.webp"
+      "/assets/products/prepared_1200/OB-EQP-81_ob-eqp-81-marshal-quality-scribbling-writing-pad.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12162,10 +12263,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-eqp-82-scholar-wirebound-spiral-notepad.webp"
+      "/assets/products/prepared_1200/OB-EQP-82_ob-eqp-82-scholar-wirebound-spiral-notepad.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12242,10 +12343,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-eqp-84-desk-visiting-card-holder-book.webp"
+      "/assets/products/prepared_1200/OB-EQP-84_ob-eqp-84-desk-visiting-card-holder-book.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12362,10 +12463,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-eqp-89-acrylic-id-card-badge-holder-with-lanyard.webp"
+      "/assets/products/prepared_1200/OB-EQP-89_ob-eqp-89-acrylic-id-card-badge-holder-with-lanyard.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12402,10 +12503,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-01-3-ply-surgical-disposable-face-mask.webp"
+      "/assets/products/prepared_1200/OB-COV-01_ob-cov-01-3-ply-surgical-disposable-face-mask.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12442,10 +12543,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-02-venus-v4400-n95-protective-respirator-mask.webp"
+      "/assets/products/prepared_1200/OB-COV-02_ob-cov-02-venus-v4400-n95-protective-respirator-mask.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12522,10 +12623,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-04-medi-dispo-n95-protective-face-mask.webp"
+      "/assets/products/prepared_1200/OB-COV-04_ob-cov-04-medi-dispo-n95-protective-face-mask.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12562,10 +12663,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-05-yellow-disposable-protective-mask.webp"
+      "/assets/products/prepared_1200/OB-COV-05_ob-cov-05-yellow-disposable-protective-mask.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12642,10 +12743,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-08-hi-safe-powder-free-latex-gloves-box.webp"
+      "/assets/products/prepared_1200/OB-COV-08_ob-cov-08-hi-safe-powder-free-latex-gloves-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12762,10 +12863,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-11-pristin-instant-hand-sanitizer-pump-5l.webp"
+      "/assets/products/prepared_1200/OB-COV-11_ob-cov-11-pristin-instant-hand-sanitizer-pump-5l.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12802,10 +12903,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-12-digital-fingertip-pulse-oximeter.webp"
+      "/assets/products/prepared_1200/OB-COV-12_ob-cov-12-digital-fingertip-pulse-oximeter.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13002,10 +13103,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-17-strerill-g-hand-sanitizer-500ml-5l.webp"
+      "/assets/products/prepared_1200/OB-COV-17_ob-cov-17-strerill-g-hand-sanitizer-500ml-5l.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13042,10 +13143,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-18-hi-clean-hand-cleansing-liquid-soap-5l.webp"
+      "/assets/products/prepared_1200/OB-COV-18_ob-cov-18-hi-clean-hand-cleansing-liquid-soap-5l.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13122,10 +13223,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-20-automatic-touchless-soap-sanitizer-dispenser.webp"
+      "/assets/products/prepared_1200/OB-COV-20_ob-cov-20-automatic-touchless-soap-sanitizer-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13162,10 +13263,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-21-foot-pedal-operated-sanitizer-stand.webp"
+      "/assets/products/prepared_1200/OB-COV-21_ob-cov-21-foot-pedal-operated-sanitizer-stand.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13282,10 +13383,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-24-automatic-shoe-cover-dispenser-machine.webp"
+      "/assets/products/prepared_1200/OB-COV-24_ob-cov-24-automatic-shoe-cover-dispenser-machine.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13402,10 +13503,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-27-reflective-safety-traffic-cone.webp"
+      "/assets/products/prepared_1200/OB-COV-27_ob-cov-27-reflective-safety-traffic-cone.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13442,10 +13543,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-28-wet-floor-caution-warning-board.webp"
+      "/assets/products/prepared_1200/OB-COV-28_ob-cov-28-wet-floor-caution-warning-board.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13482,10 +13583,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-30-manual-pressure-sanitizer-sprayer-2-litre.webp"
+      "/assets/products/prepared_1200/OB-COV-30_ob-cov-30-manual-pressure-sanitizer-sprayer-2-litre.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13522,10 +13623,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-31-garden-sanitizer-pressure-sprayer-5-litre.webp"
+      "/assets/products/prepared_1200/OB-COV-31_ob-cov-31-garden-sanitizer-pressure-sprayer-5-litre.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13562,10 +13663,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-32-backpack-knapsack-sanitizer-sprayer-18-litre.webp"
+      "/assets/products/prepared_1200/OB-COV-32_ob-cov-32-backpack-knapsack-sanitizer-sprayer-18-litre.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13602,10 +13703,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-33-full-protective-face-shield-mask.webp"
+      "/assets/products/prepared_1200/OB-COV-33_ob-cov-33-full-protective-face-shield-mask.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13642,10 +13743,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-34-dettol-original-antiseptic-liquid-5-litre.webp"
+      "/assets/products/prepared_1200/OB-COV-34_ob-cov-34-dettol-original-antiseptic-liquid-5-litre.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13682,10 +13783,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-01-flexible-traffic-cone-750mm.webp"
+      "/assets/products/prepared_1200/OB-RDS-01_ob-rds-01-flexible-traffic-cone-750mm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13748,10 +13849,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-02-hexagonal-traffic-cone-750mm-1000mm.webp"
+      "/assets/products/prepared_1200/OB-RDS-02_ob-rds-02-hexagonal-traffic-cone-750mm-1000mm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13810,10 +13911,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-03-traffic-cone-with-rubberized-plastic-base.webp"
+      "/assets/products/prepared_1200/OB-RDS-03_ob-rds-03-traffic-cone-with-rubberized-plastic-base.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13894,10 +13995,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-04-economical-traffic-cone-and-chain-set.webp"
+      "/assets/products/prepared_1200/OB-RDS-04_ob-rds-04-economical-traffic-cone-and-chain-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13951,10 +14052,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-05-collapsible-pop-up-traffic-cone-650mm.webp"
+      "/assets/products/prepared_1200/OB-RDS-05_ob-rds-05-collapsible-pop-up-traffic-cone-650mm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14004,10 +14105,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-06-retractable-cone-q-manager-ribbon.webp"
+      "/assets/products/prepared_1200/OB-RDS-06_ob-rds-06-retractable-cone-q-manager-ribbon.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14059,10 +14160,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-07-telescopic-cone-connecting-rod-1-3m-to-2-1m.webp"
+      "/assets/products/prepared_1200/OB-RDS-07_ob-rds-07-telescopic-cone-connecting-rod-1-3m-to-2-1m.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14132,10 +14233,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-08-led-traffic-baton-light-rechargeable.webp"
+      "/assets/products/prepared_1200/OB-RDS-08_ob-rds-08-led-traffic-baton-light-rechargeable.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14216,10 +14317,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-09-outdoor-convex-security-mirror-18-24-32-40-inch.webp"
+      "/assets/products/prepared_1200/OB-RDS-09_ob-rds-09-outdoor-convex-security-mirror-18-24-32-40-inch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14283,10 +14384,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-10-acrylic-dome-safety-mirror-full-half-quarter.webp"
+      "/assets/products/prepared_1200/OB-RDS-10_ob-rds-10-acrylic-dome-safety-mirror-full-half-quarter.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14350,10 +14451,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-11-warning-bollard-delineator-post.webp"
+      "/assets/products/prepared_1200/OB-RDS-11_ob-rds-11-warning-bollard-delineator-post.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14413,10 +14514,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-12-flexible-polyurethane-spring-post-750mm.webp"
+      "/assets/products/prepared_1200/OB-RDS-12_ob-rds-12-flexible-polyurethane-spring-post-750mm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14484,10 +14585,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-13-floor-stand-warning-sign-600mm.webp"
+      "/assets/products/prepared_1200/OB-RDS-13_ob-rds-13-floor-stand-warning-sign-600mm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14552,10 +14653,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-14-heavy-duty-road-rumble-strips.webp"
+      "/assets/products/prepared_1200/OB-RDS-14_ob-rds-14-heavy-duty-road-rumble-strips.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14621,10 +14722,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-15-heavy-duty-rubber-wheel-chock.webp"
+      "/assets/products/prepared_1200/OB-RDS-15_ob-rds-15-heavy-duty-rubber-wheel-chock.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14696,10 +14797,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-16-rubber-cable-protector-ramp-2-3-4-5-channel.webp"
+      "/assets/products/prepared_1200/OB-RDS-16_ob-rds-16-rubber-cable-protector-ramp-2-3-4-5-channel.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14758,10 +14859,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-17-high-visibility-reflective-safety-jacket.webp"
+      "/assets/products/prepared_1200/OB-RDS-17_ob-rds-17-high-visibility-reflective-safety-jacket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14838,10 +14939,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-18-aluminum-road-stud-and-solar-led-stud.webp"
+      "/assets/products/prepared_1200/OB-RDS-18_ob-rds-18-aluminum-road-stud-and-solar-led-stud.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14912,10 +15013,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-19-handheld-security-metal-detector-scanner.webp"
+      "/assets/products/prepared_1200/OB-RDS-19_ob-rds-19-handheld-security-metal-detector-scanner.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14976,10 +15077,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-20-stainless-steel-retractable-belt-stanchion-3m.webp"
+      "/assets/products/prepared_1200/OB-RDS-20_ob-rds-20-stainless-steel-retractable-belt-stanchion-3m.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15050,10 +15151,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-21-q-manager-a4-sign-board-display-frame.webp"
+      "/assets/products/prepared_1200/OB-RDS-21_ob-rds-21-q-manager-a4-sign-board-display-frame.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15120,10 +15221,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-22-classic-velvet-rope-stanchion-post-gold-ss.webp"
+      "/assets/products/prepared_1200/OB-RDS-22_ob-rds-22-classic-velvet-rope-stanchion-post-gold-ss.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15192,10 +15293,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-23-plastic-chain-q-manager-barrier-post-1000mm.webp"
+      "/assets/products/prepared_1200/OB-RDS-23_ob-rds-23-plastic-chain-q-manager-barrier-post-1000mm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15270,10 +15371,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-24-microprismatic-reflective-warning-tape-50mm-x-50m.webp"
+      "/assets/products/prepared_1200/OB-RDS-24_ob-rds-24-microprismatic-reflective-warning-tape-50mm-x-50m.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15334,10 +15435,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-25-heavy-duty-rubber-speed-breakers.webp"
+      "/assets/products/prepared_1200/OB-RDS-25_ob-rds-25-heavy-duty-rubber-speed-breakers.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15417,10 +15518,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-26-plastic-modular-speed-breakers.webp"
+      "/assets/products/prepared_1200/OB-RDS-26_ob-rds-26-plastic-modular-speed-breakers.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15484,10 +15585,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-27-rubber-corner-guards-square-edge.webp"
+      "/assets/products/prepared_1200/OB-RDS-27_ob-rds-27-rubber-corner-guards-square-edge.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15560,10 +15661,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-28-rubber-corner-guards-curved-edge.webp"
+      "/assets/products/prepared_1200/OB-RDS-28_ob-rds-28-rubber-corner-guards-curved-edge.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15635,10 +15736,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-29-rubber-car-wheel-stopper-600mm.webp"
+      "/assets/products/prepared_1200/OB-RDS-29_ob-rds-29-rubber-car-wheel-stopper-600mm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15705,10 +15806,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-30-rubber-car-wheel-stopper-500mm.webp"
+      "/assets/products/prepared_1200/OB-RDS-30_ob-rds-30-rubber-car-wheel-stopper-500mm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15775,10 +15876,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-31-rubber-car-wheel-stopper-commercial-1650mm.webp"
+      "/assets/products/prepared_1200/OB-RDS-31_ob-rds-31-rubber-car-wheel-stopper-commercial-1650mm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15846,10 +15947,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-32-solar-warning-blinker-light.webp"
+      "/assets/products/prepared_1200/OB-RDS-32_ob-rds-32-solar-warning-blinker-light.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15911,10 +16012,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-33-solar-traffic-flasher-light.webp"
+      "/assets/products/prepared_1200/OB-RDS-33_ob-rds-33-solar-traffic-flasher-light.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15978,10 +16079,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-34-solar-chevron-directional-warning-board.webp"
+      "/assets/products/prepared_1200/OB-RDS-34_ob-rds-34-solar-chevron-directional-warning-board.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16041,10 +16142,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-35-under-vehicle-search-inspection-mirror-uvsm.webp"
+      "/assets/products/prepared_1200/OB-RDS-35_ob-rds-35-under-vehicle-search-inspection-mirror-uvsm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16124,10 +16225,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-36-heavy-duty-anti-theft-car-wheel-lock-clamp.webp"
+      "/assets/products/prepared_1200/OB-RDS-36_ob-rds-36-heavy-duty-anti-theft-car-wheel-lock-clamp.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16193,10 +16294,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-37-led-emergency-magnetic-beacon-flare-light.webp"
+      "/assets/products/prepared_1200/OB-RDS-37_ob-rds-37-led-emergency-magnetic-beacon-flare-light.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16270,10 +16371,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-38-heavy-duty-anti-slip-traction-safety-tapes.webp"
+      "/assets/products/prepared_1200/OB-RDS-38_ob-rds-38-heavy-duty-anti-slip-traction-safety-tapes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16337,10 +16438,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-39-interlocking-plastic-water-filled-road-barrier.webp"
+      "/assets/products/prepared_1200/OB-RDS-39_ob-rds-39-interlocking-plastic-water-filled-road-barrier.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16408,10 +16509,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-40-galvanized-steel-crowd-control-barricade-barrier.webp"
+      "/assets/products/prepared_1200/OB-RDS-40_ob-rds-40-galvanized-steel-crowd-control-barricade-barrier.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16478,10 +16579,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-41-portable-expandable-scissor-road-barrier-max-2m.webp"
+      "/assets/products/prepared_1200/OB-RDS-41_ob-rds-41-portable-expandable-scissor-road-barrier-max-2m.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16559,10 +16660,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-42-rechargeable-search-light-megaphone-siren.webp"
+      "/assets/products/prepared_1200/OB-RDS-42_ob-rds-42-rechargeable-search-light-megaphone-siren.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16634,10 +16735,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 0,
     "minOrderQuantity": 1,
     "isPriceVerified": false,
-    "requiresManualReview": true,
+    "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/road-safety/ob-rds-43-metal-signage-post-stands-parking-directional.webp"
+      "/assets/products/prepared_1200/OB-RDS-43_ob-rds-43-metal-signage-post-stands-parking-directional.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16693,7 +16794,6 @@ const RAW_PRODUCTS: Product[] = [
     }
   }
 ];
-
 export const INITIAL_PRODUCTS: Product[] = RAW_PRODUCTS.map((p) => {
   const mapping = CATEGORY_MAP[p.categoryId];
   return {

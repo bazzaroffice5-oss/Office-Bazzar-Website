@@ -5,3 +5,4 @@ console.log('Watermarked items count:', watermarked.length);
 watermarked.forEach((w: any, idx: number) => {
   console.log(`${idx + 1}. [${w.sku}] ${w.name} | ${w.category} | ${w.subcategory} | ${w.imagePath}`);
 });
+

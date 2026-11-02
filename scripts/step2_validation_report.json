@@ -1,0 +1,11 @@
+{
+  "totalRows": 383,
+  "uniqueSkus": 383,
+  "uniqueFiles": 383,
+  "diskFiles": 383,
+  "allExist": true,
+  "all1200": true,
+  "allWebp": true,
+  "allDecodable": true,
+  "invalidImages": []
+}

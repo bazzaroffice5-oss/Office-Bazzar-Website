@@ -1,0 +1,467 @@
+[
+  {
+    "sku": "OB-COM-1039",
+    "name": "spiral binding machine",
+    "category": "Printers & Technology"
+  },
+  {
+    "sku": "OB-003",
+    "name": "Shoe Cover Dispenser",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-005",
+    "name": "Jet Hand Dryer",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-006",
+    "name": "Commercial Vacuum Cleaner",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-007",
+    "name": "Shoe Polish Machine",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-008",
+    "name": "Feather Duster",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-012",
+    "name": "ABS Soap Dispenser Curved",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-014",
+    "name": "ABS Soap Dispenser 250ml",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-015",
+    "name": "ABS Double Soap Dispenser Clear",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-016",
+    "name": "Double Soap Dispenser White",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-017",
+    "name": "Automatic Soap Dispenser",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-021",
+    "name": "SS Jumbo Roll Tissue Dispenser",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-023",
+    "name": "SS Toilet Roll Dispenser",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-024",
+    "name": "Mini Toilet Roll Dispenser",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-025",
+    "name": "HRT Roll Dispenser Automatic",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-026",
+    "name": "HRT Roll Dispenser Autocut",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-033",
+    "name": "HRT Tissue Roll",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-035",
+    "name": "Kitchen Tissue Roll",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-039",
+    "name": "Gada Cloth",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-041",
+    "name": "Micro Fiber Cloth (All Size)",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-042",
+    "name": "Banian Cloth",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-043",
+    "name": "Banian Cloth White",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-044",
+    "name": "Blue Duster Cloth",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-048",
+    "name": "Nylon Scrubber",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-053",
+    "name": "Hi-Clean Dishwash Liquid",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-057",
+    "name": "Toilet Brush Round",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-059",
+    "name": "Road Cleaning Brush",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-060",
+    "name": "Cloth Washing Brush",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-061",
+    "name": "Washbasin Brush",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-062",
+    "name": "Cobweb Stick Sunflower",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-066",
+    "name": "Swing Plastic Dustbin",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-069",
+    "name": "Stainless Steel Pedal Dustbin",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-070",
+    "name": "SS Perforated Dustbin",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-071",
+    "name": "SS Push Can Dustbin",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-075",
+    "name": "Kitchen Counter Wiper",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-077",
+    "name": "Floor Wiper with Long Stick",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-078",
+    "name": "Table Top Wiper",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-080",
+    "name": "Clip Mop Head Colour Coded",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-084",
+    "name": "Twist Floor Mop",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-086",
+    "name": "Rubber Welcome Mat",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-087",
+    "name": "Cotton Door Mat",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-089",
+    "name": "Plastic Handheld Dustpan",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-097",
+    "name": "Automatic Air Freshener Dispenser Refill",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-098",
+    "name": "Hi-Clean Air Freshener Liquid (5 Litre)",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-102",
+    "name": "Cleaning Caddy Basket Organizer",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-104",
+    "name": "Commercial Insect Killer Fly Catcher Machine",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-105",
+    "name": "ABS Wall Mounted Broom Mop Holder",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-106",
+    "name": "Upright Lobby Dustpan with Broom",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-107",
+    "name": "Floor and Glass Scraper Tool",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-111",
+    "name": "Caustic Soda Flakes",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-113",
+    "name": "Hard Broom Stick (Big / Small)",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-115",
+    "name": "Grass Soft Broom (Big / Small)",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-116",
+    "name": "Steel Handle Broom",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-120",
+    "name": "Hi-Clean Toilet Cleaner (500ml / 5L)",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-122",
+    "name": "Hi-Clean Glass Cleaner (500ml / 5L)",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-123",
+    "name": "Hi-Clean Black Disinfectant Concentrate Phenyl",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-124",
+    "name": "Hi-Clean Hand Wash (250ml / 500ml / 5L)",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-125",
+    "name": "Hi-Clean Bathroom Cleaner (500ml)",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-129",
+    "name": "Cleaning Thinner NC Thinner",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-131",
+    "name": "Disposable Heavy Garbage Bags (All Sizes)",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-132",
+    "name": "Industrial Rubber Anti-Fatigue Mat Roll",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-133",
+    "name": "Heavy Duty Rubber Cleaning Hand Gloves",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-134",
+    "name": "Cotton Knitted Safety Hand Gloves",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-138",
+    "name": "Wringer Trolley Triple Bucket",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-140",
+    "name": "Metal Supermarket Shopping Cart Trolley",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-141",
+    "name": "Industrial Heavy Duty Platform Trolley",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-142",
+    "name": "Janitor Cleaning Service Trolley Cart",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-143",
+    "name": "Multipurpose Wringer Janitor Trolley",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-147",
+    "name": "SS Duo Waste Recycling Dustbin",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-149",
+    "name": "FRP Duo Outdoor Waste Bins",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-152",
+    "name": "Heavy Duty Wheeled Dustbin 660 Litre",
+    "category": "Housekeeping & Hygiene"
+  },
+  {
+    "sku": "OB-FIL-19",
+    "name": "A4 Sheet Protector Clear Sheet",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-FIL-26",
+    "name": "OfficeBazzar Box File",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-PEN-35",
+    "name": "Montex Ballpoint Pen",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-PEN-41",
+    "name": "OHP CD/DVD Permanent Marker",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-PEN-42",
+    "name": "Fluorescent Highlighter Marker Pack",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-DES-55",
+    "name": "Heavy Duty Tape Dispenser (1 inch / 2 inch)",
+    "category": "Packaging Supplies"
+  },
+  {
+    "sku": "OB-DES-57",
+    "name": "Box Packaging Strapping Roll",
+    "category": "Packaging Supplies"
+  },
+  {
+    "sku": "OB-NOT-67",
+    "name": "Metal Notice Board Push Pins",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-NOT-70",
+    "name": "Nylon Rubber Bands Pack",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-NOT-74",
+    "name": "Document Paper Tray Tier Set (2/3/4 Tier)",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-EQP-83",
+    "name": "Corporate Accounts Entry Register",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-EQP-85",
+    "name": "Executive Hardbound Daily Diary",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-EQP-87",
+    "name": "High Definition Conference Projector",
+    "category": "Printers & Technology"
+  },
+  {
+    "sku": "OB-COV-03",
+    "name": "Reusable Washable Cotton Face Mask",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-COV-06",
+    "name": "Cotton Knitted Safety Gloves Pack",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-COV-09",
+    "name": "Hi-Safe Medical Grade Nitrile Gloves Box",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-COV-10",
+    "name": "Full Body Coverall PPE Safety Kit",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-COV-19",
+    "name": "Medical Oxygen Concentrator Machine",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-COV-22",
+    "name": "Disposable Non-Woven Bouffant Head Caps Pack",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-COV-23",
+    "name": "Disposable Non-Woven Shoe Covers Pack",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-COV-25",
+    "name": "Contactless Infrared Forehead Thermometer",
+    "category": "Office Stationery"
+  },
+  {
+    "sku": "OB-COV-26",
+    "name": "Social Distancing Queue Barrier Stanchion",
+    "category": "Office Stationery"
+  }
+]

@@ -1,0 +1,3449 @@
+[
+  {
+    "id": "prod-cardboard-tag-file",
+    "sku": "OB-STA-1001",
+    "name": "Cardboard Tag File",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-17-a4-transparent-report-file.webp"
+    ]
+  },
+  {
+    "id": "prod-3025-box-file",
+    "sku": "OB-STA-1002",
+    "name": "3025 Box File",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-21-a4-button-folder-document-bag.webp"
+    ]
+  },
+  {
+    "id": "prod-a4-punch-folder",
+    "sku": "OB-STA-1003",
+    "name": "A/4 Punch Folder",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-23-office-document-tag-file.webp"
+    ]
+  },
+  {
+    "id": "prod-a4-report-file",
+    "sku": "OB-STA-1004",
+    "name": "A/4 Report File",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-22-lm-plastic-folder-assorted-colours.webp"
+    ]
+  },
+  {
+    "id": "prod-a4-stick-file",
+    "sku": "OB-STA-1005",
+    "name": "A/4 Stick File",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-25-classic-cardboard-spring-file.webp"
+    ]
+  },
+  {
+    "id": "prod-visiting-card-folder",
+    "sku": "OB-STA-1006",
+    "name": "Visiting Card Folder",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-27-officebazzar-accounts-voucher-file.webp"
+    ]
+  },
+  {
+    "id": "prod-fs-expanding-file",
+    "sku": "OB-STA-1007",
+    "name": "F/S Expanding File",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-18-f-s-expanding-file-folder-case.webp"
+    ]
+  },
+  {
+    "id": "prod-punching-machine-dp-600-kangaroo",
+    "sku": "OB-STA-1008",
+    "name": "Punching Machine DP 600 Kangaroo",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-des-61-two-hole-paper-punching-machine.webp"
+    ]
+  },
+  {
+    "id": "prod-kangaro-staplers-hd-10d",
+    "sku": "OB-STA-1009",
+    "name": "Kangaro Staplers HD 10D",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-des-59-desk-stapler-machine-no-10-24-6.webp"
+    ]
+  },
+  {
+    "id": "prod-white-banian-cloth",
+    "sku": "OB-HOU-1010",
+    "name": "White Banian Cloth",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-040-yellow-cloth-small-big.webp"
+    ]
+  },
+  {
+    "id": "prod-scrubbing-pad",
+    "sku": "OB-HOU-1011",
+    "name": "Scrubbing Pad",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-046-scrub-pad-green.webp"
+    ]
+  },
+  {
+    "id": "prod-housekeeping-cleaning-chemicals",
+    "sku": "OB-HOU-1012",
+    "name": "Housekeeping Cleaning Chemicals",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/housekeeping-cleaning-chemicals-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-tissue-paper-napkin",
+    "sku": "OB-HOU-1013",
+    "name": "Tissue Paper Napkin",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-028-hi-soft-tissue-roll.webp"
+    ]
+  },
+  {
+    "id": "prod-table-wiper",
+    "sku": "OB-HOU-1014",
+    "name": "Table Wiper",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-093-premium-room-freshener-aerosol.webp"
+    ]
+  },
+  {
+    "id": "prod-toilet-cleaning-brush",
+    "sku": "OB-HOU-1015",
+    "name": "Toilet Cleaning Brush",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-056-toilet-brush-single-hockey.webp"
+    ]
+  },
+  {
+    "id": "prod-checked-cloth",
+    "sku": "OB-HOU-1016",
+    "name": "Checked Cloth",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-037-checked-cloth-small-big.webp"
+    ]
+  },
+  {
+    "id": "prod-rubber-gloves",
+    "sku": "OB-HOU-1017",
+    "name": "Rubber Gloves",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/covid-products/ob-cov-07-rubber-industrial-safety-gloves.webp"
+    ]
+  },
+  {
+    "id": "prod-kangaro-staplers-hd-10d-1",
+    "sku": "OB-HOU-1018",
+    "name": "Kangaro Staplers HD 10D",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/staplers-machine-kangaroo-hd-10d-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-glass-wiper",
+    "sku": "OB-HOU-1019",
+    "name": "Glass Wiper",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-091-magiccode-room-freshener-spray.webp"
+    ]
+  },
+  {
+    "id": "prod-caddy-basket",
+    "sku": "OB-HOU-1020",
+    "name": "Caddy Basket",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-118-hi-clean-floor-cleaner-500ml-5l.webp"
+    ]
+  },
+  {
+    "id": "prod-wringer-trolley",
+    "sku": "OB-HOU-1021",
+    "name": "Wringer Trolley",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-136-wringer-trolley-single-bucket.webp"
+    ]
+  },
+  {
+    "id": "prod-stainess-steel-hand-soap-dispenser",
+    "sku": "OB-HOU-1022",
+    "name": "Stainess Steel Hand Soap Dispenser",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-010-ss-soap-dispenser-500ml-800ml-1000ml.webp"
+    ]
+  },
+  {
+    "id": "prod-abs-hand-dryer-machine",
+    "sku": "OB-HOU-1023",
+    "name": "ABS Hand Dryer Machine",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-002-abs-hand-dryer-machine.webp"
+    ]
+  },
+  {
+    "id": "prod-stainless-steel-hand-dryer-machine",
+    "sku": "OB-HOU-1024",
+    "name": "Stainless Steel Hand Dryer Machine",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-001-ss-hand-dryer-machine.webp"
+    ]
+  },
+  {
+    "id": "prod-air-freshener-dispenser-led",
+    "sku": "OB-HOU-1025",
+    "name": "Air Freshener Dispenser LED",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-127-dettol-antiseptic-disinfectant-liquid.webp"
+    ]
+  },
+  {
+    "id": "prod-copper-water-bottle",
+    "sku": "OB-HOU-1026",
+    "name": "Copper Water Bottle",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/copper-water-bottle-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-toilet-roll-dispenser",
+    "sku": "OB-HOU-1027",
+    "name": "Toilet Roll Dispenser",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-022-abs-toilet-roll-dispenser.webp"
+    ]
+  },
+  {
+    "id": "prod-stainless-steel-dustbin",
+    "sku": "OB-GAR-1028",
+    "name": "Stainless Steel Dustbin",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-064-plastic-dustbin-regular.webp"
+    ]
+  },
+  {
+    "id": "prod-aristo-wheeled-dust-bin-120-litre-with-pedal",
+    "sku": "OB-GAR-1029",
+    "name": "Aristo Wheeled Dust Bin 120 Litre With Pedal",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-079-toilet-sink-plunger.webp"
+    ]
+  },
+  {
+    "id": "prod-green-biodegradable-garbage-bag",
+    "sku": "OB-GAR-1030",
+    "name": "Green Biodegradable Garbage Bag",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-088-plastic-bucket-and-mug-set.webp"
+    ]
+  },
+  {
+    "id": "prod-garbage-bag-small",
+    "sku": "OB-GAR-1031",
+    "name": "Garbage Bag - Small",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-082-dry-mop-set-with-refill.webp"
+    ]
+  },
+  {
+    "id": "prod-silver-stainless-steel-ss-lobby-ashtray-bin-capacity-8x24",
+    "sku": "OB-GAR-1032",
+    "name": "Silver Stainless Steel SS Lobby Ashtray Bin, Capacity: 8x24",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-068-metal-wire-mesh-dustbin.webp"
+    ]
+  },
+  {
+    "id": "prod-cartoon-character-dustbin",
+    "sku": "OB-GAR-1033",
+    "name": "Cartoon Character Dustbin",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/cartoon-character-dustbin-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-external-hard-disk",
+    "sku": "OB-COM-1034",
+    "name": "External Hard Disk",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/external-hard-disk-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-epson-ecotank-l6160-wi-fi-duplex-multi-function-ink-tank-printer",
+    "sku": "OB-COM-1035",
+    "name": "Epson Ecotank L6160 Wi-Fi Duplex Multi Function Ink Tank Printer",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/epson-l6170-wi-fi-duplex-multifunction-inktank-printer-with-adf-500x500-1-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-kent-ks-12-lamination-machine",
+    "sku": "OB-COM-1036",
+    "name": "Kent KS 12 Lamination Machine",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/kent-ks-12-lamination-machine-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-keyboard-tray-metal",
+    "sku": "OB-COM-1037",
+    "name": "Keyboard Tray Metal",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/keyboard-drawer-metal-19-innofitt-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-sandisk-pen-drive",
+    "sku": "OB-COM-1038",
+    "name": "SanDisk Pen Drive",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/16-gb-pen-drive-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-spiral-binding-machine",
+    "sku": "OB-COM-1039",
+    "name": "spiral binding machine",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/whatsapp-image-2021-03-10-at-11-16-31-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-barcode-printer",
+    "sku": "OB-COM-1040",
+    "name": "Barcode Printer",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/canon-mk2500-ferrule-printer-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-adaptor-cable",
+    "sku": "OB-COM-1041",
+    "name": "Adaptor Cable",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/adaptor-cable-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-white-board-for-school",
+    "sku": "OB-BOA-1042",
+    "name": "White Board For School",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/white-board-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-golden-letter-for-welcome-board",
+    "sku": "OB-BOA-1043",
+    "name": "Golden Letter for Welcome Board",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/golden-letter-for-welcome-board-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-alkosign-motorized-dependent-up-down-boards",
+    "sku": "OB-BOA-1044",
+    "name": "Alkosign Motorized Dependent Up Down Boards",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/alkosign-motorised-dependent-up-down-boards-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-alkosign-horizontal-sliding-board",
+    "sku": "OB-BOA-1045",
+    "name": "Alkosign Horizontal Sliding Board",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/alkosign-horizantal-sliding-board-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-pin-up-notice-board",
+    "sku": "OB-BOA-1046",
+    "name": "Pin Up / Notice Board",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/pin-up-notice-board-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-alkosign-pegboard",
+    "sku": "OB-BOA-1047",
+    "name": "Alkosign Pegboard",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/alkosign-pegboard-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-ms-black-magazine-rack",
+    "sku": "OB-BOA-1048",
+    "name": "Ms Black Magazine Rack",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/magazine-stand-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-white-board-duster",
+    "sku": "OB-BOA-1049",
+    "name": "White Board Duster",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/white-board-duster-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-a4-display-folders",
+    "sku": "OB-BOA-1050",
+    "name": "A4 Display Folders",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/boards-and-accessories-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-cello-tape",
+    "sku": "OB-PAC-1051",
+    "name": "Cello Tape",
+    "category": "Packaging Supplies",
+    "images": [
+      "/assets/products/stationery/ob-des-50-office-paper-gum-paste-bottle.webp"
+    ]
+  },
+  {
+    "id": "prod-cello-brown-tape",
+    "sku": "OB-PAC-1052",
+    "name": "Cello Brown Tape",
+    "category": "Packaging Supplies",
+    "images": [
+      "/assets/products/packaging-supplies/ob-des-54-bopp-packaging-tape-brown-cello-1-2-3-inch.webp"
+    ]
+  },
+  {
+    "id": "prod-floor-marking-tapes",
+    "sku": "OB-PAC-1053",
+    "name": "Floor Marking Tapes",
+    "category": "Packaging Supplies",
+    "images": [
+      "/assets/products/packaging-supplies/ob-cov-29-yellow-black-floor-marking-caution-tape.webp"
+    ]
+  },
+  {
+    "id": "prod-bubble-sheet",
+    "sku": "OB-PAC-1054",
+    "name": "Bubble Sheet",
+    "category": "Packaging Supplies",
+    "images": [
+      "/assets/products/packaging-supplies/ob-des-58-protective-bubble-wrap-roll.webp"
+    ]
+  },
+  {
+    "id": "prod-foam-thermocol",
+    "sku": "OB-PAC-1055",
+    "name": "Foam Thermocol",
+    "category": "Packaging Supplies",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/foam-and-thermocol-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-packing-patti-roll",
+    "sku": "OB-PAC-1056",
+    "name": "Packing Patti Roll",
+    "category": "Packaging Supplies",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/packing-patti-roll-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-magic-tape-with-dispenser",
+    "sku": "OB-PAC-1057",
+    "name": "Magic Tape With Dispenser",
+    "category": "Packaging Supplies",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/magic-tape-with-dispenser-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-paper-cutter-big",
+    "sku": "OB-PAC-1058",
+    "name": "Paper Cutter Big",
+    "category": "Packaging Supplies",
+    "images": [
+      "/assets/products/stationery/ob-des-64-stainless-steel-office-scissors-all-sizes.webp"
+    ]
+  },
+  {
+    "id": "prod-gum-paste",
+    "sku": "OB-PAC-1059",
+    "name": "Gum Paste",
+    "category": "Packaging Supplies",
+    "images": [
+      "/assets/products/stationery/ob-des-49-fevistik-glue-stick-big.webp"
+    ]
+  },
+  {
+    "id": "prod-double-sided-newspaper-stand",
+    "sku": "OB-DIS-1060",
+    "name": "Double Sided Newspaper Stand",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/double-sided-newspaper-stand-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-wooden-stand-for-boards",
+    "sku": "OB-DIS-1061",
+    "name": "Wooden Stand for Boards",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/wooden-stand-for-boards-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-tripod-stand",
+    "sku": "OB-DIS-1062",
+    "name": "Tripod Stand",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/tripod-stand-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-name-plate-plain-innofitt",
+    "sku": "OB-DIS-1063",
+    "name": "Name Plate Plain -Innofitt",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/name-plate-innofitt-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-gobbler-gs8cd-paper-shredding-machine",
+    "sku": "OB-SHR-1064",
+    "name": "Gobbler GS8CD Paper Shredding Machine",
+    "category": "Printers & Technology",
+    "images": [
+      "/assets/products/printers-technology/ob-eqp-86-heavy-duty-cross-cut-paper-shredder.webp"
+    ]
+  },
+  {
+    "id": "prod-gobbler-gs15cd-paper-shredding-machine",
+    "sku": "OB-SHR-1065",
+    "name": "Gobbler GS15CD Paper Shredding Machine",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/gobbler-gs15cd-paper-shredding-machine-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-gobbler-a2326-paper-shredding-machine",
+    "sku": "OB-SHR-1066",
+    "name": "Gobbler A2326 Paper Shredding Machine",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/gobbler-a2326-paper-shredding-machine-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-gobbler-s3135-heavy-duty-paper-shredding-machine",
+    "sku": "OB-SHR-1067",
+    "name": "Gobbler S3135 Heavy Duty Paper Shredding Machine",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/gobbler-s3135-heavy-duty-paper-shredding-machine-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-gobbler-gs-10-cd-paper-shredding-machine",
+    "sku": "OB-SHR-1068",
+    "name": "Gobbler GS 10 CD Paper Shredding Machine",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/gobbler-gs10cd-paper-shredding-machine-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-gobbler-px9900-currency-counting-machine",
+    "sku": "OB-SHR-1069",
+    "name": "Gobbler PX9900 Currency Counting Machine",
+    "category": "Printers & Technology",
+    "images": [
+      "/assets/products/stationery/ob-eqp-88-magnetic-notice-display-folder-frame.webp"
+    ]
+  },
+  {
+    "id": "prod-royal-napkins",
+    "sku": "OB-HOU-1070",
+    "name": "Royal Napkins",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/royal-napkins-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-colin-glass-cleaner-500-ml",
+    "sku": "OB-HOU-1071",
+    "name": "Colin Glass Cleaner 500 Ml",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-151-wheeled-dustbin-120-litre-green.webp"
+    ]
+  },
+  {
+    "id": "prod-plastic-storage-box",
+    "sku": "OB-HOU-1072",
+    "name": "Plastic Storage Box",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/plastic-storage-box-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-butter-paper",
+    "sku": "OB-HOU-1073",
+    "name": "Butter Paper",
+    "category": "Office Stationery",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/butter-paper-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-dettol-disinfectant-spray",
+    "sku": "OB-HOU-1074",
+    "name": "Dettol Disinfectant Spray",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/dettol-disinfectant-spray-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-best-print-12a-compatible-toner-cartridge",
+    "sku": "OB-PRI-1075",
+    "name": "Best Print 12A Compatible Toner Cartridge",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/best-print-12a-compatible-toner-cartridge-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-canon-ep-303-toner-cartridge",
+    "sku": "OB-PRI-1076",
+    "name": "Canon EP 303 Toner Cartridge",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/canon-ep-303-toner-cartridge-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-canon-308-toner-cartridge",
+    "sku": "OB-PRI-1077",
+    "name": "Canon 308 Toner Cartridge",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/canon-308-toner-cartridge-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-label-cartridges",
+    "sku": "OB-PRI-1078",
+    "name": "Label Cartridges",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/dymo-label-cartridges-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-canon-refilling-cartridge",
+    "sku": "OB-PRI-1079",
+    "name": "Canon Refilling Cartridge",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/canon-refilling-catridge-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-compatible-toner-cartridge",
+    "sku": "OB-PRI-1080",
+    "name": "Compatible Toner Cartridge",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/cf403a-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-samsung-mlt-d116s-black-toner-cartridge-packaging-type-box",
+    "sku": "OB-PRI-1081",
+    "name": "Samsung MLT-D116S Black Toner Cartridge, Packaging Type: Box",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/samsung-mlt-d116s-black-toner-cartridge-500x500-a-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-hp-126a-laser-jet-toner-cartridge",
+    "sku": "OB-PRI-1082",
+    "name": "HP 126A Laser Jet Toner Cartridge",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/hp-126a-laserjet-toner-cartridge-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-canon-npg-51-toner-cartridge",
+    "sku": "OB-PRI-1083",
+    "name": "Canon Npg 51 Toner Cartridge",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/npg-51-compatible-toner-cartridge-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-best-print-88a-compatible-toner-cartridge",
+    "sku": "OB-PRI-1084",
+    "name": "Best Print 88A Compatible Toner Cartridge",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/best-india-print-88a-compatible-toner-cartridge-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-hp-802-small-black-ink-cartridge-ch561zz",
+    "sku": "OB-PRI-1085",
+    "name": "HP 802 Small Black Ink Cartridge - CH561ZZ",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/hp-802-small-black-ink-cartridge-ch561zz-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-hp-678-tri-color-ink-cartridge-cz108aa",
+    "sku": "OB-PRI-1086",
+    "name": "HP 678 Tri-Color Ink Cartridge - CZ108AA",
+    "category": "Printers & Technology",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2022/12/hp-678-tri-color-ink-cartridge-cz108aa-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-taski-r4-furniture-maintainer",
+    "sku": "OB-CLE-1087",
+    "name": "Taski R4 Furniture Maintainer",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-148-ss-trio-waste-recycling-dustbin.webp"
+    ]
+  },
+  {
+    "id": "prod-taski-r6-toilet-cleaner",
+    "sku": "OB-CLE-1088",
+    "name": "Taski R6 Toilet Cleaner",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-150-frp-trio-segregation-waste-bins.webp"
+    ]
+  },
+  {
+    "id": "prod-liquid-white-phenyl",
+    "sku": "OB-CLE-1089",
+    "name": "Liquid White Phenyl",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2023/01/liquid-white-phenyl-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-humic-acid-liquid",
+    "sku": "OB-CLE-1090",
+    "name": "Humic Acid Liquid",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2023/01/liquid-acid-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-vim-liquid-dish-wash",
+    "sku": "OB-CLE-1091",
+    "name": "Vim Liquid Dish Wash",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-155-diversey-taski-r2-hygienic-hard-surface-cleaner.webp"
+    ]
+  },
+  {
+    "id": "prod-lizol-liquid-cleaner",
+    "sku": "OB-CLE-1092",
+    "name": "Lizol Liquid Cleaner",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-154-diversey-taski-r1-super-bathroom-cleaner.webp"
+    ]
+  },
+  {
+    "id": "prod-harpic-toilet-cleaner",
+    "sku": "OB-CLE-1093",
+    "name": "Harpic Toilet Cleaner",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2023/01/harpic-toilet-cleaner-500-ml-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-hi-clean-floor-cleaner-5-ltr",
+    "sku": "OB-CLE-1094",
+    "name": "Hi Clean Floor Cleaner 5 ltr",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2023/01/hi-clean-floor-cleaner-5-ltr-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-hi-clean-liquid-soap-oil",
+    "sku": "OB-CLE-1095",
+    "name": "Hi Clean Liquid Soap Oil",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2023/01/hi-clean-liquid-soap-1-ltr-500x500-1.jpg"
+    ]
+  },
+  {
+    "id": "prod-tissue-paper-napkin-1",
+    "sku": "OB-TIS-1096",
+    "name": "Tissue Paper Napkin",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-029-hi-soft-tissue-napkin.webp"
+    ]
+  },
+  {
+    "id": "prod-royal-napkins-tissue-paper",
+    "sku": "OB-TIS-1097",
+    "name": "Royal Napkins Tissue Paper",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2023/01/royal-napkins-tissue-paper-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-c-fold-tissue",
+    "sku": "OB-TIS-1098",
+    "name": "C Fold Tissue",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-031-c-fold-tissue.webp"
+    ]
+  },
+  {
+    "id": "prod-m-fold-tissue",
+    "sku": "OB-TIS-1099",
+    "name": "M Fold Tissue",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-032-m-fold-tissue.webp"
+    ]
+  },
+  {
+    "id": "prod-kimsoft-smile-c-fold-towels-180-towels-30-sleeves-031500",
+    "sku": "OB-TIS-1100",
+    "name": "KIMSOFT Smile C Fold Towels 180 Towels 30 Sleeves 031500",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "https://officebazzar.co.in/wp-content/uploads/2023/01/kimsoft-smile-c-fold-towels-180-towels-30-sleeves-031500-500x500-1.webp"
+    ]
+  },
+  {
+    "id": "prod-toilet-roll-big",
+    "sku": "OB-TIS-1101",
+    "name": "Toilet Roll Big",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-034-jumbo-tissue-roll.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-003-shoe-cover-dispenser",
+    "sku": "OB-003",
+    "name": "Shoe Cover Dispenser",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-003-shoe-cover-dispenser.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-004-paper-cup-dispenser",
+    "sku": "OB-004",
+    "name": "Paper Cup Dispenser",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/housekeeping/ob-004-paper-cup-dispenser.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-005-jet-hand-dryer",
+    "sku": "OB-005",
+    "name": "Jet Hand Dryer",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-005-jet-hand-dryer.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-006-commercial-vacuum-cleaner",
+    "sku": "OB-006",
+    "name": "Commercial Vacuum Cleaner",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-006-commercial-vacuum-cleaner.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-007-shoe-polish-machine",
+    "sku": "OB-007",
+    "name": "Shoe Polish Machine",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-007-shoe-polish-machine.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-008-feather-duster",
+    "sku": "OB-008",
+    "name": "Feather Duster",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-008-feather-duster.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-009-queue-manager",
+    "sku": "OB-009",
+    "name": "Queue Manager",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-009-queue-manager.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-011-abs-soap-dispenser-500ml",
+    "sku": "OB-011",
+    "name": "ABS Soap Dispenser 500ml",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-011-abs-soap-dispenser-500ml.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-012-abs-soap-dispenser-curved",
+    "sku": "OB-012",
+    "name": "ABS Soap Dispenser Curved",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-012-abs-soap-dispenser-curved.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-013-abs-soap-dispenser-single-clear",
+    "sku": "OB-013",
+    "name": "ABS Soap Dispenser Single Clear",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-013-abs-soap-dispenser-single-clear.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-014-abs-soap-dispenser-250ml",
+    "sku": "OB-014",
+    "name": "ABS Soap Dispenser 250ml",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-014-abs-soap-dispenser-250ml.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-015-abs-double-soap-dispenser-clear",
+    "sku": "OB-015",
+    "name": "ABS Double Soap Dispenser Clear",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-015-abs-double-soap-dispenser-clear.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-016-double-soap-dispenser-white",
+    "sku": "OB-016",
+    "name": "Double Soap Dispenser White",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-016-double-soap-dispenser-white.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-017-automatic-soap-dispenser",
+    "sku": "OB-017",
+    "name": "Automatic Soap Dispenser",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-017-automatic-soap-dispenser.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-018-touch-free-soap-dispenser",
+    "sku": "OB-018",
+    "name": "Touch Free Soap Dispenser",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-018-touch-free-soap-dispenser.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-019-ss-c-m-fold-tissue-dispenser",
+    "sku": "OB-019",
+    "name": "SS C/M Fold Tissue Dispenser",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-019-ss-c-m-fold-tissue-dispenser.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-020-abs-tissue-dispenser-m-fold",
+    "sku": "OB-020",
+    "name": "ABS Tissue Dispenser M-Fold",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-020-abs-tissue-dispenser-m-fold.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-021-ss-jumbo-roll-tissue-dispenser",
+    "sku": "OB-021",
+    "name": "SS Jumbo Roll Tissue Dispenser",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-021-ss-jumbo-roll-tissue-dispenser.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-023-ss-toilet-roll-dispenser",
+    "sku": "OB-023",
+    "name": "SS Toilet Roll Dispenser",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-023-ss-toilet-roll-dispenser.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-024-mini-toilet-roll-dispenser",
+    "sku": "OB-024",
+    "name": "Mini Toilet Roll Dispenser",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-024-mini-toilet-roll-dispenser.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-025-hrt-roll-dispenser-automatic",
+    "sku": "OB-025",
+    "name": "HRT Roll Dispenser Automatic",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-025-hrt-roll-dispenser-automatic.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-026-hrt-roll-dispenser-autocut",
+    "sku": "OB-026",
+    "name": "HRT Roll Dispenser Autocut",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-026-hrt-roll-dispenser-autocut.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-027-kitchen-roll-dispenser",
+    "sku": "OB-027",
+    "name": "Kitchen Roll Dispenser",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-027-kitchen-roll-dispenser.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-030-premier-face-tissue",
+    "sku": "OB-030",
+    "name": "Premier Face Tissue",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-030-premier-face-tissue.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-033-hrt-tissue-roll",
+    "sku": "OB-033",
+    "name": "HRT Tissue Roll",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-033-hrt-tissue-roll.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-035-kitchen-tissue-roll",
+    "sku": "OB-035",
+    "name": "Kitchen Tissue Roll",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-035-kitchen-tissue-roll.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-036-greenlime-tissue",
+    "sku": "OB-036",
+    "name": "Greenlime Tissue",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-036-greenlime-tissue.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-038-glass-cloth",
+    "sku": "OB-038",
+    "name": "Glass Cloth",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-038-glass-cloth.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-039-gada-cloth",
+    "sku": "OB-039",
+    "name": "Gada Cloth",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-039-gada-cloth.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-041-micro-fiber-cloth-all-size",
+    "sku": "OB-041",
+    "name": "Micro Fiber Cloth (All Size)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-041-micro-fiber-cloth-all-size.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-042-banian-cloth",
+    "sku": "OB-042",
+    "name": "Banian Cloth",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-042-banian-cloth.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-043-banian-cloth-white",
+    "sku": "OB-043",
+    "name": "Banian Cloth White",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-043-banian-cloth-white.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-044-blue-duster-cloth",
+    "sku": "OB-044",
+    "name": "Blue Duster Cloth",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-044-blue-duster-cloth.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-045-cotton-towel-small-big",
+    "sku": "OB-045",
+    "name": "Cotton Towel (Small / Big)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-045-cotton-towel-small-big.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-047-scrub-pad-with-sponge",
+    "sku": "OB-047",
+    "name": "Scrub Pad with Sponge",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-047-scrub-pad-with-sponge.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-048-nylon-scrubber",
+    "sku": "OB-048",
+    "name": "Nylon Scrubber",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-048-nylon-scrubber.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-049-steel-scrubber",
+    "sku": "OB-049",
+    "name": "Steel Scrubber",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-049-steel-scrubber.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-050-exo-round-bar",
+    "sku": "OB-050",
+    "name": "Exo Round Bar",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-050-exo-round-bar.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-051-pril-dishwash-liquid",
+    "sku": "OB-051",
+    "name": "Pril Dishwash Liquid",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-051-pril-dishwash-liquid.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-052-vim-dishwash-gel-250ml-500ml-1-8-ltr",
+    "sku": "OB-052",
+    "name": "Vim Dishwash Gel (250ml / 500ml / 1.8 Ltr)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-052-vim-dishwash-gel-250ml-500ml-1-8-ltr.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-053-hi-clean-dishwash-liquid",
+    "sku": "OB-053",
+    "name": "Hi-Clean Dishwash Liquid",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-053-hi-clean-dishwash-liquid.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-054-vim-pril-dishwash-soap",
+    "sku": "OB-054",
+    "name": "Vim & Pril Dishwash Soap",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-054-vim-pril-dishwash-soap.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-055-toilet-brush-double-hockey",
+    "sku": "OB-055",
+    "name": "Toilet Brush Double Hockey",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-055-toilet-brush-double-hockey.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-057-toilet-brush-round",
+    "sku": "OB-057",
+    "name": "Toilet Brush Round",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-057-toilet-brush-round.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-058-carpet-brush-hard-soft",
+    "sku": "OB-058",
+    "name": "Carpet Brush (Hard / Soft)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-058-carpet-brush-hard-soft.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-059-road-cleaning-brush",
+    "sku": "OB-059",
+    "name": "Road Cleaning Brush",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-059-road-cleaning-brush.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-060-cloth-washing-brush",
+    "sku": "OB-060",
+    "name": "Cloth Washing Brush",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-060-cloth-washing-brush.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-061-washbasin-brush",
+    "sku": "OB-061",
+    "name": "Washbasin Brush",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-061-washbasin-brush.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-062-cobweb-stick-sunflower",
+    "sku": "OB-062",
+    "name": "Cobweb Stick Sunflower",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-062-cobweb-stick-sunflower.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-063-dust-pan-with-brush-set",
+    "sku": "OB-063",
+    "name": "Dust Pan with Brush Set",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-063-dust-pan-with-brush-set.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-065-pedal-plastic-dustbin",
+    "sku": "OB-065",
+    "name": "Pedal Plastic Dustbin",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-065-pedal-plastic-dustbin.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-066-swing-plastic-dustbin",
+    "sku": "OB-066",
+    "name": "Swing Plastic Dustbin",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-066-swing-plastic-dustbin.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-067-single-mop-wringer-bucket",
+    "sku": "OB-067",
+    "name": "Single Mop Wringer Bucket",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-067-single-mop-wringer-bucket.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-069-stainless-steel-pedal-dustbin",
+    "sku": "OB-069",
+    "name": "Stainless Steel Pedal Dustbin",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-069-stainless-steel-pedal-dustbin.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-070-ss-perforated-dustbin",
+    "sku": "OB-070",
+    "name": "SS Perforated Dustbin",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-070-ss-perforated-dustbin.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-071-ss-push-can-dustbin",
+    "sku": "OB-071",
+    "name": "SS Push Can Dustbin",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-071-ss-push-can-dustbin.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-072-ss-swing-dustbin",
+    "sku": "OB-072",
+    "name": "SS Swing Dustbin",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-072-ss-swing-dustbin.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-073-commercial-glass-wiper",
+    "sku": "OB-073",
+    "name": "Commercial Glass Wiper",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-073-commercial-glass-wiper.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-074-glass-combi-wiper-with-sponge",
+    "sku": "OB-074",
+    "name": "Glass Combi Wiper with Sponge",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-074-glass-combi-wiper-with-sponge.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-075-kitchen-counter-wiper",
+    "sku": "OB-075",
+    "name": "Kitchen Counter Wiper",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-075-kitchen-counter-wiper.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-076-versa-wiper",
+    "sku": "OB-076",
+    "name": "Versa Wiper",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-076-versa-wiper.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-077-floor-wiper-with-long-stick",
+    "sku": "OB-077",
+    "name": "Floor Wiper with Long Stick",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-077-floor-wiper-with-long-stick.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-078-table-top-wiper",
+    "sku": "OB-078",
+    "name": "Table Top Wiper",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-078-table-top-wiper.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-080-clip-mop-head-colour-coded",
+    "sku": "OB-080",
+    "name": "Clip Mop Head Colour Coded",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-080-clip-mop-head-colour-coded.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-081-cob-web-brush-curved",
+    "sku": "OB-081",
+    "name": "Cob Web Brush Curved",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-081-cob-web-brush-curved.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-083-heavy-duty-mop-stick-handle",
+    "sku": "OB-083",
+    "name": "Heavy Duty Mop Stick Handle",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-083-heavy-duty-mop-stick-handle.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-084-twist-floor-mop",
+    "sku": "OB-084",
+    "name": "Twist Floor Mop",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-084-twist-floor-mop.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-085-clip-fit-wet-mop-refill",
+    "sku": "OB-085",
+    "name": "Clip & Fit Wet Mop Refill",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-085-clip-fit-wet-mop-refill.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-086-rubber-welcome-mat",
+    "sku": "OB-086",
+    "name": "Rubber Welcome Mat",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-086-rubber-welcome-mat.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-087-cotton-door-mat",
+    "sku": "OB-087",
+    "name": "Cotton Door Mat",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-087-cotton-door-mat.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-089-plastic-handheld-dustpan",
+    "sku": "OB-089",
+    "name": "Plastic Handheld Dustpan",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-089-plastic-handheld-dustpan.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-090-round-cotton-floor-mop",
+    "sku": "OB-090",
+    "name": "Round Cotton Floor Mop",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-090-round-cotton-floor-mop.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-092-godrej-aer-room-freshener-spray",
+    "sku": "OB-092",
+    "name": "Godrej aer Room Freshener Spray",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-092-godrej-aer-room-freshener-spray.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-094-odonil-room-air-freshener-spray",
+    "sku": "OB-094",
+    "name": "Odonil Room Air Freshener Spray",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-094-odonil-room-air-freshener-spray.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-095-airwick-room-freshener-spray",
+    "sku": "OB-095",
+    "name": "Airwick Room Freshener Spray",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-095-airwick-room-freshener-spray.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-096-ambi-pur-air-freshener-spray",
+    "sku": "OB-096",
+    "name": "Ambi Pur Air Freshener Spray",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-096-ambi-pur-air-freshener-spray.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-097-automatic-air-freshener-dispenser-refill",
+    "sku": "OB-097",
+    "name": "Automatic Air Freshener Dispenser Refill",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-097-automatic-air-freshener-dispenser-refill.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-098-hi-clean-air-freshener-liquid-5-litre",
+    "sku": "OB-098",
+    "name": "Hi-Clean Air Freshener Liquid (5 Litre)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-098-hi-clean-air-freshener-liquid-5-litre.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-099-godrej-aer-pocket-bathroom-freshener",
+    "sku": "OB-099",
+    "name": "Godrej aer Pocket Bathroom Freshener",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-099-godrej-aer-pocket-bathroom-freshener.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-100-telescopic-aluminum-extension-pole",
+    "sku": "OB-100",
+    "name": "Telescopic Aluminum Extension Pole",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-100-telescopic-aluminum-extension-pole.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-101-caution-wet-floor-sign-board",
+    "sku": "OB-101",
+    "name": "Caution Wet Floor Sign Board",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-101-caution-wet-floor-sign-board.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-102-cleaning-caddy-basket-organizer",
+    "sku": "OB-102",
+    "name": "Cleaning Caddy Basket Organizer",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-102-cleaning-caddy-basket-organizer.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-103-professional-glass-cleaning-kit-box",
+    "sku": "OB-103",
+    "name": "Professional Glass Cleaning Kit Box",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-103-professional-glass-cleaning-kit-box.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-104-commercial-insect-killer-fly-catcher-machine",
+    "sku": "OB-104",
+    "name": "Commercial Insect Killer Fly Catcher Machine",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-104-commercial-insect-killer-fly-catcher-machine.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-105-abs-wall-mounted-broom-mop-holder",
+    "sku": "OB-105",
+    "name": "ABS Wall Mounted Broom Mop Holder",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-105-abs-wall-mounted-broom-mop-holder.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-106-upright-lobby-dustpan-with-broom",
+    "sku": "OB-106",
+    "name": "Upright Lobby Dustpan with Broom",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-106-upright-lobby-dustpan-with-broom.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-107-floor-and-glass-scraper-tool",
+    "sku": "OB-107",
+    "name": "Floor and Glass Scraper Tool",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-107-floor-and-glass-scraper-tool.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-108-chemical-trigger-spray-bottle",
+    "sku": "OB-108",
+    "name": "Chemical Trigger Spray Bottle",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-108-chemical-trigger-spray-bottle.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-109-goodknight-mosquito-repellent-machine-set",
+    "sku": "OB-109",
+    "name": "Goodknight Mosquito Repellent Machine Set",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-109-goodknight-mosquito-repellent-machine-set.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-110-hit-cockroach-insect-spray",
+    "sku": "OB-110",
+    "name": "HIT Cockroach Insect Spray",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-110-hit-cockroach-insect-spray.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-111-caustic-soda-flakes",
+    "sku": "OB-111",
+    "name": "Caustic Soda Flakes",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-111-caustic-soda-flakes.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-112-pvc-hard-broom",
+    "sku": "OB-112",
+    "name": "PVC Hard Broom",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-112-pvc-hard-broom.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-113-hard-broom-stick-big-small",
+    "sku": "OB-113",
+    "name": "Hard Broom Stick (Big / Small)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-113-hard-broom-stick-big-small.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-114-all-out-mosquito-repellent-machine-set",
+    "sku": "OB-114",
+    "name": "All Out Mosquito Repellent Machine Set",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-114-all-out-mosquito-repellent-machine-set.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-115-grass-soft-broom-big-small",
+    "sku": "OB-115",
+    "name": "Grass Soft Broom (Big / Small)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-115-grass-soft-broom-big-small.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-116-steel-handle-broom",
+    "sku": "OB-116",
+    "name": "Steel Handle Broom",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-116-steel-handle-broom.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-117-gala-no-dust-broom",
+    "sku": "OB-117",
+    "name": "Gala No Dust Broom",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-117-gala-no-dust-broom.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-119-hi-clean-liquid-soap-1l-5l",
+    "sku": "OB-119",
+    "name": "Hi-Clean Liquid Soap (1L / 5L)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-119-hi-clean-liquid-soap-1l-5l.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-120-hi-clean-toilet-cleaner-500ml-5l",
+    "sku": "OB-120",
+    "name": "Hi-Clean Toilet Cleaner (500ml / 5L)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-120-hi-clean-toilet-cleaner-500ml-5l.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-121-hi-clean-perfumed-phenyl-multicolor",
+    "sku": "OB-121",
+    "name": "Hi-Clean Perfumed Phenyl (Multicolor)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-121-hi-clean-perfumed-phenyl-multicolor.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-122-hi-clean-glass-cleaner-500ml-5l",
+    "sku": "OB-122",
+    "name": "Hi-Clean Glass Cleaner (500ml / 5L)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-122-hi-clean-glass-cleaner-500ml-5l.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-123-hi-clean-black-disinfectant-concentrate-phenyl",
+    "sku": "OB-123",
+    "name": "Hi-Clean Black Disinfectant Concentrate Phenyl",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-123-hi-clean-black-disinfectant-concentrate-phenyl.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-124-hi-clean-hand-wash-250ml-500ml-5l",
+    "sku": "OB-124",
+    "name": "Hi-Clean Hand Wash (250ml / 500ml / 5L)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-124-hi-clean-hand-wash-250ml-500ml-5l.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-125-hi-clean-bathroom-cleaner-500ml",
+    "sku": "OB-125",
+    "name": "Hi-Clean Bathroom Cleaner (500ml)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-125-hi-clean-bathroom-cleaner-500ml.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-126-sodium-hypochlorite-disinfectant-solution-5l",
+    "sku": "OB-126",
+    "name": "Sodium Hypochlorite Disinfectant Solution (5L)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-126-sodium-hypochlorite-disinfectant-solution-5l.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-128-lifebuoy-antibacterial-handwash",
+    "sku": "OB-128",
+    "name": "Lifebuoy Antibacterial Handwash",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-128-lifebuoy-antibacterial-handwash.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-129-cleaning-thinner-nc-thinner",
+    "sku": "OB-129",
+    "name": "Cleaning Thinner NC Thinner",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-129-cleaning-thinner-nc-thinner.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-130-urinal-screen-anti-splash-mats",
+    "sku": "OB-130",
+    "name": "Urinal Screen Anti-Splash Mats",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-130-urinal-screen-anti-splash-mats.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-131-disposable-heavy-garbage-bags-all-sizes",
+    "sku": "OB-131",
+    "name": "Disposable Heavy Garbage Bags (All Sizes)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-131-disposable-heavy-garbage-bags-all-sizes.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-132-industrial-rubber-anti-fatigue-mat-roll",
+    "sku": "OB-132",
+    "name": "Industrial Rubber Anti-Fatigue Mat Roll",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-132-industrial-rubber-anti-fatigue-mat-roll.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-133-heavy-duty-rubber-cleaning-hand-gloves",
+    "sku": "OB-133",
+    "name": "Heavy Duty Rubber Cleaning Hand Gloves",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-133-heavy-duty-rubber-cleaning-hand-gloves.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-134-cotton-knitted-safety-hand-gloves",
+    "sku": "OB-134",
+    "name": "Cotton Knitted Safety Hand Gloves",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-134-cotton-knitted-safety-hand-gloves.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-135-pure-white-naphthalene-balls",
+    "sku": "OB-135",
+    "name": "Pure White Naphthalene Balls",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-135-pure-white-naphthalene-balls.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-137-wringer-trolley-double-bucket",
+    "sku": "OB-137",
+    "name": "Wringer Trolley Double Bucket",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-137-wringer-trolley-double-bucket.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-138-wringer-trolley-triple-bucket",
+    "sku": "OB-138",
+    "name": "Wringer Trolley Triple Bucket",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-138-wringer-trolley-triple-bucket.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-139-handheld-shopping-basket-trolley",
+    "sku": "OB-139",
+    "name": "Handheld Shopping Basket Trolley",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-139-handheld-shopping-basket-trolley.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-140-metal-supermarket-shopping-cart-trolley",
+    "sku": "OB-140",
+    "name": "Metal Supermarket Shopping Cart Trolley",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-140-metal-supermarket-shopping-cart-trolley.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-141-industrial-heavy-duty-platform-trolley",
+    "sku": "OB-141",
+    "name": "Industrial Heavy Duty Platform Trolley",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-141-industrial-heavy-duty-platform-trolley.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-142-janitor-cleaning-service-trolley-cart",
+    "sku": "OB-142",
+    "name": "Janitor Cleaning Service Trolley Cart",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-142-janitor-cleaning-service-trolley-cart.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-143-multipurpose-wringer-janitor-trolley",
+    "sku": "OB-143",
+    "name": "Multipurpose Wringer Janitor Trolley",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-143-multipurpose-wringer-janitor-trolley.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-144-double-bucket-wringer-trolley-black",
+    "sku": "OB-144",
+    "name": "Double Bucket Wringer Trolley Black",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-144-double-bucket-wringer-trolley-black.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-145-bio-medical-waste-segregation-dustbins-set",
+    "sku": "OB-145",
+    "name": "Bio Medical Waste Segregation Dustbins Set",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-145-bio-medical-waste-segregation-dustbins-set.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-146-duo-wet-dry-plastic-dustbin",
+    "sku": "OB-146",
+    "name": "Duo Wet & Dry Plastic Dustbin",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-146-duo-wet-dry-plastic-dustbin.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-147-ss-duo-waste-recycling-dustbin",
+    "sku": "OB-147",
+    "name": "SS Duo Waste Recycling Dustbin",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-147-ss-duo-waste-recycling-dustbin.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-149-frp-duo-outdoor-waste-bins",
+    "sku": "OB-149",
+    "name": "FRP Duo Outdoor Waste Bins",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-149-frp-duo-outdoor-waste-bins.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-152-heavy-duty-wheeled-dustbin-660-litre",
+    "sku": "OB-152",
+    "name": "Heavy Duty Wheeled Dustbin 660 Litre",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-152-heavy-duty-wheeled-dustbin-660-litre.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-153-industrial-plastic-storage-drum-barrel-all-sizes",
+    "sku": "OB-153",
+    "name": "Industrial Plastic Storage Drum Barrel (All Sizes)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-153-industrial-plastic-storage-drum-barrel-all-sizes.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-203-diversey-taski-r3-glass-cleaner-concentrate",
+    "sku": "OB-203",
+    "name": "Diversey Taski R3 (Glass Cleaner Concentrate)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-203-diversey-taski-r3-glass-cleaner-concentrate.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-157-diversey-taski-r4-wood-furniture-polish",
+    "sku": "OB-157",
+    "name": "Diversey Taski R4 (Wood Furniture Polish)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-157-diversey-taski-r4-wood-furniture-polish.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-158-diversey-taski-r5-air-freshener-concentrate",
+    "sku": "OB-158",
+    "name": "Diversey Taski R5 (Air Freshener Concentrate)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-158-diversey-taski-r5-air-freshener-concentrate.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-159-diversey-taski-r6-toilet-bowl-cleaner",
+    "sku": "OB-159",
+    "name": "Diversey Taski R6 (Toilet Bowl Cleaner)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-159-diversey-taski-r6-toilet-bowl-cleaner.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-160-diversey-taski-r7-floor-cleaner-concentrate",
+    "sku": "OB-160",
+    "name": "Diversey Taski R7 (Floor Cleaner Concentrate)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-160-diversey-taski-r7-floor-cleaner-concentrate.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-161-diversey-taski-r9-hard-water-limescale-cleaner",
+    "sku": "OB-161",
+    "name": "Diversey Taski R9 (Hard Water Limescale Cleaner)",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-161-diversey-taski-r9-hard-water-limescale-cleaner.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-162-diversey-suma-inox-d7-1-stainless-steel-polish",
+    "sku": "OB-162",
+    "name": "Diversey Suma Inox D7.1 Stainless Steel Polish",
+    "category": "Housekeeping & Hygiene",
+    "images": [
+      "/assets/products/housekeeping/ob-162-diversey-suma-inox-d7-1-stainless-steel-polish.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-01-jk-max-copier-paper-67-gsm-a4",
+    "sku": "OB-PAP-01",
+    "name": "JK Max Copier Paper 67 GSM A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-01-jk-max-copier-paper-67-gsm-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-02-jk-cmax-copier-paper-72-gsm-a4",
+    "sku": "OB-PAP-02",
+    "name": "JK CMax Copier Paper 72 GSM A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-02-jk-cmax-copier-paper-72-gsm-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-03-jk-easy-copier-paper-70-gsm-a4",
+    "sku": "OB-PAP-03",
+    "name": "JK Easy Copier Paper 70 GSM A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-03-jk-easy-copier-paper-70-gsm-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-04-jk-copier-paper-75-gsm-a4",
+    "sku": "OB-PAP-04",
+    "name": "JK Copier Paper 75 GSM A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-04-jk-copier-paper-75-gsm-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-05-jk-excel-bond-paper-70-80-90-100-gsm-a4",
+    "sku": "OB-PAP-05",
+    "name": "JK Excel Bond Paper (70/80/90/100 GSM) A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-05-jk-excel-bond-paper-70-80-90-100-gsm-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-06-jk-cedar-copier-paper-80-100-gsm-a4",
+    "sku": "OB-PAP-06",
+    "name": "JK Cedar Copier Paper (80/100 GSM) A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-06-jk-cedar-copier-paper-80-100-gsm-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-07-jk-sparkle-multipurpose-paper-70-75-80-gsm-a4",
+    "sku": "OB-PAP-07",
+    "name": "JK Sparkle Multipurpose Paper (70/75/80 GSM) A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-07-jk-sparkle-multipurpose-paper-70-75-80-gsm-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-08-jk-eco-rise-copier-paper-70-gsm-a4",
+    "sku": "OB-PAP-08",
+    "name": "JK Eco Rise Copier Paper 70 GSM A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-08-jk-eco-rise-copier-paper-70-gsm-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-09-tnpl-copier-paper-70-gsm-a4",
+    "sku": "OB-PAP-09",
+    "name": "TNPL Copier Paper 70 GSM A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-09-tnpl-copier-paper-70-gsm-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-10-tnpl-platinum-copier-paper-75-gsm-a4",
+    "sku": "OB-PAP-10",
+    "name": "TNPL Platinum Copier Paper 75 GSM A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-10-tnpl-platinum-copier-paper-75-gsm-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-11-tnpl-copier-paper-80-gsm-a4",
+    "sku": "OB-PAP-11",
+    "name": "TNPL Copier Paper 80 GSM A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-11-tnpl-copier-paper-80-gsm-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-12-jk-max-copier-paper-67-gsm-a4-ekent-pack",
+    "sku": "OB-PAP-12",
+    "name": "JK Max Copier Paper 67 GSM A4 (Ekent Pack)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-12-jk-max-copier-paper-67-gsm-a4-ekent-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-13-koopee-premium-glossy-photo-paper-a4",
+    "sku": "OB-PAP-13",
+    "name": "Koopee Premium Glossy Photo Paper A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-13-koopee-premium-glossy-photo-paper-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-14-royal-executive-bond-paper-a4",
+    "sku": "OB-PAP-14",
+    "name": "Royal Executive Bond Paper A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-14-royal-executive-bond-paper-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-15-compu-color-a4-color-paper-200-gsm",
+    "sku": "OB-PAP-15",
+    "name": "Compu Color A4 Color Paper 200 GSM",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-15-compu-color-a4-color-paper-200-gsm.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pap-16-novajet-inkjet-true-picture-paper-a4",
+    "sku": "OB-PAP-16",
+    "name": "NovaJet Inkjet True Picture Paper A4",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/copier-papers/ob-pap-16-novajet-inkjet-true-picture-paper-a4.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-fil-19-a4-sheet-protector-clear-sheet",
+    "sku": "OB-FIL-19",
+    "name": "A4 Sheet Protector Clear Sheet",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-19-a4-sheet-protector-clear-sheet.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-fil-20-a4-plastic-stick-file",
+    "sku": "OB-FIL-20",
+    "name": "A4 Plastic Stick File",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-20-a4-plastic-stick-file.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-fil-24-spring-file-plastic-body",
+    "sku": "OB-FIL-24",
+    "name": "Spring File Plastic Body",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-24-spring-file-plastic-body.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-fil-26-officebazzar-box-file",
+    "sku": "OB-FIL-26",
+    "name": "OfficeBazzar Box File",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-26-officebazzar-box-file.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-fil-28-ordinary-urgent-document-file",
+    "sku": "OB-FIL-28",
+    "name": "Ordinary Urgent Document File",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-28-ordinary-urgent-document-file.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-fil-29-1-to-10-index-file-separator",
+    "sku": "OB-FIL-29",
+    "name": "1 to 10 Index File Separator",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-29-1-to-10-index-file-separator.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-fil-30-a-to-z-alphabetical-file-separator",
+    "sku": "OB-FIL-30",
+    "name": "A to Z Alphabetical File Separator",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-30-a-to-z-alphabetical-file-separator.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-fil-31-2-d-ring-binder-file-1501",
+    "sku": "OB-FIL-31",
+    "name": "2-D Ring Binder File 1501",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-31-2-d-ring-binder-file-1501.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-fil-32-diamond-ring-binder-file-2302",
+    "sku": "OB-FIL-32",
+    "name": "Diamond Ring Binder File 2302",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-fil-32-diamond-ring-binder-file-2302.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-33-bitco-ballpoint-pen-pack",
+    "sku": "OB-PEN-33",
+    "name": "Bitco Ballpoint Pen Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-33-bitco-ballpoint-pen-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-34-cello-finegrip-ballpoint-pen",
+    "sku": "OB-PEN-34",
+    "name": "Cello Finegrip Ballpoint Pen",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-34-cello-finegrip-ballpoint-pen.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-35-montex-ballpoint-pen",
+    "sku": "OB-PEN-35",
+    "name": "Montex Ballpoint Pen",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-35-montex-ballpoint-pen.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-36-add-gel-achiever-pen",
+    "sku": "OB-PEN-36",
+    "name": "Add Gel Achiever Pen",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-36-add-gel-achiever-pen.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-37-pilot-v5-v7-liquid-ink-rollerball-pen",
+    "sku": "OB-PEN-37",
+    "name": "Pilot V5/V7 Liquid Ink Rollerball Pen",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-37-pilot-v5-v7-liquid-ink-rollerball-pen.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-38-rorito-045-classic-ballpoint-pen-pack",
+    "sku": "OB-PEN-38",
+    "name": "Rorito 045 Classic Ballpoint Pen Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-38-rorito-045-classic-ballpoint-pen-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-39-rorito-flymax-gel-pen",
+    "sku": "OB-PEN-39",
+    "name": "Rorito Flymax Gel Pen",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-39-rorito-flymax-gel-pen.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-40-natraj-spark-ball-pen-set",
+    "sku": "OB-PEN-40",
+    "name": "Natraj Spark Ball Pen Set",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-40-natraj-spark-ball-pen-set.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-41-ohp-cd-dvd-permanent-marker",
+    "sku": "OB-PEN-41",
+    "name": "OHP CD/DVD Permanent Marker",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-41-ohp-cd-dvd-permanent-marker.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-42-fluorescent-highlighter-marker-pack",
+    "sku": "OB-PEN-42",
+    "name": "Fluorescent Highlighter Marker Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-42-fluorescent-highlighter-marker-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-43-chisel-tip-permanent-marker",
+    "sku": "OB-PEN-43",
+    "name": "Chisel Tip Permanent Marker",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-43-chisel-tip-permanent-marker.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-44-dry-erase-whiteboard-marker",
+    "sku": "OB-PEN-44",
+    "name": "Dry Erase Whiteboard Marker",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-44-dry-erase-whiteboard-marker.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-45-luxor-color-sketch-pen-pack",
+    "sku": "OB-PEN-45",
+    "name": "Luxor Color Sketch Pen Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-45-luxor-color-sketch-pen-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-46-nataraj-hb-wooden-pencils-pack",
+    "sku": "OB-PEN-46",
+    "name": "Nataraj HB Wooden Pencils Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-46-nataraj-hb-wooden-pencils-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-47-apsara-dust-free-nataraj-plasto-eraser-pack",
+    "sku": "OB-PEN-47",
+    "name": "Apsara Dust Free / Nataraj Plasto Eraser Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-47-apsara-dust-free-nataraj-plasto-eraser-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-pen-48-desk-pencil-sharpener-pack",
+    "sku": "OB-PEN-48",
+    "name": "Desk Pencil Sharpener Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-pen-48-desk-pencil-sharpener-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-des-51-fevicol-mr-adhesive-tube",
+    "sku": "OB-DES-51",
+    "name": "Fevicol MR Adhesive Tube",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-des-51-fevicol-mr-adhesive-tube.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-des-52-double-sided-foam-tape-1-inch",
+    "sku": "OB-DES-52",
+    "name": "Double Sided Foam Tape 1 inch",
+    "category": "Packaging Supplies",
+    "images": [
+      "/assets/products/packaging-supplies/ob-des-52-double-sided-foam-tape-1-inch.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-des-53-double-sided-transparent-tissue-tape",
+    "sku": "OB-DES-53",
+    "name": "Double Sided Transparent Tissue Tape",
+    "category": "Packaging Supplies",
+    "images": [
+      "/assets/products/packaging-supplies/ob-des-53-double-sided-transparent-tissue-tape.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-des-55-heavy-duty-tape-dispenser-1-inch-2-inch",
+    "sku": "OB-DES-55",
+    "name": "Heavy Duty Tape Dispenser (1 inch / 2 inch)",
+    "category": "Packaging Supplies",
+    "images": [
+      "/assets/products/packaging-supplies/ob-des-55-heavy-duty-tape-dispenser-1-inch-2-inch.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-des-56-retractable-paper-cutter-medium",
+    "sku": "OB-DES-56",
+    "name": "Retractable Paper Cutter Medium",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-des-56-retractable-paper-cutter-medium.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-des-57-box-packaging-strapping-roll",
+    "sku": "OB-DES-57",
+    "name": "Box Packaging Strapping Roll",
+    "category": "Packaging Supplies",
+    "images": [
+      "/assets/products/packaging-supplies/ob-des-57-box-packaging-strapping-roll.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-des-60-stapler-pins-pack-no-10-24-6",
+    "sku": "OB-DES-60",
+    "name": "Stapler Pins Pack (No. 10 / 24/6)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-des-60-stapler-pins-pack-no-10-24-6.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-des-62-faber-castell-office-stamp-pad",
+    "sku": "OB-DES-62",
+    "name": "Faber-Castell Office Stamp Pad",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-des-62-faber-castell-office-stamp-pad.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-des-63-stamp-pad-ink-bottle",
+    "sku": "OB-DES-63",
+    "name": "Stamp Pad Ink Bottle",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-des-63-stamp-pad-ink-bottle.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-65-color-plastic-paper-clips-pack",
+    "sku": "OB-NOT-65",
+    "name": "Color Plastic Paper Clips Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-65-color-plastic-paper-clips-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-66-metal-binder-clips-all-sizes",
+    "sku": "OB-NOT-66",
+    "name": "Metal Binder Clips (All Sizes)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-66-metal-binder-clips-all-sizes.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-67-metal-notice-board-push-pins",
+    "sku": "OB-NOT-67",
+    "name": "Metal Notice Board Push Pins",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-67-metal-notice-board-push-pins.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-68-steel-wire-gem-clips-pack",
+    "sku": "OB-NOT-68",
+    "name": "Steel Wire Gem Clips Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-68-steel-wire-gem-clips-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-69-kores-sapphire-carbon-paper-pack",
+    "sku": "OB-NOT-69",
+    "name": "Kores Sapphire Carbon Paper Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-69-kores-sapphire-carbon-paper-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-70-nylon-rubber-bands-pack",
+    "sku": "OB-NOT-70",
+    "name": "Nylon Rubber Bands Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-70-nylon-rubber-bands-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-71-post-it-self-adhesive-sticky-notes-pad",
+    "sku": "OB-NOT-71",
+    "name": "Post-it Self Adhesive Sticky Notes Pad",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-71-post-it-self-adhesive-sticky-notes-pad.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-72-office-steel-paper-pins-box",
+    "sku": "OB-NOT-72",
+    "name": "Office Steel Paper Pins Box",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-72-office-steel-paper-pins-box.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-73-casio-electronic-desk-calculator",
+    "sku": "OB-NOT-73",
+    "name": "Casio Electronic Desk Calculator",
+    "category": "Printers & Technology",
+    "images": [
+      "/assets/products/stationery/ob-not-73-casio-electronic-desk-calculator.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-74-document-paper-tray-tier-set-2-3-4-tier",
+    "sku": "OB-NOT-74",
+    "name": "Document Paper Tray Tier Set (2/3/4 Tier)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-74-document-paper-tray-tier-set-2-3-4-tier.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-75-stainless-steel-measuring-scale-ruler",
+    "sku": "OB-NOT-75",
+    "name": "Stainless Steel Measuring Scale Ruler",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-75-stainless-steel-measuring-scale-ruler.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-76-office-hardbound-note-book",
+    "sku": "OB-NOT-76",
+    "name": "Office Hardbound Note Book",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-76-office-hardbound-note-book.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-77-itc-classmate-corporate-notebooks",
+    "sku": "OB-NOT-77",
+    "name": "ITC Classmate Corporate Notebooks",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-77-itc-classmate-corporate-notebooks.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-78-white-mailing-envelopes-pack",
+    "sku": "OB-NOT-78",
+    "name": "White Mailing Envelopes Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-78-white-mailing-envelopes-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-79-brown-kraft-paper-envelopes-pack",
+    "sku": "OB-NOT-79",
+    "name": "Brown Kraft Paper Envelopes Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-79-brown-kraft-paper-envelopes-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-not-80-cloth-lined-courier-security-envelope",
+    "sku": "OB-NOT-80",
+    "name": "Cloth Lined Courier Security Envelope",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-not-80-cloth-lined-courier-security-envelope.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-eqp-81-marshal-quality-scribbling-writing-pad",
+    "sku": "OB-EQP-81",
+    "name": "Marshal Quality Scribbling Writing Pad",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-eqp-81-marshal-quality-scribbling-writing-pad.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-eqp-82-scholar-wirebound-spiral-notepad",
+    "sku": "OB-EQP-82",
+    "name": "Scholar Wirebound Spiral Notepad",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-eqp-82-scholar-wirebound-spiral-notepad.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-eqp-83-corporate-accounts-entry-register",
+    "sku": "OB-EQP-83",
+    "name": "Corporate Accounts Entry Register",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-eqp-83-corporate-accounts-entry-register.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-eqp-84-desk-visiting-card-holder-book",
+    "sku": "OB-EQP-84",
+    "name": "Desk Visiting Card Holder Book",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-eqp-84-desk-visiting-card-holder-book.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-eqp-85-executive-hardbound-daily-diary",
+    "sku": "OB-EQP-85",
+    "name": "Executive Hardbound Daily Diary",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-eqp-85-executive-hardbound-daily-diary.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-eqp-87-high-definition-conference-projector",
+    "sku": "OB-EQP-87",
+    "name": "High Definition Conference Projector",
+    "category": "Printers & Technology",
+    "images": [
+      "/assets/products/printers-technology/ob-eqp-87-high-definition-conference-projector.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-eqp-89-acrylic-id-card-badge-holder-with-lanyard",
+    "sku": "OB-EQP-89",
+    "name": "Acrylic ID Card Badge Holder with Lanyard",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/stationery/ob-eqp-89-acrylic-id-card-badge-holder-with-lanyard.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-01-3-ply-surgical-disposable-face-mask",
+    "sku": "OB-COV-01",
+    "name": "3-Ply Surgical Disposable Face Mask",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-01-3-ply-surgical-disposable-face-mask.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-02-venus-v4400-n95-protective-respirator-mask",
+    "sku": "OB-COV-02",
+    "name": "Venus V4400 N95 Protective Respirator Mask",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-02-venus-v4400-n95-protective-respirator-mask.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-03-reusable-washable-cotton-face-mask",
+    "sku": "OB-COV-03",
+    "name": "Reusable Washable Cotton Face Mask",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-03-reusable-washable-cotton-face-mask.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-04-medi-dispo-n95-protective-face-mask",
+    "sku": "OB-COV-04",
+    "name": "Medi Dispo N95 Protective Face Mask",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-04-medi-dispo-n95-protective-face-mask.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-05-yellow-disposable-protective-mask",
+    "sku": "OB-COV-05",
+    "name": "Yellow Disposable Protective Mask",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-05-yellow-disposable-protective-mask.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-06-cotton-knitted-safety-gloves-pack",
+    "sku": "OB-COV-06",
+    "name": "Cotton Knitted Safety Gloves Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-06-cotton-knitted-safety-gloves-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-08-hi-safe-powder-free-latex-gloves-box",
+    "sku": "OB-COV-08",
+    "name": "Hi-Safe Powder Free Latex Gloves Box",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-08-hi-safe-powder-free-latex-gloves-box.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-09-hi-safe-medical-grade-nitrile-gloves-box",
+    "sku": "OB-COV-09",
+    "name": "Hi-Safe Medical Grade Nitrile Gloves Box",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-09-hi-safe-medical-grade-nitrile-gloves-box.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-10-full-body-coverall-ppe-safety-kit",
+    "sku": "OB-COV-10",
+    "name": "Full Body Coverall PPE Safety Kit",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-10-full-body-coverall-ppe-safety-kit.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-11-pristin-instant-hand-sanitizer-pump-5l",
+    "sku": "OB-COV-11",
+    "name": "Pristin Instant Hand Sanitizer (Pump / 5L)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-11-pristin-instant-hand-sanitizer-pump-5l.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-12-digital-fingertip-pulse-oximeter",
+    "sku": "OB-COV-12",
+    "name": "Digital Fingertip Pulse Oximeter",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-12-digital-fingertip-pulse-oximeter.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-13-lifebuoy-alcohol-based-hand-sanitizer-500ml-5l",
+    "sku": "OB-COV-13",
+    "name": "Lifebuoy Alcohol Based Hand Sanitizer (500ml / 5L)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-13-lifebuoy-alcohol-based-hand-sanitizer-500ml-5l.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-14-lifebuoy-germ-protection-liquid-hand-wash",
+    "sku": "OB-COV-14",
+    "name": "Lifebuoy Germ Protection Liquid Hand Wash",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-14-lifebuoy-germ-protection-liquid-hand-wash.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-15-viroff-alcohol-hand-sanitizer-5l",
+    "sku": "OB-COV-15",
+    "name": "Viroff Alcohol Hand Sanitizer (5L)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-15-viroff-alcohol-hand-sanitizer-5l.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-16-hi-clean-antibacterial-hand-wash-5l",
+    "sku": "OB-COV-16",
+    "name": "Hi-Clean Antibacterial Hand Wash (5L)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-16-hi-clean-antibacterial-hand-wash-5l.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-17-strerill-g-hand-sanitizer-500ml-5l",
+    "sku": "OB-COV-17",
+    "name": "Strerill G Hand Sanitizer (500ml / 5L)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-17-strerill-g-hand-sanitizer-500ml-5l.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-18-hi-clean-hand-cleansing-liquid-soap-5l",
+    "sku": "OB-COV-18",
+    "name": "Hi-Clean Hand Cleansing Liquid Soap (5L)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-18-hi-clean-hand-cleansing-liquid-soap-5l.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-19-medical-oxygen-concentrator-machine",
+    "sku": "OB-COV-19",
+    "name": "Medical Oxygen Concentrator Machine",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-19-medical-oxygen-concentrator-machine.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-20-automatic-touchless-soap-sanitizer-dispenser",
+    "sku": "OB-COV-20",
+    "name": "Automatic Touchless Soap Sanitizer Dispenser",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-20-automatic-touchless-soap-sanitizer-dispenser.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-21-foot-pedal-operated-sanitizer-stand",
+    "sku": "OB-COV-21",
+    "name": "Foot Pedal Operated Sanitizer Stand",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-21-foot-pedal-operated-sanitizer-stand.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-22-disposable-non-woven-bouffant-head-caps-pack",
+    "sku": "OB-COV-22",
+    "name": "Disposable Non-Woven Bouffant Head Caps Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-22-disposable-non-woven-bouffant-head-caps-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-23-disposable-non-woven-shoe-covers-pack",
+    "sku": "OB-COV-23",
+    "name": "Disposable Non-Woven Shoe Covers Pack",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-23-disposable-non-woven-shoe-covers-pack.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-24-automatic-shoe-cover-dispenser-machine",
+    "sku": "OB-COV-24",
+    "name": "Automatic Shoe Cover Dispenser Machine",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-24-automatic-shoe-cover-dispenser-machine.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-25-contactless-infrared-forehead-thermometer",
+    "sku": "OB-COV-25",
+    "name": "Contactless Infrared Forehead Thermometer",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-25-contactless-infrared-forehead-thermometer.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-26-social-distancing-queue-barrier-stanchion",
+    "sku": "OB-COV-26",
+    "name": "Social Distancing Queue Barrier Stanchion",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-26-social-distancing-queue-barrier-stanchion.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-27-reflective-safety-traffic-cone",
+    "sku": "OB-COV-27",
+    "name": "Reflective Safety Traffic Cone",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-27-reflective-safety-traffic-cone.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-28-wet-floor-caution-warning-board",
+    "sku": "OB-COV-28",
+    "name": "Wet Floor Caution Warning Board",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-28-wet-floor-caution-warning-board.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-30-manual-pressure-sanitizer-sprayer-2-litre",
+    "sku": "OB-COV-30",
+    "name": "Manual Pressure Sanitizer Sprayer 2 Litre",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-30-manual-pressure-sanitizer-sprayer-2-litre.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-31-garden-sanitizer-pressure-sprayer-5-litre",
+    "sku": "OB-COV-31",
+    "name": "Garden Sanitizer Pressure Sprayer 5 Litre",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-31-garden-sanitizer-pressure-sprayer-5-litre.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-32-backpack-knapsack-sanitizer-sprayer-18-litre",
+    "sku": "OB-COV-32",
+    "name": "Backpack Knapsack Sanitizer Sprayer 18 Litre",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-32-backpack-knapsack-sanitizer-sprayer-18-litre.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-33-full-protective-face-shield-mask",
+    "sku": "OB-COV-33",
+    "name": "Full Protective Face Shield Mask",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-33-full-protective-face-shield-mask.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-34-dettol-original-antiseptic-liquid-5-litre",
+    "sku": "OB-COV-34",
+    "name": "Dettol Original Antiseptic Liquid (5 Litre)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/covid-products/ob-cov-34-dettol-original-antiseptic-liquid-5-litre.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-01-flexible-traffic-cone-750mm",
+    "sku": "OB-RDS-01",
+    "name": "Flexible Traffic Cone 750mm",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-01-flexible-traffic-cone-750mm.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-02-hexagonal-traffic-cone-750mm-1000mm",
+    "sku": "OB-RDS-02",
+    "name": "Hexagonal Traffic Cone (750mm / 1000mm)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-02-hexagonal-traffic-cone-750mm-1000mm.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-03-traffic-cone-with-rubberized-plastic-base",
+    "sku": "OB-RDS-03",
+    "name": "Traffic Cone with Rubberized Plastic Base",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-03-traffic-cone-with-rubberized-plastic-base.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-04-economical-traffic-cone-and-chain-set",
+    "sku": "OB-RDS-04",
+    "name": "Economical Traffic Cone and Chain Set",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-04-economical-traffic-cone-and-chain-set.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-05-collapsible-pop-up-traffic-cone-650mm",
+    "sku": "OB-RDS-05",
+    "name": "Collapsible Pop-Up Traffic Cone 650mm",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-05-collapsible-pop-up-traffic-cone-650mm.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-06-retractable-cone-q-manager-ribbon",
+    "sku": "OB-RDS-06",
+    "name": "Retractable Cone Q-Manager Ribbon",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-06-retractable-cone-q-manager-ribbon.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-07-telescopic-cone-connecting-rod-1-3m-to-2-1m",
+    "sku": "OB-RDS-07",
+    "name": "Telescopic Cone Connecting Rod (1.3m to 2.1m)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-07-telescopic-cone-connecting-rod-1-3m-to-2-1m.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-08-led-traffic-baton-light-rechargeable",
+    "sku": "OB-RDS-08",
+    "name": "LED Traffic Baton Light Rechargeable",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-08-led-traffic-baton-light-rechargeable.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-09-outdoor-convex-security-mirror-18-24-32-40-inch",
+    "sku": "OB-RDS-09",
+    "name": "Outdoor Convex Security Mirror (18/24/32/40 inch)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-09-outdoor-convex-security-mirror-18-24-32-40-inch.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-10-acrylic-dome-safety-mirror-full-half-quarter",
+    "sku": "OB-RDS-10",
+    "name": "Acrylic Dome Safety Mirror (Full / Half / Quarter)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-10-acrylic-dome-safety-mirror-full-half-quarter.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-11-warning-bollard-delineator-post",
+    "sku": "OB-RDS-11",
+    "name": "Warning Bollard Delineator Post",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-11-warning-bollard-delineator-post.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-12-flexible-polyurethane-spring-post-750mm",
+    "sku": "OB-RDS-12",
+    "name": "Flexible Polyurethane Spring Post 750mm",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-12-flexible-polyurethane-spring-post-750mm.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-13-floor-stand-warning-sign-600mm",
+    "sku": "OB-RDS-13",
+    "name": "Floor Stand Warning Sign 600mm",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-13-floor-stand-warning-sign-600mm.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-14-heavy-duty-road-rumble-strips",
+    "sku": "OB-RDS-14",
+    "name": "Heavy Duty Road Rumble Strips",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-14-heavy-duty-road-rumble-strips.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-15-heavy-duty-rubber-wheel-chock",
+    "sku": "OB-RDS-15",
+    "name": "Heavy Duty Rubber Wheel Chock",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-15-heavy-duty-rubber-wheel-chock.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-16-rubber-cable-protector-ramp-2-3-4-5-channel",
+    "sku": "OB-RDS-16",
+    "name": "Rubber Cable Protector Ramp (2/3/4/5 Channel)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-16-rubber-cable-protector-ramp-2-3-4-5-channel.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-17-high-visibility-reflective-safety-jacket",
+    "sku": "OB-RDS-17",
+    "name": "High Visibility Reflective Safety Jacket",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-17-high-visibility-reflective-safety-jacket.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-18-aluminum-road-stud-and-solar-led-stud",
+    "sku": "OB-RDS-18",
+    "name": "Aluminum Road Stud and Solar LED Stud",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-18-aluminum-road-stud-and-solar-led-stud.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-19-handheld-security-metal-detector-scanner",
+    "sku": "OB-RDS-19",
+    "name": "Handheld Security Metal Detector Scanner",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-19-handheld-security-metal-detector-scanner.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-20-stainless-steel-retractable-belt-stanchion-3m",
+    "sku": "OB-RDS-20",
+    "name": "Stainless Steel Retractable Belt Stanchion (3m)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-20-stainless-steel-retractable-belt-stanchion-3m.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-21-q-manager-a4-sign-board-display-frame",
+    "sku": "OB-RDS-21",
+    "name": "Q-Manager A4 Sign Board Display Frame",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-21-q-manager-a4-sign-board-display-frame.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-22-classic-velvet-rope-stanchion-post-gold-ss",
+    "sku": "OB-RDS-22",
+    "name": "Classic Velvet Rope Stanchion Post (Gold / SS)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-22-classic-velvet-rope-stanchion-post-gold-ss.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-23-plastic-chain-q-manager-barrier-post-1000mm",
+    "sku": "OB-RDS-23",
+    "name": "Plastic Chain Q-Manager Barrier Post 1000mm",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-23-plastic-chain-q-manager-barrier-post-1000mm.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-24-microprismatic-reflective-warning-tape-50mm-x-50m",
+    "sku": "OB-RDS-24",
+    "name": "Microprismatic Reflective Warning Tape (50mm x 50m)",
+    "category": "Packaging Supplies",
+    "images": [
+      "/assets/products/road-safety/ob-rds-24-microprismatic-reflective-warning-tape-50mm-x-50m.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-25-heavy-duty-rubber-speed-breakers",
+    "sku": "OB-RDS-25",
+    "name": "Heavy Duty Rubber Speed Breakers",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-25-heavy-duty-rubber-speed-breakers.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-26-plastic-modular-speed-breakers",
+    "sku": "OB-RDS-26",
+    "name": "Plastic Modular Speed Breakers",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-26-plastic-modular-speed-breakers.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-27-rubber-corner-guards-square-edge",
+    "sku": "OB-RDS-27",
+    "name": "Rubber Corner Guards Square Edge",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-27-rubber-corner-guards-square-edge.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-28-rubber-corner-guards-curved-edge",
+    "sku": "OB-RDS-28",
+    "name": "Rubber Corner Guards Curved Edge",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-28-rubber-corner-guards-curved-edge.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-29-rubber-car-wheel-stopper-600mm",
+    "sku": "OB-RDS-29",
+    "name": "Rubber Car Wheel Stopper 600mm",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-29-rubber-car-wheel-stopper-600mm.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-30-rubber-car-wheel-stopper-500mm",
+    "sku": "OB-RDS-30",
+    "name": "Rubber Car Wheel Stopper 500mm",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-30-rubber-car-wheel-stopper-500mm.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-31-rubber-car-wheel-stopper-commercial-1650mm",
+    "sku": "OB-RDS-31",
+    "name": "Rubber Car Wheel Stopper Commercial 1650mm",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-31-rubber-car-wheel-stopper-commercial-1650mm.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-32-solar-warning-blinker-light",
+    "sku": "OB-RDS-32",
+    "name": "Solar Warning Blinker Light",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-32-solar-warning-blinker-light.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-33-solar-traffic-flasher-light",
+    "sku": "OB-RDS-33",
+    "name": "Solar Traffic Flasher Light",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-33-solar-traffic-flasher-light.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-34-solar-chevron-directional-warning-board",
+    "sku": "OB-RDS-34",
+    "name": "Solar Chevron Directional Warning Board",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-34-solar-chevron-directional-warning-board.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-35-under-vehicle-search-inspection-mirror-uvsm",
+    "sku": "OB-RDS-35",
+    "name": "Under Vehicle Search Inspection Mirror (UVSM)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-35-under-vehicle-search-inspection-mirror-uvsm.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-36-heavy-duty-anti-theft-car-wheel-lock-clamp",
+    "sku": "OB-RDS-36",
+    "name": "Heavy Duty Anti-Theft Car Wheel Lock Clamp",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-36-heavy-duty-anti-theft-car-wheel-lock-clamp.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-37-led-emergency-magnetic-beacon-flare-light",
+    "sku": "OB-RDS-37",
+    "name": "LED Emergency Magnetic Beacon Flare Light",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-37-led-emergency-magnetic-beacon-flare-light.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-38-heavy-duty-anti-slip-traction-safety-tapes",
+    "sku": "OB-RDS-38",
+    "name": "Heavy Duty Anti-Slip Traction Safety Tapes",
+    "category": "Packaging Supplies",
+    "images": [
+      "/assets/products/road-safety/ob-rds-38-heavy-duty-anti-slip-traction-safety-tapes.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-39-interlocking-plastic-water-filled-road-barrier",
+    "sku": "OB-RDS-39",
+    "name": "Interlocking Plastic Water Filled Road Barrier",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-39-interlocking-plastic-water-filled-road-barrier.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-40-galvanized-steel-crowd-control-barricade-barrier",
+    "sku": "OB-RDS-40",
+    "name": "Galvanized Steel Crowd Control Barricade Barrier",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-40-galvanized-steel-crowd-control-barricade-barrier.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-41-portable-expandable-scissor-road-barrier-max-2m",
+    "sku": "OB-RDS-41",
+    "name": "Portable Expandable Scissor Road Barrier (Max 2m)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-41-portable-expandable-scissor-road-barrier-max-2m.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-42-rechargeable-search-light-megaphone-siren",
+    "sku": "OB-RDS-42",
+    "name": "Rechargeable Search Light & Megaphone Siren",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-42-rechargeable-search-light-megaphone-siren.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-rds-43-metal-signage-post-stands-parking-directional",
+    "sku": "OB-RDS-43",
+    "name": "Metal Signage Post Stands (Parking / Directional)",
+    "category": "Office Stationery",
+    "images": [
+      "/assets/products/road-safety/ob-rds-43-metal-signage-post-stands-parking-directional.webp"
+    ]
+  }
+]
