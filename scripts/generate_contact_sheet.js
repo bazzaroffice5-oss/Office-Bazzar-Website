@@ -1,20 +1,21 @@
 const fs = require('fs');
 const path = require('path');
 
-const results = JSON.parse(fs.readFileSync('scripts/generation_results.json', 'utf8'));
-
-// Read watermarked list to tag the 93 products
+const catalogWithGallery = JSON.parse(fs.readFileSync('scripts/catalog_with_gallery_images.json', 'utf8'));
 const manifestContent = fs.readFileSync('scripts/skus_requiring_manual_replacement.txt', 'utf8');
 const watermarkedSkus = new Set([...manifestContent.matchAll(/\[PENDING\]\s+(OB-[A-Z0-9-]+)/g)].map(m => m[1]));
 
-console.log(`Loaded ${results.length} products, ${watermarkedSkus.size} pending watermarked/carton SKUs tracked.`);
+const totalProducts = catalogWithGallery.length;
+const pkg2369Count = catalogWithGallery.filter(p => p.migrationSource === 'Supplier_Package_2369').length;
+const oemCount = totalProducts - pkg2369Count;
+const galleryCount = catalogWithGallery.filter(p => (p.galleryImages || []).length > 0).length;
 
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OfficeBazzar – Migrated 2,369 Product Image Visual Quality Gate (383 Products)</title>
+  <title>OfficeBazzar – Complete Product Image Migration & Multi-Angle Gallery Quality Gate</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -62,7 +63,7 @@ const html = `<!DOCTYPE html>
     }
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
       gap: 16px;
       margin-bottom: 24px;
     }
@@ -97,7 +98,6 @@ const html = `<!DOCTYPE html>
     }
     .search-box {
       flex: 1 1 280px;
-      position: relative;
     }
     .search-box input {
       width: 100%;
@@ -136,6 +136,11 @@ const html = `<!DOCTYPE html>
     .btn-filter.purple.active {
       background: var(--purple);
       border-color: var(--purple);
+    }
+    .btn-filter.accent.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
     }
     .grid {
       display: grid;
@@ -203,6 +208,18 @@ const html = `<!DOCTYPE html>
       font-weight: 600;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
+    .badge-gallery-count {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: #f59e0b;
+      color: #000;
+      font-weight: 700;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
     .card-body {
       padding: 16px;
       display: flex;
@@ -239,6 +256,25 @@ const html = `<!DOCTYPE html>
       -webkit-box-orient: vertical;
       overflow: hidden;
       min-height: 38px;
+    }
+    .gallery-thumbs {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .thumb-item {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      background: #fff;
+      padding: 2px;
+      cursor: pointer;
+    }
+    .thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
     .meta-row {
       font-size: 12px;
@@ -298,8 +334,8 @@ const html = `<!DOCTYPE html>
   <div class="header">
     <div class="title-row">
       <div>
-        <h1>OfficeBazzar – Migrated Product Image Contact Sheet</h1>
-        <div class="subtitle">Complete visual verification catalog for 383 catalogue products (1200×1200 Master WebP)</div>
+        <h1>OfficeBazzar – Complete Image Migration & Multi-Angle Quality Gate</h1>
+        <div class="subtitle">Complete visual verification catalog for 383 catalogue products (1200×1200 Master WebP + 86 Multi-Angle Views)</div>
       </div>
       <div>
         <a href="/" style="color: #38bdf8; text-decoration: none; font-size: 14px; font-weight: 500;">← Back to OfficeBazzar Store</a>
@@ -308,20 +344,24 @@ const html = `<!DOCTYPE html>
 
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-val">383</div>
-        <div class="stat-lbl">Total Catalog Products</div>
+        <div class="stat-val">${totalProducts}</div>
+        <div class="stat-lbl">Catalog Products</div>
       </div>
       <div class="stat-card">
-        <div class="stat-val" style="color: #8b5cf6;">112</div>
-        <div class="stat-lbl">Migrated From 2,369 Pkg</div>
+        <div class="stat-val" style="color: #8b5cf6;">${pkg2369Count}</div>
+        <div class="stat-lbl">From 2,369 Pkg</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" style="color: #f59e0b;">${galleryCount} (86)</div>
+        <div class="stat-lbl">Multi-Angle Galleries</div>
       </div>
       <div class="stat-card">
         <div class="stat-val" style="color: #10b981;">93 / 93</div>
-        <div class="stat-lbl">Pending Issues Resolved</div>
+        <div class="stat-lbl">Watermarks Resolved</div>
       </div>
       <div class="stat-card">
-        <div class="stat-val" style="color: #0ea5e9;">271</div>
-        <div class="stat-lbl">Verified OEM Masters</div>
+        <div class="stat-val" style="color: #ef4444;">718</div>
+        <div class="stat-lbl">Legacy Files Cleaned</div>
       </div>
       <div class="stat-card">
         <div class="stat-val" style="color: #10b981;">0</div>
@@ -334,21 +374,25 @@ const html = `<!DOCTYPE html>
         <input type="text" id="searchInput" placeholder="Search by SKU, Product Name, or Brand..." oninput="filterCards()">
       </div>
       <div class="filter-group">
-        <button class="btn-filter active" onclick="setCategory('ALL', this)">All (383)</button>
+        <button class="btn-filter active" onclick="setCategory('ALL', this)">All (${totalProducts})</button>
         <button class="btn-filter" onclick="setCategory('Housekeeping & Hygiene', this)">Housekeeping (174)</button>
         <button class="btn-filter" onclick="setCategory('Office Stationery', this)">Stationery (166)</button>
         <button class="btn-filter" onclick="setCategory('Printers & Technology', this)">Tech & Printers (28)</button>
         <button class="btn-filter" onclick="setCategory('Packaging Supplies', this)">Packaging (15)</button>
-        <button class="btn-filter purple" onclick="setSource('Supplier_Package_2369', this)">2,369 Pkg Only (112)</button>
+        <button class="btn-filter accent" onclick="setSource('GALLERY_ONLY', this)">Multi-Angle Galleries (${galleryCount})</button>
+        <button class="btn-filter purple" onclick="setSource('Supplier_Package_2369', this)">2,369 Pkg Only (${pkg2369Count})</button>
         <button class="btn-filter" style="border-color: #10b981; color: #10b981;" onclick="setSource('WM_RESOLVED', this)">Resolved 93 Issues</button>
       </div>
     </div>
   </div>
 
   <div class="grid" id="productGrid">
-    ${results.map(p => {
+    ${catalogWithGallery.map(p => {
       const isWm = watermarkedSkus.has(p.sku);
       const is2369 = p.migrationSource === 'Supplier_Package_2369';
+      const gallery = p.galleryImages || [];
+      const hasGallery = gallery.length > 0;
+
       return `
       <div class="card" 
            data-sku="${p.sku.toLowerCase()}" 
@@ -356,10 +400,12 @@ const html = `<!DOCTYPE html>
            data-brand="${p.brand.toLowerCase()}"
            data-category="${p.category}"
            data-source="${p.migrationSource}"
-           data-wm="${isWm ? 'yes' : 'no'}">
-        <div class="img-container" onclick="openModal('${p.newImageRelative}', '${p.sku}', '${p.name.replace(/'/g, "\\'")}', '${p.sizeKb} KB')">
+           data-wm="${isWm ? 'yes' : 'no'}"
+           data-gallery="${hasGallery ? 'yes' : 'no'}">
+        <div class="img-container" id="imgBox-${p.sku}" onclick="openModal(document.querySelector('#imgBox-${p.sku} img').src, '${p.sku}', '${p.name.replace(/'/g, "\\'")}')">
           <img src="${p.newImageRelative}" alt="${p.name}" loading="lazy">
           ${isWm ? `<div class="badge-wm-resolved">RESOLVED MASTER</div>` : ''}
+          ${hasGallery ? `<div class="badge-gallery-count">+${gallery.length} ANGLES</div>` : ''}
           <div class="badge-corner ${is2369 ? 'badge-2369' : 'badge-oem'}">
             ${is2369 ? '2,369 PKG' : 'OEM MASTER'}
           </div>
@@ -370,9 +416,23 @@ const html = `<!DOCTYPE html>
             <span class="category-pill">${p.category}</span>
           </div>
           <div class="product-title" title="${p.name}">${p.name}</div>
+          
+          ${hasGallery ? `
+          <div class="gallery-thumbs">
+            <div class="thumb-item" onclick="switchCardImage('${p.sku}', '${p.newImageRelative}')">
+              <img src="${p.newImageRelative}" alt="Primary" title="Primary View">
+            </div>
+            ${gallery.map((g, gi) => `
+            <div class="thumb-item" onclick="switchCardImage('${p.sku}', '/assets/products/catalog_2026/${p.sku}-alt-${gi + 1}.webp')">
+              <img src="/assets/products/catalog_2026/${p.sku}-alt-${gi + 1}.webp" alt="Angle ${gi + 1}" title="Angle ${gi + 1}">
+            </div>
+            `).join('')}
+          </div>
+          ` : ''}
+
           <div class="meta-row">
             <span>Brand: <strong>${p.brand}</strong></span>
-            <span>1200×1200 · ${p.sizeKb} KB</span>
+            <span>1200×1200 WebP</span>
           </div>
         </div>
       </div>
@@ -387,7 +447,7 @@ const html = `<!DOCTYPE html>
       <img id="modalImg" src="" alt="Product Large View">
       <div class="modal-info">
         <h3 id="modalTitle"></h3>
-        <p id="modalSub" style="color: #64748b; font-size: 13px; margin-top: 4px;"></p>
+        <p id="modalSub" style="color: #64748b; font-size: 13px; margin-top: 4px;">Dimensions: 1200×1200 px | Format: WebP (Quality 90)</p>
       </div>
     </div>
   </div>
@@ -415,6 +475,14 @@ const html = `<!DOCTYPE html>
       filterCards();
     }
 
+    function switchCardImage(sku, newSrc) {
+      const box = document.getElementById('imgBox-' + sku);
+      if (box) {
+        const img = box.querySelector('img');
+        if (img) img.src = newSrc;
+      }
+    }
+
     function filterCards() {
       const q = document.getElementById('searchInput').value.toLowerCase().trim();
       const cards = document.querySelectorAll('#productGrid .card');
@@ -426,6 +494,7 @@ const html = `<!DOCTYPE html>
         const cat = card.getAttribute('data-category');
         const src = card.getAttribute('data-source');
         const isWm = card.getAttribute('data-wm');
+        const hasGallery = card.getAttribute('data-gallery');
 
         let matchQuery = !q || sku.includes(q) || name.includes(q) || brand.includes(q);
         let matchCat = currentCategory === 'ALL' || cat === currentCategory;
@@ -434,6 +503,8 @@ const html = `<!DOCTYPE html>
           matchSrc = src === 'Supplier_Package_2369';
         } else if (currentSource === 'WM_RESOLVED') {
           matchSrc = isWm === 'yes';
+        } else if (currentSource === 'GALLERY_ONLY') {
+          matchSrc = hasGallery === 'yes';
         }
 
         if (matchQuery && matchCat && matchSrc) {
@@ -444,10 +515,9 @@ const html = `<!DOCTYPE html>
       });
     }
 
-    function openModal(src, sku, name, size) {
+    function openModal(src, sku, name) {
       document.getElementById('modalImg').src = src;
       document.getElementById('modalTitle').textContent = sku + ' – ' + name;
-      document.getElementById('modalSub').textContent = 'Dimensions: 1200×1200 px | Format: WebP | Size: ' + size;
       document.getElementById('imageModal').classList.add('active');
     }
 
@@ -464,4 +534,9 @@ const html = `<!DOCTYPE html>
 `;
 
 fs.writeFileSync('public/migrated_product_contact_sheet.html', html, 'utf8');
-console.log('Successfully generated public/migrated_product_contact_sheet.html');
+console.log('Successfully updated public/migrated_product_contact_sheet.html with multi-angle galleries!');
+
+// Also copy to artifact directory
+const artifactPath = 'C:/Users/Pachamuthu S/.gemini/antigravity/brain/3b4e2bd9-29f4-43e6-8062-242f18749a52/migrated_product_contact_sheet.html';
+fs.copyFileSync('public/migrated_product_contact_sheet.html', artifactPath);
+console.log('Updated artifact copy of contact sheet.');
