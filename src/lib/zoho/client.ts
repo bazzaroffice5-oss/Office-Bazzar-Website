@@ -469,6 +469,7 @@ export async function zohoFetch<T = unknown>(
 
   let response = await fetch(fullUrl, {
     ...options,
+    signal: options.signal || AbortSignal.timeout(6000),
     headers: {
       Authorization: `Zoho-oauthtoken ${token}`,
       'Content-Type': 'application/json',
@@ -501,6 +502,7 @@ export async function zohoFetch<T = unknown>(
 
     response = await fetch(fullUrl, {
       ...options,
+      signal: options.signal || AbortSignal.timeout(6000),
       headers: {
         Authorization: `Zoho-oauthtoken ${token}`,
         'Content-Type': 'application/json',

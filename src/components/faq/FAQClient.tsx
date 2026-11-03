@@ -16,7 +16,7 @@ interface FAQClientProps {
 
 export default function FAQClient({ faqs }: FAQClientProps) {
   const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const filteredFaqs =
     activeCategory === 'all'
@@ -89,11 +89,13 @@ export default function FAQClient({ faqs }: FAQClientProps) {
                     }`}
                   />
                 </button>
-                {isOpen && (
-                  <div className="px-6 pb-5 pt-1 text-xs md:text-sm text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/30">
-                    {faq.answer}
-                  </div>
-                )}
+                <div
+                  className={`px-6 pb-5 pt-1 text-xs md:text-sm text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/30 ${
+                    isOpen ? 'block' : 'hidden'
+                  }`}
+                >
+                  {faq.answer}
+                </div>
               </div>
             );
           })}

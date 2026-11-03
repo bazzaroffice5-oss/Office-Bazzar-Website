@@ -1,8 +1,17 @@
 import React from 'react';
 import { notFound, permanentRedirect } from 'next/navigation';
 import ProductDetailClient from '@/components/product/ProductDetailClient';
-import { getProductBySlug, getRelatedProducts, getBrands } from '@/lib/db/store';
+import { getProductBySlug, getRelatedProducts, getBrands, getProducts } from '@/lib/db/store';
 import { getProductJsonLd, getBreadcrumbJsonLd, getCanonicalUrl, SITE_CONFIG, formatSeoTitle } from '@/lib/seo/config';
+
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const { products } = await getProducts();
+  return products.map((p) => ({
+    slug: p.slug,
+  }));
+}
 
 const DUPLICATE_PRODUCT_REDIRECTS: Record<string, string> = {
   'kangaro-staplers-hd-10d-1': '/product/kangaro-staplers-hd-10d',

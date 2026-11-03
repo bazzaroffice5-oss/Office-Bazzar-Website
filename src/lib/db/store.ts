@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import {
   Product,
   Category,
@@ -402,7 +403,7 @@ export async function getAdminProducts(): Promise<Product[]> {
   return products && products.length > 0 ? products : [...storeState.productsList];
 }
 
-export async function getProductBySlug(slug: string): Promise<Product | null> {
+export const getProductBySlug = cache(async (slug: string): Promise<Product | null> => {
   const cleanSlug = decodeURIComponent(slug).toLowerCase().trim();
   const products = await getProductsFromZoho();
   const pool = products && products.length > 0 ? products : storeState.productsList;
@@ -416,9 +417,9 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
       p.isActive !== false
   );
   return product || null;
-}
+});
 
-export async function getProductById(id: string): Promise<Product | null> {
+export const getProductById = cache(async (id: string): Promise<Product | null> => {
   const cleanId = id.trim();
   const products = await getProductsFromZoho();
   const pool = products && products.length > 0 ? products : storeState.productsList;
@@ -430,7 +431,7 @@ export async function getProductById(id: string): Promise<Product | null> {
       ((p as any).zohoProductId && (p as any).zohoProductId === cleanId)
   );
   return product || null;
-}
+});
 
 export async function getCategories(): Promise<Category[]> {
   if (isSupabaseConfigured && supabase) {

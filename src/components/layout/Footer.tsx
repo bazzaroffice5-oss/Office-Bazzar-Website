@@ -10,7 +10,7 @@ const GOOGLE_MAPS_DIRECTIONS_URL =
 const GOOGLE_MAPS_VIEW_URL =
   'https://www.google.com/maps/search/?api=1&query=Officebazzar+Tower,+No.+29/15,+Subbedar+Hussain+Street,+Royapettah,+Chennai,+Tamil+Nadu+600014';
 const GOOGLE_MAPS_EMBED_URL =
-  'https://www.google.com/maps?q=Officebazzar+Tower%2C+29%2F15+Subbedar+Hussain+Street%2C+Royapettah%2C+Chennai%2C+Tamil+Nadu+600014&t=&z=15&ie=UTF8&iwloc=&output=embed';
+  'https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1sOfficebazzar+Tower,+29/15+Subbedar+Hussain+Street,+Royapettah,+Chennai,+Tamil+Nadu+600014!6i15';
 
 const SOCIAL_LINKS = [
   {

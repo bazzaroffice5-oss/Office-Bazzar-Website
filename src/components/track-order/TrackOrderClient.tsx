@@ -60,9 +60,9 @@ export default function TrackOrderClient() {
         <div className="inline-flex p-3 bg-blue-50 text-blue-900 rounded-2xl mx-auto">
           <PackageCheck className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
           Track Your Order
-        </h1>
+        </h2>
         <p className="text-xs text-slate-600 leading-relaxed">
           Enter your OfficeBazzar Order Reference Number (e.g., <strong>OB-2026-1001</strong>) to view live warehouse dispatch and shipment progress.
         </p>

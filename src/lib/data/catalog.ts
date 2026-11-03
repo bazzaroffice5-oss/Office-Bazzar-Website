@@ -6,7 +6,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Office Stationery Suppliers in Chennai",
     "slug": "office-stationery-suppliers-in-chennai",
     "description": "Wholesale office stationery, registers, paper tag files, box files, and punching machines for enterprises in Chennai.",
-    "imageUrl": "https://officebazzar.co.in/wp-content/uploads/2022/12/officebazzar-com-3025-box-file-500x500-1.jpg",
+    "imageUrl": "/assets/products/catalog_2026/OB-STA.webp",
     "icon": "PenTool",
     "featured": true,
     "itemCount": 9
@@ -16,7 +16,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Housekeeping Items and Equipment",
     "slug": "housekeeping-items-and-equipment",
     "description": "Commercial housekeeping equipment, wringer trolleys, caddy baskets, cloths, wipers, and dispensers.",
-    "imageUrl": "https://officebazzar.co.in/wp-content/uploads/2022/12/wringer-trolley-500x500-1.jpg",
+    "imageUrl": "/assets/products/catalog_2026/OB-026.webp",
     "icon": "Sparkles",
     "featured": true,
     "itemCount": 18
@@ -26,7 +26,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Garbage Bin Suppliers in Chennai",
     "slug": "garbage-bin-suppliers-in-chennai",
     "description": "Industrial heavy-duty mobile wheeled garbage bins, stainless steel dustbins, lobby ashtray bins, and biodegradable garbage bags.",
-    "imageUrl": "https://officebazzar.co.in/wp-content/uploads/2022/12/nilkamal-120-litres-dustbin-wb120l1-500x500-1.jpg",
+    "imageUrl": "/assets/products/catalog_2026/OB-GAR.webp",
     "icon": "Trash2",
     "featured": true,
     "itemCount": 6
@@ -36,7 +36,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Computer Consumable Items in Chennai",
     "slug": "computer-consumable-items-in-chennai",
     "description": "Computer consumables, external hard disks, barcode printers, pen drives, cables, and lamination machines.",
-    "imageUrl": "https://officebazzar.co.in/wp-content/uploads/2022/12/epson-l6170-wi-fi-duplex-multifunction-inktank-printer-with-adf-500x500-1-1.jpg",
+    "imageUrl": "/assets/products/catalog_2026/OB-COM.webp",
     "icon": "Cpu",
     "featured": true,
     "itemCount": 8
@@ -46,7 +46,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Boards and Accessories",
     "slug": "boards-and-accessories",
     "description": "Magnetic whiteboards, pin-up notice boards, pegboards, sliding boards, dusters, and magazine display stands.",
-    "imageUrl": "https://officebazzar.co.in/wp-content/uploads/2022/12/white-board-500x500-1.jpg",
+    "imageUrl": "/assets/products/catalog_2026/OB-BOA.webp",
     "icon": "Presentation",
     "featured": true,
     "itemCount": 9
@@ -56,7 +56,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Packaging Adhesive Material in Chennai",
     "slug": "packaging-adhesive-material-in-chennai",
     "description": "BOPP brown cello tape, floor marking tapes, bubble sheets, foam thermocol, packing patti rolls, and gum paste.",
-    "imageUrl": "https://officebazzar.co.in/wp-content/uploads/2022/12/cello-brown-tape-2-inch-500x500-1.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-PAC.webp",
     "icon": "Package",
     "featured": true,
     "itemCount": 9
@@ -66,7 +66,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Display Stand in Chennai",
     "slug": "display-stand-in-chennai",
     "description": "Double-sided newspaper stands, tripod stands, wooden display stands, and Innofitt acrylic name plates.",
-    "imageUrl": "https://officebazzar.co.in/wp-content/uploads/2022/12/double-sided-newspaper-stand-500x500-1.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-DIS.webp",
     "icon": "Layers",
     "featured": true,
     "itemCount": 4
@@ -76,7 +76,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Best Paper Shredders and Currency Counting Machine in Chennai",
     "slug": "best-paper-shredders-and-currency-counting-machine-in-chennai",
     "description": "Heavy duty commercial paper shredders and currency counting machines with counterfeit detection.",
-    "imageUrl": "https://officebazzar.co.in/wp-content/uploads/2022/12/gobbler-s3135-heavy-duty-paper-shredding-machine-500x500-1.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-COM.webp",
     "icon": "Coins",
     "featured": true,
     "itemCount": 6
@@ -86,7 +86,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Housekeeping Accessories Suppliers in Chennai",
     "slug": "housekeeping-accessories-suppliers-in-chennai",
     "description": "Colin glass cleaners, plastic storage boxes, butter paper, Dettol disinfectant sprays, and napkins.",
-    "imageUrl": "https://officebazzar.co.in/wp-content/uploads/2022/12/colin-glass-cleaner-500-ml-500x500-1.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-HOU.webp",
     "icon": "ShieldCheck",
     "featured": true,
     "itemCount": 5
@@ -96,7 +96,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Printer Cartridges Suppliers in Chennai",
     "slug": "printer-cartridges-suppliers-in-chennai",
     "description": "Laser toner cartridges, Canon, HP, Samsung, and Best Print compatible toners and ink cartridges.",
-    "imageUrl": "https://officebazzar.co.in/wp-content/uploads/2022/12/best-print-12a-compatible-toner-cartridge-500x500-1.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-TON.webp",
     "icon": "Printer",
     "featured": true,
     "itemCount": 12
@@ -106,7 +106,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Cleaning Chemical Suppliers in Chennai",
     "slug": "cleaning-chemical-suppliers-in-chennai",
     "description": "Diversey Taski R4, R6, white phenyl, liquid acid, Vim dish wash, Lizol, Harpic, and Hi Clean floor cleaners.",
-    "imageUrl": "https://officebazzar.co.in/wp-content/uploads/2023/01/taski-r6-500x500-1.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-HOU.webp",
     "icon": "FlaskConical",
     "featured": true,
     "itemCount": 9
@@ -116,7 +116,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Tissue Paper Napkin",
     "slug": "tissue-paper-napkin",
     "description": "Commercial tissue paper napkins, C-fold towels, M-fold tissues, Kimberly-Clark Kimsoft, and jumbo toilet rolls.",
-    "imageUrl": "https://officebazzar.co.in/wp-content/uploads/2023/01/tissue-paper-napkin-500x500-1.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-HOU.webp",
     "icon": "Scroll",
     "featured": true,
     "itemCount": 6
@@ -1109,7 +1109,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-STA-1001_ob-fil-17-a4-transparent-report-file.webp"
+      "/assets/products/catalog_2026/OB-STA-1001.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1142,7 +1142,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-STA-1002_ob-fil-21-a4-button-folder-document-bag.webp"
+      "/assets/products/catalog_2026/OB-STA-1002.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1175,7 +1175,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-STA-1003_ob-fil-23-office-document-tag-file.webp"
+      "/assets/products/catalog_2026/OB-STA-1003.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1208,7 +1208,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-STA-1004_ob-fil-22-lm-plastic-folder-assorted-colours.webp"
+      "/assets/products/catalog_2026/OB-STA-1004.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1241,7 +1241,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-STA-1005_ob-fil-25-classic-cardboard-spring-file.webp"
+      "/assets/products/catalog_2026/OB-STA-1005.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1274,7 +1274,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-STA-1006_ob-fil-27-officebazzar-accounts-voucher-file.webp"
+      "/assets/products/catalog_2026/OB-STA-1006.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1307,7 +1307,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-STA-1007_ob-fil-18-f-s-expanding-file-folder-case.webp"
+      "/assets/products/catalog_2026/OB-STA-1007.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1340,7 +1340,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-STA-1008_ob-sta-1008-kangaro-dp600-paper-punch.webp"
+      "/assets/products/catalog_2026/OB-STA-1008.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1373,7 +1373,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-STA-1009_ob-des-59-desk-stapler-machine-no-10-24-6.webp"
+      "/assets/products/catalog_2026/OB-STA-1009.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1406,7 +1406,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1010_ob-040-yellow-cloth-small-big.webp"
+      "/assets/products/catalog_2026/OB-HOU-1010.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1439,7 +1439,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1011_ob-046-scrub-pad-green.webp"
+      "/assets/products/catalog_2026/OB-HOU-1011.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1472,7 +1472,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1012_OB-HOU-1012_housekeeping-cleaning-chemicals-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-HOU-1012.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1501,7 +1501,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1013_ob-028-hi-soft-tissue-roll.webp"
+      "/assets/products/catalog_2026/OB-HOU-1013.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1534,7 +1534,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1014_ob-093-premium-room-freshener-aerosol.webp"
+      "/assets/products/catalog_2026/OB-HOU-1014.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1567,7 +1567,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1015_ob-056-toilet-brush-single-hockey.webp"
+      "/assets/products/catalog_2026/OB-HOU-1015.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1600,7 +1600,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1016_ob-037-checked-cloth-small-big.webp"
+      "/assets/products/catalog_2026/OB-HOU-1016.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1633,7 +1633,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1017_ob-cov-07-rubber-industrial-safety-gloves.webp"
+      "/assets/products/catalog_2026/OB-HOU-1017.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1666,7 +1666,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1018_OB-HOU-1018_staplers-machine-kangaroo-hd-10d-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-HOU-1018.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1695,7 +1695,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1019_ob-091-magiccode-room-freshener-spray.webp"
+      "/assets/products/catalog_2026/OB-HOU-1019.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1728,7 +1728,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1020_ob-118-hi-clean-floor-cleaner-500ml-5l.webp"
+      "/assets/products/catalog_2026/OB-HOU-1020.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1761,7 +1761,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1021_ob-136-wringer-trolley-single-bucket.webp"
+      "/assets/products/catalog_2026/OB-HOU-1021.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1794,7 +1794,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1022_ob-010-ss-soap-dispenser-500ml-800ml-1000ml.webp"
+      "/assets/products/catalog_2026/OB-HOU-1022.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1827,7 +1827,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1023_ob-002-abs-hand-dryer-machine.webp"
+      "/assets/products/catalog_2026/OB-HOU-1023.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1860,7 +1860,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1024_ob-001-ss-hand-dryer-machine.webp"
+      "/assets/products/catalog_2026/OB-HOU-1024.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1893,7 +1893,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1025_ob-127-dettol-antiseptic-disinfectant-liquid.webp"
+      "/assets/products/catalog_2026/OB-HOU-1025.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1926,7 +1926,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1026_OB-HOU-1026_copper-water-bottle-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-HOU-1026.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1955,7 +1955,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1027_ob-022-abs-toilet-roll-dispenser.webp"
+      "/assets/products/catalog_2026/OB-HOU-1027.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1988,7 +1988,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-GAR-1028_ob-064-plastic-dustbin-regular.webp"
+      "/assets/products/catalog_2026/OB-GAR-1028.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2021,7 +2021,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-GAR-1029_ob-079-toilet-sink-plunger.webp"
+      "/assets/products/catalog_2026/OB-GAR-1029.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2054,7 +2054,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-GAR-1030_ob-088-plastic-bucket-and-mug-set.webp"
+      "/assets/products/catalog_2026/OB-GAR-1030.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2087,7 +2087,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-GAR-1031_ob-082-dry-mop-set-with-refill.webp"
+      "/assets/products/catalog_2026/OB-GAR-1031.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2120,7 +2120,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-GAR-1032_ob-068-metal-wire-mesh-dustbin.webp"
+      "/assets/products/catalog_2026/OB-GAR-1032.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2153,7 +2153,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "https://officebazzar.co.in/wp-content/uploads/2022/12/cartoon-character-dustbin-500x500-1.jpg"
+      "/assets/products/catalog_2026/OB-GAR-1033.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2182,7 +2182,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COM-1034_OB-COM-1034_external-hard-disk-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-COM-1034.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2211,7 +2211,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COM-1035_OB-COM-1035_epson-l6170-wi-fi-duplex-multifunction-inktank-printer-with-adf-500x500-1-1.webp"
+      "/assets/products/catalog_2026/OB-COM-1035.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2240,7 +2240,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COM-1036_OB-COM-1036_kent-ks-12-lamination-machine-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-COM-1036.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2269,7 +2269,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COM-1037_OB-COM-1037_keyboard-drawer-metal-19-innofitt-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-COM-1037.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2298,7 +2298,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COM-1038_OB-COM-1038_16-gb-pen-drive-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-COM-1038.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2327,7 +2327,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COM-1039_ob-com-1039-kent-fc777-spiral-binding-machine.webp"
+      "/assets/products/catalog_2026/OB-COM-1039.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2356,7 +2356,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COM-1040_OB-COM-1040_canon-mk2500-ferrule-printer-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-COM-1040.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2385,7 +2385,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COM-1041_OB-COM-1041_adaptor-cable-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-COM-1041.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2414,7 +2414,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-BOA-1042_OB-BOA-1042_white-board-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-BOA-1042.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2443,7 +2443,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-BOA-1043_OB-BOA-1043_golden-letter-for-welcome-board-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-BOA-1043.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2472,7 +2472,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-BOA-1044_OB-BOA-1044_alkosign-motorised-dependent-up-down-boards-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-BOA-1044.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2501,7 +2501,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-BOA-1045_OB-BOA-1045_alkosign-horizantal-sliding-board-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-BOA-1045.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2530,7 +2530,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-BOA-1046_OB-BOA-1046_pin-up-notice-board-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-BOA-1046.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2559,7 +2559,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-BOA-1047_OB-BOA-1047_alkosign-pegboard-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-BOA-1047.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2588,7 +2588,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-BOA-1048_OB-BOA-1048_magazine-stand-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-BOA-1048.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2617,7 +2617,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-BOA-1049_OB-BOA-1049_white-board-duster-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-BOA-1049.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2646,7 +2646,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-BOA-1050_OB-BOA-1050_boards-and-accessories-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-BOA-1050.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2675,7 +2675,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAC-1051_ob-des-50-office-paper-gum-paste-bottle.webp"
+      "/assets/products/catalog_2026/OB-PAC-1051.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2708,7 +2708,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAC-1052_ob-des-54-bopp-packaging-tape-brown-cello-1-2-3-inch.webp"
+      "/assets/products/catalog_2026/OB-PAC-1052.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2741,7 +2741,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/packaging-supplies/ob-cov-29-yellow-black-floor-marking-caution-tape.webp"
+      "/assets/products/catalog_2026/OB-PAC-1053.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2774,7 +2774,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAC-1054_ob-des-58-protective-bubble-wrap-roll.webp"
+      "/assets/products/catalog_2026/OB-PAC-1054.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2807,7 +2807,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAC-1055_OB-PAC-1055_foam-and-thermocol-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PAC-1055.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2836,7 +2836,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAC-1056_OB-PAC-1056_packing-patti-roll-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PAC-1056.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2865,7 +2865,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAC-1057_OB-PAC-1057_magic-tape-with-dispenser-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PAC-1057.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2894,7 +2894,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAC-1058_ob-des-64-stainless-steel-office-scissors-all-sizes.webp"
+      "/assets/products/catalog_2026/OB-PAC-1058.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2927,7 +2927,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAC-1059_ob-des-49-fevistik-glue-stick-big.webp"
+      "/assets/products/catalog_2026/OB-PAC-1059.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2960,7 +2960,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-DIS-1060_OB-DIS-1060_double-sided-newspaper-stand-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-DIS-1060.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2989,7 +2989,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-DIS-1061_OB-DIS-1061_wooden-stand-for-boards-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-DIS-1061.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3018,7 +3018,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-DIS-1062_OB-DIS-1062_tripod-stand-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-DIS-1062.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3047,7 +3047,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-DIS-1063_OB-DIS-1063_name-plate-innofitt-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-DIS-1063.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3076,7 +3076,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-SHR-1064_ob-eqp-86-heavy-duty-cross-cut-paper-shredder.webp"
+      "/assets/products/catalog_2026/OB-SHR-1064.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3109,7 +3109,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-SHR-1065_OB-SHR-1065_gobbler-gs15cd-paper-shredding-machine-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-SHR-1065.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3138,7 +3138,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-SHR-1066_OB-SHR-1066_gobbler-a2326-paper-shredding-machine-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-SHR-1066.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3167,7 +3167,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-SHR-1067_OB-SHR-1067_gobbler-s3135-heavy-duty-paper-shredding-machine-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-SHR-1067.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3196,7 +3196,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-SHR-1068_OB-SHR-1068_gobbler-gs10cd-paper-shredding-machine-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-SHR-1068.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3225,7 +3225,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-SHR-1069_ob-eqp-88-magnetic-notice-display-folder-frame.webp"
+      "/assets/products/catalog_2026/OB-SHR-1069.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3258,7 +3258,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1070_OB-HOU-1070_royal-napkins-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-HOU-1070.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3287,7 +3287,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1071_ob-151-wheeled-dustbin-120-litre-green.webp"
+      "/assets/products/catalog_2026/OB-HOU-1071.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3320,7 +3320,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1072_OB-HOU-1072_plastic-storage-box-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-HOU-1072.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3349,7 +3349,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1073_OB-HOU-1073_butter-paper-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-HOU-1073.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3378,7 +3378,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-HOU-1074_OB-HOU-1074_dettol-disinfectant-spray-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-HOU-1074.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3407,7 +3407,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PRI-1075_OB-PRI-1075_best-print-12a-compatible-toner-cartridge-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PRI-1075.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3436,7 +3436,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PRI-1076_OB-PRI-1076_canon-ep-303-toner-cartridge-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PRI-1076.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3465,7 +3465,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PRI-1077_OB-PRI-1077_canon-308-toner-cartridge-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PRI-1077.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3494,7 +3494,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PRI-1078_OB-PRI-1078_dymo-label-cartridges-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PRI-1078.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3523,7 +3523,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PRI-1079_OB-PRI-1079_canon-refilling-catridge-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PRI-1079.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3552,7 +3552,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PRI-1080_OB-PRI-1080_cf403a-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PRI-1080.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3581,7 +3581,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PRI-1081_OB-PRI-1081_samsung-mlt-d116s-black-toner-cartridge-500x500-a-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PRI-1081.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3610,7 +3610,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PRI-1082_OB-PRI-1082_hp-126a-laserjet-toner-cartridge-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PRI-1082.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3639,7 +3639,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PRI-1083_OB-PRI-1083_npg-51-compatible-toner-cartridge-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PRI-1083.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3668,7 +3668,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PRI-1084_OB-PRI-1084_best-india-print-88a-compatible-toner-cartridge-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PRI-1084.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3697,7 +3697,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PRI-1085_OB-PRI-1085_hp-802-small-black-ink-cartridge-ch561zz-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PRI-1085.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3726,7 +3726,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PRI-1086_OB-PRI-1086_hp-678-tri-color-ink-cartridge-cz108aa-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-PRI-1086.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3755,7 +3755,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-CLE-1087_ob-148-ss-trio-waste-recycling-dustbin.webp"
+      "/assets/products/catalog_2026/OB-CLE-1087.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3788,7 +3788,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-CLE-1088_ob-150-frp-trio-segregation-waste-bins.webp"
+      "/assets/products/catalog_2026/OB-CLE-1088.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3821,7 +3821,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-CLE-1089_OB-CLE-1089_liquid-white-phenyl-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-CLE-1089.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3850,7 +3850,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-CLE-1090_OB-CLE-1090_liquid-acid-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-CLE-1090.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3879,7 +3879,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-CLE-1091_ob-155-diversey-taski-r2-hygienic-hard-surface-cleaner.webp"
+      "/assets/products/catalog_2026/OB-CLE-1091.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3912,7 +3912,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-CLE-1092_ob-154-diversey-taski-r1-super-bathroom-cleaner.webp"
+      "/assets/products/catalog_2026/OB-CLE-1092.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3945,7 +3945,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-CLE-1093_OB-CLE-1093_harpic-toilet-cleaner-500-ml-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-CLE-1093.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3974,7 +3974,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-CLE-1094_OB-CLE-1094_hi-clean-floor-cleaner-5-ltr-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-CLE-1094.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4003,7 +4003,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-CLE-1095_OB-CLE-1095_hi-clean-liquid-soap-1-ltr-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-CLE-1095.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4032,7 +4032,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-TIS-1096_ob-029-hi-soft-tissue-napkin.webp"
+      "/assets/products/catalog_2026/OB-TIS-1096.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -4065,7 +4065,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-TIS-1097_OB-TIS-1097_royal-napkins-tissue-paper-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-TIS-1097.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4094,7 +4094,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-TIS-1098_ob-031-c-fold-tissue.webp"
+      "/assets/products/catalog_2026/OB-TIS-1098.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4127,7 +4127,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-TIS-1099_ob-032-m-fold-tissue.webp"
+      "/assets/products/catalog_2026/OB-TIS-1099.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4160,7 +4160,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-TIS-1100_OB-TIS-1100_kimsoft-smile-c-fold-towels-180-towels-30-sleeves-031500-500x500-1.webp"
+      "/assets/products/catalog_2026/OB-TIS-1100.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4189,7 +4189,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-TIS-1101_ob-034-jumbo-tissue-roll.webp"
+      "/assets/products/catalog_2026/OB-TIS-1101.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -4226,7 +4226,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-003-shoe-cover-dispenser.webp"
+      "/assets/products/catalog_2026/OB-003.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4266,7 +4266,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-004_ob-004-paper-cup-dispenser.webp"
+      "/assets/products/catalog_2026/OB-004.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4306,7 +4306,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-005-jet-hand-dryer.webp"
+      "/assets/products/catalog_2026/OB-005.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4346,7 +4346,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-006-commercial-vacuum-cleaner.webp"
+      "/assets/products/catalog_2026/OB-006.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4386,7 +4386,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-007-shoe-polish-machine.webp"
+      "/assets/products/catalog_2026/OB-007.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4426,7 +4426,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-008-feather-duster.webp"
+      "/assets/products/catalog_2026/OB-008.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4466,7 +4466,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-009_ob-009-queue-manager.webp"
+      "/assets/products/catalog_2026/OB-009.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4506,7 +4506,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-011_ob-011-abs-soap-dispenser-500ml.webp"
+      "/assets/products/catalog_2026/OB-011.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4546,7 +4546,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-012-abs-soap-dispenser-curved.webp"
+      "/assets/products/catalog_2026/OB-012.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4586,7 +4586,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-013_ob-013-abs-soap-dispenser-single-clear.webp"
+      "/assets/products/catalog_2026/OB-013.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4626,7 +4626,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-014-abs-soap-dispenser-250ml.webp"
+      "/assets/products/catalog_2026/OB-014.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4666,7 +4666,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-015-abs-double-soap-dispenser-clear.webp"
+      "/assets/products/catalog_2026/OB-015.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4706,7 +4706,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-016-double-soap-dispenser-white.webp"
+      "/assets/products/catalog_2026/OB-016.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4746,7 +4746,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-017-automatic-soap-dispenser.webp"
+      "/assets/products/catalog_2026/OB-017.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4786,7 +4786,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-018_ob-018-touch-free-soap-dispenser.webp"
+      "/assets/products/catalog_2026/OB-018.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4826,7 +4826,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-019_ob-019-ss-c-m-fold-tissue-dispenser.webp"
+      "/assets/products/catalog_2026/OB-019.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4866,7 +4866,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-020_ob-020-abs-tissue-dispenser-m-fold.webp"
+      "/assets/products/catalog_2026/OB-020.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4906,7 +4906,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-021-ss-jumbo-roll-tissue-dispenser.webp"
+      "/assets/products/catalog_2026/OB-021.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4946,7 +4946,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-023-ss-toilet-roll-dispenser.webp"
+      "/assets/products/catalog_2026/OB-023.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4986,7 +4986,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-024-mini-toilet-roll-dispenser.webp"
+      "/assets/products/catalog_2026/OB-024.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5026,7 +5026,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-025-hrt-roll-dispenser-automatic.webp"
+      "/assets/products/catalog_2026/OB-025.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5066,7 +5066,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-026-hrt-roll-dispenser-autocut.webp"
+      "/assets/products/catalog_2026/OB-026.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5106,7 +5106,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-027_ob-027-kitchen-roll-dispenser.webp"
+      "/assets/products/catalog_2026/OB-027.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5146,7 +5146,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-030_ob-030-premier-face-tissue.webp"
+      "/assets/products/catalog_2026/OB-030.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5186,7 +5186,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-033-hrt-tissue-roll.webp"
+      "/assets/products/catalog_2026/OB-033.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5226,7 +5226,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-035-kitchen-tissue-roll.webp"
+      "/assets/products/catalog_2026/OB-035.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5266,7 +5266,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-036_ob-036-greenlime-tissue.webp"
+      "/assets/products/catalog_2026/OB-036.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5306,7 +5306,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-038_ob-038-glass-cloth.webp"
+      "/assets/products/catalog_2026/OB-038.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5346,7 +5346,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-039-gada-cloth.webp"
+      "/assets/products/catalog_2026/OB-039.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5386,7 +5386,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-041-micro-fiber-cloth-all-size.webp"
+      "/assets/products/catalog_2026/OB-041.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5426,7 +5426,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-042-banian-cloth.webp"
+      "/assets/products/catalog_2026/OB-042.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5466,7 +5466,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-043-banian-cloth-white.webp"
+      "/assets/products/catalog_2026/OB-043.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5506,7 +5506,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-044-blue-duster-cloth.webp"
+      "/assets/products/catalog_2026/OB-044.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5546,7 +5546,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-045_ob-045-cotton-towel-small-big.webp"
+      "/assets/products/catalog_2026/OB-045.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5586,7 +5586,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-047_ob-047-scrub-pad-with-sponge.webp"
+      "/assets/products/catalog_2026/OB-047.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5626,7 +5626,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-048-nylon-scrubber.webp"
+      "/assets/products/catalog_2026/OB-048.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5666,7 +5666,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-049_ob-049-steel-scrubber.webp"
+      "/assets/products/catalog_2026/OB-049.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5706,7 +5706,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-050_ob-050-exo-round-bar.webp"
+      "/assets/products/catalog_2026/OB-050.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5746,7 +5746,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-051_ob-051-pril-dishwash-liquid.webp"
+      "/assets/products/catalog_2026/OB-051.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5786,7 +5786,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-052_ob-052-vim-dishwash-gel-250ml-500ml-1-8-ltr.webp"
+      "/assets/products/catalog_2026/OB-052.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5826,7 +5826,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-053-hi-clean-dishwash-liquid.webp"
+      "/assets/products/catalog_2026/OB-053.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5866,7 +5866,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-054_ob-054-vim-pril-dishwash-soap.webp"
+      "/assets/products/catalog_2026/OB-054.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5906,7 +5906,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-055_ob-055-toilet-brush-double-hockey.webp"
+      "/assets/products/catalog_2026/OB-055.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5946,7 +5946,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-057-toilet-brush-round.webp"
+      "/assets/products/catalog_2026/OB-057.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5986,7 +5986,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-058_ob-058-carpet-brush-hard-soft.webp"
+      "/assets/products/catalog_2026/OB-058.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6026,7 +6026,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-059-road-cleaning-brush.webp"
+      "/assets/products/catalog_2026/OB-059.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6066,7 +6066,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-060-cloth-washing-brush.webp"
+      "/assets/products/catalog_2026/OB-060.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6106,7 +6106,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-061-washbasin-brush.webp"
+      "/assets/products/catalog_2026/OB-061.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6146,7 +6146,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-062-cobweb-stick-sunflower.webp"
+      "/assets/products/catalog_2026/OB-062.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6186,7 +6186,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-063_ob-063-dust-pan-with-brush-set.webp"
+      "/assets/products/catalog_2026/OB-063.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6226,7 +6226,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-065_ob-065-pedal-plastic-dustbin.webp"
+      "/assets/products/catalog_2026/OB-065.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6266,7 +6266,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-066-swing-plastic-dustbin.webp"
+      "/assets/products/catalog_2026/OB-066.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6306,7 +6306,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-067_ob-067-single-mop-wringer-bucket.webp"
+      "/assets/products/catalog_2026/OB-067.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6346,7 +6346,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-069-stainless-steel-pedal-dustbin.webp"
+      "/assets/products/catalog_2026/OB-069.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6386,7 +6386,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-070-ss-perforated-dustbin.webp"
+      "/assets/products/catalog_2026/OB-070.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6426,7 +6426,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-071-ss-push-can-dustbin.webp"
+      "/assets/products/catalog_2026/OB-071.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6466,7 +6466,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-072_ob-072-ss-swing-dustbin.webp"
+      "/assets/products/catalog_2026/OB-072.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6506,7 +6506,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-073_ob-073-commercial-glass-wiper.webp"
+      "/assets/products/catalog_2026/OB-073.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6546,7 +6546,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-074_ob-074-glass-combi-wiper-with-sponge.webp"
+      "/assets/products/catalog_2026/OB-074.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6586,7 +6586,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-075-kitchen-counter-wiper.webp"
+      "/assets/products/catalog_2026/OB-075.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6626,7 +6626,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-076_ob-076-versa-wiper.webp"
+      "/assets/products/catalog_2026/OB-076.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6666,7 +6666,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-077-floor-wiper-with-long-stick.webp"
+      "/assets/products/catalog_2026/OB-077.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6706,7 +6706,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-078-table-top-wiper.webp"
+      "/assets/products/catalog_2026/OB-078.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6746,7 +6746,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-080-clip-mop-head-colour-coded.webp"
+      "/assets/products/catalog_2026/OB-080.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6786,7 +6786,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-081_ob-081-cob-web-brush-curved.webp"
+      "/assets/products/catalog_2026/OB-081.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6826,7 +6826,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-083_ob-083-heavy-duty-mop-stick-handle.webp"
+      "/assets/products/catalog_2026/OB-083.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6866,7 +6866,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-084-twist-floor-mop.webp"
+      "/assets/products/catalog_2026/OB-084.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6906,7 +6906,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-085_ob-085-clip-fit-wet-mop-refill.webp"
+      "/assets/products/catalog_2026/OB-085.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6946,7 +6946,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-086-rubber-welcome-mat.webp"
+      "/assets/products/catalog_2026/OB-086.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6986,7 +6986,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-087-cotton-door-mat.webp"
+      "/assets/products/catalog_2026/OB-087.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7026,7 +7026,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-089-plastic-handheld-dustpan.webp"
+      "/assets/products/catalog_2026/OB-089.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7066,7 +7066,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-090_ob-090-round-cotton-floor-mop.webp"
+      "/assets/products/catalog_2026/OB-090.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7106,7 +7106,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-092_ob-092-godrej-aer-room-freshener-spray.webp"
+      "/assets/products/catalog_2026/OB-092.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7146,7 +7146,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-094_ob-094-odonil-room-air-freshener-spray.webp"
+      "/assets/products/catalog_2026/OB-094.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7186,7 +7186,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-095_ob-095-airwick-room-freshener-spray.webp"
+      "/assets/products/catalog_2026/OB-095.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7226,7 +7226,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-096_ob-096-ambi-pur-air-freshener-spray.webp"
+      "/assets/products/catalog_2026/OB-096.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7266,7 +7266,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-097-automatic-air-freshener-dispenser-refill.webp"
+      "/assets/products/catalog_2026/OB-097.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7306,7 +7306,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-098-hi-clean-air-freshener-liquid-5-litre.webp"
+      "/assets/products/catalog_2026/OB-098.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7346,7 +7346,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-099_ob-099-godrej-aer-pocket-bathroom-freshener.webp"
+      "/assets/products/catalog_2026/OB-099.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7386,7 +7386,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-100_ob-100-telescopic-aluminum-extension-pole.webp"
+      "/assets/products/catalog_2026/OB-100.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7426,7 +7426,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-101_ob-101-caution-wet-floor-sign-board.webp"
+      "/assets/products/catalog_2026/OB-101.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7466,7 +7466,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-102-cleaning-caddy-basket-organizer.webp"
+      "/assets/products/catalog_2026/OB-102.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7506,7 +7506,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-103_ob-103-professional-glass-cleaning-kit-box.webp"
+      "/assets/products/catalog_2026/OB-103.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7546,7 +7546,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-104-commercial-insect-killer-fly-catcher-machine.webp"
+      "/assets/products/catalog_2026/OB-104.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7586,7 +7586,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-105-abs-wall-mounted-broom-mop-holder.webp"
+      "/assets/products/catalog_2026/OB-105.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7626,7 +7626,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-106-upright-lobby-dustpan-with-broom.webp"
+      "/assets/products/catalog_2026/OB-106.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7666,7 +7666,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-107-floor-and-glass-scraper-tool.webp"
+      "/assets/products/catalog_2026/OB-107.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7706,7 +7706,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-108_ob-108-chemical-trigger-spray-bottle.webp"
+      "/assets/products/catalog_2026/OB-108.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7746,7 +7746,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-109_ob-109-goodknight-mosquito-repellent-machine-set.webp"
+      "/assets/products/catalog_2026/OB-109.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7786,7 +7786,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-110_ob-110-hit-cockroach-insect-spray.webp"
+      "/assets/products/catalog_2026/OB-110.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7826,7 +7826,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-111-caustic-soda-flakes.webp"
+      "/assets/products/catalog_2026/OB-111.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7866,7 +7866,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-112_ob-112-pvc-hard-broom.webp"
+      "/assets/products/catalog_2026/OB-112.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7906,7 +7906,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-113-hard-broom-stick-big-small.webp"
+      "/assets/products/catalog_2026/OB-113.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7946,7 +7946,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-114_ob-114-all-out-mosquito-repellent-machine-set.webp"
+      "/assets/products/catalog_2026/OB-114.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7986,7 +7986,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-115-grass-soft-broom-big-small.webp"
+      "/assets/products/catalog_2026/OB-115.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8026,7 +8026,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-116-steel-handle-broom.webp"
+      "/assets/products/catalog_2026/OB-116.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8066,7 +8066,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-117_ob-117-gala-no-dust-broom.webp"
+      "/assets/products/catalog_2026/OB-117.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8106,7 +8106,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-119_ob-119-hi-clean-liquid-soap-1l-5l.webp"
+      "/assets/products/catalog_2026/OB-119.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8146,7 +8146,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-120-hi-clean-toilet-cleaner-500ml-5l.webp"
+      "/assets/products/catalog_2026/OB-120.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8186,7 +8186,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-121_ob-121-hi-clean-perfumed-phenyl-multicolor.webp"
+      "/assets/products/catalog_2026/OB-121.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8226,7 +8226,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-122-hi-clean-glass-cleaner-500ml-5l.webp"
+      "/assets/products/catalog_2026/OB-122.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8266,7 +8266,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-123-hi-clean-black-disinfectant-concentrate-phenyl.webp"
+      "/assets/products/catalog_2026/OB-123.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8306,7 +8306,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-124-hi-clean-hand-wash-250ml-500ml-5l.webp"
+      "/assets/products/catalog_2026/OB-124.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8346,7 +8346,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-125-hi-clean-bathroom-cleaner-500ml.webp"
+      "/assets/products/catalog_2026/OB-125.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8386,7 +8386,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-126_ob-126-sodium-hypochlorite-disinfectant-solution-5l.webp"
+      "/assets/products/catalog_2026/OB-126.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8426,7 +8426,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-128_ob-128-lifebuoy-antibacterial-handwash.webp"
+      "/assets/products/catalog_2026/OB-128.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8466,7 +8466,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-129-cleaning-thinner-nc-thinner.webp"
+      "/assets/products/catalog_2026/OB-129.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8506,7 +8506,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-130_ob-130-urinal-screen-anti-splash-mats.webp"
+      "/assets/products/catalog_2026/OB-130.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8546,7 +8546,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-131-disposable-heavy-garbage-bags-all-sizes.webp"
+      "/assets/products/catalog_2026/OB-131.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8586,7 +8586,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-132-industrial-rubber-anti-fatigue-mat-roll.webp"
+      "/assets/products/catalog_2026/OB-132.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8626,7 +8626,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-133-heavy-duty-rubber-cleaning-hand-gloves.webp"
+      "/assets/products/catalog_2026/OB-133.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8666,7 +8666,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-134-cotton-knitted-safety-hand-gloves.webp"
+      "/assets/products/catalog_2026/OB-134.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8706,7 +8706,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-135_ob-135-pure-white-naphthalene-balls.webp"
+      "/assets/products/catalog_2026/OB-135.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8746,7 +8746,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-137_ob-137-wringer-trolley-double-bucket.webp"
+      "/assets/products/catalog_2026/OB-137.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8786,7 +8786,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-138-wringer-trolley-triple-bucket.webp"
+      "/assets/products/catalog_2026/OB-138.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8826,7 +8826,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-139_ob-139-handheld-shopping-basket-trolley.webp"
+      "/assets/products/catalog_2026/OB-139.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8866,7 +8866,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-140-metal-supermarket-shopping-cart-trolley.webp"
+      "/assets/products/catalog_2026/OB-140.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8906,7 +8906,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-141-industrial-heavy-duty-platform-trolley.webp"
+      "/assets/products/catalog_2026/OB-141.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8946,7 +8946,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-142-janitor-cleaning-service-trolley-cart.webp"
+      "/assets/products/catalog_2026/OB-142.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8986,7 +8986,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-143-multipurpose-wringer-janitor-trolley.webp"
+      "/assets/products/catalog_2026/OB-143.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9026,7 +9026,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-144_ob-144-double-bucket-wringer-trolley-black.webp"
+      "/assets/products/catalog_2026/OB-144.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9066,7 +9066,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-145_ob-145-bio-medical-waste-segregation-dustbins-set.webp"
+      "/assets/products/catalog_2026/OB-145.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9106,7 +9106,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-146_ob-146-duo-wet-dry-plastic-dustbin.webp"
+      "/assets/products/catalog_2026/OB-146.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9146,7 +9146,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-147-ss-duo-waste-recycling-dustbin.webp"
+      "/assets/products/catalog_2026/OB-147.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9186,7 +9186,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-149-frp-duo-outdoor-waste-bins.webp"
+      "/assets/products/catalog_2026/OB-149.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9226,7 +9226,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/housekeeping/ob-152-heavy-duty-wheeled-dustbin-660-litre.webp"
+      "/assets/products/catalog_2026/OB-152.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9266,7 +9266,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-153_ob-153-industrial-plastic-storage-drum-barrel-all-sizes.webp"
+      "/assets/products/catalog_2026/OB-153.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9306,7 +9306,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-203_ob-203-diversey-taski-r3-glass-cleaner-concentrate.webp"
+      "/assets/products/catalog_2026/OB-203.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9346,7 +9346,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-157_ob-157-diversey-taski-r4-wood-furniture-polish.webp"
+      "/assets/products/catalog_2026/OB-157.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9386,7 +9386,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-158_ob-158-diversey-taski-r5-air-freshener-concentrate.webp"
+      "/assets/products/catalog_2026/OB-158.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9426,7 +9426,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-159_ob-159-diversey-taski-r6-toilet-bowl-cleaner.webp"
+      "/assets/products/catalog_2026/OB-159.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9466,7 +9466,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-160_ob-160-diversey-taski-r7-floor-cleaner-concentrate.webp"
+      "/assets/products/catalog_2026/OB-160.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9506,7 +9506,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-161_ob-161-diversey-taski-r9-hard-water-limescale-cleaner.webp"
+      "/assets/products/catalog_2026/OB-161.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9546,7 +9546,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-162_ob-162-diversey-suma-inox-d7-1-stainless-steel-polish.webp"
+      "/assets/products/catalog_2026/OB-162.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9586,7 +9586,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAP-01_ob-pap-01-jk-max-copier-paper-67-gsm-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-01.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9626,7 +9626,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAP-02_ob-pap-02-jk-cmax-copier-paper-72-gsm-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-02.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9666,7 +9666,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAP-03_ob-pap-03-jk-easy-copier-paper-70-gsm-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-03.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9706,7 +9706,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAP-04_ob-pap-04-jk-copier-paper-75-gsm-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-04.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9746,7 +9746,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAP-05_ob-pap-05-jk-excel-bond-paper-70-80-90-100-gsm-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-05.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9786,7 +9786,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAP-06_ob-pap-06-jk-cedar-copier-paper-80-100-gsm-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-06.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9826,7 +9826,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAP-07_ob-pap-07-jk-sparkle-multipurpose-paper-70-75-80-gsm-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-07.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9866,7 +9866,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAP-08_ob-pap-08-jk-eco-rise-copier-paper-70-gsm-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-08.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9906,7 +9906,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAP-09_ob-pap-09-tnpl-copier-paper-70-gsm-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-09.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9946,7 +9946,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAP-10_ob-pap-10-tnpl-platinum-copier-paper-75-gsm-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-10.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9986,7 +9986,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAP-11_ob-pap-11-tnpl-copier-paper-80-gsm-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-11.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10026,7 +10026,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAP-12_ob-pap-12-jk-max-copier-paper-67-gsm-a4-ekent-pack.webp"
+      "/assets/products/catalog_2026/OB-PAP-12.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10066,7 +10066,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-13-koopee-premium-glossy-photo-paper-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-13.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10106,7 +10106,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PAP-14_ob-pap-14-royal-executive-bond-paper-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-14.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10146,7 +10146,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-15-compu-color-a4-color-paper-200-gsm.webp"
+      "/assets/products/catalog_2026/OB-PAP-15.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10186,7 +10186,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/copier-papers/ob-pap-16-novajet-inkjet-true-picture-paper-a4.webp"
+      "/assets/products/catalog_2026/OB-PAP-16.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10226,7 +10226,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-19-a4-sheet-protector-clear-sheet.webp"
+      "/assets/products/catalog_2026/OB-FIL-19.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10266,7 +10266,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-FIL-20_ob-fil-20-a4-plastic-stick-file.webp"
+      "/assets/products/catalog_2026/OB-FIL-20.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10306,7 +10306,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-FIL-24_ob-fil-24-spring-file-plastic-body.webp"
+      "/assets/products/catalog_2026/OB-FIL-24.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10346,7 +10346,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-26-officebazzar-box-file.webp"
+      "/assets/products/catalog_2026/OB-FIL-26.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10386,7 +10386,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-FIL-28_ob-fil-28-ordinary-urgent-document-file.webp"
+      "/assets/products/catalog_2026/OB-FIL-28.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10426,7 +10426,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-fil-29-1-to-10-index-file-separator.webp"
+      "/assets/products/catalog_2026/OB-FIL-29.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10466,7 +10466,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-FIL-30_ob-fil-30-a-to-z-alphabetical-file-separator.webp"
+      "/assets/products/catalog_2026/OB-FIL-30.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10506,7 +10506,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-FIL-31_ob-fil-31-2-d-ring-binder-file-1501.webp"
+      "/assets/products/catalog_2026/OB-FIL-31.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10546,7 +10546,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-FIL-32_ob-fil-32-diamond-ring-binder-file-2302.webp"
+      "/assets/products/catalog_2026/OB-FIL-32.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10586,7 +10586,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-33_ob-pen-33-bitco-ballpoint-pen-pack.webp"
+      "/assets/products/catalog_2026/OB-PEN-33.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10626,7 +10626,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-34_ob-pen-34-cello-finegrip-ballpoint-pen.webp"
+      "/assets/products/catalog_2026/OB-PEN-34.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10666,7 +10666,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-35_ob-pen-35-montex-megatop-ballpoint-pen.webp"
+      "/assets/products/catalog_2026/OB-PEN-35.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10706,7 +10706,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-36_ob-pen-36-add-gel-achiever-pen.webp"
+      "/assets/products/catalog_2026/OB-PEN-36.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10746,7 +10746,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-37_ob-pen-37-pilot-v5-v7-liquid-ink-rollerball-pen.webp"
+      "/assets/products/catalog_2026/OB-PEN-37.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10786,7 +10786,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-38_ob-pen-38-rorito-045-classic-ballpoint-pen-pack.webp"
+      "/assets/products/catalog_2026/OB-PEN-38.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10826,7 +10826,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-39_ob-pen-39-rorito-flymax-gel-pen.webp"
+      "/assets/products/catalog_2026/OB-PEN-39.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10866,7 +10866,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-40_ob-pen-40-natraj-spark-ball-pen-set.webp"
+      "/assets/products/catalog_2026/OB-PEN-40.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10906,7 +10906,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-41-ohp-cd-dvd-permanent-marker.webp"
+      "/assets/products/catalog_2026/OB-PEN-41.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10946,7 +10946,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-pen-42-fluorescent-highlighter-marker-pack.webp"
+      "/assets/products/catalog_2026/OB-PEN-42.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10986,7 +10986,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-43_ob-pen-43-chisel-tip-permanent-marker.webp"
+      "/assets/products/catalog_2026/OB-PEN-43.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11026,7 +11026,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-44_ob-pen-44-dry-erase-whiteboard-marker.webp"
+      "/assets/products/catalog_2026/OB-PEN-44.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11066,7 +11066,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-45_ob-pen-45-luxor-color-sketch-pen-pack.webp"
+      "/assets/products/catalog_2026/OB-PEN-45.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11106,7 +11106,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-46_ob-pen-46-nataraj-hb-wooden-pencils-pack.webp"
+      "/assets/products/catalog_2026/OB-PEN-46.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11146,7 +11146,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-47_ob-pen-47-apsara-dust-free-nataraj-plasto-eraser-pack.webp"
+      "/assets/products/catalog_2026/OB-PEN-47.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11186,7 +11186,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-PEN-48_ob-pen-48-desk-pencil-sharpener-pack.webp"
+      "/assets/products/catalog_2026/OB-PEN-48.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11226,7 +11226,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-DES-51_ob-des-51-fevicol-mr-adhesive-tube.webp"
+      "/assets/products/catalog_2026/OB-DES-51.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11266,7 +11266,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-DES-52_ob-des-52-double-sided-foam-tape-1-inch.webp"
+      "/assets/products/catalog_2026/OB-DES-52.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11306,7 +11306,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-DES-53_ob-des-53-double-sided-transparent-tissue-tape.webp"
+      "/assets/products/catalog_2026/OB-DES-53.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11346,7 +11346,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/packaging-supplies/ob-des-55-heavy-duty-tape-dispenser-1-inch-2-inch.webp"
+      "/assets/products/catalog_2026/OB-DES-55.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11386,7 +11386,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-DES-56_ob-des-56-retractable-paper-cutter-medium.webp"
+      "/assets/products/catalog_2026/OB-DES-56.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11426,7 +11426,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/packaging-supplies/ob-des-57-box-packaging-strapping-roll.webp"
+      "/assets/products/catalog_2026/OB-DES-57.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11466,7 +11466,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-DES-60_ob-des-60-stapler-pins-pack-no-10-24-6.webp"
+      "/assets/products/catalog_2026/OB-DES-60.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11506,7 +11506,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-DES-62_ob-des-62-faber-castell-office-stamp-pad.webp"
+      "/assets/products/catalog_2026/OB-DES-62.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11546,7 +11546,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-DES-63_ob-des-63-stamp-pad-ink-bottle.webp"
+      "/assets/products/catalog_2026/OB-DES-63.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11586,7 +11586,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-NOT-65_ob-not-65-color-plastic-paper-clips-pack.webp"
+      "/assets/products/catalog_2026/OB-NOT-65.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11626,7 +11626,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-NOT-66_ob-not-66-metal-binder-clips-all-sizes.webp"
+      "/assets/products/catalog_2026/OB-NOT-66.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11666,7 +11666,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-67-metal-notice-board-push-pins.webp"
+      "/assets/products/catalog_2026/OB-NOT-67.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11706,7 +11706,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-NOT-68_ob-not-68-steel-wire-gem-clips-pack.webp"
+      "/assets/products/catalog_2026/OB-NOT-68.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11746,7 +11746,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-NOT-69_ob-not-69-kores-sapphire-carbon-paper-pack.webp"
+      "/assets/products/catalog_2026/OB-NOT-69.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11786,7 +11786,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-70-nylon-rubber-bands-pack.webp"
+      "/assets/products/catalog_2026/OB-NOT-70.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11826,7 +11826,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-NOT-71_ob-not-71-post-it-self-adhesive-sticky-notes-pad.webp"
+      "/assets/products/catalog_2026/OB-NOT-71.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11866,7 +11866,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-NOT-72_ob-not-72-office-steel-paper-pins-box.webp"
+      "/assets/products/catalog_2026/OB-NOT-72.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11906,7 +11906,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-NOT-73_ob-not-73-casio-electronic-desk-calculator.webp"
+      "/assets/products/catalog_2026/OB-NOT-73.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11946,7 +11946,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-not-74-document-paper-tray-tier-set-2-3-4-tier.webp"
+      "/assets/products/catalog_2026/OB-NOT-74.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11986,7 +11986,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-NOT-75_ob-not-75-stainless-steel-measuring-scale-ruler.webp"
+      "/assets/products/catalog_2026/OB-NOT-75.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12026,7 +12026,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-NOT-76_ob-not-76-office-hardbound-note-book.webp"
+      "/assets/products/catalog_2026/OB-NOT-76.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12066,7 +12066,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-NOT-77_ob-not-77-itc-classmate-corporate-notebooks.webp"
+      "/assets/products/catalog_2026/OB-NOT-77.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12106,7 +12106,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-NOT-78_ob-not-78-white-mailing-envelopes-pack.webp"
+      "/assets/products/catalog_2026/OB-NOT-78.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12146,7 +12146,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-NOT-79_ob-not-79-brown-kraft-paper-envelopes-pack.webp"
+      "/assets/products/catalog_2026/OB-NOT-79.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12186,7 +12186,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-NOT-80_ob-not-80-cloth-lined-courier-security-envelope.webp"
+      "/assets/products/catalog_2026/OB-NOT-80.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12226,7 +12226,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-EQP-81_ob-eqp-81-marshal-quality-scribbling-writing-pad.webp"
+      "/assets/products/catalog_2026/OB-EQP-81.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12266,7 +12266,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-EQP-82_ob-eqp-82-scholar-wirebound-spiral-notepad.webp"
+      "/assets/products/catalog_2026/OB-EQP-82.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12306,7 +12306,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-eqp-83-corporate-accounts-entry-register.webp"
+      "/assets/products/catalog_2026/OB-EQP-83.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12346,7 +12346,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-EQP-84_ob-eqp-84-desk-visiting-card-holder-book.webp"
+      "/assets/products/catalog_2026/OB-EQP-84.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12386,7 +12386,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/stationery/ob-eqp-85-executive-hardbound-daily-diary.webp"
+      "/assets/products/catalog_2026/OB-EQP-85.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12426,7 +12426,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/printers-technology/ob-eqp-87-high-definition-conference-projector.webp"
+      "/assets/products/catalog_2026/OB-EQP-87.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12466,7 +12466,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-EQP-89_ob-eqp-89-acrylic-id-card-badge-holder-with-lanyard.webp"
+      "/assets/products/catalog_2026/OB-EQP-89.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12506,7 +12506,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-01_ob-cov-01-3-ply-surgical-disposable-face-mask.webp"
+      "/assets/products/catalog_2026/OB-COV-01.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12546,7 +12546,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-02_ob-cov-02-venus-v4400-n95-protective-respirator-mask.webp"
+      "/assets/products/catalog_2026/OB-COV-02.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12586,7 +12586,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-03-reusable-washable-cotton-face-mask.webp"
+      "/assets/products/catalog_2026/OB-COV-03.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12626,7 +12626,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-04_ob-cov-04-medi-dispo-n95-protective-face-mask.webp"
+      "/assets/products/catalog_2026/OB-COV-04.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12666,7 +12666,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-05_ob-cov-05-yellow-disposable-protective-mask.webp"
+      "/assets/products/catalog_2026/OB-COV-05.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12706,7 +12706,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-06-cotton-knitted-safety-gloves-pack.webp"
+      "/assets/products/catalog_2026/OB-COV-06.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12746,7 +12746,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-08_ob-cov-08-hi-safe-powder-free-latex-gloves-box.webp"
+      "/assets/products/catalog_2026/OB-COV-08.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12786,7 +12786,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-09-hi-safe-medical-grade-nitrile-gloves-box.webp"
+      "/assets/products/catalog_2026/OB-COV-09.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12826,7 +12826,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-10-full-body-coverall-ppe-safety-kit.webp"
+      "/assets/products/catalog_2026/OB-COV-10.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12866,7 +12866,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-11_ob-cov-11-pristin-instant-hand-sanitizer-pump-5l.webp"
+      "/assets/products/catalog_2026/OB-COV-11.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12906,7 +12906,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-12_ob-cov-12-digital-fingertip-pulse-oximeter.webp"
+      "/assets/products/catalog_2026/OB-COV-12.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12946,7 +12946,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-13_ob-cov-13-lifebuoy-alcohol-based-hand-sanitizer.webp"
+      "/assets/products/catalog_2026/OB-COV-13.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12986,7 +12986,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-14_ob-cov-14-lifebuoy-germ-protection-liquid-hand-wash-5l.webp"
+      "/assets/products/catalog_2026/OB-COV-14.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13026,7 +13026,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-15-viroff-alcohol-hand-sanitizer-5l.webp"
+      "/assets/products/catalog_2026/OB-COV-15.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13066,7 +13066,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-16-hi-clean-antibacterial-hand-wash-5l.webp"
+      "/assets/products/catalog_2026/OB-COV-16.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13106,7 +13106,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-17_ob-cov-17-strerill-g-hand-sanitizer-500ml-5l.webp"
+      "/assets/products/catalog_2026/OB-COV-17.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13146,7 +13146,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-18_ob-cov-18-hi-clean-hand-cleansing-liquid-soap-5l.webp"
+      "/assets/products/catalog_2026/OB-COV-18.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13186,7 +13186,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-19-medical-oxygen-concentrator-machine.webp"
+      "/assets/products/catalog_2026/OB-COV-19.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13226,7 +13226,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-20_ob-cov-20-automatic-touchless-soap-sanitizer-dispenser.webp"
+      "/assets/products/catalog_2026/OB-COV-20.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13266,7 +13266,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-21_ob-cov-21-foot-pedal-operated-sanitizer-stand.webp"
+      "/assets/products/catalog_2026/OB-COV-21.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13306,7 +13306,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-22-disposable-non-woven-bouffant-head-caps-pack.webp"
+      "/assets/products/catalog_2026/OB-COV-22.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13346,7 +13346,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-23-disposable-non-woven-shoe-covers-pack.webp"
+      "/assets/products/catalog_2026/OB-COV-23.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13386,7 +13386,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-24_ob-cov-24-automatic-shoe-cover-dispenser-machine.webp"
+      "/assets/products/catalog_2026/OB-COV-24.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13426,7 +13426,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-25-contactless-infrared-forehead-thermometer.webp"
+      "/assets/products/catalog_2026/OB-COV-25.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13466,7 +13466,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/covid-products/ob-cov-26-social-distancing-queue-barrier-stanchion.webp"
+      "/assets/products/catalog_2026/OB-COV-26.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13506,7 +13506,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-27_ob-cov-27-reflective-safety-traffic-cone.webp"
+      "/assets/products/catalog_2026/OB-COV-27.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13546,7 +13546,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-28_ob-cov-28-wet-floor-caution-warning-board.webp"
+      "/assets/products/catalog_2026/OB-COV-28.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13586,7 +13586,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-30_ob-cov-30-manual-pressure-sanitizer-sprayer-2-litre.webp"
+      "/assets/products/catalog_2026/OB-COV-30.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13626,7 +13626,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-31_ob-cov-31-garden-sanitizer-pressure-sprayer-5-litre.webp"
+      "/assets/products/catalog_2026/OB-COV-31.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13666,7 +13666,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-32_ob-cov-32-backpack-knapsack-sanitizer-sprayer-18-litre.webp"
+      "/assets/products/catalog_2026/OB-COV-32.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13706,7 +13706,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-33_ob-cov-33-full-protective-face-shield-mask.webp"
+      "/assets/products/catalog_2026/OB-COV-33.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13746,7 +13746,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-COV-34_ob-cov-34-dettol-original-antiseptic-liquid-5-litre.webp"
+      "/assets/products/catalog_2026/OB-COV-34.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13786,7 +13786,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-01_ob-rds-01-flexible-traffic-cone-750mm.webp"
+      "/assets/products/catalog_2026/OB-RDS-01.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13852,7 +13852,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-02_ob-rds-02-hexagonal-traffic-cone-750mm-1000mm.webp"
+      "/assets/products/catalog_2026/OB-RDS-02.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13914,7 +13914,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-03_ob-rds-03-traffic-cone-with-rubberized-plastic-base.webp"
+      "/assets/products/catalog_2026/OB-RDS-03.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13998,7 +13998,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-04_ob-rds-04-economical-traffic-cone-and-chain-set.webp"
+      "/assets/products/catalog_2026/OB-RDS-04.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14055,7 +14055,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-05_ob-rds-05-collapsible-pop-up-traffic-cone-650mm.webp"
+      "/assets/products/catalog_2026/OB-RDS-05.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14108,7 +14108,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-06_ob-rds-06-retractable-cone-q-manager-ribbon.webp"
+      "/assets/products/catalog_2026/OB-RDS-06.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14163,7 +14163,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-07_ob-rds-07-telescopic-cone-connecting-rod-1-3m-to-2-1m.webp"
+      "/assets/products/catalog_2026/OB-RDS-07.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14236,7 +14236,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-08_ob-rds-08-led-traffic-baton-light-rechargeable.webp"
+      "/assets/products/catalog_2026/OB-RDS-08.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14320,7 +14320,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-09_ob-rds-09-outdoor-convex-security-mirror-18-24-32-40-inch.webp"
+      "/assets/products/catalog_2026/OB-RDS-09.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14387,7 +14387,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-10_ob-rds-10-acrylic-dome-safety-mirror-full-half-quarter.webp"
+      "/assets/products/catalog_2026/OB-RDS-10.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14454,7 +14454,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-11_ob-rds-11-warning-bollard-delineator-post.webp"
+      "/assets/products/catalog_2026/OB-RDS-11.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14517,7 +14517,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-12_ob-rds-12-flexible-polyurethane-spring-post-750mm.webp"
+      "/assets/products/catalog_2026/OB-RDS-12.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14588,7 +14588,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-13_ob-rds-13-floor-stand-warning-sign-600mm.webp"
+      "/assets/products/catalog_2026/OB-RDS-13.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14656,7 +14656,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-14_ob-rds-14-heavy-duty-road-rumble-strips.webp"
+      "/assets/products/catalog_2026/OB-RDS-14.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14725,7 +14725,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-15_ob-rds-15-heavy-duty-rubber-wheel-chock.webp"
+      "/assets/products/catalog_2026/OB-RDS-15.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14800,7 +14800,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-16_ob-rds-16-rubber-cable-protector-ramp-2-3-4-5-channel.webp"
+      "/assets/products/catalog_2026/OB-RDS-16.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14862,7 +14862,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-17_ob-rds-17-high-visibility-reflective-safety-jacket.webp"
+      "/assets/products/catalog_2026/OB-RDS-17.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14942,7 +14942,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-18_ob-rds-18-aluminum-road-stud-and-solar-led-stud.webp"
+      "/assets/products/catalog_2026/OB-RDS-18.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15016,7 +15016,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-19_ob-rds-19-handheld-security-metal-detector-scanner.webp"
+      "/assets/products/catalog_2026/OB-RDS-19.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15080,7 +15080,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-20_ob-rds-20-stainless-steel-retractable-belt-stanchion-3m.webp"
+      "/assets/products/catalog_2026/OB-RDS-20.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15154,7 +15154,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-21_ob-rds-21-q-manager-a4-sign-board-display-frame.webp"
+      "/assets/products/catalog_2026/OB-RDS-21.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15224,7 +15224,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-22_ob-rds-22-classic-velvet-rope-stanchion-post-gold-ss.webp"
+      "/assets/products/catalog_2026/OB-RDS-22.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15296,7 +15296,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-23_ob-rds-23-plastic-chain-q-manager-barrier-post-1000mm.webp"
+      "/assets/products/catalog_2026/OB-RDS-23.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15374,7 +15374,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-24_ob-rds-24-microprismatic-reflective-warning-tape-50mm-x-50m.webp"
+      "/assets/products/catalog_2026/OB-RDS-24.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15438,7 +15438,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-25_ob-rds-25-heavy-duty-rubber-speed-breakers.webp"
+      "/assets/products/catalog_2026/OB-RDS-25.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15521,7 +15521,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-26_ob-rds-26-plastic-modular-speed-breakers.webp"
+      "/assets/products/catalog_2026/OB-RDS-26.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15588,7 +15588,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-27_ob-rds-27-rubber-corner-guards-square-edge.webp"
+      "/assets/products/catalog_2026/OB-RDS-27.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15664,7 +15664,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-28_ob-rds-28-rubber-corner-guards-curved-edge.webp"
+      "/assets/products/catalog_2026/OB-RDS-28.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15739,7 +15739,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-29_ob-rds-29-rubber-car-wheel-stopper-600mm.webp"
+      "/assets/products/catalog_2026/OB-RDS-29.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15809,7 +15809,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-30_ob-rds-30-rubber-car-wheel-stopper-500mm.webp"
+      "/assets/products/catalog_2026/OB-RDS-30.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15879,7 +15879,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-31_ob-rds-31-rubber-car-wheel-stopper-commercial-1650mm.webp"
+      "/assets/products/catalog_2026/OB-RDS-31.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15950,7 +15950,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-32_ob-rds-32-solar-warning-blinker-light.webp"
+      "/assets/products/catalog_2026/OB-RDS-32.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16015,7 +16015,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-33_ob-rds-33-solar-traffic-flasher-light.webp"
+      "/assets/products/catalog_2026/OB-RDS-33.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16082,7 +16082,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-34_ob-rds-34-solar-chevron-directional-warning-board.webp"
+      "/assets/products/catalog_2026/OB-RDS-34.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16145,7 +16145,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-35_ob-rds-35-under-vehicle-search-inspection-mirror-uvsm.webp"
+      "/assets/products/catalog_2026/OB-RDS-35.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16228,7 +16228,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-36_ob-rds-36-heavy-duty-anti-theft-car-wheel-lock-clamp.webp"
+      "/assets/products/catalog_2026/OB-RDS-36.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16297,7 +16297,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-37_ob-rds-37-led-emergency-magnetic-beacon-flare-light.webp"
+      "/assets/products/catalog_2026/OB-RDS-37.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16374,7 +16374,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-38_ob-rds-38-heavy-duty-anti-slip-traction-safety-tapes.webp"
+      "/assets/products/catalog_2026/OB-RDS-38.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16441,7 +16441,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-39_ob-rds-39-interlocking-plastic-water-filled-road-barrier.webp"
+      "/assets/products/catalog_2026/OB-RDS-39.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16512,7 +16512,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-40_ob-rds-40-galvanized-steel-crowd-control-barricade-barrier.webp"
+      "/assets/products/catalog_2026/OB-RDS-40.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16582,7 +16582,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-41_ob-rds-41-portable-expandable-scissor-road-barrier-max-2m.webp"
+      "/assets/products/catalog_2026/OB-RDS-41.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16663,7 +16663,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-42_ob-rds-42-rechargeable-search-light-megaphone-siren.webp"
+      "/assets/products/catalog_2026/OB-RDS-42.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16738,7 +16738,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/prepared_1200/OB-RDS-43_ob-rds-43-metal-signage-post-stands-parking-directional.webp"
+      "/assets/products/catalog_2026/OB-RDS-43.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16865,9 +16865,9 @@ export const HOMEPAGE_BANNERS: HomepageBanner[] = [
       { label: 'FAST DISPATCH', icon: 'Truck' },
       { label: 'IDEAL FOR BUSINESS', icon: 'Building2' },
     ],
-    imageUrl: 'https://officebazzar.co.in/wp-content/uploads/2022/12/officebazzar-com-3025-box-file-500x500-1.jpg',
+    imageUrl: '/assets/products/catalog_2026/OB-STA.webp',
     bannerUrl: '/images/banners/01-jk-copier-blue.png',
-    productUrl: 'https://officebazzar.co.in/wp-content/uploads/2022/12/officebazzar-com-3025-box-file-500x500-1.jpg',
+    productUrl: '/assets/products/catalog_2026/OB-STA.webp',
     altText: 'Office stationery box files and desk essentials in Chennai',
     gradient: 'from-[#ffffff] via-[#f0f6ff] to-[#e1edff]',
     accentGradient: 'from-[#0052b4] via-[#0066cc] to-[#0284c7]',
@@ -16895,9 +16895,9 @@ export const HOMEPAGE_BANNERS: HomepageBanner[] = [
       { label: 'TRUSTED BRANDS', icon: 'Star' },
       { label: 'IDEAL FOR FACILITIES', icon: 'Building2' },
     ],
-    imageUrl: 'https://officebazzar.co.in/wp-content/uploads/2022/12/wringer-trolley-500x500-1.jpg',
+    imageUrl: '/assets/products/catalog_2026/OB-026.webp',
     bannerUrl: '/images/banners/02-stationery-green.png',
-    productUrl: 'https://officebazzar.co.in/wp-content/uploads/2022/12/wringer-trolley-500x500-1.jpg',
+    productUrl: '/assets/products/catalog_2026/OB-026.webp',
     altText: 'Housekeeping wringer trolley and facility maintenance supplies',
     gradient: 'from-[#ffffff] via-[#f0fdf4] to-[#dcfce7]',
     accentGradient: 'from-[#047857] via-[#059669] to-[#10b981]',
@@ -16925,9 +16925,9 @@ export const HOMEPAGE_BANNERS: HomepageBanner[] = [
       { label: 'UV STABILIZED', icon: 'ShieldCheck' },
       { label: 'COMMERCIAL GRADE', icon: 'Building2' },
     ],
-    imageUrl: 'https://officebazzar.co.in/wp-content/uploads/2022/12/nilkamal-120-litres-dustbin-wb120l1-500x500-1.jpg',
+    imageUrl: '/assets/products/catalog_2026/OB-GAR.webp',
     bannerUrl: '/images/banners/03-housekeeping-orange.png',
-    productUrl: 'https://officebazzar.co.in/wp-content/uploads/2022/12/nilkamal-120-litres-dustbin-wb120l1-500x500-1.jpg',
+    productUrl: '/assets/products/catalog_2026/OB-GAR.webp',
     altText: 'Industrial Nilkamal wheeled dustbins and stainless steel garbage bins',
     gradient: 'from-[#ffffff] via-[#fff7ed] to-[#ffedd5]',
     accentGradient: 'from-[#c2410c] via-[#ea580c] to-[#f97316]',
@@ -16955,9 +16955,9 @@ export const HOMEPAGE_BANNERS: HomepageBanner[] = [
       { label: 'HIGH PERFORMANCE', icon: 'Gauge' },
       { label: 'TESTED QUALITY', icon: 'Printer' },
     ],
-    imageUrl: 'https://officebazzar.co.in/wp-content/uploads/2022/12/best-print-12a-compatible-toner-cartridge-500x500-1.webp',
+    imageUrl: '/assets/products/catalog_2026/OB-TON.webp',
     bannerUrl: '/images/banners/04-toner-ink-purple.png',
-    productUrl: 'https://officebazzar.co.in/wp-content/uploads/2022/12/best-print-12a-compatible-toner-cartridge-500x500-1.webp',
+    productUrl: '/assets/products/catalog_2026/OB-TON.webp',
     altText: 'Laser printer toner cartridges in Chennai',
     gradient: 'from-[#ffffff] via-[#faf5ff] to-[#f3e8ff]',
     accentGradient: 'from-[#5b21b6] via-[#7c3aed] to-[#8b5cf6]',

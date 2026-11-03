@@ -56,6 +56,22 @@ try {
   // Mapping will be populated on first sync
 }
 
+function buildInitialCatalog(): Product[] {
+  const productsMap = new Map<string, Product>();
+  for (const p of INITIAL_PRODUCTS) {
+    const zohoInfo = mappingByWebsiteId.get(p.id) || mappingBySku.get(p.sku);
+    const isDup = DUPLICATE_INACTIVE_SLUGS.has(p.slug);
+    productsMap.set(p.sku, {
+      ...p,
+      isActive: isDup ? false : p.isActive,
+      zohoProductId: zohoInfo?.zohoId,
+    } as Product & { zohoProductId?: string });
+  }
+  return Array.from(productsMap.values());
+}
+
+cachedProducts = buildInitialCatalog();
+
 /**
  * Get the Zoho CRM Product ID for a given website product ID or SKU
  */
@@ -192,7 +208,7 @@ export async function getProductsFromZoho(forceRefresh = false): Promise<Product
  * Invalidate the product cache to force fresh retrieval from Zoho CRM on next request
  */
 export function invalidateZohoProductCache(): void {
-  cachedProducts = null;
+  cachedProducts = buildInitialCatalog();
   lastCacheSync = 0;
   inflightSyncPromise = null;
 }

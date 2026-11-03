@@ -116,7 +116,7 @@ export default function CareersClient() {
       </section>
 
       {/* 2. CAREERS MESSAGE PANEL (Clean, compact container, warm cream, navy heading & green email link) */}
-      <section id="opportunities" className="w-full pb-14 sm:pb-16 lg:pb-20 px-4 sm:px-6 flex justify-center">
+      <section id="opportunities" className="w-full pb-10 sm:pb-12 px-4 sm:px-6 flex justify-center">
         <div className="relative w-full max-w-[820px] mx-auto overflow-hidden rounded-[18px] bg-[#fafaf9] border border-orange-100/90 py-6 sm:py-7 px-5 sm:px-8 text-center shadow-xs">
           {/* Subtle light orange edge accents */}
           <div className="absolute -left-3 -top-3 h-14 w-14 rounded-full bg-orange-200/25 pointer-events-none" />
@@ -125,22 +125,59 @@ export default function CareersClient() {
 
           {/* Centered Content */}
           <div className="relative z-10 space-y-2 max-w-[680px] mx-auto">
-            {/* Section Heading in Navy Blue (Proportionate ~18-25px) */}
+            {/* Section Heading in Navy Blue */}
             <h2 className="text-lg sm:text-xl md:text-2xl lg:text-[25px] font-bold text-[#004b87] tracking-tight leading-snug">
               Interested in Joining Office Bazzar?
             </h2>
 
             {/* Supporting Text with Green Email Link */}
             <p className="text-xs sm:text-sm md:text-[15px] text-slate-700 leading-relaxed font-normal">
-              We don’t have any open positions right now. Share your resume at{' '}
+              We are continually expanding our enterprise procurement network across Chennai, Bengaluru, Mumbai, and Hyderabad. While current openings may be filled, we invite talented professionals to share their credentials at{' '}
               <a
                 href="mailto:admin@officebazzar.com?subject=Resume%20Submission%20%E2%80%93%20Office%20Bazzar%20Careers"
                 className="text-[#15803d] hover:text-[#166534] font-semibold underline underline-offset-4 decoration-[#15803d]/50 hover:decoration-[#166534] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#16a34a] focus-visible:ring-offset-2 rounded-xs"
               >
                 admin@officebazzar.com
               </a>
-              , and we’ll contact you when a suitable opportunity becomes available.
+              . Our recruitment team reviews submissions on a rolling basis.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. CORE FUNCTIONAL DIVISIONS & WORK CULTURE */}
+      <section className="w-full pb-16 sm:pb-20 lg:pb-24 px-4 sm:px-6">
+        <div className="max-w-[1080px] mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+              Life and Careers at Office Bazzar
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+              We empower our teams to build long-term relationships with Fortune 500 enterprises, educational institutions, and healthcare systems across India.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-2.5">
+              <h4 className="text-sm font-bold text-slate-900">Enterprise Accounts &amp; B2B Sales</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Partner with corporate procurement heads, manage recurring rate contracts, and provide strategic cost optimization for office stationery, tech consumables, and pantry supplies.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-2.5">
+              <h4 className="text-sm font-bold text-slate-900">Logistics &amp; Fulfillment Operations</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Coordinate warehouse logistics from our central Royapettah fulfillment hub, manage dispatch workflows, optimize delivery routes, and ensure zero-delay gate delivery.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-2.5">
+              <h4 className="text-sm font-bold text-slate-900">E-Commerce &amp; Digital Solutions</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Drive product catalog intelligence, Zoho CRM integration, digital quotation consoles, and automated invoice delivery systems powering seamless B2B transactions.
+              </p>
+            </div>
           </div>
         </div>
       </section>
