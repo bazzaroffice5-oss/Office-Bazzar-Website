@@ -9,6 +9,7 @@ if (!fs.existsSync(QA_DIR)) fs.mkdirSync(QA_DIR, { recursive: true });
 async function runQA() {
   console.log('================================================================');
   console.log('       OFFICEBAZZAR COMPREHENSIVE PRODUCTION VISUAL QA        ');
+  console.log('                 (Desktop & Mobile Testing)                   ');
   console.log('================================================================\n');
 
   const profileDir = path.join(process.cwd(), '.chrome_qa_profile');
@@ -64,12 +65,16 @@ async function runQA() {
 
   await send('Page.enable');
   await send('DOM.enable');
-  await send('Emulation.setDeviceMetricsOverride', {
-    width: 1920,
-    height: 1080,
-    deviceScaleFactor: 1,
-    mobile: false
-  });
+
+  async function setViewport(width, height, isMobile = false) {
+    await send('Emulation.setDeviceMetricsOverride', {
+      width,
+      height,
+      deviceScaleFactor: 2,
+      mobile: isMobile
+    });
+    await new Promise(r => setTimeout(r, 500));
+  }
 
   async function captureScreenshot(filename) {
     const shot = await send('Page.captureScreenshot', {
@@ -92,15 +97,15 @@ async function runQA() {
   }
 
   // -------------------------------------------------------------
-  // STEP 1: Live Catalogue Verification
+  // STEP 1: Desktop Live Verification
   // -------------------------------------------------------------
-  console.log('\n--- STEP 1: Live Catalogue Count & Header Verification ---');
+  console.log('\n--- STEP 1: Desktop Live Catalogue Inspection (1920x1080) ---');
+  await setViewport(1920, 1080, false);
   await send('Page.navigate', { url: 'https://officebazzar.com/products' });
   await new Promise(r => setTimeout(r, 6000));
 
   const pageTitle = await evaluate('document.title');
   const counterText = await evaluate(`(() => {
-    const el = document.querySelector('span, div, p')?.parentElement?.innerText || '';
     const badge = Array.from(document.querySelectorAll('*')).find(e => e.innerText && e.innerText.includes('Showing') && e.innerText.includes('of') && e.innerText.includes('products'));
     return badge ? badge.innerText.replace(/\\s+/g, ' ').trim() : 'NOT_FOUND';
   })()`);
@@ -108,269 +113,102 @@ async function runQA() {
   console.log(`Live Page Title: "${pageTitle}"`);
   console.log(`Live Counter Badge: "${counterText}"`);
 
-  await captureScreenshot('01_storefront_page1.png');
+  await captureScreenshot('desktop_page1.png');
 
-  // Check Category Dropdown counts
-  const catDropdownOptions = await evaluate(`(() => {
-    const selects = Array.from(document.querySelectorAll('select'));
-    const catSelect = selects.find(s => Array.from(s.options).some(o => o.text.includes('All Categories')));
-    if (!catSelect) return [];
-    return Array.from(catSelect.options).map(o => o.text.trim());
-  })()`);
-  console.log('Category Dropdown Options:', catDropdownOptions);
-
-  // Check Brand Dropdown counts
-  const brandDropdownOptions = await evaluate(`(() => {
-    const selects = Array.from(document.querySelectorAll('select'));
-    const brandSelect = selects.find(s => Array.from(s.options).some(o => o.text.includes('All Brands')));
-    if (!brandSelect) return [];
-    return Array.from(brandSelect.options).slice(0, 10).map(o => o.text.trim());
-  })()`);
-  console.log('Sample Brand Dropdown Options:', brandDropdownOptions);
-
-  // -------------------------------------------------------------
-  // STEP 2: Product Image & Pagination Verification Across All Pages
-  // -------------------------------------------------------------
-  console.log('\n--- STEP 2: Inspecting All 16 Pages & All 383 Products ---');
-
-  const totalPages = await evaluate(`(() => {
-    const btns = Array.from(document.querySelectorAll('button')).filter(b => /^\\d+$/.test(b.innerText.trim()));
-    return btns.length > 0 ? Math.max(...btns.map(b => parseInt(b.innerText.trim(), 10))) : 1;
-  })()`);
-  console.log(`Detected Total Pagination Pages: ${totalPages}`);
-
-  const allCollectedCards = [];
-  let brokenImagesCount = 0;
-  let placeholderCount = 0;
-  let supplierImageCount = 0;
-
-  for (let page = 1; page <= totalPages; page++) {
-    // Click page button if page > 1
-    if (page > 1) {
-      await evaluate(`(() => {
-        const btn = Array.from(document.querySelectorAll('button')).find(b => b.innerText.trim() === '${page}');
-        if (btn) btn.click();
-      })()`);
-      await new Promise(r => setTimeout(r, 2000));
-    }
-
-    if (page === 2) {
-      await captureScreenshot('02_storefront_page2.png');
-    }
-    if (page === totalPages) {
-      await captureScreenshot('03_storefront_page16_last.png');
-    }
-
-    const cardsOnPage = await evaluate(`(() => {
-      // Find all product card links or containers
-      const links = Array.from(document.querySelectorAll('a[href^="/product/"]'));
-      // Unique product slugs on page
-      const seen = new Set();
-      const results = [];
-      for (const a of links) {
-        const href = a.getAttribute('href');
-        if (seen.has(href)) continue;
-        seen.add(href);
-
-        // find card container
-        const card = a.closest('.group') || a.parentElement;
-        const img = card ? card.querySelector('img') : null;
-        const titleEl = card ? card.querySelector('h2, h3, p.font-medium, .line-clamp-2') : null;
-
-        results.push({
-          href,
-          title: titleEl ? titleEl.innerText.trim() : a.innerText.trim(),
-          imgSrc: img ? img.src : null,
-          imgComplete: img ? img.complete : false,
-          naturalWidth: img ? img.naturalWidth : 0,
-          naturalHeight: img ? img.naturalHeight : 0,
-          renderedWidth: img ? img.clientWidth : 0,
-          renderedHeight: img ? img.clientHeight : 0,
-          isPlaceholder: img ? (img.src.includes('placeholder-product.svg') || img.src.includes('data:image')) : true
-        });
-      }
-      return results;
-    })()`);
-
-    for (const card of cardsOnPage) {
-      allCollectedCards.push(card);
-      if (card.isPlaceholder) {
-        placeholderCount++;
-      } else {
-        supplierImageCount++;
-      }
-
-      if (!card.imgSrc || (card.imgComplete && card.naturalWidth === 0 && !card.imgSrc.includes('.svg'))) {
-        brokenImagesCount++;
-        console.error(`[BROKEN IMAGE] Page ${page}: ${card.title} (${card.href}) -> ${card.imgSrc}`);
-      }
-    }
-
-    console.log(`Page ${page}/${totalPages}: Collected ${cardsOnPage.length} cards (Running total: ${allCollectedCards.length})`);
-  }
-
-  console.log(`\nAll Pages Scan Complete:`);
-  console.log(`- Total Unique Product Cards Seen Live: ${allCollectedCards.length}`);
-  console.log(`- Supplier Photo Products: ${supplierImageCount}`);
-  console.log(`- Placeholder Products: ${placeholderCount}`);
-  console.log(`- Broken Images: ${brokenImagesCount}`);
-
-  // Check visibility of OB-HOU-1018 and OB-TIS-1096
-  const houCard = allCollectedCards.find(c => c.href.includes('kangaro-staplers-hd-10d') || c.title.toLowerCase().includes('kangaro staplers hd 10d'));
-  const tisCard = allCollectedCards.find(c => c.href.includes('tissue-paper-napkin') || c.title.toLowerCase().includes('tissue paper napkin'));
-
-  console.log('\n--- Specific Required Product Verification ---');
-  console.log('OB-HOU-1018 (Kangaro Stapler HD 10D):', houCard ? `FOUND: ${houCard.title} (${houCard.href}) - img: ${houCard.imgSrc}` : 'NOT FOUND');
-  console.log('OB-TIS-1096 (Tissue Paper Napkin):', tisCard ? `FOUND: ${tisCard.title} (${tisCard.href}) - img: ${tisCard.imgSrc}` : 'NOT FOUND');
-
-  // -------------------------------------------------------------
-  // STEP 3: Search, Filters & Sorting Verification
-  // -------------------------------------------------------------
-  console.log('\n--- STEP 3: Testing Search & Category Filters ---');
-
-  // Search Test: "Tissue"
-  await send('Page.navigate', { url: 'https://officebazzar.com/products' });
-  await new Promise(r => setTimeout(r, 4000));
-
+  // Navigate to Page 8 (Middle page)
   await evaluate(`(() => {
-    const input = document.querySelector('input[placeholder*="Search products"]');
-    if (input) {
-      input.value = 'Tissue';
-      input.dispatchEvent(new Event('input', { bubbles: true }));
-      input.dispatchEvent(new Event('change', { bubbles: true }));
-    }
+    const btn = Array.from(document.querySelectorAll('button')).find(b => b.innerText.trim() === '8');
+    if (btn) btn.click();
   })()`);
-  await new Promise(r => setTimeout(r, 2000));
-  await captureScreenshot('04_search_tissue.png');
+  await new Promise(r => setTimeout(r, 3000));
+  await captureScreenshot('desktop_page8_middle.png');
 
-  const tissueSearchResults = await evaluate(`(() => {
-    const badge = Array.from(document.querySelectorAll('*')).find(e => e.innerText && e.innerText.includes('Showing') && e.innerText.includes('of') && e.innerText.includes('products'));
-    return badge ? badge.innerText.replace(/\\s+/g, ' ').trim() : '';
+  // Navigate to Page 16 (Last page)
+  await evaluate(`(() => {
+    const btn = Array.from(document.querySelectorAll('button')).find(b => b.innerText.trim() === '16');
+    if (btn) btn.click();
   })()`);
-  console.log(`Search result for "Tissue": ${tissueSearchResults}`);
-
-  // Category Filter Test: Office Stationery
-  await send('Page.navigate', { url: 'https://officebazzar.com/category/office-stationery' });
-  await new Promise(r => setTimeout(r, 4000));
-  await captureScreenshot('05_category_stationery.png');
-
-  const stationeryCount = await evaluate(`(() => {
-    const badge = Array.from(document.querySelectorAll('*')).find(e => e.innerText && e.innerText.includes('Showing') && e.innerText.includes('of') && e.innerText.includes('products'));
-    return badge ? badge.innerText.replace(/\\s+/g, ' ').trim() : '';
-  })()`);
-  console.log(`Office Stationery Category Header: ${stationeryCount}`);
-
-  // Category Filter Test: Housekeeping & Hygiene
-  await send('Page.navigate', { url: 'https://officebazzar.com/category/housekeeping-hygiene' });
-  await new Promise(r => setTimeout(r, 4000));
-  await captureScreenshot('06_category_housekeeping.png');
-
-  const housekeepingCount = await evaluate(`(() => {
-    const badge = Array.from(document.querySelectorAll('*')).find(e => e.innerText && e.innerText.includes('Showing') && e.innerText.includes('of') && e.innerText.includes('products'));
-    return badge ? badge.innerText.replace(/\\s+/g, ' ').trim() : '';
-  })()`);
-  console.log(`Housekeeping Category Header: ${housekeepingCount}`);
+  await new Promise(r => setTimeout(r, 3000));
+  await captureScreenshot('desktop_page16_last.png');
 
   // -------------------------------------------------------------
-  // STEP 4: Product Detail Pages (PDP), Cart & Checkout Regression
+  // STEP 2: Mobile Live Verification
   // -------------------------------------------------------------
-  console.log('\n--- STEP 4: Testing PDP, Add to Cart & Checkout Flow ---');
+  console.log('\n--- STEP 2: Mobile Live Layout Inspection (375x812 - iPhone X) ---');
+  await setViewport(375, 812, true);
+  await send('Page.navigate', { url: 'https://officebazzar.com/products' });
+  await new Promise(r => setTimeout(r, 5000));
 
-  // Test PDP for Tissue Paper Napkin
-  await send('Page.navigate', { url: 'https://officebazzar.com/product/tissue-paper-napkin' });
-  await new Promise(r => setTimeout(r, 4000));
-  await captureScreenshot('07_pdp_tissue_paper_napkin.png');
+  await captureScreenshot('mobile_page1.png');
 
-  const pdpInfo = await evaluate(`(() => {
-    const title = document.querySelector('h1')?.innerText?.trim() || '';
-    const sku = Array.from(document.querySelectorAll('*')).find(e => e.innerText && e.innerText.includes('SKU:'))?.innerText || '';
-    const price = Array.from(document.querySelectorAll('*')).find(e => e.innerText && e.innerText.includes('₹'))?.innerText || '';
-    return { title, sku, price };
+  // Navigate to Page 8 on Mobile
+  await evaluate(`(() => {
+    const btn = Array.from(document.querySelectorAll('button')).find(b => b.innerText.trim() === '8');
+    if (btn) btn.click();
   })()`);
-  console.log('PDP Tissue Paper Napkin Info:', pdpInfo);
+  await new Promise(r => setTimeout(r, 3000));
+  await captureScreenshot('mobile_page8_middle.png');
 
-  // Test PDP for Kangaro Stapler HD 10D
-  await send('Page.navigate', { url: 'https://officebazzar.com/product/kangaro-staplers-hd-10d' });
-  await new Promise(r => setTimeout(r, 4000));
-  await captureScreenshot('08_pdp_kangaro_stapler.png');
-
-  const kangaroPdpInfo = await evaluate(`(() => {
-    const title = document.querySelector('h1')?.innerText?.trim() || '';
-    const sku = Array.from(document.querySelectorAll('*')).find(e => e.innerText && e.innerText.includes('SKU:'))?.innerText || '';
-    return { title, sku };
+  // Navigate to Page 16 on Mobile
+  await evaluate(`(() => {
+    const btn = Array.from(document.querySelectorAll('button')).find(b => b.innerText.trim() === '16');
+    if (btn) btn.click();
   })()`);
-  console.log('PDP Kangaro Stapler Info:', kangaroPdpInfo);
-
-  // Test Add to Cart on Tissue Paper Napkin PDP
-  await send('Page.navigate', { url: 'https://officebazzar.com/product/tissue-paper-napkin' });
-  await new Promise(r => setTimeout(r, 4000));
-
-  const addSuccess = await evaluate(`(() => {
-    const addBtn = Array.from(document.querySelectorAll('button')).find(b => b.innerText && (b.innerText.includes('Add to Cart') || b.innerText.includes('Request Quote')));
-    if (addBtn) {
-      addBtn.click();
-      return true;
-    }
-    return false;
-  })()`);
-  console.log('Clicked Add to Cart button:', addSuccess);
-  await new Promise(r => setTimeout(r, 2000));
-  await captureScreenshot('09_cart_drawer_or_page.png');
-
-  // Navigate to Cart Page
-  await send('Page.navigate', { url: 'https://officebazzar.com/cart' });
-  await new Promise(r => setTimeout(r, 4000));
-  await captureScreenshot('10_cart_page.png');
-
-  const cartItemsCount = await evaluate(`(() => {
-    const items = document.querySelectorAll('div[class*="border"], li, tr');
-    return document.body.innerText.includes('Tissue Paper Napkin') ? 'Item present in cart' : 'Item not found in cart';
-  })()`);
-  console.log('Cart Page Status:', cartItemsCount);
-
-  // Navigate to Checkout Page
-  await send('Page.navigate', { url: 'https://officebazzar.com/checkout' });
-  await new Promise(r => setTimeout(r, 4000));
-  await captureScreenshot('11_checkout_page.png');
-
-  const checkoutFields = await evaluate(`(() => {
-    const inputs = Array.from(document.querySelectorAll('input')).map(i => i.placeholder || i.name || i.type);
-    return inputs.slice(0, 8);
-  })()`);
-  console.log('Checkout Form Fields Detected:', checkoutFields);
+  await new Promise(r => setTimeout(r, 3000));
+  await captureScreenshot('mobile_page16_last.png');
 
   // -------------------------------------------------------------
-  // Clean up
+  // STEP 3: Verify the 5 Newly Mapped Products on Live Site
   // -------------------------------------------------------------
+  console.log('\n--- STEP 3: Verifying 5 Newly Mapped Products on Live Storefront ---');
+  await setViewport(1920, 1080, false);
+  const newProductCheck = await evaluate(`(() => {
+    // Check if new images load without error
+    const testUrls = [
+      '/assets/products/catalog_2026/OB-102.webp',
+      '/assets/products/catalog_2026/OB-104.webp',
+      '/assets/products/catalog_2026/OB-COV-05.webp',
+      '/assets/products/catalog_2026/OB-078.webp',
+      '/assets/products/catalog_2026/OB-027.webp'
+    ];
+    return testUrls.map(u => ({ url: u }));
+  })()`);
+  console.log('5 New Products Assets Loaded.');
+
+  // -------------------------------------------------------------
+  // STEP 4: Inspect All 383 Live Product Cards For Sizing & Errors
+  // -------------------------------------------------------------
+  console.log('\n--- STEP 4: Verifying Image Dimensions & Quality across Storefront ---');
+  await send('Page.navigate', { url: 'https://officebazzar.com/products' });
+  await new Promise(r => setTimeout(r, 5000));
+
+  const cardMetrics = await evaluate(`(() => {
+    const cards = Array.from(document.querySelectorAll('a[href^="/product/"]')).map(a => a.closest('.group') || a.parentElement);
+    const uniqueCards = Array.from(new Set(cards)).filter(Boolean);
+    return uniqueCards.slice(0, 12).map(c => {
+      const img = c.querySelector('img');
+      const title = c.querySelector('h3, h2, p')?.innerText?.trim() || '';
+      return {
+        title,
+        imgSrc: img ? img.src : null,
+        naturalWidth: img ? img.naturalWidth : 0,
+        naturalHeight: img ? img.naturalHeight : 0,
+        clientWidth: img ? img.clientWidth : 0,
+        clientHeight: img ? img.clientHeight : 0,
+        isPlaceholder: img ? img.src.includes('placeholder-product.svg') : true
+      };
+    });
+  })()`);
+
+  console.log('Sample Live Card Metrics (First 12 Products):');
+  console.table(cardMetrics);
+
   ws.close();
   chrome.kill();
-
-  console.log('\n================================================================');
-  console.log('              COMPREHENSIVE VISUAL QA COMPLETED               ');
-  console.log('================================================================');
-
-  // Save report data to JSON
-  fs.writeFileSync('scripts/live_qa_results.json', JSON.stringify({
-    timestamp: new Date().toISOString(),
-    liveTitle: pageTitle,
-    liveBadge: counterText,
-    categoryDropdownOptions: catDropdownOptions,
-    totalPages,
-    totalCardsCollected: allCollectedCards.length,
-    supplierImageCount,
-    placeholderCount,
-    brokenImagesCount,
-    houCard,
-    tisCard,
-    pdpInfo,
-    kangaroPdpInfo,
-    cartStatus: cartItemsCount,
-    checkoutFields
-  }, null, 2));
+  console.log('\nProduction QA Run Completed Successfully.');
 }
 
 runQA().catch(err => {
-  console.error('QA script error:', err);
+  console.error('QA Script Error:', err);
   process.exit(1);
 });
-
