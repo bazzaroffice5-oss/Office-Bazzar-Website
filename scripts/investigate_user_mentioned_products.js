@@ -21,3 +21,4 @@ for (const term of searchTerms) {
   console.log(`=== Term: "${term}" (${matches.length} matches) ===`);
   matches.slice(0, 5).forEach(m => console.log(`   ${m.rel}`));
 }
+

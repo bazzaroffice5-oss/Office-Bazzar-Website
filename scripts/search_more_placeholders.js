@@ -25,3 +25,4 @@ search(['caddy', 'organizer', 'tray']).slice(0, 20).forEach(m => console.log(' '
 
 console.log('\n--- Broom / Hard Broom ---');
 search(['hard broom', 'pvc broom', 'broom']).slice(0, 25).forEach(m => console.log(' ', m.rel));
+

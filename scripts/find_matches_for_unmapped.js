@@ -258,3 +258,4 @@ for (const c of candidates) {
     console.log(`[${c.sku}] ${c.name} -> NO direct keyword matches`);
   }
 }
+

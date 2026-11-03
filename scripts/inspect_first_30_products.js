@@ -10,3 +10,4 @@ while ((m = regex.exec(cat)) !== null && count < 30) {
   const imgs = imgsRaw.split(',').map(s => s.trim().replace(/['"]/g, '')).filter(Boolean);
   console.log(`${count.toString().padStart(2)}. ${sku.padEnd(14)} | ${name.padEnd(35)} | images: ${imgs.length}`);
 }
+

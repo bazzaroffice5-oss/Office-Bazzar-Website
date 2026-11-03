@@ -15,3 +15,4 @@ console.log('Last 5 SKUs:', skuLines.slice(-5));
 if (skuLines.length > 215) {
   console.log('Around 220th SKU:', skuLines.slice(215, 225));
 }
+

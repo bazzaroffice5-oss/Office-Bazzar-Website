@@ -35,3 +35,4 @@ search(['punch', 'staple', 'kangaro', 'dp 600', '10d', 'hd-10']).forEach(m => co
 
 console.log('\n--- 8. Keyboard / Tray / Cable / Adapter ---');
 search(['keyboard', 'tray', 'cable', 'adapter', 'wire']).forEach(m => console.log(' ', m.rel));
+

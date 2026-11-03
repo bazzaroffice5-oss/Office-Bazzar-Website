@@ -19,3 +19,4 @@ search(['pen', 'pencil', 'marker', 'nataraj', 'reynolds']).forEach(m => console.
 
 console.log('\n--- Road Safety / Traffic / Cone / Mirror ---');
 search(['cone', 'traffic', 'barrier', 'speed breaker', 'mirror', 'bollard', 'road']).forEach(m => console.log(' ', m.rel));
+

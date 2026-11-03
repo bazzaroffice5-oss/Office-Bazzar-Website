@@ -154,6 +154,36 @@ export default function ProductListingClient({
     return Array.from(brandMap.values()).sort((a, b) => a.name.localeCompare(b.name));
   }, [brands, activeProducts]);
 
+  // Dynamic category and subcategory counts
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    activeProducts.forEach((p) => {
+      if (p.categoryId) {
+        counts[p.categoryId] = (counts[p.categoryId] || 0) + 1;
+      }
+    });
+    return counts;
+  }, [activeProducts]);
+
+  const subcategoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    NINE_SUBCATEGORIES.forEach((s) => {
+      counts[s.slug] = activeProducts.filter((p) => isProductInSubcategory(p, s.slug)).length;
+    });
+    return counts;
+  }, [activeProducts]);
+
+  const brandCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    activeProducts.forEach((p) => {
+      const id = p.brandId || p.brandName?.toLowerCase().replace(/\s+/g, '-');
+      if (id) {
+        counts[id] = (counts[id] || 0) + 1;
+      }
+    });
+    return counts;
+  }, [activeProducts]);
+
   // Filtered products calculation
   const filteredProducts = useMemo(() => {
     let result = [...activeProducts];
@@ -374,14 +404,14 @@ export default function ProductListingClient({
                 <optgroup label="Main Categories">
                   {categories.map((c) => (
                     <option key={`cat-${c.id}`} value={`cat:${c.slug}`}>
-                      {c.name}
+                      {c.name} ({categoryCounts[c.id] || categoryCounts[c.slug] || 0})
                     </option>
                   ))}
                 </optgroup>
                 <optgroup label="Subcategories">
                   {NINE_SUBCATEGORIES.map((s) => (
                     <option key={`sub-${s.id}`} value={`sub:${s.slug}`}>
-                      {s.name}
+                      {s.name} ({subcategoryCounts[s.slug] || 0})
                     </option>
                   ))}
                 </optgroup>
@@ -396,10 +426,10 @@ export default function ProductListingClient({
                 aria-label="Filter by brand"
                 className="w-full sm:w-auto min-w-[140px] py-2.5 pl-3.5 pr-8 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-medium text-slate-800 focus:bg-white focus:outline-none focus:border-[#004b87] focus:ring-2 focus:ring-[#004b87]/20 transition-all cursor-pointer"
               >
-                <option value="">All Brands</option>
+                <option value="">All Brands ({activeProducts.length})</option>
                 {availableBrands.map((b) => (
                   <option key={b.id} value={b.id}>
-                    {b.name}
+                    {b.name} ({brandCounts[b.id] || 0})
                   </option>
                 ))}
               </select>
