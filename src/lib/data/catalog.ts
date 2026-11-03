@@ -6,7 +6,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Office Stationery Suppliers in Chennai",
     "slug": "office-stationery-suppliers-in-chennai",
     "description": "Wholesale office stationery, registers, paper tag files, box files, and punching machines for enterprises in Chennai.",
-    "imageUrl": "/assets/products/catalog_2026/OB-STA.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-STA-1002.webp",
     "icon": "PenTool",
     "featured": true,
     "itemCount": 9
@@ -26,7 +26,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Garbage Bin Suppliers in Chennai",
     "slug": "garbage-bin-suppliers-in-chennai",
     "description": "Industrial heavy-duty mobile wheeled garbage bins, stainless steel dustbins, lobby ashtray bins, and biodegradable garbage bags.",
-    "imageUrl": "/assets/products/catalog_2026/OB-GAR.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-152.webp",
     "icon": "Trash2",
     "featured": true,
     "itemCount": 6
@@ -36,7 +36,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Computer Consumable Items in Chennai",
     "slug": "computer-consumable-items-in-chennai",
     "description": "Computer consumables, external hard disks, barcode printers, pen drives, cables, and lamination machines.",
-    "imageUrl": "/assets/products/catalog_2026/OB-COM.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-007.webp",
     "icon": "Cpu",
     "featured": true,
     "itemCount": 8
@@ -46,7 +46,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Boards and Accessories",
     "slug": "boards-and-accessories",
     "description": "Magnetic whiteboards, pin-up notice boards, pegboards, sliding boards, dusters, and magazine display stands.",
-    "imageUrl": "/assets/products/catalog_2026/OB-BOA.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-BOA-1049.webp",
     "icon": "Presentation",
     "featured": true,
     "itemCount": 9
@@ -56,7 +56,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Packaging Adhesive Material in Chennai",
     "slug": "packaging-adhesive-material-in-chennai",
     "description": "BOPP brown cello tape, floor marking tapes, bubble sheets, foam thermocol, packing patti rolls, and gum paste.",
-    "imageUrl": "/assets/products/catalog_2026/OB-PAC.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-DES-55.webp",
     "icon": "Package",
     "featured": true,
     "itemCount": 9
@@ -66,7 +66,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Display Stand in Chennai",
     "slug": "display-stand-in-chennai",
     "description": "Double-sided newspaper stands, tripod stands, wooden display stands, and Innofitt acrylic name plates.",
-    "imageUrl": "/assets/products/catalog_2026/OB-DIS.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-003.webp",
     "icon": "Layers",
     "featured": true,
     "itemCount": 4
@@ -76,7 +76,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Best Paper Shredders and Currency Counting Machine in Chennai",
     "slug": "best-paper-shredders-and-currency-counting-machine-in-chennai",
     "description": "Heavy duty commercial paper shredders and currency counting machines with counterfeit detection.",
-    "imageUrl": "/assets/products/catalog_2026/OB-COM.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-007.webp",
     "icon": "Coins",
     "featured": true,
     "itemCount": 6
@@ -86,7 +86,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Housekeeping Accessories Suppliers in Chennai",
     "slug": "housekeeping-accessories-suppliers-in-chennai",
     "description": "Colin glass cleaners, plastic storage boxes, butter paper, Dettol disinfectant sprays, and napkins.",
-    "imageUrl": "/assets/products/catalog_2026/OB-HOU.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-026.webp",
     "icon": "ShieldCheck",
     "featured": true,
     "itemCount": 5
@@ -96,7 +96,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Printer Cartridges Suppliers in Chennai",
     "slug": "printer-cartridges-suppliers-in-chennai",
     "description": "Laser toner cartridges, Canon, HP, Samsung, and Best Print compatible toners and ink cartridges.",
-    "imageUrl": "/assets/products/catalog_2026/OB-TON.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-006.webp",
     "icon": "Printer",
     "featured": true,
     "itemCount": 12
@@ -106,7 +106,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Cleaning Chemical Suppliers in Chennai",
     "slug": "cleaning-chemical-suppliers-in-chennai",
     "description": "Diversey Taski R4, R6, white phenyl, liquid acid, Vim dish wash, Lizol, Harpic, and Hi Clean floor cleaners.",
-    "imageUrl": "/assets/products/catalog_2026/OB-HOU.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-026.webp",
     "icon": "FlaskConical",
     "featured": true,
     "itemCount": 9
@@ -116,7 +116,7 @@ export const LEGACY_CATEGORIES: Category[] = [
     "name": "Tissue Paper Napkin",
     "slug": "tissue-paper-napkin",
     "description": "Commercial tissue paper napkins, C-fold towels, M-fold tissues, Kimberly-Clark Kimsoft, and jumbo toilet rolls.",
-    "imageUrl": "/assets/products/catalog_2026/OB-HOU.webp",
+    "imageUrl": "/assets/products/catalog_2026/OB-026.webp",
     "icon": "Scroll",
     "featured": true,
     "itemCount": 6
@@ -1175,7 +1175,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-STA-1003.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1208,7 +1207,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-STA-1004.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1241,7 +1239,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-STA-1005.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1274,7 +1271,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-STA-1006.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1307,7 +1303,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-STA-1007.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1340,7 +1335,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-STA-1008.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1373,7 +1367,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-STA-1009.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1406,7 +1399,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1010.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1439,7 +1431,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1011.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1472,7 +1463,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1012.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1603,7 +1593,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1016.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1669,7 +1658,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1018.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1801,7 +1789,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1022.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1834,7 +1821,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1023.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1900,7 +1886,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1025.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1933,7 +1918,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1026.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2095,7 +2079,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-GAR-1031.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2128,7 +2111,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-GAR-1032.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2161,7 +2143,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-GAR-1033.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2190,7 +2171,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COM-1034.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2219,7 +2199,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COM-1035.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2248,7 +2227,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COM-1036.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2277,7 +2255,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COM-1037.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2306,7 +2283,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COM-1038.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2367,7 +2343,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COM-1040.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2396,7 +2371,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COM-1041.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2425,7 +2399,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-BOA-1042.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2454,7 +2427,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-BOA-1043.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2483,7 +2455,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-BOA-1044.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2512,7 +2483,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-BOA-1045.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2541,7 +2511,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-BOA-1046.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2570,7 +2539,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-BOA-1047.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2599,7 +2567,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-BOA-1048.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2658,7 +2625,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-BOA-1050.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2721,7 +2687,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAC-1052.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2754,7 +2719,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAC-1053.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2820,7 +2784,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAC-1055.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2849,7 +2812,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAC-1056.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2878,7 +2840,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAC-1057.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2907,7 +2868,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAC-1058.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2940,7 +2900,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAC-1059.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2973,7 +2932,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-DIS-1060.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3002,7 +2960,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-DIS-1061.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3060,7 +3017,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-DIS-1063.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3089,7 +3045,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-SHR-1064.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3122,7 +3077,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-SHR-1065.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3151,7 +3105,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-SHR-1066.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3180,7 +3133,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-SHR-1067.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3209,7 +3161,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-SHR-1068.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3238,7 +3189,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-SHR-1069.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3336,7 +3286,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1072.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3365,7 +3314,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1073.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3423,7 +3371,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PRI-1075.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3452,7 +3399,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PRI-1076.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3481,7 +3427,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PRI-1077.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3510,7 +3455,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PRI-1078.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3539,7 +3483,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PRI-1079.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3568,7 +3511,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PRI-1080.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3597,7 +3539,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PRI-1081.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3626,7 +3567,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PRI-1082.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3655,7 +3595,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PRI-1083.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3684,7 +3623,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PRI-1084.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3713,7 +3651,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PRI-1085.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3742,7 +3679,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PRI-1086.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -3837,7 +3773,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-CLE-1089.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3866,7 +3801,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-CLE-1090.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3895,7 +3829,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-CLE-1091.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -4019,7 +3952,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-CLE-1095.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4176,7 +4108,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-TIS-1100.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4205,7 +4136,6 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-TIS-1101.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -4612,7 +4542,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-013.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4812,7 +4741,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-018.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4892,7 +4820,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-020.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5136,7 +5063,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-027.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5580,7 +5506,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-045.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5620,7 +5545,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-047.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5821,7 +5745,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-052.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5901,7 +5824,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-054.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6021,7 +5943,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-058.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6061,8 +5982,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-059.webp",
-      "/assets/products/catalog_2026/OB-059-alt-1.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6182,7 +6101,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-062.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6222,7 +6140,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-063.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6465,7 +6382,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-071.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6545,7 +6461,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-073.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6625,7 +6540,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-075.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6665,7 +6579,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-076.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6745,7 +6658,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-078.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6828,7 +6740,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-081.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6868,7 +6779,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-083.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6988,7 +6898,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-086.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7069,7 +6978,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-089.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7229,7 +7137,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-095.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7432,7 +7339,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-100.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7512,10 +7418,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-102.webp",
-      "/assets/products/catalog_2026/OB-102-alt-1.webp",
-      "/assets/products/catalog_2026/OB-102-alt-2.webp",
-      "/assets/products/catalog_2026/OB-102-alt-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7595,9 +7497,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-104.webp",
-      "/assets/products/catalog_2026/OB-104-alt-1.webp",
-      "/assets/products/catalog_2026/OB-104-alt-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7758,7 +7657,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-108.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7798,7 +7696,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-109.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7918,7 +7815,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-112.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8239,7 +8135,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-121.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8440,7 +8335,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-126.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8560,7 +8454,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-130.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8763,7 +8656,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-135.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8886,7 +8778,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-139.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9134,7 +9025,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-145.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9174,7 +9064,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-146.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9659,7 +9548,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-01.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9699,7 +9587,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-02.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9739,7 +9626,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-03.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9779,7 +9665,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-04.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9819,7 +9704,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-05.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9859,7 +9743,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-06.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9899,7 +9782,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-07.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9939,7 +9821,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-08.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9979,7 +9860,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-09.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10019,7 +9899,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-10.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10059,7 +9938,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-11.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10099,7 +9977,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-12.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10139,7 +10016,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-13.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10179,7 +10055,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-14.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10219,7 +10094,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-15.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10259,7 +10133,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAP-16.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10340,7 +10213,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-FIL-20.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10380,7 +10252,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-FIL-24.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10461,7 +10332,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-FIL-28.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10501,7 +10371,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-FIL-29.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10541,7 +10410,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-FIL-30.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10621,7 +10489,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-FIL-32.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10661,7 +10528,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-33.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10701,7 +10567,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-34.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10782,7 +10647,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-36.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10822,7 +10686,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-37.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10862,7 +10725,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-38.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10902,7 +10764,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-39.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10942,7 +10803,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-40.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11063,7 +10923,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-43.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11103,7 +10962,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-44.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11143,7 +11001,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-45.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11183,7 +11040,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-46.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11223,7 +11079,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-47.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11263,7 +11118,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-48.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11303,7 +11157,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-DES-51.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11343,7 +11196,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-DES-52.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11383,7 +11235,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-DES-53.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11466,7 +11317,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-DES-56.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11546,7 +11396,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-DES-60.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11586,7 +11435,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-DES-62.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11626,7 +11474,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-DES-63.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11666,7 +11513,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-NOT-65.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11786,7 +11632,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-NOT-68.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11826,7 +11671,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-NOT-69.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11946,7 +11790,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-NOT-72.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11986,7 +11829,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-NOT-73.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12067,7 +11909,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-NOT-75.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12147,7 +11988,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-NOT-77.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12187,7 +12027,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-NOT-78.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12227,7 +12066,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-NOT-79.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12307,7 +12145,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-EQP-81.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12347,7 +12184,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-EQP-82.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12387,7 +12223,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-EQP-83.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12427,7 +12262,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-EQP-84.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12467,7 +12301,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-EQP-85.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12507,7 +12340,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-EQP-87.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12547,7 +12379,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-EQP-89.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12749,7 +12580,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-05.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12991,7 +12821,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-12.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13071,7 +12900,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-14.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13271,7 +13099,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-19.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13592,7 +13419,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-27.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13672,7 +13498,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-30.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13712,7 +13537,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-31.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13752,7 +13576,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-32.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13872,7 +13695,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-01.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13938,7 +13760,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-02.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14000,7 +13821,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-03.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14084,7 +13904,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-04.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14141,7 +13960,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-05.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14194,7 +14012,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-06.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14249,7 +14066,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-07.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14322,7 +14138,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-08.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14406,7 +14221,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-09.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14473,7 +14287,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-10.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14540,7 +14353,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-11.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14603,7 +14415,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-12.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14674,7 +14485,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-13.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14742,7 +14552,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-14.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14811,7 +14620,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-15.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14886,7 +14694,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-16.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15028,7 +14835,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-18.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15102,7 +14908,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-19.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15240,7 +15045,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-21.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15310,7 +15114,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-22.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15382,7 +15185,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-23.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15460,7 +15262,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-24.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15524,7 +15325,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-25.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15607,7 +15407,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-26.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15674,7 +15473,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-27.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15750,7 +15548,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-28.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15825,7 +15622,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-29.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15895,7 +15691,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-30.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15965,7 +15760,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-31.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16036,7 +15830,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-32.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16101,7 +15894,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-33.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16168,7 +15960,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-34.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16231,7 +16022,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-35.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16314,7 +16104,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-36.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16383,7 +16172,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-37.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16460,7 +16248,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-38.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16527,7 +16314,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-39.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16598,7 +16384,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-40.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16668,7 +16453,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-41.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16749,7 +16533,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-42.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16824,7 +16607,6 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-43.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16951,9 +16733,9 @@ export const HOMEPAGE_BANNERS: HomepageBanner[] = [
       { label: 'FAST DISPATCH', icon: 'Truck' },
       { label: 'IDEAL FOR BUSINESS', icon: 'Building2' },
     ],
-    imageUrl: '/assets/products/catalog_2026/OB-STA.webp',
+    imageUrl: '/assets/products/catalog_2026/OB-STA-1002.webp',
     bannerUrl: '/images/banners/01-jk-copier-blue.png',
-    productUrl: '/assets/products/catalog_2026/OB-STA.webp',
+    productUrl: '/assets/products/catalog_2026/OB-STA-1002.webp',
     altText: 'Office stationery box files and desk essentials in Chennai',
     gradient: 'from-[#ffffff] via-[#f0f6ff] to-[#e1edff]',
     accentGradient: 'from-[#0052b4] via-[#0066cc] to-[#0284c7]',
@@ -17011,9 +16793,9 @@ export const HOMEPAGE_BANNERS: HomepageBanner[] = [
       { label: 'UV STABILIZED', icon: 'ShieldCheck' },
       { label: 'COMMERCIAL GRADE', icon: 'Building2' },
     ],
-    imageUrl: '/assets/products/catalog_2026/OB-GAR.webp',
+    imageUrl: '/assets/products/catalog_2026/OB-152.webp',
     bannerUrl: '/images/banners/03-housekeeping-orange.png',
-    productUrl: '/assets/products/catalog_2026/OB-GAR.webp',
+    productUrl: '/assets/products/catalog_2026/OB-152.webp',
     altText: 'Industrial Nilkamal wheeled dustbins and stainless steel garbage bins',
     gradient: 'from-[#ffffff] via-[#fff7ed] to-[#ffedd5]',
     accentGradient: 'from-[#c2410c] via-[#ea580c] to-[#f97316]',
@@ -17041,9 +16823,9 @@ export const HOMEPAGE_BANNERS: HomepageBanner[] = [
       { label: 'HIGH PERFORMANCE', icon: 'Gauge' },
       { label: 'TESTED QUALITY', icon: 'Printer' },
     ],
-    imageUrl: '/assets/products/catalog_2026/OB-TON.webp',
+    imageUrl: '/assets/products/catalog_2026/OB-006.webp',
     bannerUrl: '/images/banners/04-toner-ink-purple.png',
-    productUrl: '/assets/products/catalog_2026/OB-TON.webp',
+    productUrl: '/assets/products/catalog_2026/OB-006.webp',
     altText: 'Laser printer toner cartridges in Chennai',
     gradient: 'from-[#ffffff] via-[#faf5ff] to-[#f3e8ff]',
     accentGradient: 'from-[#5b21b6] via-[#7c3aed] to-[#8b5cf6]',

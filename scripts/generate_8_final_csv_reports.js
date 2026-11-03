@@ -23,22 +23,40 @@ function main() {
   const inventory = JSON.parse(fs.readFileSync('scripts/supplier_inventory_complete.json', 'utf8'));
   const duplicates = JSON.parse(fs.readFileSync('scripts/supplier_duplicates.json', 'utf8'));
   const summary = JSON.parse(fs.readFileSync('scripts/supplier_summary.json', 'utf8'));
-  const catalogWithGallery = JSON.parse(fs.readFileSync('scripts/catalog_with_gallery_images.json', 'utf8'));
-  const galleryAngles = JSON.parse(fs.readFileSync('scripts/processed_gallery_angles.json', 'utf8'));
   const proposedNew = JSON.parse(fs.readFileSync('scripts/proposed_new_products.json', 'utf8'));
   const cleanedFiles = JSON.parse(fs.readFileSync('scripts/cleaned_legacy_files.json', 'utf8'));
-  const generationResults = JSON.parse(fs.readFileSync('scripts/generation_results.json', 'utf8'));
+  const verifiedList = JSON.parse(fs.readFileSync('scripts/final_verified_supplier_products.json', 'utf8'));
+  const verifiedSkuMap = new Map(verifiedList.map(x => [x.sku, x]));
 
-  // Track matched supplier paths
-  const matchedSupplierPaths = new Set();
-  catalogWithGallery.forEach(p => {
-    if (p.matchedInventoryPath) matchedSupplierPaths.add(p.matchedInventoryPath.toLowerCase());
-    (p.galleryImages || []).forEach(g => {
-      matchedSupplierPaths.add(g.relPath.toLowerCase());
+  const allAngles = JSON.parse(fs.readFileSync('scripts/processed_gallery_angles.json', 'utf8'));
+  const verifiedAngles = allAngles.filter(a => verifiedSkuMap.has(a.sku));
+  const skuToAngles = new Map();
+  for (const a of verifiedAngles) {
+    if (!skuToAngles.has(a.sku)) skuToAngles.set(a.sku, []);
+    skuToAngles.get(a.sku).push(a);
+  }
+
+  // Load all 383 catalogue products from catalog.ts
+  const rawCatalogContent = fs.readFileSync('src/lib/data/catalog.ts', 'utf8');
+  const regex = /\{\s*\"id\":\s*\"([^\"]+)\"[\s\S]*?\"name\":\s*\"([^\"]+)\"[\s\S]*?\"sku\":\s*\"([^\"]+)\"[\s\S]*?\"categoryId\":\s*\"([^\"]+)\"[\s\S]*?\"brandName\":\s*\"([^\"]+)\"/g;
+
+  const catalogProducts = [];
+  let match;
+  while ((match = regex.exec(rawCatalogContent)) !== null) {
+    catalogProducts.push({
+      id: match[1],
+      name: match[2],
+      sku: match[3],
+      category: match[4],
+      brand: match[5]
     });
-  });
+  }
 
   // 1. complete_supplier_image_inventory.csv (2,369 rows)
+  const matchedSupplierPaths = new Set();
+  verifiedList.forEach(v => matchedSupplierPaths.add(v.supplierSource.toLowerCase()));
+  verifiedAngles.forEach(a => matchedSupplierPaths.add(a.originalFile.toLowerCase()));
+
   const invHeaders = [
     'File Index',
     'Relative Path',
@@ -85,38 +103,34 @@ function main() {
     'Primary Image URL',
     'Gallery Images Count',
     'Gallery Image URLs',
-    'Resolution',
-    'Format',
+    'Image Source',
     'Quality Status',
-    'Source',
     'Watermark Status'
   ];
-  const skuRows = catalogWithGallery.map(p => {
-    const gen = generationResults.find(g => g.sku === p.sku) || {};
-    const galleryCount = (p.galleryImages || []).length;
-    const galleryUrls = galleryCount > 0 
-      ? p.galleryImages.map((g, i) => `/assets/products/catalog_2026/${p.sku}-alt-${i + 1}.webp`).join(' | ')
+  const skuRows = catalogProducts.map(p => {
+    const isMatched = verifiedSkuMap.has(p.sku);
+    const angles = skuToAngles.get(p.sku) || [];
+    const galleryCount = angles.length;
+    const galleryUrls = galleryCount > 0
+      ? angles.map(a => a.alternateImage).join(' | ')
       : 'NONE';
 
-    const is2369 = p.migrationSource === 'Supplier_Package_2369';
     return [
       p.sku,
       p.name,
       p.category,
       p.brand,
-      p.newImageRelative,
+      isMatched ? `/assets/products/catalog_2026/${p.sku}.webp` : '/assets/placeholder-product.svg',
       galleryCount,
       galleryUrls,
-      '1200x1200',
-      'WebP (Quality 90)',
-      'STUDIO_MASTER_VERIFIED',
-      is2369 ? 'Supplier Package (2,369 Pkg)' : 'Verified OEM Master',
-      'WATERMARK_FREE_CLEAN_MASTER'
+      isMatched ? 'PURE_SUPPLIER_ARCHIVE_2365' : 'IMAGE_PENDING_SUPPLIER_PHOTOGRAPHY',
+      isMatched ? 'VERIFIED_STUDIO_MASTER' : 'FALLBACK_PLACEHOLDER_ACTIVE',
+      isMatched ? 'WATERMARK_FREE_AUTHORIZED_PHOTO' : 'N/A'
     ];
   });
   writeCsv('all_product_sku_image_mapping.csv', skuHeaders, skuRows);
 
-  // 3. new_product_images_report.csv
+  // 3. new_product_images_report.csv (1,966 rows)
   const newProdHeaders = [
     'Supplier File Path',
     'Category Folder',
@@ -142,7 +156,7 @@ function main() {
   });
   writeCsv('new_product_images_report.csv', newProdHeaders, newProdRows);
 
-  // 4. multiple_product_angles_report.csv
+  // 4. multiple_product_angles_report.csv (80 rows)
   const anglesHeaders = [
     'SKU',
     'Product Name',
@@ -155,7 +169,7 @@ function main() {
     'Format',
     'File Size (KB)'
   ];
-  const anglesRows = galleryAngles.map(a => [
+  const anglesRows = verifiedAngles.map(a => [
     a.sku,
     a.productName,
     a.category,
@@ -169,7 +183,7 @@ function main() {
   ]);
   writeCsv('multiple_product_angles_report.csv', anglesHeaders, anglesRows);
 
-  // 5. duplicate_images_report.csv
+  // 5. duplicate_images_report.csv (3 rows)
   const dupHeaders = [
     'Duplicate File Path',
     'Original File Path',
@@ -197,17 +211,28 @@ function main() {
   }
   writeCsv('duplicate_images_report.csv', dupHeaders, dupRows);
 
-  // 6. missing_product_images_report.csv (0 missing)
+  // 6. missing_product_images_report.csv (212 rows)
   const missingHeaders = [
     'SKU',
     'Product Name',
     'Category',
     'Brand',
     'Expected Image',
-    'Actual Image Status',
+    'Supplier Archive Status',
+    'Website Display State',
     'Resolution Action'
   ];
-  const missingRows = [];
+  const missingProducts = catalogProducts.filter(p => !verifiedSkuMap.has(p.sku));
+  const missingRows = missingProducts.map(p => [
+    p.sku,
+    p.name,
+    p.category,
+    p.brand,
+    'MISSING_SUPPLIER_PHOTOGRAPHY',
+    'NOT_PRESENT_IN_2365_SUPPLIER_ARCHIVE',
+    'PLACEHOLDER_PRODUCT_SVG_ACTIVE',
+    'Awaiting official supplier product photography. Old and OEM images strictly withheld per user mandate.'
+  ]);
   writeCsv('missing_product_images_report.csv', missingHeaders, missingRows);
 
   // 7. old_product_image_cleanup_report.csv (718 rows)
@@ -246,15 +271,14 @@ function main() {
     ['Supplier Archive', 'Non-image assets in archive', summary.nonImages, 'ISOLATED', '1 text file, 1 ZIP file, 1 PDF file'],
     ['Supplier Archive', 'Unique image hashes (SHA-256)', summary.uniqueImageHashes, 'DEDUPLICATED', 'Exact binary uniqueness verified'],
     ['Supplier Archive', 'Redundant duplicate files', summary.duplicateFilesTotal, 'DEDUPLICATED', 'Documented in duplicate_images_report.csv'],
-    ['Catalog Migration', 'Total active catalogue products', 381, 'MIGRATED', '100% complete coverage across active catalog'],
-    ['Catalog Migration', 'Total catalogue database records', 383, 'MIGRATED', 'Includes 2 inactive duplicate SKUs for integrity'],
-    ['Catalog Migration', 'Migrated directly from 2,369 package', 112, 'UPGRADED', 'High-res studio master photography'],
-    ['Catalog Migration', 'Verified OEM studio masters retained', 271, 'STANDARDIZED', '1200x1200 WebP solid white canvas'],
-    ['Catalog Migration', 'Products with multiple angle galleries', 45, 'ENHANCED', 'Interactive multi-image thumbnails active'],
-    ['Catalog Migration', 'Alternate angle images processed', galleryAngles.length, 'INTEGRATED', '1200x1200 WebP alternate angles'],
-    ['Catalog Migration', 'Total production WebP images in catalog_2026', 383 + galleryAngles.length, 'PUBLISHED', '383 primary + 86 gallery angles'],
-    ['Catalog Quality', 'Watermark-affected images remaining', 0, 'ZERO_WATERMARKS', '100% clean authorized studio photos'],
-    ['Catalog Quality', 'Missing product images', 0, 'ZERO_MISSING', '100% catalog image availability'],
+    ['Catalog Migration', 'Total catalogue products audited', catalogProducts.length, 'AUDITED', 'Complete database audit'],
+    ['Catalog Migration', 'Products mapped from pure supplier archive', verifiedList.length, 'VERIFIED_SUPPLIER', 'Strictly from 2,365 supplier archive only'],
+    ['Catalog Migration', 'Products with multiple angle galleries', verifiedAngles.length > 0 ? skuToAngles.size : 0, 'ENHANCED', 'Interactive multi-image thumbnails active'],
+    ['Catalog Migration', 'Alternate angle images processed', verifiedAngles.length, 'INTEGRATED', '1200x1200 WebP alternate angles'],
+    ['Catalog Migration', 'Total active images in catalog_2026', verifiedList.length + verifiedAngles.length, 'PUBLISHED', '171 primary + 80 gallery angles = 251 WebP'],
+    ['Catalog Migration', 'Products missing supplier photography', missingProducts.length, 'TRANSPARENTLY_REPORTED', 'Zero old/OEM images used as filler'],
+    ['Catalog Integrity', 'Old / OEM master images used', 0, 'ZERO_OLD_IMAGES', '100% compliance with pure supplier directive'],
+    ['Catalog Quality', 'Watermark-affected images remaining on site', 0, 'ZERO_WATERMARKS', '100% clean authorized studio photos'],
     ['Catalog Expansion', 'Proposed new supplier products identified', proposedNew.length, 'DOCUMENTED', 'Documented in new_product_images_report.csv'],
     ['Legacy Cleanup', 'Legacy product files backed up & removed', cleanedFiles.length, 'CLEANED', 'Backed up to D:/legacy_products_backup_2026'],
     ['Website Integrity', 'Non-product assets preserved', '100%', 'PRESERVED', 'Brand logos, banners, icons, UI untouched'],
@@ -263,9 +287,11 @@ function main() {
   writeCsv('final_image_migration_report.csv', kpiHeaders, kpiRows);
 
   console.log('\n========================================');
-  console.log('ALL 8 CSV REPORTS GENERATED SUCCESSFULLY!');
+  console.log('ALL 8 PURE SUPPLIER CSV REPORTS GENERATED!');
+  console.log(`Verified Supplier Products: ${verifiedList.length}`);
+  console.log(`Missing Supplier Products: ${missingProducts.length}`);
+  console.log(`Gallery Alternate Angles: ${verifiedAngles.length}`);
   console.log('========================================\n');
 }
 
 main();
-

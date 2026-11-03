@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="1200" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Border Card -->
+  <rect x="60" y="60" width="1080" height="1080" rx="32" fill="#ffffff" stroke="#e2e8f0" stroke-width="3"/>
+
+  <!-- Center Decorative Icon Container -->
+  <circle cx="600" cy="500" r="140" fill="#eff6ff"/>
+  
+  <!-- Camera / Package Graphic -->
+  <g transform="translate(480, 380)" stroke="url(#iconGrad)" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Camera body -->
+    <path d="M 30 70 L 60 30 L 180 30 L 210 70 L 230 70 C 241 70 250 79 250 90 L 250 200 C 250 211 241 220 230 220 L 10 220 C -1 220 -10 211 -10 200 L -10 90 C -10 79 -1 70 10 70 Z" fill="#ffffff"/>
+    <!-- Camera Lens -->
+    <circle cx="120" cy="145" r="45" fill="#eff6ff" stroke="url(#iconGrad)" stroke-width="12"/>
+    <circle cx="120" cy="145" r="16" fill="#3b82f6"/>
+    <!-- Flash -->
+    <circle cx="195" cy="100" r="8" fill="#3b82f6"/>
+  </g>
+
+  <!-- Brand Title -->
+  <text x="600" y="720" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#0f172a" text-anchor="middle" letter-spacing="3">OFFICEBAZZAR</text>
+
+  <!-- Status Subtitle -->
+  <text x="600" y="780" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="22" font-weight="600" fill="#64748b" text-anchor="middle" letter-spacing="1">SUPPLIER PHOTOGRAPHY PENDING</text>
+
+  <!-- Assurance Notice -->
+  <text x="600" y="825" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="400" fill="#94a3b8" text-anchor="middle">Genuine B2B Product · Contact sales for specification sheet</text>
+</svg>
+

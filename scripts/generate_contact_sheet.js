@@ -1,21 +1,44 @@
 const fs = require('fs');
 const path = require('path');
 
-const catalogWithGallery = JSON.parse(fs.readFileSync('scripts/catalog_with_gallery_images.json', 'utf8'));
-const manifestContent = fs.readFileSync('scripts/skus_requiring_manual_replacement.txt', 'utf8');
-const watermarkedSkus = new Set([...manifestContent.matchAll(/\[PENDING\]\s+(OB-[A-Z0-9-]+)/g)].map(m => m[1]));
+const verifiedList = JSON.parse(fs.readFileSync('scripts/final_verified_supplier_products.json', 'utf8'));
+const verifiedSkuMap = new Map(verifiedList.map(x => [x.sku, x]));
 
-const totalProducts = catalogWithGallery.length;
-const pkg2369Count = catalogWithGallery.filter(p => p.migrationSource === 'Supplier_Package_2369').length;
-const oemCount = totalProducts - pkg2369Count;
-const galleryCount = catalogWithGallery.filter(p => (p.galleryImages || []).length > 0).length;
+const allAngles = JSON.parse(fs.readFileSync('scripts/processed_gallery_angles.json', 'utf8'));
+const verifiedAngles = allAngles.filter(a => verifiedSkuMap.has(a.sku));
+const skuToAngles = new Map();
+for (const a of verifiedAngles) {
+  if (!skuToAngles.has(a.sku)) skuToAngles.set(a.sku, []);
+  skuToAngles.get(a.sku).push(a);
+}
+
+// Load all 383 catalogue products from catalog.ts
+const rawCatalogContent = fs.readFileSync('src/lib/data/catalog.ts', 'utf8');
+const regex = /\{\s*\"id\":\s*\"([^\"]+)\"[\s\S]*?\"name\":\s*\"([^\"]+)\"[\s\S]*?\"sku\":\s*\"([^\"]+)\"[\s\S]*?\"categoryId\":\s*\"([^\"]+)\"[\s\S]*?\"brandName\":\s*\"([^\"]+)\"/g;
+
+const catalogProducts = [];
+let match;
+while ((match = regex.exec(rawCatalogContent)) !== null) {
+  catalogProducts.push({
+    id: match[1],
+    name: match[2],
+    sku: match[3],
+    category: match[4],
+    brand: match[5]
+  });
+}
+
+const totalProducts = catalogProducts.length;
+const verifiedCount = verifiedList.length;
+const missingCount = totalProducts - verifiedCount;
+const galleryCount = skuToAngles.size;
 
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OfficeBazzar – Complete Product Image Migration & Multi-Angle Gallery Quality Gate</title>
+  <title>OfficeBazzar – Pure Supplier Archive Visual Quality Gate (2,365 Package)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,6 +53,7 @@ const html = `<!DOCTYPE html>
       --success: #10b981;
       --purple: #8b5cf6;
       --accent: #f59e0b;
+      --danger: #ef4444;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -188,25 +212,13 @@ const html = `<!DOCTYPE html>
       font-weight: 600;
       text-transform: uppercase;
     }
-    .badge-2369 {
-      background: #8b5cf6;
-      color: #fff;
-    }
-    .badge-oem {
-      background: #0ea5e9;
-      color: #fff;
-    }
-    .badge-wm-resolved {
-      position: absolute;
-      top: 10px;
-      left: 10px;
+    .badge-verified {
       background: #10b981;
       color: #fff;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .badge-missing {
+      background: #64748b;
+      color: #f1f5f9;
     }
     .badge-gallery-count {
       position: absolute;
@@ -334,8 +346,8 @@ const html = `<!DOCTYPE html>
   <div class="header">
     <div class="title-row">
       <div>
-        <h1>OfficeBazzar – Complete Image Migration & Multi-Angle Quality Gate</h1>
-        <div class="subtitle">Complete visual verification catalog for 383 catalogue products (1200×1200 Master WebP + 86 Multi-Angle Views)</div>
+        <h1>OfficeBazzar – Pure Supplier Archive Visual Quality Gate</h1>
+        <div class="subtitle">Complete visual verification catalog (Strictly 2,365 Supplier Package Only | Zero OEM / Legacy Filler Images)</div>
       </div>
       <div>
         <a href="/" style="color: #38bdf8; text-decoration: none; font-size: 14px; font-weight: 500;">← Back to OfficeBazzar Store</a>
@@ -348,24 +360,24 @@ const html = `<!DOCTYPE html>
         <div class="stat-lbl">Catalog Products</div>
       </div>
       <div class="stat-card">
-        <div class="stat-val" style="color: #8b5cf6;">${pkg2369Count}</div>
-        <div class="stat-lbl">From 2,369 Pkg</div>
+        <div class="stat-val" style="color: #10b981;">${verifiedCount}</div>
+        <div class="stat-lbl">Verified Supplier Images</div>
       </div>
       <div class="stat-card">
-        <div class="stat-val" style="color: #f59e0b;">${galleryCount} (86)</div>
+        <div class="stat-val" style="color: #f59e0b;">${galleryCount} (${verifiedAngles.length})</div>
         <div class="stat-lbl">Multi-Angle Galleries</div>
       </div>
       <div class="stat-card">
-        <div class="stat-val" style="color: #10b981;">93 / 93</div>
-        <div class="stat-lbl">Watermarks Resolved</div>
+        <div class="stat-val" style="color: #94a3b8;">${missingCount}</div>
+        <div class="stat-lbl">Missing Supplier Photos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" style="color: #10b981;">0</div>
+        <div class="stat-lbl">OEM / Legacy Images Used</div>
       </div>
       <div class="stat-card">
         <div class="stat-val" style="color: #ef4444;">718</div>
         <div class="stat-lbl">Legacy Files Cleaned</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-val" style="color: #10b981;">0</div>
-        <div class="stat-lbl">Missing Images</div>
       </div>
     </div>
 
@@ -375,23 +387,19 @@ const html = `<!DOCTYPE html>
       </div>
       <div class="filter-group">
         <button class="btn-filter active" onclick="setCategory('ALL', this)">All (${totalProducts})</button>
-        <button class="btn-filter" onclick="setCategory('Housekeeping & Hygiene', this)">Housekeeping (174)</button>
-        <button class="btn-filter" onclick="setCategory('Office Stationery', this)">Stationery (166)</button>
-        <button class="btn-filter" onclick="setCategory('Printers & Technology', this)">Tech & Printers (28)</button>
-        <button class="btn-filter" onclick="setCategory('Packaging Supplies', this)">Packaging (15)</button>
+        <button class="btn-filter" style="border-color: #10b981; color: #10b981;" onclick="setSource('VERIFIED', this)">Verified Supplier Only (${verifiedCount})</button>
         <button class="btn-filter accent" onclick="setSource('GALLERY_ONLY', this)">Multi-Angle Galleries (${galleryCount})</button>
-        <button class="btn-filter purple" onclick="setSource('Supplier_Package_2369', this)">2,369 Pkg Only (${pkg2369Count})</button>
-        <button class="btn-filter" style="border-color: #10b981; color: #10b981;" onclick="setSource('WM_RESOLVED', this)">Resolved 93 Issues</button>
+        <button class="btn-filter" style="border-color: #94a3b8; color: #94a3b8;" onclick="setSource('MISSING', this)">Pending Photos (${missingCount})</button>
       </div>
     </div>
   </div>
 
   <div class="grid" id="productGrid">
-    ${catalogWithGallery.map(p => {
-      const isWm = watermarkedSkus.has(p.sku);
-      const is2369 = p.migrationSource === 'Supplier_Package_2369';
-      const gallery = p.galleryImages || [];
-      const hasGallery = gallery.length > 0;
+    ${catalogProducts.map(p => {
+      const isMatched = verifiedSkuMap.has(p.sku);
+      const angles = skuToAngles.get(p.sku) || [];
+      const hasGallery = angles.length > 0;
+      const imgSrc = isMatched ? `/assets/products/catalog_2026/${p.sku}.webp` : '/assets/placeholder-product.svg';
 
       return `
       <div class="card" 
@@ -399,15 +407,13 @@ const html = `<!DOCTYPE html>
            data-name="${p.name.toLowerCase()}" 
            data-brand="${p.brand.toLowerCase()}"
            data-category="${p.category}"
-           data-source="${p.migrationSource}"
-           data-wm="${isWm ? 'yes' : 'no'}"
+           data-source="${isMatched ? 'VERIFIED' : 'MISSING'}"
            data-gallery="${hasGallery ? 'yes' : 'no'}">
         <div class="img-container" id="imgBox-${p.sku}" onclick="openModal(document.querySelector('#imgBox-${p.sku} img').src, '${p.sku}', '${p.name.replace(/'/g, "\\'")}')">
-          <img src="${p.newImageRelative}" alt="${p.name}" loading="lazy">
-          ${isWm ? `<div class="badge-wm-resolved">RESOLVED MASTER</div>` : ''}
-          ${hasGallery ? `<div class="badge-gallery-count">+${gallery.length} ANGLES</div>` : ''}
-          <div class="badge-corner ${is2369 ? 'badge-2369' : 'badge-oem'}">
-            ${is2369 ? '2,369 PKG' : 'OEM MASTER'}
+          <img src="${imgSrc}" alt="${p.name}" loading="lazy">
+          ${hasGallery ? `<div class="badge-gallery-count">+${angles.length} ANGLES</div>` : ''}
+          <div class="badge-corner ${isMatched ? 'badge-verified' : 'badge-missing'}">
+            ${isMatched ? 'SUPPLIER MASTER' : 'PENDING PHOTO'}
           </div>
         </div>
         <div class="card-body">
@@ -419,12 +425,12 @@ const html = `<!DOCTYPE html>
           
           ${hasGallery ? `
           <div class="gallery-thumbs">
-            <div class="thumb-item" onclick="switchCardImage('${p.sku}', '${p.newImageRelative}')">
-              <img src="${p.newImageRelative}" alt="Primary" title="Primary View">
+            <div class="thumb-item" onclick="switchCardImage('${p.sku}', '${imgSrc}')">
+              <img src="${imgSrc}" alt="Primary" title="Primary View">
             </div>
-            ${gallery.map((g, gi) => `
-            <div class="thumb-item" onclick="switchCardImage('${p.sku}', '/assets/products/catalog_2026/${p.sku}-alt-${gi + 1}.webp')">
-              <img src="/assets/products/catalog_2026/${p.sku}-alt-${gi + 1}.webp" alt="Angle ${gi + 1}" title="Angle ${gi + 1}">
+            ${angles.map((g, gi) => `
+            <div class="thumb-item" onclick="switchCardImage('${p.sku}', '${g.alternateImage}')">
+              <img src="${g.alternateImage}" alt="Angle ${gi + 1}" title="Angle ${gi + 1}">
             </div>
             `).join('')}
           </div>
@@ -432,7 +438,7 @@ const html = `<!DOCTYPE html>
 
           <div class="meta-row">
             <span>Brand: <strong>${p.brand}</strong></span>
-            <span>1200×1200 WebP</span>
+            <span>${isMatched ? '1200×1200 WebP' : 'Placeholder SVG'}</span>
           </div>
         </div>
       </div>
@@ -447,7 +453,7 @@ const html = `<!DOCTYPE html>
       <img id="modalImg" src="" alt="Product Large View">
       <div class="modal-info">
         <h3 id="modalTitle"></h3>
-        <p id="modalSub" style="color: #64748b; font-size: 13px; margin-top: 4px;">Dimensions: 1200×1200 px | Format: WebP (Quality 90)</p>
+        <p id="modalSub" style="color: #64748b; font-size: 13px; margin-top: 4px;">Dimensions: 1200×1200 px | Source: 2,365 Supplier Package</p>
       </div>
     </div>
   </div>
@@ -493,16 +499,15 @@ const html = `<!DOCTYPE html>
         const brand = card.getAttribute('data-brand');
         const cat = card.getAttribute('data-category');
         const src = card.getAttribute('data-source');
-        const isWm = card.getAttribute('data-wm');
         const hasGallery = card.getAttribute('data-gallery');
 
         let matchQuery = !q || sku.includes(q) || name.includes(q) || brand.includes(q);
         let matchCat = currentCategory === 'ALL' || cat === currentCategory;
         let matchSrc = true;
-        if (currentSource === 'Supplier_Package_2369') {
-          matchSrc = src === 'Supplier_Package_2369';
-        } else if (currentSource === 'WM_RESOLVED') {
-          matchSrc = isWm === 'yes';
+        if (currentSource === 'VERIFIED') {
+          matchSrc = src === 'VERIFIED';
+        } else if (currentSource === 'MISSING') {
+          matchSrc = src === 'MISSING';
         } else if (currentSource === 'GALLERY_ONLY') {
           matchSrc = hasGallery === 'yes';
         }
@@ -534,9 +539,8 @@ const html = `<!DOCTYPE html>
 `;
 
 fs.writeFileSync('public/migrated_product_contact_sheet.html', html, 'utf8');
-console.log('Successfully updated public/migrated_product_contact_sheet.html with multi-angle galleries!');
+console.log('Successfully updated public/migrated_product_contact_sheet.html');
 
-// Also copy to artifact directory
 const artifactPath = 'C:/Users/Pachamuthu S/.gemini/antigravity/brain/3b4e2bd9-29f4-43e6-8062-242f18749a52/migrated_product_contact_sheet.html';
 fs.copyFileSync('public/migrated_product_contact_sheet.html', artifactPath);
-console.log('Updated artifact copy of contact sheet.');
+console.log('Copied contact sheet to artifact directory.');

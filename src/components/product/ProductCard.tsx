@@ -55,7 +55,7 @@ export default function ProductCard({
   const displayImage =
     product.images && product.images[0]
       ? product.images[0]
-      : 'https://officebazzar.co.in/wp-content/uploads/2022/12/cardboard-tag-file-500x500-1.jpg';
+      : '/assets/placeholder-product.svg';
 
   const brandDisplayName = product.brandName || 'OfficeBazzar';
 

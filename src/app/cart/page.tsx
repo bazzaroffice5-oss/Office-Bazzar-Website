@@ -17,7 +17,7 @@ import {
 import { useCart } from '@/context/CartContext';
 
 const FALLBACK_IMAGE =
-  'https://officebazzar.co.in/wp-content/uploads/2022/12/cardboard-tag-file-500x500-1.jpg';
+  '/assets/placeholder-product.svg';
 
 export default function QuoteCartPage() {
   const { items, updateQuantity, removeFromCart, itemCount, subtotal, total } = useCart();

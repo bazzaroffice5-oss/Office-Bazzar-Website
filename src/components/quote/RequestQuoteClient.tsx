@@ -422,7 +422,7 @@ export default function RequestQuoteClient() {
                         <Image
                           src={
                             item.product.images[0] ||
-                            'https://officebazzar.co.in/wp-content/uploads/2022/12/cardboard-tag-file-500x500-1.jpg'
+                            '/assets/placeholder-product.svg'
                           }
                           alt={item.product.name}
                           fill

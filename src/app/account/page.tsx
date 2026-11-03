@@ -573,7 +573,7 @@ function CustomerAccountDashboardContent() {
                         <div className="flex items-center gap-3 min-w-0">
                           <div className="relative w-12 h-12 rounded-lg bg-slate-50 border border-slate-100 overflow-hidden shrink-0">
                             <Image
-                              src={item.images[0] || 'https://officebazzar.co.in/wp-content/uploads/2022/12/cardboard-tag-file-500x500-1.jpg'}
+                              src={item.images[0] || '/assets/placeholder-product.svg'}
                               alt={item.name}
                               fill
                               className="object-contain p-1.5"

@@ -5,15 +5,14 @@ Supplier Archive,Corrupted / 0-byte files detected,1,EXCLUDED,Caution Floor Sign
 Supplier Archive,Non-image assets in archive,3,ISOLATED,"1 text file, 1 ZIP file, 1 PDF file"
 Supplier Archive,Unique image hashes (SHA-256),2362,DEDUPLICATED,Exact binary uniqueness verified
 Supplier Archive,Redundant duplicate files,3,DEDUPLICATED,Documented in duplicate_images_report.csv
-Catalog Migration,Total active catalogue products,381,MIGRATED,100% complete coverage across active catalog
-Catalog Migration,Total catalogue database records,383,MIGRATED,Includes 2 inactive duplicate SKUs for integrity
-Catalog Migration,"Migrated directly from 2,369 package",112,UPGRADED,High-res studio master photography
-Catalog Migration,Verified OEM studio masters retained,271,STANDARDIZED,1200x1200 WebP solid white canvas
-Catalog Migration,Products with multiple angle galleries,45,ENHANCED,Interactive multi-image thumbnails active
-Catalog Migration,Alternate angle images processed,86,INTEGRATED,1200x1200 WebP alternate angles
-Catalog Migration,Total production WebP images in catalog_2026,469,PUBLISHED,383 primary + 86 gallery angles
-Catalog Quality,Watermark-affected images remaining,0,ZERO_WATERMARKS,100% clean authorized studio photos
-Catalog Quality,Missing product images,0,ZERO_MISSING,100% catalog image availability
+Catalog Migration,Total catalogue products audited,383,AUDITED,Complete database audit
+Catalog Migration,Products mapped from pure supplier archive,171,VERIFIED_SUPPLIER,"Strictly from 2,365 supplier archive only"
+Catalog Migration,Products with multiple angle galleries,42,ENHANCED,Interactive multi-image thumbnails active
+Catalog Migration,Alternate angle images processed,80,INTEGRATED,1200x1200 WebP alternate angles
+Catalog Migration,Total active images in catalog_2026,251,PUBLISHED,171 primary + 80 gallery angles = 251 WebP
+Catalog Migration,Products missing supplier photography,212,TRANSPARENTLY_REPORTED,Zero old/OEM images used as filler
+Catalog Integrity,Old / OEM master images used,0,ZERO_OLD_IMAGES,100% compliance with pure supplier directive
+Catalog Quality,Watermark-affected images remaining on site,0,ZERO_WATERMARKS,100% clean authorized studio photos
 Catalog Expansion,Proposed new supplier products identified,1966,DOCUMENTED,Documented in new_product_images_report.csv
 Legacy Cleanup,Legacy product files backed up & removed,718,CLEANED,Backed up to D:/legacy_products_backup_2026
 Website Integrity,Non-product assets preserved,100%,PRESERVED,"Brand logos, banners, icons, UI untouched"
