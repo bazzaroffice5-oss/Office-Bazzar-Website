@@ -18,6 +18,7 @@ const endpoints = [
 function check(url) {
   return new Promise((resolve) => {
     https.get(`https://officebazzar.com${url}`, res => {
+      res.resume();
       resolve({ url, status: res.statusCode });
     }).on('error', err => {
       resolve({ url, status: err.message });
