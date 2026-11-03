@@ -36,3 +36,4 @@ for (const p of prods) {
 }
 const idDups = Object.entries(idCounts).filter(([id, c]) => c > 1);
 console.log('Duplicate IDs:', idDups);
+

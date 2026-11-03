@@ -29,3 +29,4 @@ for (const u of updates) {
 
 fs.writeFileSync('src/lib/data/catalog.ts', cat, 'utf8');
 console.log('Successfully saved src/lib/data/catalog.ts');
+

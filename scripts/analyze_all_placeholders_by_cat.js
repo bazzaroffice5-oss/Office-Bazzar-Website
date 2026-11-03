@@ -26,3 +26,4 @@ console.log('\n--- Placeholders in Office Stationery ---');
 const staPlaceholders = placeholders.filter(p => p.categoryId === 'office-stationery');
 console.log(`Total Stationery placeholders: ${staPlaceholders.length}`);
 staPlaceholders.forEach(p => console.log(`[${p.sku}] ${p.name} (${p.subcategoryId})`));
+

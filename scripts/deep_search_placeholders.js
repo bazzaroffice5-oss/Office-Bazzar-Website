@@ -91,3 +91,4 @@ for (const p of potentialMatches.slice(0, 25)) {
   console.log(`\n[${p.sku}] ${p.name} (${p.category})`);
   p.candidates.forEach(c => console.log(`  -> ${c.score}%: ${c.img} (${c.reason})`));
 }
+

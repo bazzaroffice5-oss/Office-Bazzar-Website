@@ -12,3 +12,4 @@ skus.forEach(sku => {
     console.log(`SKU NOT FOUND: ${sku}`);
   }
 });
+

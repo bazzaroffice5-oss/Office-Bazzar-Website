@@ -9,3 +9,4 @@ skus.forEach(sku => {
   const imgM = block.match(/"images":\s*\[([\s\S]*?)\]/);
   console.log(`${sku} images:`, imgM ? imgM[0] : 'not found');
 });
+

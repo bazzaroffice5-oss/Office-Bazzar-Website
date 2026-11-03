@@ -8,3 +8,4 @@ skus.forEach(sku => {
   console.log(`\n================= ${sku} =================`);
   console.log(cat.slice(idx, idx + 800));
 });
+
