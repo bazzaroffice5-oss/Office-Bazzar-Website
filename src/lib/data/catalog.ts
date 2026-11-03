@@ -5058,7 +5058,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-027.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6667,7 +6669,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-078.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7435,7 +7439,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-102.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7513,7 +7519,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-104.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12566,7 +12574,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-COV-05.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,

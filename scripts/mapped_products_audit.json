@@ -1147,6 +1147,20 @@
     ]
   },
   {
+    "id": "prod-ob-027-kitchen-roll-dispenser",
+    "sku": "OB-027",
+    "name": "Kitchen Roll Dispenser",
+    "slug": "ob-027-kitchen-roll-dispenser",
+    "categoryId": "housekeeping-hygiene",
+    "subcategoryId": "washroom-dispensers",
+    "brand": "OfficeBazzar",
+    "price": 0,
+    "isActive": true,
+    "images": [
+      "/assets/products/catalog_2026/OB-027.webp"
+    ]
+  },
+  {
     "id": "prod-ob-030-premier-face-tissue",
     "sku": "OB-030",
     "name": "Premier Face Tissue",
@@ -1680,6 +1694,20 @@
     ]
   },
   {
+    "id": "prod-ob-078-table-top-wiper",
+    "sku": "OB-078",
+    "name": "Table Top Wiper",
+    "slug": "ob-078-table-top-wiper",
+    "categoryId": "housekeeping-hygiene",
+    "subcategoryId": "mops-floor-wipers",
+    "brand": "OfficeBazzar",
+    "price": 0,
+    "isActive": true,
+    "images": [
+      "/assets/products/catalog_2026/OB-078.webp"
+    ]
+  },
+  {
     "id": "prod-ob-080-clip-mop-head-colour-coded",
     "sku": "OB-080",
     "name": "Clip Mop Head Colour Coded",
@@ -1942,6 +1970,20 @@
     ]
   },
   {
+    "id": "prod-ob-102-cleaning-caddy-basket-organizer",
+    "sku": "OB-102",
+    "name": "Cleaning Caddy Basket Organizer",
+    "slug": "ob-102-cleaning-caddy-basket-organizer",
+    "categoryId": "housekeeping-hygiene",
+    "subcategoryId": "mops-floor-wipers",
+    "brand": "OfficeBazzar",
+    "price": 0,
+    "isActive": true,
+    "images": [
+      "/assets/products/catalog_2026/OB-102.webp"
+    ]
+  },
+  {
     "id": "prod-ob-103-professional-glass-cleaning-kit-box",
     "sku": "OB-103",
     "name": "Professional Glass Cleaning Kit Box",
@@ -1953,6 +1995,20 @@
     "isActive": true,
     "images": [
       "/assets/products/catalog_2026/OB-103.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-104-commercial-insect-killer-fly-catcher-machine",
+    "sku": "OB-104",
+    "name": "Commercial Insect Killer Fly Catcher Machine",
+    "slug": "ob-104-commercial-insect-killer-fly-catcher-machine",
+    "categoryId": "housekeeping-hygiene",
+    "subcategoryId": "mops-floor-wipers",
+    "brand": "OfficeBazzar",
+    "price": 0,
+    "isActive": true,
+    "images": [
+      "/assets/products/catalog_2026/OB-104.webp"
     ]
   },
   {
@@ -3054,6 +3110,20 @@
     "isActive": true,
     "images": [
       "/assets/products/catalog_2026/OB-COV-04.webp"
+    ]
+  },
+  {
+    "id": "prod-ob-cov-05-yellow-disposable-protective-mask",
+    "sku": "OB-COV-05",
+    "name": "Yellow Disposable Protective Mask",
+    "slug": "ob-cov-05-yellow-disposable-protective-mask",
+    "categoryId": "office-stationery",
+    "subcategoryId": "safety-maintenance",
+    "brand": "OfficeBazzar",
+    "price": 0,
+    "isActive": true,
+    "images": [
+      "/assets/products/catalog_2026/OB-COV-05.webp"
     ]
   },
   {

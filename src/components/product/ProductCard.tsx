@@ -51,18 +51,19 @@ export default function ProductCard({
     }, 1500);
   };
 
-  // Safe image fallback
-  const displayImage =
-    product.images && product.images[0]
-      ? product.images[0]
-      : '/assets/placeholder-product.svg';
+  // Safe image fallback with dynamic error recovery
+  const initialImage =
+    (product.images && product.images[0]) ||
+    ((product as unknown as { image?: string }).image) ||
+    '/assets/placeholder-product.svg';
+  const [imgSrc, setImgSrc] = useState<string>(initialImage);
 
   const brandDisplayName = product.brandName || 'OfficeBazzar';
 
   return (
     <div
       onClick={handleCardClick}
-      className={`group relative flex flex-col justify-between bg-white border border-gray-200/90 hover:border-gray-300 rounded-2xl p-4 sm:p-5 transition-all duration-200 ease-out hover:shadow-lg hover:-translate-y-1 h-full select-none cursor-pointer ${className}`}
+      className={`group relative flex flex-col justify-between bg-white border border-gray-200/90 hover:border-gray-300 rounded-2xl p-3 sm:p-4 transition-all duration-200 ease-out hover:shadow-lg hover:-translate-y-1 h-full select-none cursor-pointer ${className}`}
     >
       {/* Top Action: Compact Cart Icon Button at top-right of product card matching Reference */}
       <div className="relative z-10 flex items-center justify-end w-full">
@@ -90,17 +91,18 @@ export default function ProductCard({
       {/* Product Image Area: Wrap in Link for native accessibility and SEO */}
       <Link
         href={productUrl}
-        className="relative z-10 w-full aspect-square bg-white rounded-xl overflow-hidden my-2 flex items-center justify-center focus:outline-none"
+        className="relative z-10 w-full aspect-square bg-white rounded-xl overflow-hidden my-1 sm:my-1.5 flex items-center justify-center focus:outline-none"
         tabIndex={-1}
         aria-hidden="true"
       >
         <Image
-          src={displayImage}
+          src={imgSrc}
           alt={product.name}
           fill
           priority={priority}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          className="object-contain p-3.5 transition-transform duration-200 ease-out group-hover:scale-105"
+          className="object-contain p-1 sm:p-1.5 transition-transform duration-200 ease-out group-hover:scale-105"
+          onError={() => setImgSrc('/assets/placeholder-product.svg')}
         />
       </Link>
 

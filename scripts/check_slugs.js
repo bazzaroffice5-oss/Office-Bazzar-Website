@@ -8,3 +8,4 @@ while ((m = regex.exec(cat)) !== null) {
     console.log(`ID: ${m[1]} | SKU: ${m[3]} | SLUG: ${m[2]}`);
   }
 }
+

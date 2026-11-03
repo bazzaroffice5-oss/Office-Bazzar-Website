@@ -31,3 +31,4 @@ for (const file of referenced) {
 
 console.log('Primary image assets:', primaryCount);
 console.log('Alternate angle/gallery assets:', alternateCount);
+

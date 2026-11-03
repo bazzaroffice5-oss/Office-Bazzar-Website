@@ -63,3 +63,4 @@ console.log('OB-TIS-1096 status:', tis ? { sku: tis.sku, name: tis.name, active:
 // Write out JSON files for analysis
 fs.writeFileSync('scripts/mapped_products_audit.json', JSON.stringify(mapped, null, 2));
 fs.writeFileSync('scripts/placeholder_products_audit.json', JSON.stringify(placeholder, null, 2));
+

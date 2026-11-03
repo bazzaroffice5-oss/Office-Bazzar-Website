@@ -1,0 +1,209 @@
+[
+  {
+    "sku": "OB-HOU-1072",
+    "name": "Plastic Storage Box",
+    "category": "housekeeping-hygiene",
+    "candidates": [
+      {
+        "img": "Mix\\Modular Plastic Storage Drawer 3 Tier White With Castors Front Closed.jpg",
+        "score": 100,
+        "reason": "2/2 tokens matched"
+      },
+      {
+        "img": "Mix\\Modular Plastic Storage Drawer 3 Tier White With Castors Side Open.jpg",
+        "score": 100,
+        "reason": "2/2 tokens matched"
+      },
+      {
+        "img": "Mix\\Multipurpose 3 Tier Plastic Storage Rack With Pull Out Baskets Yellow Green Blue Front View.jpg",
+        "score": 100,
+        "reason": "2/2 tokens matched"
+      }
+    ]
+  },
+  {
+    "sku": "OB-078",
+    "name": "Table Top Wiper",
+    "category": "housekeeping-hygiene",
+    "candidates": [
+      {
+        "img": "Hygenic Tools and Trolly\\Window Wiper Combi Washer And Squeegee Yellow Handle Tabletop View.jpeg",
+        "score": 100,
+        "reason": "3/3 tokens matched"
+      }
+    ]
+  },
+  {
+    "sku": "OB-102",
+    "name": "Cleaning Caddy Basket Organizer",
+    "category": "housekeeping-hygiene",
+    "candidates": [
+      {
+        "img": "Hygenic Tools and Trolly\\Plastic Cleaning Caddy Basket Blue 3 Compartments Top View.jpg",
+        "score": 75,
+        "reason": "3/4 tokens matched"
+      },
+      {
+        "img": "Hygenic Tools and Trolly\\Plastic Cleaning Caddy Basket Green 3 Compartments Top View.jpg",
+        "score": 75,
+        "reason": "3/4 tokens matched"
+      },
+      {
+        "img": "Hygenic Tools and Trolly\\Plastic Cleaning Caddy Basket Grey 3 Compartments Top View.jpg",
+        "score": 75,
+        "reason": "3/4 tokens matched"
+      }
+    ]
+  },
+  {
+    "sku": "OB-104",
+    "name": "Commercial Insect Killer Fly Catcher Machine",
+    "category": "housekeeping-hygiene",
+    "candidates": [
+      {
+        "img": "Hit and Disinfectant Spray\\Lazzo Insect Killer Machine Black UV Light On Front View.jpg",
+        "score": 50,
+        "reason": "3/6 tokens matched"
+      },
+      {
+        "img": "Hit and Disinfectant Spray\\Lazzo Insect Killer Machine Blue UV Light On Front View.jpg",
+        "score": 50,
+        "reason": "3/6 tokens matched"
+      },
+      {
+        "img": "Hit and Disinfectant Spray\\Lazzo Insect Killer Machine UV Light Off And On Collage.jpg",
+        "score": 50,
+        "reason": "3/6 tokens matched"
+      }
+    ]
+  },
+  {
+    "sku": "OB-FIL-32",
+    "name": "Diamond Ring Binder File 2302",
+    "category": "office-stationery",
+    "candidates": [
+      {
+        "img": "Stationery\\Classik A4 403 2 Ring Binder D-Ring File Folder Blue Closed and Open Views.jpg",
+        "score": 60,
+        "reason": "3/5 tokens matched"
+      }
+    ]
+  },
+  {
+    "sku": "OB-NOT-75",
+    "name": "Stainless Steel Measuring Scale Ruler",
+    "category": "office-stationery",
+    "candidates": [
+      {
+        "img": "Dustbin\\Stainless Steel Perforated Dustbin 10x14 On Weighing Scale.jpg",
+        "score": 60,
+        "reason": "3/5 tokens matched"
+      },
+      {
+        "img": "Dustbin\\Stainless Steel Perforated Dustbin 7x10 On Weighing Scale.jpg",
+        "score": 60,
+        "reason": "3/5 tokens matched"
+      },
+      {
+        "img": "Dustbin\\Stainless Steel Perforated Dustbin 8x12 On Weighing Scale.jpg",
+        "score": 60,
+        "reason": "3/5 tokens matched"
+      }
+    ]
+  },
+  {
+    "sku": "OB-COV-05",
+    "name": "Yellow Disposable Protective Mask",
+    "category": "office-stationery",
+    "candidates": [
+      {
+        "img": "Mask\\Kingfa Disposable Protective Face Mask Blue With 100 Pcs Box.jpg",
+        "score": 75,
+        "reason": "3/4 tokens matched"
+      }
+    ]
+  },
+  {
+    "sku": "OB-RDS-15",
+    "name": "Heavy Duty Rubber Wheel Chock",
+    "category": "office-stationery",
+    "candidates": [
+      {
+        "img": "Gloves\\Heavy Duty Rubber Glove Orange Long On Table Top View.jpg",
+        "score": 60,
+        "reason": "3/5 tokens matched"
+      },
+      {
+        "img": "Gloves\\Heavy Duty Rubber Glove Orange Long Worn On Arm Palm View.jpg",
+        "score": 60,
+        "reason": "3/5 tokens matched"
+      },
+      {
+        "img": "Gloves\\Heavy Duty Rubber Gloves Orange Long Size L Pair Palm View.jpg",
+        "score": 60,
+        "reason": "3/5 tokens matched"
+      }
+    ]
+  },
+  {
+    "sku": "OB-RDS-24",
+    "name": "Microprismatic Reflective Warning Tape (50mm x 50m)",
+    "category": "packaging-supplies",
+    "candidates": [
+      {
+        "img": "Safety Items\\Red Orange Traffic Cone with White Reflective Collar Band 750mm Wholesaler Bazzar Display.JPG",
+        "score": 50,
+        "reason": "3/6 tokens matched"
+      },
+      {
+        "img": "Safety Items\\Red Orange Traffic Cone with White Reflective Collar Band 750mm.JPG",
+        "score": 50,
+        "reason": "3/6 tokens matched"
+      }
+    ]
+  },
+  {
+    "sku": "OB-RDS-25",
+    "name": "Heavy Duty Rubber Speed Breakers",
+    "category": "office-stationery",
+    "candidates": [
+      {
+        "img": "Gloves\\Heavy Duty Rubber Glove Orange Long On Table Top View.jpg",
+        "score": 60,
+        "reason": "3/5 tokens matched"
+      },
+      {
+        "img": "Gloves\\Heavy Duty Rubber Glove Orange Long Worn On Arm Palm View.jpg",
+        "score": 60,
+        "reason": "3/5 tokens matched"
+      },
+      {
+        "img": "Gloves\\Heavy Duty Rubber Gloves Orange Long Size L Pair Palm View.jpg",
+        "score": 60,
+        "reason": "3/5 tokens matched"
+      }
+    ]
+  },
+  {
+    "sku": "OB-RDS-36",
+    "name": "Heavy Duty Anti-Theft Car Wheel Lock Clamp",
+    "category": "office-stationery",
+    "candidates": [
+      {
+        "img": "Mix\\Heavy Duty Black Metal Pipe Bracket Clamps Set of 3.jpg",
+        "score": 38,
+        "reason": "3/8 tokens matched"
+      },
+      {
+        "img": "Wiper\\Heavy-Duty Plastic Floor Wiper Head Purple With Threaded Socket Clamp.jpg",
+        "score": 38,
+        "reason": "3/8 tokens matched"
+      },
+      {
+        "img": "Wiper\\Heavy-Duty Plastic Floor Wiper Head Yellow With Threaded Socket Clamp.jpg",
+        "score": 38,
+        "reason": "3/8 tokens matched"
+      }
+    ]
+  }
+]
