@@ -1240,7 +1240,9 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-STA-1005.webp"
+    ],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -1670,7 +1672,7 @@ const RAW_PRODUCTS: Product[] = [
     "bestseller": false,
     "rating": 4.8,
     "reviewCount": 15,
-    "isActive": false,
+    "isActive": true,
     "specifications": {},
     "subcategoryId": "desk-accessories-tools",
     "subcategoryName": "Desk Organization & Tools",
@@ -2571,7 +2573,9 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-BOA-1048.webp"
+    ],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2844,7 +2848,9 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-PAC-1057.webp"
+    ],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3969,7 +3975,7 @@ const RAW_PRODUCTS: Product[] = [
     "bestseller": true,
     "rating": 4.8,
     "reviewCount": 15,
-    "isActive": false,
+    "isActive": true,
     "specifications": {
       "catalogueCode": "OB-029",
       "cataloguePage": "6",
@@ -11182,7 +11188,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-DES-52.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11417,7 +11425,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-DES-62.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12048,7 +12058,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-NOT-79.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,

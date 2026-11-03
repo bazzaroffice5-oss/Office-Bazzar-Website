@@ -1,12 +1,5 @@
 [
   {
-    "id": "prod-a4-stick-file",
-    "sku": "OB-STA-1005",
-    "name": "A/4 Stick File",
-    "category": "Office Stationery",
-    "images": []
-  },
-  {
     "id": "prod-punching-machine-dp-600-kangaroo",
     "sku": "OB-STA-1008",
     "name": "Punching Machine DP 600 Kangaroo",
@@ -119,13 +112,6 @@
     "images": []
   },
   {
-    "id": "prod-ms-black-magazine-rack",
-    "sku": "OB-BOA-1048",
-    "name": "Ms Black Magazine Rack",
-    "category": "Office Stationery",
-    "images": []
-  },
-  {
     "id": "prod-cello-brown-tape",
     "sku": "OB-PAC-1052",
     "name": "Cello Brown Tape",
@@ -136,13 +122,6 @@
     "id": "prod-foam-thermocol",
     "sku": "OB-PAC-1055",
     "name": "Foam Thermocol",
-    "category": "Packaging Supplies",
-    "images": []
-  },
-  {
-    "id": "prod-magic-tape-with-dispenser",
-    "sku": "OB-PAC-1057",
-    "name": "Magic Tape With Dispenser",
     "category": "Packaging Supplies",
     "images": []
   },
@@ -623,13 +602,6 @@
     "images": []
   },
   {
-    "id": "prod-ob-des-52-double-sided-foam-tape-1-inch",
-    "sku": "OB-DES-52",
-    "name": "Double Sided Foam Tape 1 inch",
-    "category": "Packaging Supplies",
-    "images": []
-  },
-  {
     "id": "prod-ob-des-53-double-sided-transparent-tissue-tape",
     "sku": "OB-DES-53",
     "name": "Double Sided Transparent Tissue Tape",
@@ -647,13 +619,6 @@
     "id": "prod-ob-des-60-stapler-pins-pack-no-10-24-6",
     "sku": "OB-DES-60",
     "name": "Stapler Pins Pack (No. 10 / 24/6)",
-    "category": "Office Stationery",
-    "images": []
-  },
-  {
-    "id": "prod-ob-des-62-faber-castell-office-stamp-pad",
-    "sku": "OB-DES-62",
-    "name": "Faber-Castell Office Stamp Pad",
     "category": "Office Stationery",
     "images": []
   },
@@ -689,13 +654,6 @@
     "id": "prod-ob-not-77-itc-classmate-corporate-notebooks",
     "sku": "OB-NOT-77",
     "name": "ITC Classmate Corporate Notebooks",
-    "category": "Office Stationery",
-    "images": []
-  },
-  {
-    "id": "prod-ob-not-79-brown-kraft-paper-envelopes-pack",
-    "sku": "OB-NOT-79",
-    "name": "Brown Kraft Paper Envelopes Pack",
     "category": "Office Stationery",
     "images": []
   },

@@ -6,3 +6,4 @@ const umbrellaFiles = inventory.filter(x => x.rel.startsWith('Umbrella'));
 
 console.log('Total Umbrella files:', umbrellaFiles.length);
 umbrellaFiles.slice(0, 20).forEach(u => console.log(' ', u.rel));
+

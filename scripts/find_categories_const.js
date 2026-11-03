@@ -7,3 +7,4 @@ lines.forEach((l, idx) => {
     console.log(`Line ${idx + 1}: ${l}`);
   }
 });
+

@@ -17,3 +17,4 @@ function searchSrc(dir) {
 }
 
 searchSrc(path.join(process.cwd(), 'src'));
+

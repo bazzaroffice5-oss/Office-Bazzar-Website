@@ -18,3 +18,4 @@ function searchFiles(dir) {
 }
 
 searchFiles(process.cwd());
+

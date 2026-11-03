@@ -58,3 +58,4 @@ fs.writeFileSync('scripts/distinct_uncatalogued_groups.json', JSON.stringify({
   totalDistinctGroups: distinctKeys.length,
   groups
 }, null, 2));
+

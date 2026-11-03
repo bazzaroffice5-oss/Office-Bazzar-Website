@@ -35,3 +35,4 @@ detailedItems.slice(0, 15).forEach(d => console.log(`   [${d.brand.toUpperCase()
 
 console.log('\nSample Generic Groups:');
 genericItems.slice(0, 15).forEach(g => console.log(`   ${g.groupName} (${g.fileCount} angles)`));
+

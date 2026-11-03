@@ -41,3 +41,4 @@ console.table(catCounts);
 
 console.log('\nSubcategory counts in catalog:');
 console.table(subCounts);
+

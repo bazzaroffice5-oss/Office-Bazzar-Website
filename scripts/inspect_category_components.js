@@ -7,3 +7,4 @@ console.log(file1.slice(0, 600));
 const file2 = fs.readFileSync('src/components/category/CategoryLandingClient.tsx', 'utf8');
 console.log('--- CategoryLandingClient.tsx ---');
 console.log(file2.slice(0, 600));
+
