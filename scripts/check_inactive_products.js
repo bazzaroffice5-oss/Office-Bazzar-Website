@@ -21,3 +21,4 @@ for (let i = 1; i < blocks.length; i++) {
 
 console.log('Total inactive products:', inactive.length);
 inactive.forEach(p => console.log(`   [${p.sku}] ${p.name}`));
+

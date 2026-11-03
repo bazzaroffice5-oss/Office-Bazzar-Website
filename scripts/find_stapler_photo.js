@@ -10,3 +10,4 @@ const matches = validImages.filter(img => {
 
 console.log('Stapler / Kangaro matches:', matches.length);
 matches.forEach(m => console.log(' ', m.rel));
+

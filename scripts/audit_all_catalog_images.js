@@ -69,3 +69,4 @@ if (missingFiles.length > 0) {
   console.log('\nMISSING FILES SAMPLE:');
   missingFiles.slice(0, 10).forEach(m => console.log(`   [${m.sku}] ${m.img}`));
 }
+

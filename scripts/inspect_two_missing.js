@@ -14,3 +14,4 @@ console.log(findProductBySlug('kangaro-staplers-hd-10d-1'));
 
 console.log('\n=== PRODUCT 2: tissue-paper-napkin-1 ===');
 console.log(findProductBySlug('tissue-paper-napkin-1'));
+

@@ -7,3 +7,4 @@ const staImages = validImages.filter(x => x.rel.toLowerCase().startsWith('statio
 
 console.log(`Stationery images: ${staImages.length}`);
 staImages.forEach(m => console.log(' ', m.rel));
+

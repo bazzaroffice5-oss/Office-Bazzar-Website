@@ -27,3 +27,4 @@ for (let i = 1; i <= 20; i++) {
   console.log(`${i}. SKU: ${skuM ? skuM[1] : ''} | Name: ${nameM ? nameM[1] : ''} | Slug: ${slugM ? slugM[1] : ''}`);
   console.log(`   Images: ${JSON.stringify(images)}`);
 }
+
