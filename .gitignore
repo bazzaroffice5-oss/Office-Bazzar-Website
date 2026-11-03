@@ -58,3 +58,6 @@ test_shot.png
 # uploaded files
 /public/uploads/*
 !/public/uploads/.gitkeep
+
+# raw supplier archive
+/Office Bazzar New Images/

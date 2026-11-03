@@ -1174,8 +1174,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -1206,8 +1205,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -1238,8 +1236,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -1270,8 +1267,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -1303,6 +1299,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-STA-1007.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1334,8 +1331,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -1366,8 +1362,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -1398,8 +1393,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -1430,8 +1424,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -1462,8 +1455,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -1592,8 +1584,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -1657,8 +1648,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -1789,6 +1779,8 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-HOU-1022.webp",
+      "/assets/products/catalog_2026/OB-HOU-1022-alt-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1820,8 +1812,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -1886,6 +1877,8 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-HOU-1025.webp",
+      "/assets/products/catalog_2026/OB-HOU-1025-alt-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1917,8 +1910,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -2078,8 +2070,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -2110,8 +2101,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2142,8 +2132,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2170,8 +2159,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2198,8 +2186,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2226,8 +2213,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -2254,8 +2240,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2282,8 +2267,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2342,8 +2326,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2370,8 +2353,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -2398,8 +2380,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2426,8 +2407,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2454,8 +2434,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2482,8 +2461,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2510,8 +2488,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -2538,8 +2515,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2566,8 +2542,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2624,8 +2599,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2686,8 +2660,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2718,8 +2691,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2783,8 +2755,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2812,6 +2783,7 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-PAC-1056.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -2839,8 +2811,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2867,8 +2838,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2899,8 +2869,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2931,8 +2900,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2959,8 +2927,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -3016,8 +2983,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3044,8 +3010,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3076,8 +3041,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3104,8 +3068,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -3132,8 +3095,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3160,8 +3122,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3188,8 +3149,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3285,8 +3245,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3313,8 +3272,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3370,8 +3328,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3398,8 +3355,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -3426,8 +3382,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3454,8 +3409,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3482,8 +3436,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3510,8 +3463,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3538,8 +3490,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -3566,8 +3517,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3594,8 +3544,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3622,8 +3571,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3650,8 +3598,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3678,8 +3625,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -3772,8 +3718,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3800,8 +3745,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3828,8 +3772,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -3951,8 +3894,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -4108,6 +4050,8 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-TIS-1100.webp",
+      "/assets/products/catalog_2026/OB-TIS-1100-alt-1.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4135,8 +4079,7 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -4541,8 +4484,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -4740,8 +4682,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -4819,8 +4760,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5062,8 +5002,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5505,8 +5444,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5544,8 +5482,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5744,8 +5681,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5823,8 +5759,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5942,8 +5877,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5981,8 +5915,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6100,8 +6033,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6139,8 +6071,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6381,8 +6312,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6460,8 +6390,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6539,8 +6468,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6578,8 +6506,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6657,8 +6584,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6739,8 +6665,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6778,8 +6703,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6897,8 +6821,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6977,8 +6900,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7136,8 +7058,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7339,6 +7260,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-100.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7417,8 +7339,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7496,8 +7417,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7656,8 +7576,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7695,8 +7614,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -7814,8 +7732,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -8134,8 +8051,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -8335,6 +8251,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-126.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8453,8 +8370,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -8655,8 +8571,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -8778,6 +8693,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-139.webp",
+      "/assets/products/catalog_2026/OB-139-alt-1.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9024,8 +8941,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9063,8 +8979,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9547,8 +9462,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9586,8 +9500,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9625,8 +9538,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9664,8 +9576,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9703,8 +9614,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9742,8 +9652,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9781,8 +9690,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9820,8 +9728,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9859,8 +9766,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9898,8 +9804,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9937,8 +9842,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -9976,8 +9880,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10015,8 +9918,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10054,8 +9956,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10093,8 +9994,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10132,8 +10032,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10212,8 +10111,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10251,8 +10149,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10331,8 +10228,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10370,8 +10266,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10409,8 +10304,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10488,8 +10382,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10527,8 +10420,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10566,8 +10458,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10646,8 +10537,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10685,8 +10575,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10724,8 +10613,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10763,8 +10651,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10802,8 +10689,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10922,8 +10808,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -10961,8 +10846,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11000,8 +10884,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11039,8 +10922,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11078,8 +10960,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11117,8 +10998,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11156,8 +11036,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11195,8 +11074,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11234,8 +11112,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11316,8 +11193,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11395,8 +11271,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11434,8 +11309,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11473,8 +11347,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11513,6 +11386,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-NOT-65.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11631,8 +11505,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11670,8 +11543,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11790,6 +11662,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-NOT-72.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11828,8 +11701,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11908,8 +11780,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -11987,8 +11858,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12026,8 +11896,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12065,8 +11934,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12144,8 +12012,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12183,8 +12050,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12222,8 +12088,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12261,8 +12126,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12300,8 +12164,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12339,8 +12202,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12378,8 +12240,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12579,8 +12440,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12821,6 +12681,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-COV-12.webp",
+      "/assets/products/catalog_2026/OB-COV-12-alt-1.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12899,8 +12761,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12979,7 +12840,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-16.webp"
+      "/assets/products/catalog_2026/OB-COV-16.webp",
+      "/assets/products/catalog_2026/OB-COV-16-alt-1.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13019,7 +12881,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-17.webp"
+      "/assets/products/catalog_2026/OB-COV-17.webp",
+      "/assets/products/catalog_2026/OB-COV-17-alt-1.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13098,8 +12961,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": true,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -13258,7 +13120,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-23.webp"
+      "/assets/products/catalog_2026/OB-COV-23.webp",
+      "/assets/products/catalog_2026/OB-COV-23-alt-1.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13418,8 +13281,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -13498,6 +13360,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-COV-30.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13537,6 +13400,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-COV-31.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13576,6 +13440,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-COV-32.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13695,6 +13560,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-RDS-01.webp",
+      "/assets/products/catalog_2026/OB-RDS-01-alt-1.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13759,8 +13626,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -13821,6 +13687,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-RDS-03.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13903,8 +13770,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -13959,8 +13825,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -14011,8 +13876,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -14065,8 +13929,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -14137,8 +14000,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -14220,8 +14082,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -14286,8 +14147,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -14352,8 +14212,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -14414,8 +14273,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -14484,8 +14342,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -14551,8 +14408,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -14619,8 +14475,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -14693,8 +14548,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -14834,8 +14688,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -14907,8 +14760,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -15044,8 +14896,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -15114,6 +14965,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-RDS-22.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15185,6 +15037,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
+      "/assets/products/catalog_2026/OB-RDS-23.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15261,8 +15114,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -15324,8 +15176,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -15406,8 +15257,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -15472,8 +15322,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -15547,8 +15396,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -15621,8 +15469,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -15690,8 +15537,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -15759,8 +15605,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -15829,8 +15674,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -15893,8 +15737,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -15959,8 +15802,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -16021,8 +15863,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -16103,8 +15944,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -16171,8 +16011,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -16247,8 +16086,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -16313,8 +16151,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -16383,8 +16220,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -16452,8 +16288,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -16532,8 +16367,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -16606,8 +16440,7 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
