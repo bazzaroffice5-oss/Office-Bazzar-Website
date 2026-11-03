@@ -118,9 +118,9 @@ export default function CustomerOrdersClient({ initialOrders }: CustomerOrdersCl
               <div className="p-5 sm:p-6 divide-y divide-slate-100">
                 {order.items.map((item) => (
                   <div key={item.id} className="py-4 first:pt-0 last:pb-0 flex items-center space-x-4">
-                    <div className="w-16 h-16 rounded-xl overflow-hidden bg-slate-100 relative shrink-0 border border-slate-100">
+                    <div className="w-16 h-16 rounded-xl overflow-hidden bg-white relative shrink-0 border border-slate-200 flex items-center justify-center">
                       <Image
-                        src={item.productImage}
+                        src={item.productImage || "/assets/placeholder-product.svg"}
                         alt={item.productName}
                         fill
                         quality={85}

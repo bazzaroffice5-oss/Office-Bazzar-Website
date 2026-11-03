@@ -418,10 +418,10 @@ export default function RequestQuoteClient() {
                 {items.map((item) => (
                   <div key={item.id} className="py-2 flex items-center justify-between gap-2.5">
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="relative w-10 h-10 rounded-md bg-slate-50 border border-slate-100 overflow-hidden shrink-0 flex items-center justify-center">
+                      <div className="relative w-10 h-10 rounded-md bg-white border border-slate-200 overflow-hidden shrink-0 flex items-center justify-center">
                         <Image
                           src={
-                            item.product.images[0] ||
+                            item.product.images?.[0] ||
                             '/assets/placeholder-product.svg'
                           }
                           alt={item.product.name}

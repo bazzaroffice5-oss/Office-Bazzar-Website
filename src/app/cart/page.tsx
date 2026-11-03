@@ -98,7 +98,7 @@ export default function QuoteCartPage() {
                       {/* Product Image — Compact & Centered */}
                       <Link
                         href={productUrl}
-                        className="relative block h-36 sm:h-40 w-full bg-slate-50 rounded-lg overflow-hidden mb-2.5 group-hover:bg-slate-100/70 transition-colors"
+                        className="relative block aspect-square w-full bg-white border border-slate-100 rounded-lg overflow-hidden mb-2.5 flex items-center justify-center transition-colors"
                         title={product.name}
                       >
                         <Image

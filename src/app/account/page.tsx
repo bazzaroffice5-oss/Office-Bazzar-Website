@@ -571,9 +571,9 @@ function CustomerAccountDashboardContent() {
                         className="p-3.5 rounded-xl border border-slate-200 flex items-center justify-between gap-3 hover:border-slate-300 transition-colors"
                       >
                         <div className="flex items-center gap-3 min-w-0">
-                          <div className="relative w-12 h-12 rounded-lg bg-slate-50 border border-slate-100 overflow-hidden shrink-0">
+                          <div className="relative w-12 h-12 rounded-lg bg-white border border-slate-200 overflow-hidden shrink-0 flex items-center justify-center">
                             <Image
-                              src={item.images[0] || '/assets/placeholder-product.svg'}
+                              src={item.images?.[0] || '/assets/placeholder-product.svg'}
                               alt={item.name}
                               fill
                               className="object-contain p-1.5"

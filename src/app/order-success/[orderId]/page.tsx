@@ -108,8 +108,8 @@ export default async function OrderSuccessPage({
           {order.items.map((item) => (
             <div key={item.id} className="py-3 flex items-center justify-between text-xs gap-4">
               <div className="flex items-center space-x-3 min-w-0">
-                <div className="relative w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 overflow-hidden shrink-0">
-                  <Image src={item.productImage} alt={item.productName} fill quality={85} className="object-contain p-1" sizes="48px" />
+                <div className="relative w-12 h-12 rounded-xl bg-white border border-slate-200 overflow-hidden shrink-0 flex items-center justify-center">
+                  <Image src={item.productImage || "/assets/placeholder-product.svg"} alt={item.productName} fill quality={85} className="object-contain p-1" sizes="48px" />
                 </div>
                 <div className="min-w-0">
                   <div className="font-bold text-slate-900 truncate">{item.productName}</div>
