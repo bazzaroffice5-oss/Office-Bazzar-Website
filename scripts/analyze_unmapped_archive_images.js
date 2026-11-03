@@ -27,3 +27,4 @@ console.log('\n--- Unmapped Images by Folder ---');
 for (const [k, v] of Object.entries(byFolder).sort((a,b) => b[1] - a[1])) {
   console.log(`  ${k.padEnd(30)}: ${v}`);
 }
+

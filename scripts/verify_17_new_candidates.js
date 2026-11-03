@@ -37,3 +37,4 @@ for (const c of candidateList) {
 }
 
 console.log(`\nVerified ${verified} / ${candidateList.length} candidate files!`);
+

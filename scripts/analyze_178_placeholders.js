@@ -34,3 +34,4 @@ for (const [cat, count] of Object.entries(byCategory).sort((a,b) => b[1] - a[1])
 }
 
 fs.writeFileSync('scripts/placeholders_178.json', JSON.stringify(placeholders, null, 2), 'utf8');
+
