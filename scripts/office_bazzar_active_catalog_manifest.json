@@ -157,12 +157,12 @@
   {
     "sku": "OB-BOA-1049",
     "primaryRelative": "/assets/products/catalog_2026/OB-BOA-1049.webp",
-    "primarySource": "Stationery/JB9 Chalk Board and Non Magnetic White Board Duster Packaging Box.jpg",
+    "primarySource": "Stationery/JB9 Magnetic White Board Duster Red with Marker Holder and Box.jpg",
     "altRelatives": [
       "/assets/products/catalog_2026/OB-BOA-1049-alt-1.webp"
     ],
     "altSources": [
-      "Stationery/JB9 Chalk Board and Non Magnetic White Board Duster with Box.jpg"
+      "Stationery/JB9 Magnetic White Board Duster Pack of 10 Boxes Shrink Wrapped.jpg"
     ],
     "allImages": [
       "/assets/products/catalog_2026/OB-BOA-1049.webp",
@@ -1266,10 +1266,15 @@
     "sku": "OB-NOT-71",
     "primaryRelative": "/assets/products/catalog_2026/OB-NOT-71.webp",
     "primarySource": "Stationery/JB9 Prompt Sticky Note Pad Multi Color 76x76mm with 12 Pcs Box.jpg",
-    "altRelatives": [],
-    "altSources": [],
+    "altRelatives": [
+      "/assets/products/catalog_2026/OB-NOT-71-alt-1.webp"
+    ],
+    "altSources": [
+      "Stationery/JB9 Prompt Sticky Note Pad Pink and Yellow 76x76mm 3x3 Inch Pair.jpg"
+    ],
     "allImages": [
-      "/assets/products/catalog_2026/OB-NOT-71.webp"
+      "/assets/products/catalog_2026/OB-NOT-71.webp",
+      "/assets/products/catalog_2026/OB-NOT-71-alt-1.webp"
     ]
   },
   {
@@ -2446,6 +2451,171 @@
     "altSources": [],
     "allImages": [
       "/assets/products/catalog_2026/OB-COV-27.webp"
+    ]
+  },
+  {
+    "sku": "OB-GAR-1031",
+    "primaryRelative": "/assets/products/catalog_2026/OB-GAR-1031.webp",
+    "primarySource": "Garbage Bag/Clean India Garbage Bags Packaging Boxes 4 Sizes Small Medium Large XL.jpg",
+    "altRelatives": [],
+    "altSources": [],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-GAR-1031.webp"
+    ]
+  },
+  {
+    "sku": "OB-108",
+    "primaryRelative": "/assets/products/catalog_2026/OB-108.webp",
+    "primarySource": "Sprayer Pump/Translucent Plastic Trigger Spray Bottles White Sprayer Pair.JPG",
+    "altRelatives": [],
+    "altSources": [],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-108.webp"
+    ]
+  },
+  {
+    "sku": "OB-130",
+    "primaryRelative": "/assets/products/catalog_2026/OB-130.webp",
+    "primarySource": "Urinal Screen/Crew Urinal Screen Orange Sealed Pack.jpg",
+    "altRelatives": [
+      "/assets/products/catalog_2026/OB-130-alt-1.webp"
+    ],
+    "altSources": [
+      "Urinal Screen/Diversey TASKI Fresh and Clean Urinal Screen Green Box Front and Pack.JPG"
+    ],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-130.webp",
+      "/assets/products/catalog_2026/OB-130-alt-1.webp"
+    ]
+  },
+  {
+    "sku": "OB-086",
+    "primaryRelative": "/assets/products/catalog_2026/OB-086.webp",
+    "primarySource": "Mat/Comfort PVC Cushion Coil Welcome Door Mat Green Gold Oval Label.jpg",
+    "altRelatives": [],
+    "altSources": [],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-086.webp"
+    ]
+  },
+  {
+    "sku": "OB-089",
+    "primaryRelative": "/assets/products/catalog_2026/OB-089.webp",
+    "primarySource": "Bucket-Mug-Tray/Dustpan (10).jpg",
+    "altRelatives": [
+      "/assets/products/catalog_2026/OB-089-alt-1.webp"
+    ],
+    "altSources": [
+      "Bucket-Mug-Tray/Dustpan (2).jpg"
+    ],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-089.webp",
+      "/assets/products/catalog_2026/OB-089-alt-1.webp"
+    ]
+  },
+  {
+    "sku": "OB-073",
+    "primaryRelative": "/assets/products/catalog_2026/OB-073.webp",
+    "primarySource": "Wiper/Window Glass Wiper Telescopic Handle With Mesh Sponge and Squeegee.jpg",
+    "altRelatives": [],
+    "altSources": [],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-073.webp"
+    ]
+  },
+  {
+    "sku": "OB-075",
+    "primaryRelative": "/assets/products/catalog_2026/OB-075.webp",
+    "primarySource": "Wiper/Kitchen and Table Mini Squeegee Wiper Pink Green Peach Blue 4-Piece Set.jpg",
+    "altRelatives": [
+      "/assets/products/catalog_2026/OB-075-alt-1.webp"
+    ],
+    "altSources": [
+      "Wiper/Handheld Kitchen and Window Squeegee Wiper Blue Cyan Pink Trio.jpg"
+    ],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-075.webp",
+      "/assets/products/catalog_2026/OB-075-alt-1.webp"
+    ]
+  },
+  {
+    "sku": "OB-083",
+    "primaryRelative": "/assets/products/catalog_2026/OB-083.webp",
+    "primarySource": "Collage/Mop Stick Handle.jpg",
+    "altRelatives": [],
+    "altSources": [],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-083.webp"
+    ]
+  },
+  {
+    "sku": "OB-109",
+    "primaryRelative": "/assets/products/catalog_2026/OB-109.webp",
+    "primarySource": "Hit and Disinfectant Spray/Good Knight Flash Liquid Vaporiser Kit Machine And Refill Lavender 45 ml With Box.jpg",
+    "altRelatives": [],
+    "altSources": [],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-109.webp"
+    ]
+  },
+  {
+    "sku": "OB-TIS-1101",
+    "primaryRelative": "/assets/products/catalog_2026/OB-TIS-1101.webp",
+    "primarySource": "Tissue Product/Royal Natural Jumbo Roll Tissue JRT Two Rolls Stack.jpg",
+    "altRelatives": [
+      "/assets/products/catalog_2026/OB-TIS-1101-alt-1.webp"
+    ],
+    "altSources": [
+      "Tissue Product/Kosher JRT Jumbo Rolled Tissue 4 Inch x 750 Gms Carton with Rolls.jpg"
+    ],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-TIS-1101.webp",
+      "/assets/products/catalog_2026/OB-TIS-1101-alt-1.webp"
+    ]
+  },
+  {
+    "sku": "OB-BOA-1050",
+    "primaryRelative": "/assets/products/catalog_2026/OB-BOA-1050.webp",
+    "primarySource": "Stationery/Magnetic Folder A4 .jpeg",
+    "altRelatives": [],
+    "altSources": [],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-BOA-1050.webp"
+    ]
+  },
+  {
+    "sku": "OB-DIS-1060",
+    "primaryRelative": "/assets/products/catalog_2026/OB-DIS-1060.webp",
+    "primarySource": "Stationery/Magazine Brochure Display Stand Rack Models 1271 1272 1318 1328 Chart.jpg",
+    "altRelatives": [],
+    "altSources": [],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-DIS-1060.webp"
+    ]
+  },
+  {
+    "sku": "OB-NOT-68",
+    "primaryRelative": "/assets/products/catalog_2026/OB-NOT-68.webp",
+    "primarySource": "Stationery/JB9 U Clips Triangular 26mm Nickel Plated Box with Clips.jpg",
+    "altRelatives": [
+      "/assets/products/catalog_2026/OB-NOT-68-alt-1.webp"
+    ],
+    "altSources": [
+      "Stationery/JB9 U Clips Triangular 26mm Nickel Plated 1000 Pc Box and Small Box.jpg"
+    ],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-NOT-68.webp",
+      "/assets/products/catalog_2026/OB-NOT-68-alt-1.webp"
+    ]
+  },
+  {
+    "sku": "OB-PAC-1053",
+    "primaryRelative": "/assets/products/catalog_2026/OB-PAC-1053.webp",
+    "primarySource": "Stationery/Floor Masking Tape 2 inch 25 mtr.jpeg",
+    "altRelatives": [],
+    "altSources": [],
+    "allImages": [
+      "/assets/products/catalog_2026/OB-PAC-1053.webp"
     ]
   }
 ]

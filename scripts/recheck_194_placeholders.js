@@ -76,3 +76,4 @@ for (const [sku, matches] of Object.entries(bySku)) {
     console.log(`   score ${m.score}: ${m.imageRel}`);
   });
 }
+

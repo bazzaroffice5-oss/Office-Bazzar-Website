@@ -4,3 +4,4 @@ files.forEach(f => {
   const st = fs.statSync(f);
   console.log(`${st.isDirectory() ? '[DIR] ' : '[FILE]'} ${f}`);
 });
+

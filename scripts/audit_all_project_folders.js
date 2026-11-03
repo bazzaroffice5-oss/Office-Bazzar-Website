@@ -31,3 +31,4 @@ dirs.forEach(d => console.log(' - ' + d.rel));
 const zips = all.filter(x => x.ext === '.zip' || x.ext === '.tar' || x.ext === '.gz' || x.ext === '.rar');
 console.log('\n--- ARCHIVE FILES ---');
 zips.forEach(z => console.log(` - ${z.rel} (${(z.size / 1024 / 1024).toFixed(2)} MB)`));
+

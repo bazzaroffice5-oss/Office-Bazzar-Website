@@ -27,3 +27,4 @@ for (const file of obsoleteFiles) {
 }
 
 console.log(`Total obsolete root files cleaned up: ${removed}`);
+
