@@ -1812,7 +1812,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-HOU-1023.webp",
+      "/assets/products/catalog_2026/OB-HOU-1023-alt-1.webp"
+    ],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3772,7 +3775,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-CLE-1091.webp",
+      "/assets/products/catalog_2026/OB-CLE-1091-alt-1.webp"
+    ],
     "featured": true,
     "bestseller": true,
     "rating": 4.8,
@@ -3894,7 +3900,10 @@ const RAW_PRODUCTS: Product[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-CLE-1095.webp",
+      "/assets/products/catalog_2026/OB-CLE-1095-alt-1.webp"
+    ],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -4484,7 +4493,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-013.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -4682,7 +4693,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-018.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -4760,7 +4773,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-020.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5482,7 +5497,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-047.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -5681,7 +5698,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-052.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6071,7 +6090,10 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-063.webp",
+      "/assets/products/catalog_2026/OB-063-alt-1.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -6665,7 +6687,10 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-081.webp",
+      "/assets/products/catalog_2026/OB-081-alt-1.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -8051,7 +8076,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-121.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -8571,7 +8598,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-135.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -8941,7 +8970,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-145.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -8979,7 +9010,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-146.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -12761,7 +12794,10 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-COV-14.webp",
+      "/assets/products/catalog_2026/OB-COV-14-alt-1.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,
@@ -13281,7 +13317,9 @@ const RAW_PRODUCTS: Product[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-COV-27.webp"
+    ],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,

@@ -50,3 +50,4 @@ for (const c of candidates) {
   if (exists) okCount++;
 }
 console.log(`\nVerified ${okCount} / ${candidates.length} candidate files exist in Office Bazzar New Images!`);
+

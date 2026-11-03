@@ -27,3 +27,4 @@ console.log('--- ALL 212 MISSING PRODUCTS ---');
 missing.forEach(p => {
   console.log(`${p.sku.padEnd(14)} | ${p.categoryId.padEnd(25)} | ${p.brand.padEnd(18)} | ${p.name}`);
 });
+

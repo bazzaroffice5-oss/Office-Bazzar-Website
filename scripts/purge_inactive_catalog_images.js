@@ -27,3 +27,4 @@ for (const f of onDisk) {
 }
 
 console.log(`Purged ${purged} inactive files. Directory now contains exactly ${fs.readdirSync(dir).length} files.`);
+

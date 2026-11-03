@@ -27,3 +27,4 @@ refs.forEach(r => {
     console.log(r.file, ':', productRefs.slice(0, 5));
   }
 });
+

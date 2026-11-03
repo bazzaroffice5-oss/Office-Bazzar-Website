@@ -213,3 +213,4 @@ const r8Rows = [
 ];
 fs.writeFileSync('final_image_migration_report.csv', r8Rows.join('\n'), 'utf8');
 console.log('Generated final_image_migration_report.csv');
+

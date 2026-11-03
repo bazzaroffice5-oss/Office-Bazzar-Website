@@ -41,3 +41,4 @@ if (fs.existsSync(uploadsProducts)) {
 }
 
 console.log(`Total legacy upload files removed: ${removedCount}`);
+

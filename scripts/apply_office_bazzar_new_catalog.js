@@ -36,3 +36,4 @@ console.log(`Empty images for fallback placeholder: ${placeholderProducts}`);
 
 fs.writeFileSync(catalogPath, newCatalogContent, 'utf8');
 console.log('Successfully updated src/lib/data/catalog.ts!');
+

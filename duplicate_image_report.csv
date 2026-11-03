@@ -1,4 +1,0 @@
-Duplicate File Path,Original File Path,SHA256 Hash,File Size (KB),Resolution Action,Notes
-,,a9ffda65cbc9087fd2409ff1c1d85ad3d6a3deb0be9d619ec4f5105edbce7494,,DEDUPLICATED_CANONICAL_SELECTION,Identical byte stream found in supplier archive. Canonical instance selected.
-,,138c3290532bda505094978e9d4e17d7f7a259ce66aaaccec215653114a4c7f3,,DEDUPLICATED_CANONICAL_SELECTION,Identical byte stream found in supplier archive. Canonical instance selected.
-,,2af95bccfc02511e62d7caf86734c293a64a3ca9c5658dfa647b90bd7cea25b8,,DEDUPLICATED_CANONICAL_SELECTION,Identical byte stream found in supplier archive. Canonical instance selected.

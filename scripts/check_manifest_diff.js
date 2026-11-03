@@ -7,3 +7,4 @@ for (const m of manifest) {
     console.log('Manifest SKU not in catalog:', m.sku);
   }
 }
+

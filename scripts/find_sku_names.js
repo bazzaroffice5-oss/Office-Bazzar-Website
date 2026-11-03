@@ -10,3 +10,4 @@ while ((m = regex.exec(cat)) !== null) {
     console.log(`${sku.padEnd(16)} | ${name}`);
   }
 }
+

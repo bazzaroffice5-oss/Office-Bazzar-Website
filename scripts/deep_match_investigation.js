@@ -52,3 +52,4 @@ console.log('\nMissing products by category:');
 for (const [k, v] of Object.entries(missingByCat).sort((a,b) => b[1] - a[1])) {
   console.log('  ' + k.padEnd(50) + ': ' + v);
 }
+

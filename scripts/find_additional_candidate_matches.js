@@ -62,3 +62,4 @@ possibleCandidates.forEach(c => {
   console.log(`\nSKU: ${c.sku} | Brand: ${c.brand} | Name: ${c.name}`);
   c.candidates.slice(0, 5).forEach(img => console.log(`   -> ${img}`));
 });
+

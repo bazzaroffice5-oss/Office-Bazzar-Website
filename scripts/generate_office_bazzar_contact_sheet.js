@@ -398,3 +398,4 @@ const html = `<!DOCTYPE html>
 
 fs.writeFileSync('public/migrated_product_contact_sheet.html', html, 'utf8');
 console.log('Successfully regenerated public/migrated_product_contact_sheet.html!');
+
