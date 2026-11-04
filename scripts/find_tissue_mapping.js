@@ -19,3 +19,4 @@ for (const f of files) {
     } catch (e) {}
   }
 }
+

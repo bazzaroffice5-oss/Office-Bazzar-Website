@@ -51,11 +51,12 @@ export default function ProductCard({
     }, 1500);
   };
 
-  // Safe image fallback with dynamic error recovery
-  const initialImage =
+  // Safe image fallback with dynamic error recovery (strictly new supplier catalog only)
+  const rawImage =
     (product.images && product.images[0]) ||
-    ((product as unknown as { image?: string }).image) ||
-    '/assets/placeholder-product.svg';
+    ((product as unknown as { image?: string }).image);
+  const isValidNewImage = typeof rawImage === 'string' && rawImage.startsWith('/assets/products/catalog_2026/');
+  const initialImage = isValidNewImage ? rawImage : '/assets/placeholder-product.svg';
   const [imgSrc, setImgSrc] = useState<string>(initialImage);
 
   const brandDisplayName = product.brandName || 'OfficeBazzar';

@@ -84,7 +84,8 @@ export default function QuoteCartPage() {
             <div className="flex flex-wrap justify-center gap-4 sm:gap-5 mx-auto">
               {items.map((item) => {
                 const product = item.product;
-                const displayImage = product.images?.[0] || FALLBACK_IMAGE;
+                const rawImg = product.images?.[0];
+                const displayImage = (typeof rawImg === 'string' && rawImg.startsWith('/assets/products/catalog_2026/')) ? rawImg : FALLBACK_IMAGE;
                 const productUrl = `/product/${product.slug || product.id}`;
                 const hasPrice = (product.price ?? 0) > 0;
                 const itemSubtotal = hasPrice ? (product.price ?? 0) * item.quantity : null;

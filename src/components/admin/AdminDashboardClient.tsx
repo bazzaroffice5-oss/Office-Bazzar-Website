@@ -405,7 +405,7 @@ export default function AdminDashboardClient({
                 stockQuantity: 100,
                 packSize: '1 Unit',
                 description: 'Corporate office supplies product description.',
-                images: ['https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=800&auto=format&fit=crop'],
+                images: ['/assets/placeholder-product.svg'],
                 isActive: true,
               });
               setIsEditingProduct(true);

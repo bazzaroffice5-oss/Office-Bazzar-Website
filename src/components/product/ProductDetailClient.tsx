@@ -28,8 +28,11 @@ export default function ProductDetailClient({
   const { isInWishlist, toggleWishlist } = useWishlist();
   const [addedFeedback, setAddedFeedback] = useState(false);
 
-  // Active image selector (supports multiple product images)
-  const productImages = product.images && product.images.length > 0 ? product.images : [FALLBACK_IMAGE];
+  // Active image selector (strictly new supplier catalog only)
+  const validImages = (product.images && product.images.length > 0 ? product.images : []).filter(
+    (img) => typeof img === 'string' && img.startsWith('/assets/products/catalog_2026/')
+  );
+  const productImages = validImages.length > 0 ? validImages : [FALLBACK_IMAGE];
   const [activeImage, setActiveImage] = useState<string>(productImages[0]);
 
   const inWishlist = isInWishlist(product.id);

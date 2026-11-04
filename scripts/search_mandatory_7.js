@@ -50,3 +50,4 @@ console.log(searchTerms(['canon', 'ep 303', 'ep303', 'toner']));
 
 console.log('--- 7. Samsung / MLT / Cartridge ---');
 console.log(searchTerms(['samsung', 'mlt', 'd116s', '116s']));
+

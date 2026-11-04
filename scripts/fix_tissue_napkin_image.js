@@ -32,3 +32,4 @@ async function convertNapkins() {
 }
 
 convertNapkins().catch(console.error);
+

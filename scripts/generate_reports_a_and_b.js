@@ -156,3 +156,4 @@ const csvB = toCsv(placeholderReport, ['sku', 'productName', 'category', 'subcat
 fs.writeFileSync('scripts/report_b_awaiting_photography.csv', csvB);
 
 console.log('Saved JSON and CSV reports successfully!');
+

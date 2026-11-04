@@ -8,3 +8,4 @@ while ((m = regex.exec(cat)) !== null) {
     console.log(m[1], '|', m[2]);
   }
 }
+

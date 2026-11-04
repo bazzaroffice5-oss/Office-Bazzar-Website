@@ -109,7 +109,7 @@ export default async function OrderSuccessPage({
             <div key={item.id} className="py-3 flex items-center justify-between text-xs gap-4">
               <div className="flex items-center space-x-3 min-w-0">
                 <div className="relative w-12 h-12 rounded-xl bg-white border border-slate-200 overflow-hidden shrink-0 flex items-center justify-center">
-                  <Image src={item.productImage || "/assets/placeholder-product.svg"} alt={item.productName} fill quality={85} className="object-contain p-1" sizes="48px" />
+                  <Image src={(item.productImage?.startsWith('/assets/products/catalog_2026/') ? item.productImage : '/assets/placeholder-product.svg')} alt={item.productName} fill quality={85} className="object-contain p-1" sizes="48px" />
                 </div>
                 <div className="min-w-0">
                   <div className="font-bold text-slate-900 truncate">{item.productName}</div>

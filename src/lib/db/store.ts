@@ -152,7 +152,7 @@ function mapDbProduct(row: any): Product {
     images: Array.isArray(row.images)
       ? row.images.filter((img: unknown) => typeof img === 'string' && img.length > 0)
       : typeof row.images === 'string' && row.images.trim().length > 0
-      ? (() => {
+        ? (() => {
           try {
             const parsed = JSON.parse(row.images);
             return Array.isArray(parsed) ? parsed.filter(Boolean) : [row.images];
@@ -160,7 +160,7 @@ function mapDbProduct(row: any): Product {
             return [row.images];
           }
         })()
-      : [],
+        : [],
     featured: Boolean(row.is_featured),
     bestseller: Boolean(row.is_bestseller),
     rating: row.rating !== null && row.rating !== undefined ? Number(row.rating) : null,
@@ -1009,7 +1009,7 @@ export async function saveProduct(productData: Partial<Product>): Promise<Produc
     images:
       productData.images && productData.images.length > 0
         ? productData.images
-        : ['https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=800&auto=format&fit=crop'],
+        : ['/assets/placeholder-product.svg'],
     rating: null,
     reviewCount: 0,
     isActive: productData.isActive !== false,
@@ -1312,17 +1312,17 @@ export async function createQuotation(
     quoteData.originalItems && quoteData.originalItems.length > 0
       ? quoteData.originalItems
       : mappedItems.map((it) => ({
-          id: it.id,
-          productId: it.productId,
-          productName: it.productName,
-          sku: it.sku,
-          hsnCode: it.hsnCode,
-          packSize: it.packSize,
-          originalQuantity: it.quantity,
-          indicativeUnitPrice: it.indicativeUnitPrice,
-          gstPercent: it.gstPercent,
-          indicativeTotalPrice: it.indicativeTotalPrice,
-        }));
+        id: it.id,
+        productId: it.productId,
+        productName: it.productName,
+        sku: it.sku,
+        hsnCode: it.hsnCode,
+        packSize: it.packSize,
+        originalQuantity: it.quantity,
+        indicativeUnitPrice: it.indicativeUnitPrice,
+        gstPercent: it.gstPercent,
+        indicativeTotalPrice: it.indicativeTotalPrice,
+      }));
 
   const newQuote: Quotation = {
     ...quoteData,

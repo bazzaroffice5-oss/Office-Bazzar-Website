@@ -41,3 +41,4 @@ for (let i = 0; i < mapped.length; i += 8) {
   const p = mapped[i];
   console.log(`[${p.sku}] ${p.name} (${p.category} / ${p.subcategory}) -> ${p.image}`);
 }
+

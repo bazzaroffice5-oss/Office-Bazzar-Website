@@ -52,7 +52,7 @@ export default function WishlistPage() {
             >
               <div>
                 <div className="relative aspect-square bg-white border border-slate-100 rounded-xl overflow-hidden mb-3 flex items-center justify-center">
-                  <Image src={product.images?.[0] || "/assets/placeholder-product.svg"} alt={product.name} fill quality={85} className="object-contain p-2" sizes="250px" />
+                  <Image src={(product.images?.[0]?.startsWith('/assets/products/catalog_2026/') ? product.images[0] : '/assets/placeholder-product.svg')} alt={product.name} fill quality={85} className="object-contain p-2" sizes="250px" />
                 </div>
                 <div className="text-xs font-semibold text-blue-900">
                   {product.brandName}
