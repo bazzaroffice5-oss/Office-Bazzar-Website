@@ -806,5 +806,53 @@
     "name": "Toilet Roll Big",
     "price": 0,
     "action": "update"
+  },
+  "prod-ob-003-shoe-cover-dispenser": {
+    "zohoId": "1476900000000593002",
+    "sku": "OB-003",
+    "websiteId": "prod-ob-003-shoe-cover-dispenser",
+    "name": "Shoe Cover Dispenser",
+    "price": 0,
+    "action": "insert"
+  },
+  "prod-ob-004-paper-cup-dispenser": {
+    "zohoId": "1476900000000593003",
+    "sku": "OB-004",
+    "websiteId": "prod-ob-004-paper-cup-dispenser",
+    "name": "Paper Cup Dispenser",
+    "price": 0,
+    "action": "insert"
+  },
+  "prod-ob-008-feather-duster": {
+    "zohoId": "1476900000000593004",
+    "sku": "OB-008",
+    "websiteId": "prod-ob-008-feather-duster",
+    "name": "Feather Duster",
+    "price": 0,
+    "action": "insert"
+  },
+  "prod-ob-pap-01-jk-max-copier-paper-67-gsm-a4": {
+    "zohoId": "1476900000000593005",
+    "sku": "OB-PAP-01",
+    "websiteId": "prod-ob-pap-01-jk-max-copier-paper-67-gsm-a4",
+    "name": "JK Max Copier Paper 67 GSM A4",
+    "price": 0,
+    "action": "insert"
+  },
+  "prod-ob-des-52-double-sided-foam-tape-1-inch": {
+    "zohoId": "1476900000000593006",
+    "sku": "OB-DES-52",
+    "websiteId": "prod-ob-des-52-double-sided-foam-tape-1-inch",
+    "name": "Double Sided Foam Tape 1 inch",
+    "price": 0,
+    "action": "insert"
+  },
+  "prod-ob-not-73-casio-electronic-desk-calculator": {
+    "zohoId": "1476900000000593007",
+    "sku": "OB-NOT-73",
+    "websiteId": "prod-ob-not-73-casio-electronic-desk-calculator",
+    "name": "Casio Electronic Desk Calculator",
+    "price": 0,
+    "action": "insert"
   }
 }

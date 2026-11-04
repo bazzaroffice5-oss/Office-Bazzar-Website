@@ -1,0 +1,143 @@
+{
+  "executionTimestamp": "2026-11-04T10:38:00.302Z",
+  "totalPilotAttempted": 6,
+  "totalPilotSucceeded": 6,
+  "totalPilotFailed": 0,
+  "existingZohoProductsUntouched": 101,
+  "pilotResults": [
+    {
+      "sku": "OB-003",
+      "name": "Shoe Cover Dispenser",
+      "category": "Housekeeping & Hygiene",
+      "status": "SUCCESS",
+      "action": "insert",
+      "zohoId": "1476900000000593002",
+      "message": "record added"
+    },
+    {
+      "sku": "OB-004",
+      "name": "Paper Cup Dispenser",
+      "category": "Office Stationery",
+      "status": "SUCCESS",
+      "action": "insert",
+      "zohoId": "1476900000000593003",
+      "message": "record added"
+    },
+    {
+      "sku": "OB-008",
+      "name": "Feather Duster",
+      "category": "Housekeeping & Hygiene",
+      "status": "SUCCESS",
+      "action": "insert",
+      "zohoId": "1476900000000593004",
+      "message": "record added"
+    },
+    {
+      "sku": "OB-PAP-01",
+      "name": "JK Max Copier Paper 67 GSM A4",
+      "category": "Office Stationery",
+      "status": "SUCCESS",
+      "action": "insert",
+      "zohoId": "1476900000000593005",
+      "message": "record added"
+    },
+    {
+      "sku": "OB-DES-52",
+      "name": "Double Sided Foam Tape 1 inch",
+      "category": "Packaging Supplies",
+      "status": "SUCCESS",
+      "action": "insert",
+      "zohoId": "1476900000000593006",
+      "message": "record added"
+    },
+    {
+      "sku": "OB-NOT-73",
+      "name": "Casio Electronic Desk Calculator",
+      "category": "Printers & Technology",
+      "status": "SUCCESS",
+      "action": "insert",
+      "zohoId": "1476900000000593007",
+      "message": "record added"
+    }
+  ],
+  "readBackVerification": [
+    {
+      "sku": "OB-003",
+      "name": "Shoe Cover Dispenser",
+      "zohoId": "1476900000000593002",
+      "Product_Code": "OB-003",
+      "Unit_Price": 0,
+      "Product_Active": true,
+      "DescriptionLength": 719,
+      "isCodeMatch": true,
+      "isNameMatch": true,
+      "isPriceMatch": true,
+      "isDescMatch": true
+    },
+    {
+      "sku": "OB-004",
+      "name": "Paper Cup Dispenser",
+      "zohoId": "1476900000000593003",
+      "Product_Code": "OB-004",
+      "Unit_Price": 0,
+      "Product_Active": true,
+      "DescriptionLength": 617,
+      "isCodeMatch": true,
+      "isNameMatch": true,
+      "isPriceMatch": true,
+      "isDescMatch": true
+    },
+    {
+      "sku": "OB-008",
+      "name": "Feather Duster",
+      "zohoId": "1476900000000593004",
+      "Product_Code": "OB-008",
+      "Unit_Price": 0,
+      "Product_Active": true,
+      "DescriptionLength": 477,
+      "isCodeMatch": true,
+      "isNameMatch": true,
+      "isPriceMatch": true,
+      "isDescMatch": true
+    },
+    {
+      "sku": "OB-PAP-01",
+      "name": "JK Max Copier Paper 67 GSM A4",
+      "zohoId": "1476900000000593005",
+      "Product_Code": "OB-PAP-01",
+      "Unit_Price": 0,
+      "Product_Active": true,
+      "DescriptionLength": 493,
+      "isCodeMatch": true,
+      "isNameMatch": true,
+      "isPriceMatch": true,
+      "isDescMatch": true
+    },
+    {
+      "sku": "OB-DES-52",
+      "name": "Double Sided Foam Tape 1 inch",
+      "zohoId": "1476900000000593006",
+      "Product_Code": "OB-DES-52",
+      "Unit_Price": 0,
+      "Product_Active": true,
+      "DescriptionLength": 514,
+      "isCodeMatch": true,
+      "isNameMatch": true,
+      "isPriceMatch": true,
+      "isDescMatch": true
+    },
+    {
+      "sku": "OB-NOT-73",
+      "name": "Casio Electronic Desk Calculator",
+      "zohoId": "1476900000000593007",
+      "Product_Code": "OB-NOT-73",
+      "Unit_Price": 0,
+      "Product_Active": true,
+      "DescriptionLength": 518,
+      "isCodeMatch": true,
+      "isNameMatch": true,
+      "isPriceMatch": true,
+      "isDescMatch": true
+    }
+  ]
+}
