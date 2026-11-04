@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "validate:images": "node scripts/validate_catalog_images.js",
+    "monitor:images": "node scripts/monitor_image_health.js"
   },
   "dependencies": {
     "@google/genai": "^2.32.0",

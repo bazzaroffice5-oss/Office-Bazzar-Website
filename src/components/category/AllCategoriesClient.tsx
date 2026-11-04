@@ -137,29 +137,6 @@ export default function AllCategoriesClient({
             <p className="text-[11px] text-slate-500">Custom pricing for institutions</p>
           </div>
         </div>
-        {/* B2B Procurement Guide Section */}
-        <section className="mt-12 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-2xs space-y-4">
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900">
-            Consolidated B2B Workplace Procurement Across India
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Office Bazzar simplifies corporate purchasing by consolidating four core workplace supply chains—<strong>Office Stationery</strong>, <strong>Housekeeping &amp; Hygiene</strong>, <strong>Printers &amp; Technology</strong>, and <strong>Packaging Supplies</strong>—under a single GST-compliant vendor. Whether your organization is stocking a corporate headquarters in Chennai or managing multi-branch offices in Bangalore, Mumbai, and Hyderabad, our catalog covers 100+ verified SKUs from trusted brands including JK Paper, Kangaro, Taski Diversey, Hi-Clean, 3M, HP, Canon, Epson, Brother, and Roots.
-          </p>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Corporate administration teams, facility managers, IT parks, hospitals, and educational institutions can add required items directly to their quotation cart or apply for an Annual Rate Contract (ARC) with scheduled doorstep delivery and 100% Input Tax Credit (ITC) documentation.
-          </p>
-          <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-semibold">
-            <Link href="/bulk-orders" className="text-[#004b87] hover:underline">
-              Explore Bulk Orders &amp; Rate Contracts →
-            </Link>
-            <Link href="/request-quote" className="text-[#16a34a] hover:underline">
-              Submit a Custom RFQ →
-            </Link>
-            <Link href="/faq" className="text-slate-600 hover:text-slate-900 hover:underline">
-              Read Corporate Procurement FAQ →
-            </Link>
-          </div>
-        </section>
       </div>
     </div>
   );

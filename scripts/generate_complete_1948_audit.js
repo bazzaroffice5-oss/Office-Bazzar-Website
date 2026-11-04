@@ -119,3 +119,4 @@ console.log(`- scripts/complete_1948_product_image_audit.csv`);
 console.log(`- scripts/complete_product_image_mapping_master.json`);
 console.log(`- scripts/before_after_image_comparison.json`);
 console.log(`- scripts/affected_products_resolved_list.json`);
+

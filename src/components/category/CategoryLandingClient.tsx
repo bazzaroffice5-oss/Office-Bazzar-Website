@@ -160,7 +160,7 @@ export default function CategoryLandingClient({
         </div>
 
         {/* 10 Category Cards in Responsive Grid: Desktop 4 cols, Medium screens 3 cols, Tablets 2 cols, Mobile 1 col */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
           {cards.map((card, index) => (
             <Link
               key={card.id}
@@ -197,29 +197,6 @@ export default function CategoryLandingClient({
             </Link>
           ))}
         </div>
-        {/* Category B2B Procurement Overview */}
-        <section className="mt-10 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-2xs space-y-4">
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900">
-            Bulk {category.name} Procurement &amp; Corporate Supply Across India
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            {category.description} Office Bazzar supplies 100% genuine {category.name.toLowerCase()} products for corporate offices, IT parks, manufacturing units, healthcare institutions, and educational campuses across India, backed by our corporate headquarters in Chennai and regional branches in Bangalore, Mumbai, and Hyderabad.
-          </p>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Every institutional order includes a compliant GST tax invoice with HSN codes for full Input Tax Credit (ITC). Procurement teams can add individual SKUs to their quotation cart or request an Annual Rate Contract (ARC) for recurring monthly branch deliveries.
-          </p>
-          <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-semibold">
-            <Link href="/bulk-orders" className="text-[#004b87] hover:underline">
-              Request Bulk Rate Contract →
-            </Link>
-            <Link href="/request-quote" className="text-[#16a34a] hover:underline">
-              Submit Custom RFQ →
-            </Link>
-            <Link href="/faq" className="text-slate-600 hover:text-slate-900 hover:underline">
-              GST &amp; Delivery FAQ →
-            </Link>
-          </div>
-        </section>
       </div>
     );
   }
@@ -416,29 +393,6 @@ export default function CategoryLandingClient({
           </button>
         </div>
       )}
-        {/* Category B2B Procurement Overview */}
-        <section className="mt-10 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-2xs space-y-4">
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900">
-            Bulk {category.name} Procurement &amp; Corporate Supply Across India
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            {category.description} Office Bazzar supplies 100% genuine {category.name.toLowerCase()} products for corporate offices, IT parks, manufacturing units, healthcare institutions, and educational campuses across India, backed by our corporate headquarters in Chennai and regional branches in Bangalore, Mumbai, and Hyderabad.
-          </p>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Every institutional order includes a compliant GST tax invoice with HSN codes for full Input Tax Credit (ITC). Procurement teams can add individual SKUs to their quotation cart or request an Annual Rate Contract (ARC) for recurring monthly branch deliveries.
-          </p>
-          <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-semibold">
-            <Link href="/bulk-orders" className="text-[#004b87] hover:underline">
-              Request Bulk Rate Contract →
-            </Link>
-            <Link href="/request-quote" className="text-[#16a34a] hover:underline">
-              Submit Custom RFQ →
-            </Link>
-            <Link href="/faq" className="text-slate-600 hover:text-slate-900 hover:underline">
-              GST &amp; Delivery FAQ →
-            </Link>
-          </div>
-        </section>
     </div>
   );
 }

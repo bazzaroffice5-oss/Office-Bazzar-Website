@@ -71,3 +71,4 @@ console.log(`\nProcessed ${affected.length} products:`);
 console.log(`Successfully mapped and copied: ${successCount} / ${affected.length}`);
 
 fs.writeFileSync('scripts/97_products_copied_images_manifest.json', JSON.stringify(results, null, 2));
+

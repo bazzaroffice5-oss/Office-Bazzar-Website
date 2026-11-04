@@ -64,3 +64,4 @@ if (emptyCount === 0 && brokenCount === 0) {
   console.error('FAIL: Verification checks failed.');
   process.exit(1);
 }
+

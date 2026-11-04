@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-11-04T12:15:01.828Z",
+  "targetHost": "https://officebazzar.com",
+  "totalChecked": 30,
+  "passed": 30,
+  "failed": 0,
+  "healthyRate": "100.00%",
+  "failures": []
+}
