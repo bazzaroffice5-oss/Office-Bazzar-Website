@@ -31,3 +31,4 @@ const newCatContent = prefix + formattedProducts + ';\n\n' + suffix;
 
 fs.writeFileSync(catFile, newCatContent, 'utf8');
 console.log('Successfully wrote updated catalog.ts');
+

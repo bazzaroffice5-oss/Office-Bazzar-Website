@@ -128,3 +128,4 @@ reportRows.forEach(row => {
 fs.writeFileSync('scripts/master_383_product_image_mapping_report.csv', csvLines.join('\n'), 'utf8');
 fs.writeFileSync('scripts/master_383_product_image_mapping_report.json', JSON.stringify(reportRows, null, 2), 'utf8');
 console.log('Wrote scripts/master_383_product_image_mapping_report.csv & .json');
+

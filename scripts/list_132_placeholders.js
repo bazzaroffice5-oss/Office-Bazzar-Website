@@ -20,3 +20,4 @@ for (const [cat, prods] of Object.entries(byCat)) {
   console.log(`\n=== Category: ${cat} (${prods.length}) ===`);
   prods.forEach(p => console.log(`  [${p.sku}] ${p.name} | ${p.sub}`));
 }
+

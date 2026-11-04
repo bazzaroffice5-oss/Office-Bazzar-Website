@@ -39,3 +39,4 @@ for (const [f, count] of Object.entries(folders)) {
 
 fs.writeFileSync('scripts/all_2369_supplier_files_index.json', JSON.stringify(files, null, 2), 'utf8');
 console.log('Wrote scripts/all_2369_supplier_files_index.json');
+

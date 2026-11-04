@@ -15,3 +15,4 @@ cartoon.forEach(c => console.log(`  ${c.folder} / ${c.filename}`));
 
 console.log('\nSample other dustbin files:');
 dustbinFiles.slice(0, 15).forEach(d => console.log(`  ${d.folder} / ${d.filename}`));
+

@@ -30,7 +30,7 @@ export default function ProductDetailClient({
 
   // Active image selector (strictly new supplier catalog only)
   const validImages = (product.images && product.images.length > 0 ? product.images : []).filter(
-    (img) => typeof img === 'string' && img.startsWith('/assets/products/catalog_2026/')
+    (img) => typeof img === 'string' && (img.startsWith('/assets/products/catalog_2026/') || img.startsWith('/assets/supplier-library/'))
   );
   const productImages = validImages.length > 0 ? validImages : [FALLBACK_IMAGE];
   const [activeImage, setActiveImage] = useState<string>(productImages[0]);

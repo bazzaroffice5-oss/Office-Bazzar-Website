@@ -301,3 +301,4 @@ async function processNewImages() {
 }
 
 processNewImages().catch(console.error);
+

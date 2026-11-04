@@ -56,3 +56,4 @@ candidates.forEach(c => {
   console.log(`\n[${c.sku}] ${c.name} (${c.cat} > ${c.sub})`);
   c.topMatches.forEach(m => console.log(`   score ${m.score} | [${m.folder}] ${m.filename}`));
 });
+

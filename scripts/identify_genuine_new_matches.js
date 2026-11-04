@@ -212,3 +212,4 @@ genuineMatches.forEach((m, i) => {
 });
 
 fs.writeFileSync('scripts/candidate_new_mappings.json', JSON.stringify(genuineMatches, null, 2), 'utf8');
+

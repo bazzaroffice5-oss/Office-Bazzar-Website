@@ -9,3 +9,4 @@ packing.forEach((f, i) => console.log(`${i+1}. ${f.filename}`));
 console.log('\n=== SAFETY ITEMS FILES ===');
 const safety = allFiles.filter(f => f.folder === 'Safety Items' || f.relativePath.startsWith('Safety Items/'));
 safety.forEach((f, i) => console.log(`${i+1}. ${f.filename}`));
+

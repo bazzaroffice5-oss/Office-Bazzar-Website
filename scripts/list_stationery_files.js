@@ -8,3 +8,4 @@ console.log('Total files in Stationery:', stationeryFiles.length);
 stationeryFiles.forEach((f, i) => {
   console.log(`${i+1}. ${f.filename}`);
 });
+

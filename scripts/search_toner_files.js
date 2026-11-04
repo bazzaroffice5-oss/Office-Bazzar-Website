@@ -8,3 +8,4 @@ for (const t of targets) {
   console.log(`\nMatches for "${t}": ${matches.length}`);
   matches.forEach(m => console.log(`  [${m.folder}] ${m.filename}`));
 }
+

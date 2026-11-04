@@ -55,7 +55,7 @@ export default function ProductCard({
   const rawImage =
     (product.images && product.images[0]) ||
     ((product as unknown as { image?: string }).image);
-  const isValidNewImage = typeof rawImage === 'string' && rawImage.startsWith('/assets/products/catalog_2026/');
+  const isValidNewImage = typeof rawImage === 'string' && (rawImage.startsWith('/assets/products/catalog_2026/') || rawImage.startsWith('/assets/supplier-library/'));
   const initialImage = isValidNewImage ? rawImage : '/assets/placeholder-product.svg';
   const [imgSrc, setImgSrc] = useState<string>(initialImage);
 

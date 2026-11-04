@@ -182,6 +182,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/supplier-gallery" className="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+                  <span>Supplier Image Library</span>
+                  <span className="text-[10px] bg-blue-900 text-blue-200 px-1.5 py-0.5 rounded font-bold">2,369</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/category/office-stationery" className="hover:text-emerald-400 transition-colors">
                   Office Stationery
                 </Link>

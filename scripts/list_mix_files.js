@@ -6,3 +6,4 @@ const mix = allFiles.filter(f => f.folder === 'Mix' || f.relativePath.startsWith
 console.log('Total files in Mix:', mix.length);
 
 mix.forEach((f, i) => console.log(`${i+1}. [${f.folder}] ${f.filename}`));
+
