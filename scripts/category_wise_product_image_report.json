@@ -1,0 +1,30 @@
+{
+  "Office Stationery": {
+    "totalProducts": 341,
+    "withImages": 269,
+    "withPlaceholders": 72,
+    "multiGallery": 60,
+    "totalImageAssignments": 375
+  },
+  "Housekeeping & Hygiene": {
+    "totalProducts": 1536,
+    "withImages": 1535,
+    "withPlaceholders": 1,
+    "multiGallery": 383,
+    "totalImageAssignments": 2321
+  },
+  "Printers & Technology": {
+    "totalProducts": 28,
+    "withImages": 7,
+    "withPlaceholders": 21,
+    "multiGallery": 1,
+    "totalImageAssignments": 10
+  },
+  "Packaging Supplies": {
+    "totalProducts": 43,
+    "withImages": 40,
+    "withPlaceholders": 3,
+    "multiGallery": 9,
+    "totalImageAssignments": 58
+  }
+}
