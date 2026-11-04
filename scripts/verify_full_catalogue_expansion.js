@@ -69,3 +69,4 @@ console.log(`Products with multi-image gallery (>1): ${multiImageCount}`);
 console.log(`Products with neutral placeholder (consumables): ${placeholderCount}`);
 
 console.log('\nALL VERIFICATION CHECKS PASSED!');
+
