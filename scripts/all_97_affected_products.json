@@ -1,0 +1,972 @@
+[
+  {
+    "sku": "OB-STA-1008",
+    "name": "Punching Machine DP 600 Kangaroo",
+    "brand": "Kangaro",
+    "category": "office-stationery",
+    "subcategory": "desk-accessories-tools",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Punching Machine DP 600 Kangaroo supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-STA-1009",
+    "name": "Kangaro Staplers HD 10D",
+    "brand": "Kangaro",
+    "category": "office-stationery",
+    "subcategory": "desk-accessories-tools",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Kangaro Staplers HD 10D supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-HOU-1018",
+    "name": "Kangaro Staplers HD 10D",
+    "brand": "Kangaro",
+    "category": "office-stationery",
+    "subcategory": "desk-accessories-tools",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Kangaro Staplers HD 10D supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-COM-1034",
+    "name": "External Hard Disk",
+    "brand": "OfficeBazzar",
+    "category": "printers-technology",
+    "subcategory": "it-peripherals-machines",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "External Hard Disk supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-COM-1035",
+    "name": "Epson Ecotank L6160 Wi-Fi Duplex Multi Function Ink Tank Printer",
+    "brand": "Epson",
+    "category": "printers-technology",
+    "subcategory": "it-peripherals-machines",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Epson Ecotank L6160 Wi-Fi Duplex Multi Function Ink Tank Printer supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-COM-1036",
+    "name": "Kent KS 12 Lamination Machine",
+    "brand": "Kent",
+    "category": "printers-technology",
+    "subcategory": "it-peripherals-machines",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Kent KS 12 Lamination Machine supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-COM-1038",
+    "name": "SanDisk Pen Drive",
+    "brand": "SanDisk",
+    "category": "printers-technology",
+    "subcategory": "it-peripherals-machines",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "SanDisk Pen Drive supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-COM-1040",
+    "name": "Barcode Printer",
+    "brand": "OfficeBazzar",
+    "category": "printers-technology",
+    "subcategory": "it-peripherals-machines",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Barcode Printer supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-COM-1041",
+    "name": "Adaptor Cable",
+    "brand": "OfficeBazzar",
+    "category": "printers-technology",
+    "subcategory": "it-peripherals-machines",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Adaptor Cable supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-BOA-1042",
+    "name": "White Board For School",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "boards-visual-display",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "White Board For School supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-BOA-1043",
+    "name": "Golden Letter for Welcome Board",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "boards-visual-display",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Golden Letter for Welcome Board supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-BOA-1044",
+    "name": "Alkosign Motorized Dependent Up Down Boards",
+    "brand": "Alkosign",
+    "category": "office-stationery",
+    "subcategory": "writing-instruments",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Alkosign Motorized Dependent Up Down Boards supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-BOA-1045",
+    "name": "Alkosign Horizontal Sliding Board",
+    "brand": "Alkosign",
+    "category": "office-stationery",
+    "subcategory": "boards-visual-display",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Alkosign Horizontal Sliding Board supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-BOA-1047",
+    "name": "Alkosign Pegboard",
+    "brand": "Alkosign",
+    "category": "office-stationery",
+    "subcategory": "boards-visual-display",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Alkosign Pegboard supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-DIS-1063",
+    "name": "Name Plate Plain -Innofitt",
+    "brand": "Innofitt",
+    "category": "office-stationery",
+    "subcategory": "boards-visual-display",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Name Plate Plain -Innofitt supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-SHR-1069",
+    "name": "Gobbler PX9900 Currency Counting Machine",
+    "brand": "Gobbler",
+    "category": "printers-technology",
+    "subcategory": "currency-counting-machines",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Gobbler PX9900 Currency Counting Machine supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-HOU-1073",
+    "name": "Butter Paper",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "office-pantry-essentials",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Butter Paper supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-PRI-1075",
+    "name": "Best Print 12A Compatible Toner Cartridge",
+    "brand": "OfficeBazzar",
+    "category": "printers-technology",
+    "subcategory": "laser-toner-cartridges",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Best Print 12A Compatible Toner Cartridge supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-PRI-1076",
+    "name": "Canon EP 303 Toner Cartridge",
+    "brand": "Canon",
+    "category": "printers-technology",
+    "subcategory": "laser-toner-cartridges",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Canon EP 303 Toner Cartridge supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-PRI-1077",
+    "name": "Canon 308 Toner Cartridge",
+    "brand": "Canon",
+    "category": "printers-technology",
+    "subcategory": "laser-toner-cartridges",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Canon 308 Toner Cartridge supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-PRI-1078",
+    "name": "Label Cartridges",
+    "brand": "OfficeBazzar",
+    "category": "printers-technology",
+    "subcategory": "ink-cartridges-supplies",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Label Cartridges supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-PRI-1079",
+    "name": "Canon Refilling Cartridge",
+    "brand": "Canon",
+    "category": "printers-technology",
+    "subcategory": "ink-cartridges-supplies",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Canon Refilling Cartridge supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-PRI-1080",
+    "name": "Compatible Toner Cartridge",
+    "brand": "OfficeBazzar",
+    "category": "printers-technology",
+    "subcategory": "laser-toner-cartridges",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Compatible Toner Cartridge supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-PRI-1081",
+    "name": "Samsung MLT-D116S Black Toner Cartridge, Packaging Type: Box",
+    "brand": "Samsung",
+    "category": "printers-technology",
+    "subcategory": "laser-toner-cartridges",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Samsung MLT-D116S Black Toner Cartridge, Packaging Type: Box supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-PRI-1082",
+    "name": "HP 126A Laser Jet Toner Cartridge",
+    "brand": "HP",
+    "category": "printers-technology",
+    "subcategory": "laser-toner-cartridges",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "HP 126A Laser Jet Toner Cartridge supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-PRI-1083",
+    "name": "Canon Npg 51 Toner Cartridge",
+    "brand": "Canon",
+    "category": "printers-technology",
+    "subcategory": "laser-toner-cartridges",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Canon Npg 51 Toner Cartridge supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-PRI-1084",
+    "name": "Best Print 88A Compatible Toner Cartridge",
+    "brand": "OfficeBazzar",
+    "category": "printers-technology",
+    "subcategory": "laser-toner-cartridges",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Best Print 88A Compatible Toner Cartridge supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-PRI-1085",
+    "name": "HP 802 Small Black Ink Cartridge - CH561ZZ",
+    "brand": "HP",
+    "category": "printers-technology",
+    "subcategory": "ink-cartridges-supplies",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "HP 802 Small Black Ink Cartridge - CH561ZZ supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-PRI-1086",
+    "name": "HP 678 Tri-Color Ink Cartridge - CZ108AA",
+    "brand": "HP",
+    "category": "printers-technology",
+    "subcategory": "ink-cartridges-supplies",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "HP 678 Tri-Color Ink Cartridge - CZ108AA supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-CLE-1090",
+    "name": "Humic Acid Liquid",
+    "brand": "OfficeBazzar",
+    "category": "housekeeping-hygiene",
+    "subcategory": "cleaning-chemicals",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Humic Acid Liquid supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India."
+  },
+  {
+    "sku": "OB-PAP-01",
+    "name": "JK Max Copier Paper 67 GSM A4",
+    "brand": "JK Paper",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "JK Max Copier Paper 67 GSM A4 (OB-PAP-01) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-02",
+    "name": "JK CMax Copier Paper 72 GSM A4",
+    "brand": "JK Paper",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "JK CMax Copier Paper 72 GSM A4 (OB-PAP-02) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-03",
+    "name": "JK Easy Copier Paper 70 GSM A4",
+    "brand": "JK Paper",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "JK Easy Copier Paper 70 GSM A4 (OB-PAP-03) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-04",
+    "name": "JK Copier Paper 75 GSM A4",
+    "brand": "JK Paper",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "JK Copier Paper 75 GSM A4 (OB-PAP-04) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-05",
+    "name": "JK Excel Bond Paper (70/80/90/100 GSM) A4",
+    "brand": "JK Paper",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "JK Excel Bond Paper (70/80/90/100 GSM) A4 (OB-PAP-05) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-06",
+    "name": "JK Cedar Copier Paper (80/100 GSM) A4",
+    "brand": "JK Paper",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "JK Cedar Copier Paper (80/100 GSM) A4 (OB-PAP-06) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-07",
+    "name": "JK Sparkle Multipurpose Paper (70/75/80 GSM) A4",
+    "brand": "JK Paper",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "JK Sparkle Multipurpose Paper (70/75/80 GSM) A4 (OB-PAP-07) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-08",
+    "name": "JK Eco Rise Copier Paper 70 GSM A4",
+    "brand": "JK Paper",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "JK Eco Rise Copier Paper 70 GSM A4 (OB-PAP-08) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-09",
+    "name": "TNPL Copier Paper 70 GSM A4",
+    "brand": "TNPL",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "TNPL Copier Paper 70 GSM A4 (OB-PAP-09) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-10",
+    "name": "TNPL Platinum Copier Paper 75 GSM A4",
+    "brand": "TNPL",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "TNPL Platinum Copier Paper 75 GSM A4 (OB-PAP-10) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-11",
+    "name": "TNPL Copier Paper 80 GSM A4",
+    "brand": "TNPL",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "TNPL Copier Paper 80 GSM A4 (OB-PAP-11) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-12",
+    "name": "JK Max Copier Paper 67 GSM A4 (Ekent Pack)",
+    "brand": "JK Paper",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "JK Max Copier Paper 67 GSM A4 (Ekent Pack) (OB-PAP-12) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-13",
+    "name": "Koopee Premium Glossy Photo Paper A4",
+    "brand": "Koopee",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Koopee Premium Glossy Photo Paper A4 (OB-PAP-13) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-14",
+    "name": "Royal Executive Bond Paper A4",
+    "brand": "Royal",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Royal Executive Bond Paper A4 (OB-PAP-14) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-15",
+    "name": "Compu Color A4 Color Paper 200 GSM",
+    "brand": "Compu",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Compu Color A4 Color Paper 200 GSM (OB-PAP-15) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PAP-16",
+    "name": "NovaJet Inkjet True Picture Paper A4",
+    "brand": "NovaJet",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "NovaJet Inkjet True Picture Paper A4 (OB-PAP-16) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-FIL-20",
+    "name": "A4 Plastic Stick File",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "files-office-organization",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "A4 Plastic Stick File (OB-FIL-20) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-FIL-24",
+    "name": "Spring File Plastic Body",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "files-office-organization",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Spring File Plastic Body (OB-FIL-24) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-FIL-28",
+    "name": "Ordinary Urgent Document File",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "files-office-organization",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Ordinary Urgent Document File (OB-FIL-28) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PEN-36",
+    "name": "Add Gel Achiever Pen",
+    "brand": "Add Gel",
+    "category": "office-stationery",
+    "subcategory": "writing-instruments",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Add Gel Achiever Pen (OB-PEN-36) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PEN-37",
+    "name": "Pilot V5/V7 Liquid Ink Rollerball Pen",
+    "brand": "Pilot",
+    "category": "office-stationery",
+    "subcategory": "writing-instruments",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Pilot V5/V7 Liquid Ink Rollerball Pen (OB-PEN-37) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PEN-39",
+    "name": "Rorito Flymax Gel Pen",
+    "brand": "Rorito",
+    "category": "office-stationery",
+    "subcategory": "writing-instruments",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Rorito Flymax Gel Pen (OB-PEN-39) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PEN-44",
+    "name": "Dry Erase Whiteboard Marker",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "writing-instruments",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Dry Erase Whiteboard Marker (OB-PEN-44) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PEN-45",
+    "name": "Luxor Color Sketch Pen Pack",
+    "brand": "Luxor",
+    "category": "office-stationery",
+    "subcategory": "writing-instruments",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Luxor Color Sketch Pen Pack (OB-PEN-45) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PEN-46",
+    "name": "Nataraj HB Wooden Pencils Pack",
+    "brand": "Nataraj",
+    "category": "office-stationery",
+    "subcategory": "writing-instruments",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Nataraj HB Wooden Pencils Pack (OB-PEN-46) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PEN-47",
+    "name": "Apsara Dust Free / Nataraj Plasto Eraser Pack",
+    "brand": "Apsara",
+    "category": "office-stationery",
+    "subcategory": "writing-instruments",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Apsara Dust Free / Nataraj Plasto Eraser Pack (OB-PEN-47) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-PEN-48",
+    "name": "Desk Pencil Sharpener Pack",
+    "brand": "Nataraj",
+    "category": "office-stationery",
+    "subcategory": "writing-instruments",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Desk Pencil Sharpener Pack (OB-PEN-48) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-DES-53",
+    "name": "Double Sided Transparent Tissue Tape",
+    "brand": "OfficeBazzar",
+    "category": "packaging-supplies",
+    "subcategory": "bopp-packaging-tapes",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Double Sided Transparent Tissue Tape (OB-DES-53) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-DES-60",
+    "name": "Stapler Pins Pack (No. 10 / 24/6)",
+    "brand": "Kangaro",
+    "category": "office-stationery",
+    "subcategory": "desk-accessories-tools",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Stapler Pins Pack (No. 10 / 24/6) (OB-DES-60) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-DES-63",
+    "name": "Stamp Pad Ink Bottle",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "desk-accessories-tools",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Stamp Pad Ink Bottle (OB-DES-63) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-NOT-69",
+    "name": "Kores Sapphire Carbon Paper Pack",
+    "brand": "Kores",
+    "category": "office-stationery",
+    "subcategory": "desk-accessories-tools",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Kores Sapphire Carbon Paper Pack (OB-NOT-69) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-NOT-73",
+    "name": "Casio Electronic Desk Calculator",
+    "brand": "Casio",
+    "category": "printers-technology",
+    "subcategory": "it-peripherals-machines",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Casio Electronic Desk Calculator (OB-NOT-73) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-NOT-75",
+    "name": "Stainless Steel Measuring Scale Ruler",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "desk-accessories-tools",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Stainless Steel Measuring Scale Ruler (OB-NOT-75) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-EQP-83",
+    "name": "Corporate Accounts Entry Register",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "paper-notebooks",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Corporate Accounts Entry Register (OB-EQP-83) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-EQP-84",
+    "name": "Desk Visiting Card Holder Book",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "desk-accessories-tools",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Desk Visiting Card Holder Book (OB-EQP-84) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-EQP-87",
+    "name": "High Definition Conference Projector",
+    "brand": "OfficeBazzar",
+    "category": "printers-technology",
+    "subcategory": "it-peripherals-machines",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "High Definition Conference Projector (OB-EQP-87) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-EQP-89",
+    "name": "Acrylic ID Card Badge Holder with Lanyard",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "desk-accessories-tools",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Acrylic ID Card Badge Holder with Lanyard (OB-EQP-89) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-COV-19",
+    "name": "Medical Oxygen Concentrator Machine",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Medical Oxygen Concentrator Machine (OB-COV-19) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-07",
+    "name": "Telescopic Cone Connecting Rod (1.3m to 2.1m)",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Telescopic Cone Connecting Rod (1.3m to 2.1m) (OB-RDS-07) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-08",
+    "name": "LED Traffic Baton Light Rechargeable",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "LED Traffic Baton Light Rechargeable (OB-RDS-08) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-09",
+    "name": "Outdoor Convex Security Mirror (18/24/32/40 inch)",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Outdoor Convex Security Mirror (18/24/32/40 inch) (OB-RDS-09) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-10",
+    "name": "Acrylic Dome Safety Mirror (Full / Half / Quarter)",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Acrylic Dome Safety Mirror (Full / Half / Quarter) (OB-RDS-10) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-11",
+    "name": "Warning Bollard Delineator Post",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Warning Bollard Delineator Post (OB-RDS-11) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-12",
+    "name": "Flexible Polyurethane Spring Post 750mm",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Flexible Polyurethane Spring Post 750mm (OB-RDS-12) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-14",
+    "name": "Heavy Duty Road Rumble Strips",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Heavy Duty Road Rumble Strips (OB-RDS-14) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-15",
+    "name": "Heavy Duty Rubber Wheel Chock",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Heavy Duty Rubber Wheel Chock (OB-RDS-15) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-16",
+    "name": "Rubber Cable Protector Ramp (2/3/4/5 Channel)",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Rubber Cable Protector Ramp (2/3/4/5 Channel) (OB-RDS-16) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-18",
+    "name": "Aluminum Road Stud and Solar LED Stud",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Aluminum Road Stud and Solar LED Stud (OB-RDS-18) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-19",
+    "name": "Handheld Security Metal Detector Scanner",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Handheld Security Metal Detector Scanner (OB-RDS-19) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-24",
+    "name": "Microprismatic Reflective Warning Tape (50mm x 50m)",
+    "brand": "OfficeBazzar",
+    "category": "packaging-supplies",
+    "subcategory": "floor-marking-safety-tapes",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Microprismatic Reflective Warning Tape (50mm x 50m) (OB-RDS-24) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-25",
+    "name": "Heavy Duty Rubber Speed Breakers",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Heavy Duty Rubber Speed Breakers (OB-RDS-25) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-26",
+    "name": "Plastic Modular Speed Breakers",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Plastic Modular Speed Breakers (OB-RDS-26) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-27",
+    "name": "Rubber Corner Guards Square Edge",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Rubber Corner Guards Square Edge (OB-RDS-27) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-28",
+    "name": "Rubber Corner Guards Curved Edge",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Rubber Corner Guards Curved Edge (OB-RDS-28) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-29",
+    "name": "Rubber Car Wheel Stopper 600mm",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Rubber Car Wheel Stopper 600mm (OB-RDS-29) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-30",
+    "name": "Rubber Car Wheel Stopper 500mm",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Rubber Car Wheel Stopper 500mm (OB-RDS-30) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-31",
+    "name": "Rubber Car Wheel Stopper Commercial 1650mm",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Rubber Car Wheel Stopper Commercial 1650mm (OB-RDS-31) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-32",
+    "name": "Solar Warning Blinker Light",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Solar Warning Blinker Light (OB-RDS-32) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-33",
+    "name": "Solar Traffic Flasher Light",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Solar Traffic Flasher Light (OB-RDS-33) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-34",
+    "name": "Solar Chevron Directional Warning Board",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Solar Chevron Directional Warning Board (OB-RDS-34) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-35",
+    "name": "Under Vehicle Search Inspection Mirror (UVSM)",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Under Vehicle Search Inspection Mirror (UVSM) (OB-RDS-35) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-36",
+    "name": "Heavy Duty Anti-Theft Car Wheel Lock Clamp",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Heavy Duty Anti-Theft Car Wheel Lock Clamp (OB-RDS-36) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-37",
+    "name": "LED Emergency Magnetic Beacon Flare Light",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "LED Emergency Magnetic Beacon Flare Light (OB-RDS-37) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-38",
+    "name": "Heavy Duty Anti-Slip Traction Safety Tapes",
+    "brand": "OfficeBazzar",
+    "category": "packaging-supplies",
+    "subcategory": "floor-marking-safety-tapes",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Heavy Duty Anti-Slip Traction Safety Tapes (OB-RDS-38) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-41",
+    "name": "Portable Expandable Scissor Road Barrier (Max 2m)",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Portable Expandable Scissor Road Barrier (Max 2m) (OB-RDS-41) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-42",
+    "name": "Rechargeable Search Light & Megaphone Siren",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Rechargeable Search Light & Megaphone Siren (OB-RDS-42) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  },
+  {
+    "sku": "OB-RDS-43",
+    "name": "Metal Signage Post Stands (Parking / Directional)",
+    "brand": "OfficeBazzar",
+    "category": "office-stationery",
+    "subcategory": "safety-maintenance",
+    "packSize": "Standard Pack",
+    "price": 0,
+    "description": "Metal Signage Post Stands (Parking / Directional) (OB-RDS-43) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders."
+  }
+]
