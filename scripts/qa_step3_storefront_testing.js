@@ -85,3 +85,4 @@ async function runStorefrontTests() {
 }
 
 runStorefrontTests();
+

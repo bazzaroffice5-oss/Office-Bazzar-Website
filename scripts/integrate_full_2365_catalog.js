@@ -520,3 +520,4 @@ allImageAuditRows.forEach(row => {
 fs.writeFileSync('scripts/complete_2365_supplier_images_integration_report.csv', csvLines.join('\n'), 'utf8');
 fs.writeFileSync('scripts/complete_2365_supplier_images_integration_report.json', JSON.stringify(allImageAuditRows, null, 2), 'utf8');
 console.log('Successfully saved scripts/complete_2365_supplier_images_integration_report.csv and .json!');
+

@@ -136,6 +136,14 @@ const nextConfig: NextConfig = {
 
     return [...legacyRedirects, ...mainCategoryAliases, ...duplicateProductRedirects];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/assets/supplier-library/:path*',
+        destination: '/assets/product/:path*',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

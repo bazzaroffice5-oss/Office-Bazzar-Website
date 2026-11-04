@@ -85,7 +85,7 @@ export default function QuoteCartPage() {
               {items.map((item) => {
                 const product = item.product;
                 const rawImg = product.images?.[0];
-                const displayImage = (typeof rawImg === 'string' && (rawImg.startsWith('/assets/products/catalog_2026/') || rawImg.startsWith('/assets/supplier-library/'))) ? rawImg : FALLBACK_IMAGE;
+                const displayImage = (typeof rawImg === 'string' && (rawImg.startsWith('/assets/products/catalog_2026/') || rawImg.startsWith('/assets/supplier-library/') || rawImg.startsWith('/assets/product/'))) ? rawImg : FALLBACK_IMAGE;
                 const productUrl = `/product/${product.slug || product.id}`;
                 const hasPrice = (product.price ?? 0) > 0;
                 const itemSubtotal = hasPrice ? (product.price ?? 0) * item.quantity : null;

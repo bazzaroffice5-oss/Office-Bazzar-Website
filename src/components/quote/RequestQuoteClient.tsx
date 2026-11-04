@@ -233,7 +233,7 @@ export default function RequestQuoteClient() {
             gstPercent: it.product.gstPercent || 18,
             quantity: it.quantity,
             indicativeTotalPrice: (it.product.price ?? 0) * it.quantity,
-            productImage: ((it.product.images?.[0]?.startsWith('/assets/products/catalog_2026/') || it.product.images?.[0]?.startsWith('/assets/supplier-library/')) ? it.product.images[0] : '/assets/placeholder-product.svg'),
+            productImage: ((it.product.images?.[0]?.startsWith('/assets/products/catalog_2026/') || it.product.images?.[0]?.startsWith('/assets/supplier-library/') || it.product.images?.[0]?.startsWith('/assets/product/')) ? it.product.images[0] : '/assets/placeholder-product.svg'),
             packSize: it.product.packSize || 'Standard Pack',
           })),
         }),

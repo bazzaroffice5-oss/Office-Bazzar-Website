@@ -1,9 +1,10 @@
 const fs = require('fs');
-const cat = fs.readFileSync('src/lib/data/catalog.ts', 'utf8');
-const lines = cat.split('\n');
-lines.forEach((l, idx) => {
-  if (l.includes('RAW_PRODUCTS')) {
-    console.log(`Line ${idx + 1}: ${l.slice(0, 80)}`);
-  }
-});
 
+const content = fs.readFileSync('src/lib/data/catalog.ts', 'utf8');
+const lines = content.split('\n');
+
+for (let i = 0; i < lines.length; i++) {
+  if (lines[i].includes('RAW_PRODUCTS')) {
+    console.log(`Line ${i + 1}: ${lines[i].substring(0, 100)}`);
+  }
+}

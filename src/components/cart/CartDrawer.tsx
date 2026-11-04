@@ -86,7 +86,7 @@ export default function CartDrawer() {
                 <div key={item.product.id} className="py-3.5 first:pt-0 last:pb-0 flex space-x-3">
                   <div className="relative w-16 h-16 rounded-md bg-white border border-slate-200 overflow-hidden shrink-0">
                     <Image
-                      src={((item.product.images?.[0]?.startsWith('/assets/products/catalog_2026/') || item.product.images?.[0]?.startsWith('/assets/supplier-library/')) ? item.product.images[0] : '/assets/placeholder-product.svg')}
+                      src={((item.product.images?.[0]?.startsWith('/assets/products/catalog_2026/') || item.product.images?.[0]?.startsWith('/assets/supplier-library/') || item.product.images?.[0]?.startsWith('/assets/product/')) ? item.product.images[0] : '/assets/placeholder-product.svg')}
                       alt={item.product.name}
                       fill
                       className="object-contain p-1"

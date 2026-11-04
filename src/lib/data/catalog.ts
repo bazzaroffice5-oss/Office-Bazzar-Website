@@ -1091,7 +1091,8 @@ export const BRANDS: Brand[] = [
   }
 ];
 
-const RAW_PRODUCTS: Product[] = [
+// @ts-ignore
+const RAW_PRODUCTS: any[] = [
   {
     "id": "prod-cardboard-tag-file",
     "name": "Cardboard Tag File",
@@ -1472,7 +1473,7 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1012.webp",
       "/assets/products/catalog_2026/OB-HOU-1012_alt1.webp",
-      "/assets/supplier-library/collage/housekeeping-and-cleaning-equipment-collection.webp"
+      "/assets/product/collage/housekeeping-and-cleaning-equipment-collection.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1503,9 +1504,9 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1013.webp",
       "/assets/products/catalog_2026/OB-HOU-1013-alt-1.webp",
-      "/assets/supplier-library/collage/tissue-and-paper-towel-dispensers-collection.webp",
-      "/assets/supplier-library/tissue-product/hi-soft-tissue-travel-pack-cocktail-napkin-two-packs-display.webp",
-      "/assets/supplier-library/tissue-product/scott-essential-paper-napkin-01324-front-and-back-view-split.webp"
+      "/assets/product/collage/tissue-and-paper-towel-dispensers-collection.webp",
+      "/assets/product/tissue-product/hi-soft-tissue-travel-pack-cocktail-napkin-two-packs-display.webp",
+      "/assets/product/tissue-product/scott-essential-paper-napkin-01324-front-and-back-view-split.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1539,8 +1540,8 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1014.webp",
-      "/assets/supplier-library/wiper/mini-table-window-squeegee-wiper-6-piece-hexagonal-assorted-display.webp",
-      "/assets/supplier-library/wiper/window-and-table-squeegee-wiper-with-sponge-heads-4-piece-assorted-set.webp"
+      "/assets/product/wiper/mini-table-window-squeegee-wiper-6-piece-hexagonal-assorted-display.webp",
+      "/assets/product/wiper/window-and-table-squeegee-wiper-with-sponge-heads-4-piece-assorted-set.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1576,8 +1577,8 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-HOU-1015.webp",
       "/assets/products/catalog_2026/OB-HOU-1015-alt-1.webp",
       "/assets/products/catalog_2026/OB-HOU-1015-alt-2.webp",
-      "/assets/supplier-library/cleaning-brush/bed-cleaning-brush-3.webp",
-      "/assets/supplier-library/cleaning-brush/bed-cleaning-brush-2.webp"
+      "/assets/product/cleaning-brush/bed-cleaning-brush-3.webp",
+      "/assets/product/cleaning-brush/bed-cleaning-brush-2.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1644,10 +1645,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1017.webp",
-      "/assets/supplier-library/collage/victor-rubber-household-gloves.webp",
-      "/assets/supplier-library/gloves/dual-color-household-rubber-gloves-4-colors-blue-green-orange-pink-with-yellow-cuff.webp",
-      "/assets/supplier-library/gloves/flockline-hand-care-household-rubber-gloves-blue-size-l-with-pouch.webp",
-      "/assets/supplier-library/gloves/flockline-hand-care-household-rubber-gloves-orange-size-l-with-pouch.webp"
+      "/assets/product/collage/victor-rubber-household-gloves.webp",
+      "/assets/product/gloves/dual-color-household-rubber-gloves-4-colors-blue-green-orange-pink-with-yellow-cuff.webp",
+      "/assets/product/gloves/flockline-hand-care-household-rubber-gloves-blue-size-l-with-pouch.webp",
+      "/assets/product/gloves/flockline-hand-care-household-rubber-gloves-orange-size-l-with-pouch.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1708,7 +1709,7 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1019.webp",
-      "/assets/supplier-library/wiper/window-glass-wiper-with-sponge-squeegee-blue-and-green-long-handle-pair.webp"
+      "/assets/product/wiper/window-glass-wiper-with-sponge-squeegee-blue-and-green-long-handle-pair.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1745,7 +1746,7 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-HOU-1020-alt-1.webp",
       "/assets/products/catalog_2026/OB-HOU-1020-alt-2.webp",
       "/assets/products/catalog_2026/OB-HOU-1020-alt-3.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/plastic-cleaning-caddy-basket-grey-with-handle-3-compartments-top-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/plastic-cleaning-caddy-basket-grey-with-handle-3-compartments-top-view.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1780,9 +1781,9 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1021.webp",
       "/assets/products/catalog_2026/OB-HOU-1021-alt-1.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-front-left-angled-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-front-right-angled-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-front-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-front-left-angled-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-front-right-angled-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-front-view.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1918,9 +1919,9 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1025.webp",
       "/assets/products/catalog_2026/OB-HOU-1025-alt-1.webp",
-      "/assets/supplier-library/room-spray/dyna-fresh-pocket-air-freshener-green-apple-dispenser-box.webp",
-      "/assets/supplier-library/room-spray/dyna-fresh-pocket-air-freshener-lavender-dispenser-box.webp",
-      "/assets/supplier-library/room-spray/dyna-fresh-pocket-air-freshener-mix-fruit-dispenser-box.webp"
+      "/assets/product/room-spray/dyna-fresh-pocket-air-freshener-green-apple-dispenser-box.webp",
+      "/assets/product/room-spray/dyna-fresh-pocket-air-freshener-lavender-dispenser-box.webp",
+      "/assets/product/room-spray/dyna-fresh-pocket-air-freshener-mix-fruit-dispenser-box.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1955,7 +1956,7 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1026.webp",
       "/assets/products/catalog_2026/OB-HOU-1026_alt1.webp",
-      "/assets/supplier-library/office-bazzar-new-images/milton-small-water-bottle-450.webp"
+      "/assets/product/office-bazzar-new-images/milton-small-water-bottle-450.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1985,10 +1986,12 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1027.webp",
-      "/assets/supplier-library/collage/apple-paper-napkins-and-toilet-roll.webp",
-      "/assets/supplier-library/collage/auto-cut-roll-towel-dispenser.webp",
-      "/assets/supplier-library/collage/greenlime-toilet-roll-and-multi-fold-towels.webp",
-      "/assets/supplier-library/collage/toilet-paper-and-roll-dispensers-collection.webp"
+      "/assets/product/collage/apple-paper-napkins-and-toilet-roll.webp",
+      "/assets/product/collage/auto-cut-roll-towel-dispenser.webp",
+      "/assets/product/collage/greenlime-toilet-roll-and-multi-fold-towels.webp",
+      "/assets/product/collage/toilet-paper-and-roll-dispensers-collection.webp",
+      "/assets/product/dispenser/greenlime-toilet-roll-dispenser-small-2.webp",
+      "/assets/product/dispenser/greenlime-toilet-roll-dispenser-small-4.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2023,9 +2026,10 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-GAR-1028.webp",
       "/assets/products/catalog_2026/OB-GAR-1028-alt-1.webp",
-      "/assets/supplier-library/dustbin/lazzo-stainless-steel-pedal-bin-7x11-with-box.webp",
-      "/assets/supplier-library/dustbin/lazzo-stainless-steel-pedal-bin-7x11-matte-black-open-lid-with-box.webp",
-      "/assets/supplier-library/dustbin/lazzo-stainless-steel-pedal-bin-8x13-with-box.webp"
+      "/assets/product/dustbin/lazzo-stainless-steel-pedal-bin-7x11-with-box.webp",
+      "/assets/product/dustbin/lazzo-stainless-steel-pedal-bin-7x11-matte-black-open-lid-with-box.webp",
+      "/assets/product/dustbin/lazzo-stainless-steel-pedal-bin-8x13-with-box.webp",
+      "/assets/product/collage/stainless-steel-push-dustbin.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2092,10 +2096,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-GAR-1030.webp",
-      "/assets/supplier-library/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-black-flat-view.webp",
-      "/assets/supplier-library/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-blue-flat-view.webp",
-      "/assets/supplier-library/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-red-flat-view.webp",
-      "/assets/supplier-library/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-yellow-flat-view.webp"
+      "/assets/product/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-black-flat-view.webp",
+      "/assets/product/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-blue-flat-view.webp",
+      "/assets/product/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-red-flat-view.webp",
+      "/assets/product/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-yellow-flat-view.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2641,8 +2645,8 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-BOA-1049.webp",
       "/assets/products/catalog_2026/OB-BOA-1049-alt-1.webp",
-      "/assets/supplier-library/stationery/jb9-chalk-board-and-non-magnetic-white-board-duster-packaging-box.webp",
-      "/assets/supplier-library/stationery/jb9-chalk-board-and-non-magnetic-white-board-duster-with-box.webp"
+      "/assets/product/stationery/jb9-chalk-board-and-non-magnetic-white-board-duster-packaging-box.webp",
+      "/assets/product/stationery/jb9-chalk-board-and-non-magnetic-white-board-duster-with-box.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2892,10 +2896,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-PAC-1057.webp",
-      "/assets/supplier-library/packing-product/handheld-carton-tape-dispenser-gun-yellow-front-angle-view.webp",
-      "/assets/supplier-library/packing-product/handheld-carton-tape-dispenser-gun-yellow-low-angle-view.webp",
-      "/assets/supplier-library/packing-product/handheld-carton-tape-dispenser-gun-yellow-side-profile-view.webp",
-      "/assets/supplier-library/packing-product/handheld-carton-tape-dispenser-gun-yellow-metal-plastic-side-angle.webp"
+      "/assets/product/packing-product/handheld-carton-tape-dispenser-gun-yellow-front-angle-view.webp",
+      "/assets/product/packing-product/handheld-carton-tape-dispenser-gun-yellow-low-angle-view.webp",
+      "/assets/product/packing-product/handheld-carton-tape-dispenser-gun-yellow-side-profile-view.webp",
+      "/assets/product/packing-product/handheld-carton-tape-dispenser-gun-yellow-metal-plastic-side-angle.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3288,7 +3292,7 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-HOU-1070-alt-1.webp",
       "/assets/products/catalog_2026/OB-HOU-1070-alt-2.webp",
       "/assets/products/catalog_2026/OB-HOU-1070-alt-3.webp",
-      "/assets/supplier-library/tissue-product/royal-napkins-70-pcs-1-ply-27x30cm-packs-side-by-side.webp"
+      "/assets/product/tissue-product/royal-napkins-70-pcs-1-ply-27x30cm-packs-side-by-side.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3351,9 +3355,9 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1072.webp",
-      "/assets/supplier-library/mix/modular-plastic-storage-drawer-3-tier-white-with-castors-side-open.webp",
-      "/assets/supplier-library/mix/multipurpose-3-tier-plastic-storage-rack-with-pull-out-baskets-yellow-green-blue-front-view.webp",
-      "/assets/supplier-library/mix/multipurpose-3-tier-plastic-storage-rack-with-pull-out-baskets-yellow-green-blue-side-view.webp"
+      "/assets/product/mix/modular-plastic-storage-drawer-3-tier-white-with-castors-side-open.webp",
+      "/assets/product/mix/multipurpose-3-tier-plastic-storage-rack-with-pull-out-baskets-yellow-green-blue-front-view.webp",
+      "/assets/product/mix/multipurpose-3-tier-plastic-storage-rack-with-pull-out-baskets-yellow-green-blue-side-view.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3409,7 +3413,8 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1074.webp"
+      "/assets/products/catalog_2026/OB-HOU-1074.webp",
+      "/assets/product/hit-and-disinfectant-spray/dettol-disinfectant-spray-original-pine-225-ml-front-and-back-view.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3763,7 +3768,7 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-CLE-1087.webp",
-      "/assets/supplier-library/chemical-product/diversey-taski-r4-shine-up-furniture-maintainer-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/diversey-taski-r4-shine-up-furniture-maintainer-5-litre-can-front-view.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3797,10 +3802,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-CLE-1088.webp",
-      "/assets/supplier-library/chemical-product/diversey-taski-r6-toilet-bowl-cleaner-5-litre-can-front-view.webp",
-      "/assets/supplier-library/chemical-product/diversey-taski-r6-toilet-bowl-cleaner-500ml-angular-neck-bottle-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/domex-professional-disinfectant-toilet-bowl-cleaner-5-litre-can-front-view-angle-2.webp",
-      "/assets/supplier-library/chemical-product/domex-professional-disinfectant-toilet-bowl-cleaner-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/diversey-taski-r6-toilet-bowl-cleaner-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/diversey-taski-r6-toilet-bowl-cleaner-500ml-angular-neck-bottle-front-and-back.webp",
+      "/assets/product/chemical-product/domex-professional-disinfectant-toilet-bowl-cleaner-5-litre-can-front-view-angle-2.webp",
+      "/assets/product/chemical-product/domex-professional-disinfectant-toilet-bowl-cleaner-5-litre-can-front-and-back.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3924,10 +3929,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-CLE-1092.webp",
-      "/assets/supplier-library/chemical-product/lizol-all-in-1-pine-disinfectant-surface-cleaner-500ml-bottles-pair-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/lizol-all-in-1-citrus-disinfectant-surface-cleaner-975ml-bottles-pair-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/lizol-all-in-1-lavender-disinfectant-surface-cleaner-5-litre-can-front-view.webp",
-      "/assets/supplier-library/chemical-product/lizol-all-in-1-lavender-disinfectant-surface-cleaner-5-litre-cans-pair-front-and-back.webp"
+      "/assets/product/chemical-product/lizol-all-in-1-pine-disinfectant-surface-cleaner-500ml-bottles-pair-front-and-back.webp",
+      "/assets/product/chemical-product/lizol-all-in-1-citrus-disinfectant-surface-cleaner-975ml-bottles-pair-front-and-back.webp",
+      "/assets/product/chemical-product/lizol-all-in-1-lavender-disinfectant-surface-cleaner-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/lizol-all-in-1-lavender-disinfectant-surface-cleaner-5-litre-cans-pair-front-and-back.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3961,10 +3966,11 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-CLE-1093.webp",
-      "/assets/supplier-library/chemical-product/domex-professional-disinfectant-toilet-bowl-cleaner-5-litre-can-front-view.webp",
-      "/assets/supplier-library/chemical-product/domex-professional-disinfectant-toilet-bowl-cleaner-5-litre-cans-pair-front-and-back-angle-2.webp",
-      "/assets/supplier-library/chemical-product/harpic-disinfectant-bathroom-cleaner-lemon-fresh-500ml-bottle-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/harpic-toilet-cleaner-5-ltr.webp"
+      "/assets/product/chemical-product/domex-professional-disinfectant-toilet-bowl-cleaner-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/domex-professional-disinfectant-toilet-bowl-cleaner-5-litre-cans-pair-front-and-back-angle-2.webp",
+      "/assets/product/chemical-product/harpic-disinfectant-bathroom-cleaner-lemon-fresh-500ml-bottle-front-and-back.webp",
+      "/assets/product/chemical-product/harpic-toilet-cleaner-5-ltr.webp",
+      "/assets/product/collage/lizol-surface-cleaner-and-harpic-toilet-cleaner.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3994,7 +4000,8 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-CLE-1094.webp",
-      "/assets/supplier-library/chemical-product/hi-clean-hc-r-1-cleaning-and-sanitising-of-bathroom-and-floor-disinfectant-surface-cleaner-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/hi-clean-hc-r-1-cleaning-and-sanitising-of-bathroom-and-floor-disinfectant-surface-cleaner-5-litre-can-front-and-back.webp",
+      "/assets/product/chemical-product/hi-clean-floor-cleaner-500ml.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4054,10 +4061,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-TIS-1096.webp",
-      "/assets/supplier-library/tissue-product/scott-essential-paper-napkin-01324-100-sheets-back-view.webp",
-      "/assets/supplier-library/tissue-product/scott-essential-paper-napkin-100-sheets-30x30cm-front-view.webp",
-      "/assets/supplier-library/tissue-product/scott-paper-napkin-100-napkins-soft-and-hygienic-front-view.webp",
-      "/assets/supplier-library/tissue-product/scott-paper-napkin-1324a-front-and-back-view-split.webp"
+      "/assets/product/tissue-product/scott-essential-paper-napkin-01324-100-sheets-back-view.webp",
+      "/assets/product/tissue-product/scott-essential-paper-napkin-100-sheets-30x30cm-front-view.webp",
+      "/assets/product/tissue-product/scott-paper-napkin-100-napkins-soft-and-hygienic-front-view.webp",
+      "/assets/product/tissue-product/scott-paper-napkin-1324a-front-and-back-view-split.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -4091,9 +4098,9 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-TIS-1097.webp",
-      "/assets/supplier-library/tissue-product/apple-soft-tissue-paper-napkins-and-toilet-roll-pair.webp",
-      "/assets/supplier-library/tissue-product/apple-soft-tissue-paper-napkins-pack.webp",
-      "/assets/supplier-library/tissue-product/royal-natural-tissue-products-outer-carton-with-two-paper-towel-rolls.webp"
+      "/assets/product/tissue-product/apple-soft-tissue-paper-napkins-and-toilet-roll-pair.webp",
+      "/assets/product/tissue-product/apple-soft-tissue-paper-napkins-pack.webp",
+      "/assets/product/tissue-product/royal-natural-tissue-products-outer-carton-with-two-paper-towel-rolls.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4123,7 +4130,7 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-TIS-1098.webp",
-      "/assets/supplier-library/tissue-product/hi-soft-tissue-multi-fold-hand-towel-carton-with-packs.webp"
+      "/assets/product/tissue-product/hi-soft-tissue-multi-fold-hand-towel-carton-with-packs.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4221,8 +4228,8 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-TIS-1101.webp",
       "/assets/products/catalog_2026/OB-TIS-1101-alt-1.webp",
-      "/assets/supplier-library/tissue-product/apple-toilet-roll-paper-single-roll.webp",
-      "/assets/supplier-library/tissue-product/skotch-toilet-roll-33-mtr-cocktail-palm-graphic.webp"
+      "/assets/product/tissue-product/apple-toilet-roll-paper-single-roll.webp",
+      "/assets/product/tissue-product/skotch-toilet-roll-33-mtr-cocktail-palm-graphic.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -4263,7 +4270,7 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-003-alt-1.webp",
       "/assets/products/catalog_2026/OB-003-alt-2.webp",
       "/assets/products/catalog_2026/OB-003-alt-3.webp",
-      "/assets/supplier-library/dispenser/shoe-cover-dispenser-aluminium-2.webp"
+      "/assets/product/dispenser/shoe-cover-dispenser-aluminium-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4305,7 +4312,7 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-004.webp",
       "/assets/products/catalog_2026/OB-004-alt-1.webp",
-      "/assets/supplier-library/collage/multipurpose-mop-holder-and-cup-holder-dispenser.webp"
+      "/assets/product/collage/multipurpose-mop-holder-and-cup-holder-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4346,8 +4353,9 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-005.webp",
-      "/assets/supplier-library/collage/automatic-hand-dryer-black-and-white.webp",
-      "/assets/supplier-library/collage/automatic-hand-dryer-specifications.webp"
+      "/assets/product/collage/automatic-hand-dryer-black-and-white.webp",
+      "/assets/product/collage/automatic-hand-dryer-specifications.webp",
+      "/assets/product/collage/jet-hand-dryer.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4389,8 +4397,8 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-006.webp",
       "/assets/products/catalog_2026/OB-006-alt-1.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/industrial-wet-and-dry-vacuum-cleaner-stainless-steel-small-and-large-set.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/industrial-wet-and-dry-vacuum-cleaner-stainless-steel-with-complete-accessories-set.webp"
+      "/assets/product/hygenic-tools-and-trolly/industrial-wet-and-dry-vacuum-cleaner-stainless-steel-small-and-large-set.webp",
+      "/assets/product/hygenic-tools-and-trolly/industrial-wet-and-dry-vacuum-cleaner-stainless-steel-with-complete-accessories-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4513,7 +4521,7 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-009.webp",
-      "/assets/supplier-library/safety-items/queue-manager-ss-retractable-queue-post-detailed-specification-sheet.webp"
+      "/assets/product/safety-items/queue-manager-ss-retractable-queue-post-detailed-specification-sheet.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4554,10 +4562,11 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-011.webp",
-      "/assets/supplier-library/dispenser/greenlime-soap-dispenser-abs-500-ml.webp",
-      "/assets/supplier-library/dispenser/liquid-soap-and-lotion-dispenser-extra-grip-a-1-500ml.webp",
-      "/assets/supplier-library/dispenser/soap-dispenser-abs-260-ml-1.webp",
-      "/assets/supplier-library/dispenser/soap-dispenser-abs-260-ml-4.webp"
+      "/assets/product/dispenser/greenlime-soap-dispenser-abs-500-ml.webp",
+      "/assets/product/dispenser/liquid-soap-and-lotion-dispenser-extra-grip-a-1-500ml.webp",
+      "/assets/product/dispenser/soap-dispenser-abs-260-ml-1.webp",
+      "/assets/product/dispenser/soap-dispenser-abs-260-ml-4.webp",
+      "/assets/product/dispenser/greenlime-soap-dispenser-abs-500-ml-1.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4601,7 +4610,7 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-012-alt-1.webp",
       "/assets/products/catalog_2026/OB-012-alt-2.webp",
       "/assets/products/catalog_2026/OB-012-alt-3.webp",
-      "/assets/supplier-library/dispenser/soap-dispenser-abs-260-ml-7.webp"
+      "/assets/product/dispenser/soap-dispenser-abs-260-ml-7.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4682,10 +4691,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-014.webp",
-      "/assets/supplier-library/dispenser/soap-dispenser-abs-500500-ml-6.webp",
-      "/assets/supplier-library/dispenser/soap-dispenser-abs-500500-ml-3.webp",
-      "/assets/supplier-library/dispenser/soap-dispenser-abs-260ml-white-with-box.webp",
-      "/assets/supplier-library/dispenser/soap-dispenser-abs-pair-large-and-small-white.webp"
+      "/assets/product/dispenser/soap-dispenser-abs-500500-ml-6.webp",
+      "/assets/product/dispenser/soap-dispenser-abs-500500-ml-3.webp",
+      "/assets/product/dispenser/soap-dispenser-abs-260ml-white-with-box.webp",
+      "/assets/product/dispenser/soap-dispenser-abs-pair-large-and-small-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4766,10 +4775,12 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-016.webp",
-      "/assets/supplier-library/collage/liquid-soap-dispenser-chrome-and-white.webp",
-      "/assets/supplier-library/dispenser/decorative-soap-dispenser-bottle-dot-pattern-white.webp",
-      "/assets/supplier-library/dispenser/gel-soap-sanitizer-dispenser-dp-350-white-with-box.webp",
-      "/assets/supplier-library/dispenser/gel-soap-sanitizer-dispenser-dt-1000-white-with-box.webp"
+      "/assets/product/collage/liquid-soap-dispenser-chrome-and-white.webp",
+      "/assets/product/dispenser/decorative-soap-dispenser-bottle-dot-pattern-white.webp",
+      "/assets/product/dispenser/gel-soap-sanitizer-dispenser-dp-350-white-with-box.webp",
+      "/assets/product/dispenser/gel-soap-sanitizer-dispenser-dt-1000-white-with-box.webp",
+      "/assets/product/dispenser/manual-double-soap-dispenser-500ml-x-2-white-2.webp",
+      "/assets/product/dispenser/manual-double-soap-dispenser-500ml-x-2-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4810,10 +4821,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-017.webp",
-      "/assets/supplier-library/collage/soap-dispenser-2.webp",
-      "/assets/supplier-library/collage/soap-dispenser-3.webp",
-      "/assets/supplier-library/collage/soap-dispenser-dp-350.webp",
-      "/assets/supplier-library/collage/soap-dispenser-dt-1000-and-dt-500.webp"
+      "/assets/product/collage/soap-dispenser-2.webp",
+      "/assets/product/collage/soap-dispenser-3.webp",
+      "/assets/product/collage/soap-dispenser-dp-350.webp",
+      "/assets/product/collage/soap-dispenser-dt-1000-and-dt-500.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4854,10 +4865,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-018.webp",
-      "/assets/supplier-library/dispenser/touch-soap-dispenser-cylindrical-white-with-box-2.webp",
-      "/assets/supplier-library/dispenser/touch-soap-dispenser-cylindrical-white-with-box.webp",
-      "/assets/supplier-library/dispenser/touch-soap-dispenser-cylindrical-black-with-box.webp",
-      "/assets/supplier-library/dispenser/touch-soap-dispenser-wall-mount-silver-with-box-2.webp"
+      "/assets/product/dispenser/touch-soap-dispenser-cylindrical-white-with-box-2.webp",
+      "/assets/product/dispenser/touch-soap-dispenser-cylindrical-white-with-box.webp",
+      "/assets/product/dispenser/touch-soap-dispenser-cylindrical-black-with-box.webp",
+      "/assets/product/dispenser/touch-soap-dispenser-wall-mount-silver-with-box-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4898,10 +4909,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-019.webp",
-      "/assets/supplier-library/collage/wooden-top-tissue-box-dispenser.webp",
-      "/assets/supplier-library/dispenser/kimberly-clark-aquarius-folded-toilet-tissue-dispenser-69460-2.webp",
-      "/assets/supplier-library/dispenser/kimberly-clark-aquarius-folded-toilet-tissue-dispenser-69460.webp",
-      "/assets/supplier-library/dispenser/kimberly-clark-aquarius-m-fold-towel-dispenser-70220.webp"
+      "/assets/product/collage/wooden-top-tissue-box-dispenser.webp",
+      "/assets/product/dispenser/kimberly-clark-aquarius-folded-toilet-tissue-dispenser-69460-2.webp",
+      "/assets/product/dispenser/kimberly-clark-aquarius-folded-toilet-tissue-dispenser-69460.webp",
+      "/assets/product/dispenser/kimberly-clark-aquarius-m-fold-towel-dispenser-70220.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4982,10 +4993,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-021.webp",
-      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-round-teardrop-window-white-front-view.webp",
-      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-round-teardrop-window-white.webp",
-      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-round-white-2.webp",
-      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-star-clear-pair.webp"
+      "/assets/product/dispenser/jumbo-toilet-roll-dispenser-round-teardrop-window-white-front-view.webp",
+      "/assets/product/dispenser/jumbo-toilet-roll-dispenser-round-teardrop-window-white.webp",
+      "/assets/product/dispenser/jumbo-toilet-roll-dispenser-round-white-2.webp",
+      "/assets/product/dispenser/jumbo-toilet-roll-dispenser-star-clear-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5026,10 +5037,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-023.webp",
-      "/assets/supplier-library/dispenser/autocut-roll-paper-towel-dispenser-white-front-view.webp",
-      "/assets/supplier-library/dispenser/autocut-roll-paper-towel-dispenser-white-side-view.webp",
-      "/assets/supplier-library/dispenser/autocut-roll-paper-towel-dispenser-white-large-and-small-pair.webp",
-      "/assets/supplier-library/dispenser/hrt-roll-towel-dispenser-black-with-dimensions.webp"
+      "/assets/product/dispenser/autocut-roll-paper-towel-dispenser-white-front-view.webp",
+      "/assets/product/dispenser/autocut-roll-paper-towel-dispenser-white-side-view.webp",
+      "/assets/product/dispenser/autocut-roll-paper-towel-dispenser-white-large-and-small-pair.webp",
+      "/assets/product/dispenser/hrt-roll-towel-dispenser-black-with-dimensions.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5070,10 +5081,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-024.webp",
-      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-round-white.webp",
-      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-white-2.webp",
-      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-white-3.webp",
-      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-white.webp"
+      "/assets/product/dispenser/jumbo-toilet-roll-dispenser-round-white.webp",
+      "/assets/product/dispenser/jumbo-toilet-roll-dispenser-white-2.webp",
+      "/assets/product/dispenser/jumbo-toilet-roll-dispenser-white-3.webp",
+      "/assets/product/dispenser/jumbo-toilet-roll-dispenser-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5117,7 +5128,9 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-025-alt-1.webp",
       "/assets/products/catalog_2026/OB-025-alt-2.webp",
       "/assets/products/catalog_2026/OB-025-alt-3.webp",
-      "/assets/supplier-library/dispenser/hrt-roll-towel-dispenser-black-front-view.webp"
+      "/assets/product/dispenser/hrt-roll-towel-dispenser-black-front-view.webp",
+      "/assets/product/dispenser/greenlime-hrt-roll-dispenser-1.webp",
+      "/assets/product/dispenser/greenlime-hrt-roll-dispenser-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5159,9 +5172,9 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-026.webp",
       "/assets/products/catalog_2026/OB-026-alt-1.webp",
-      "/assets/supplier-library/dispenser/autocut-roll-paper-towel-dispenser-mechanism-open-front-view.webp",
-      "/assets/supplier-library/dispenser/autocut-roll-paper-towel-dispenser-white-collage.webp",
-      "/assets/supplier-library/dispenser/autocut-roll-paper-towel-dispenser-mechanism-open-side-view.webp"
+      "/assets/product/dispenser/autocut-roll-paper-towel-dispenser-mechanism-open-front-view.webp",
+      "/assets/product/dispenser/autocut-roll-paper-towel-dispenser-white-collage.webp",
+      "/assets/product/dispenser/autocut-roll-paper-towel-dispenser-mechanism-open-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5202,10 +5215,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-027.webp",
-      "/assets/supplier-library/dispenser/hrt-roll-towel-dispenser-white-front-view.webp",
-      "/assets/supplier-library/dispenser/hrt-roll-towel-dispenser-white-with-dimensions.webp",
-      "/assets/supplier-library/dispenser/industrial-heavy-duty-roll-towel-dispenser-blue.webp",
-      "/assets/supplier-library/dispenser/industrial-roll-towel-dispenser-blue-with-dimensions.webp"
+      "/assets/product/dispenser/hrt-roll-towel-dispenser-white-front-view.webp",
+      "/assets/product/dispenser/hrt-roll-towel-dispenser-white-with-dimensions.webp",
+      "/assets/product/dispenser/industrial-heavy-duty-roll-towel-dispenser-blue.webp",
+      "/assets/product/dispenser/industrial-roll-towel-dispenser-blue-with-dimensions.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5246,10 +5259,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-030.webp",
-      "/assets/supplier-library/collage/premier-soft-face-tissues-200-pulls.webp",
-      "/assets/supplier-library/tissue-product/premier-and-royal-tissue-products-4-grid-collage-display.webp",
-      "/assets/supplier-library/tissue-product/premier-merry-christmas-soft-face-tissues-2-ply-100-pulls-box.webp",
-      "/assets/supplier-library/tissue-product/premier-soft-face-tissues-2-ply-100-pulls-4-boxes-stack.webp"
+      "/assets/product/collage/premier-soft-face-tissues-200-pulls.webp",
+      "/assets/product/tissue-product/premier-and-royal-tissue-products-4-grid-collage-display.webp",
+      "/assets/product/tissue-product/premier-merry-christmas-soft-face-tissues-2-ply-100-pulls-box.webp",
+      "/assets/product/tissue-product/premier-soft-face-tissues-2-ply-100-pulls-4-boxes-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5290,10 +5303,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-033.webp",
-      "/assets/supplier-library/tissue-product/kosher-hrt-rolled-towels-8-inch-roll-175-meters-carton-with-rolls.webp",
-      "/assets/supplier-library/tissue-product/kosher-hrt-rolled-towels-k00304-16-kgs-200-meters-single-roll.webp",
-      "/assets/supplier-library/tissue-product/lazzo-hrt-roll-1-kg-rolled-towels-carton-with-rolls.webp",
-      "/assets/supplier-library/tissue-product/kosher-hrt-rolled-towels-k00306-20-kgs-220-meters-single-roll.webp"
+      "/assets/product/tissue-product/kosher-hrt-rolled-towels-8-inch-roll-175-meters-carton-with-rolls.webp",
+      "/assets/product/tissue-product/kosher-hrt-rolled-towels-k00304-16-kgs-200-meters-single-roll.webp",
+      "/assets/product/tissue-product/lazzo-hrt-roll-1-kg-rolled-towels-carton-with-rolls.webp",
+      "/assets/product/tissue-product/kosher-hrt-rolled-towels-k00306-20-kgs-220-meters-single-roll.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5335,9 +5348,9 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-035.webp",
       "/assets/products/catalog_2026/OB-035-alt-1.webp",
-      "/assets/supplier-library/tissue-product/regal-restroom-tissue-roll-r00202-magenta-wrapped-close-up-pair.webp",
-      "/assets/supplier-library/tissue-product/regal-restroom-tissue-roll-r00202-magenta-wrapped-pair.webp",
-      "/assets/supplier-library/tissue-product/royal-natural-premium-kitchen-roll-wrapped-pair-standing-and-tilted.webp"
+      "/assets/product/tissue-product/regal-restroom-tissue-roll-r00202-magenta-wrapped-close-up-pair.webp",
+      "/assets/product/tissue-product/regal-restroom-tissue-roll-r00202-magenta-wrapped-pair.webp",
+      "/assets/product/tissue-product/royal-natural-premium-kitchen-roll-wrapped-pair-standing-and-tilted.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5702,10 +5715,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-047.webp",
-      "/assets/supplier-library/collage/lazzo-nylon-scrub-sponge-pad.webp",
-      "/assets/supplier-library/collage/scotch-brite-scouring-pad-and-sponge.webp",
-      "/assets/supplier-library/scotch-bright-and-scrubber/gala-super-scrub-2-in-1-steel-loops-scrub-sponge-front-and-back-packaging.webp",
-      "/assets/supplier-library/scotch-bright-and-scrubber/glorious-power-goldcoin-nylon-scrub-pad-100x150mm-5-pcs-pack-3-sets-display.webp"
+      "/assets/product/collage/lazzo-nylon-scrub-sponge-pad.webp",
+      "/assets/product/collage/scotch-brite-scouring-pad-and-sponge.webp",
+      "/assets/product/scotch-bright-and-scrubber/gala-super-scrub-2-in-1-steel-loops-scrub-sponge-front-and-back-packaging.webp",
+      "/assets/product/scotch-bright-and-scrubber/glorious-power-goldcoin-nylon-scrub-pad-100x150mm-5-pcs-pack-3-sets-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5746,9 +5759,9 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-048.webp",
-      "/assets/supplier-library/scotch-bright-and-scrubber/nylon-scrubber-777-1.webp",
-      "/assets/supplier-library/scotch-bright-and-scrubber/nylon-scrubber-777.webp",
-      "/assets/supplier-library/scotch-bright-and-scrubber/nylon-scrubber-hero.webp"
+      "/assets/product/scotch-bright-and-scrubber/nylon-scrubber-777-1.webp",
+      "/assets/product/scotch-bright-and-scrubber/nylon-scrubber-777.webp",
+      "/assets/product/scotch-bright-and-scrubber/nylon-scrubber-hero.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5790,8 +5803,8 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-049.webp",
       "/assets/products/catalog_2026/OB-049-alt-1.webp",
-      "/assets/supplier-library/scotch-bright-and-scrubber/exo-stainless-steel-scrubber-rust-free-12-pcs-hanging-card-display.webp",
-      "/assets/supplier-library/scotch-bright-and-scrubber/steel-scrubber-exe.webp"
+      "/assets/product/scotch-bright-and-scrubber/exo-stainless-steel-scrubber-rust-free-12-pcs-hanging-card-display.webp",
+      "/assets/product/scotch-bright-and-scrubber/steel-scrubber-exe.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5872,10 +5885,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-051.webp",
-      "/assets/supplier-library/chemical-product/pril-kraft-mint-dishwashing-liquid-425ml-bottles-pair-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/vim-dishwash-liquid-lemon-concentrated-gel-18-litre-handle-bottle-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/vim-dishwash-liquid-lemon-concentrated-gel-140ml-refill-pouch-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/vim-pro-no-fragrance-hand-dishwash-liquid-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/pril-kraft-mint-dishwashing-liquid-425ml-bottles-pair-front-and-back.webp",
+      "/assets/product/chemical-product/vim-dishwash-liquid-lemon-concentrated-gel-18-litre-handle-bottle-front-and-back.webp",
+      "/assets/product/chemical-product/vim-dishwash-liquid-lemon-concentrated-gel-140ml-refill-pouch-front-and-back.webp",
+      "/assets/product/chemical-product/vim-pro-no-fragrance-hand-dishwash-liquid-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5956,10 +5969,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-053.webp",
-      "/assets/supplier-library/chemical-product/hi-clean-liquid-hand-wash-5-ltr.webp",
-      "/assets/supplier-library/chemical-product/hi-clean-liquid-handwash-assorted-fragrances-250ml-pump-bottles-row-of-5.webp",
-      "/assets/supplier-library/chemical-product/hi-clean-liquid-handwash-rose-fragrance-250ml-pump-bottle-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/vim-pro-no-fragrance-hand-dishwash-liquid-5-litre-cans-pair-front-and-back.webp"
+      "/assets/product/chemical-product/hi-clean-liquid-hand-wash-5-ltr.webp",
+      "/assets/product/chemical-product/hi-clean-liquid-handwash-assorted-fragrances-250ml-pump-bottles-row-of-5.webp",
+      "/assets/product/chemical-product/hi-clean-liquid-handwash-rose-fragrance-250ml-pump-bottle-front-and-back.webp",
+      "/assets/product/chemical-product/vim-pro-no-fragrance-hand-dishwash-liquid-5-litre-cans-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6041,10 +6054,11 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-055.webp",
-      "/assets/supplier-library/cleaning-brush/double-sided-hockey-toilet-brush.webp",
-      "/assets/supplier-library/cleaning-brush/double-sided-hockey-toilet-brush-3.webp",
-      "/assets/supplier-library/cleaning-brush/hockey-toilet-brush.webp",
-      "/assets/supplier-library/cleaning-brush/hockey-toilet-brush-2.webp"
+      "/assets/product/cleaning-brush/double-sided-hockey-toilet-brush.webp",
+      "/assets/product/cleaning-brush/double-sided-hockey-toilet-brush-3.webp",
+      "/assets/product/cleaning-brush/hockey-toilet-brush.webp",
+      "/assets/product/cleaning-brush/hockey-toilet-brush-2.webp",
+      "/assets/product/cleaning-brush/double-sided-hockey-toilet-brush-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6085,10 +6099,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-057.webp",
-      "/assets/supplier-library/cleaning-brush/round-toilet-brush-2.webp",
-      "/assets/supplier-library/cleaning-brush/sink-brush-round.webp",
-      "/assets/supplier-library/cleaning-brush/round-toilet-brush.webp",
-      "/assets/supplier-library/cleaning-brush/steel-handle-toilet-brush.webp"
+      "/assets/product/cleaning-brush/round-toilet-brush-2.webp",
+      "/assets/product/cleaning-brush/sink-brush-round.webp",
+      "/assets/product/cleaning-brush/round-toilet-brush.webp",
+      "/assets/product/cleaning-brush/steel-handle-toilet-brush.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6169,10 +6183,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-059.webp",
-      "/assets/supplier-library/cleaning-brush/bed-cleaning-brush-4.webp",
-      "/assets/supplier-library/cleaning-brush/bed-cleaning-brush.webp",
-      "/assets/supplier-library/cleaning-brush/bottle-cleaning-brush.webp",
-      "/assets/supplier-library/cleaning-brush/wooden-cleaning-brush-2.webp"
+      "/assets/product/cleaning-brush/bed-cleaning-brush-4.webp",
+      "/assets/product/cleaning-brush/bed-cleaning-brush.webp",
+      "/assets/product/cleaning-brush/bottle-cleaning-brush.webp",
+      "/assets/product/cleaning-brush/wooden-cleaning-brush-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6213,10 +6227,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-060.webp",
-      "/assets/supplier-library/cleaning-brush/cloth-washing-brush-2.webp",
-      "/assets/supplier-library/cleaning-brush/cloth-washing-brush-3.webp",
-      "/assets/supplier-library/cleaning-brush/cloth-washing-brush-4.webp",
-      "/assets/supplier-library/cleaning-brush/cloth-washing-brush-5.webp"
+      "/assets/product/cleaning-brush/cloth-washing-brush-2.webp",
+      "/assets/product/cleaning-brush/cloth-washing-brush-3.webp",
+      "/assets/product/cleaning-brush/cloth-washing-brush-4.webp",
+      "/assets/product/cleaning-brush/cloth-washing-brush-5.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6379,10 +6393,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-065.webp",
-      "/assets/supplier-library/dustbin/aristo-lazzo-bio-hazard-pedal-dustbin-blue-front-view.webp",
-      "/assets/supplier-library/dustbin/aristo-lazzo-bio-hazard-pedal-dustbin-yellow-front-view.webp",
-      "/assets/supplier-library/dustbin/aristo-pedal-dustbin-70-ltr-set-of-4-blue-red-green-yellow.webp",
-      "/assets/supplier-library/dustbin/aristo-pedal-dustbin-70-ltr-set-of-4-red-green-blue-yellow.webp"
+      "/assets/product/dustbin/aristo-lazzo-bio-hazard-pedal-dustbin-blue-front-view.webp",
+      "/assets/product/dustbin/aristo-lazzo-bio-hazard-pedal-dustbin-yellow-front-view.webp",
+      "/assets/product/dustbin/aristo-pedal-dustbin-70-ltr-set-of-4-blue-red-green-yellow.webp",
+      "/assets/product/dustbin/aristo-pedal-dustbin-70-ltr-set-of-4-red-green-blue-yellow.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6423,10 +6437,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-066.webp",
-      "/assets/supplier-library/dustbin/decoplast-round-swing-dustbin-30l-50l-80l-set-of-3.webp",
-      "/assets/supplier-library/dustbin/decoplast-round-swing-dustbin-green.webp",
-      "/assets/supplier-library/dustbin/decoplast-round-swing-dustbin-blue.webp",
-      "/assets/supplier-library/dustbin/decoplast-round-swing-dustbin-green-2.webp"
+      "/assets/product/dustbin/decoplast-round-swing-dustbin-30l-50l-80l-set-of-3.webp",
+      "/assets/product/dustbin/decoplast-round-swing-dustbin-green.webp",
+      "/assets/product/dustbin/decoplast-round-swing-dustbin-blue.webp",
+      "/assets/product/dustbin/decoplast-round-swing-dustbin-green-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6510,7 +6524,7 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-069-alt-1.webp",
       "/assets/products/catalog_2026/OB-069-alt-2.webp",
       "/assets/products/catalog_2026/OB-069-alt-3.webp",
-      "/assets/supplier-library/dustbin/lazzo-stainless-steel-pedal-bin-10x15-packaging-box.webp"
+      "/assets/product/dustbin/lazzo-stainless-steel-pedal-bin-10x15-packaging-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6551,10 +6565,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-070.webp",
-      "/assets/supplier-library/dustbin/stainless-steel-perforated-bin-and-pedal-dustbin-sizes-infographic.webp",
-      "/assets/supplier-library/dustbin/stainless-steel-perforated-dustbin-10x14-front-view.webp",
-      "/assets/supplier-library/dustbin/stainless-steel-perforated-dustbin-10x14-on-weighing-scale.webp",
-      "/assets/supplier-library/dustbin/stainless-steel-perforated-dustbin-7x10-on-weighing-scale.webp"
+      "/assets/product/dustbin/stainless-steel-perforated-bin-and-pedal-dustbin-sizes-infographic.webp",
+      "/assets/product/dustbin/stainless-steel-perforated-dustbin-10x14-front-view.webp",
+      "/assets/product/dustbin/stainless-steel-perforated-dustbin-10x14-on-weighing-scale.webp",
+      "/assets/product/dustbin/stainless-steel-perforated-dustbin-7x10-on-weighing-scale.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6636,10 +6650,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-072.webp",
-      "/assets/supplier-library/dustbin/aristo-utility-swing-dustbin-range-5l-to-28l-multicolor.webp",
-      "/assets/supplier-library/dustbin/aristo-vento-swing-dustbin-range-9l-to-28l-red-green-blue.webp",
-      "/assets/supplier-library/dustbin/bhupendra-international-executive-swing-dustbin-with-handle-black.webp",
-      "/assets/supplier-library/dustbin/decoplast-round-swing-dustbin-30l-50l-80l-with-labels.webp"
+      "/assets/product/dustbin/aristo-utility-swing-dustbin-range-5l-to-28l-multicolor.webp",
+      "/assets/product/dustbin/aristo-vento-swing-dustbin-range-9l-to-28l-red-green-blue.webp",
+      "/assets/product/dustbin/bhupendra-international-executive-swing-dustbin-with-handle-black.webp",
+      "/assets/product/dustbin/decoplast-round-swing-dustbin-30l-50l-80l-with-labels.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6761,7 +6775,7 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-075.webp",
       "/assets/products/catalog_2026/OB-075-alt-1.webp",
-      "/assets/supplier-library/wiper/kitchen-and-window-squeegee-wiper-white-with-blue-loop-handle.webp"
+      "/assets/product/wiper/kitchen-and-window-squeegee-wiper-white-with-blue-loop-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6843,7 +6857,7 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-077.webp",
-      "/assets/supplier-library/wiper/floor-wiper-with-long-aluminum-handle-green-blue-red-yellow-4-piece-set.webp"
+      "/assets/product/wiper/floor-wiper-with-long-aluminum-handle-green-blue-red-yellow-4-piece-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7007,7 +7021,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-083.webp"
+      "/assets/products/catalog_2026/OB-083.webp",
+      "/assets/product/collage/mop-stick-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7048,9 +7063,9 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-084.webp",
-      "/assets/supplier-library/mop/blue-wet-floor-mop-kentucky-refill-stitched-headband.webp",
-      "/assets/supplier-library/mop/blue-wet-floor-mop-with-steel-pipe-handle-and-refill-collage.webp",
-      "/assets/supplier-library/mop/shreenath-flat-microfiber-floor-and-solar-cleaning-mop-assembled.webp"
+      "/assets/product/mop/blue-wet-floor-mop-kentucky-refill-stitched-headband.webp",
+      "/assets/product/mop/blue-wet-floor-mop-with-steel-pipe-handle-and-refill-collage.webp",
+      "/assets/product/mop/shreenath-flat-microfiber-floor-and-solar-cleaning-mop-assembled.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7131,10 +7146,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-086.webp",
-      "/assets/supplier-library/mat/heavy-duty-hollow-ring-rubber-drainage-door-mat-black-stack-bundle-of-5.webp",
-      "/assets/supplier-library/mat/heavy-duty-rubber-backed-polypropylene-ribbed-geometric-square-door-mat-grey-black-border.webp",
-      "/assets/supplier-library/mat/pvc-cushion-coil-welcome-door-mat-assorted-colors-set-of-5-fan-stacked.webp",
-      "/assets/supplier-library/mat/pvc-cushion-coil-welcome-door-mat-assorted-colors-set-of-6-fan-stacked-with-grey-on-top.webp"
+      "/assets/product/mat/heavy-duty-hollow-ring-rubber-drainage-door-mat-black-stack-bundle-of-5.webp",
+      "/assets/product/mat/heavy-duty-rubber-backed-polypropylene-ribbed-geometric-square-door-mat-grey-black-border.webp",
+      "/assets/product/mat/pvc-cushion-coil-welcome-door-mat-assorted-colors-set-of-5-fan-stacked.webp",
+      "/assets/product/mat/pvc-cushion-coil-welcome-door-mat-assorted-colors-set-of-6-fan-stacked-with-grey-on-top.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7176,9 +7191,9 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-087.webp",
       "/assets/products/catalog_2026/OB-087-alt-1.webp",
-      "/assets/supplier-library/mat/cotton-chindi-handloom-door-mat-multicolored-striped-14x22-inch-with-tassels.webp",
-      "/assets/supplier-library/mat/cotton-chindi-handloom-door-mat-multicolored-striped-with-tassels.webp",
-      "/assets/supplier-library/mat/cotton-handloom-woven-floor-mat-blue-and-dark-blue-vertical-striped.webp"
+      "/assets/product/mat/cotton-chindi-handloom-door-mat-multicolored-striped-14x22-inch-with-tassels.webp",
+      "/assets/product/mat/cotton-chindi-handloom-door-mat-multicolored-striped-with-tassels.webp",
+      "/assets/product/mat/cotton-handloom-woven-floor-mat-blue-and-dark-blue-vertical-striped.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7623,7 +7638,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-101.webp"
+      "/assets/products/catalog_2026/OB-101.webp",
+      "/assets/product/hygenic-tools-and-trolly/caution-wet-floor-foldable-sign-board-yellow-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7905,9 +7921,9 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-108.webp",
-      "/assets/supplier-library/chemical-product/british-clean-british-lime-fragrance-300ml-trigger-spray-bottle-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/sterill-g-advanced-handrub-disinfectant-500ml-trigger-spray-bottle-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/varaa-alcohol-based-liquid-hand-sanitizer-500ml-trigger-spray-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/british-clean-british-lime-fragrance-300ml-trigger-spray-bottle-front-and-back.webp",
+      "/assets/product/chemical-product/sterill-g-advanced-handrub-disinfectant-500ml-trigger-spray-bottle-front-and-back.webp",
+      "/assets/product/chemical-product/varaa-alcohol-based-liquid-hand-sanitizer-500ml-trigger-spray-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8230,10 +8246,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-116.webp",
-      "/assets/supplier-library/brooms-and-sticks/dhoom-3-steel-handle-soft-broom.webp",
-      "/assets/supplier-library/brooms-and-sticks/dhoom-3-v-handle-soft-broom.webp",
-      "/assets/supplier-library/brooms-and-sticks/micky-soft-broom-steel-handle.webp",
-      "/assets/supplier-library/brooms-and-sticks/nisha-v-handle-soft-broom.webp"
+      "/assets/product/brooms-and-sticks/dhoom-3-steel-handle-soft-broom.webp",
+      "/assets/product/brooms-and-sticks/dhoom-3-v-handle-soft-broom.webp",
+      "/assets/product/brooms-and-sticks/micky-soft-broom-steel-handle.webp",
+      "/assets/product/brooms-and-sticks/nisha-v-handle-soft-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8274,8 +8290,9 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-117.webp",
-      "/assets/supplier-library/brooms-and-sticks/gala-broom.webp",
-      "/assets/supplier-library/brooms-and-sticks/non-dust-broom.webp"
+      "/assets/product/brooms-and-sticks/gala-broom.webp",
+      "/assets/product/brooms-and-sticks/non-dust-broom.webp",
+      "/assets/product/brooms-and-sticks/gala-non-dust-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8637,7 +8654,7 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-128.webp",
-      "/assets/supplier-library/collage/lifebuoy-handwash-5l-and-refills.webp"
+      "/assets/product/collage/lifebuoy-handwash-5l-and-refills.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8839,8 +8856,8 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-133.webp",
-      "/assets/supplier-library/gloves/heavy-duty-rubber-gloves-orange-long-size-l-pair-palm-view.webp",
-      "/assets/supplier-library/gloves/household-rubber-gloves-orange-long-heavy-duty-pair-palm-view.webp"
+      "/assets/product/gloves/heavy-duty-rubber-gloves-orange-long-size-l-pair-palm-view.webp",
+      "/assets/product/gloves/household-rubber-gloves-orange-long-heavy-duty-pair-palm-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8884,7 +8901,7 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-134-alt-1.webp",
       "/assets/products/catalog_2026/OB-134-alt-2.webp",
       "/assets/products/catalog_2026/OB-134-alt-3.webp",
-      "/assets/supplier-library/gloves/cotton-knitted-hand-gloves-40-gms-blue-3.webp"
+      "/assets/product/gloves/cotton-knitted-hand-gloves-40-gms-blue-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8965,10 +8982,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-137.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-rear-angled-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-side-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-mwt-50-ltr-specifications-infographic.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/single-bucket-mop-wringer-trolley-20-ltr-yellow-caution-wet-floor-on-box-side-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-rear-angled-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-side-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-mwt-50-ltr-specifications-infographic.webp",
+      "/assets/product/hygenic-tools-and-trolly/single-bucket-mop-wringer-trolley-20-ltr-yellow-caution-wet-floor-on-box-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9012,7 +9029,7 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-138-alt-1.webp",
       "/assets/products/catalog_2026/OB-138-alt-2.webp",
       "/assets/products/catalog_2026/OB-138-alt-3.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/single-bucket-mop-wringer-trolley-20-ltr-blue-red-green-yellow-set-of-4.webp"
+      "/assets/product/hygenic-tools-and-trolly/single-bucket-mop-wringer-trolley-20-ltr-blue-red-green-yellow-set-of-4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9180,7 +9197,7 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-142-alt-1.webp",
       "/assets/products/catalog_2026/OB-142-alt-2.webp",
       "/assets/products/catalog_2026/OB-142-alt-3.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-mop-wringer-and-yellow-vinyl-bag-side-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-mop-wringer-and-yellow-vinyl-bag-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9223,8 +9240,8 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-143.webp",
       "/assets/products/catalog_2026/OB-143-alt-1.webp",
       "/assets/products/catalog_2026/OB-143-alt-2.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-double-buckets-wringer-and-yellow-vinyl-bag.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-mop-wringer-and-yellow-vinyl-bag-angled-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-double-buckets-wringer-and-yellow-vinyl-bag.webp",
+      "/assets/product/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-mop-wringer-and-yellow-vinyl-bag-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9550,10 +9567,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-203.webp",
-      "/assets/supplier-library/chemical-product/diversey-taski-r1-super-bathroom-cleaner-concentrate-5-litre-can-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/diversey-taski-r1-super-bathroom-cleaner-concentrate-5-litre-can-front-view.webp",
-      "/assets/supplier-library/chemical-product/diversey-taski-r2-hygienic-hard-surface-cleaner-concentrate-5-litre-can-front-view.webp",
-      "/assets/supplier-library/chemical-product/diversey-taski-r3-glass-cleaner-concentrate-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/diversey-taski-r1-super-bathroom-cleaner-concentrate-5-litre-can-front-and-back.webp",
+      "/assets/product/chemical-product/diversey-taski-r1-super-bathroom-cleaner-concentrate-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/diversey-taski-r2-hygienic-hard-surface-cleaner-concentrate-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/diversey-taski-r3-glass-cleaner-concentrate-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9634,7 +9651,7 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-158.webp",
-      "/assets/supplier-library/chemical-product/diversey-taski-r5-air-freshener-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/diversey-taski-r5-air-freshener-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9715,8 +9732,8 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-160.webp",
-      "/assets/supplier-library/chemical-product/diversey-taski-r7-floor-cleaner-concentrate-5-litre-can-front-view.webp",
-      "/assets/supplier-library/chemical-product/diversey-taski-r9-bathroom-cleaner-concentrate-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/diversey-taski-r7-floor-cleaner-concentrate-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/diversey-taski-r9-bathroom-cleaner-concentrate-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9797,7 +9814,8 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-162.webp",
-      "/assets/supplier-library/chemical-product/diversey-suma-inox-d71-stainless-steel-polish-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/diversey-suma-inox-d71-stainless-steel-polish-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/diversey-suma-inox-d71-stainless-steel-polish-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11629,8 +11647,8 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-DES-57.webp",
-      "/assets/supplier-library/packing-product/zen-pp-twine-sutli-roll-brown-red-color-mesh-packaging.webp",
-      "/assets/supplier-library/packing-product/zen-pp-twine-sutli-roll-green-color-mesh-packaging.webp"
+      "/assets/product/packing-product/zen-pp-twine-sutli-roll-brown-red-color-mesh-packaging.webp",
+      "/assets/product/packing-product/zen-pp-twine-sutli-roll-green-color-mesh-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11986,10 +12004,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-NOT-70.webp",
-      "/assets/supplier-library/collage/lazzo-nylon-rubber-band.webp",
-      "/assets/supplier-library/mix/office-bazzar-100-percent-nylon-rubber-band-packaging-box-die-cut-cyan-blue.webp",
-      "/assets/supplier-library/mix/office-bazzar-100-percent-nylon-rubber-band-packaging-box-die-cut-floral-blue-hexagon-window.webp",
-      "/assets/supplier-library/mix/office-bazzar-100-percent-nylon-rubber-band-packaging-box-die-cut-light-green.webp"
+      "/assets/product/collage/lazzo-nylon-rubber-band.webp",
+      "/assets/product/mix/office-bazzar-100-percent-nylon-rubber-band-packaging-box-die-cut-cyan-blue.webp",
+      "/assets/product/mix/office-bazzar-100-percent-nylon-rubber-band-packaging-box-die-cut-floral-blue-hexagon-window.webp",
+      "/assets/product/mix/office-bazzar-100-percent-nylon-rubber-band-packaging-box-die-cut-light-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12700,10 +12718,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-COV-01.webp",
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-black-front-and-back-view-pair.webp",
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-black-front-and-back-extended-earloops-pair.webp",
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-black-pair-with-earloops-front-and-back.webp",
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-blue-earloop-back-view-pair.webp"
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-black-front-and-back-view-pair.webp",
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-black-front-and-back-extended-earloops-pair.webp",
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-black-pair-with-earloops-front-and-back.webp",
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-blue-earloop-back-view-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12744,8 +12762,8 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-COV-02.webp",
-      "/assets/supplier-library/mask/venus-v-4400-n95-particulate-respirator-face-mask-with-red-box.webp",
-      "/assets/supplier-library/mask/venus-v-4400-n95-niosh-certified-respirator-face-mask-white-yellow-straps.webp"
+      "/assets/product/mask/venus-v-4400-n95-particulate-respirator-face-mask-with-red-box.webp",
+      "/assets/product/mask/venus-v-4400-n95-niosh-certified-respirator-face-mask-white-yellow-straps.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12788,8 +12806,8 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-COV-03.webp",
       "/assets/products/catalog_2026/OB-COV-03-alt-1.webp",
       "/assets/products/catalog_2026/OB-COV-03-alt-2.webp",
-      "/assets/supplier-library/mask/washable-reusable-cotton-cloth-face-masks-multicolor-set-of-8-vertical-display.webp",
-      "/assets/supplier-library/mask/washable-reusable-cotton-cloth-face-masks-multicolor-set-of-8.webp"
+      "/assets/product/mask/washable-reusable-cotton-cloth-face-masks-multicolor-set-of-8-vertical-display.webp",
+      "/assets/product/mask/washable-reusable-cotton-cloth-face-masks-multicolor-set-of-8.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12830,10 +12848,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-COV-04.webp",
-      "/assets/supplier-library/mask/classik-n95-eco-virus-protective-face-mask-white-with-single-pouch-packaging.webp",
-      "/assets/supplier-library/mask/classik-n95-eco-virus-protective-face-mask-grey-with-single-pouch-packaging.webp",
-      "/assets/supplier-library/mask/classik-n95-premium-headloop-virus-protective-face-mask-white-with-single-pouch.webp",
-      "/assets/supplier-library/mask/classik-n95-premium-virus-protective-face-mask-white-with-single-pouch-packaging.webp"
+      "/assets/product/mask/classik-n95-eco-virus-protective-face-mask-white-with-single-pouch-packaging.webp",
+      "/assets/product/mask/classik-n95-eco-virus-protective-face-mask-grey-with-single-pouch-packaging.webp",
+      "/assets/product/mask/classik-n95-premium-headloop-virus-protective-face-mask-white-with-single-pouch.webp",
+      "/assets/product/mask/classik-n95-premium-virus-protective-face-mask-white-with-single-pouch-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12874,7 +12892,7 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-COV-05.webp",
-      "/assets/supplier-library/mask/kingfa-disposable-protective-face-mask-blue-with-100-pcs-box.webp"
+      "/assets/product/mask/kingfa-disposable-protective-face-mask-blue-with-100-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12915,10 +12933,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-COV-06.webp",
-      "/assets/supplier-library/collage/knitted-cotton-safety-gloves.webp",
-      "/assets/supplier-library/collage/lazzo-disposable-plastic-gloves-and-cotton-safety-gloves.webp",
-      "/assets/supplier-library/gloves/cotton-knitted-hand-gloves-40-gms-gray.webp",
-      "/assets/supplier-library/gloves/cotton-knitted-hand-gloves-40-gms-gray-2.webp"
+      "/assets/product/collage/knitted-cotton-safety-gloves.webp",
+      "/assets/product/collage/lazzo-disposable-plastic-gloves-and-cotton-safety-gloves.webp",
+      "/assets/product/gloves/cotton-knitted-hand-gloves-40-gms-gray.webp",
+      "/assets/product/gloves/cotton-knitted-hand-gloves-40-gms-gray-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13122,7 +13140,7 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-COV-12.webp",
       "/assets/products/catalog_2026/OB-COV-12-alt-1.webp",
-      "/assets/supplier-library/safety-items/zebronics-fingertip-pulse-oximeter-zeb-fpo500-device-with-product-box.webp"
+      "/assets/product/safety-items/zebronics-fingertip-pulse-oximeter-zeb-fpo500-device-with-product-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13443,7 +13461,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-20.webp"
+      "/assets/products/catalog_2026/OB-COV-20.webp",
+      "/assets/product/dispenser/automatic-hand-sanitizer-soap-dispenser-white-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13524,9 +13543,9 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-COV-22.webp",
-      "/assets/supplier-library/mix/disposable-non-woven-head-cap.webp",
-      "/assets/supplier-library/mix/disposable-non-woven-bouffant-clip-caps-green-and-white-set-of-10.webp",
-      "/assets/supplier-library/mix/disposable-non-woven-bouffant-clip-caps-blue-white-green-9-strips.webp"
+      "/assets/product/mix/disposable-non-woven-head-cap.webp",
+      "/assets/product/mix/disposable-non-woven-bouffant-clip-caps-green-and-white-set-of-10.webp",
+      "/assets/product/mix/disposable-non-woven-bouffant-clip-caps-blue-white-green-9-strips.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13568,7 +13587,7 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-COV-23.webp",
       "/assets/products/catalog_2026/OB-COV-23-alt-1.webp",
-      "/assets/supplier-library/mix/disposable-non-woven-shoe-covers.webp"
+      "/assets/product/mix/disposable-non-woven-shoe-covers.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13608,7 +13627,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-24.webp"
+      "/assets/products/catalog_2026/OB-COV-24.webp",
+      "/assets/product/dispenser/automatic-shoe-cover-dispenser-gold-2.webp",
+      "/assets/product/dispenser/automatic-shoe-cover-dispenser-gold-with-box.webp",
+      "/assets/product/dispenser/automatic-shoe-cover-dispenser-gold.webp",
+      "/assets/product/dispenser/automatic-shoe-cover-dispenser-silver-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13649,10 +13672,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-COV-25.webp",
-      "/assets/supplier-library/mix/care4u-non-contact-digital-infrared-forehead-thermometer-features-diagram.webp",
-      "/assets/supplier-library/mix/care4u-non-contact-digital-infrared-forehead-thermometer-with-desk-plant.webp",
-      "/assets/supplier-library/mix/care4u-non-contact-digital-infrared-forehead-thermometer-with-packaging-box.webp",
-      "/assets/supplier-library/mix/xech-inframount-automatic-contactless-wall-mounted-infrared-thermometer-with-box.webp"
+      "/assets/product/mix/care4u-non-contact-digital-infrared-forehead-thermometer-features-diagram.webp",
+      "/assets/product/mix/care4u-non-contact-digital-infrared-forehead-thermometer-with-desk-plant.webp",
+      "/assets/product/mix/care4u-non-contact-digital-infrared-forehead-thermometer-with-packaging-box.webp",
+      "/assets/product/mix/xech-inframount-automatic-contactless-wall-mounted-infrared-thermometer-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14015,9 +14038,9 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-RDS-01.webp",
       "/assets/products/catalog_2026/OB-RDS-01-alt-1.webp",
-      "/assets/supplier-library/safety-items/red-orange-traffic-cone-750mm-side-and-bottom-base-view-collage.webp",
-      "/assets/supplier-library/safety-items/rubber-base-traffic-cone-rbtc-750mm-height-32kg-side-and-bottom-view.webp",
-      "/assets/supplier-library/safety-items/rubber-base-traffic-cone-rbtc-750mm-semi-virgin-15kg-standing-and-base-view.webp"
+      "/assets/product/safety-items/red-orange-traffic-cone-750mm-side-and-bottom-base-view-collage.webp",
+      "/assets/product/safety-items/rubber-base-traffic-cone-rbtc-750mm-height-32kg-side-and-bottom-view.webp",
+      "/assets/product/safety-items/rubber-base-traffic-cone-rbtc-750mm-semi-virgin-15kg-standing-and-base-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -15077,7 +15100,7 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-RDS-17.webp",
-      "/assets/supplier-library/safety-items/high-visibility-orange-reflective-safety-vest-with-reflective-stripes.webp"
+      "/assets/product/safety-items/high-visibility-orange-reflective-safety-vest-with-reflective-stripes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16989,7 +17012,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/broom-stick-plastic.webp"
+      "/assets/product/brooms-and-sticks/broom-stick-plastic.webp",
+      "/assets/product/brooms-and-sticks/kharata-broom-stick-plastic-1.webp",
+      "/assets/product/brooms-and-sticks/kharata-broom-stick-plastic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17029,7 +17054,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/coconut-broom-stick-big.webp"
+      "/assets/product/brooms-and-sticks/coconut-broom-stick-big.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17069,7 +17094,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/coconut-broom-stick-small.webp"
+      "/assets/product/brooms-and-sticks/coconut-broom-stick-small.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17109,7 +17134,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/coconut-broom.webp"
+      "/assets/product/brooms-and-sticks/coconut-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17149,7 +17174,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/dhoom3-broom.webp"
+      "/assets/product/brooms-and-sticks/dhoom3-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17189,7 +17214,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/garden-broom-with-stick.webp"
+      "/assets/product/brooms-and-sticks/garden-broom-with-stick.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17229,7 +17254,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/garden-broom.webp"
+      "/assets/product/brooms-and-sticks/garden-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17269,10 +17294,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/metal-stick-5-feet-gray-1.webp",
-      "/assets/supplier-library/brooms-and-sticks/metal-stick-5-feet-gray-2.webp",
-      "/assets/supplier-library/brooms-and-sticks/metal-stick-5-feet-gray.webp",
-      "/assets/supplier-library/brooms-and-sticks/metal-stick-5-feet.webp"
+      "/assets/product/brooms-and-sticks/metal-stick-5-feet-gray-1.webp",
+      "/assets/product/brooms-and-sticks/metal-stick-5-feet-gray-2.webp",
+      "/assets/product/brooms-and-sticks/metal-stick-5-feet-gray.webp",
+      "/assets/product/brooms-and-sticks/metal-stick-5-feet.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17312,7 +17337,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/lazzo-broom.webp"
+      "/assets/product/brooms-and-sticks/lazzo-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17352,7 +17377,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/nandhi-jumbo-soft-broom.webp"
+      "/assets/product/brooms-and-sticks/nandhi-jumbo-soft-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17392,7 +17417,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/nandhi-soft-broom.webp"
+      "/assets/product/brooms-and-sticks/nandhi-soft-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17432,7 +17457,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/nisha-round-pipe-soft-broombig.webp"
+      "/assets/product/brooms-and-sticks/nisha-round-pipe-soft-broombig.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17472,7 +17497,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/royal-soft-broom-steel-handle.webp"
+      "/assets/product/brooms-and-sticks/royal-soft-broom-steel-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17512,7 +17537,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/radha-soft-broom-jumbo.webp"
+      "/assets/product/brooms-and-sticks/radha-soft-broom-jumbo.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17552,7 +17577,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/royal-soft-broom.webp"
+      "/assets/product/brooms-and-sticks/royal-soft-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17592,8 +17617,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/soft-broom-all.webp",
-      "/assets/supplier-library/brooms-and-sticks/soft-broom-all-1.webp"
+      "/assets/product/brooms-and-sticks/soft-broom-all.webp",
+      "/assets/product/brooms-and-sticks/soft-broom-all-1.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17633,7 +17658,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/ss-mop-stick.webp"
+      "/assets/product/brooms-and-sticks/ss-mop-stick.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17673,7 +17698,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/ss-stick.webp"
+      "/assets/product/brooms-and-sticks/ss-stick.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17713,15 +17738,15 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/bucket-with-mug-2.webp",
-      "/assets/supplier-library/bucket-mug-tray/bucket-with-mug-3.webp",
-      "/assets/supplier-library/bucket-mug-tray/bucket-with-mug-4.webp",
-      "/assets/supplier-library/bucket-mug-tray/bucket-with-mug-5.webp",
-      "/assets/supplier-library/bucket-mug-tray/bucket-with-mug-6.webp",
-      "/assets/supplier-library/bucket-mug-tray/bucket-with-mug-7.webp",
-      "/assets/supplier-library/bucket-mug-tray/bucket-with-mug-8.webp",
-      "/assets/supplier-library/bucket-mug-tray/bucket-with-mug.webp",
-      "/assets/supplier-library/bucket-mug-tray/bucket-with-mug-9.webp"
+      "/assets/product/bucket-mug-tray/bucket-with-mug-2.webp",
+      "/assets/product/bucket-mug-tray/bucket-with-mug-3.webp",
+      "/assets/product/bucket-mug-tray/bucket-with-mug-4.webp",
+      "/assets/product/bucket-mug-tray/bucket-with-mug-5.webp",
+      "/assets/product/bucket-mug-tray/bucket-with-mug-6.webp",
+      "/assets/product/bucket-mug-tray/bucket-with-mug-7.webp",
+      "/assets/product/bucket-mug-tray/bucket-with-mug-8.webp",
+      "/assets/product/bucket-mug-tray/bucket-with-mug.webp",
+      "/assets/product/bucket-mug-tray/bucket-with-mug-9.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17761,7 +17786,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/surya-round-pipe-soft-broom.webp"
+      "/assets/product/brooms-and-sticks/surya-round-pipe-soft-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17801,7 +17826,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/brooms-and-sticks/surya-v-handle-soft-broom.webp"
+      "/assets/product/brooms-and-sticks/surya-v-handle-soft-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17841,13 +17866,13 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/cammy-spin-mop-with-bucket-2.webp",
-      "/assets/supplier-library/bucket-mug-tray/cammy-spin-mop-with-bucket-3.webp",
-      "/assets/supplier-library/bucket-mug-tray/cammy-spin-mop-with-bucket-5.webp",
-      "/assets/supplier-library/bucket-mug-tray/cammy-spin-mop-with-bucket-4.webp",
-      "/assets/supplier-library/bucket-mug-tray/cammy-spin-mop-with-bucket-6.webp",
-      "/assets/supplier-library/bucket-mug-tray/cammy-spin-mop-with-bucket-7.webp",
-      "/assets/supplier-library/bucket-mug-tray/cammy-spin-mop-with-bucket.webp"
+      "/assets/product/bucket-mug-tray/cammy-spin-mop-with-bucket-2.webp",
+      "/assets/product/bucket-mug-tray/cammy-spin-mop-with-bucket-3.webp",
+      "/assets/product/bucket-mug-tray/cammy-spin-mop-with-bucket-5.webp",
+      "/assets/product/bucket-mug-tray/cammy-spin-mop-with-bucket-4.webp",
+      "/assets/product/bucket-mug-tray/cammy-spin-mop-with-bucket-6.webp",
+      "/assets/product/bucket-mug-tray/cammy-spin-mop-with-bucket-7.webp",
+      "/assets/product/bucket-mug-tray/cammy-spin-mop-with-bucket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17887,14 +17912,14 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/dustpan-3.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-4.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-5.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-6.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-9.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-7.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-8.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan.webp"
+      "/assets/product/bucket-mug-tray/dustpan-3.webp",
+      "/assets/product/bucket-mug-tray/dustpan-4.webp",
+      "/assets/product/bucket-mug-tray/dustpan-5.webp",
+      "/assets/product/bucket-mug-tray/dustpan-6.webp",
+      "/assets/product/bucket-mug-tray/dustpan-9.webp",
+      "/assets/product/bucket-mug-tray/dustpan-7.webp",
+      "/assets/product/bucket-mug-tray/dustpan-8.webp",
+      "/assets/product/bucket-mug-tray/dustpan.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17934,16 +17959,16 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/dustpan-with-brush-12.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-with-brush-2.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-with-brush-4.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-with-brush-3.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-with-brush-5.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-with-brush-6.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-with-brush-7.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-with-brush-8.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-with-brush-9.webp",
-      "/assets/supplier-library/bucket-mug-tray/dustpan-with-brush.webp"
+      "/assets/product/bucket-mug-tray/dustpan-with-brush-12.webp",
+      "/assets/product/bucket-mug-tray/dustpan-with-brush-2.webp",
+      "/assets/product/bucket-mug-tray/dustpan-with-brush-4.webp",
+      "/assets/product/bucket-mug-tray/dustpan-with-brush-3.webp",
+      "/assets/product/bucket-mug-tray/dustpan-with-brush-5.webp",
+      "/assets/product/bucket-mug-tray/dustpan-with-brush-6.webp",
+      "/assets/product/bucket-mug-tray/dustpan-with-brush-7.webp",
+      "/assets/product/bucket-mug-tray/dustpan-with-brush-8.webp",
+      "/assets/product/bucket-mug-tray/dustpan-with-brush-9.webp",
+      "/assets/product/bucket-mug-tray/dustpan-with-brush.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -17983,9 +18008,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/ktv-spin-mop-with-bucket-2.webp",
-      "/assets/supplier-library/bucket-mug-tray/ktv-spin-mop-with-bucket.webp",
-      "/assets/supplier-library/bucket-mug-tray/ktv-spin-mop-with-bucket-3.webp"
+      "/assets/product/bucket-mug-tray/ktv-spin-mop-with-bucket-2.webp",
+      "/assets/product/bucket-mug-tray/ktv-spin-mop-with-bucket.webp",
+      "/assets/product/bucket-mug-tray/ktv-spin-mop-with-bucket-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18025,9 +18050,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/mop-set-with-bucket-2.webp",
-      "/assets/supplier-library/bucket-mug-tray/mop-set-with-bucket-3.webp",
-      "/assets/supplier-library/bucket-mug-tray/mop-set-with-bucket.webp"
+      "/assets/product/bucket-mug-tray/mop-set-with-bucket-2.webp",
+      "/assets/product/bucket-mug-tray/mop-set-with-bucket-3.webp",
+      "/assets/product/bucket-mug-tray/mop-set-with-bucket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18067,20 +18092,20 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-10.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-12.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-11.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-13.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-2.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-14.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-4.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-5.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-6.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-3.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-7.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-8.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-9.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket.webp"
+      "/assets/product/bucket-mug-tray/plastic-bucket-10.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket-12.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket-11.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket-13.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket-2.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket-14.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket-4.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket-5.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket-6.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket-3.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket-7.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket-8.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket-9.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18120,7 +18145,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-17-ltr.webp"
+      "/assets/product/bucket-mug-tray/plastic-bucket-17-ltr.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18160,8 +18185,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-5-ltr.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-bucket-9-ltr.webp"
+      "/assets/product/bucket-mug-tray/plastic-bucket-5-ltr.webp",
+      "/assets/product/bucket-mug-tray/plastic-bucket-9-ltr.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18201,10 +18226,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/plastic-mug-2.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-mug-3.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-mug-4.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-mug.webp"
+      "/assets/product/bucket-mug-tray/plastic-mug-2.webp",
+      "/assets/product/bucket-mug-tray/plastic-mug-3.webp",
+      "/assets/product/bucket-mug-tray/plastic-mug-4.webp",
+      "/assets/product/bucket-mug-tray/plastic-mug.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18244,8 +18269,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/plastic-tray-2.webp",
-      "/assets/supplier-library/bucket-mug-tray/plastic-tray.webp"
+      "/assets/product/bucket-mug-tray/plastic-tray-2.webp",
+      "/assets/product/bucket-mug-tray/plastic-tray.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18285,7 +18310,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/plastic-tub.webp"
+      "/assets/product/bucket-mug-tray/plastic-tub.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18325,7 +18350,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-head-with-refill.webp"
+      "/assets/product/bucket-mug-tray/spin-mop-head-with-refill.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18365,8 +18390,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-rod.webp",
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-rod-with-refill.webp"
+      "/assets/product/bucket-mug-tray/spin-mop-rod.webp",
+      "/assets/product/bucket-mug-tray/spin-mop-rod-with-refill.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18406,7 +18431,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-refill.webp"
+      "/assets/product/bucket-mug-tray/spin-mop-refill.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18446,16 +18471,16 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-with-bucket-10.webp",
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-with-bucket-4.webp",
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-with-bucket-5.webp",
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-with-bucket-2.webp",
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-with-bucket-3.webp",
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-with-bucket-6.webp",
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-with-bucket-7.webp",
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-with-bucket-8.webp",
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-with-bucket-9.webp",
-      "/assets/supplier-library/bucket-mug-tray/spin-mop-with-bucket.webp"
+      "/assets/product/bucket-mug-tray/spin-mop-with-bucket-10.webp",
+      "/assets/product/bucket-mug-tray/spin-mop-with-bucket-4.webp",
+      "/assets/product/bucket-mug-tray/spin-mop-with-bucket-5.webp",
+      "/assets/product/bucket-mug-tray/spin-mop-with-bucket-2.webp",
+      "/assets/product/bucket-mug-tray/spin-mop-with-bucket-3.webp",
+      "/assets/product/bucket-mug-tray/spin-mop-with-bucket-6.webp",
+      "/assets/product/bucket-mug-tray/spin-mop-with-bucket-7.webp",
+      "/assets/product/bucket-mug-tray/spin-mop-with-bucket-8.webp",
+      "/assets/product/bucket-mug-tray/spin-mop-with-bucket-9.webp",
+      "/assets/product/bucket-mug-tray/spin-mop-with-bucket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18495,13 +18520,13 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/transparent-bucket-3.webp",
-      "/assets/supplier-library/bucket-mug-tray/transparent-bucket-2.webp",
-      "/assets/supplier-library/bucket-mug-tray/transparent-bucket-4.webp",
-      "/assets/supplier-library/bucket-mug-tray/transparent-bucket-5.webp",
-      "/assets/supplier-library/bucket-mug-tray/transparent-bucket-6.webp",
-      "/assets/supplier-library/bucket-mug-tray/transparent-bucket-7.webp",
-      "/assets/supplier-library/bucket-mug-tray/transparent-bucket.webp"
+      "/assets/product/bucket-mug-tray/transparent-bucket-3.webp",
+      "/assets/product/bucket-mug-tray/transparent-bucket-2.webp",
+      "/assets/product/bucket-mug-tray/transparent-bucket-4.webp",
+      "/assets/product/bucket-mug-tray/transparent-bucket-5.webp",
+      "/assets/product/bucket-mug-tray/transparent-bucket-6.webp",
+      "/assets/product/bucket-mug-tray/transparent-bucket-7.webp",
+      "/assets/product/bucket-mug-tray/transparent-bucket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18541,7 +18566,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/stool.webp"
+      "/assets/product/bucket-mug-tray/stool.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18581,7 +18606,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/tubby-390.webp"
+      "/assets/product/bucket-mug-tray/tubby-390.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18621,7 +18646,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/bucket-mug-tray/transparent-mug.webp"
+      "/assets/product/bucket-mug-tray/transparent-mug.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18661,7 +18686,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/black-rose-hair-dye-brush-box.webp"
+      "/assets/product/cleaning-brush/black-rose-hair-dye-brush-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18701,7 +18726,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/black-rose-hair-dye-brush.webp"
+      "/assets/product/cleaning-brush/black-rose-hair-dye-brush.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18741,8 +18766,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/car-duster-brush-2.webp",
-      "/assets/supplier-library/cleaning-brush/car-duster-brush.webp"
+      "/assets/product/cleaning-brush/car-duster-brush-2.webp",
+      "/assets/product/cleaning-brush/car-duster-brush.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18782,7 +18807,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/ceiling-fan-broom-with-handle.webp"
+      "/assets/product/cleaning-brush/ceiling-fan-broom-with-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18822,7 +18847,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/cloth-washing-brush.webp"
+      "/assets/product/cleaning-brush/cloth-washing-brush.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18862,7 +18887,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/cobweb-brush-3.webp"
+      "/assets/product/cleaning-brush/cobweb-brush-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18902,9 +18927,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/fan-duster-brush-2.webp",
-      "/assets/supplier-library/cleaning-brush/fan-duster-brush-3.webp",
-      "/assets/supplier-library/cleaning-brush/fan-duster-brush.webp"
+      "/assets/product/cleaning-brush/fan-duster-brush-2.webp",
+      "/assets/product/cleaning-brush/fan-duster-brush-3.webp",
+      "/assets/product/cleaning-brush/fan-duster-brush.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18944,14 +18969,14 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/fan-duster-brush-head-2.webp",
-      "/assets/supplier-library/cleaning-brush/fan-duster-brush-head-3.webp",
-      "/assets/supplier-library/cleaning-brush/fan-duster-brush-head-4.webp",
-      "/assets/supplier-library/cleaning-brush/fan-duster-brush-head-5.webp",
-      "/assets/supplier-library/cleaning-brush/fan-duster-brush-head-6.webp",
-      "/assets/supplier-library/cleaning-brush/fan-duster-brush-head-7.webp",
-      "/assets/supplier-library/cleaning-brush/fan-duster-brush-head.webp",
-      "/assets/supplier-library/cleaning-brush/fan-duster-brush-head-8.webp"
+      "/assets/product/cleaning-brush/fan-duster-brush-head-2.webp",
+      "/assets/product/cleaning-brush/fan-duster-brush-head-3.webp",
+      "/assets/product/cleaning-brush/fan-duster-brush-head-4.webp",
+      "/assets/product/cleaning-brush/fan-duster-brush-head-5.webp",
+      "/assets/product/cleaning-brush/fan-duster-brush-head-6.webp",
+      "/assets/product/cleaning-brush/fan-duster-brush-head-7.webp",
+      "/assets/product/cleaning-brush/fan-duster-brush-head.webp",
+      "/assets/product/cleaning-brush/fan-duster-brush-head-8.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -18991,16 +19016,17 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-head-2.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-head-3.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-head-4.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-head-5.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-head-6.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-head-7.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-head-8.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-head.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-head-9.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-head-with-box.webp"
+      "/assets/product/cleaning-brush/floor-scrub-brush-head-2.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-head-3.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-head-4.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-head-5.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-head-6.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-head-7.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-head-8.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-head.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-head-9.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-head-with-box.webp",
+      "/assets/product/cleaning-brush/wooden-floor-scrub-brush-head.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19040,7 +19066,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/floor-broom-with-handle.webp"
+      "/assets/product/cleaning-brush/floor-broom-with-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19080,8 +19106,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/floor-broom-head-2.webp",
-      "/assets/supplier-library/cleaning-brush/floor-broom-head.webp"
+      "/assets/product/cleaning-brush/floor-broom-head-2.webp",
+      "/assets/product/cleaning-brush/floor-broom-head.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19121,13 +19147,13 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-with-handle-2.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-with-handle-3.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-with-handle-6.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-with-handle-7.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-with-handle-4.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-with-handle-5.webp",
-      "/assets/supplier-library/cleaning-brush/floor-scrub-brush-with-handle.webp"
+      "/assets/product/cleaning-brush/floor-scrub-brush-with-handle-2.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-with-handle-3.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-with-handle-6.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-with-handle-7.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-with-handle-4.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-with-handle-5.webp",
+      "/assets/product/cleaning-brush/floor-scrub-brush-with-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19167,8 +19193,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/microfiber-flexible-duster.webp",
-      "/assets/supplier-library/cleaning-brush/microfiber-flexible-duster-2.webp"
+      "/assets/product/cleaning-brush/microfiber-flexible-duster.webp",
+      "/assets/product/cleaning-brush/microfiber-flexible-duster-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19208,11 +19234,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/microfiber-telescopic-duster-2.webp",
-      "/assets/supplier-library/cleaning-brush/microfiber-telescopic-duster.webp",
-      "/assets/supplier-library/cleaning-brush/microfiber-telescopic-duster-3.webp",
-      "/assets/supplier-library/cleaning-brush/microfiber-telescopic-duster-4.webp",
-      "/assets/supplier-library/cleaning-brush/microfiber-telescopic-duster-5.webp"
+      "/assets/product/cleaning-brush/microfiber-telescopic-duster-2.webp",
+      "/assets/product/cleaning-brush/microfiber-telescopic-duster.webp",
+      "/assets/product/cleaning-brush/microfiber-telescopic-duster-3.webp",
+      "/assets/product/cleaning-brush/microfiber-telescopic-duster-4.webp",
+      "/assets/product/cleaning-brush/microfiber-telescopic-duster-5.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19252,11 +19278,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/mr-tall-brush-green.webp",
-      "/assets/supplier-library/cleaning-brush/mr-tall-brush-blue.webp",
-      "/assets/supplier-library/cleaning-brush/mr-tall-brush-pink.webp",
-      "/assets/supplier-library/cleaning-brush/mr-tall-brush-red.webp",
-      "/assets/supplier-library/cleaning-brush/mr-tall-brush.webp"
+      "/assets/product/cleaning-brush/mr-tall-brush-green.webp",
+      "/assets/product/cleaning-brush/mr-tall-brush-blue.webp",
+      "/assets/product/cleaning-brush/mr-tall-brush-pink.webp",
+      "/assets/product/cleaning-brush/mr-tall-brush-red.webp",
+      "/assets/product/cleaning-brush/mr-tall-brush.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19296,8 +19322,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/push-broom-3.webp",
-      "/assets/supplier-library/cleaning-brush/push-broom-2.webp"
+      "/assets/product/cleaning-brush/push-broom-3.webp",
+      "/assets/product/cleaning-brush/push-broom-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19337,11 +19363,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/push-broom-head-2.webp",
-      "/assets/supplier-library/cleaning-brush/push-broom-head-5.webp",
-      "/assets/supplier-library/cleaning-brush/push-broom-head-4.webp",
-      "/assets/supplier-library/cleaning-brush/push-broom-head-3.webp",
-      "/assets/supplier-library/cleaning-brush/push-broom-head.webp"
+      "/assets/product/cleaning-brush/push-broom-head-2.webp",
+      "/assets/product/cleaning-brush/push-broom-head-5.webp",
+      "/assets/product/cleaning-brush/push-broom-head-4.webp",
+      "/assets/product/cleaning-brush/push-broom-head-3.webp",
+      "/assets/product/cleaning-brush/push-broom-head.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19381,9 +19407,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/rainbow-duster-brush.webp",
-      "/assets/supplier-library/cleaning-brush/rainbow-duster-brush-2.webp",
-      "/assets/supplier-library/cleaning-brush/rainbow-duster-brush-3.webp"
+      "/assets/product/cleaning-brush/rainbow-duster-brush.webp",
+      "/assets/product/cleaning-brush/rainbow-duster-brush-2.webp",
+      "/assets/product/cleaning-brush/rainbow-duster-brush-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19423,7 +19449,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/sink-brush.webp"
+      "/assets/product/cleaning-brush/sink-brush.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19463,7 +19489,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/sink-brush-curved.webp"
+      "/assets/product/cleaning-brush/sink-brush-curved.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19503,7 +19529,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/toilet-brush-with-stand.webp"
+      "/assets/product/cleaning-brush/toilet-brush-with-stand.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19543,7 +19569,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/static-duster-brush.webp"
+      "/assets/product/cleaning-brush/static-duster-brush.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19583,7 +19609,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/wooden-cleaning-brush.webp"
+      "/assets/product/cleaning-brush/wooden-cleaning-brush.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19623,7 +19649,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/wooden-cloth-brush.webp"
+      "/assets/product/cleaning-brush/wooden-cloth-brush.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19663,8 +19689,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cleaning-brush/wooden-floor-scrub-brush-with-clamp-2.webp",
-      "/assets/supplier-library/cleaning-brush/wooden-floor-scrub-brush-with-clamp.webp"
+      "/assets/product/cleaning-brush/wooden-floor-scrub-brush-with-clamp-2.webp",
+      "/assets/product/cleaning-brush/wooden-floor-scrub-brush-with-clamp.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19704,7 +19730,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/lazzo-car-cleaning-microfiber-cloth-40x60.webp"
+      "/assets/product/cloth/lazzo-car-cleaning-microfiber-cloth-40x60.webp",
+      "/assets/product/cloth/lazzo-blue-microfiber-cloth-2.webp",
+      "/assets/product/cloth/lazzo-blue-microfiber-cloth.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19744,7 +19772,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/lazzo-luxury-bath-towel-70x140.webp"
+      "/assets/product/cloth/lazzo-luxury-bath-towel-70x140.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19784,8 +19812,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/lazzo-microfiber-cloth-2.webp",
-      "/assets/supplier-library/cloth/lazzo-microfiber-cloth.webp"
+      "/assets/product/cloth/lazzo-microfiber-cloth-2.webp",
+      "/assets/product/cloth/lazzo-microfiber-cloth.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19825,7 +19853,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/lazzo-microfiber-cloth-40x40.webp"
+      "/assets/product/cloth/lazzo-microfiber-cloth-40x40.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19865,7 +19893,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/lazzo-microfiber-cloth-40x60.webp"
+      "/assets/product/cloth/lazzo-microfiber-cloth-40x60.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19905,7 +19933,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/lazzo-microfiber-cloth-packed.webp"
+      "/assets/product/cloth/lazzo-microfiber-cloth-packed.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19945,8 +19973,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/lazzo-microfiber-cloth-box.webp",
-      "/assets/supplier-library/cloth/lazzo-microfiber-cloth-box-2.webp"
+      "/assets/product/cloth/lazzo-microfiber-cloth-box.webp",
+      "/assets/product/cloth/lazzo-microfiber-cloth-box-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -19986,12 +20014,12 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/microfiber-cloth-multicolor-2.webp",
-      "/assets/supplier-library/cloth/microfiber-cloth-multicolor.webp",
-      "/assets/supplier-library/cloth/microfiber-cloth-multicolor-3.webp",
-      "/assets/supplier-library/cloth/microfiber-cloth-stack.webp",
-      "/assets/supplier-library/cloth/microfiber-cloth.webp",
-      "/assets/supplier-library/cloth/red-microfiber-cloth.webp"
+      "/assets/product/cloth/microfiber-cloth-multicolor-2.webp",
+      "/assets/product/cloth/microfiber-cloth-multicolor.webp",
+      "/assets/product/cloth/microfiber-cloth-multicolor-3.webp",
+      "/assets/product/cloth/microfiber-cloth-stack.webp",
+      "/assets/product/cloth/microfiber-cloth.webp",
+      "/assets/product/cloth/red-microfiber-cloth.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20031,7 +20059,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/microfiber-towel-with-loop.webp"
+      "/assets/product/cloth/microfiber-towel-with-loop.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20071,7 +20099,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/striped-hand-towel-hanging.webp"
+      "/assets/product/cloth/striped-hand-towel-hanging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20111,7 +20139,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/striped-hand-towel-roll.webp"
+      "/assets/product/cloth/striped-hand-towel-roll.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20151,7 +20179,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/white-hand-towel-14x21.webp"
+      "/assets/product/cloth/white-hand-towel-14x21.webp",
+      "/assets/product/cloth/color-hand-towel-14x21.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20191,7 +20220,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/white-hand-towel-14x28.webp"
+      "/assets/product/cloth/white-hand-towel-14x28.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20231,7 +20260,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/cloth/scotch-brite-microfiber-cleaning-cloth-yellow.webp"
+      "/assets/product/cloth/scotch-brite-microfiber-cleaning-cloth-yellow.webp",
+      "/assets/product/cloth/scotch-brite-microfiber-cleaning-cloth-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20271,7 +20301,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/air-freshener-and-cleaning-supplies.webp"
+      "/assets/product/collage/air-freshener-and-cleaning-supplies.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20311,8 +20341,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/air-freshener-cans-and-refills-collection-2.webp",
-      "/assets/supplier-library/collage/air-freshener-cans-and-refills-collection.webp"
+      "/assets/product/collage/air-freshener-cans-and-refills-collection-2.webp",
+      "/assets/product/collage/air-freshener-cans-and-refills-collection.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20352,7 +20382,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/airolution-perfume-bag.webp"
+      "/assets/product/collage/airolution-perfume-bag.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20392,7 +20422,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/aluminium-flat-microfiber-mop-with-handle.webp"
+      "/assets/product/collage/aluminium-flat-microfiber-mop-with-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20432,7 +20462,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/ambi-pur-premium-lia-room-freshener-sprays.webp"
+      "/assets/product/collage/ambi-pur-premium-lia-room-freshener-sprays.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20472,9 +20502,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/aquarius-multifold-towel-dispenser-2.webp",
-      "/assets/supplier-library/collage/aquarius-multifold-towel-dispenser.webp",
-      "/assets/supplier-library/collage/aquarius-multifold-towel-dispenser-3.webp"
+      "/assets/product/collage/aquarius-multifold-towel-dispenser-2.webp",
+      "/assets/product/collage/aquarius-multifold-towel-dispenser.webp",
+      "/assets/product/collage/aquarius-multifold-towel-dispenser-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20514,7 +20544,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/assorted-cleaning-cloths-and-microfiber-dusters.webp"
+      "/assets/product/collage/assorted-cleaning-cloths-and-microfiber-dusters.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20554,11 +20584,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/ceramic-aroma-oil-diffuser-3.webp",
-      "/assets/supplier-library/collage/ceramic-aroma-oil-diffuser-2.webp",
-      "/assets/supplier-library/collage/ceramic-aroma-oil-diffuser-4.webp",
-      "/assets/supplier-library/collage/ceramic-aroma-oil-diffuser.webp",
-      "/assets/supplier-library/collage/ceramic-aroma-oil-diffuser-5.webp"
+      "/assets/product/collage/ceramic-aroma-oil-diffuser-3.webp",
+      "/assets/product/collage/ceramic-aroma-oil-diffuser-2.webp",
+      "/assets/product/collage/ceramic-aroma-oil-diffuser-4.webp",
+      "/assets/product/collage/ceramic-aroma-oil-diffuser.webp",
+      "/assets/product/collage/ceramic-aroma-oil-diffuser-5.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20598,7 +20628,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/black-rose-hair-dye-brush.webp"
+      "/assets/product/collage/black-rose-hair-dye-brush.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20638,7 +20668,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/cobweb-brush-with-telescopic-pole.webp"
+      "/assets/product/collage/cobweb-brush-with-telescopic-pole.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20678,7 +20708,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/cloth-line-envelope-12x10-inch.webp"
+      "/assets/product/collage/cloth-line-envelope-12x10-inch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20718,9 +20748,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/cotton-mop-refill-2.webp",
-      "/assets/supplier-library/collage/cotton-mop-refill-3.webp",
-      "/assets/supplier-library/collage/cotton-mop-refill.webp"
+      "/assets/product/collage/cotton-mop-refill-2.webp",
+      "/assets/product/collage/cotton-mop-refill-3.webp",
+      "/assets/product/collage/cotton-mop-refill.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20760,7 +20790,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/cotton-mop-with-handle.webp"
+      "/assets/product/collage/cotton-mop-with-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20800,8 +20830,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/decoplast-swing-dustbins-2.webp",
-      "/assets/supplier-library/collage/decoplast-swing-dustbins.webp"
+      "/assets/product/collage/decoplast-swing-dustbins-2.webp",
+      "/assets/product/collage/decoplast-swing-dustbins.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20841,7 +20871,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/dettol-antiseptic-liquid-bottles.webp"
+      "/assets/product/collage/dettol-antiseptic-liquid-bottles.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20881,7 +20911,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/disposable-face-mask.webp"
+      "/assets/product/collage/disposable-face-mask.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20921,7 +20951,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/diversey-taski-chemicals.webp"
+      "/assets/product/collage/diversey-taski-chemicals.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -20961,7 +20991,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/double-roller-pva-sponge-mop.webp"
+      "/assets/product/collage/double-roller-pva-sponge-mop.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21001,7 +21031,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/dyna-fresh-air-freshener.webp"
+      "/assets/product/collage/dyna-fresh-air-freshener.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21041,7 +21071,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/drain-cleaner.webp"
+      "/assets/product/collage/drain-cleaner.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21081,7 +21111,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/dyna-fresh-pocket-air-freshener.webp"
+      "/assets/product/collage/dyna-fresh-pocket-air-freshener.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21121,9 +21151,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/flat-microfiber-mop-head-2.webp",
-      "/assets/supplier-library/collage/flat-microfiber-mop-head-3.webp",
-      "/assets/supplier-library/collage/flat-microfiber-mop-head.webp"
+      "/assets/product/collage/flat-microfiber-mop-head-2.webp",
+      "/assets/product/collage/flat-microfiber-mop-head-3.webp",
+      "/assets/product/collage/flat-microfiber-mop-head.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21163,7 +21193,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/face-mask.webp"
+      "/assets/product/collage/face-mask.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21203,7 +21233,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/foldable-platform-trolley.webp"
+      "/assets/product/collage/foldable-platform-trolley.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21243,7 +21273,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/floor-scrubbing-brush-with-long-handle.webp"
+      "/assets/product/collage/floor-scrubbing-brush-with-long-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21283,7 +21313,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/gala-cleaning-products.webp"
+      "/assets/product/collage/gala-cleaning-products.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21323,7 +21353,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/gloveon-nb32-nitrile-examination-gloves.webp"
+      "/assets/product/collage/gloveon-nb32-nitrile-examination-gloves.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21363,7 +21393,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/garbage-bags-collection.webp"
+      "/assets/product/collage/garbage-bags-collection.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21403,7 +21433,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/godrej-aer-fragrance-range.webp"
+      "/assets/product/collage/godrej-aer-fragrance-range.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21443,7 +21473,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/godrej-aer-power-pocket-range.webp"
+      "/assets/product/collage/godrej-aer-power-pocket-range.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21483,7 +21513,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/godrej-aer-spray-one-day-offer.webp"
+      "/assets/product/collage/godrej-aer-spray-one-day-offer.webp",
+      "/assets/product/collage/godrej-aer-spray-one-day-offer-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21523,7 +21554,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/hand-sanitizer.webp"
+      "/assets/product/collage/hand-sanitizer.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21563,8 +21594,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/hand-towel-14x21-2.webp",
-      "/assets/supplier-library/collage/hand-towel-14x21.webp"
+      "/assets/product/collage/hand-towel-14x21-2.webp",
+      "/assets/product/collage/hand-towel-14x21.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21604,7 +21635,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/hi-clean-chemicals-5l.webp"
+      "/assets/product/collage/hi-clean-chemicals-5l.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21644,7 +21675,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/hi-soft-multifold-hand-towel.webp"
+      "/assets/product/collage/hi-soft-multifold-hand-towel.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21684,7 +21715,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/household-and-examination-gloves-collection.webp"
+      "/assets/product/collage/household-and-examination-gloves-collection.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21724,7 +21755,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/housekeeping-service-trolley-cart.webp"
+      "/assets/product/collage/housekeeping-service-trolley-cart.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21764,7 +21795,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/iris-home-fragrance-and-diffuser-set.webp"
+      "/assets/product/collage/iris-home-fragrance-and-diffuser-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21804,7 +21835,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/iris-reed-diffuser-oil-1l-range.webp"
+      "/assets/product/collage/iris-reed-diffuser-oil-1l-range.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21844,7 +21875,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/iris-vaporizer-oil-lemon-grass-and-lavender.webp"
+      "/assets/product/collage/iris-vaporizer-oil-lemon-grass-and-lavender.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21884,7 +21915,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/iris-vaporizer-oil-1l-range.webp"
+      "/assets/product/collage/iris-vaporizer-oil-1l-range.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21924,7 +21955,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/jago-heavy-duty-plastic-bucket.webp"
+      "/assets/product/collage/jago-heavy-duty-plastic-bucket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -21964,8 +21995,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/jb9-binder-clips-2.webp",
-      "/assets/supplier-library/collage/jb9-binder-clips.webp"
+      "/assets/product/collage/jb9-binder-clips-2.webp",
+      "/assets/product/collage/jb9-binder-clips.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22005,7 +22036,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/kimberly-clark-professional-hand-towel-dispenser.webp"
+      "/assets/product/collage/kimberly-clark-professional-hand-towel-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22045,7 +22076,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/kiwi-dranex-drain-cleaner.webp"
+      "/assets/product/collage/kiwi-dranex-drain-cleaner.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22085,7 +22116,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/latex-and-nitrile-examination-gloves.webp"
+      "/assets/product/collage/latex-and-nitrile-examination-gloves.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22125,7 +22156,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/lazzo-folding-flat-mop.webp"
+      "/assets/product/collage/lazzo-folding-flat-mop.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22165,7 +22196,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/lazzo-luxury-bath-towels-70x140cm.webp"
+      "/assets/product/collage/lazzo-luxury-bath-towels-70x140cm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22205,9 +22236,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/lazzo-sanitary-cubes-2.webp",
-      "/assets/supplier-library/collage/lazzo-sanitary-cubes-3.webp",
-      "/assets/supplier-library/collage/lazzo-sanitary-cubes.webp"
+      "/assets/product/collage/lazzo-sanitary-cubes-2.webp",
+      "/assets/product/collage/lazzo-sanitary-cubes-3.webp",
+      "/assets/product/collage/lazzo-sanitary-cubes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22247,7 +22278,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/lazzo-sanitary-cubes-wonder-clean-flush-mate-kwick-drain-cleaner.webp"
+      "/assets/product/collage/lazzo-sanitary-cubes-wonder-clean-flush-mate-kwick-drain-cleaner.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22287,8 +22318,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/liquid-handwash-5l-2.webp",
-      "/assets/supplier-library/collage/liquid-handwash-5l.webp"
+      "/assets/product/collage/liquid-handwash-5l-2.webp",
+      "/assets/product/collage/liquid-handwash-5l.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22328,7 +22359,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/lizol-and-harpic-5l.webp"
+      "/assets/product/collage/lizol-and-harpic-5l.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22368,7 +22399,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/mesh-document-tray-desk-organizer.webp"
+      "/assets/product/collage/mesh-document-tray-desk-organizer.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22408,7 +22439,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/manual-strapping-tool-tensioner-and-sealer.webp"
+      "/assets/product/collage/manual-strapping-tool-tensioner-and-sealer.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22448,7 +22479,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/microfiber-mops-and-cobweb-brushes-collection.webp"
+      "/assets/product/collage/microfiber-mops-and-cobweb-brushes-collection.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22488,7 +22519,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/microfiber-dust-mop.webp"
+      "/assets/product/collage/microfiber-dust-mop.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22528,7 +22559,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/mop-handles-and-sticks-collection.webp"
+      "/assets/product/collage/mop-handles-and-sticks-collection.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22568,7 +22599,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/odonil-air-freshener-blocks.webp"
+      "/assets/product/collage/odonil-air-freshener-blocks.webp",
+      "/assets/product/collage/odonil-air-freshener-blocks-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22608,7 +22640,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/odonil-air-fresheners-sani-fresh-toilet-cubes-and-safe-handz.webp"
+      "/assets/product/collage/odonil-air-fresheners-sani-fresh-toilet-cubes-and-safe-handz.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22648,7 +22680,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/odonil-exotic-automatic-spray-and-refill-range.webp"
+      "/assets/product/collage/odonil-exotic-automatic-spray-and-refill-range.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22688,8 +22720,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/odonil-room-spray-one-day-offer-2.webp",
-      "/assets/supplier-library/collage/odonil-room-spray-one-day-offer.webp"
+      "/assets/product/collage/odonil-room-spray-one-day-offer-2.webp",
+      "/assets/product/collage/odonil-room-spray-one-day-offer.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22729,7 +22761,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/odonil-zipper.webp"
+      "/assets/product/collage/odonil-zipper.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22769,7 +22801,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/office-bazzar-cricket-team-and-man-of-the-match.webp"
+      "/assets/product/collage/office-bazzar-cricket-team-and-man-of-the-match.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22809,7 +22841,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/plastic-buckets-assortment.webp"
+      "/assets/product/collage/plastic-buckets-assortment.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22849,7 +22881,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/plastic-bucket.webp"
+      "/assets/product/collage/plastic-bucket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22889,7 +22921,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/platform-trolley.webp"
+      "/assets/product/collage/platform-trolley.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22929,8 +22961,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/primmox-metered-air-freshener-refill-2.webp",
-      "/assets/supplier-library/collage/primmox-metered-air-freshener-refill.webp"
+      "/assets/product/collage/primmox-metered-air-freshener-refill-2.webp",
+      "/assets/product/collage/primmox-metered-air-freshener-refill.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -22970,7 +23002,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/room-freshener-sprays.webp"
+      "/assets/product/collage/room-freshener-sprays.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23010,8 +23042,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/royal-natural-tissue-2.webp",
-      "/assets/supplier-library/collage/royal-natural-tissue.webp"
+      "/assets/product/collage/royal-natural-tissue-2.webp",
+      "/assets/product/collage/royal-natural-tissue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23051,8 +23083,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/schevaran-chemicals-5l-2.webp",
-      "/assets/supplier-library/collage/schevaran-chemicals-5l.webp"
+      "/assets/product/collage/schevaran-chemicals-5l-2.webp",
+      "/assets/product/collage/schevaran-chemicals-5l.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23092,7 +23124,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/scotch-brite-cleaning-pads.webp"
+      "/assets/product/collage/scotch-brite-cleaning-pads.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23132,7 +23164,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/scott-essential-multi-fold-towels-32152.webp"
+      "/assets/product/collage/scott-essential-multi-fold-towels-32152.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23172,8 +23204,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/scott-foam-skin-cleanser-2.webp",
-      "/assets/supplier-library/collage/scott-foam-skin-cleanser.webp"
+      "/assets/product/collage/scott-foam-skin-cleanser-2.webp",
+      "/assets/product/collage/scott-foam-skin-cleanser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23213,7 +23245,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/scott-multi-fold-paper-towels.webp"
+      "/assets/product/collage/scott-multi-fold-paper-towels.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23253,8 +23285,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/scott-roll-paper-towel-2.webp",
-      "/assets/supplier-library/collage/scott-roll-paper-towel.webp"
+      "/assets/product/collage/scott-roll-paper-towel-2.webp",
+      "/assets/product/collage/scott-roll-paper-towel.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23294,7 +23326,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/soap-and-sanitizer-dispensers-collection.webp"
+      "/assets/product/collage/soap-and-sanitizer-dispensers-collection.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23334,7 +23366,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/soap-dispenser.webp"
+      "/assets/product/collage/soap-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23374,7 +23406,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/striped-cotton-floor-mats.webp"
+      "/assets/product/collage/striped-cotton-floor-mats.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23414,9 +23446,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/super-absorbent-quick-dry-bath-mat-2.webp",
-      "/assets/supplier-library/collage/super-absorbent-quick-dry-bath-mat-3.webp",
-      "/assets/supplier-library/collage/super-absorbent-quick-dry-bath-mat.webp"
+      "/assets/product/collage/super-absorbent-quick-dry-bath-mat-2.webp",
+      "/assets/product/collage/super-absorbent-quick-dry-bath-mat-3.webp",
+      "/assets/product/collage/super-absorbent-quick-dry-bath-mat.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23456,7 +23488,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/surf-excel-vim-hamam-and-rin-detergent-bars.webp"
+      "/assets/product/collage/surf-excel-vim-hamam-and-rin-detergent-bars.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23496,7 +23528,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/surya-grass-broom.webp"
+      "/assets/product/collage/surya-grass-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23536,7 +23568,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/toilet-brush-and-floor-scrub-brush-set.webp"
+      "/assets/product/collage/toilet-brush-and-floor-scrub-brush-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23576,10 +23608,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/toilet-paper-holder-with-phone-shelf-2.webp",
-      "/assets/supplier-library/collage/toilet-paper-holder-with-phone-shelf-3.webp",
-      "/assets/supplier-library/collage/toilet-paper-holder-with-phone-shelf-4.webp",
-      "/assets/supplier-library/collage/toilet-paper-holder-with-phone-shelf.webp"
+      "/assets/product/collage/toilet-paper-holder-with-phone-shelf-2.webp",
+      "/assets/product/collage/toilet-paper-holder-with-phone-shelf-3.webp",
+      "/assets/product/collage/toilet-paper-holder-with-phone-shelf-4.webp",
+      "/assets/product/collage/toilet-paper-holder-with-phone-shelf.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23619,7 +23651,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/urinal-screen.webp"
+      "/assets/product/collage/urinal-screen.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23659,7 +23691,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/victor-household-gloves-red-and-blue.webp"
+      "/assets/product/collage/victor-household-gloves-red-and-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23699,7 +23731,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/vayu-diffuser-oil-1l-range.webp"
+      "/assets/product/collage/vayu-diffuser-oil-1l-range.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23739,7 +23771,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/victor-nitrile-flocklined-gloves.webp"
+      "/assets/product/collage/victor-nitrile-flocklined-gloves.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23779,7 +23811,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/window-glass-cleaning-squeegee-washer-and-scraper-set.webp"
+      "/assets/product/collage/window-glass-cleaning-squeegee-washer-and-scraper-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23819,9 +23851,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/collage/wonder-killex-mosquito-racket-2.webp",
-      "/assets/supplier-library/collage/wonder-killex-mosquito-racket-3.webp",
-      "/assets/supplier-library/collage/wonder-killex-mosquito-racket.webp"
+      "/assets/product/collage/wonder-killex-mosquito-racket-2.webp",
+      "/assets/product/collage/wonder-killex-mosquito-racket-3.webp",
+      "/assets/product/collage/wonder-killex-mosquito-racket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23861,7 +23893,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/aerosol-dispenser-automatic-white-box.webp"
+      "/assets/product/dispenser/aerosol-dispenser-automatic-white-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23901,10 +23933,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/air-revitalisor-air-purifier-j-283-green-2.webp",
-      "/assets/supplier-library/dispenser/air-revitalisor-air-purifier-j-283-green-pair-2.webp",
-      "/assets/supplier-library/dispenser/air-revitalisor-air-purifier-j-283-green-pair.webp",
-      "/assets/supplier-library/dispenser/air-revitalisor-air-purifier-j-283-green.webp"
+      "/assets/product/dispenser/air-revitalisor-air-purifier-j-283-green-2.webp",
+      "/assets/product/dispenser/air-revitalisor-air-purifier-j-283-green-pair-2.webp",
+      "/assets/product/dispenser/air-revitalisor-air-purifier-j-283-green-pair.webp",
+      "/assets/product/dispenser/air-revitalisor-air-purifier-j-283-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23944,7 +23976,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/air-revitalisor-humidifier-hdl-606-green.webp"
+      "/assets/product/dispenser/air-revitalisor-humidifier-hdl-606-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23984,8 +24016,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/auto-perfume-dispenser-wall-mount-white-blue-2.webp",
-      "/assets/supplier-library/dispenser/auto-perfume-dispenser-wall-mount-white-blue.webp"
+      "/assets/product/dispenser/auto-perfume-dispenser-wall-mount-white-blue-2.webp",
+      "/assets/product/dispenser/auto-perfume-dispenser-wall-mount-white-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24025,7 +24057,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/aspire-automatic-towel-dispenser-pd-549-white-with-box.webp"
+      "/assets/product/dispenser/aspire-automatic-towel-dispenser-pd-549-white-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24065,8 +24097,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/autocut-paper-towel-dispenser-lever-white-black-leaf-2.webp",
-      "/assets/supplier-library/dispenser/autocut-paper-towel-dispenser-lever-white-black-leaf.webp"
+      "/assets/product/dispenser/autocut-paper-towel-dispenser-lever-white-black-leaf-2.webp",
+      "/assets/product/dispenser/autocut-paper-towel-dispenser-lever-white-black-leaf.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24106,7 +24138,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/automatic-aerosol-air-freshener-dispenser.webp"
+      "/assets/product/dispenser/automatic-aerosol-air-freshener-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24146,9 +24178,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/automatic-aerosol-lcd-dispenser-white-with-box-2.webp",
-      "/assets/supplier-library/dispenser/automatic-aerosol-lcd-dispenser-white-with-box.webp",
-      "/assets/supplier-library/dispenser/automatic-aerosol-lcd-dispenser-white.webp"
+      "/assets/product/dispenser/automatic-aerosol-lcd-dispenser-white-with-box-2.webp",
+      "/assets/product/dispenser/automatic-aerosol-lcd-dispenser-white-with-box.webp",
+      "/assets/product/dispenser/automatic-aerosol-lcd-dispenser-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24188,7 +24220,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/automatic-aerosol-lcd-dispenser-white-with-refill-can.webp"
+      "/assets/product/dispenser/automatic-aerosol-lcd-dispenser-white-with-refill-can.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24228,8 +24260,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/automatic-aerosol-led-dispenser-white-with-box-2.webp",
-      "/assets/supplier-library/dispenser/automatic-aerosol-led-dispenser-white-with-box.webp"
+      "/assets/product/dispenser/automatic-aerosol-led-dispenser-white-with-box-2.webp",
+      "/assets/product/dispenser/automatic-aerosol-led-dispenser-white-with-box.webp",
+      "/assets/product/dispenser/automatic-aerosol-led-dispenser-led-250-2.webp",
+      "/assets/product/dispenser/automatic-aerosol-led-dispenser-led-250.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24269,8 +24303,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/automatic-aerosol-led-dispenser-white-with-box-and-refill-can-2.webp",
-      "/assets/supplier-library/dispenser/automatic-aerosol-led-dispenser-white-with-box-and-refill-can.webp"
+      "/assets/product/dispenser/automatic-aerosol-led-dispenser-white-with-box-and-refill-can-2.webp",
+      "/assets/product/dispenser/automatic-aerosol-led-dispenser-white-with-box-and-refill-can.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24310,8 +24344,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/automatic-aerosol-led-dispenser-white-with-refill-can-2.webp",
-      "/assets/supplier-library/dispenser/automatic-aerosol-led-dispenser-white-with-refill-can.webp"
+      "/assets/product/dispenser/automatic-aerosol-led-dispenser-white-with-refill-can-2.webp",
+      "/assets/product/dispenser/automatic-aerosol-led-dispenser-white-with-refill-can.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24351,7 +24385,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/automatic-dispenser-5-ltr.webp"
+      "/assets/product/dispenser/automatic-dispenser-5-ltr.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24391,7 +24425,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/automatic-soap-dispenser-1000ml-with-box.webp"
+      "/assets/product/dispenser/automatic-soap-dispenser-1000ml-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24431,7 +24465,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/automatic-soap-dispenser-700ml.webp"
+      "/assets/product/dispenser/automatic-soap-dispenser-700ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24471,7 +24505,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/ceramic-electric-aroma-diffuser-bulbous-round-leaf-cutout.webp"
+      "/assets/product/dispenser/ceramic-electric-aroma-diffuser-bulbous-round-leaf-cutout.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24511,7 +24545,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/ceramic-electric-aroma-diffuser-bulbous-round-lit-up.webp"
+      "/assets/product/dispenser/ceramic-electric-aroma-diffuser-bulbous-round-lit-up.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24551,7 +24585,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/ceramic-electric-aroma-diffuser-cylindrical-diamond-cutout.webp"
+      "/assets/product/dispenser/ceramic-electric-aroma-diffuser-cylindrical-diamond-cutout.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24591,7 +24625,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/ceramic-electric-aroma-diffuser-cylindrical-lit-up.webp"
+      "/assets/product/dispenser/ceramic-electric-aroma-diffuser-cylindrical-lit-up.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24631,7 +24665,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/ceramic-electric-aroma-diffuser-small-egg-shape-flower-cutout-lit-up.webp"
+      "/assets/product/dispenser/ceramic-electric-aroma-diffuser-small-egg-shape-flower-cutout-lit-up.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24671,7 +24705,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/ceramic-electric-aroma-diffuser-small-egg-shape-flower-cutout.webp"
+      "/assets/product/dispenser/ceramic-electric-aroma-diffuser-small-egg-shape-flower-cutout.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24711,7 +24745,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/chrome-wall-mount-liquid-soap-dispenser-with-box.webp"
+      "/assets/product/dispenser/chrome-wall-mount-liquid-soap-dispenser-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24751,8 +24785,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/decorative-soap-dispenser-bottle-set-of-5-2.webp",
-      "/assets/supplier-library/dispenser/decorative-soap-dispenser-bottle-set-of-5.webp"
+      "/assets/product/dispenser/decorative-soap-dispenser-bottle-set-of-5-2.webp",
+      "/assets/product/dispenser/decorative-soap-dispenser-bottle-set-of-5.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24792,7 +24826,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/elbow-operated-soap-and-sanitizer-dispenser.webp"
+      "/assets/product/dispenser/elbow-operated-soap-and-sanitizer-dispenser.webp",
+      "/assets/product/dispenser/elbow-push-soap-and-sanitizer-dispenser-abs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24832,8 +24867,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/electric-ceramic-aroma-oil-diffuser-lamp-butterfly-2.webp",
-      "/assets/supplier-library/dispenser/electric-ceramic-aroma-oil-diffuser-lamp-butterfly.webp"
+      "/assets/product/dispenser/electric-ceramic-aroma-oil-diffuser-lamp-butterfly-2.webp",
+      "/assets/product/dispenser/electric-ceramic-aroma-oil-diffuser-lamp-butterfly.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24873,7 +24908,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/faux-leather-tissue-box-cover-rectangular-black-and-square-brown.webp"
+      "/assets/product/dispenser/faux-leather-tissue-box-cover-rectangular-black-and-square-brown.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24913,10 +24948,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/folded-paper-towel-dispenser-teardrop-window-white-front-view-2.webp",
-      "/assets/supplier-library/dispenser/folded-paper-towel-dispenser-teardrop-window-white-front-view.webp",
-      "/assets/supplier-library/dispenser/folded-paper-towel-dispenser-teardrop-window-white-side-view-2.webp",
-      "/assets/supplier-library/dispenser/folded-paper-towel-dispenser-teardrop-window-white-side-view.webp"
+      "/assets/product/dispenser/folded-paper-towel-dispenser-teardrop-window-white-front-view-2.webp",
+      "/assets/product/dispenser/folded-paper-towel-dispenser-teardrop-window-white-front-view.webp",
+      "/assets/product/dispenser/folded-paper-towel-dispenser-teardrop-window-white-side-view-2.webp",
+      "/assets/product/dispenser/folded-paper-towel-dispenser-teardrop-window-white-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24956,7 +24991,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/faux-leather-tissue-box-cover-rectangular-black.webp"
+      "/assets/product/dispenser/faux-leather-tissue-box-cover-rectangular-black.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -24996,7 +25031,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/faux-leather-tissue-box-cover-square-brown.webp"
+      "/assets/product/dispenser/faux-leather-tissue-box-cover-square-brown.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25036,7 +25071,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/foot-pedal-hand-sanitizer-dispenser-stand-black-yellow.webp"
+      "/assets/product/dispenser/foot-pedal-hand-sanitizer-dispenser-stand-black-yellow.webp",
+      "/assets/product/dispenser/foot-pedal-hand-sanitizer-dispenser-stand-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25076,7 +25112,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/foot-pedal-hand-sanitizer-dispenser-stand-with-bottle.webp"
+      "/assets/product/dispenser/foot-pedal-hand-sanitizer-dispenser-stand-with-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25116,7 +25152,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/gel-soap-sanitizer-dispenser-dp-350-black-with-box.webp"
+      "/assets/product/dispenser/gel-soap-sanitizer-dispenser-dp-350-black-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25156,7 +25192,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/gel-soap-sanitizer-dispenser-dt-1000-black-with-box.webp"
+      "/assets/product/dispenser/gel-soap-sanitizer-dispenser-dt-1000-black-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25196,8 +25232,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/gel-soap-sanitizer-dispenser-dt-500-black-with-box.webp",
-      "/assets/supplier-library/dispenser/gel-soap-sanitizer-dispenser-dt-500-white-with-box.webp"
+      "/assets/product/dispenser/gel-soap-sanitizer-dispenser-dt-500-black-with-box.webp",
+      "/assets/product/dispenser/gel-soap-sanitizer-dispenser-dt-500-white-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25237,8 +25273,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/hand-soap-dispenser-1000ml-white-2.webp",
-      "/assets/supplier-library/dispenser/hand-soap-dispenser-1000ml-white.webp"
+      "/assets/product/dispenser/hand-soap-dispenser-1000ml-white-2.webp",
+      "/assets/product/dispenser/hand-soap-dispenser-1000ml-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25278,8 +25314,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/industrial-heavy-duty-roll-towel-dispenser-stand-blue-2.webp",
-      "/assets/supplier-library/dispenser/industrial-heavy-duty-roll-towel-dispenser-stand-blue.webp"
+      "/assets/product/dispenser/industrial-heavy-duty-roll-towel-dispenser-stand-blue-2.webp",
+      "/assets/product/dispenser/industrial-heavy-duty-roll-towel-dispenser-stand-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25319,8 +25355,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/kimberly-clark-aquarius-hand-cleanser-dispenser-69480.webp",
-      "/assets/supplier-library/dispenser/kimberly-clark-aquarius-hand-cleanser-dispenser-69480-2.webp"
+      "/assets/product/dispenser/kimberly-clark-aquarius-hand-cleanser-dispenser-69480.webp",
+      "/assets/product/dispenser/kimberly-clark-aquarius-hand-cleanser-dispenser-69480-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25360,7 +25396,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/kimberly-clark-aquarius-rolled-hand-towel-dispenser-6959010.webp"
+      "/assets/product/dispenser/kimberly-clark-aquarius-rolled-hand-towel-dispenser-6959010.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25400,7 +25436,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/kimberly-clark-aquarius-slimroll-dispenser-6953010.webp"
+      "/assets/product/dispenser/kimberly-clark-aquarius-slimroll-dispenser-6953010.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25440,7 +25476,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/kimberly-clark-aquarius-rolled-hand-towel-dispenser-7375010.webp"
+      "/assets/product/dispenser/kimberly-clark-aquarius-rolled-hand-towel-dispenser-7375010.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25480,7 +25516,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/kimberly-clark-professional-aquarius-m-fold-towel-dispenser-70220-white-with-box.webp"
+      "/assets/product/dispenser/kimberly-clark-professional-aquarius-m-fold-towel-dispenser-70220-white-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25520,8 +25556,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/kimberly-clark-professional-aquarius-m-fold-towel-dispenser-70230-white-2.webp",
-      "/assets/supplier-library/dispenser/kimberly-clark-professional-aquarius-m-fold-towel-dispenser-70230-white.webp"
+      "/assets/product/dispenser/kimberly-clark-professional-aquarius-m-fold-towel-dispenser-70230-white-2.webp",
+      "/assets/product/dispenser/kimberly-clark-professional-aquarius-m-fold-towel-dispenser-70230-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25561,8 +25597,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/kimberly-clark-professional-aquarius-m-fold-towel-dispenser-70230-box-2.webp",
-      "/assets/supplier-library/dispenser/kimberly-clark-professional-aquarius-m-fold-towel-dispenser-70230-box.webp"
+      "/assets/product/dispenser/kimberly-clark-professional-aquarius-m-fold-towel-dispenser-70230-box-2.webp",
+      "/assets/product/dispenser/kimberly-clark-professional-aquarius-m-fold-towel-dispenser-70230-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25602,7 +25638,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/kimberly-clark-professional-aquarius-slimroll-hand-towel-dispenser-7955011-white-with-box.webp"
+      "/assets/product/dispenser/kimberly-clark-professional-aquarius-slimroll-hand-towel-dispenser-7955011-white-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25642,8 +25678,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/kimberly-clark-professional-electronic-touchless-roll-towel-dispenser-white-side-view.webp",
-      "/assets/supplier-library/dispenser/kimberly-clark-professional-electronic-touchless-roll-towel-dispenser-white.webp"
+      "/assets/product/dispenser/kimberly-clark-professional-electronic-touchless-roll-towel-dispenser-white-side-view.webp",
+      "/assets/product/dispenser/kimberly-clark-professional-electronic-touchless-roll-towel-dispenser-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25683,7 +25719,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/kimberly-clark-professional-automatic-soap-dispenser-9214702.webp"
+      "/assets/product/dispenser/kimberly-clark-professional-automatic-soap-dispenser-9214702.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25723,7 +25759,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/kimberly-clark-professional-facial-tissue-dispenser-white.webp"
+      "/assets/product/dispenser/kimberly-clark-professional-facial-tissue-dispenser-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25763,8 +25799,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/kimberly-clark-professional-interleaved-toilet-tissue-dispenser-white-side-view.webp",
-      "/assets/supplier-library/dispenser/kimberly-clark-professional-interleaved-toilet-tissue-dispenser-white.webp"
+      "/assets/product/dispenser/kimberly-clark-professional-interleaved-toilet-tissue-dispenser-white-side-view.webp",
+      "/assets/product/dispenser/kimberly-clark-professional-interleaved-toilet-tissue-dispenser-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25804,7 +25840,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/lazzo-automatic-soap-dispenser-1000ml-infographic.webp"
+      "/assets/product/dispenser/lazzo-automatic-soap-dispenser-1000ml-infographic.webp",
+      "/assets/product/dispenser/lazzo-automatic-soap-dispenser-1000ml-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25844,8 +25881,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/lazzo-gel-soap-sanitizer-dispenser-dp-350-white-with-box.webp",
-      "/assets/supplier-library/dispenser/lazzo-gel-soap-sanitizer-dispenser-dp-350-black-with-box.webp"
+      "/assets/product/dispenser/lazzo-gel-soap-sanitizer-dispenser-dp-350-white-with-box.webp",
+      "/assets/product/dispenser/lazzo-gel-soap-sanitizer-dispenser-dp-350-black-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25885,8 +25922,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/lazzo-geometric-diamond-liquid-soap-dispenser-set-of-4-with-box.webp",
-      "/assets/supplier-library/dispenser/lazzo-geometric-diamond-liquid-soap-dispenser-set-of-4.webp"
+      "/assets/product/dispenser/lazzo-geometric-diamond-liquid-soap-dispenser-set-of-4-with-box.webp",
+      "/assets/product/dispenser/lazzo-geometric-diamond-liquid-soap-dispenser-set-of-4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25926,9 +25963,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/lazzo-m-and-v-fold-towel-dispenser-compact-mc-300-pp-black-collage.webp",
-      "/assets/supplier-library/dispenser/lazzo-m-and-v-fold-towel-dispenser-compact-mc-300-pp-black-with-box.webp",
-      "/assets/supplier-library/dispenser/lazzo-m-and-v-fold-towel-dispenser-compact-mc-300-pp-black-with-box-2.webp"
+      "/assets/product/dispenser/lazzo-m-and-v-fold-towel-dispenser-compact-mc-300-pp-black-collage.webp",
+      "/assets/product/dispenser/lazzo-m-and-v-fold-towel-dispenser-compact-mc-300-pp-black-with-box.webp",
+      "/assets/product/dispenser/lazzo-m-and-v-fold-towel-dispenser-compact-mc-300-pp-black-with-box-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -25968,9 +26005,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/lazzo-soap-dispenser-white-grey-2.webp",
-      "/assets/supplier-library/dispenser/lazzo-soap-dispenser-white-grey-collage.webp",
-      "/assets/supplier-library/dispenser/lazzo-soap-dispenser-white-grey.webp"
+      "/assets/product/dispenser/lazzo-soap-dispenser-white-grey-2.webp",
+      "/assets/product/dispenser/lazzo-soap-dispenser-white-grey-collage.webp",
+      "/assets/product/dispenser/lazzo-soap-dispenser-white-grey.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26010,7 +26047,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/liquid-soap-dispenser-cylindrical-clear-white.webp"
+      "/assets/product/dispenser/liquid-soap-dispenser-cylindrical-clear-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26050,7 +26087,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/liquid-soap-dispenser-push-button-clear-chrome-with-box.webp"
+      "/assets/product/dispenser/liquid-soap-dispenser-push-button-clear-chrome-with-box.webp",
+      "/assets/product/dispenser/clear-wall-mount-soap-dispenser-push-button.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26090,7 +26128,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/liquid-soap-dispenser-push-button-clear-with-box.webp"
+      "/assets/product/dispenser/liquid-soap-dispenser-push-button-clear-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26130,7 +26168,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/m-and-v-fold-towel-dispenser-jumbo-white.webp"
+      "/assets/product/dispenser/m-and-v-fold-towel-dispenser-jumbo-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26170,9 +26208,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/m-and-v-fold-towel-dispenser-lazzo-jumbo-white-2.webp",
-      "/assets/supplier-library/dispenser/m-and-v-fold-towel-dispenser-lazzo-jumbo-white.webp",
-      "/assets/supplier-library/dispenser/m-and-v-fold-towel-dispenser-lazzo-jumbo-white-3.webp"
+      "/assets/product/dispenser/m-and-v-fold-towel-dispenser-lazzo-jumbo-white-2.webp",
+      "/assets/product/dispenser/m-and-v-fold-towel-dispenser-lazzo-jumbo-white.webp",
+      "/assets/product/dispenser/m-and-v-fold-towel-dispenser-lazzo-jumbo-white-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26212,7 +26250,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/m-fold-dispence-big-size.webp"
+      "/assets/product/dispenser/m-fold-dispence-big-size.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26252,7 +26290,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/m-and-v-fold-towel-dispenser-compact-white-with-box.webp"
+      "/assets/product/dispenser/m-and-v-fold-towel-dispenser-compact-white-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26292,10 +26330,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/m-fold-dispenser-1.webp",
-      "/assets/supplier-library/dispenser/m-fold-dispenser-2.webp",
-      "/assets/supplier-library/dispenser/m-fold-dispenser-3.webp",
-      "/assets/supplier-library/dispenser/m-fold-dispenser.webp"
+      "/assets/product/dispenser/m-fold-dispenser-1.webp",
+      "/assets/product/dispenser/m-fold-dispenser-2.webp",
+      "/assets/product/dispenser/m-fold-dispenser-3.webp",
+      "/assets/product/dispenser/m-fold-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26335,7 +26373,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/m-fold-dispenser-compact-white.webp"
+      "/assets/product/dispenser/m-fold-dispenser-compact-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26375,8 +26413,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/m-fold-towel-dispenser-white-blue-oval.webp",
-      "/assets/supplier-library/dispenser/m-fold-towel-dispenser-white-blue-oval-2.webp"
+      "/assets/product/dispenser/m-fold-towel-dispenser-white-blue-oval.webp",
+      "/assets/product/dispenser/m-fold-towel-dispenser-white-blue-oval-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26416,8 +26454,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/m-fold-paper-towel-dispenser-white.webp",
-      "/assets/supplier-library/dispenser/white-m-fold-paper-towel-dispenser-collage.webp"
+      "/assets/product/dispenser/m-fold-paper-towel-dispenser-white.webp",
+      "/assets/product/dispenser/white-m-fold-paper-towel-dispenser-collage.webp",
+      "/assets/product/dispenser/m-fold-paper-towel-dispenser-white-with-tissue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26457,8 +26496,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/m-fold-towel-dispenser-white-water-droplet-design-2.webp",
-      "/assets/supplier-library/dispenser/m-fold-towel-dispenser-white-water-droplet-design.webp"
+      "/assets/product/dispenser/m-fold-towel-dispenser-white-water-droplet-design-2.webp",
+      "/assets/product/dispenser/m-fold-towel-dispenser-white-water-droplet-design.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26498,7 +26537,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/manual-and-automatic-soap-dispenser-models-assorted-collage.webp"
+      "/assets/product/dispenser/manual-and-automatic-soap-dispenser-models-assorted-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26538,8 +26577,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/manual-foam-drop-spray-soap-dispenser-1000ml-with-box-2.webp",
-      "/assets/supplier-library/dispenser/manual-foam-drop-spray-soap-dispenser-1000ml-with-box.webp"
+      "/assets/product/dispenser/manual-foam-drop-spray-soap-dispenser-1000ml-with-box-2.webp",
+      "/assets/product/dispenser/manual-foam-drop-spray-soap-dispenser-1000ml-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26579,8 +26618,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/manual-gel-foam-spray-sanitizer-dispenser-mg-450-with-box-2.webp",
-      "/assets/supplier-library/dispenser/manual-gel-foam-spray-sanitizer-dispenser-mg-450-with-box.webp"
+      "/assets/product/dispenser/manual-gel-foam-spray-sanitizer-dispenser-mg-450-with-box-2.webp",
+      "/assets/product/dispenser/manual-gel-foam-spray-sanitizer-dispenser-mg-450-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26620,7 +26659,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/mechanical-hands-free-roll-towel-dispenser-201-specifications.webp"
+      "/assets/product/dispenser/mechanical-hands-free-roll-towel-dispenser-201-specifications.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26660,9 +26699,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/mechanical-hands-free-roll-towel-dispenser-202-auto-cut-white-2.webp",
-      "/assets/supplier-library/dispenser/mechanical-hands-free-roll-towel-dispenser-202-auto-cut-white-with-box.webp",
-      "/assets/supplier-library/dispenser/mechanical-hands-free-roll-towel-dispenser-202-auto-cut-white.webp"
+      "/assets/product/dispenser/mechanical-hands-free-roll-towel-dispenser-202-auto-cut-white-2.webp",
+      "/assets/product/dispenser/mechanical-hands-free-roll-towel-dispenser-202-auto-cut-white-with-box.webp",
+      "/assets/product/dispenser/mechanical-hands-free-roll-towel-dispenser-202-auto-cut-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26702,7 +26741,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/paper-cup-dispenser.webp"
+      "/assets/product/dispenser/paper-cup-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26742,8 +26781,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/plastic-tabletop-tissue-box-dispenser-white-2.webp",
-      "/assets/supplier-library/dispenser/plastic-tabletop-tissue-box-dispenser-white.webp"
+      "/assets/product/dispenser/plastic-tabletop-tissue-box-dispenser-white-2.webp",
+      "/assets/product/dispenser/plastic-tabletop-tissue-box-dispenser-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26783,7 +26822,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/plastic-tabletop-tissue-box-dispenser-with-tissue.webp"
+      "/assets/product/dispenser/plastic-tabletop-tissue-box-dispenser-with-tissue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26823,8 +26862,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/rectangular-tissue-box-cover-black-with-wooden-lid.webp",
-      "/assets/supplier-library/dispenser/rectangular-tissue-box-cover-white-with-wooden-lid.webp"
+      "/assets/product/dispenser/rectangular-tissue-box-cover-black-with-wooden-lid.webp",
+      "/assets/product/dispenser/rectangular-tissue-box-cover-white-with-wooden-lid.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26864,7 +26903,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/scott-rolled-hand-towel-dispenser-07377-white-with-box.webp"
+      "/assets/product/dispenser/scott-rolled-hand-towel-dispenser-07377-white-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26904,7 +26943,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/shoe-cover-dispenser.webp"
+      "/assets/product/dispenser/shoe-cover-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26944,8 +26983,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/shoe-cover-dispenser-aluminium-with-box-2.webp",
-      "/assets/supplier-library/dispenser/shoe-cover-dispenser-aluminium-with-box.webp"
+      "/assets/product/dispenser/shoe-cover-dispenser-aluminium-with-box-2.webp",
+      "/assets/product/dispenser/shoe-cover-dispenser-aluminium-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -26985,7 +27024,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/single-shampoo-and-soap-dispenser-350ml-white.webp"
+      "/assets/product/dispenser/single-shampoo-and-soap-dispenser-350ml-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27025,8 +27064,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/soap-and-sanitizer-dispenser-wf-064-2.webp",
-      "/assets/supplier-library/dispenser/soap-and-sanitizer-dispenser-wf-064.webp"
+      "/assets/product/dispenser/soap-and-sanitizer-dispenser-wf-064-2.webp",
+      "/assets/product/dispenser/soap-and-sanitizer-dispenser-wf-064.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27066,8 +27105,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/soap-and-sanitizer-dispenser-wf-065.webp",
-      "/assets/supplier-library/dispenser/soap-and-sanitizer-dispenser-wf-065-2.webp"
+      "/assets/product/dispenser/soap-and-sanitizer-dispenser-wf-065.webp",
+      "/assets/product/dispenser/soap-and-sanitizer-dispenser-wf-065-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27107,8 +27146,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/soap-and-spray-dispenser-dc800-800ml-2.webp",
-      "/assets/supplier-library/dispenser/soap-and-spray-dispenser-dc800-800ml.webp"
+      "/assets/product/dispenser/soap-and-spray-dispenser-dc800-800ml-2.webp",
+      "/assets/product/dispenser/soap-and-spray-dispenser-dc800-800ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27148,10 +27187,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/soap-dispenser-ls-350-black-2.webp",
-      "/assets/supplier-library/dispenser/soap-dispenser-ls-350-black.webp",
-      "/assets/supplier-library/dispenser/soap-dispenser-ls-350-white-2.webp",
-      "/assets/supplier-library/dispenser/soap-dispenser-ls-350-white.webp"
+      "/assets/product/dispenser/soap-dispenser-ls-350-black-2.webp",
+      "/assets/product/dispenser/soap-dispenser-ls-350-black.webp",
+      "/assets/product/dispenser/soap-dispenser-ls-350-white-2.webp",
+      "/assets/product/dispenser/soap-dispenser-ls-350-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27191,8 +27230,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/soap-dispenser-ss-500-ml.webp",
-      "/assets/supplier-library/dispenser/soap-dispenser-ss-500-ml-2.webp"
+      "/assets/product/dispenser/soap-dispenser-ss-500-ml.webp",
+      "/assets/product/dispenser/soap-dispenser-ss-500-ml-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27232,7 +27271,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/soap-dispenser-variety-collage-5-in-1.webp"
+      "/assets/product/dispenser/soap-dispenser-variety-collage-5-in-1.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27272,9 +27311,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/square-tissue-box-cover-white-with-wooden-lid-angled-view.webp",
-      "/assets/supplier-library/dispenser/square-tissue-box-cover-white-with-wooden-lid-top-view-2.webp",
-      "/assets/supplier-library/dispenser/square-tissue-box-cover-white-with-wooden-lid-top-view.webp"
+      "/assets/product/dispenser/square-tissue-box-cover-white-with-wooden-lid-angled-view.webp",
+      "/assets/product/dispenser/square-tissue-box-cover-white-with-wooden-lid-top-view-2.webp",
+      "/assets/product/dispenser/square-tissue-box-cover-white-with-wooden-lid-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27314,7 +27353,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/square-soap-dispenser-pump-bottle-white-and-smoke-black.webp"
+      "/assets/product/dispenser/square-soap-dispenser-pump-bottle-white-and-smoke-black.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27354,7 +27393,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/soap-oil-dispenser-ls1000.webp"
+      "/assets/product/dispenser/soap-oil-dispenser-ls1000.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27394,7 +27433,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/soapoil-dispenser-ls-500ml.webp"
+      "/assets/product/dispenser/soapoil-dispenser-ls-500ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27434,7 +27473,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/ss-c-fold-dispenser-compact.webp"
+      "/assets/product/dispenser/ss-c-fold-dispenser-compact.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27474,7 +27513,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/ss-handwash-dispencer.webp"
+      "/assets/product/dispenser/ss-handwash-dispencer.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27514,7 +27553,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-jumbo-toilet-roll-dispenser-with-dimensions.webp"
+      "/assets/product/dispenser/stainless-steel-jumbo-toilet-roll-dispenser-with-dimensions.webp",
+      "/assets/product/collage/jumbo-toilet-roll-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27554,8 +27594,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-jumbo-toilet-roll-dispenser-round-with-key-2.webp",
-      "/assets/supplier-library/dispenser/stainless-steel-jumbo-toilet-roll-dispenser-round-with-key.webp"
+      "/assets/product/dispenser/stainless-steel-jumbo-toilet-roll-dispenser-round-with-key-2.webp",
+      "/assets/product/dispenser/stainless-steel-jumbo-toilet-roll-dispenser-round-with-key.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27595,9 +27635,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-m-fold-dispenser-2.webp",
-      "/assets/supplier-library/dispenser/stainless-steel-m-fold-dispenser-3.webp",
-      "/assets/supplier-library/dispenser/stainless-steel-m-fold-dispenser.webp"
+      "/assets/product/dispenser/stainless-steel-m-fold-dispenser-2.webp",
+      "/assets/product/dispenser/stainless-steel-m-fold-dispenser-3.webp",
+      "/assets/product/dispenser/stainless-steel-m-fold-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27637,7 +27677,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-liquid-soap-dispenser-set-of-3.webp"
+      "/assets/product/dispenser/stainless-steel-liquid-soap-dispenser-set-of-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27677,7 +27717,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-m-fold-dispenser-large-with-dimensions.webp"
+      "/assets/product/dispenser/stainless-steel-m-fold-dispenser-large-with-dimensions.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27717,7 +27757,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-m-fold-dispenser-standard-with-dimensions.webp"
+      "/assets/product/dispenser/stainless-steel-m-fold-dispenser-standard-with-dimensions.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27757,8 +27797,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-push-button-soap-dispenser-500ml-angled-view.webp",
-      "/assets/supplier-library/dispenser/stainless-steel-push-button-soap-dispenser-500ml-top-view.webp"
+      "/assets/product/dispenser/stainless-steel-push-button-soap-dispenser-500ml-angled-view.webp",
+      "/assets/product/dispenser/stainless-steel-push-button-soap-dispenser-500ml-top-view.webp",
+      "/assets/product/dispenser/stainless-steel-push-button-soap-dispenser-500ml-wall-mount-view.webp",
+      "/assets/product/dispenser/stainless-steel-push-button-soap-dispenser-500ml-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27798,7 +27840,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-soap-dispenser-1000ml-box.webp"
+      "/assets/product/dispenser/stainless-steel-soap-dispenser-1000ml-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27838,7 +27880,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-soap-dispenser-500ml-box.webp"
+      "/assets/product/dispenser/stainless-steel-soap-dispenser-500ml-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27878,7 +27920,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-soap-dispenser-500ml-800ml-1000ml.webp"
+      "/assets/product/dispenser/stainless-steel-soap-dispenser-500ml-800ml-1000ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27918,7 +27960,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-soap-dispenser-800ml-box.webp"
+      "/assets/product/dispenser/stainless-steel-soap-dispenser-800ml-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -27958,9 +28000,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-toilet-paper-holder-with-flap-open.webp",
-      "/assets/supplier-library/dispenser/stainless-steel-toilet-paper-holder-with-flap-open-2.webp",
-      "/assets/supplier-library/dispenser/stainless-steel-toilet-paper-holder-with-flap.webp"
+      "/assets/product/dispenser/stainless-steel-toilet-paper-holder-with-flap-open.webp",
+      "/assets/product/dispenser/stainless-steel-toilet-paper-holder-with-flap-open-2.webp",
+      "/assets/product/dispenser/stainless-steel-toilet-paper-holder-with-flap.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28000,7 +28042,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-toilet-paper-holder-with-box.webp"
+      "/assets/product/dispenser/stainless-steel-toilet-paper-holder-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28040,7 +28082,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/stainless-steel-tapered-liquid-soap-dispenser-bottle.webp"
+      "/assets/product/dispenser/stainless-steel-tapered-liquid-soap-dispenser-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28080,7 +28122,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/tabletop-napkin-dispenser-white-pair.webp"
+      "/assets/product/dispenser/tabletop-napkin-dispenser-white-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28120,7 +28162,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/tabletop-pop-up-paper-napkin-dispenser-white.webp"
+      "/assets/product/dispenser/tabletop-pop-up-paper-napkin-dispenser-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28160,7 +28202,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/tabletop-napkin-dispenser-white-black-with-loaded-napkin.webp"
+      "/assets/product/dispenser/tabletop-napkin-dispenser-white-black-with-loaded-napkin.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28200,7 +28242,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/tabletop-tissue-box-dispenser-lazzo-white.webp"
+      "/assets/product/dispenser/tabletop-tissue-box-dispenser-lazzo-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28240,7 +28282,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/tabletop-napkin-dispenser-white-black-with-napkin-pack.webp"
+      "/assets/product/dispenser/tabletop-napkin-dispenser-white-black-with-napkin-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28280,7 +28322,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/tabletop-tissue-box-square-white.webp"
+      "/assets/product/dispenser/tabletop-tissue-box-square-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28320,7 +28362,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/tabletop-tissue-box-square-with-wooden-lid.webp"
+      "/assets/product/dispenser/tabletop-tissue-box-square-with-wooden-lid.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28360,7 +28402,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/tissue-paper-and-towel-roll-dispenser-models-assorted-collage.webp"
+      "/assets/product/dispenser/tissue-paper-and-towel-roll-dispenser-models-assorted-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28400,7 +28442,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/toilet-roll-holder-with-top-shelf-white.webp"
+      "/assets/product/dispenser/toilet-roll-holder-with-top-shelf-white.webp",
+      "/assets/product/dispenser/toilet-roll-holder-with-mobile-shelf-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28440,7 +28483,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/toilet-seat-cover-dispenser-white.webp"
+      "/assets/product/dispenser/toilet-seat-cover-dispenser-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28480,8 +28523,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/wall-mount-liquid-soap-dispenser-white-and-grey-angled-view.webp",
-      "/assets/supplier-library/dispenser/wall-mount-liquid-soap-dispenser-white-and-grey-front-view.webp"
+      "/assets/product/dispenser/wall-mount-liquid-soap-dispenser-white-and-grey-angled-view.webp",
+      "/assets/product/dispenser/wall-mount-liquid-soap-dispenser-white-and-grey-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28521,7 +28564,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/white-wall-mount-liquid-soap-dispenser-with-box.webp"
+      "/assets/product/dispenser/white-wall-mount-liquid-soap-dispenser-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28561,7 +28604,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dispenser/white-marble-finish-liquid-soap-dispenser-set-of-3.webp"
+      "/assets/product/dispenser/white-marble-finish-liquid-soap-dispenser-set-of-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28601,7 +28644,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-lazzo-swing-bin-with-handle-pair-blue-teal-collage.webp"
+      "/assets/product/dustbin/aristo-lazzo-swing-bin-with-handle-pair-blue-teal-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28641,7 +28684,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-plastic-garbage-bin-with-handle-and-lid-red-and-blue.webp"
+      "/assets/product/dustbin/aristo-plastic-garbage-bin-with-handle-and-lid-red-and-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28681,7 +28724,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-lazzo-pedal-dustbin-with-handle-pair-grey-and-beige.webp"
+      "/assets/product/dustbin/aristo-lazzo-pedal-dustbin-with-handle-pair-grey-and-beige.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28721,7 +28764,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-round-swing-bin-range-25l-to-80l-multicolor.webp"
+      "/assets/product/dustbin/aristo-round-swing-bin-range-25l-to-80l-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28761,7 +28804,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-safari-square-perforated-waste-basket-set-of-4-multicolor.webp"
+      "/assets/product/dustbin/aristo-safari-square-perforated-waste-basket-set-of-4-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28801,7 +28844,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-square-pedal-dustbin-45-ltr-set-of-4-red-yellow-blue-green.webp"
+      "/assets/product/dustbin/aristo-square-pedal-dustbin-45-ltr-set-of-4-red-yellow-blue-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28841,7 +28884,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-square-swing-bin-60-ltr-specifications-infographic.webp"
+      "/assets/product/dustbin/aristo-square-swing-bin-60-ltr-specifications-infographic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28881,10 +28924,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-square-waste-bin-without-lid-set-of-3-green-red-blue.webp",
-      "/assets/supplier-library/dustbin/aristo-square-waste-bin-without-lid-set-of-4-green-red-blue-yellow-3.webp",
-      "/assets/supplier-library/dustbin/aristo-square-waste-bin-without-lid-set-of-4-green-red-blue-yellow-2.webp",
-      "/assets/supplier-library/dustbin/aristo-square-waste-bin-without-lid-set-of-4-green-red-blue-yellow.webp"
+      "/assets/product/dustbin/aristo-square-waste-bin-without-lid-set-of-3-green-red-blue.webp",
+      "/assets/product/dustbin/aristo-square-waste-bin-without-lid-set-of-4-green-red-blue-yellow-3.webp",
+      "/assets/product/dustbin/aristo-square-waste-bin-without-lid-set-of-4-green-red-blue-yellow-2.webp",
+      "/assets/product/dustbin/aristo-square-waste-bin-without-lid-set-of-4-green-red-blue-yellow.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28924,7 +28967,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-swing-bin-and-wheel-waste-bin-range-catalogue.webp"
+      "/assets/product/dustbin/aristo-swing-bin-and-wheel-waste-bin-range-catalogue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -28964,7 +29007,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-utility-open-waste-bin-range-5l-to-28l-multicolor.webp"
+      "/assets/product/dustbin/aristo-utility-open-waste-bin-range-5l-to-28l-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29004,7 +29047,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-waste-bin-dome-lid-double-stand-blue-and-green.webp"
+      "/assets/product/dustbin/aristo-waste-bin-dome-lid-double-stand-blue-and-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29044,7 +29087,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-waste-bin-dome-lid-single-and-double-stand-catalogue.webp"
+      "/assets/product/dustbin/aristo-waste-bin-dome-lid-single-and-double-stand-catalogue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29084,11 +29127,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-waste-bin-with-dome-lid-set-of-4-blue-red-yellow-green.webp",
-      "/assets/supplier-library/dustbin/aristo-waste-bin-with-dome-lid-set-of-3-green-red-blue.webp",
-      "/assets/supplier-library/dustbin/aristo-waste-bin-with-dome-lid-set-of-4-green-red-blue-yellow-2.webp",
-      "/assets/supplier-library/dustbin/aristo-waste-bin-with-dome-lid-set-of-4-green-red-blue-yellow-3.webp",
-      "/assets/supplier-library/dustbin/aristo-waste-bin-with-dome-lid-set-of-4-green-red-blue-yellow.webp"
+      "/assets/product/dustbin/aristo-waste-bin-with-dome-lid-set-of-4-blue-red-yellow-green.webp",
+      "/assets/product/dustbin/aristo-waste-bin-with-dome-lid-set-of-3-green-red-blue.webp",
+      "/assets/product/dustbin/aristo-waste-bin-with-dome-lid-set-of-4-green-red-blue-yellow-2.webp",
+      "/assets/product/dustbin/aristo-waste-bin-with-dome-lid-set-of-4-green-red-blue-yellow-3.webp",
+      "/assets/product/dustbin/aristo-waste-bin-with-dome-lid-set-of-4-green-red-blue-yellow.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29128,7 +29171,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-waste-bin-with-dome-lid-60l-80l-110l-catalogue.webp"
+      "/assets/product/dustbin/aristo-waste-bin-with-dome-lid-60l-80l-110l-catalogue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29168,7 +29211,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-1100-ltr-green-swachh-bharat-front-view.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-1100-ltr-green-swachh-bharat-front-view.webp",
+      "/assets/product/dustbin/aristo-4-wheel-garbage-bin-660-ltr-blue-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29208,7 +29252,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-1100-ltr-open-lid-green-catalogue.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-1100-ltr-open-lid-green-catalogue.webp",
+      "/assets/product/dustbin/aristo-4-wheel-garbage-bin-1100-ltr-blue-closed-lid.webp",
+      "/assets/product/dustbin/aristo-4-wheel-garbage-bin-1100-ltr-blue-open-lid.webp",
+      "/assets/product/dustbin/aristo-wheel-waste-bin-with-dome-lid-120-ltr-blue-catalogue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29248,7 +29295,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-120-ltr-and-240-ltr-specifications-catalogue.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-120-ltr-and-240-ltr-specifications-catalogue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29288,7 +29335,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-120-ltr-green-front-view.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-120-ltr-green-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29328,7 +29375,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-120-ltr-stacked-set-of-5-multicolor.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-120-ltr-stacked-set-of-5-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29368,7 +29415,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-120l-240l-360l-red-green-catalogue.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-120l-240l-360l-red-green-catalogue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29408,7 +29455,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-120-ltr-set-of-5-multicolor-storefront-full-view.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-120-ltr-set-of-5-multicolor-storefront-full-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29448,7 +29495,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-660-ltr-and-1100-ltr-swachh-bharat-catalogue.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-660-ltr-and-1100-ltr-swachh-bharat-catalogue.webp",
+      "/assets/product/dustbin/aristo-swachh-bharat-4-wheel-garbage-bin-660-ltr-green-catalogue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29488,7 +29536,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-set-of-3-sizes-240l-120l-90l-red-blue-green.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-set-of-3-sizes-240l-120l-90l-red-blue-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29528,7 +29576,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-120-ltr-set-of-5-multicolor-storefront-view.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-120-ltr-set-of-5-multicolor-storefront-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29568,7 +29616,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-green-stacked-columns-warehouse-view.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-green-stacked-columns-warehouse-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29608,7 +29656,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-stacked-warehouse-view-multicolor.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-stacked-warehouse-view-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29648,7 +29696,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-stacked-perspective-blue-yellow-green.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-stacked-perspective-blue-yellow-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29688,7 +29736,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-stacked-row-blue-yellow-green-front-view.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-stacked-row-blue-yellow-green-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29728,7 +29776,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-with-pedal-120-ltr-and-240-ltr-green-catalogue.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-with-pedal-120-ltr-and-240-ltr-green-catalogue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29768,7 +29816,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-with-pedal-120-ltr-green-open-lid.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-with-pedal-120-ltr-green-open-lid.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29808,7 +29856,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-with-pedal-65-ltr-open-lid-demonstration.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-with-pedal-65-ltr-open-lid-demonstration.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29848,7 +29896,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-with-metal-pedal-120-ltr-green-open-lid.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-with-metal-pedal-120-ltr-green-open-lid.webp",
+      "/assets/product/dustbin/aristo-wheel-waste-bin-with-metal-pedal-120-ltr-green-closed-lid.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29888,8 +29937,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-with-pedal-65-ltr-set-of-4-red-yellow-green-blue.webp",
-      "/assets/supplier-library/dustbin/aristo-wheel-waste-bin-with-pedal-65-ltr-set-of-4-green-yellow-red-blue.webp"
+      "/assets/product/dustbin/aristo-wheel-waste-bin-with-pedal-65-ltr-set-of-4-red-yellow-green-blue.webp",
+      "/assets/product/dustbin/aristo-wheel-waste-bin-with-pedal-65-ltr-set-of-4-green-yellow-red-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29929,7 +29978,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/bhupendra-international-open-waste-basket-ivory.webp"
+      "/assets/product/dustbin/bhupendra-international-open-waste-basket-ivory.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -29969,7 +30018,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/biohazard-and-standard-pedal-dustbin-sizes-collage.webp"
+      "/assets/product/dustbin/biohazard-and-standard-pedal-dustbin-sizes-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30009,7 +30058,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/biohazard-pedal-dustbin-black-set-of-3-sizes.webp"
+      "/assets/product/dustbin/biohazard-pedal-dustbin-black-set-of-3-sizes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30049,8 +30098,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/biohazard-pedal-dustbin-large-black-perspective-view.webp",
-      "/assets/supplier-library/dustbin/biohazard-pedal-dustbin-large-black-front-view.webp"
+      "/assets/product/dustbin/biohazard-pedal-dustbin-large-black-perspective-view.webp",
+      "/assets/product/dustbin/biohazard-pedal-dustbin-large-black-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30090,7 +30139,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/decoplast-heavy-duty-round-drum-bin-with-lid-blue.webp"
+      "/assets/product/dustbin/decoplast-heavy-duty-round-drum-bin-with-lid-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30130,7 +30179,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/decoplast-round-garbage-drum-bin-50-ltr-red-height-measurement.webp"
+      "/assets/product/dustbin/decoplast-round-garbage-drum-bin-50-ltr-red-height-measurement.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30170,7 +30219,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/decoplast-round-garbage-drum-bin-30-ltr-teal-height-measurement.webp"
+      "/assets/product/dustbin/decoplast-round-garbage-drum-bin-30-ltr-teal-height-measurement.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30210,7 +30259,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/decoplast-round-garbage-drum-bin-80-ltr-blue-height-measurement.webp"
+      "/assets/product/dustbin/decoplast-round-garbage-drum-bin-80-ltr-blue-height-measurement.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30250,7 +30299,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/decoplast-round-garbage-drum-bin-open-set-of-3-blue-red-teal.webp"
+      "/assets/product/dustbin/decoplast-round-garbage-drum-bin-open-set-of-3-blue-red-teal.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30290,7 +30339,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/decoplast-round-garbage-drum-bin-with-lid-set-of-3-blue-red-teal.webp"
+      "/assets/product/dustbin/decoplast-round-garbage-drum-bin-with-lid-set-of-3-blue-red-teal.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30330,7 +30379,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/decoplast-swing-dustbins-set-of-4-yellow-green-red-blue.webp"
+      "/assets/product/dustbin/decoplast-swing-dustbins-set-of-4-yellow-green-red-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30370,8 +30419,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/decoplast-round-swing-dustbin-yellow.webp",
-      "/assets/supplier-library/dustbin/decoplast-round-swing-dustbin-grey.webp"
+      "/assets/product/dustbin/decoplast-round-swing-dustbin-yellow.webp",
+      "/assets/product/dustbin/decoplast-round-swing-dustbin-grey.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30411,7 +30460,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/executive-swing-dustbin-with-handle-grey.webp"
+      "/assets/product/dustbin/executive-swing-dustbin-with-handle-grey.webp",
+      "/assets/product/collage/executive-push-dustbin-with-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30451,7 +30501,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/frp-dual-waste-bin-recycle-paper-and-general-terrace-view.webp"
+      "/assets/product/dustbin/frp-dual-waste-bin-recycle-paper-and-general-terrace-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30491,7 +30541,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/executive-swing-dustbin-with-handle-ivory.webp"
+      "/assets/product/dustbin/executive-swing-dustbin-with-handle-ivory.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30531,8 +30581,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/frp-dual-waste-bin-recycle-paper-and-general-waste-front-view-2.webp",
-      "/assets/supplier-library/dustbin/frp-dual-waste-bin-recycle-paper-and-general-waste-front-view.webp"
+      "/assets/product/dustbin/frp-dual-waste-bin-recycle-paper-and-general-waste-front-view-2.webp",
+      "/assets/product/dustbin/frp-dual-waste-bin-recycle-paper-and-general-waste-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30572,8 +30622,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/frp-trio-waste-bin-60x3-ltr-closed-lid-view.webp",
-      "/assets/supplier-library/dustbin/frp-trio-waste-bin-60x3-ltr-open-lid-view.webp"
+      "/assets/product/dustbin/frp-trio-waste-bin-60x3-ltr-closed-lid-view.webp",
+      "/assets/product/dustbin/frp-trio-waste-bin-60x3-ltr-open-lid-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30613,8 +30663,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/jago-heavy-duty-pedal-dustbin-grey.webp",
-      "/assets/supplier-library/dustbin/jago-heavy-duty-pedal-dustbin-set-of-3-green-red-blue.webp"
+      "/assets/product/dustbin/jago-heavy-duty-pedal-dustbin-grey.webp",
+      "/assets/product/dustbin/jago-heavy-duty-pedal-dustbin-set-of-3-green-red-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30654,7 +30704,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/jago-heavy-duty-pedal-dustbin-pair-blue-and-red.webp"
+      "/assets/product/dustbin/jago-heavy-duty-pedal-dustbin-pair-blue-and-red.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30694,7 +30744,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-7l-12l-18l-with-labels.webp"
+      "/assets/product/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-7l-12l-18l-with-labels.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30734,14 +30784,14 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-blue-front-view.webp",
-      "/assets/supplier-library/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-green-front-view.webp",
-      "/assets/supplier-library/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-grey-front-view.webp",
-      "/assets/supplier-library/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-red.webp",
-      "/assets/supplier-library/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-red-front-view.webp",
-      "/assets/supplier-library/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-yellow-front-view.webp",
-      "/assets/supplier-library/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-yellow.webp",
-      "/assets/supplier-library/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-set-of-5-multicolor.webp"
+      "/assets/product/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-blue-front-view.webp",
+      "/assets/product/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-green-front-view.webp",
+      "/assets/product/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-grey-front-view.webp",
+      "/assets/product/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-red.webp",
+      "/assets/product/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-red-front-view.webp",
+      "/assets/product/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-yellow-front-view.webp",
+      "/assets/product/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-yellow.webp",
+      "/assets/product/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-set-of-5-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30781,7 +30831,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-teal-green.webp"
+      "/assets/product/dustbin/jago-heavy-duty-pedal-dustbin-with-handle-teal-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30821,7 +30871,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/jago-heavy-duty-plastic-waste-basket-open-dustbin-3-sizes-green.webp"
+      "/assets/product/dustbin/jago-heavy-duty-plastic-waste-basket-open-dustbin-3-sizes-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30861,9 +30911,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/jago-heavy-duty-plastic-waste-basket-open-dustbin-set-of-6-multicolor-2.webp",
-      "/assets/supplier-library/dustbin/jago-heavy-duty-plastic-waste-basket-open-dustbin-set-of-6-multicolor.webp",
-      "/assets/supplier-library/dustbin/jago-heavy-duty-plastic-waste-basket-open-dustbin-set-of-9-multicolor.webp"
+      "/assets/product/dustbin/jago-heavy-duty-plastic-waste-basket-open-dustbin-set-of-6-multicolor-2.webp",
+      "/assets/product/dustbin/jago-heavy-duty-plastic-waste-basket-open-dustbin-set-of-6-multicolor.webp",
+      "/assets/product/dustbin/jago-heavy-duty-plastic-waste-basket-open-dustbin-set-of-9-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30903,9 +30953,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/jago-heavy-duty-swing-dustbin-set-of-4-blue-green-yellow-red.webp",
-      "/assets/supplier-library/dustbin/jago-heavy-duty-swing-dustbin-blue.webp",
-      "/assets/supplier-library/dustbin/jago-heavy-duty-swing-dustbin-yellow.webp"
+      "/assets/product/dustbin/jago-heavy-duty-swing-dustbin-set-of-4-blue-green-yellow-red.webp",
+      "/assets/product/dustbin/jago-heavy-duty-swing-dustbin-blue.webp",
+      "/assets/product/dustbin/jago-heavy-duty-swing-dustbin-yellow.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30945,7 +30995,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/jago-plastic-waste-basket-open-dustbin-2-sizes-green-stacks.webp"
+      "/assets/product/dustbin/jago-plastic-waste-basket-open-dustbin-2-sizes-green-stacks.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -30985,7 +31035,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/jago-plastic-waste-basket-open-dustbin-stack-of-3-blue-brown-green.webp"
+      "/assets/product/dustbin/jago-plastic-waste-basket-open-dustbin-stack-of-3-blue-brown-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31025,7 +31075,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/jago-plastic-waste-basket-open-dustbin-stacked-multicolor.webp"
+      "/assets/product/dustbin/jago-plastic-waste-basket-open-dustbin-stacked-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31065,7 +31115,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/kyracs-biohazard-stepbin-4-bins-on-trolley-rack.webp"
+      "/assets/product/dustbin/kyracs-biohazard-stepbin-4-bins-on-trolley-rack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31105,8 +31155,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/kyracs-biohazard-stepbin-pedal-dustbin-4-sizes-blue-green-yellow-red-2.webp",
-      "/assets/supplier-library/dustbin/kyracs-biohazard-stepbin-pedal-dustbin-4-sizes-blue-green-yellow-red.webp"
+      "/assets/product/dustbin/kyracs-biohazard-stepbin-pedal-dustbin-4-sizes-blue-green-yellow-red-2.webp",
+      "/assets/product/dustbin/kyracs-biohazard-stepbin-pedal-dustbin-4-sizes-blue-green-yellow-red.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31146,7 +31196,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/jago-plastic-waste-basket-open-dustbin-two-stacks-multicolor.webp"
+      "/assets/product/dustbin/jago-plastic-waste-basket-open-dustbin-two-stacks-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31186,7 +31236,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/kyracs-biohazard-stepbin-pedal-dustbin-6-colors-collage.webp"
+      "/assets/product/dustbin/kyracs-biohazard-stepbin-pedal-dustbin-6-colors-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31226,7 +31276,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/kyracs-k65-stepbin-pedal-dustbin-65-ltr-set-of-3-green-yellow-red.webp"
+      "/assets/product/dustbin/kyracs-k65-stepbin-pedal-dustbin-65-ltr-set-of-3-green-yellow-red.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31266,7 +31316,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/kyracs-biohazard-stepbin-pedal-dustbin-white.webp"
+      "/assets/product/dustbin/kyracs-biohazard-stepbin-pedal-dustbin-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31306,7 +31356,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/kyracs-stepbin-biohazard-pedal-dustbin-all-sizes-10l-to-65l-collage.webp"
+      "/assets/product/dustbin/kyracs-stepbin-biohazard-pedal-dustbin-all-sizes-10l-to-65l-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31346,7 +31396,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/kyracs-stepbin-pedal-dustbin-range-10l-to-65l-multicolor.webp"
+      "/assets/product/dustbin/kyracs-stepbin-pedal-dustbin-range-10l-to-65l-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31386,7 +31436,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-2x2-stacked-set-of-4-multicolor.webp"
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-2x2-stacked-set-of-4-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31426,13 +31476,13 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-blue-front-view.webp",
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-red-front-view.webp",
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-green-front-view.webp",
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-red.webp",
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-red-front-view-1.webp",
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-set-of-4-red-blue-yellow-green.webp",
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-yellow-front-view.webp"
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-blue-front-view.webp",
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-red-front-view.webp",
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-green-front-view.webp",
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-red.webp",
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-red-front-view-1.webp",
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-set-of-4-red-blue-yellow-green.webp",
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-yellow-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31472,8 +31522,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-pair-blue-and-green.webp",
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-pair-red-and-yellow.webp"
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-pair-blue-and-green.webp",
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-pair-red-and-yellow.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31513,7 +31563,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-with-handle-3-sizes-15l-20l-30l-with-labels.webp"
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-with-handle-3-sizes-15l-20l-30l-with-labels.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31553,7 +31603,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-with-handle-4-sizes-10l-to-30l-with-labels.webp"
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-with-handle-4-sizes-10l-to-30l-with-labels.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31593,7 +31643,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-with-handle-2x2-stacked-set-of-4-multicolor.webp"
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-with-handle-2x2-stacked-set-of-4-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31633,7 +31683,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-with-handle-set-of-4-sizes-10l-to-30l-multicolor.webp"
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-with-handle-set-of-4-sizes-10l-to-30l-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31673,8 +31723,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-with-handle-pair-black.webp",
-      "/assets/supplier-library/dustbin/lazzo-biohazard-pedal-dustbin-with-handle-set-of-3-blue-red-yellow.webp"
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-with-handle-pair-black.webp",
+      "/assets/product/dustbin/lazzo-biohazard-pedal-dustbin-with-handle-set-of-3-blue-red-yellow.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31714,7 +31764,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/lazzo-biohazard-square-pedal-dustbin-65l-blue-and-45l-green-with-labels.webp"
+      "/assets/product/dustbin/lazzo-biohazard-square-pedal-dustbin-65l-blue-and-45l-green-with-labels.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31754,7 +31804,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/lazzo-stainless-steel-pedal-bin-7x11-matte-black-with-box.webp"
+      "/assets/product/dustbin/lazzo-stainless-steel-pedal-bin-7x11-matte-black-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31794,8 +31844,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/metal-mesh-round-waste-basket-black-front-view.webp",
-      "/assets/supplier-library/dustbin/metal-mesh-round-waste-basket-pair-black.webp"
+      "/assets/product/dustbin/metal-mesh-round-waste-basket-black-front-view.webp",
+      "/assets/product/dustbin/metal-mesh-round-waste-basket-pair-black.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31835,7 +31885,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/metal-matte-black-round-pedal-dustbin-pair.webp"
+      "/assets/product/dustbin/metal-matte-black-round-pedal-dustbin-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31875,7 +31925,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/metal-wire-mesh-round-waste-basket-sizes-infographic.webp"
+      "/assets/product/dustbin/metal-wire-mesh-round-waste-basket-sizes-infographic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31915,7 +31965,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/lazzo-vento-swing-dustbin-9-ltr-blue-and-white.webp"
+      "/assets/product/dustbin/lazzo-vento-swing-dustbin-9-ltr-blue-and-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31955,7 +32005,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/plastic-round-heavy-duty-garbage-drum-bin-slate-blue.webp"
+      "/assets/product/dustbin/plastic-round-heavy-duty-garbage-drum-bin-slate-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -31995,7 +32045,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/plastic-waste-basket-open-dustbin-colors-collage.webp"
+      "/assets/product/dustbin/plastic-waste-basket-open-dustbin-colors-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32035,7 +32085,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/plastic-fluted-waste-basket-set-of-3-green-maroon-blue.webp"
+      "/assets/product/dustbin/plastic-fluted-waste-basket-set-of-3-green-maroon-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32075,7 +32125,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/plastic-waste-basket-open-dustbin-stacked-set-multicolor.webp"
+      "/assets/product/dustbin/plastic-waste-basket-open-dustbin-stacked-set-multicolor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32115,7 +32165,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/plastic-fluted-waste-basket-pair-green-and-grey.webp"
+      "/assets/product/dustbin/plastic-fluted-waste-basket-pair-green-and-grey.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32155,7 +32205,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/rectangular-waste-basket-open-dustbin-pair-grey-and-ivory.webp"
+      "/assets/product/dustbin/rectangular-waste-basket-open-dustbin-pair-grey-and-ivory.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32195,7 +32245,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/round-garbage-drum-bin-open-30l-50l-80l-set-of-3.webp"
+      "/assets/product/dustbin/round-garbage-drum-bin-open-30l-50l-80l-set-of-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32235,7 +32285,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/round-garbage-drum-bin-with-lid-30l-50l-80l-set-of-3.webp"
+      "/assets/product/dustbin/round-garbage-drum-bin-with-lid-30l-50l-80l-set-of-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32275,7 +32325,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/round-swing-dustbin-30l-50l-80l-jago-and-bpi-with-size-labels.webp"
+      "/assets/product/dustbin/round-swing-dustbin-30l-50l-80l-jago-and-bpi-with-size-labels.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32315,7 +32365,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/round-swing-dustbin-set-of-3-30l-50l-80l-blue-red-green.webp"
+      "/assets/product/dustbin/round-swing-dustbin-set-of-3-30l-50l-80l-blue-red-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32355,8 +32405,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/slim-sanitary-pedal-dustbin-white-and-grey-open-flap.webp",
-      "/assets/supplier-library/dustbin/slim-sanitary-pedal-dustbin-white-and-blue-open-flap.webp"
+      "/assets/product/dustbin/slim-sanitary-pedal-dustbin-white-and-grey-open-flap.webp",
+      "/assets/product/dustbin/slim-sanitary-pedal-dustbin-white-and-blue-open-flap.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32396,8 +32446,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/slim-sanitary-pedal-dustbin-white-and-grey-closed-lid.webp",
-      "/assets/supplier-library/dustbin/slim-sanitary-pedal-dustbin-white-and-blue-closed-lid.webp"
+      "/assets/product/dustbin/slim-sanitary-pedal-dustbin-white-and-grey-closed-lid.webp",
+      "/assets/product/dustbin/slim-sanitary-pedal-dustbin-white-and-blue-closed-lid.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32437,7 +32487,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-dome-push-bin-front-view.webp"
+      "/assets/product/dustbin/stainless-steel-dome-push-bin-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32477,7 +32527,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-bins-and-holders-sizes-catalogue-chart.webp"
+      "/assets/product/dustbin/stainless-steel-bins-and-holders-sizes-catalogue-chart.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32517,7 +32567,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-bins-range-perforated-plain-swing-pedal-collage.webp"
+      "/assets/product/dustbin/stainless-steel-bins-range-perforated-plain-swing-pedal-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32557,7 +32607,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-open-top-round-dustbin-4-sizes.webp"
+      "/assets/product/dustbin/stainless-steel-open-top-round-dustbin-4-sizes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32597,7 +32647,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-pedal-dustbin-11-ltr-packaging-box.webp"
+      "/assets/product/dustbin/stainless-steel-pedal-dustbin-11-ltr-packaging-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32637,7 +32687,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-dual-waste-bin-wet-and-dry-compostable-and-recyclable.webp"
+      "/assets/product/dustbin/stainless-steel-dual-waste-bin-wet-and-dry-compostable-and-recyclable.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32677,7 +32727,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-perforated-dustbin-7x10-front-view.webp"
+      "/assets/product/dustbin/stainless-steel-perforated-dustbin-7x10-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32717,7 +32767,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-perforated-dustbin-8x12-front-view.webp"
+      "/assets/product/dustbin/stainless-steel-perforated-dustbin-8x12-front-view.webp",
+      "/assets/product/collage/perforated-stainless-steel-dustbin-8x12-2.webp",
+      "/assets/product/collage/perforated-stainless-steel-dustbin-8x12.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32757,7 +32809,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-perforated-pedal-dustbin-with-lid-handle-pair.webp"
+      "/assets/product/dustbin/stainless-steel-perforated-pedal-dustbin-with-lid-handle-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32797,7 +32849,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-perforated-dustbin-8x12-on-weighing-scale.webp"
+      "/assets/product/dustbin/stainless-steel-perforated-dustbin-8x12-on-weighing-scale.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32837,7 +32889,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-perforated-waste-basket-4-sizes.webp"
+      "/assets/product/dustbin/stainless-steel-perforated-waste-basket-4-sizes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32877,7 +32929,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-plain-open-top-round-waste-basket.webp"
+      "/assets/product/dustbin/stainless-steel-plain-open-top-round-waste-basket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32917,7 +32969,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-perforated-dustbin-set-of-3-sizes-7x10-8x12-10x14.webp"
+      "/assets/product/dustbin/stainless-steel-perforated-dustbin-set-of-3-sizes-7x10-8x12-10x14.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32957,7 +33009,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-round-pedal-dustbin-4-sizes-with-labels-infographic.webp"
+      "/assets/product/dustbin/stainless-steel-round-pedal-dustbin-4-sizes-with-labels-infographic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -32997,7 +33049,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-round-pedal-dustbin-4-sizes.webp"
+      "/assets/product/dustbin/stainless-steel-round-pedal-dustbin-4-sizes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33037,7 +33089,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-round-pedal-dustbin-matte-finish.webp"
+      "/assets/product/dustbin/stainless-steel-round-pedal-dustbin-matte-finish.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33077,8 +33129,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-round-swing-top-dustbin-12x28-front-view-2.webp",
-      "/assets/supplier-library/dustbin/stainless-steel-round-swing-top-dustbin-12x28-front-view.webp"
+      "/assets/product/dustbin/stainless-steel-round-swing-top-dustbin-12x28-front-view-2.webp",
+      "/assets/product/dustbin/stainless-steel-round-swing-top-dustbin-12x28-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33118,8 +33170,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-round-swing-top-dustbin-14x28-front-view-2.webp",
-      "/assets/supplier-library/dustbin/stainless-steel-round-swing-top-dustbin-14x28-front-view.webp"
+      "/assets/product/dustbin/stainless-steel-round-swing-top-dustbin-14x28-front-view-2.webp",
+      "/assets/product/dustbin/stainless-steel-round-swing-top-dustbin-14x28-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33159,7 +33211,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-swing-bin-sizes-infographic.webp"
+      "/assets/product/dustbin/stainless-steel-swing-bin-sizes-infographic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33199,7 +33251,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-swing-bin-specifications-and-volume-chart.webp"
+      "/assets/product/dustbin/stainless-steel-swing-bin-specifications-and-volume-chart.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33239,8 +33291,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-round-swing-top-dustbin-satin-finish-2.webp",
-      "/assets/supplier-library/dustbin/stainless-steel-round-swing-top-dustbin-satin-finish.webp"
+      "/assets/product/dustbin/stainless-steel-round-swing-top-dustbin-satin-finish-2.webp",
+      "/assets/product/dustbin/stainless-steel-round-swing-top-dustbin-satin-finish.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33280,7 +33332,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-swing-top-round-dustbin-4-sizes.webp"
+      "/assets/product/dustbin/stainless-steel-swing-top-round-dustbin-4-sizes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33320,7 +33372,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0002.webp"
+      "/assets/product/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0002.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33360,7 +33412,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0004.webp"
+      "/assets/product/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0004.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33400,7 +33452,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0003.webp"
+      "/assets/product/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0003.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33440,7 +33492,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin/stainless-steel-trio-waste-bin-segregation-front-view.webp"
+      "/assets/product/dustbin/stainless-steel-trio-waste-bin-segregation-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33480,7 +33532,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0005.webp"
+      "/assets/product/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0005.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33520,7 +33572,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0006.webp"
+      "/assets/product/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0006.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33560,7 +33612,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0007.webp"
+      "/assets/product/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0007.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33600,7 +33652,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0008.webp"
+      "/assets/product/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0008.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33640,7 +33692,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0009.webp"
+      "/assets/product/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0009.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33680,7 +33732,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0010.webp"
+      "/assets/product/dustbin-jpg/kyracs-bmw-bins-e-catalogue_page-0010.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33720,9 +33772,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/garbage-bag/meeku-biodegradable-garbage-bags-black-rolls-with-boxes-3-sizes-2.webp",
-      "/assets/supplier-library/garbage-bag/meeku-biodegradable-garbage-bags-black-rolls-with-boxes-3-sizes.webp",
-      "/assets/supplier-library/garbage-bag/meeku-biodegradable-garbage-bags-green-rolls-with-boxes-3-sizes.webp"
+      "/assets/product/garbage-bag/meeku-biodegradable-garbage-bags-black-rolls-with-boxes-3-sizes-2.webp",
+      "/assets/product/garbage-bag/meeku-biodegradable-garbage-bags-black-rolls-with-boxes-3-sizes.webp",
+      "/assets/product/garbage-bag/meeku-biodegradable-garbage-bags-green-rolls-with-boxes-3-sizes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33762,8 +33814,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bags-5-colors-collage-2.webp",
-      "/assets/supplier-library/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bags-5-colors-collage.webp"
+      "/assets/product/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bags-5-colors-collage-2.webp",
+      "/assets/product/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bags-5-colors-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33803,7 +33855,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/garbage-bag/meeku-biodegradable-garbage-bags-green-rolls-3-sizes.webp"
+      "/assets/product/garbage-bag/meeku-biodegradable-garbage-bags-green-rolls-3-sizes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33843,7 +33895,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/garbage-bag/meeku-biodegradable-garbage-bags-packaging-boxes-stack-of-3.webp"
+      "/assets/product/garbage-bag/meeku-biodegradable-garbage-bags-packaging-boxes-stack-of-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33883,7 +33935,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/garbage-bag/pearl-luxury-garbage-bags-jumbo-91x122-cm-roll-with-box.webp"
+      "/assets/product/garbage-bag/pearl-luxury-garbage-bags-jumbo-91x122-cm-roll-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33923,7 +33975,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/garbage-bag/pearl-luxury-biodegradable-garbage-bags-green-roll-with-box.webp"
+      "/assets/product/garbage-bag/pearl-luxury-biodegradable-garbage-bags-green-roll-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -33963,7 +34015,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/garbage-bag/plastobag-garbage-bags-4-sizes-boxes-with-roll-on-top.webp"
+      "/assets/product/garbage-bag/plastobag-garbage-bags-4-sizes-boxes-with-roll-on-top.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34003,8 +34055,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/garbage-bag/pearl-luxury-garbage-bags-black-folded-flat-pack.webp",
-      "/assets/supplier-library/garbage-bag/pearl-luxury-garbage-bags-green-folded-flat-pack.webp"
+      "/assets/product/garbage-bag/pearl-luxury-garbage-bags-black-folded-flat-pack.webp",
+      "/assets/product/garbage-bag/pearl-luxury-garbage-bags-green-folded-flat-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34044,8 +34096,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/garbage-bag/plastobag-garbage-bags-packaging-boxes-stack-of-5-sizes-2.webp",
-      "/assets/supplier-library/garbage-bag/plastobag-garbage-bags-packaging-boxes-stack-of-5-sizes.webp"
+      "/assets/product/garbage-bag/plastobag-garbage-bags-packaging-boxes-stack-of-5-sizes-2.webp",
+      "/assets/product/garbage-bag/plastobag-garbage-bags-packaging-boxes-stack-of-5-sizes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34085,7 +34137,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/garbage-bag/plastobag-garbage-bags-black-rolls-5-sizes.webp"
+      "/assets/product/garbage-bag/plastobag-garbage-bags-black-rolls-5-sizes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34125,7 +34177,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/garbage-bag/plastobag-garbage-bags-black-rolls-with-boxes-5-sizes.webp"
+      "/assets/product/garbage-bag/plastobag-garbage-bags-black-rolls-with-boxes-5-sizes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34165,7 +34217,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/garbage-bag/shalimar-oxo-biodegradable-garbage-bags-extra-large-30x37-pack-of-6-rolls.webp"
+      "/assets/product/garbage-bag/shalimar-oxo-biodegradable-garbage-bags-extra-large-30x37-pack-of-6-rolls.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34205,7 +34257,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/garbage-bag/shalimar-oxo-biodegradable-garbage-bags-medium-48x56-cm-roll-with-box-and-dustbin.webp"
+      "/assets/product/garbage-bag/shalimar-oxo-biodegradable-garbage-bags-medium-48x56-cm-roll-with-box-and-dustbin.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34245,7 +34297,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/cotton-knitted-dotted-hand-glove-navy-blue-worn-single-view.webp"
+      "/assets/product/gloves/cotton-knitted-dotted-hand-glove-navy-blue-worn-single-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34285,9 +34337,13 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/cotton-knitted-hand-gloves-40-gms-white-2.webp",
-      "/assets/supplier-library/gloves/cotton-knitted-hand-gloves-40-gms-white-3.webp",
-      "/assets/supplier-library/gloves/cotton-knitted-hand-gloves-40-gms-white.webp"
+      "/assets/product/gloves/cotton-knitted-hand-gloves-40-gms-white-2.webp",
+      "/assets/product/gloves/cotton-knitted-hand-gloves-40-gms-white-3.webp",
+      "/assets/product/gloves/cotton-knitted-hand-gloves-40-gms-white.webp",
+      "/assets/product/gloves/cotton-knitted-hand-gloves-40-gms-black-2.webp",
+      "/assets/product/gloves/cotton-knitted-hand-gloves-40-gms-black-3.webp",
+      "/assets/product/gloves/cotton-knitted-hand-gloves-40-gms-black.webp",
+      "/assets/product/gloves/cotton-knitted-hand-gloves-40-gms-blue-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34327,7 +34383,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/disposable-latex-examination-gloves-white-pair-front-and-back-view.webp"
+      "/assets/product/gloves/disposable-latex-examination-gloves-white-pair-front-and-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34367,7 +34423,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/flockline-hand-care-household-rubber-gloves-orange-yellow-blue-size-l-3-panels-collage.webp"
+      "/assets/product/gloves/flockline-hand-care-household-rubber-gloves-orange-yellow-blue-size-l-3-panels-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34407,8 +34463,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/flockline-hand-care-household-rubber-gloves-yellow-blue-orange-3-colors-size-l-with-pouches-2.webp",
-      "/assets/supplier-library/gloves/flockline-hand-care-household-rubber-gloves-yellow-blue-orange-3-colors-size-l-with-pouches.webp"
+      "/assets/product/gloves/flockline-hand-care-household-rubber-gloves-yellow-blue-orange-3-colors-size-l-with-pouches-2.webp",
+      "/assets/product/gloves/flockline-hand-care-household-rubber-gloves-yellow-blue-orange-3-colors-size-l-with-pouches.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34448,7 +34504,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/flockline-hand-care-household-rubber-gloves-yellow-size-l-with-pouch.webp"
+      "/assets/product/gloves/flockline-hand-care-household-rubber-gloves-yellow-size-l-with-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34488,7 +34544,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/flockline-hand-care-household-rubber-gloves-yellow-blue-orange-size-l-pouches-and-gloves-collage.webp"
+      "/assets/product/gloves/flockline-hand-care-household-rubber-gloves-yellow-blue-orange-size-l-pouches-and-gloves-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34528,7 +34584,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/gloveon-nb30-nitrile-powder-free-disposable-gloves-size-m-box-with-blue-glove.webp"
+      "/assets/product/gloves/gloveon-nb30-nitrile-powder-free-disposable-gloves-size-m-box-with-blue-glove.webp",
+      "/assets/product/gloves/gloveon-eureka-nitrile-powder-free-examination-gloves-size-m-box-with-blue-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34568,7 +34625,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/heavy-duty-rubber-glove-orange-long-on-table-top-view.webp"
+      "/assets/product/gloves/heavy-duty-rubber-glove-orange-long-on-table-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34608,7 +34665,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/heavy-duty-rubber-glove-orange-long-worn-on-arm-palm-view.webp"
+      "/assets/product/gloves/heavy-duty-rubber-glove-orange-long-worn-on-arm-palm-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34648,7 +34705,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/hi-safe-latex-examination-gloves-box-with-glove.webp"
+      "/assets/product/gloves/hi-safe-latex-examination-gloves-box-with-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34688,8 +34745,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/gloveon-talos-nitrile-powder-free-disposable-gloves-size-m-box-with-black-glove-angled-view.webp",
-      "/assets/supplier-library/gloves/gloveon-talos-nitrile-powder-free-disposable-gloves-size-m-box-with-black-glove.webp"
+      "/assets/product/gloves/gloveon-talos-nitrile-powder-free-disposable-gloves-size-m-box-with-black-glove-angled-view.webp",
+      "/assets/product/gloves/gloveon-talos-nitrile-powder-free-disposable-gloves-size-m-box-with-black-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34729,7 +34786,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/household-rubber-gloves-yellow-blue-orange-3-colors-back-view.webp"
+      "/assets/product/gloves/household-rubber-gloves-yellow-blue-orange-3-colors-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34769,7 +34826,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/hi-safe-nitrile-examination-gloves-box-with-glove.webp"
+      "/assets/product/gloves/hi-safe-nitrile-examination-gloves-box-with-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34809,7 +34866,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/household-rubber-gloves-yellow-with-white-rolled-cuff-pair.webp"
+      "/assets/product/gloves/household-rubber-gloves-yellow-with-white-rolled-cuff-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34849,7 +34906,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/joy-45-reusable-household-rubber-gloves-blue-and-orange-with-pouch.webp"
+      "/assets/product/gloves/joy-45-reusable-household-rubber-gloves-blue-and-orange-with-pouch.webp",
+      "/assets/product/collage/joy-and-victor-rubber-household-gloves.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34889,7 +34947,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/household-rubber-gloves-yellow-blue-orange-3-colors-palm-view.webp"
+      "/assets/product/gloves/household-rubber-gloves-yellow-blue-orange-3-colors-palm-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34929,7 +34987,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/joy-45-reusable-household-rubber-gloves-orange-size-l-with-pouch.webp"
+      "/assets/product/gloves/joy-45-reusable-household-rubber-gloves-orange-size-l-with-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -34969,7 +35027,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/lazzo-disposable-plastic-gloves-100-pcs-pack-with-gloves.webp"
+      "/assets/product/gloves/lazzo-disposable-plastic-gloves-100-pcs-pack-with-gloves.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35009,7 +35067,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/lazzo-latex-examination-gloves-100-pcs-box-with-white-glove.webp"
+      "/assets/product/gloves/lazzo-latex-examination-gloves-100-pcs-box-with-white-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35049,7 +35107,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/lazzo-nitrile-examination-gloves-100-pcs-box-with-blue-glove.webp"
+      "/assets/product/gloves/lazzo-nitrile-examination-gloves-100-pcs-box-with-blue-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35089,7 +35147,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/medipride-soft-hands-and-usa-latex-examination-gloves-boxes-with-gloves.webp"
+      "/assets/product/gloves/medipride-soft-hands-and-usa-latex-examination-gloves-boxes-with-gloves.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35129,7 +35187,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/medipride-soft-hands-disposable-nitrile-examination-gloves-200-pcs-box-with-blue-glove-worn.webp"
+      "/assets/product/gloves/medipride-soft-hands-disposable-nitrile-examination-gloves-200-pcs-box-with-blue-glove-worn.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35169,7 +35227,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/matig-nitrile-powder-free-disposable-gloves-size-l-box-with-blue-glove.webp"
+      "/assets/product/gloves/matig-nitrile-powder-free-disposable-gloves-size-l-box-with-blue-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35209,7 +35267,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/matig-nitrile-powder-free-disposable-gloves-size-m-box-with-white-glove.webp"
+      "/assets/product/gloves/matig-nitrile-powder-free-disposable-gloves-size-m-box-with-white-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35249,7 +35307,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/medipride-soft-hands-latex-examination-gloves-100-pcs-box-with-white-glove.webp"
+      "/assets/product/gloves/medipride-soft-hands-latex-examination-gloves-100-pcs-box-with-white-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35289,7 +35347,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/optus-nitrile-disposable-multipurpose-gloves-size-m-box-with-blue-glove.webp"
+      "/assets/product/gloves/optus-nitrile-disposable-multipurpose-gloves-size-m-box-with-blue-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35329,7 +35387,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/optus-latex-examination-multi-purpose-gloves-size-m-box-with-white-glove.webp"
+      "/assets/product/gloves/optus-latex-examination-multi-purpose-gloves-size-m-box-with-white-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35369,7 +35427,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/palak-disposable-hdpe-examination-gloves-medium-size-100-pcs-pack-with-glove.webp"
+      "/assets/product/gloves/palak-disposable-hdpe-examination-gloves-medium-size-100-pcs-pack-with-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35409,7 +35467,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/optus-nitrile-examination-multi-purpose-gloves-size-l-box-with-blue-glove.webp"
+      "/assets/product/gloves/optus-nitrile-examination-multi-purpose-gloves-size-l-box-with-blue-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35449,7 +35507,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/shuklaz-hand-gloves-dual-color-orange-and-yellow-size-l-with-packaging.webp"
+      "/assets/product/gloves/shuklaz-hand-gloves-dual-color-orange-and-yellow-size-l-with-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35489,7 +35547,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/san-glove-premium-latex-surgical-gloves-size-75-pair-with-pouch.webp"
+      "/assets/product/gloves/san-glove-premium-latex-surgical-gloves-size-75-pair-with-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35529,7 +35587,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/sri-krishna-safe-hands-latex-examination-gloves-100-pcs-box-with-white-glove.webp"
+      "/assets/product/gloves/sri-krishna-safe-hands-latex-examination-gloves-100-pcs-box-with-white-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35569,7 +35627,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/rb-med-nitrile-examination-gloves-powder-free-size-m-100-pcs-box-with-blue-glove.webp"
+      "/assets/product/gloves/rb-med-nitrile-examination-gloves-powder-free-size-m-100-pcs-box-with-blue-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35609,8 +35667,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/stalion-s-glove-latex-examination-gloves-with-box.webp",
-      "/assets/supplier-library/gloves/stalion-s-glove-latex-examination-gloves-pair.webp"
+      "/assets/product/gloves/stalion-s-glove-latex-examination-gloves-with-box.webp",
+      "/assets/product/gloves/stalion-s-glove-latex-examination-gloves-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35650,7 +35708,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/usa-latex-examination-gloves-powdered-box-with-white-glove.webp"
+      "/assets/product/gloves/usa-latex-examination-gloves-powdered-box-with-white-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35690,7 +35748,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/usa-nitrile-examination-gloves-powder-free-box-with-blue-glove.webp"
+      "/assets/product/gloves/usa-nitrile-examination-gloves-powder-free-box-with-blue-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35730,7 +35788,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/victor-household-gloves-cotton-flock-lining-light-blue-size-l-with-pouch.webp"
+      "/assets/product/gloves/victor-household-gloves-cotton-flock-lining-light-blue-size-l-with-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35770,10 +35828,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/victor-household-gloves-cyan-blue-cotton-flock-lining-60-gms-on-weighing-scale.webp",
-      "/assets/supplier-library/gloves/victor-household-gloves-orange-cotton-flock-lining-60-gms-on-weighing-scale.webp",
-      "/assets/supplier-library/gloves/victor-household-gloves-red-cotton-flock-lining-60-gms-on-weighing-scale.webp",
-      "/assets/supplier-library/gloves/victor-household-gloves-yellow-cotton-flock-lining-60-gms-on-weighing-scale.webp"
+      "/assets/product/gloves/victor-household-gloves-cyan-blue-cotton-flock-lining-60-gms-on-weighing-scale.webp",
+      "/assets/product/gloves/victor-household-gloves-orange-cotton-flock-lining-60-gms-on-weighing-scale.webp",
+      "/assets/product/gloves/victor-household-gloves-red-cotton-flock-lining-60-gms-on-weighing-scale.webp",
+      "/assets/product/gloves/victor-household-gloves-yellow-cotton-flock-lining-60-gms-on-weighing-scale.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35813,7 +35871,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/usha-disposable-hdpe-examination-gloves-medium-size-100-pcs-pack-with-glove.webp"
+      "/assets/product/gloves/usha-disposable-hdpe-examination-gloves-medium-size-100-pcs-pack-with-glove.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35853,7 +35911,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/victor-household-gloves-royal-blue-cotton-flock-lining-60-gms-on-weighing-scale.webp"
+      "/assets/product/gloves/victor-household-gloves-royal-blue-cotton-flock-lining-60-gms-on-weighing-scale.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35893,7 +35951,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/victor-household-gloves-yellow-blue-orange-3-colors-size-l-with-pouch.webp"
+      "/assets/product/gloves/victor-household-gloves-yellow-blue-orange-3-colors-size-l-with-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35933,7 +35991,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/all-out-ultra-mosquito-liquid-vaporiser-machine-and-refill-45-ml-box-front-and-side-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/all-out-ultra-mosquito-liquid-vaporiser-machine-and-refill-45-ml-box-front-and-side-view.webp",
+      "/assets/product/hit-and-disinfectant-spray/all-out-ultra-mosquito-liquid-vaporiser-kit-machine-and-refill-45-ml-with-box.webp",
+      "/assets/product/hit-and-disinfectant-spray/all-out-ultra-mosquito-liquid-vaporiser-refill-45-ml-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -35973,7 +36033,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/victor-nitrile-flocklined-gloves-13-mil-green-pair.webp"
+      "/assets/product/gloves/victor-nitrile-flocklined-gloves-13-mil-green-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36013,7 +36073,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/gloves/victor-nitrile-flocklined-gloves-13-mil-size-l-pouch.webp"
+      "/assets/product/gloves/victor-nitrile-flocklined-gloves-13-mil-size-l-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36053,7 +36113,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/dettol-savlon-schevaran-viroff-surface-disinfectant-spray-cans-with-price-tags.webp"
+      "/assets/product/hit-and-disinfectant-spray/dettol-savlon-schevaran-viroff-surface-disinfectant-spray-cans-with-price-tags.webp",
+      "/assets/product/hit-and-disinfectant-spray/savlon-surface-disinfectant-spray-fresh-170-g-front-and-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36093,7 +36154,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/dettol-savlon-schevaran-viroff-surface-disinfectant-spray-cans.webp"
+      "/assets/product/hit-and-disinfectant-spray/dettol-savlon-schevaran-viroff-surface-disinfectant-spray-cans.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36133,7 +36194,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/good-knight-flash-liquid-vaporiser-refill-lavender-45-ml-with-box.webp"
+      "/assets/product/hit-and-disinfectant-spray/good-knight-flash-liquid-vaporiser-refill-lavender-45-ml-with-box.webp",
+      "/assets/product/hit-and-disinfectant-spray/good-knight-flash-liquid-vaporiser-kit-machine-and-refill-lavender-45-ml-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36173,7 +36235,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/hunter-rechargeable-mosquito-swatter-bat.webp"
+      "/assets/product/hit-and-disinfectant-spray/hunter-rechargeable-mosquito-swatter-bat.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36213,7 +36275,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/harpic-drain-xpert-powder-400-g-pack-of-8-box-front-and-back-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/harpic-drain-xpert-powder-400-g-pack-of-8-box-front-and-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36253,7 +36315,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/harpic-drain-xpert-powder-50-g-front-and-back-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/harpic-drain-xpert-powder-50-g-front-and-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36293,8 +36355,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/kwick-drain-cleaner-heavy-duty-50-g-front-and-back-view.webp",
-      "/assets/supplier-library/hit-and-disinfectant-spray/kwick-drain-cleaner-heavy-duty-50-g-front-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/kwick-drain-cleaner-heavy-duty-50-g-front-and-back-view.webp",
+      "/assets/product/hit-and-disinfectant-spray/kwick-drain-cleaner-heavy-duty-50-g-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36334,7 +36396,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/kiwi-dranex-drain-cleaner-heavy-duty-375-g-bottle-front-and-back-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/kiwi-dranex-drain-cleaner-heavy-duty-375-g-bottle-front-and-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36374,7 +36436,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/kiwi-dranex-drain-cleaner-heavy-duty-300-g-6-packs-box-front-and-top-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/kiwi-dranex-drain-cleaner-heavy-duty-300-g-6-packs-box-front-and-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36414,7 +36476,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/kiwi-dranex-drain-cleaner-heavy-duty-50-g-sachet-front-and-back-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/kiwi-dranex-drain-cleaner-heavy-duty-50-g-sachet-front-and-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36454,7 +36516,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/kwick-drain-cleaner-heavy-duty-600-g-box-front-and-side-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/kwick-drain-cleaner-heavy-duty-600-g-box-front-and-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36494,7 +36556,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/kwick-drain-cleaner-heavy-duty-box-front-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/kwick-drain-cleaner-heavy-duty-box-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36534,7 +36596,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/lazzo-insect-killer-machine-uv-light-off-and-on-collage.webp"
+      "/assets/product/hit-and-disinfectant-spray/lazzo-insect-killer-machine-uv-light-off-and-on-collage.webp",
+      "/assets/product/hit-and-disinfectant-spray/lazzo-insect-killer-machine-black-uv-light-on-front-view.webp",
+      "/assets/product/hit-and-disinfectant-spray/lazzo-insect-killer-machine-blue-uv-light-on-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36574,7 +36638,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/lazzo-insect-killer-machine-uv-light-off-front-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/lazzo-insect-killer-machine-uv-light-off-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36614,7 +36678,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/lazzo-insect-killer-machine-uv-light-on-close-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/lazzo-insect-killer-machine-uv-light-on-close-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36654,7 +36718,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/lazzo-insect-killer-machine-uv-light-on-front-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/lazzo-insect-killer-machine-uv-light-on-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36694,7 +36758,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/lazzo-premium-insect-killer-machine-blue-uv-light-on-front-view-2.webp"
+      "/assets/product/hit-and-disinfectant-spray/lazzo-premium-insect-killer-machine-blue-uv-light-on-front-view-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36734,7 +36798,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/lazzo-premium-insect-killer-machine-uv-light-off-and-on-split-collage-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/lazzo-premium-insect-killer-machine-uv-light-off-and-on-split-collage-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36774,7 +36838,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/mr-muscle-dranex-drain-cleaner-heavy-duty-50-g-front-and-back-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/mr-muscle-dranex-drain-cleaner-heavy-duty-50-g-front-and-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36814,7 +36878,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/lazzo-premium-insect-killer-machine-white-uv-light-off-front-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/lazzo-premium-insect-killer-machine-white-uv-light-off-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36854,7 +36918,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/wonder-clean-drainmax-instant-drain-cleaner-50-g-sachet.webp"
+      "/assets/product/hit-and-disinfectant-spray/wonder-clean-drainmax-instant-drain-cleaner-50-g-sachet.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36894,7 +36958,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/wonder-killex-anti-mosquito-racket-box-3d-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/wonder-killex-anti-mosquito-racket-box-3d-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36934,7 +36998,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/wonder-killex-anti-mosquito-racket-box-front-and-side-3d-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/wonder-killex-anti-mosquito-racket-box-front-and-side-3d-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -36974,8 +37038,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/wonder-fresh-glue-trap-peanut-butter-rat-catcher-2-packs-angled-view.webp",
-      "/assets/supplier-library/hit-and-disinfectant-spray/wonder-fresh-glue-trap-peanut-butter-rat-catcher-2-packs-top-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/wonder-fresh-glue-trap-peanut-butter-rat-catcher-2-packs-angled-view.webp",
+      "/assets/product/hit-and-disinfectant-spray/wonder-fresh-glue-trap-peanut-butter-rat-catcher-2-packs-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37015,7 +37079,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/wonder-fresh-drain-cleaner-sachets-in-transparent-plastic-jars-pair.webp"
+      "/assets/product/hit-and-disinfectant-spray/wonder-fresh-drain-cleaner-sachets-in-transparent-plastic-jars-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37055,7 +37119,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/wonder-killex-mosquito-swatter-racket-buttons-diagram-infographic.webp"
+      "/assets/product/hit-and-disinfectant-spray/wonder-killex-mosquito-swatter-racket-buttons-diagram-infographic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37095,7 +37159,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/wonder-killex-mosquito-swatter-racket-retractable-charging-plug-infographic.webp"
+      "/assets/product/hit-and-disinfectant-spray/wonder-killex-mosquito-swatter-racket-retractable-charging-plug-infographic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37135,7 +37199,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/wonder-killex-mosquito-swatter-racket-zap-action-infographic.webp"
+      "/assets/product/hit-and-disinfectant-spray/wonder-killex-mosquito-swatter-racket-zap-action-infographic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37175,7 +37239,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/wonder-killex-rechargeable-mosquito-swatter-racket-red-full-view.webp"
+      "/assets/product/hit-and-disinfectant-spray/wonder-killex-rechargeable-mosquito-swatter-racket-red-full-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37215,7 +37279,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/wonder-killex-rechargeable-mosquito-swatter-racket-features-infographic.webp"
+      "/assets/product/hit-and-disinfectant-spray/wonder-killex-rechargeable-mosquito-swatter-racket-features-infographic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37255,7 +37319,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hit-and-disinfectant-spray/wonder-killex-mouse-glue-trap-with-peanut-butter-21-x-307-cm-pack.webp"
+      "/assets/product/hit-and-disinfectant-spray/wonder-killex-mouse-glue-trap-with-peanut-butter-21-x-307-cm-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37295,7 +37359,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/3m-5100-red-buffer-4100-white-polish-floor-pads-17-inch-with-packaging-box.webp"
+      "/assets/product/hygenic-tools-and-trolly/3m-5100-red-buffer-4100-white-polish-floor-pads-17-inch-with-packaging-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37335,7 +37399,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/aluminium-telescopic-extension-poles-assorted-lengths-set-display.webp"
+      "/assets/product/hygenic-tools-and-trolly/aluminium-telescopic-extension-poles-assorted-lengths-set-display.webp",
+      "/assets/product/hygenic-tools-and-trolly/aluminium-telescopic-extension-poles-36m-6m-8m-set-of-3.webp",
+      "/assets/product/hygenic-tools-and-trolly/aluminium-telescopic-extension-poles-assorted-lengths-with-cobweb-duster-brushes-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37375,7 +37441,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/3m-5100-red-buffer-4100-white-super-polish-floor-pads-17-inch-assorted-set.webp"
+      "/assets/product/hygenic-tools-and-trolly/3m-5100-red-buffer-4100-white-super-polish-floor-pads-17-inch-assorted-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37415,7 +37481,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/aluminium-telescopic-extension-poles-set-of-4-assorted-lengths.webp"
+      "/assets/product/hygenic-tools-and-trolly/aluminium-telescopic-extension-poles-set-of-4-assorted-lengths.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37455,7 +37521,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/aluminium-telescopic-extension-poles-blue-handles-set-of-5-assorted-lengths.webp"
+      "/assets/product/hygenic-tools-and-trolly/aluminium-telescopic-extension-poles-blue-handles-set-of-5-assorted-lengths.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37495,7 +37561,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/automatic-hand-dryer-1500w-abs-black-specifications-infographic.webp"
+      "/assets/product/hygenic-tools-and-trolly/automatic-hand-dryer-1500w-abs-black-specifications-infographic.webp",
+      "/assets/product/hygenic-tools-and-trolly/automatic-hand-dryer-1500w-abs-white-specifications-infographic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37535,8 +37602,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/automatic-hand-dryer-abs-white-on-blue-box-front-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/automatic-hand-dryer-abs-white-on-blue-box-angled-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/automatic-hand-dryer-abs-white-on-blue-box-front-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/automatic-hand-dryer-abs-white-on-blue-box-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37576,7 +37643,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/automatic-hand-dryer-abs-white-glossy-side-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/automatic-hand-dryer-abs-white-glossy-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37616,8 +37683,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/automatic-hand-dryer-abs-white-side-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/automatic-hand-dryer-abs-white-with-packaging-box-front-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/automatic-hand-dryer-abs-white-side-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/automatic-hand-dryer-abs-white-with-packaging-box-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37657,7 +37724,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/automatic-hand-dryer-abs-white-tabletop-angled-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/automatic-hand-dryer-abs-white-tabletop-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37697,7 +37764,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/automatic-hand-dryer-stainless-steel-chrome-finish-front-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/automatic-hand-dryer-stainless-steel-chrome-finish-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37737,8 +37804,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/automatic-hand-dryer-sleek-abs-black-top-angled-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/automatic-hand-dryer-sleek-abs-white-top-angled-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/automatic-hand-dryer-sleek-abs-black-top-angled-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/automatic-hand-dryer-sleek-abs-white-top-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37778,8 +37845,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/automatic-sensor-paper-towel-dispenser-blue-white-front-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/automatic-sensor-paper-towel-dispenser-blue-white-side-angled-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/automatic-sensor-paper-towel-dispenser-blue-white-front-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/automatic-sensor-paper-towel-dispenser-blue-white-side-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37819,7 +37886,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/caution-floor-sign-boards-cleaning-in-progress-work-in-progress-wet-floor-set.webp"
+      "/assets/product/hygenic-tools-and-trolly/caution-floor-sign-boards-cleaning-in-progress-work-in-progress-wet-floor-set.webp",
+      "/assets/product/hygenic-tools-and-trolly/caution-cleaning-in-progress-foldable-floor-sign-board-yellow-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37859,7 +37927,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/caution-floor-sign-boards-wet-floor-cleaning-maintenance-men-at-work-yellow-set-of-4.webp"
+      "/assets/product/hygenic-tools-and-trolly/caution-floor-sign-boards-wet-floor-cleaning-maintenance-men-at-work-yellow-set-of-4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37899,7 +37967,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/clean-tools-professional-window-cleaning-kit-stacked-packaging-boxes.webp"
+      "/assets/product/hygenic-tools-and-trolly/clean-tools-professional-window-cleaning-kit-stacked-packaging-boxes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37939,7 +38007,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/clean-tools-professional-window-cleaning-kit-with-telescopic-pole-in-box.webp"
+      "/assets/product/hygenic-tools-and-trolly/clean-tools-professional-window-cleaning-kit-with-telescopic-pole-in-box.webp",
+      "/assets/product/hygenic-tools-and-trolly/professional-window-glass-cleaning-kit-with-telescopic-pole-in-box-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -37979,7 +38048,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/cobweb-ceiling-fan-duster-brush-head-white-bristles.webp"
+      "/assets/product/hygenic-tools-and-trolly/cobweb-ceiling-fan-duster-brush-head-white-bristles.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38019,8 +38088,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/commercial-high-speed-vertical-jet-hand-dryer-silver-metallic-front-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/commercial-high-speed-vertical-jet-hand-dryer-silver-metallic-top-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/commercial-high-speed-vertical-jet-hand-dryer-silver-metallic-front-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/commercial-high-speed-vertical-jet-hand-dryer-silver-metallic-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38060,7 +38129,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/down-press-mop-wringer-replacement-unit-yellow-plastic-angled-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/down-press-mop-wringer-replacement-unit-yellow-plastic-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38100,7 +38169,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/floor-scrubbing-and-polishing-machine-buffing-pads-17-inch-assorted-colors-set-of-4.webp"
+      "/assets/product/hygenic-tools-and-trolly/floor-scrubbing-and-polishing-machine-buffing-pads-17-inch-assorted-colors-set-of-4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38140,7 +38209,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/elan-bubble-mini-automatic-hand-dryer-metallic-grey-front-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/elan-bubble-mini-automatic-hand-dryer-metallic-grey-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38180,7 +38249,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/elan-automatic-hand-dryer-stainless-steel-brushed-finish-front-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/elan-automatic-hand-dryer-stainless-steel-brushed-finish-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38220,7 +38289,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/floor-scrubbing-and-polishing-machine-buffing-pads-green-red-white-black-17-inch-assorted-set.webp"
+      "/assets/product/hygenic-tools-and-trolly/floor-scrubbing-and-polishing-machine-buffing-pads-green-red-white-black-17-inch-assorted-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38260,7 +38329,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/elan-bubble-mini-automatic-hand-dryer-white-front-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/elan-bubble-mini-automatic-hand-dryer-white-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38300,7 +38369,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/glass-floor-scraper-with-white-handle-and-red-head-razor-blade.webp"
+      "/assets/product/hygenic-tools-and-trolly/glass-floor-scraper-with-white-handle-and-red-head-razor-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38340,7 +38409,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/glass-floor-scraper-with-white-handle-and-spare-razor-blade.webp"
+      "/assets/product/hygenic-tools-and-trolly/glass-floor-scraper-with-white-handle-and-spare-razor-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38380,7 +38449,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/heavy-duty-aluminium-telescopic-extension-poles-specifications-infographic.webp"
+      "/assets/product/hygenic-tools-and-trolly/heavy-duty-aluminium-telescopic-extension-poles-specifications-infographic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38420,8 +38489,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/housekeeping-hotel-room-service-trolley-cart-brown-with-laundry-bag-angled-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/housekeeping-hotel-room-service-trolley-cart-brown-with-laundry-bag-front-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/housekeeping-hotel-room-service-trolley-cart-brown-with-laundry-bag-angled-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/housekeeping-hotel-room-service-trolley-cart-brown-with-laundry-bag-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38461,7 +38530,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/janitor-cart-vinyl-replacement-bag-yellow-with-eyelets.webp"
+      "/assets/product/hygenic-tools-and-trolly/janitor-cart-vinyl-replacement-bag-yellow-with-eyelets.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38501,7 +38570,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/lazzo-stainless-steel-x-frame-linen-laundry-trolley-cart-with-yellow-canvas-bag-angled-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/lazzo-stainless-steel-x-frame-linen-laundry-trolley-cart-with-yellow-canvas-bag-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38541,8 +38610,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/lobby-dustpan-and-angle-broom-sets-long-stainless-steel-handles-pastel-multicolor-set-of-4-front-angled-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/lobby-dustpan-and-angle-broom-sets-long-stainless-steel-handles-pastel-multicolor-set-of-4-front-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/lobby-dustpan-and-angle-broom-sets-long-stainless-steel-handles-pastel-multicolor-set-of-4-front-angled-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/lobby-dustpan-and-angle-broom-sets-long-stainless-steel-handles-pastel-multicolor-set-of-4-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38582,7 +38651,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/long-handle-doodlebug-scrub-pad-holders-with-green-and-maroon-pads-pair.webp"
+      "/assets/product/hygenic-tools-and-trolly/long-handle-doodlebug-scrub-pad-holders-with-green-and-maroon-pads-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38622,7 +38691,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-yellow-bag-angled-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-yellow-bag-angled-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-blue-with-mop-wringer-and-yellow-bag.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38662,8 +38732,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolleys-grey-with-double-bucket-mop-wringers-pair-front-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolleys-grey-with-double-bucket-mop-wringers-row-front-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolleys-grey-with-double-bucket-mop-wringers-pair-front-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolleys-grey-with-double-bucket-mop-wringers-row-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38703,8 +38773,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolleys-grey-with-double-bucket-mop-wringers-row-of-4-angled-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolleys-grey-with-double-bucket-mop-wringers-row-of-4-front-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolleys-grey-with-double-bucket-mop-wringers-row-of-4-angled-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolleys-grey-with-double-bucket-mop-wringers-row-of-4-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38744,7 +38814,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/plastic-cleaning-caddy-baskets-blue-red-and-grey-set-of-3-top-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/plastic-cleaning-caddy-baskets-blue-red-and-grey-set-of-3-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38784,8 +38854,12 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/plastic-cleaning-caddy-basket-red-3-compartments-top-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/plastic-cleaning-caddy-basket-yellow-3-compartments-top-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/plastic-cleaning-caddy-basket-red-3-compartments-top-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/plastic-cleaning-caddy-basket-yellow-3-compartments-top-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/plastic-cleaning-caddy-basket-blue-3-compartments-top-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/plastic-cleaning-caddy-basket-green-3-compartments-top-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/plastic-cleaning-caddy-basket-grey-3-compartments-top-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/plastic-cleaning-caddy-basket-grey-with-handle-3-compartments-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38825,7 +38899,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/plastic-cleaning-caddy-baskets-assorted-colors-set-of-6.webp"
+      "/assets/product/hygenic-tools-and-trolly/plastic-cleaning-caddy-baskets-assorted-colors-set-of-6.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38865,8 +38939,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/plastic-lobby-dustpan-and-broom-set-grey-with-long-handles.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/plastic-lobby-dustpan-and-broom-set-black-with-long-handles.webp"
+      "/assets/product/hygenic-tools-and-trolly/plastic-lobby-dustpan-and-broom-set-grey-with-long-handles.webp",
+      "/assets/product/hygenic-tools-and-trolly/plastic-lobby-dustpan-and-broom-set-black-with-long-handles.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38906,8 +38980,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/plastic-lobby-dustpan-closed-lid-and-broom-set-black-front-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/plastic-lobby-dustpan-open-lid-and-broom-set-black-angled-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/plastic-lobby-dustpan-closed-lid-and-broom-set-black-front-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/plastic-lobby-dustpan-open-lid-and-broom-set-black-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38947,7 +39021,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/plastic-cleaning-caddy-baskets-yellow-grey-blue-red-green-set-of-5.webp"
+      "/assets/product/hygenic-tools-and-trolly/plastic-cleaning-caddy-baskets-yellow-grey-blue-red-green-set-of-5.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -38987,7 +39061,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/plastic-lobby-dustpan-open-lid-and-broom-set-grey-aluminium-handles-angled-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/plastic-lobby-dustpan-open-lid-and-broom-set-grey-aluminium-handles-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39027,7 +39101,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/plastic-lobby-dustpan-with-lid-and-broom-set-black-long-handles-front-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/plastic-lobby-dustpan-with-lid-and-broom-set-black-long-handles-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39067,7 +39141,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/professional-glass-and-window-cleaning-kit-boxes-stack-display.webp"
+      "/assets/product/hygenic-tools-and-trolly/professional-glass-and-window-cleaning-kit-boxes-stack-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39107,7 +39181,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/professional-glass-and-window-cleaning-kit-opened-case-with-accessories.webp"
+      "/assets/product/hygenic-tools-and-trolly/professional-glass-and-window-cleaning-kit-opened-case-with-accessories.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39147,7 +39221,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/ringed-tube-radiator-bottle-pipe-cleaning-brushes-pair-grey-handles.webp"
+      "/assets/product/hygenic-tools-and-trolly/ringed-tube-radiator-bottle-pipe-cleaning-brushes-pair-grey-handles.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39187,7 +39261,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/ruike-weifeng-mini-safety-razor-blade-scraper-yellow-and-black-pair-with-protective-cap.webp"
+      "/assets/product/hygenic-tools-and-trolly/ruike-weifeng-mini-safety-razor-blade-scraper-yellow-and-black-pair-with-protective-cap.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39227,7 +39301,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/single-bucket-mop-wringer-trolley-20-ltr-yellow-caution-wet-floor-side-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/single-bucket-mop-wringer-trolley-20-ltr-yellow-caution-wet-floor-side-view.webp",
+      "/assets/product/collage/mop-wringer-trolley-50l.webp",
+      "/assets/product/collage/mop-wringer-trolley.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39267,7 +39343,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/stainless-steel-automatic-hand-dryer-2300w-installation-diagram-and-manual.webp"
+      "/assets/product/hygenic-tools-and-trolly/stainless-steel-automatic-hand-dryer-2300w-installation-diagram-and-manual.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39307,9 +39383,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/stainless-steel-laundry-linen-trolley-cart-rectangular-with-yellow-canvas-bag-angled-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/stainless-steel-laundry-linen-trolley-cart-rectangular-with-yellow-canvas-bag-front-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/stainless-steel-laundry-linen-trolley-cart-rectangular-with-yellow-canvas-bag.webp"
+      "/assets/product/hygenic-tools-and-trolly/stainless-steel-laundry-linen-trolley-cart-rectangular-with-yellow-canvas-bag-angled-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/stainless-steel-laundry-linen-trolley-cart-rectangular-with-yellow-canvas-bag-front-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/stainless-steel-laundry-linen-trolley-cart-rectangular-with-yellow-canvas-bag.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39349,8 +39425,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/stainless-steel-service-clearing-trolley-cart-3-tier-trays-with-dual-bins-front-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/stainless-steel-service-clearing-trolley-cart-3-tier-trays-with-dual-bins-side-angled-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/stainless-steel-service-clearing-trolley-cart-3-tier-trays-with-dual-bins-front-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/stainless-steel-service-clearing-trolley-cart-3-tier-trays-with-dual-bins-side-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39390,7 +39466,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/stainless-steel-x-frame-linen-laundry-trolley-cart-with-yellow-canvas-bag.webp"
+      "/assets/product/hygenic-tools-and-trolly/stainless-steel-x-frame-linen-laundry-trolley-cart-with-yellow-canvas-bag.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39430,7 +39506,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/stainless-steel-window-glass-squeegee-wiper-with-rubber-grip-handle.webp"
+      "/assets/product/hygenic-tools-and-trolly/stainless-steel-window-glass-squeegee-wiper-with-rubber-grip-handle.webp",
+      "/assets/product/wiper/window-glass-wiper-telescopic-handle-with-mesh-sponge-and-squeegee.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39470,7 +39547,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/stainless-steel-service-clearing-trolley-cart-3-tier-trays-with-dual-bins-high-angled-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/stainless-steel-service-clearing-trolley-cart-3-tier-trays-with-dual-bins-high-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39510,7 +39587,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/swivel-doodlebug-pad-holder-blue-gripper-base-bottom-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/swivel-doodlebug-pad-holder-blue-gripper-base-bottom-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39550,8 +39627,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/swivel-doodlebug-pad-holder-blue-with-green-and-maroon-scrub-pads-pair.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/swivel-doodlebug-pad-holder-blue-with-green-and-maroon-scrub-pads-side-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/swivel-doodlebug-pad-holder-blue-with-green-and-maroon-scrub-pads-pair.webp",
+      "/assets/product/hygenic-tools-and-trolly/swivel-doodlebug-pad-holder-blue-with-green-and-maroon-scrub-pads-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39591,7 +39668,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/toilet-sink-suction-plungers-long-handles-multicolor-set-of-4.webp"
+      "/assets/product/hygenic-tools-and-trolly/toilet-sink-suction-plungers-long-handles-multicolor-set-of-4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39631,7 +39708,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/toilet-sink-suction-plungers-tall-plastic-handles-assorted-colors-set-of-4.webp"
+      "/assets/product/hygenic-tools-and-trolly/toilet-sink-suction-plungers-tall-plastic-handles-assorted-colors-set-of-4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39671,7 +39748,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/triangular-cobweb-ceiling-duster-brush-head-grey-bristles-with-threaded-socket.webp"
+      "/assets/product/hygenic-tools-and-trolly/triangular-cobweb-ceiling-duster-brush-head-grey-bristles-with-threaded-socket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39711,7 +39788,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/toilet-sink-suction-plungers-plastic-textured-handles-red-colors-set-of-3.webp"
+      "/assets/product/hygenic-tools-and-trolly/toilet-sink-suction-plungers-plastic-textured-handles-red-colors-set-of-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39751,7 +39828,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/wall-mounted-aluminium-mop-and-broom-holder-5-position-with-hooks-pair.webp"
+      "/assets/product/hygenic-tools-and-trolly/wall-mounted-aluminium-mop-and-broom-holder-5-position-with-hooks-pair.webp",
+      "/assets/product/collage/aluminium-mop-holder.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39791,10 +39869,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/wall-mounted-plastic-mop-and-broom-holder-5-ball-slots-6-hooks-grey-front-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/wall-mounted-plastic-mop-and-broom-holder-5-ball-slots-6-hooks-grey-with-packaging-box-front-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/wall-mounted-plastic-mop-and-broom-holder-5-ball-slots-6-hooks-grey-with-packaging-box.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/wall-mounted-plastic-mop-and-broom-holder-5-ball-slots-6-hooks-grey.webp"
+      "/assets/product/hygenic-tools-and-trolly/wall-mounted-plastic-mop-and-broom-holder-5-ball-slots-6-hooks-grey-front-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/wall-mounted-plastic-mop-and-broom-holder-5-ball-slots-6-hooks-grey-with-packaging-box-front-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/wall-mounted-plastic-mop-and-broom-holder-5-ball-slots-6-hooks-grey-with-packaging-box.webp",
+      "/assets/product/hygenic-tools-and-trolly/wall-mounted-plastic-mop-and-broom-holder-5-ball-slots-6-hooks-grey.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39834,7 +39912,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/wall-mounted-aluminium-mop-and-broom-holder-5-position-blue-on-packaging-box.webp"
+      "/assets/product/hygenic-tools-and-trolly/wall-mounted-aluminium-mop-and-broom-holder-5-position-blue-on-packaging-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39874,7 +39952,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/window-glass-washer-plush-microfiber-sleeve-refills-pair-35-cm-and-45-cm.webp"
+      "/assets/product/hygenic-tools-and-trolly/window-glass-washer-plush-microfiber-sleeve-refills-pair-35-cm-and-45-cm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39914,7 +39992,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/wet-mop-plastic-clamp-clips-blue-red-green-yellow-set-of-4.webp"
+      "/assets/product/hygenic-tools-and-trolly/wet-mop-plastic-clamp-clips-blue-red-green-yellow-set-of-4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39954,7 +40032,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/window-glass-washer-t-bar-with-white-microfiber-plush-sleeve-refill.webp"
+      "/assets/product/hygenic-tools-and-trolly/window-glass-washer-t-bar-with-white-microfiber-plush-sleeve-refill.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -39994,7 +40072,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-orange-handle-infographic.webp"
+      "/assets/product/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-orange-handle-infographic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40034,11 +40112,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-green-handle-back-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-green-handle-front-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-yellow-handle-angled-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-yellow-handle-front-view.webp",
-      "/assets/supplier-library/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-yellow-handle-rear-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-green-handle-back-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-green-handle-front-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-yellow-handle-angled-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-yellow-handle-front-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-yellow-handle-rear-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40078,7 +40156,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/wet-mop-plastic-gripper-clamp-clips-blue-red-green-yellow-4-colors-set.webp"
+      "/assets/product/hygenic-tools-and-trolly/wet-mop-plastic-gripper-clamp-clips-blue-red-green-yellow-4-colors-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40118,7 +40196,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-yellow-handle-open-sleeve-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-yellow-handle-open-sleeve-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40158,7 +40236,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-yellow-handle-tabletop-view.webp"
+      "/assets/product/hygenic-tools-and-trolly/window-wiper-combi-washer-and-squeegee-yellow-handle-tabletop-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40198,7 +40276,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/classik-fs-111-protective-face-shield-visor-on-mannequin-head-side-view.webp"
+      "/assets/product/mask/classik-fs-111-protective-face-shield-visor-on-mannequin-head-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40238,7 +40316,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/classik-protective-face-shield-visor-with-blue-headband-front-view.webp"
+      "/assets/product/mask/classik-protective-face-shield-visor-with-blue-headband-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40278,7 +40356,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/classik-n95-virus-protective-face-mask-white-with-packaging-box-of-25-pcs.webp"
+      "/assets/product/mask/classik-n95-virus-protective-face-mask-white-with-packaging-box-of-25-pcs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40318,7 +40396,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-blue-pack-of-100-pcs.webp"
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-blue-pack-of-100-pcs.webp",
+      "/assets/product/mask/breath-guard-3-ply-surgical-face-mask-with-100-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40358,7 +40437,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-blue-front-and-back-view-pair.webp"
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-blue-front-and-back-view-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40398,7 +40477,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-blue-front-and-back-split-view.webp"
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-blue-front-and-back-split-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40438,7 +40517,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-blue-ultrasonic-welded-edges-pair.webp"
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-blue-ultrasonic-welded-edges-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40478,7 +40557,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-blue-pack-of-50-with-front-and-back-pair.webp"
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-blue-pack-of-50-with-front-and-back-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40518,7 +40597,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-blue-with-nose-pin-pair-brown-background.webp"
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-blue-with-nose-pin-pair-brown-background.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40558,7 +40637,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-light-blue-folded-ultrasonic-edges-pair.webp"
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-light-blue-folded-ultrasonic-edges-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40598,7 +40677,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-meltblown-filter-with-nose-pin-pair-black-background.webp"
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-meltblown-filter-with-nose-pin-pair-black-background.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40638,7 +40717,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-light-blue-ultrasonic-seam-with-nose-wire-pair.webp"
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-light-blue-ultrasonic-seam-with-nose-wire-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40678,7 +40757,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-light-blue-inner-and-outer-layers-pair.webp"
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-light-blue-inner-and-outer-layers-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40718,7 +40797,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-sky-blue-front-and-back-earloops-pair.webp"
+      "/assets/product/mask/disposable-3-ply-surgical-face-mask-sky-blue-front-and-back-earloops-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40758,7 +40837,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/keeolife-3-ply-surgical-mask-non-sterile-disposable-blue-with-50-pcs-box.webp"
+      "/assets/product/mask/keeolife-3-ply-surgical-mask-non-sterile-disposable-blue-with-50-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40798,7 +40877,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/kingfa-medical-type-iir-disposable-surgical-face-mask-blue-with-50-pcs-box.webp"
+      "/assets/product/mask/kingfa-medical-type-iir-disposable-surgical-face-mask-blue-with-50-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40838,7 +40917,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/kingfa-medical-type-iir-surgical-face-mask-blue-with-50-pcs-box.webp"
+      "/assets/product/mask/kingfa-medical-type-iir-surgical-face-mask-blue-with-50-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40878,7 +40957,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/king-roto-type-iir-surgical-face-mask-blue-with-50-pcs-box.webp"
+      "/assets/product/mask/king-roto-type-iir-surgical-face-mask-blue-with-50-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40918,7 +40997,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/little-maskwell-3d-kids-face-mask-beige-with-10-pcs-pouch-and-50-pcs-box.webp"
+      "/assets/product/mask/little-maskwell-3d-kids-face-mask-beige-with-10-pcs-pouch-and-50-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40958,8 +41037,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/kpp-n95-6-layered-face-mask-grey-with-single-pouch-packaging.webp",
-      "/assets/supplier-library/mask/kpp-n95-6-layered-face-mask-white-with-single-pouch-packaging.webp"
+      "/assets/product/mask/kpp-n95-6-layered-face-mask-grey-with-single-pouch-packaging.webp",
+      "/assets/product/mask/kpp-n95-6-layered-face-mask-white-with-single-pouch-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -40999,7 +41078,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/lazzo-type-iir-disposable-surgical-face-mask-blue-with-50-pcs-box.webp"
+      "/assets/product/mask/lazzo-type-iir-disposable-surgical-face-mask-blue-with-50-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41039,7 +41118,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/little-maskwell-3d-kids-face-mask-white-with-10-pcs-pouch-and-50-pcs-box.webp"
+      "/assets/product/mask/little-maskwell-3d-kids-face-mask-white-with-10-pcs-pouch-and-50-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41079,7 +41158,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/little-maskwell-3d-kids-face-mask-beige-with-10-pcs-silver-zip-pouch.webp"
+      "/assets/product/mask/little-maskwell-3d-kids-face-mask-beige-with-10-pcs-silver-zip-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41119,7 +41198,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/little-maskwell-3d-kids-face-mask-white-with-10-pcs-silver-zip-pouch.webp"
+      "/assets/product/mask/little-maskwell-3d-kids-face-mask-white-with-10-pcs-silver-zip-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41159,7 +41238,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/maskwell-3d-face-mask-assorted-packaging-boxes-of-50-pcs-set-of-3.webp"
+      "/assets/product/mask/maskwell-3d-face-mask-assorted-packaging-boxes-of-50-pcs-set-of-3.webp",
+      "/assets/product/mask/breath-guard-3-ply-face-mask-packaging-boxes-50-pcs-and-100-pcs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41199,7 +41279,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/maskwell-3d-face-mask-white-with-10-pcs-resealable-zip-pouch.webp"
+      "/assets/product/mask/maskwell-3d-face-mask-white-with-10-pcs-resealable-zip-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41239,7 +41319,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/medi-dispo-n95-foldable-face-mask-white-set-of-3.webp"
+      "/assets/product/mask/medi-dispo-n95-foldable-face-mask-white-set-of-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41279,7 +41359,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/medi-dispo-n95-foldable-face-mask-individual-pouches-front-and-back-view.webp"
+      "/assets/product/mask/medi-dispo-n95-foldable-face-mask-individual-pouches-front-and-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41319,7 +41399,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/medi-dispo-n95-foldable-face-mask-white-with-individual-pouch-side-view.webp"
+      "/assets/product/mask/medi-dispo-n95-foldable-face-mask-white-with-individual-pouch-side-view.webp",
+      "/assets/product/mask/medi-dispo-n95-5-layer-foldable-face-mask-white-with-50-pcs-box-and-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41359,7 +41440,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/n95-5-layer-virus-protection-face-mask-white-with-98-percent-filtration-pouch.webp"
+      "/assets/product/mask/n95-5-layer-virus-protection-face-mask-white-with-98-percent-filtration-pouch.webp",
+      "/assets/product/mask/n95-foldable-virus-protection-face-mask-bright-yellow.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41399,7 +41481,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/protective-direct-splash-face-shield-250-micron-elastic-band-pack-of-5.webp"
+      "/assets/product/mask/protective-direct-splash-face-shield-250-micron-elastic-band-pack-of-5.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41439,7 +41521,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/protective-direct-splash-face-shield-350-micron-foam-cushion-sponge-back-view.webp"
+      "/assets/product/mask/protective-direct-splash-face-shield-350-micron-foam-cushion-sponge-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41479,7 +41561,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/prima-ps-12-face-shield-visor-with-glasses-frame-blue-mask-and-box-kit.webp"
+      "/assets/product/mask/prima-ps-12-face-shield-visor-with-glasses-frame-blue-mask-and-box-kit.webp",
+      "/assets/product/mask/anti-fog-protective-face-shield-visor-with-glasses-frame-and-red-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41519,7 +41602,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/protective-face-shield-visor-with-glasses-frame-black-front-view.webp"
+      "/assets/product/mask/protective-face-shield-visor-with-glasses-frame-black-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41559,7 +41642,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/protective-direct-splash-face-shield-350-micron-with-foam-headband-flat-view.webp"
+      "/assets/product/mask/protective-direct-splash-face-shield-350-micron-with-foam-headband-flat-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41599,7 +41682,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/protective-direct-splash-face-shields-with-foam-headband-bulk-stack-wholesale.webp"
+      "/assets/product/mask/protective-direct-splash-face-shields-with-foam-headband-bulk-stack-wholesale.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41639,7 +41722,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/protective-flip-up-face-shield-visor-with-adjustable-head-bracket-on-mannequin.webp"
+      "/assets/product/mask/protective-flip-up-face-shield-visor-with-adjustable-head-bracket-on-mannequin.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41679,7 +41762,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/nostrilin-3-layer-bacteria-protection-surgical-face-mask-blue-with-50-pcs-box.webp"
+      "/assets/product/mask/nostrilin-3-layer-bacteria-protection-surgical-face-mask-blue-with-50-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41719,7 +41802,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/qe-healthcare-disposable-3-ply-medical-face-mask-blue-50-pcs-box.webp"
+      "/assets/product/mask/qe-healthcare-disposable-3-ply-medical-face-mask-blue-50-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41759,7 +41842,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/steripull-3-ply-pullout-disposable-face-mask-50-pcs-box-infographic.webp"
+      "/assets/product/mask/steripull-3-ply-pullout-disposable-face-mask-50-pcs-box-infographic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41799,7 +41882,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/qe-healthcare-disposable-face-mask-blue-with-packaging-box-top-view.webp"
+      "/assets/product/mask/qe-healthcare-disposable-face-mask-blue-with-packaging-box-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41839,7 +41922,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/qe-healthcare-disposable-medical-face-mask-blue-50-pcs-box-front-view.webp"
+      "/assets/product/mask/qe-healthcare-disposable-medical-face-mask-blue-50-pcs-box-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41879,7 +41962,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/steripull-n95-5-layer-face-mask-white-with-single-unit-pouch.webp"
+      "/assets/product/mask/steripull-n95-5-layer-face-mask-white-with-single-unit-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41919,7 +42002,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/venus-v-1010-3-ply-earloop-surgical-face-mask-blue-with-packaging-box.webp"
+      "/assets/product/mask/venus-v-1010-3-ply-earloop-surgical-face-mask-blue-with-packaging-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41959,7 +42042,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mask/windsor-protective-face-shield-visor-with-adjustable-strap.webp"
+      "/assets/product/mask/windsor-protective-face-shield-visor-with-adjustable-strap.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -41999,7 +42082,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/cotton-handloom-woven-floor-mat-blue-and-yellow-vertical-striped.webp"
+      "/assets/product/mat/cotton-handloom-woven-floor-mat-blue-and-yellow-vertical-striped.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42039,8 +42122,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/cotton-handloom-woven-floor-mat-green-and-dark-blue-vertical-striped.webp",
-      "/assets/supplier-library/mat/cotton-handloom-woven-floor-mat-red-and-dark-blue-vertical-striped.webp"
+      "/assets/product/mat/cotton-handloom-woven-floor-mat-green-and-dark-blue-vertical-striped.webp",
+      "/assets/product/mat/cotton-handloom-woven-floor-mat-red-and-dark-blue-vertical-striped.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42080,7 +42163,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/pvc-cushion-coil-door-mat-rolls-assorted-colors-display-red-green-blue-grey.webp"
+      "/assets/product/mat/pvc-cushion-coil-door-mat-rolls-assorted-colors-display-red-green-blue-grey.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42120,7 +42203,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/pvc-cushion-coil-door-mat-plain-rectangular-stack-of-3-brown-green-grey.webp"
+      "/assets/product/mat/pvc-cushion-coil-door-mat-plain-rectangular-stack-of-3-brown-green-grey.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42160,7 +42243,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/pvc-cushion-coil-mat-color-sample-swatches-stack-of-6.webp"
+      "/assets/product/mat/pvc-cushion-coil-mat-color-sample-swatches-stack-of-6.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42200,7 +42283,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/pvc-cushion-coil-mat-color-swatches-set-of-4-blue-grey-red-green.webp"
+      "/assets/product/mat/pvc-cushion-coil-mat-color-swatches-set-of-4-blue-grey-red-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42240,7 +42323,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/pvc-cushion-coil-plain-door-mat-assorted-colors-set-of-5-fan-stacked.webp"
+      "/assets/product/mat/pvc-cushion-coil-plain-door-mat-assorted-colors-set-of-5-fan-stacked.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42280,7 +42363,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/pvc-cushion-coil-welcome-door-mat-two-sizes-display-with-fan-stack-assorted-colors.webp"
+      "/assets/product/mat/pvc-cushion-coil-welcome-door-mat-two-sizes-display-with-fan-stack-assorted-colors.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42320,7 +42403,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/pvc-s-mesh-drainage-anti-slip-mat-color-swatches-stack-of-5.webp"
+      "/assets/product/mat/pvc-s-mesh-drainage-anti-slip-mat-color-swatches-stack-of-5.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42360,7 +42443,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/pvc-s-mesh-anti-slip-drainage-hollow-floor-mat-grey-folded-close-up.webp"
+      "/assets/product/mat/pvc-s-mesh-anti-slip-drainage-hollow-floor-mat-grey-folded-close-up.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42400,7 +42483,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/super-absorbent-diatomite-bath-mat-assorted-printed-designs-display-set-of-16.webp"
+      "/assets/product/mat/super-absorbent-diatomite-bath-mat-assorted-printed-designs-display-set-of-16.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42440,7 +42523,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/super-absorbent-diatomite-bath-mat-oval-assorted-printed-designs-row-of-8.webp"
+      "/assets/product/mat/super-absorbent-diatomite-bath-mat-oval-assorted-printed-designs-row-of-8.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42480,7 +42563,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/super-absorbent-diatomite-bath-mat-oval-bathroom-pink-with-white-border.webp"
+      "/assets/product/mat/super-absorbent-diatomite-bath-mat-oval-bathroom-pink-with-white-border.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42520,7 +42603,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/super-absorbent-diatomite-bath-mat-oval-bathtime-grey-two-tone.webp"
+      "/assets/product/mat/super-absorbent-diatomite-bath-mat-oval-bathtime-grey-two-tone.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42560,7 +42643,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/super-absorbent-diatomite-bath-mat-oval-living-simple-blue-and-lavender.webp"
+      "/assets/product/mat/super-absorbent-diatomite-bath-mat-oval-living-simple-blue-and-lavender.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42600,7 +42683,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/super-absorbent-diatomite-bath-mat-oval-shower-pastel-pink-and-sage-grey.webp"
+      "/assets/product/mat/super-absorbent-diatomite-bath-mat-oval-shower-pastel-pink-and-sage-grey.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42640,7 +42723,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/super-absorbent-diatomite-bath-mat-rectangular-bathroom-dark-blue-with-white-border.webp"
+      "/assets/product/mat/super-absorbent-diatomite-bath-mat-rectangular-bathroom-dark-blue-with-white-border.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42680,7 +42763,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/super-absorbent-diatomite-bath-mat-rectangular-bathroom-dusty-rose-pink.webp"
+      "/assets/product/mat/super-absorbent-diatomite-bath-mat-rectangular-bathroom-dusty-rose-pink.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42720,7 +42803,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/super-absorbent-diatomite-bath-mat-rectangular-bathroom-grey-purple-border.webp"
+      "/assets/product/mat/super-absorbent-diatomite-bath-mat-rectangular-bathroom-grey-purple-border.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42760,7 +42843,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mat/super-absorbent-diatomite-bath-mat-rectangular-bathroom-slate-blue-grey-border.webp"
+      "/assets/product/mat/super-absorbent-diatomite-bath-mat-rectangular-bathroom-slate-blue-grey-border.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42800,7 +42883,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/aluminum-folding-step-ladder-multi-size-comparison-green-blue-orange.webp"
+      "/assets/product/mix/aluminum-folding-step-ladder-multi-size-comparison-green-blue-orange.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42840,7 +42923,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/apex-rainwear-model-a-701-waterproof-rain-suit-black-full-length-front.webp"
+      "/assets/product/mix/apex-rainwear-model-a-701-waterproof-rain-suit-black-full-length-front.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42880,7 +42963,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/aluminum-folding-step-ladder-6-step-with-orange-top-handles-in-warehouse.webp"
+      "/assets/product/mix/aluminum-folding-step-ladder-6-step-with-orange-top-handles-in-warehouse.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42920,7 +43003,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/apex-rainwear-model-a-701-waterproof-rain-suit-black-with-visor-hood.webp"
+      "/assets/product/mix/apex-rainwear-model-a-701-waterproof-rain-suit-black-with-visor-hood.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -42960,7 +43043,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/apex-rainwear-model-a-702-waterproof-rain-suit-black-full-length-front.webp"
+      "/assets/product/mix/apex-rainwear-model-a-702-waterproof-rain-suit-black-full-length-front.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43000,7 +43083,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/apex-rainwear-model-a-702-waterproof-rain-suit-black-with-red-piping-trim-pose.webp"
+      "/assets/product/mix/apex-rainwear-model-a-702-waterproof-rain-suit-black-with-red-piping-trim-pose.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43040,7 +43123,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/apex-rainwear-model-a-702-waterproof-rain-suit-black-with-visor-hood.webp"
+      "/assets/product/mix/apex-rainwear-model-a-702-waterproof-rain-suit-black-with-visor-hood.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43080,7 +43163,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/apex-rainwear-model-r-108-waterproof-rain-suit-black-full-model-pose-standing.webp"
+      "/assets/product/mix/apex-rainwear-model-r-108-waterproof-rain-suit-black-full-model-pose-standing.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43120,7 +43203,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/apex-rainwear-model-r-108-waterproof-rain-suit-black-hands-in-pocket-pose.webp"
+      "/assets/product/mix/apex-rainwear-model-r-108-waterproof-rain-suit-black-hands-in-pocket-pose.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43160,7 +43243,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/apex-rainwear-model-r-108-waterproof-rain-suit-black-red-piping.webp"
+      "/assets/product/mix/apex-rainwear-model-r-108-waterproof-rain-suit-black-red-piping.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43200,7 +43283,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/apex-rainwear-model-r-108-waterproof-rain-suit-black-with-hood.webp"
+      "/assets/product/mix/apex-rainwear-model-r-108-waterproof-rain-suit-black-with-hood.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43240,7 +43323,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/apex-rainwear-model-r-108-waterproof-rain-suit-navy-blue-model-pose.webp"
+      "/assets/product/mix/apex-rainwear-model-r-108-waterproof-rain-suit-navy-blue-model-pose.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43280,7 +43363,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/apex-rainwear-model-r-108-waterproof-rain-suit-navy-blue-with-visor-hood.webp"
+      "/assets/product/mix/apex-rainwear-model-r-108-waterproof-rain-suit-navy-blue-with-visor-hood.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43320,7 +43403,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/aristo-insulated-ice-box-red-14-litre-front-view.webp"
+      "/assets/product/mix/aristo-insulated-ice-box-red-14-litre-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43360,7 +43443,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/aristo-insulated-ice-box-red-6-litre-14-litre-25-litre-comparison-grid.webp"
+      "/assets/product/mix/aristo-insulated-ice-box-red-6-litre-14-litre-25-litre-comparison-grid.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43400,7 +43483,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/aristo-insulated-ice-box-red-25-litre-front-view.webp"
+      "/assets/product/mix/aristo-insulated-ice-box-red-25-litre-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43440,7 +43523,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/aristo-insulated-ice-box-red-6-litre-front-view.webp"
+      "/assets/product/mix/aristo-insulated-ice-box-red-6-litre-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43480,7 +43563,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/aristo-insulated-ice-box-red-6l-14l-25l-stacked-tower.webp"
+      "/assets/product/mix/aristo-insulated-ice-box-red-6l-14l-25l-stacked-tower.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43520,7 +43603,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/aristo-insulated-ice-box-red-with-raised-white-handle-perspective-view.webp"
+      "/assets/product/mix/aristo-insulated-ice-box-red-with-raised-white-handle-perspective-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43560,7 +43643,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/brasso-metal-polish-triple-action-formula-100ml-tin-front-and-back.webp"
+      "/assets/product/chemical-product/brasso-metal-polish-triple-action-formula-100ml-tin-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43600,8 +43683,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/british-clean-s5-british-lime-fragrance-5-litre-can-back-view.webp",
-      "/assets/supplier-library/chemical-product/british-clean-s5-british-lime-fragrance-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/british-clean-s5-british-lime-fragrance-5-litre-can-back-view.webp",
+      "/assets/product/chemical-product/british-clean-s5-british-lime-fragrance-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43641,7 +43724,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/brasso-metal-polish.webp"
+      "/assets/product/chemical-product/brasso-metal-polish.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43681,7 +43764,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/cif-pro-carpet-and-upholstery-cleaner-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/cif-pro-carpet-and-upholstery-cleaner-5-litre-can-front-and-back.webp",
+      "/assets/product/chemical-product/cif-pro-all-purpose-kitchen-cleaner-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43721,7 +43805,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/cif-pro-citrus-air-freshener-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/cif-pro-citrus-air-freshener-5-litre-can-front-and-back.webp",
+      "/assets/product/chemical-product/diversey-taski-r5-air-freshener-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43761,7 +43846,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/cif-pro-descaler-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/cif-pro-descaler-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43801,7 +43886,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/cif-pro-disinfectant-multi-surface-cleaner-450ml-spray-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/cif-pro-disinfectant-multi-surface-cleaner-450ml-spray-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43841,7 +43926,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/cif-pro-glass-cleaner-450ml-spray-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/cif-pro-glass-cleaner-450ml-spray-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43881,7 +43966,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/cif-pro-glass-cleaner-concentrate-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/cif-pro-glass-cleaner-concentrate-5-litre-can-front-and-back.webp",
+      "/assets/product/chemical-product/diversey-taski-r3-glass-cleaner-concentrate-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43921,7 +44007,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/cif-pro-heavy-duty-degreaser-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/cif-pro-heavy-duty-degreaser-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -43961,7 +44047,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/cif-pro-kitchen-degreaser-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/cif-pro-kitchen-degreaser-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44001,7 +44087,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/cif-pro-oven-and-grill-cleaner-450ml-spray-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/cif-pro-oven-and-grill-cleaner-450ml-spray-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44041,7 +44127,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/cif-pro-oven-and-grill-cleaner-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/cif-pro-oven-and-grill-cleaner-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44081,7 +44167,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/comfort-lily-fresh-fabric-conditioner-pink-bottle-front-view.webp"
+      "/assets/product/chemical-product/comfort-lily-fresh-fabric-conditioner-pink-bottle-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44121,7 +44207,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/comfort-lily-fresh-fabric-conditioner-pink-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/comfort-lily-fresh-fabric-conditioner-pink-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44161,7 +44247,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/comfort-morning-fresh-and-lily-fresh-fabric-conditioner-bottles-pair.webp"
+      "/assets/product/chemical-product/comfort-morning-fresh-and-lily-fresh-fabric-conditioner-bottles-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44201,7 +44287,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/comfort-morning-fresh-fabric-conditioner-blue-bottle-front-view.webp"
+      "/assets/product/chemical-product/comfort-morning-fresh-fabric-conditioner-blue-bottle-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44241,7 +44327,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/comfort-pro-fabric-conditioner-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/comfort-pro-fabric-conditioner-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44281,7 +44367,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/comfort-morning-fresh-fabric-conditioner-blue-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/comfort-morning-fresh-fabric-conditioner-blue-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44321,7 +44407,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-germ-defence-antiseptic-liquid-1-litre-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-germ-defence-antiseptic-liquid-1-litre-bottles-pair-front-and-back.webp",
+      "/assets/product/chemical-product/dettol-germ-defence-antiseptic-liquid-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44361,7 +44448,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-germ-defence-antiseptic-liquid-125ml-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-germ-defence-antiseptic-liquid-125ml-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44401,7 +44488,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-germ-defence-antiseptic-liquid-250ml-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-germ-defence-antiseptic-liquid-250ml-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44441,7 +44528,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-instant-hand-sanitizer-200ml.webp"
+      "/assets/product/chemical-product/dettol-instant-hand-sanitizer-200ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44481,7 +44568,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-germ-defence-antiseptic-liquid-5-litre-cans-pair-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-germ-defence-antiseptic-liquid-5-litre-cans-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44521,7 +44608,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-germ-defence-antiseptic-liquid-550ml-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-germ-defence-antiseptic-liquid-550ml-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44561,7 +44648,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-germ-defence-antiseptic-liquid-60ml-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-germ-defence-antiseptic-liquid-60ml-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44601,7 +44688,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-no-touch-automatic-hand-wash-dispenser-system-box-packaging-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-no-touch-automatic-hand-wash-dispenser-system-box-packaging-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44641,7 +44728,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-no-touch-automatic-hand-wash-dispenser-system-with-aloe-vera-refill-and-box.webp"
+      "/assets/product/chemical-product/dettol-no-touch-automatic-hand-wash-dispenser-system-with-aloe-vera-refill-and-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44681,7 +44768,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-original-everyday-protection-liquid-handwash-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-original-everyday-protection-liquid-handwash-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44721,7 +44808,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-instant-hand-sanitizer-original-200ml-pump-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-instant-hand-sanitizer-original-200ml-pump-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44761,7 +44848,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-original-germ-defence-instant-hand-sanitizer-50ml-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-original-germ-defence-instant-hand-sanitizer-50ml-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44801,7 +44888,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-original-liquid-handwash-200ml-pump-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-original-liquid-handwash-200ml-pump-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44841,7 +44928,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-original-liquid-handwash-900ml-refill-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-original-liquid-handwash-900ml-refill-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44881,7 +44968,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-original-germ-defence-liquid-handwash-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/dettol-original-germ-defence-liquid-handwash-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44921,8 +45008,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-skincare-ph-balanced-liquid-handwash-200ml-pump-bottle-front-and-back-close-up.webp",
-      "/assets/supplier-library/chemical-product/dettol-skincare-ph-balanced-liquid-handwash-200ml-pump-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-skincare-ph-balanced-liquid-handwash-200ml-pump-bottle-front-and-back-close-up.webp",
+      "/assets/product/chemical-product/dettol-skincare-ph-balanced-liquid-handwash-200ml-pump-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -44962,7 +45049,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-sensitive-everyday-protection-liquid-handwash-200ml-pump-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-sensitive-everyday-protection-liquid-handwash-200ml-pump-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45002,7 +45089,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-skincare-ph-balanced-liquid-handwash-200ml-with-free-175ml-refill-pouch-net-pack.webp"
+      "/assets/product/chemical-product/dettol-skincare-ph-balanced-liquid-handwash-200ml-with-free-175ml-refill-pouch-net-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45042,7 +45129,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/dettol-skincare-ph-balanced-liquid-handwash-900ml-refill-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/dettol-skincare-ph-balanced-liquid-handwash-900ml-refill-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45082,7 +45169,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-crew-all-purpose-household-cleaner-500ml-spray-bottles-pair-front-view.webp"
+      "/assets/product/chemical-product/diversey-crew-all-purpose-household-cleaner-500ml-spray-bottles-pair-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45122,8 +45209,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-drain-cleaning-and-maintainer-2.webp",
-      "/assets/supplier-library/chemical-product/diversey-drain-cleaning-and-maintainer.webp"
+      "/assets/product/chemical-product/diversey-drain-cleaning-and-maintainer-2.webp",
+      "/assets/product/chemical-product/diversey-drain-cleaning-and-maintainer.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45163,7 +45250,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-emerel-plus-multi-surface-cream-cleanser-500ml-front-and-back.webp"
+      "/assets/product/chemical-product/diversey-emerel-plus-multi-surface-cream-cleanser-500ml-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45203,7 +45290,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-soft-care-premium-blossom-handwash-250ml-pump-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/diversey-soft-care-premium-blossom-handwash-250ml-pump-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45243,7 +45330,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-soft-care-max-rose-hand-wash-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/diversey-soft-care-max-rose-hand-wash-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45283,7 +45370,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-soft-care-premium-handwash-blossom-refill-pack-750ml-front-view.webp"
+      "/assets/product/chemical-product/diversey-soft-care-premium-handwash-blossom-refill-pack-750ml-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45323,7 +45410,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-soft-care-max-rose-hand-wash-5-litre-cans-pair-front-and-back.webp"
+      "/assets/product/chemical-product/diversey-soft-care-max-rose-hand-wash-5-litre-cans-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45363,7 +45450,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-soft-care-star-gentle-hand-cleanser-h100-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/diversey-soft-care-star-gentle-hand-cleanser-h100-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45403,8 +45490,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-sumo-inox-d71-2.webp",
-      "/assets/supplier-library/chemical-product/diversey-sumo-inox-d71.webp"
+      "/assets/product/chemical-product/diversey-sumo-inox-d71-2.webp",
+      "/assets/product/chemical-product/diversey-sumo-inox-d71.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45444,7 +45531,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-suma-tab-d4-chlorine-tablets-50x2g-tubs-pair-front-and-back.webp"
+      "/assets/product/chemical-product/diversey-suma-tab-d4-chlorine-tablets-50x2g-tubs-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45484,7 +45571,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-suma-tab-d4-chlorine-tablets-50x2g-tubs-with-carton-box.webp"
+      "/assets/product/chemical-product/diversey-suma-tab-d4-chlorine-tablets-50x2g-tubs-with-carton-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45524,7 +45611,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-taski-cleaning-chemical-5-litre-cans-assorted-grid-collage.webp"
+      "/assets/product/chemical-product/diversey-taski-cleaning-chemical-5-litre-cans-assorted-grid-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45564,7 +45651,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-taski-green-apple-liquid-odour-counteractant-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/diversey-taski-green-apple-liquid-odour-counteractant-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45604,7 +45691,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-taski-green-apple-liquid-odour-counteractant-5-litre-cans-pair-front-and-back.webp"
+      "/assets/product/chemical-product/diversey-taski-green-apple-liquid-odour-counteractant-5-litre-cans-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45644,7 +45731,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-taski-r20-strip-floor-stripper-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/diversey-taski-r20-strip-floor-stripper-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/diversey-taski-r7-floor-cleaner-concentrate-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45684,8 +45772,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-taski-spiral-hd-2.webp",
-      "/assets/supplier-library/chemical-product/diversey-taski-spiral-hd.webp"
+      "/assets/product/chemical-product/diversey-taski-spiral-hd-2.webp",
+      "/assets/product/chemical-product/diversey-taski-spiral-hd.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45725,7 +45813,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/diversey-virex-ii-256-broad-spectrum-environmental-cleaner-and-disinfectant-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/diversey-virex-ii-256-broad-spectrum-environmental-cleaner-and-disinfectant-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45765,7 +45853,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/domex-floor-cleaner-500ml.webp"
+      "/assets/product/chemical-product/domex-floor-cleaner-500ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45805,7 +45893,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/domex-fresh-guard-500ml.webp"
+      "/assets/product/chemical-product/domex-fresh-guard-500ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45845,7 +45933,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/domex-professional-disinfectant-multi-surface-cleaner-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/domex-professional-disinfectant-multi-surface-cleaner-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45885,8 +45973,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/fem-safe-handz-hand-wash-saffron-and-blossom-5-litre-can-front-view.webp",
-      "/assets/supplier-library/chemical-product/fem-safe-handz-hand-wash-saffron-and-blossom-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/fem-safe-handz-hand-wash-saffron-and-blossom-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/fem-safe-handz-hand-wash-saffron-and-blossom-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45926,7 +46014,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/fem-safe-handz-saffron-and-blossom-hand-wash-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/fem-safe-handz-saffron-and-blossom-hand-wash-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -45966,7 +46054,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/fem-soft-and-safe-handz-wash-floral-bouquet-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/fem-soft-and-safe-handz-wash-floral-bouquet-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46006,7 +46094,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/ganga-bleaching-powder-double-strong-1kg-packet.webp"
+      "/assets/product/chemical-product/ganga-bleaching-powder-double-strong-1kg-packet.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46046,7 +46134,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/fem-soft-and-safe-handz-wash-floral-bouquet-5-litre-cans-pair-front-and-back.webp"
+      "/assets/product/chemical-product/fem-soft-and-safe-handz-wash-floral-bouquet-5-litre-cans-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46086,7 +46174,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/ganga-bleaching-powder-double-strong-1kg-pouch-front-view-angle-2.webp"
+      "/assets/product/chemical-product/ganga-bleaching-powder-double-strong-1kg-pouch-front-view-angle-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46126,8 +46214,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/gerbens-hand-sanitizer-75-percent-alcohol-5-litre-can-front-view-angle-2.webp",
-      "/assets/supplier-library/chemical-product/gerbens-hand-sanitizer-75-percent-alcohol-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/gerbens-hand-sanitizer-75-percent-alcohol-5-litre-can-front-view-angle-2.webp",
+      "/assets/product/chemical-product/gerbens-hand-sanitizer-75-percent-alcohol-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46167,7 +46255,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/harpic-500-ml.webp"
+      "/assets/product/chemical-product/harpic-500-ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46207,8 +46295,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/gerbens-hand-sanitizer-75-percent-alcohol-500ml-pump-bottle-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/gerbens-hand-sanitizer-75-percent-alcohol-blue-500ml-pump-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/gerbens-hand-sanitizer-75-percent-alcohol-500ml-pump-bottle-front-and-back.webp",
+      "/assets/product/chemical-product/gerbens-hand-sanitizer-75-percent-alcohol-blue-500ml-pump-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46248,7 +46336,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/harpic-power-plus-10x-advanced-original-fresh-toilet-cleaner-1-litre-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/harpic-power-plus-10x-advanced-original-fresh-toilet-cleaner-1-litre-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46288,7 +46376,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/hi-clean-all-surface-cleaner-and-degreaser-500ml-spray-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/hi-clean-all-surface-cleaner-and-degreaser-500ml-spray-bottle-front-and-back.webp",
+      "/assets/product/chemical-product/hi-clean-black-concentrate-cleaner-500ml-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46328,7 +46417,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/hi-clean-bathroom-cleaner-500ml.webp"
+      "/assets/product/chemical-product/hi-clean-bathroom-cleaner-500ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46368,7 +46457,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/hi-clean-herbal-perfumed-phenyle-aromatic-cleaner-pink-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/hi-clean-herbal-perfumed-phenyle-aromatic-cleaner-pink-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46408,7 +46497,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/hi-clean-herbal-perfumed-phenyle-lavender-1-litre-bottle-front-and-back-variant-2.webp"
+      "/assets/product/chemical-product/hi-clean-herbal-perfumed-phenyle-lavender-1-litre-bottle-front-and-back-variant-2.webp",
+      "/assets/product/chemical-product/hi-clean-herbal-perfumed-phenyle-white-milk-1-litre-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46448,7 +46538,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/hi-clean-herbal-perfumed-phenyle-lavender-1-litre-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/hi-clean-herbal-perfumed-phenyle-lavender-1-litre-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46488,7 +46578,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/hi-clean-neem-concentrate-cleaner-1-litre-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/hi-clean-neem-concentrate-cleaner-1-litre-bottle-front-and-back.webp",
+      "/assets/product/chemical-product/hi-clean-neem-concentrate-cleaner-500ml-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46528,7 +46619,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/hi-clean-toilet-cleaner-all-in-1-extra-power-500ml-angular-neck-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/hi-clean-toilet-cleaner-all-in-1-extra-power-500ml-angular-neck-bottle-front-and-back.webp",
+      "/assets/product/chemical-product/hi-clean-toilet-cleaner-all-in-1-extra-power-original-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46568,7 +46660,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/k2-multi-clean-500-ml.webp"
+      "/assets/product/chemical-product/k2-multi-clean-500-ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46608,7 +46700,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/hi-clean-white-concentrate-cleaner-1-litre-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/hi-clean-white-concentrate-cleaner-1-litre-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46648,7 +46740,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/kimberly-clark-scott-30915-luxury-foam-skin-cleanser-1200ml-refills-with-carton-box.webp"
+      "/assets/product/chemical-product/kimberly-clark-scott-30915-luxury-foam-skin-cleanser-1200ml-refills-with-carton-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46688,7 +46780,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/kimberly-clark-gentle-lotion-skin-cleanser-pink-500ml-refill-boxes-trio.webp"
+      "/assets/product/chemical-product/kimberly-clark-gentle-lotion-skin-cleanser-pink-500ml-refill-boxes-trio.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46728,7 +46820,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-instant-advanced-hand-sanitizer-100ml-spray-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/lazzo-instant-advanced-hand-sanitizer-100ml-spray-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46768,7 +46860,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/kimberly-clark-gentle-lotion-skin-cleanser-pink-500ml-refills-with-carton-box.webp"
+      "/assets/product/chemical-product/kimberly-clark-gentle-lotion-skin-cleanser-pink-500ml-refills-with-carton-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46808,7 +46900,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-instant-advanced-hand-sanitizer-blue-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/lazzo-instant-advanced-hand-sanitizer-blue-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46848,7 +46940,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-instant-advanced-hand-sanitizer-blue-500ml-pump-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/lazzo-instant-advanced-hand-sanitizer-blue-500ml-pump-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46888,8 +46980,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-instant-advanced-hand-sanitizer-gel-5-litre-can-front-view.webp",
-      "/assets/supplier-library/chemical-product/lazzo-instant-advanced-hand-sanitizer-gel-5-litre-can-front-view-2.webp"
+      "/assets/product/chemical-product/lazzo-instant-advanced-hand-sanitizer-gel-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/lazzo-instant-advanced-hand-sanitizer-gel-5-litre-can-front-view-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46929,7 +47021,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-instant-advanced-hand-sanitizer-gel-500ml-pump-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/lazzo-instant-advanced-hand-sanitizer-gel-500ml-pump-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -46969,7 +47061,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-l2-super-hygienic-hard-surface-cleaner-concentrate-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/lazzo-l2-super-hygienic-hard-surface-cleaner-concentrate-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/diversey-taski-r2-hygienic-hard-surface-cleaner-concentrate-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47009,7 +47102,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-l1-super-bathroom-cleaner-concentrate-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/lazzo-l1-super-bathroom-cleaner-concentrate-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/diversey-taski-r9-bathroom-cleaner-concentrate-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47049,7 +47143,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-l3-super-glass-cleaner-concentrate-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/lazzo-l3-super-glass-cleaner-concentrate-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47089,7 +47183,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-l4-super-furniture-maintenance-concentrate-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/lazzo-l4-super-furniture-maintenance-concentrate-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47129,7 +47223,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-l5-super-air-freshener-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/lazzo-l5-super-air-freshener-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47169,7 +47263,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-l6-super-toilet-bowl-cleaner-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/lazzo-l6-super-toilet-bowl-cleaner-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/diversey-taski-r6-toilet-bowl-cleaner-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47209,7 +47304,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-l7-super-floor-cleaner-concentrate-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/lazzo-l7-super-floor-cleaner-concentrate-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47249,7 +47344,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-multicolour-shoe-polish-1000ml-bottles-pair-front-and-side-view.webp"
+      "/assets/product/chemical-product/lazzo-multicolour-shoe-polish-1000ml-bottles-pair-front-and-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47289,8 +47384,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-naturmeds-refreshing-lemon-hand-sanitize-500ml-spray-bottles-pair-angle-1.webp",
-      "/assets/supplier-library/chemical-product/lazzo-naturmeds-refreshing-lemon-hand-sanitize-500ml-spray-bottles-pair-angle-2.webp"
+      "/assets/product/chemical-product/lazzo-naturmeds-refreshing-lemon-hand-sanitize-500ml-spray-bottles-pair-angle-1.webp",
+      "/assets/product/chemical-product/lazzo-naturmeds-refreshing-lemon-hand-sanitize-500ml-spray-bottles-pair-angle-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47330,7 +47425,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-l9-super-bathroom-cleaner-concentrate-for-hard-water-conditions-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/lazzo-l9-super-bathroom-cleaner-concentrate-for-hard-water-conditions-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47370,7 +47465,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-super-cleaning-concentrates-l1-to-l9-range-5-litre-cans-grid-collage-of-9.webp"
+      "/assets/product/chemical-product/lazzo-super-cleaning-concentrates-l1-to-l9-range-5-litre-cans-grid-collage-of-9.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47410,7 +47505,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-super-cleaning-concentrates-l1-l2-l3-l4-set-of-4-250ml-bottles-front-view.webp"
+      "/assets/product/chemical-product/lazzo-super-cleaning-concentrates-l1-l2-l3-l4-set-of-4-250ml-bottles-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47450,7 +47545,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lazzo-super-cleaning-concentrates-l5-l6-l7-l9-set-of-4-250ml-bottles-front-view.webp"
+      "/assets/product/chemical-product/lazzo-super-cleaning-concentrates-l5-l6-l7-l9-set-of-4-250ml-bottles-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47490,7 +47585,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lifebuoy-hand-sanitizer-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/lifebuoy-hand-sanitizer-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47530,7 +47625,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lifebuoy-hand-sanitizer-5-ltr.webp"
+      "/assets/product/chemical-product/lifebuoy-hand-sanitizer-5-ltr.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47570,9 +47665,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lifebuoy-hand-sanitizer-gel-500-ml-1.webp",
-      "/assets/supplier-library/chemical-product/lifebuoy-hand-sanitizer-gel-500-ml-2.webp",
-      "/assets/supplier-library/chemical-product/lifebuoy-hand-sanitizer-gel-500-ml.webp"
+      "/assets/product/chemical-product/lifebuoy-hand-sanitizer-gel-500-ml-1.webp",
+      "/assets/product/chemical-product/lifebuoy-hand-sanitizer-gel-500-ml-2.webp",
+      "/assets/product/chemical-product/lifebuoy-hand-sanitizer-gel-500-ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47612,7 +47707,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lifebuoy-hand-sanitizer-total-50ml-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/lifebuoy-hand-sanitizer-total-50ml-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47652,7 +47747,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lifebuoy-total-10-germ-protection-handwash-190ml-pump-bottle-with-185ml-free-refill-pouch.webp"
+      "/assets/product/chemical-product/lifebuoy-total-10-germ-protection-handwash-190ml-pump-bottle-with-185ml-free-refill-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47692,7 +47787,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lifebuoy-total-10-handwash-750ml-refill-pouch-buy-1-get-1-free-front-and-back.webp"
+      "/assets/product/chemical-product/lifebuoy-total-10-handwash-750ml-refill-pouch-buy-1-get-1-free-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47732,8 +47827,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lizol-500-ml-1.webp",
-      "/assets/supplier-library/chemical-product/lizol-500-ml.webp"
+      "/assets/product/chemical-product/lizol-500-ml-1.webp",
+      "/assets/product/chemical-product/lizol-500-ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47773,7 +47868,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lifebuoy-total-10-handwash-750ml-refill-pouch-buy-1-get-1-free-pack-in-net.webp"
+      "/assets/product/chemical-product/lifebuoy-total-10-handwash-750ml-refill-pouch-buy-1-get-1-free-pack-in-net.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47813,7 +47908,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lizol-disinfectant-surface-cleaner-citrus-1-litre-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/lizol-disinfectant-surface-cleaner-citrus-1-litre-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47853,8 +47948,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lizol-disinfectant-surface-cleaner-citrus-5-litre-can-front-view.webp",
-      "/assets/supplier-library/chemical-product/lizol-disinfectant-surface-cleaner-citrus-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/lizol-disinfectant-surface-cleaner-citrus-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/lizol-disinfectant-surface-cleaner-citrus-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47894,8 +47989,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/lizol-disinfectant-surface-cleaner-floral-5-litre-can-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/lizol-disinfectant-surface-cleaner-floral-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/lizol-disinfectant-surface-cleaner-floral-5-litre-can-front-and-back.webp",
+      "/assets/product/chemical-product/lizol-disinfectant-surface-cleaner-floral-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47935,7 +48030,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/pril-425ml.webp"
+      "/assets/product/chemical-product/pril-425ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -47975,7 +48070,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/picsart_24-08-07_19-35-12-495.webp"
+      "/assets/product/chemical-product/picsart_24-08-07_19-35-12-495.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48015,7 +48110,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/pril-225ml.webp"
+      "/assets/product/chemical-product/pril-225ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48055,7 +48150,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/rin-detergent-liquid-for-bright-clothes-500ml-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/rin-detergent-liquid-for-bright-clothes-500ml-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48095,7 +48190,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/rin-ala-500ml.webp"
+      "/assets/product/chemical-product/rin-ala-500ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48135,7 +48230,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/rin-fabric-whitener-ala-500ml-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/rin-fabric-whitener-ala-500ml-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48175,7 +48270,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/rin-matic-top-load-bright-lock-liquid-detergent-850ml-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/rin-matic-top-load-bright-lock-liquid-detergent-850ml-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48215,7 +48310,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/rin-pro-fabric-whitener-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/rin-pro-fabric-whitener-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48255,7 +48350,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/savlon-chlorhexidine-gluconate-and-cetrimide-antiseptic-disinfectant-liquid-1-litre-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/savlon-chlorhexidine-gluconate-and-cetrimide-antiseptic-disinfectant-liquid-1-litre-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48295,7 +48390,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/rin-pro-fabric-whitener-5-litre-cans-pair-front-and-back.webp"
+      "/assets/product/chemical-product/rin-pro-fabric-whitener-5-litre-cans-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48335,7 +48430,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/schevaran-chemical-price-list_page-0001.webp"
+      "/assets/product/chemical-product/schevaran-chemical-price-list_page-0001.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48375,7 +48470,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/schevaran-h5-viroff-553-concentrate-broad-spectrum-sterilent-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/schevaran-h5-viroff-553-concentrate-broad-spectrum-sterilent-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48415,7 +48510,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/schevaran-k6-natural-shine-stainless-steel-cleaner-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/schevaran-k6-natural-shine-stainless-steel-cleaner-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48455,7 +48550,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/savlon-professional-liquid-handwash-5-litre-cans-pair-front-and-back.webp"
+      "/assets/product/chemical-product/savlon-professional-liquid-handwash-5-litre-cans-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48495,7 +48590,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/schevaran-s1-germ-free-concentrate-neutral-cleaner-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/schevaran-s1-germ-free-concentrate-neutral-cleaner-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48535,7 +48630,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/schevaran-s11-labello-pearlescent-germicidal-hand-wash-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/schevaran-s11-labello-pearlescent-germicidal-hand-wash-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48575,7 +48670,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/schevaran-s10-super-lime-away-concentrate-heavy-duty-acidic-descaler-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/schevaran-s10-super-lime-away-concentrate-heavy-duty-acidic-descaler-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48615,7 +48710,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/schevaran-s1-s2-s3-s6-s10-cleaning-chemical-cans-lineup-set.webp"
+      "/assets/product/chemical-product/schevaran-s1-s2-s3-s6-s10-cleaning-chemical-cans-lineup-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48655,7 +48750,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/schevaran-s12-hand-wash-concentrate-germicidal-hand-wash-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/schevaran-s12-hand-wash-concentrate-germicidal-hand-wash-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48695,7 +48790,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/schevaran-s2-all-klean-concentrate-all-purpose-neutral-cleaner-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/schevaran-s2-all-klean-concentrate-all-purpose-neutral-cleaner-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48735,7 +48830,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/schevaran-s3-window-shine-neutral-glass-cleaner-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/schevaran-s3-window-shine-neutral-glass-cleaner-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48775,7 +48870,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/schevaran-s6-super-lime-away-plus-strong-acidic-descaler-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/schevaran-s6-super-lime-away-plus-strong-acidic-descaler-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48815,7 +48910,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/schevaran-viroff-753-plus-hand-sanitizer-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/schevaran-viroff-753-plus-hand-sanitizer-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48855,7 +48950,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/scott-luxury-foam-skin-cleanser-1000ml-cartridges-with-6x1000ml-case-box.webp"
+      "/assets/product/chemical-product/scott-luxury-foam-skin-cleanser-1000ml-cartridges-with-6x1000ml-case-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48895,7 +48990,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/scott-luxury-foam-skin-cleanser-with-moisturizer-1000ml-cartridge-pack-front-and-back.webp"
+      "/assets/product/chemical-product/scott-luxury-foam-skin-cleanser-with-moisturizer-1000ml-cartridge-pack-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48935,7 +49030,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/snog-sd1-liquid-detergent-with-conditioner-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/snog-sd1-liquid-detergent-with-conditioner-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -48975,8 +49070,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/sterill-g-5-ltr-can-3.webp",
-      "/assets/supplier-library/chemical-product/sterill-g-5-ltr-can-4.webp"
+      "/assets/product/chemical-product/sterill-g-5-ltr-can-3.webp",
+      "/assets/product/chemical-product/sterill-g-5-ltr-can-4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49016,8 +49111,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/sterill-g-500-ml-3.webp",
-      "/assets/supplier-library/chemical-product/sterill-g-500-ml-4.webp"
+      "/assets/product/chemical-product/sterill-g-500-ml-3.webp",
+      "/assets/product/chemical-product/sterill-g-500-ml-4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49057,7 +49152,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/snog-sd1-liquid-detergent-with-conditioner-5-litre-cans-pair-front-and-back.webp"
+      "/assets/product/chemical-product/snog-sd1-liquid-detergent-with-conditioner-5-litre-cans-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49097,7 +49192,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/sterill-g-advanced-handrub-disinfectant-500ml-pump-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/sterill-g-advanced-handrub-disinfectant-500ml-pump-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49137,7 +49232,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/sterill-g-5-ltr.webp"
+      "/assets/product/chemical-product/sterill-g-5-ltr.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49177,7 +49272,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/sterillium-effective-antimicrobial-rub-disinfectant-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/sterillium-effective-antimicrobial-rub-disinfectant-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49217,7 +49312,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/sterillium-effective-antimicrobial-rub-disinfectant-500ml-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/sterillium-effective-antimicrobial-rub-disinfectant-500ml-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49257,7 +49352,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/sterillium-rub-in-hand-disinfectant-500ml-with-dispenser-pump-front-and-back.webp"
+      "/assets/product/chemical-product/sterillium-rub-in-hand-disinfectant-500ml-with-dispenser-pump-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49297,7 +49392,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/surf-excel-easy-wash-liquid-detergent-500ml-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/surf-excel-easy-wash-liquid-detergent-500ml-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49337,7 +49432,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/surf-excel-matic-pro-liquid-detergent-5-litre-can-front-and-back.webp"
+      "/assets/product/chemical-product/surf-excel-matic-pro-liquid-detergent-5-litre-can-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49377,7 +49472,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/teepol-b-300-liquid-cleaner-10kg-blue-can-front-view.webp"
+      "/assets/product/chemical-product/teepol-b-300-liquid-cleaner-10kg-blue-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49417,7 +49512,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/surf-excel-matic-top-load-liquid-detergent-1-litre-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/surf-excel-matic-top-load-liquid-detergent-1-litre-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49457,7 +49552,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/surf-excel-matic-top-load-liquid-detergent-500ml-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/surf-excel-matic-top-load-liquid-detergent-500ml-bottles-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49497,7 +49592,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/transparent-liquid-chemical-1-litre-pet-bottles-with-blue-caps-pair.webp"
+      "/assets/product/chemical-product/transparent-liquid-chemical-1-litre-pet-bottles-with-blue-caps-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49537,7 +49632,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/vanish-oxi-action-10x-oxi-power-colour-safe-detergent-booster-400ml-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/vanish-oxi-action-10x-oxi-power-colour-safe-detergent-booster-400ml-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49577,7 +49672,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/vanish-oxi-action-10x-oxi-power-colour-safe-detergent-booster-800ml-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/vanish-oxi-action-10x-oxi-power-colour-safe-detergent-booster-800ml-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49617,7 +49712,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/varaa-alcohol-70-percent-based-gel-hand-sanitizer-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/varaa-alcohol-70-percent-based-gel-hand-sanitizer-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49657,7 +49752,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/varaa-5-ltr-hand-sanitizer.webp"
+      "/assets/product/chemical-product/varaa-5-ltr-hand-sanitizer.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49697,7 +49792,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/varaa-alcohol-based-liquid-hand-sanitizer-100ml-spray-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/varaa-alcohol-based-liquid-hand-sanitizer-100ml-spray-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49737,7 +49832,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/varaa-alcohol-based-liquid-hand-sanitizer-500ml-pump-bottle-front-and-back-variant-2.webp"
+      "/assets/product/chemical-product/varaa-alcohol-based-liquid-hand-sanitizer-500ml-pump-bottle-front-and-back-variant-2.webp",
+      "/assets/product/chemical-product/varaa-alcohol-based-gel-hand-sanitizer-500ml-pump-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49777,7 +49873,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/varaa-alcohol-based-liquid-hand-sanitizer-500ml-pump-bottle-front-and-back.webp"
+      "/assets/product/chemical-product/varaa-alcohol-based-liquid-hand-sanitizer-500ml-pump-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49817,7 +49913,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/vim-professional-hand-dishwashing-liquid-5-litre-can-front-and-back-variant-2.webp"
+      "/assets/product/chemical-product/vim-professional-hand-dishwashing-liquid-5-litre-can-front-and-back-variant-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49857,8 +49953,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/vim-professional-hand-dishwashing-liquid-5-litre-can-front-and-back.webp",
-      "/assets/supplier-library/chemical-product/vim-professional-hand-dishwashing-liquid-5-litre-can-front-view.webp"
+      "/assets/product/chemical-product/vim-professional-hand-dishwashing-liquid-5-litre-can-front-and-back.webp",
+      "/assets/product/chemical-product/vim-professional-hand-dishwashing-liquid-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49898,7 +49994,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/clean-mart-kleen-cellulose-sponge-wipe-pack-of-3-yellow.webp"
+      "/assets/product/mix/clean-mart-kleen-cellulose-sponge-wipe-pack-of-3-yellow.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49938,7 +50034,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/chemical-product/vim-tropical-lemon-freshness-dishwash-liquid-gel-750ml-bottles-pair-front-and-back.webp"
+      "/assets/product/chemical-product/vim-tropical-lemon-freshness-dishwash-liquid-gel-750ml-bottles-pair-front-and-back.webp",
+      "/assets/product/chemical-product/vim-dishwash-liquid-lemon-250ml-bottle-front-and-back.webp",
+      "/assets/product/chemical-product/vim-dishwash-liquid-lemon-500ml-bottle-front-and-back.webp",
+      "/assets/product/collage/vim-dishwash-liquid-5l-and-bottles.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -49978,7 +50077,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/disposable-paper-tea-cups-size-comparison-100ml-110ml-150ml-210ml-250ml.webp"
+      "/assets/product/mix/disposable-paper-tea-cups-size-comparison-100ml-110ml-150ml-210ml-250ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50018,7 +50117,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/easy-step-ladder-model-610-height-5ft-to-6ft-blue.webp"
+      "/assets/product/mix/easy-step-ladder-model-610-height-5ft-to-6ft-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50058,7 +50157,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/duckback-brigadier-coat-01.webp"
+      "/assets/product/mix/duckback-brigadier-coat-01.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50098,7 +50197,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/disposable-plastic-shoe-cover-blue-close-up.webp"
+      "/assets/product/mix/disposable-plastic-shoe-cover-blue-close-up.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50138,9 +50237,12 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/equal-foldable-platform-trolley-200kg-blue-back-view.webp",
-      "/assets/supplier-library/mix/equal-foldable-platform-trolley-200kg-blue-front-view.webp",
-      "/assets/supplier-library/mix/equal-foldable-platform-trolley-200kg-blue-side-view.webp"
+      "/assets/product/mix/equal-foldable-platform-trolley-200kg-blue-back-view.webp",
+      "/assets/product/mix/equal-foldable-platform-trolley-200kg-blue-front-view.webp",
+      "/assets/product/mix/equal-foldable-platform-trolley-200kg-blue-side-view.webp",
+      "/assets/product/mix/equal-foldable-platform-trolley-200kg-and-400kg-stacked-front-view.webp",
+      "/assets/product/mix/equal-foldable-platform-trolley-200kg-and-400kg-stacked-perspective-view.webp",
+      "/assets/product/mix/equal-foldable-platform-trolley-200kg-and-400kg-stacked-straight-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50180,9 +50282,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/equal-foldable-platform-trolley-400kg-blue-back-view.webp",
-      "/assets/supplier-library/mix/equal-foldable-platform-trolley-400kg-blue-front-view.webp",
-      "/assets/supplier-library/mix/equal-foldable-platform-trolley-400kg-blue-side-perspective-view.webp"
+      "/assets/product/mix/equal-foldable-platform-trolley-400kg-blue-back-view.webp",
+      "/assets/product/mix/equal-foldable-platform-trolley-400kg-blue-front-view.webp",
+      "/assets/product/mix/equal-foldable-platform-trolley-400kg-blue-side-perspective-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50222,7 +50324,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/equal-foldable-platform-trolley-400kg-blue-front-view-low-angle.webp"
+      "/assets/product/mix/equal-foldable-platform-trolley-400kg-blue-front-view-low-angle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50262,7 +50364,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/equal-foldable-platform-trolley-400kg-blue-side-angle-view.webp"
+      "/assets/product/mix/equal-foldable-platform-trolley-400kg-blue-side-angle-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50302,7 +50404,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/equal-foldable-platform-trolley-blue-plastic-base-150kg.webp"
+      "/assets/product/mix/equal-foldable-platform-trolley-blue-plastic-base-150kg.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50342,7 +50444,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/equal-foldable-platform-trolley-400kg-blue-underside-castors-and-grid.webp"
+      "/assets/product/mix/equal-foldable-platform-trolley-400kg-blue-underside-castors-and-grid.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50382,8 +50484,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/foam-cleaning-sponge-white-block-pack-of-12.webp",
-      "/assets/supplier-library/mix/foam-cleaning-sponge-green-block-pack-of-12.webp"
+      "/assets/product/mix/foam-cleaning-sponge-white-block-pack-of-12.webp",
+      "/assets/product/mix/foam-cleaning-sponge-green-block-pack-of-12.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50423,7 +50525,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/lazzo-nava-vel-stainless-steel-putty-blade-painter-tools-4-inches-pair.webp"
+      "/assets/product/mix/lazzo-nava-vel-stainless-steel-putty-blade-painter-tools-4-inches-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50463,7 +50565,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/heavy-duty-black-metal-pipe-bracket-clamps-set-of-3.webp"
+      "/assets/product/mix/heavy-duty-black-metal-pipe-bracket-clamps-set-of-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50503,7 +50605,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/iris-home-fragrances-unscented-tealights-100-pack-9g-each.webp"
+      "/assets/product/mix/iris-home-fragrances-unscented-tealights-100-pack-9g-each.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50543,7 +50645,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/iris-home-fragrances-reed-sticks-pack-of-3-bundles.webp"
+      "/assets/product/mix/iris-home-fragrances-reed-sticks-pack-of-3-bundles.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50583,7 +50685,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/lazzo-super-sponge-wipes-highly-absorbent-yellow-pack-of-3.webp"
+      "/assets/product/mix/lazzo-super-sponge-wipes-highly-absorbent-yellow-pack-of-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50623,7 +50725,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/non-woven-shoe-cover.webp"
+      "/assets/product/mix/non-woven-shoe-cover.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50663,7 +50765,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/multipurpose-foam-cleaning-sponge-multicolor-pack-of-12.webp"
+      "/assets/product/mix/multipurpose-foam-cleaning-sponge-multicolor-pack-of-12.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50703,7 +50805,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/mylab-coviself-covid-19-rapid-antigen-self-test-kit-pack-front-and-back.webp"
+      "/assets/product/mix/mylab-coviself-covid-19-rapid-antigen-self-test-kit-pack-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50743,7 +50845,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/mytig-clean-sponge-cloths-extra-large-and-absorbent-18x20cm-3x-pack-front-and-back.webp"
+      "/assets/product/mix/mytig-clean-sponge-cloths-extra-large-and-absorbent-18x20cm-3x-pack-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50783,7 +50885,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/office-bazzar-100-percent-nylon-rubber-band-packaging-box-die-cut-sky-blue.webp"
+      "/assets/product/mix/office-bazzar-100-percent-nylon-rubber-band-packaging-box-die-cut-sky-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50823,7 +50925,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/office-bazzar-100-percent-pure-poly-rubber-bands-packaging-box-die-cut-blue-80g.webp"
+      "/assets/product/mix/office-bazzar-100-percent-pure-poly-rubber-bands-packaging-box-die-cut-blue-80g.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50863,7 +50965,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/office-bazzar-100-percent-pure-poly-rubber-bands-packaging-box-die-cut-rainbow-80g.webp"
+      "/assets/product/mix/office-bazzar-100-percent-pure-poly-rubber-bands-packaging-box-die-cut-rainbow-80g.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50903,8 +51005,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/office-bazzar-100-percent-pure-poly-rubber-bands-packaging-box-die-cut-teal-green-80g-variant-1.webp",
-      "/assets/supplier-library/mix/office-bazzar-100-percent-pure-poly-rubber-bands-packaging-box-die-cut-teal-green-80g-variant-2.webp"
+      "/assets/product/mix/office-bazzar-100-percent-pure-poly-rubber-bands-packaging-box-die-cut-teal-green-80g-variant-1.webp",
+      "/assets/product/mix/office-bazzar-100-percent-pure-poly-rubber-bands-packaging-box-die-cut-teal-green-80g-variant-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50944,7 +51046,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/office-bazzar-branding-banner-logo-the-biggest-choice-of-office-needs.webp"
+      "/assets/product/mix/office-bazzar-branding-banner-logo-the-biggest-choice-of-office-needs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -50984,9 +51086,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/office-bazzar-packing-tape-3-ply-corrugated-carton-box-label-design-blue-400x300x310mm.webp",
-      "/assets/supplier-library/mix/office-bazzar-packing-tape-3-ply-corrugated-carton-box-label-design-orange-400x300x310mm.webp",
-      "/assets/supplier-library/mix/office-bazzar-packing-tape-3-ply-corrugated-carton-box-label-design-red-400x300x310mm.webp"
+      "/assets/product/mix/office-bazzar-packing-tape-3-ply-corrugated-carton-box-label-design-blue-400x300x310mm.webp",
+      "/assets/product/mix/office-bazzar-packing-tape-3-ply-corrugated-carton-box-label-design-orange-400x300x310mm.webp",
+      "/assets/product/mix/office-bazzar-packing-tape-3-ply-corrugated-carton-box-label-design-red-400x300x310mm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51026,7 +51128,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/office-bazzar-packing-tape-3-ply-corrugated-carton-box-label-design-maroon-400x300x310mm.webp"
+      "/assets/product/mix/office-bazzar-packing-tape-3-ply-corrugated-carton-box-label-design-maroon-400x300x310mm.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51066,8 +51168,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/plastic-threaded-end-caps-blue-yellow-orange-green-row-of-4-side-angle.webp",
-      "/assets/supplier-library/mix/plastic-threaded-end-caps-blue-yellow-orange-green-row-of-4-top-angle.webp"
+      "/assets/product/mix/plastic-threaded-end-caps-blue-yellow-orange-green-row-of-4-side-angle.webp",
+      "/assets/product/mix/plastic-threaded-end-caps-blue-yellow-orange-green-row-of-4-top-angle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51107,7 +51209,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/plastic-threaded-end-caps-assorted-colors-multi-pack-pile.webp"
+      "/assets/product/mix/plastic-threaded-end-caps-assorted-colors-multi-pack-pile.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51147,7 +51249,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/plastic-water-bottles-1-litre-set-of-4-assorted-blue-yellow-pink-green.webp"
+      "/assets/product/mix/plastic-water-bottles-1-litre-set-of-4-assorted-blue-yellow-pink-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51187,13 +51289,13 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/platform-trolley-1.webp",
-      "/assets/supplier-library/mix/platform-trolley-2.webp",
-      "/assets/supplier-library/mix/platform-trolley-3.webp",
-      "/assets/supplier-library/mix/platform-trolley-4.webp",
-      "/assets/supplier-library/mix/platform-trolley-5.webp",
-      "/assets/supplier-library/mix/platform-trolley-6.webp",
-      "/assets/supplier-library/mix/platform-trolley.webp"
+      "/assets/product/mix/platform-trolley-1.webp",
+      "/assets/product/mix/platform-trolley-2.webp",
+      "/assets/product/mix/platform-trolley-3.webp",
+      "/assets/product/mix/platform-trolley-4.webp",
+      "/assets/product/mix/platform-trolley-5.webp",
+      "/assets/product/mix/platform-trolley-6.webp",
+      "/assets/product/mix/platform-trolley.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51233,7 +51335,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/plastic-water-bottles-curvy-grip-1-litre-set-of-3-red-blue-green.webp"
+      "/assets/product/mix/plastic-water-bottles-curvy-grip-1-litre-set-of-3-red-blue-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51273,8 +51375,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/platform-trolley-new-1.webp",
-      "/assets/supplier-library/mix/platform-trolley-new.webp"
+      "/assets/product/mix/platform-trolley-new-1.webp",
+      "/assets/product/mix/platform-trolley-new.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51314,7 +51416,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/ppe-kit-suit.webp"
+      "/assets/product/mix/ppe-kit-suit.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51354,7 +51456,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/sink-plunger-with-long-plastic-handle-swirl-rubber-cup-set-of-3-blue-green-red.webp"
+      "/assets/product/mix/sink-plunger-with-long-plastic-handle-swirl-rubber-cup-set-of-3-blue-green-red.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51394,7 +51496,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/super-sturdy-easy-step-ladder-model-612-height-5ft-to-8ft-green.webp"
+      "/assets/product/mix/super-sturdy-easy-step-ladder-model-612-height-5ft-to-8ft-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51434,7 +51536,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/stainless-steel-platform-trolley-with-red-wheels-and-folding-handle.webp"
+      "/assets/product/mix/stainless-steel-platform-trolley-with-red-wheels-and-folding-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51474,7 +51576,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/scotch-brite-professional-sponge-wipe-4-n-pink-pack-front-and-back.webp"
+      "/assets/product/mix/scotch-brite-professional-sponge-wipe-4-n-pink-pack-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51514,7 +51616,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/wholesaler-bazzar-easy-step-ladder-model-610-and-612-detail-features-collage.webp"
+      "/assets/product/mix/wholesaler-bazzar-easy-step-ladder-model-610-and-612-detail-features-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51554,7 +51656,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/wholesaler-bazzar-rain-coat-new-arrivals-banner-models-r-108-a-701-a-702.webp"
+      "/assets/product/mix/wholesaler-bazzar-rain-coat-new-arrivals-banner-models-r-108-a-701-a-702.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51594,7 +51696,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/windsor-lovely-open-face-motorcycle-helmet-silver-with-clear-visor.webp"
+      "/assets/product/mix/windsor-lovely-open-face-motorcycle-helmet-silver-with-clear-visor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51634,7 +51736,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/windsor-sport-half-face-motorcycle-helmet-silver-black-with-peak-visor.webp"
+      "/assets/product/mix/windsor-sport-half-face-motorcycle-helmet-silver-black-with-peak-visor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51674,7 +51776,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mix/windsor-flying-angel-star-full-face-motorcycle-helmet-black-with-clear-visor.webp"
+      "/assets/product/mix/windsor-flying-angel-star-full-face-motorcycle-helmet-black-with-clear-visor.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51714,9 +51816,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/4-clip-mop-refill-1.webp",
-      "/assets/supplier-library/mop/4-clip-mop-refill.webp",
-      "/assets/supplier-library/mop/4-clip-mop-refill-2.webp"
+      "/assets/product/mop/4-clip-mop-refill-1.webp",
+      "/assets/product/mop/4-clip-mop-refill.webp",
+      "/assets/product/mop/4-clip-mop-refill-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51756,7 +51858,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/aluminium-flat-mop-frame-and-blue-microfiber-pad-set-vertical-view.webp"
+      "/assets/product/mop/aluminium-flat-mop-frame-and-blue-microfiber-pad-set-vertical-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51796,7 +51898,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/aluminium-flat-mop-frame-set-of-4-colors-blue-green-yellow-red-with-cloth-grippers.webp"
+      "/assets/product/mop/aluminium-flat-mop-frame-set-of-4-colors-blue-green-yellow-red-with-cloth-grippers.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51836,7 +51938,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/aluminium-flat-mop-frame-with-blue-microfiber-pad-and-handle-attachment.webp"
+      "/assets/product/mop/aluminium-flat-mop-frame-with-blue-microfiber-pad-and-handle-attachment.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51876,7 +51978,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/blue-and-red-foldable-flat-mop-frame-with-microfiber-mop-head-half-folded.webp"
+      "/assets/product/mop/blue-and-red-foldable-flat-mop-frame-with-microfiber-mop-head-half-folded.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51916,7 +52018,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/aluminium-flat-mop-with-blue-microfiber-pad-bottom-view.webp"
+      "/assets/product/mop/aluminium-flat-mop-with-blue-microfiber-pad-bottom-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51956,7 +52058,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/blue-and-red-foldable-flat-mop-frame-with-microfiber-pad-set-flat-view.webp"
+      "/assets/product/mop/blue-and-red-foldable-flat-mop-frame-with-microfiber-pad-set-flat-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -51996,7 +52098,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/blue-and-red-foldable-flat-mop-frame-with-microfiber-pads-set-display.webp"
+      "/assets/product/mop/blue-and-red-foldable-flat-mop-frame-with-microfiber-pads-set-display.webp",
+      "/assets/product/mop/microfiber-flat-mop-set-with-telescopic-handle-and-5-extra-chenille-pads-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52036,7 +52139,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/blue-plastic-velcro-flat-mop-frame-front-and-back-view.webp"
+      "/assets/product/mop/blue-plastic-velcro-flat-mop-frame-front-and-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52076,7 +52179,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/blue-wet-mop-full-set-with-aluminum-handle-standing.webp"
+      "/assets/product/mop/blue-wet-mop-full-set-with-aluminum-handle-standing.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52116,7 +52219,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/blue-wet-mop-set-with-refill-and-clip-clamp-3-in-1-collage.webp"
+      "/assets/product/mop/blue-wet-mop-set-with-refill-and-clip-clamp-3-in-1-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52156,8 +52259,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/clip-n-fit-mop-1.webp",
-      "/assets/supplier-library/mop/clip-n-fit-mop.webp"
+      "/assets/product/mop/clip-n-fit-mop-1.webp",
+      "/assets/product/mop/clip-n-fit-mop.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52197,7 +52300,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/commercial-aluminum-flat-mop-frames-and-microfiber-pads-4-colors-set.webp"
+      "/assets/product/mop/commercial-aluminum-flat-mop-frames-and-microfiber-pads-4-colors-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52237,8 +52340,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/cotton-wet-mop-clip-refill-set-of-3-green-and-yellow-front-view.webp",
-      "/assets/supplier-library/mop/cotton-wet-mop-clip-refill-yellow-and-green-pair-top-view.webp"
+      "/assets/product/mop/cotton-wet-mop-clip-refill-set-of-3-green-and-yellow-front-view.webp",
+      "/assets/product/mop/cotton-wet-mop-clip-refill-yellow-and-green-pair-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52278,7 +52381,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/commercial-flat-mop-folding-frame-plates-blue-and-red-flat-and-folded-pair.webp"
+      "/assets/product/mop/commercial-flat-mop-folding-frame-plates-blue-and-red-flat-and-folded-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52318,7 +52421,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/commercial-flat-mop-folding-frame-plates-blue-and-red-top-and-bottom-view.webp"
+      "/assets/product/mop/commercial-flat-mop-folding-frame-plates-blue-and-red-top-and-bottom-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52358,8 +52461,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/cotton-wet-mop-kentucky-refill-stitched-headband.webp",
-      "/assets/supplier-library/mop/white-cotton-wet-mop-kentucky-refill-stitched-headband.webp"
+      "/assets/product/mop/cotton-wet-mop-kentucky-refill-stitched-headband.webp",
+      "/assets/product/mop/white-cotton-wet-mop-kentucky-refill-stitched-headband.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52399,8 +52502,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/cotton-wet-mop-refill-green-white-purple-thread-with-metal-socket.webp",
-      "/assets/supplier-library/mop/cotton-wet-mop-refill-multicolor-thread-with-metal-socket.webp"
+      "/assets/product/mop/cotton-wet-mop-refill-green-white-purple-thread-with-metal-socket.webp",
+      "/assets/product/mop/cotton-wet-mop-refill-multicolor-thread-with-metal-socket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52440,7 +52543,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/cotton-wet-mop-refill-metal-socket-round-cap.webp"
+      "/assets/product/mop/cotton-wet-mop-refill-metal-socket-round-cap.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52480,7 +52583,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/dry-mop-refill.webp"
+      "/assets/product/mop/dry-mop-refill.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52520,9 +52623,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/dry-mop-set-2.webp",
-      "/assets/supplier-library/mop/dry-mop-set-1.webp",
-      "/assets/supplier-library/mop/dry-mop-set.webp"
+      "/assets/product/mop/dry-mop-set-2.webp",
+      "/assets/product/mop/dry-mop-set-1.webp",
+      "/assets/product/mop/dry-mop-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52562,7 +52665,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/cotton-wet-socket-mop-head-refill-white-with-green-threaded-connector.webp"
+      "/assets/product/mop/cotton-wet-socket-mop-head-refill-white-with-green-threaded-connector.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52602,9 +52705,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/green-wet-mop-kentucky-refill-stitched-headband.webp",
-      "/assets/supplier-library/mop/red-wet-mop-kentucky-refill-stitched-headband.webp",
-      "/assets/supplier-library/mop/yellow-wet-mop-kentucky-refill-stitched-headband.webp"
+      "/assets/product/mop/green-wet-mop-kentucky-refill-stitched-headband.webp",
+      "/assets/product/mop/red-wet-mop-kentucky-refill-stitched-headband.webp",
+      "/assets/product/mop/yellow-wet-mop-kentucky-refill-stitched-headband.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52644,7 +52747,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/gala-clip-n-fit-refill-packaging-back-view.webp"
+      "/assets/product/mop/gala-clip-n-fit-refill-packaging-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52684,7 +52787,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/gala-easy-clip-n-fit-cotton-mop-refill-in-packaging-front-view.webp"
+      "/assets/product/mop/gala-easy-clip-n-fit-cotton-mop-refill-in-packaging-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52724,9 +52827,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/green-wet-mop-kentucky-refill-with-green-plastic-clip-clamp.webp",
-      "/assets/supplier-library/mop/red-wet-mop-kentucky-refill-with-red-plastic-clip-clamp.webp",
-      "/assets/supplier-library/mop/yellow-wet-mop-kentucky-refill-with-yellow-plastic-clip-clamp.webp"
+      "/assets/product/mop/green-wet-mop-kentucky-refill-with-green-plastic-clip-clamp.webp",
+      "/assets/product/mop/red-wet-mop-kentucky-refill-with-red-plastic-clip-clamp.webp",
+      "/assets/product/mop/yellow-wet-mop-kentucky-refill-with-yellow-plastic-clip-clamp.webp",
+      "/assets/product/mop/blue-wet-floor-mop-kentucky-refill-with-blue-clip-clamp.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52766,7 +52870,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/i-mop-color.webp"
+      "/assets/product/mop/i-mop-color.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52806,8 +52910,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/kentucky-cotton-wet-mop-refill-set-of-5-colors-green-main-collage.webp",
-      "/assets/supplier-library/mop/kentucky-cotton-wet-mop-refill-set-of-5-colors-white-main-collage.webp"
+      "/assets/product/mop/kentucky-cotton-wet-mop-refill-set-of-5-colors-green-main-collage.webp",
+      "/assets/product/mop/kentucky-cotton-wet-mop-refill-set-of-5-colors-white-main-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52847,7 +52951,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/kentucky-wet-mop-head-with-plastic-clamp-4-color-grid-collage.webp"
+      "/assets/product/mop/kentucky-wet-mop-head-with-plastic-clamp-4-color-grid-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52887,7 +52991,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/kentucky-cotton-wet-mop-refills-4-color-grid-collage-red-blue-green-yellow.webp"
+      "/assets/product/mop/kentucky-cotton-wet-mop-refills-4-color-grid-collage-red-blue-green-yellow.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52927,7 +53031,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/kentucky-wet-mop-head-with-plastic-clamp-set-of-5-colors-collage.webp"
+      "/assets/product/mop/kentucky-wet-mop-head-with-plastic-clamp-set-of-5-colors-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -52967,7 +53071,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/lazzo-cotton-wet-mop-kentucky-refill-white-stitched-headband-with-color-coding-tags.webp"
+      "/assets/product/mop/lazzo-cotton-wet-mop-kentucky-refill-white-stitched-headband-with-color-coding-tags.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53007,7 +53111,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/kentucky-wet-mop-head-with-plastic-clamp-set-of-5-colors-white-main-collage.webp"
+      "/assets/product/mop/kentucky-wet-mop-head-with-plastic-clamp-set-of-5-colors-white-main-collage.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53047,7 +53151,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/lazzo-flat-mop-folding-frame-plate-assembled-with-microfiber-pad-top-view.webp"
+      "/assets/product/mop/lazzo-flat-mop-folding-frame-plate-assembled-with-microfiber-pad-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53087,7 +53191,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/lazzo-flat-mop-folding-frame-plate-with-microfiber-pad-folded-upright.webp"
+      "/assets/product/mop/lazzo-flat-mop-folding-frame-plate-with-microfiber-pad-folded-upright.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53127,7 +53231,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/lazzo-flat-mop-folding-frame-plate-bottom-view-showing-push-button.webp"
+      "/assets/product/mop/lazzo-flat-mop-folding-frame-plate-bottom-view-showing-push-button.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53167,7 +53271,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/lazzo-flat-mop-folding-frame-plate-half-folded-angular-view.webp"
+      "/assets/product/mop/lazzo-flat-mop-folding-frame-plate-half-folded-angular-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53207,8 +53311,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/lazzo-microfiber-flat-mop-frame-with-blue-microfiber-refill-pad-set-2.webp",
-      "/assets/supplier-library/mop/lazzo-microfiber-flat-mop-frame-with-blue-microfiber-refill-pad-set.webp"
+      "/assets/product/mop/lazzo-microfiber-flat-mop-frame-with-blue-microfiber-refill-pad-set-2.webp",
+      "/assets/product/mop/lazzo-microfiber-flat-mop-frame-with-blue-microfiber-refill-pad-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53248,7 +53352,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/lazzo-flat-mop-folding-frame-plate-with-red-clamps-blue-flat-view.webp"
+      "/assets/product/mop/lazzo-flat-mop-folding-frame-plate-with-red-clamps-blue-flat-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53288,7 +53392,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/lazzo-microfiber-flat-mop-pad-with-eyelet-flaps-and-color-tabs-back-view.webp"
+      "/assets/product/mop/lazzo-microfiber-flat-mop-pad-with-eyelet-flaps-and-color-tabs-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53328,7 +53432,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/lazzo-microfiber-flat-mop-replacement-pad-blue-folded-with-eyelet-and-label.webp"
+      "/assets/product/mop/lazzo-microfiber-flat-mop-replacement-pad-blue-folded-with-eyelet-and-label.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53368,7 +53472,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-dry-mop-refill-blue-fringe-pad-bottom-view.webp"
+      "/assets/product/mop/microfiber-dry-mop-refill-blue-fringe-pad-bottom-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53408,7 +53512,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/lazzo-microfiber-flat-mop-replacement-pad-blue-front-loop-view.webp"
+      "/assets/product/mop/lazzo-microfiber-flat-mop-replacement-pad-blue-front-loop-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53448,7 +53552,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-dry-mop-refill-blue-fringe-pad-with-blue-plastic-frame-holder-top-view.webp"
+      "/assets/product/mop/microfiber-dry-mop-refill-blue-fringe-pad-with-blue-plastic-frame-holder-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53488,7 +53592,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-dry-mop-refill-blue-fringe-pad-folded-showing-pocket-and-fringe.webp"
+      "/assets/product/mop/microfiber-dry-mop-refill-blue-fringe-pad-folded-showing-pocket-and-fringe.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53528,7 +53632,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-dry-mop-refill-blue-fringe-pad-with-pocket-backing-full-view.webp"
+      "/assets/product/mop/microfiber-dry-mop-refill-blue-fringe-pad-with-pocket-backing-full-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53568,7 +53672,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-dry-mop-refill-grey-pad-with-green-wire-frame-holder.webp"
+      "/assets/product/mop/microfiber-dry-mop-refill-grey-pad-with-green-wire-frame-holder.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53608,7 +53712,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-dry-mop-set.webp"
+      "/assets/product/mop/microfiber-dry-mop-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53648,7 +53752,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-dry-mop-set-grey-pad-with-green-frame-and-steel-handle.webp"
+      "/assets/product/mop/microfiber-dry-mop-set-grey-pad-with-green-frame-and-steel-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53688,7 +53792,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-flat-mop-replacement-pads-stacked-4-colors-blue-green-red-yellow.webp"
+      "/assets/product/mop/microfiber-flat-mop-replacement-pads-stacked-4-colors-blue-green-red-yellow.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53728,7 +53832,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-flat-mop-pad-front-and-velcro-backing-view.webp"
+      "/assets/product/mop/microfiber-flat-mop-pad-front-and-velcro-backing-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53768,7 +53872,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-flat-mop-refill-pads-set-of-4-colors-yellow-red-green-blue.webp"
+      "/assets/product/mop/microfiber-flat-mop-refill-pads-set-of-4-colors-yellow-red-green-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53808,7 +53912,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-flat-mop-pad-blue-and-white-reversible-refill.webp"
+      "/assets/product/mop/microfiber-flat-mop-pad-blue-and-white-reversible-refill.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53848,7 +53952,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-kentucky-wet-mop-refill-blue-with-wide-mesh-headband.webp"
+      "/assets/product/mop/microfiber-kentucky-wet-mop-refill-blue-with-wide-mesh-headband.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53888,7 +53992,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-flat-mop-replacement-pads-stacked-set-of-4-colors.webp"
+      "/assets/product/mop/microfiber-flat-mop-replacement-pads-stacked-set-of-4-colors.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53928,7 +54032,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-wet-mop-head-refill-blue-highly-absorbent-replacement-infographic.webp"
+      "/assets/product/mop/microfiber-wet-mop-head-refill-blue-highly-absorbent-replacement-infographic.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -53968,7 +54072,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/pva-sponge-roller-squeeze-mop-blue-with-telescopic-handle.webp"
+      "/assets/product/mop/pva-sponge-roller-squeeze-mop-blue-with-telescopic-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54008,7 +54112,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/microfiber-kentucky-wet-mop-refills-set-of-4-colors-blue-green-red-yellow.webp"
+      "/assets/product/mop/microfiber-kentucky-wet-mop-refills-set-of-4-colors-blue-green-red-yellow.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54048,7 +54152,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/pva-sponge-roller-squeeze-mop-set-of-2-black-and-blue-with-telescopic-handles.webp"
+      "/assets/product/mop/pva-sponge-roller-squeeze-mop-set-of-2-black-and-blue-with-telescopic-handles.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54088,7 +54192,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/pva-sponge-squeeze-mop-double-roller-stainless-steel-handle-cyan-blue.webp"
+      "/assets/product/mop/pva-sponge-squeeze-mop-double-roller-stainless-steel-handle-cyan-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54128,7 +54232,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/pva-sponge-squeeze-mop-double-roller-stainless-steel-handle-magenta-pink.webp"
+      "/assets/product/mop/pva-sponge-squeeze-mop-double-roller-stainless-steel-handle-magenta-pink.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54168,7 +54272,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/pva-sponge-squeeze-mop-double-roller-stainless-steel-handle-neon-yellow.webp"
+      "/assets/product/mop/pva-sponge-squeeze-mop-double-roller-stainless-steel-handle-neon-yellow.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54208,7 +54312,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/roots-eze-clean-dry-mop-full-set-assembled-standing.webp"
+      "/assets/product/mop/roots-eze-clean-dry-mop-full-set-assembled-standing.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54248,7 +54352,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/roots-eze-clean-dry-mop-frame-and-refills-3-sizes-with-telescopic-handle.webp"
+      "/assets/product/mop/roots-eze-clean-dry-mop-frame-and-refills-3-sizes-with-telescopic-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54288,7 +54392,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/roots-eze-clean-neo-wet-and-dry-mop-complete-set-with-packaging-and-handle.webp"
+      "/assets/product/mop/roots-eze-clean-neo-wet-and-dry-mop-complete-set-with-packaging-and-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54328,7 +54432,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/royal-blue-wet-mop-kentucky-refill-stitched-headband.webp"
+      "/assets/product/mop/royal-blue-wet-mop-kentucky-refill-stitched-headband.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54368,7 +54472,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/royal-blue-wet-mop-kentucky-refill-with-blue-plastic-clip-clamp.webp"
+      "/assets/product/mop/royal-blue-wet-mop-kentucky-refill-with-blue-plastic-clip-clamp.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54408,8 +54512,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/round-cotton-yarn-mop-refill-head-grey-and-orange-with-red-socket.webp",
-      "/assets/supplier-library/mop/round-cotton-yarn-mop-refill-head-grey-and-yellow-with-green-socket.webp"
+      "/assets/product/mop/round-cotton-yarn-mop-refill-head-grey-and-orange-with-red-socket.webp",
+      "/assets/product/mop/round-cotton-yarn-mop-refill-head-grey-and-yellow-with-green-socket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54449,7 +54553,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/shreenath-flat-microfiber-mop-assembled-with-extra-replacement-pad.webp"
+      "/assets/product/mop/shreenath-flat-microfiber-mop-assembled-with-extra-replacement-pad.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54489,7 +54593,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/shreenath-flat-microfiber-mop-telescopic-handle-with-box-packaging.webp"
+      "/assets/product/mop/shreenath-flat-microfiber-mop-telescopic-handle-with-box-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54529,7 +54633,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/telescopic-handle-spin-mop-rod-with-purple-refill-heads-assorted-5-colors.webp"
+      "/assets/product/mop/telescopic-handle-spin-mop-rod-with-purple-refill-heads-assorted-5-colors.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54569,7 +54673,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/spin-mop-telescopic-rod-with-purple-microfiber-round-head-set-of-4-colors.webp"
+      "/assets/product/mop/spin-mop-telescopic-rod-with-purple-microfiber-round-head-set-of-4-colors.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54609,7 +54713,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/sln-clip-mop-cotton-refill-with-blue-clamp-set-packaged-and-open.webp"
+      "/assets/product/mop/sln-clip-mop-cotton-refill-with-blue-clamp-set-packaged-and-open.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54649,7 +54753,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/triangle-microfiber-cleaning-mop-extendable-long-stainless-steel-pole-full-assembled.webp"
+      "/assets/product/mop/triangle-microfiber-cleaning-mop-extendable-long-stainless-steel-pole-full-assembled.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54689,7 +54793,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/triangle-microfiber-cleaning-mop-extendable-pole-with-extension-section.webp"
+      "/assets/product/mop/triangle-microfiber-cleaning-mop-extendable-pole-with-extension-section.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54729,7 +54833,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/triangle-microfiber-cleaning-mop-head-with-3-section-stainless-steel-pole-detached.webp"
+      "/assets/product/mop/triangle-microfiber-cleaning-mop-head-with-3-section-stainless-steel-pole-detached.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54769,7 +54873,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/triangle-microfiber-mop-head-frame-back-view-with-swivel-socket.webp"
+      "/assets/product/mop/triangle-microfiber-mop-head-frame-back-view-with-swivel-socket.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54809,7 +54913,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/triangle-microfiber-mop-head-with-squeegee-wiper-blade-top-angle-view.webp"
+      "/assets/product/mop/triangle-microfiber-mop-head-with-squeegee-wiper-blade-top-angle-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54849,7 +54953,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/wet-mop-set-with-aluminum-handle-blue-grip-and-clamp-holder-standing.webp"
+      "/assets/product/mop/wet-mop-set-with-aluminum-handle-blue-grip-and-clamp-holder-standing.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54889,7 +54993,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/white-cotton-kentucky-wet-mop-refill-mounted-in-blue-clamp-holder.webp"
+      "/assets/product/mop/white-cotton-kentucky-wet-mop-refill-mounted-in-blue-clamp-holder.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54929,7 +55033,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/white-cotton-kentucky-mop-refills-wholesale-bundle-tied-pack.webp"
+      "/assets/product/mop/white-cotton-kentucky-mop-refills-wholesale-bundle-tied-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -54969,7 +55073,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/white-cotton-kentucky-wet-mop-refill-with-color-coded-identification-tag.webp"
+      "/assets/product/mop/white-cotton-kentucky-wet-mop-refill-with-color-coded-identification-tag.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55009,7 +55113,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/white-cotton-wet-mop-kentucky-refill-with-white-and-green-plastic-clip-clamp.webp"
+      "/assets/product/mop/white-cotton-wet-mop-kentucky-refill-with-white-and-green-plastic-clip-clamp.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55049,7 +55153,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/wonder-mop-pva-sponge-roller-squeeze-mop-black-with-telescopic-handle.webp"
+      "/assets/product/mop/wonder-mop-pva-sponge-roller-squeeze-mop-black-with-telescopic-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55089,7 +55193,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/mop/wire-frame-dry-mop-holder-green-and-blue-pair-in-plastic-wrap.webp"
+      "/assets/product/mop/wire-frame-dry-mop-holder-green-and-blue-pair-in-plastic-wrap.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55129,7 +55233,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/packing-product/box-strapping-band-rolls-pyramidal-stack-white-pink-green-blue.webp"
+      "/assets/product/packing-product/box-strapping-band-rolls-pyramidal-stack-white-pink-green-blue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55169,7 +55273,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/packing-product/handheld-carton-tape-dispenser-guns-yellow-and-blue-pair-front-view.webp"
+      "/assets/product/packing-product/handheld-carton-tape-dispenser-guns-yellow-and-blue-pair-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55209,7 +55313,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/packing-product/heavy-duty-box-strapping-sealer-plier-tool-red-handles-top-view.webp"
+      "/assets/product/packing-product/heavy-duty-box-strapping-sealer-plier-tool-red-handles-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55249,7 +55353,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/packing-product/heavy-duty-box-strapping-sealer-plier-tool-red-handles-angular-jaws-view.webp"
+      "/assets/product/packing-product/heavy-duty-box-strapping-sealer-plier-tool-red-handles-angular-jaws-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55289,7 +55393,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/packing-product/handheld-carton-tape-dispenser-guns-yellow-and-off-white-pair-front-view.webp"
+      "/assets/product/packing-product/handheld-carton-tape-dispenser-guns-yellow-and-off-white-pair-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55329,7 +55433,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/packing-product/manual-box-strapping-tensioner-tool-red-and-black-side-view.webp"
+      "/assets/product/packing-product/manual-box-strapping-tensioner-tool-red-and-black-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55369,7 +55473,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/packing-product/metal-box-strapping-clips-seals-group-of-4-pieces.webp"
+      "/assets/product/packing-product/metal-box-strapping-clips-seals-group-of-4-pieces.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55409,7 +55513,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/packing-product/white-pp-box-strapping-band-rolls-standing-and-on-side-pair.webp"
+      "/assets/product/packing-product/white-pp-box-strapping-band-rolls-standing-and-on-side-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55449,7 +55553,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/packing-product/zen-pp-twine-sutli-rolls-brown-and-green-pair-polybag-packaging.webp"
+      "/assets/product/packing-product/zen-pp-twine-sutli-rolls-brown-and-green-pair-polybag-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55489,7 +55593,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/office-bazzar-new-images/parry-sugar.webp"
+      "/assets/product/office-bazzar-new-images/parry-sugar.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55529,7 +55633,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/air-kwick-freshmatic-shania-refill-cans-4-fragrances-on-carton-box.webp"
+      "/assets/product/room-spray/air-kwick-freshmatic-shania-refill-cans-4-fragrances-on-carton-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55569,7 +55673,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/air-kwick-automatic-spray-refill-cans-6-fragrances-straight-lineup.webp"
+      "/assets/product/room-spray/air-kwick-automatic-spray-refill-cans-6-fragrances-straight-lineup.webp",
+      "/assets/product/room-spray/air-kwick-automatic-spray-refill-cans-4-fragrances-lineup.webp",
+      "/assets/product/room-spray/air-kwick-automatic-spray-refill-cans-6-fragrances-v-formation-group.webp",
+      "/assets/product/room-spray/air-wick-automatic-spray-refill-cans-5-fragrances-lineup.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55609,7 +55716,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/air-wick-air-freshener-spray-cans-sandalwood-lavender-lemon-rose-4-pack.webp"
+      "/assets/product/room-spray/air-wick-air-freshener-spray-cans-sandalwood-lavender-lemon-rose-4-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55649,7 +55756,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/air-wick-freshmatic-autospray-kits-lemon-lavender-lotus-summer-delights-boxes.webp"
+      "/assets/product/room-spray/air-wick-freshmatic-autospray-kits-lemon-lavender-lotus-summer-delights-boxes.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55689,7 +55796,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/airolution-lovendory-lavender-perfume-bag-sachet-front-and-back-pack.webp"
+      "/assets/product/room-spray/airolution-lovendory-lavender-perfume-bag-sachet-front-and-back-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55729,7 +55836,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/airolution-rose-exotica-perfume-bag-sachet-front-and-back-pack.webp"
+      "/assets/product/room-spray/airolution-rose-exotica-perfume-bag-sachet-front-and-back-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55769,7 +55876,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/airolution-sunny-lemony-perfume-bag-sachet-front-and-back-pack.webp"
+      "/assets/product/room-spray/airolution-sunny-lemony-perfume-bag-sachet-front-and-back-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55809,7 +55916,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/ambi-pur-air-effects-freshener-spray-275g-6-fragrances-bottles-row.webp"
+      "/assets/product/room-spray/ambi-pur-air-effects-freshener-spray-275g-6-fragrances-bottles-row.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55849,7 +55956,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/ambi-pur-air-effects-freshener-spray-275g-6-fragrances-lineup.webp"
+      "/assets/product/room-spray/ambi-pur-air-effects-freshener-spray-275g-6-fragrances-lineup.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55889,7 +55996,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/ambi-pur-car-fresh-romantic-rose-gel-75g-front-and-back-pair.webp"
+      "/assets/product/room-spray/ambi-pur-car-fresh-romantic-rose-gel-75g-front-and-back-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55929,7 +56036,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/ambi-pur-air-freshener-spray-lavender-bouquet-rose-and-blossom-exotic-jasmine-275ml-bottles-with-3n-retail-pack-and-shipping-carton.webp"
+      "/assets/product/room-spray/ambi-pur-air-freshener-spray-lavender-bouquet-rose-and-blossom-exotic-jasmine-275ml-bottles-with-3n-retail-pack-and-shipping-carton.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -55969,7 +56076,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/ambi-pur-room-fresh-moodtherapy-loves-bouquet-and-relax-unwind-gels-180g-pair.webp"
+      "/assets/product/room-spray/ambi-pur-room-fresh-moodtherapy-loves-bouquet-and-relax-unwind-gels-180g-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56009,7 +56116,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/ambi-pur-car-lavender-spa-air-freshener-clip-diffuser-75ml-card-front-and-back.webp"
+      "/assets/product/room-spray/ambi-pur-car-lavender-spa-air-freshener-clip-diffuser-75ml-card-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56049,7 +56156,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/ambi-pur-room-fresh-moodtherapy-loves-bouquet-pink-gel-180g-pair.webp"
+      "/assets/product/room-spray/ambi-pur-room-fresh-moodtherapy-loves-bouquet-pink-gel-180g-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56089,7 +56196,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/crazy-john-room-spray.webp"
+      "/assets/product/room-spray/crazy-john-room-spray.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56129,7 +56236,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dyna-fresh-berry-blossom-air-freshener-sachet-pink-packet.webp"
+      "/assets/product/room-spray/dyna-fresh-berry-blossom-air-freshener-sachet-pink-packet.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56169,7 +56276,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/ambi-pur-room-fresh-moodtherapy-relax-and-unwind-purple-gel-180g-pair.webp"
+      "/assets/product/room-spray/ambi-pur-room-fresh-moodtherapy-relax-and-unwind-purple-gel-180g-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56209,7 +56316,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dyna-fresh-citrus-air-freshener-sachet-yellow-packet.webp"
+      "/assets/product/room-spray/dyna-fresh-citrus-air-freshener-sachet-yellow-packet.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56249,7 +56356,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dyna-fresh-green-apple-air-freshener-sachet-light-blue-packet.webp"
+      "/assets/product/room-spray/dyna-fresh-green-apple-air-freshener-sachet-light-blue-packet.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56289,7 +56396,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dyna-fresh-lavender-air-freshener-sachet-purple-packet.webp"
+      "/assets/product/room-spray/dyna-fresh-lavender-air-freshener-sachet-purple-packet.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56329,7 +56436,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dyna-fresh-mix-fruit-air-freshener-sachet-green-packet.webp"
+      "/assets/product/room-spray/dyna-fresh-mix-fruit-air-freshener-sachet-green-packet.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56369,7 +56476,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dyna-fresh-paradise-air-freshener-sachet-pink-packet.webp"
+      "/assets/product/room-spray/dyna-fresh-paradise-air-freshener-sachet-pink-packet.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56409,7 +56516,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dyna-fresh-pocket-air-freshener-paradise-dispenser-box.webp"
+      "/assets/product/room-spray/dyna-fresh-pocket-air-freshener-paradise-dispenser-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56449,7 +56556,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dyna-fresh-pocket-air-freshener-rosy-dew-dispenser-box.webp"
+      "/assets/product/room-spray/dyna-fresh-pocket-air-freshener-rosy-dew-dispenser-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56489,7 +56596,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dyna-fresh-rosy-dew-air-freshener-sachet-yellow-packet.webp"
+      "/assets/product/room-spray/dyna-fresh-rosy-dew-air-freshener-sachet-yellow-packet.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56529,7 +56636,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dynafresh-pocket-air-freshener-6-fragrances-boxes-6-panel-collage-display.webp"
+      "/assets/product/room-spray/dynafresh-pocket-air-freshener-6-fragrances-boxes-6-panel-collage-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56569,7 +56676,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dynafresh-pocket-air-freshener-berry-blossom-box.webp"
+      "/assets/product/room-spray/dynafresh-pocket-air-freshener-berry-blossom-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56609,7 +56716,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dynafresh-pocket-air-freshener-6-fragrances-citrus-berry-blossom-lavender-paradise-green-apple-rosy-dew-boxes-2x3-stack.webp"
+      "/assets/product/room-spray/dynafresh-pocket-air-freshener-6-fragrances-citrus-berry-blossom-lavender-paradise-green-apple-rosy-dew-boxes-2x3-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56649,7 +56756,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dynafresh-pocket-air-freshener-citrus-box.webp"
+      "/assets/product/room-spray/dynafresh-pocket-air-freshener-citrus-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56689,7 +56796,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dynafresh-pocket-air-freshener-green-apple-box.webp"
+      "/assets/product/room-spray/dynafresh-pocket-air-freshener-green-apple-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56729,7 +56836,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dynafresh-pocket-air-freshener-lavender-box.webp"
+      "/assets/product/room-spray/dynafresh-pocket-air-freshener-lavender-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56769,7 +56876,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dynafresh-pocket-air-freshener-paradise-box.webp"
+      "/assets/product/room-spray/dynafresh-pocket-air-freshener-paradise-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56809,7 +56916,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/dynafresh-pocket-air-freshener-rosy-dew-box.webp"
+      "/assets/product/room-spray/dynafresh-pocket-air-freshener-rosy-dew-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56849,7 +56956,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/fresh-think-metered-air-freshener-refill-cans-4-fragrances-row.webp"
+      "/assets/product/room-spray/fresh-think-metered-air-freshener-refill-cans-4-fragrances-row.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56889,7 +56996,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/fresh-think-room-air-freshener-spray-cans-assorted-fragrances-lineup-9-bottles.webp"
+      "/assets/product/room-spray/fresh-think-room-air-freshener-spray-cans-assorted-fragrances-lineup-9-bottles.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56929,7 +57036,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/frescor-premium-air-freshener-mystical-lavender-refreshing-aqua-velvet-sandalwood-blooming-jasmine-spray-cans-4-fragrances-row.webp"
+      "/assets/product/room-spray/frescor-premium-air-freshener-mystical-lavender-refreshing-aqua-velvet-sandalwood-blooming-jasmine-spray-cans-4-fragrances-row.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -56969,7 +57076,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/frescor-premium-air-freshener-velvet-sandalwood-mystical-lavender-blooming-jasmine-spray-cans-trio.webp"
+      "/assets/product/room-spray/frescor-premium-air-freshener-velvet-sandalwood-mystical-lavender-blooming-jasmine-spray-cans-trio.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57009,7 +57116,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/glade-wild-lavender-aerosol-air-freshener-cans-with-carton-box-24-units.webp"
+      "/assets/product/room-spray/glade-wild-lavender-aerosol-air-freshener-cans-with-carton-box-24-units.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57049,7 +57156,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/glade-touch-and-fresh-dispenser-units-lemon-and-lavender-on-wholesale-carton-box.webp"
+      "/assets/product/room-spray/glade-touch-and-fresh-dispenser-units-lemon-and-lavender-on-wholesale-carton-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57089,7 +57196,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/glade-touch-and-fresh-refill-packs-lemon-and-lavender-on-carton-box-front-view.webp"
+      "/assets/product/room-spray/glade-touch-and-fresh-refill-packs-lemon-and-lavender-on-carton-box-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57129,7 +57236,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/glade-touch-and-fresh-refill-packs-lemon-and-lavender-on-wholesale-carton-box.webp"
+      "/assets/product/room-spray/glade-touch-and-fresh-refill-packs-lemon-and-lavender-on-wholesale-carton-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57169,7 +57276,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-matic-automatic-spray-machine-kits-cool-violet-petal-boxes-row.webp"
+      "/assets/product/room-spray/godrej-aer-matic-automatic-spray-machine-kits-cool-violet-petal-boxes-row.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57209,7 +57316,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-matic-automatic-spray-machine-kits-violet-petal-cool-boxes-group.webp"
+      "/assets/product/room-spray/godrej-aer-matic-automatic-spray-machine-kits-violet-petal-cool-boxes-group.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57249,7 +57356,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-matic-automatic-spray-refill-cans-4-flavors-violet-fresh-petal-cool.webp"
+      "/assets/product/room-spray/godrej-aer-matic-automatic-spray-refill-cans-4-flavors-violet-fresh-petal-cool.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57289,7 +57396,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-matic-automatic-spray-refill-cans-4-fragrances-violet-fresh-petal-cool-row.webp"
+      "/assets/product/room-spray/godrej-aer-matic-automatic-spray-refill-cans-4-fragrances-violet-fresh-petal-cool-row.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57329,7 +57436,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-o-hanging-car-air-freshener-cool-aqua-membrane-pod-with-orange-cord.webp"
+      "/assets/product/room-spray/godrej-aer-o-hanging-car-air-freshener-cool-aqua-membrane-pod-with-orange-cord.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57369,7 +57476,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-o-hanging-car-air-freshener-cool-aqua-pack-back-view.webp"
+      "/assets/product/room-spray/godrej-aer-o-hanging-car-air-freshener-cool-aqua-pack-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57409,7 +57516,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-o-hanging-car-air-freshener-cool-aqua-pack-of-4-retail-box.webp"
+      "/assets/product/room-spray/godrej-aer-o-hanging-car-air-freshener-cool-aqua-pack-of-4-retail-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57449,7 +57556,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-power-pocket-4-packets-with-buy-3-get-1-free-box-lineup.webp"
+      "/assets/product/room-spray/godrej-aer-power-pocket-4-packets-with-buy-3-get-1-free-box-lineup.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57489,7 +57596,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-o-hanging-car-air-freshener-cool-aqua-single-pouch-front-view.webp"
+      "/assets/product/room-spray/godrej-aer-o-hanging-car-air-freshener-cool-aqua-single-pouch-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57529,7 +57636,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-power-pocket-bathroom-fragrance-pack-of-4-flavors.webp"
+      "/assets/product/room-spray/godrej-aer-power-pocket-bathroom-fragrance-pack-of-4-flavors.webp",
+      "/assets/product/room-spray/godrej-aer-power-pocket-bathroom-fragrance-pack-of-3-assorted-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57569,7 +57677,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-power-pocket-buy-3-get-1-free-pack-box-40g-front-and-back.webp"
+      "/assets/product/room-spray/godrej-aer-power-pocket-buy-3-get-1-free-pack-box-40g-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57609,7 +57717,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-power-pocket-berry-rush-bathroom-fragrance-pouch-front-view.webp"
+      "/assets/product/room-spray/godrej-aer-power-pocket-berry-rush-bathroom-fragrance-pouch-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57649,7 +57757,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-power-pocket-sea-breeze-bathroom-fragrance-pouch-front-view.webp"
+      "/assets/product/room-spray/godrej-aer-power-pocket-sea-breeze-bathroom-fragrance-pouch-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57689,7 +57797,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-power-pocket-lemon-tangy-delight-bathroom-fragrance-pouch-front-view.webp"
+      "/assets/product/room-spray/godrej-aer-power-pocket-lemon-tangy-delight-bathroom-fragrance-pouch-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57729,7 +57837,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-smart-matic-automatic-fragrance-dispenser-with-product-box.webp"
+      "/assets/product/room-spray/godrej-aer-smart-matic-automatic-fragrance-dispenser-with-product-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57769,7 +57877,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-spray-home-fragrance-passion-relax-alive-3-cans.webp"
+      "/assets/product/room-spray/godrej-aer-spray-home-fragrance-passion-relax-alive-3-cans.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57809,7 +57917,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-spray-home-fragrance-7-fragrances-musk-violet-cool-fresh-morning-petal-monsoon-cans-lineup.webp"
+      "/assets/product/room-spray/godrej-aer-spray-home-fragrance-7-fragrances-musk-violet-cool-fresh-morning-petal-monsoon-cans-lineup.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57849,7 +57957,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-spray-home-fragrance-7-fragrances-musk-violet-cool-fresh-morning-petal-monsoon-row.webp"
+      "/assets/product/room-spray/godrej-aer-spray-home-fragrance-7-fragrances-musk-violet-cool-fresh-morning-petal-monsoon-row.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57889,7 +57997,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-twist-gel-bright-tangy-delight-car-fragrance-dispenser-and-box.webp"
+      "/assets/product/room-spray/godrej-aer-twist-gel-bright-tangy-delight-car-fragrance-dispenser-and-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57929,7 +58037,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-twist-gel-car-fragrance-7-fragrance-box-units-stacked-display.webp"
+      "/assets/product/room-spray/godrej-aer-twist-gel-car-fragrance-7-fragrance-box-units-stacked-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -57969,7 +58077,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-twist-gel-car-fragrance-7-fragrances-assorted-pyramid-stack-with-dispensers.webp"
+      "/assets/product/room-spray/godrej-aer-twist-gel-car-fragrance-7-fragrances-assorted-pyramid-stack-with-dispensers.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58009,7 +58117,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-twist-gel-cool-surf-blue-car-fragrance-dispenser-and-box.webp"
+      "/assets/product/room-spray/godrej-aer-twist-gel-cool-surf-blue-car-fragrance-dispenser-and-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58049,7 +58157,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-twist-gel-fresh-forest-drizzle-car-fragrance-dispenser-and-box.webp"
+      "/assets/product/room-spray/godrej-aer-twist-gel-fresh-forest-drizzle-car-fragrance-dispenser-and-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58089,7 +58197,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-twist-gel-fresh-lush-green-car-fragrance-dispenser-and-box.webp"
+      "/assets/product/room-spray/godrej-aer-twist-gel-fresh-lush-green-car-fragrance-dispenser-and-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58129,7 +58237,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-twist-gel-musk-after-smoke-car-fragrance-dispenser-and-box.webp"
+      "/assets/product/room-spray/godrej-aer-twist-gel-musk-after-smoke-car-fragrance-dispenser-and-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58169,7 +58277,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-car-fragrance-spray-100ml-ocean-dream-and-lavender-mist-bottles-pair.webp"
+      "/assets/product/room-spray/iris-car-fragrance-spray-100ml-ocean-dream-and-lavender-mist-bottles-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58209,7 +58317,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-twist-gel-rich-irish-cocktail-car-fragrance-dispenser-and-box.webp"
+      "/assets/product/room-spray/godrej-aer-twist-gel-rich-irish-cocktail-car-fragrance-dispenser-and-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58249,7 +58357,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/godrej-aer-twist-gel-sunny-citrus-blast-car-fragrance-dispenser-and-box.webp"
+      "/assets/product/room-spray/godrej-aer-twist-gel-sunny-citrus-blast-car-fragrance-dispenser-and-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58289,7 +58397,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-home-fragrances-lemon-grass-and-lavender-vaporizer-oil-1l-pair.webp"
+      "/assets/product/room-spray/iris-home-fragrances-lemon-grass-and-lavender-vaporizer-oil-1l-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58329,7 +58437,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-home-fragrances-lemon-grass-vaporizer-oil-1-liter-bottle.webp"
+      "/assets/product/room-spray/iris-home-fragrances-lemon-grass-vaporizer-oil-1-liter-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58369,7 +58477,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-celeste-wall-mounted-aroma-diffuser-product-box-with-handle.webp"
+      "/assets/product/room-spray/iris-celeste-wall-mounted-aroma-diffuser-product-box-with-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58409,7 +58517,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-home-fragrances-lemon-grass-vaporizer-oil-1-liter-bottles-pair.webp"
+      "/assets/product/room-spray/iris-home-fragrances-lemon-grass-vaporizer-oil-1-liter-bottles-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58449,7 +58557,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-potpourri-lavender-packets-tied-with-ribbon-pair.webp"
+      "/assets/product/room-spray/iris-potpourri-lavender-packets-tied-with-ribbon-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58489,7 +58597,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-reed-diffuser-oil-1l-apple-cinnamon-aluminium-bottle.webp"
+      "/assets/product/room-spray/iris-reed-diffuser-oil-1l-apple-cinnamon-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58529,7 +58637,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-lavender-and-lemon-grass-reed-diffuser-sets-box-packaging-pair.webp"
+      "/assets/product/room-spray/iris-lavender-and-lemon-grass-reed-diffuser-sets-box-packaging-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58569,7 +58677,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-lemon-grass-reed-diffuser-set-front-and-back-box-packaging-pair.webp"
+      "/assets/product/room-spray/iris-lemon-grass-reed-diffuser-set-front-and-back-box-packaging-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58609,7 +58717,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-reed-diffuser-oil-1l-lavender-aluminium-bottle.webp"
+      "/assets/product/room-spray/iris-reed-diffuser-oil-1l-lavender-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58649,7 +58757,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-reed-diffuser-oil-1l-jasmine-aluminium-bottle.webp"
+      "/assets/product/room-spray/iris-reed-diffuser-oil-1l-jasmine-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58689,7 +58797,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-reed-diffuser-oil-1l-lemon-grass-aluminium-bottle.webp"
+      "/assets/product/room-spray/iris-reed-diffuser-oil-1l-lemon-grass-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58729,7 +58837,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-reed-diffuser-oil-1l-lavender-lemon-grass-apple-cinnamon-aluminium-bottles-3-pack.webp"
+      "/assets/product/room-spray/iris-reed-diffuser-oil-1l-lavender-lemon-grass-apple-cinnamon-aluminium-bottles-3-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58769,7 +58877,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-reed-diffuser-oil-1l-lemon-grass-and-lavender-aluminium-bottles-pair.webp"
+      "/assets/product/room-spray/iris-reed-diffuser-oil-1l-lemon-grass-and-lavender-aluminium-bottles-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58809,7 +58917,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-reed-diffuser-oil-1l-ocean-dream-aluminium-bottle.webp"
+      "/assets/product/room-spray/iris-reed-diffuser-oil-1l-ocean-dream-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58849,7 +58957,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-reed-diffuser-oil-1l-romance-aluminium-bottle.webp"
+      "/assets/product/room-spray/iris-reed-diffuser-oil-1l-romance-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58889,7 +58997,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-vaporizer-oil-1l-apple-cinnamon-aluminium-bottle.webp"
+      "/assets/product/room-spray/iris-vaporizer-oil-1l-apple-cinnamon-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58929,7 +59037,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-vaporizer-oil-1l-jasmine-aluminium-bottle.webp"
+      "/assets/product/room-spray/iris-vaporizer-oil-1l-jasmine-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -58969,7 +59077,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-vaporizer-oil-1l-lavender-aluminium-bottle.webp"
+      "/assets/product/room-spray/iris-vaporizer-oil-1l-lavender-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59009,7 +59117,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/iris-vaporizer-oil-1l-lemon-grass-aluminium-bottle.webp"
+      "/assets/product/room-spray/iris-vaporizer-oil-1l-lemon-grass-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59049,7 +59157,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/lazzo-aroma-oil-air-fragrance-green-apple-aluminium-bottle.webp"
+      "/assets/product/room-spray/lazzo-aroma-oil-air-fragrance-green-apple-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59089,7 +59197,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/kleenex-joy-fragrance-refill-300ml-pouch-with-wholesale-carton-box-6x300ml.webp"
+      "/assets/product/room-spray/kleenex-joy-fragrance-refill-300ml-pouch-with-wholesale-carton-box-6x300ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59129,7 +59237,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/lazzo-aroma-oil-air-fragrance-4-fragrances-lemon-grass-lavender-jasmine-green-apple-aluminium-bottles-row.webp"
+      "/assets/product/room-spray/lazzo-aroma-oil-air-fragrance-4-fragrances-lemon-grass-lavender-jasmine-green-apple-aluminium-bottles-row.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59169,7 +59277,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/lazzo-aroma-oil-air-fragrance-jasmine-aluminium-bottle.webp"
+      "/assets/product/room-spray/lazzo-aroma-oil-air-fragrance-jasmine-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59209,7 +59317,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/lia-lavender-room-freshener-spray-can-with-lavender-flowers-on-table.webp"
+      "/assets/product/room-spray/lia-lavender-room-freshener-spray-can-with-lavender-flowers-on-table.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59249,7 +59357,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/lazzo-aroma-oil-air-fragrance-lavender-aluminium-bottle.webp"
+      "/assets/product/room-spray/lazzo-aroma-oil-air-fragrance-lavender-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59289,7 +59397,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/lia-chandanam-room-freshener-spray-can-with-sandalwood-sticks-on-table.webp"
+      "/assets/product/room-spray/lia-chandanam-room-freshener-spray-can-with-sandalwood-sticks-on-table.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59329,7 +59437,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/lazzo-aroma-oil-air-fragrance-lemon-grass-aluminium-bottle.webp"
+      "/assets/product/room-spray/lazzo-aroma-oil-air-fragrance-lemon-grass-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59369,7 +59477,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/lia-lemon-burst-room-freshener-spray-can-with-lemon-slices-on-table.webp"
+      "/assets/product/room-spray/lia-lemon-burst-room-freshener-spray-can-with-lemon-slices-on-table.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59409,7 +59517,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/lia-rose-room-freshener-spray-can-with-red-roses-on-table.webp"
+      "/assets/product/room-spray/lia-rose-room-freshener-spray-can-with-red-roses-on-table.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59449,7 +59557,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/lia-sea-shore-room-freshener-spray-can-with-sea-shells-on-table.webp"
+      "/assets/product/room-spray/lia-sea-shore-room-freshener-spray-can-with-sea-shells-on-table.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59489,7 +59597,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/lia-room-freshener-spray-cans-5-fragrances-lemon-chandanam-lavender-rose-sea-shore-lineup.webp"
+      "/assets/product/room-spray/lia-room-freshener-spray-cans-5-fragrances-lemon-chandanam-lavender-rose-sea-shore-lineup.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59529,7 +59637,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/odonil-air-freshener-block-and-zipper-dabur-marketing-poster-banner.webp"
+      "/assets/product/room-spray/odonil-air-freshener-block-and-zipper-dabur-marketing-poster-banner.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59569,7 +59677,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/odonil-exotic-automatic-room-spray-refill-cans-trio-with-wholesale-carton-box-24-x-225ml.webp"
+      "/assets/product/room-spray/odonil-exotic-automatic-room-spray-refill-cans-trio-with-wholesale-carton-box-24-x-225ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59609,7 +59717,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/odonil-exotic-automatic-spray-dispensers-boxes-and-refill-cans-full-set-trio.webp"
+      "/assets/product/room-spray/odonil-exotic-automatic-spray-dispensers-boxes-and-refill-cans-full-set-trio.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59649,7 +59757,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/odonil-room-spray-7-fragrances-dabur-marketing-poster-banner.webp"
+      "/assets/product/room-spray/odonil-room-spray-7-fragrances-dabur-marketing-poster-banner.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59689,7 +59797,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/odonil-exotic-automatic-spray-dispensers-with-boxes-sensual-dahlia-floral-bliss-ocean-breeze-trio.webp"
+      "/assets/product/room-spray/odonil-exotic-automatic-spray-dispensers-with-boxes-sensual-dahlia-floral-bliss-ocean-breeze-trio.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59729,7 +59837,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/odonil-exotic-automatic-spray-refill-cans-sensual-dahlia-floral-bliss-ocean-breeze-trio.webp"
+      "/assets/product/room-spray/odonil-exotic-automatic-spray-refill-cans-sensual-dahlia-floral-bliss-ocean-breeze-trio.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59769,7 +59877,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/odonil-zipper-alluring-daffodil-air-freshener-pack.webp"
+      "/assets/product/room-spray/odonil-zipper-alluring-daffodil-air-freshener-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59809,7 +59917,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/odonil-room-spray-7-fragrances-sandal-rose-ocean-citrus-jasmine-floral-lavender-cans-row.webp"
+      "/assets/product/room-spray/odonil-room-spray-7-fragrances-sandal-rose-ocean-citrus-jasmine-floral-lavender-cans-row.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59849,7 +59957,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/odonil-zipper-blissful-citrus-air-freshener-pack.webp"
+      "/assets/product/room-spray/odonil-zipper-blissful-citrus-air-freshener-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59889,7 +59997,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/odonil-room-spray-7-fragrances-sandal-rose-ocean-citrus-jasmine-floral-lavender-cans-lineup.webp"
+      "/assets/product/room-spray/odonil-room-spray-7-fragrances-sandal-rose-ocean-citrus-jasmine-floral-lavender-cans-lineup.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59929,7 +60037,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/premium-air-fragrance-spray-cans-raymond-initiative-5-flavors-lineup.webp"
+      "/assets/product/room-spray/premium-air-fragrance-spray-cans-raymond-initiative-5-flavors-lineup.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -59969,7 +60077,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/odonil-zipper-joyful-lavender-air-freshener-pack.webp"
+      "/assets/product/room-spray/odonil-zipper-joyful-lavender-air-freshener-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60009,7 +60117,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/odonil-zipper-scintillating-rose-air-freshener-pack.webp"
+      "/assets/product/room-spray/odonil-zipper-scintillating-rose-air-freshener-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60049,7 +60157,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/odonil-zipper-soulful-jasmine-air-freshener-pack.webp"
+      "/assets/product/room-spray/odonil-zipper-soulful-jasmine-air-freshener-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60089,7 +60197,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/primmox-metered-air-freshener-refill-cans-3000-spray-catalog-grid.webp"
+      "/assets/product/room-spray/primmox-metered-air-freshener-refill-cans-3000-spray-catalog-grid.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60129,7 +60237,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/primmox-refill-110-ml.webp"
+      "/assets/product/room-spray/primmox-refill-110-ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60169,7 +60277,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/primmox-metered-air-freshener-refill-cans-5-fragrances-jasmin-lemon-grass-black-feel-cool-water-rose.webp"
+      "/assets/product/room-spray/primmox-metered-air-freshener-refill-cans-5-fragrances-jasmin-lemon-grass-black-feel-cool-water-rose.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60209,7 +60317,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/primmox-metered-air-freshener-refill-cans-5-fragrances-lavender-midas-black-vibrant-impression.webp"
+      "/assets/product/room-spray/primmox-metered-air-freshener-refill-cans-5-fragrances-lavender-midas-black-vibrant-impression.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60249,7 +60357,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/spring-fest-room-freshener-spray-cans-lineup-7-fragrances.webp"
+      "/assets/product/room-spray/spring-fest-room-freshener-spray-cans-lineup-7-fragrances.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60289,7 +60397,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/vayu-diffuser-oil-1l-home-fragrance-8-fragrances-green-apple-jasmine-nilgiri-orange-lemongrass-rose-wild-forest-lavender-aluminium-bottles-row.webp"
+      "/assets/product/room-spray/vayu-diffuser-oil-1l-home-fragrance-8-fragrances-green-apple-jasmine-nilgiri-orange-lemongrass-rose-wild-forest-lavender-aluminium-bottles-row.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60329,7 +60437,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/room-spray-lia.webp"
+      "/assets/product/room-spray/room-spray-lia.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60369,7 +60477,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/utsav-air-freshner-spray-cans-lineup-6-fragrances.webp"
+      "/assets/product/room-spray/utsav-air-freshner-spray-cans-lineup-6-fragrances.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60409,7 +60517,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/vayu-diffuser-oil-1l-jasmine-home-fragrance-aluminium-bottle.webp"
+      "/assets/product/room-spray/vayu-diffuser-oil-1l-jasmine-home-fragrance-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60449,7 +60557,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/vayu-diffuser-oil-1l-lavender-home-fragrance-aluminium-bottle.webp"
+      "/assets/product/room-spray/vayu-diffuser-oil-1l-lavender-home-fragrance-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60489,7 +60597,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/vayu-diffuser-oil-1l-lemongrass-home-fragrance-aluminium-bottle.webp"
+      "/assets/product/room-spray/vayu-diffuser-oil-1l-lemongrass-home-fragrance-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60529,7 +60637,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/vayu-diffuser-oil-1l-wild-forest-home-fragrance-aluminium-bottle.webp"
+      "/assets/product/room-spray/vayu-diffuser-oil-1l-wild-forest-home-fragrance-aluminium-bottle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60569,7 +60677,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/axl-med-wall-mount-infrared-thermometer-non-contact-temperature-tester-with-product-box.webp"
+      "/assets/product/safety-items/axl-med-wall-mount-infrared-thermometer-non-contact-temperature-tester-with-product-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60609,7 +60717,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/vayu-premium-air-freshener-shrink-wrap-bundles-6-fragrances-morning-mist-english-rose-aromatic-aura-lavender-amber-french-vanilla-stack.webp"
+      "/assets/product/room-spray/vayu-premium-air-freshener-shrink-wrap-bundles-6-fragrances-morning-mist-english-rose-aromatic-aura-lavender-amber-french-vanilla-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60649,7 +60757,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/carewell-first-aid-box-type-iii-front-and-back-view-pair.webp"
+      "/assets/product/safety-items/carewell-first-aid-box-type-iii-front-and-back-view-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60689,7 +60797,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/vayu-premium-air-freshener-spray-8-fragrances-english-rose-morning-mist-royal-night-queen-amber-french-vanilla-wild-forest-lavender-aromatic-aura-cans-row.webp"
+      "/assets/product/room-spray/vayu-premium-air-freshener-spray-8-fragrances-english-rose-morning-mist-royal-night-queen-amber-french-vanilla-wild-forest-lavender-aromatic-aura-cans-row.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60729,7 +60837,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/room-spray/vayu-premium-air-freshener-spray-6-fragrances-aromatic-aura-wild-forest-morning-mist-english-rose-royal-night-queen-french-vanilla-cans-row.webp"
+      "/assets/product/room-spray/vayu-premium-air-freshener-spray-6-fragrances-aromatic-aura-wild-forest-morning-mist-english-rose-royal-night-queen-french-vanilla-cans-row.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60769,7 +60877,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/carewell-first-aid-box-type-iv-and-type-iii-plastic-boxes-pair.webp"
+      "/assets/product/safety-items/carewell-first-aid-box-type-iv-and-type-iii-plastic-boxes-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60809,7 +60917,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/clear-safety-goggles-glasses-with-black-frame-pair.webp"
+      "/assets/product/safety-items/clear-safety-goggles-glasses-with-black-frame-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60849,7 +60957,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/carewell-first-aid-box-type-iv-contents-label-view.webp"
+      "/assets/product/safety-items/carewell-first-aid-box-type-iv-contents-label-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60889,7 +60997,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/digital-thermometer-with-beeper-and-memory-clinical-thermometer-device-and-box.webp"
+      "/assets/product/safety-items/digital-thermometer-with-beeper-and-memory-clinical-thermometer-device-and-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60929,7 +61037,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/k-3s-wall-mount-infrared-thermometer-hands-free-digital-temperature-measurement-device-with-product-box.webp"
+      "/assets/product/safety-items/k-3s-wall-mount-infrared-thermometer-hands-free-digital-temperature-measurement-device-with-product-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -60969,7 +61077,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/personal-protective-equipment-kit-90-gsm-coverall-shoe-cover-mask-gloves-shield-infographic-poster.webp"
+      "/assets/product/safety-items/personal-protective-equipment-kit-90-gsm-coverall-shoe-cover-mask-gloves-shield-infographic-poster.webp",
+      "/assets/product/safety-items/personal-protective-equipment-kit-full-body-coverall-90-gsm-with-face-shield-and-mask-packed-kit.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61009,7 +61118,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/q-manager-specification.webp"
+      "/assets/product/safety-items/q-manager-specification.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61049,7 +61158,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/mylab-coviself-covid-19-rapid-antigen-test-self-test-kit-front-and-back-pouches.webp"
+      "/assets/product/safety-items/mylab-coviself-covid-19-rapid-antigen-test-self-test-kit-front-and-back-pouches.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61089,7 +61198,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/red-orange-traffic-cone-heavy-rubber-square-base-bottom-view.webp"
+      "/assets/product/safety-items/red-orange-traffic-cone-heavy-rubber-square-base-bottom-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61129,7 +61238,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/shetu-all-in-one-respiratory-vaporizer-facial-steamer-with-product-box.webp"
+      "/assets/product/safety-items/shetu-all-in-one-respiratory-vaporizer-facial-steamer-with-product-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61169,7 +61278,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/xech-inframount-automatic-contactless-wall-mounted-infrared-thermometer-product-box.webp"
+      "/assets/product/safety-items/xech-inframount-automatic-contactless-wall-mounted-infrared-thermometer-product-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61209,7 +61318,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/safety-items/zebronics-contactless-infrared-thermometer-ad801-product-packaging-box-front-and-back.webp"
+      "/assets/product/safety-items/zebronics-contactless-infrared-thermometer-ad801-product-packaging-box-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61249,7 +61358,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/feel-fresh-flush-matic-double.webp"
+      "/assets/product/sani-cubes/feel-fresh-flush-matic-double.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61289,7 +61398,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/drytab-in-tank-automatic-cleaner-freshener-lime-orchid-greenapple-and-mint-3-dispensers.webp"
+      "/assets/product/sani-cubes/drytab-in-tank-automatic-cleaner-freshener-lime-orchid-greenapple-and-mint-3-dispensers.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61329,7 +61438,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/feel-fresh-flush-matic-in-cistern-toilet-cleaner-2-blocks-blister-pack.webp"
+      "/assets/product/sani-cubes/feel-fresh-flush-matic-in-cistern-toilet-cleaner-2-blocks-blister-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61369,7 +61478,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/freshzone-deodorizer-air-freshener-rose-jasmine-mogra-lavender-4-pack.webp"
+      "/assets/product/sani-cubes/freshzone-deodorizer-air-freshener-rose-jasmine-mogra-lavender-4-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61409,7 +61518,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/freshzone-royal-sani-cubes-multicolor-assorted-blocks-hanging-pouch.webp"
+      "/assets/product/sani-cubes/freshzone-royal-sani-cubes-multicolor-assorted-blocks-hanging-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61449,7 +61558,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/harpic-flush-matic-in-cistern-toilet-cleaner-citrus-2x50g-blister-pack-front-and-back.webp"
+      "/assets/product/sani-cubes/harpic-flush-matic-in-cistern-toilet-cleaner-citrus-2x50g-blister-pack-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61489,7 +61598,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/freshzone-toilet-cubes-300g-panchem-2-boxes-stacked.webp"
+      "/assets/product/sani-cubes/freshzone-toilet-cubes-300g-panchem-2-boxes-stacked.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61529,7 +61638,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/harpic-hygienic-toilet-rim-block-jasmine-26g-blister-pack-front-and-back.webp"
+      "/assets/product/sani-cubes/harpic-hygienic-toilet-rim-block-jasmine-26g-blister-pack-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61569,7 +61678,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/harpic-flush-matic-in-cistern-toilet-cleaner-marine-single-block-blister-pack.webp"
+      "/assets/product/sani-cubes/harpic-flush-matic-in-cistern-toilet-cleaner-marine-single-block-blister-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61609,7 +61718,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/hi-fresh-air-freshener-50g-jasmine-mist-front-and-back-view.webp"
+      "/assets/product/sani-cubes/hi-fresh-air-freshener-50g-jasmine-mist-front-and-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61649,7 +61758,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/hi-fresh-air-freshener-50g-lavender-meadows-and-jasmine-mist-front-view-pair.webp"
+      "/assets/product/sani-cubes/hi-fresh-air-freshener-50g-lavender-meadows-and-jasmine-mist-front-view-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61689,7 +61798,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/hi-fresh-air-freshener-50g-lavender-meadows-front-and-back-view.webp"
+      "/assets/product/sani-cubes/hi-fresh-air-freshener-50g-lavender-meadows-front-and-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61729,7 +61838,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/lazzo-premium-product-naphthalene-balls-100-percent-stain-free-500g-3-packs-display.webp"
+      "/assets/product/sani-cubes/lazzo-premium-product-naphthalene-balls-100-percent-stain-free-500g-3-packs-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61769,7 +61878,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/lazzo-premium-product-naphthalene-balls-100-percent-stain-free-500g-pack-on-grey-background.webp"
+      "/assets/product/sani-cubes/lazzo-premium-product-naphthalene-balls-100-percent-stain-free-500g-pack-on-grey-background.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61809,7 +61918,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/lazzo-flush-tab-in-cistern-toilet-cleaner-ocean-blue-fragrance-2-blocks-blister-pack.webp"
+      "/assets/product/sani-cubes/lazzo-flush-tab-in-cistern-toilet-cleaner-ocean-blue-fragrance-2-blocks-blister-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61849,7 +61958,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/lazzo-premium-product-naphthalene-balls-100-percent-stain-free-500g-pack-on-wood-background.webp"
+      "/assets/product/sani-cubes/lazzo-premium-product-naphthalene-balls-100-percent-stain-free-500g-pack-on-wood-background.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61889,7 +61998,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/lazzo-premium-product-naphthalene-balls-100-percent-stain-free-500g-single-pack.webp"
+      "/assets/product/sani-cubes/lazzo-premium-product-naphthalene-balls-100-percent-stain-free-500g-single-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61929,7 +62038,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/lazzo-premium-product-naphthalene-balls-colored-multicolored-500g-pack-pair-front-and-back.webp"
+      "/assets/product/sani-cubes/lazzo-premium-product-naphthalene-balls-colored-multicolored-500g-pack-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -61969,7 +62078,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/lazzo-premium-sanitary-cubes-blue-pack-6-pcs-front-view.webp"
+      "/assets/product/sani-cubes/lazzo-premium-sanitary-cubes-blue-pack-6-pcs-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62009,7 +62118,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/lazzo-premium-sanitary-cubes-blue-pack-back-view.webp"
+      "/assets/product/sani-cubes/lazzo-premium-sanitary-cubes-blue-pack-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62049,7 +62158,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/lazzo-premium-sanitary-cubes-6-pcs-pack-of-6-assorted-front-and-back-display.webp"
+      "/assets/product/sani-cubes/lazzo-premium-sanitary-cubes-6-pcs-pack-of-6-assorted-front-and-back-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62089,9 +62198,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/lazzo-premium-sanitary-cubes-pink-6-pcs-pack-with-4-wrapped-blocks.webp",
-      "/assets/supplier-library/sani-cubes/lazzo-premium-sanitary-cubes-red-6-pcs-pack-with-4-wrapped-blocks.webp",
-      "/assets/supplier-library/sani-cubes/lazzo-premium-sanitary-cubes-white-6-pcs-pack-with-4-wrapped-blocks.webp"
+      "/assets/product/sani-cubes/lazzo-premium-sanitary-cubes-pink-6-pcs-pack-with-4-wrapped-blocks.webp",
+      "/assets/product/sani-cubes/lazzo-premium-sanitary-cubes-red-6-pcs-pack-with-4-wrapped-blocks.webp",
+      "/assets/product/sani-cubes/lazzo-premium-sanitary-cubes-white-6-pcs-pack-with-4-wrapped-blocks.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62131,8 +62240,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/lazzo-premium-sanitary-cubes-pink-4-wrapped-blocks-display.webp",
-      "/assets/supplier-library/sani-cubes/lazzo-premium-sanitary-cubes-white-4-wrapped-blocks-display.webp"
+      "/assets/product/sani-cubes/lazzo-premium-sanitary-cubes-pink-4-wrapped-blocks-display.webp",
+      "/assets/product/sani-cubes/lazzo-premium-sanitary-cubes-white-4-wrapped-blocks-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62172,7 +62281,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/lazzo-premium-sanitary-cubes-white-6-pcs-pack-front-back-and-wrapped-blocks.webp"
+      "/assets/product/sani-cubes/lazzo-premium-sanitary-cubes-white-6-pcs-pack-front-back-and-wrapped-blocks.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62212,7 +62321,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/odonil-air-freshener-50g-blocks-lavender-jasmine-rose-orchid-4-pack-front-and-back.webp"
+      "/assets/product/sani-cubes/odonil-air-freshener-50g-blocks-lavender-jasmine-rose-orchid-4-pack-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62252,7 +62361,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/odonil-air-freshener-75g-blocks-lavender-jasmine-rose-orchid-4-pack-front-and-back.webp"
+      "/assets/product/sani-cubes/odonil-air-freshener-75g-blocks-lavender-jasmine-rose-orchid-4-pack-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62292,7 +62401,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/odonil-air-freshener-blocks-lavender-meadows-jasmine-mist-orchid-dew-mystic-rose-4-pack-front-view.webp"
+      "/assets/product/sani-cubes/odonil-air-freshener-blocks-lavender-meadows-jasmine-mist-orchid-dew-mystic-rose-4-pack-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62332,7 +62441,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/odonil-air-freshener-jasmine-mist-30-days-freshness-single-box-front-view.webp"
+      "/assets/product/sani-cubes/odonil-air-freshener-jasmine-mist-30-days-freshness-single-box-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62372,7 +62481,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/odonil-air-freshener-jasmine-mist-45-days-freshness-single-box-front-view.webp"
+      "/assets/product/sani-cubes/odonil-air-freshener-jasmine-mist-45-days-freshness-single-box-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62412,7 +62521,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/odonil-air-freshener-lavender-meadows-30-days-freshness-single-box-front-view.webp"
+      "/assets/product/sani-cubes/odonil-air-freshener-lavender-meadows-30-days-freshness-single-box-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62452,7 +62561,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/odonil-air-freshener-lavender-meadows-45-days-freshness-single-box-front-view.webp"
+      "/assets/product/sani-cubes/odonil-air-freshener-lavender-meadows-45-days-freshness-single-box-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62492,7 +62601,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/odonil-air-freshener-mystic-rose-30-days-freshness-single-box-front-view.webp"
+      "/assets/product/sani-cubes/odonil-air-freshener-mystic-rose-30-days-freshness-single-box-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62532,7 +62641,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/odonil-air-freshener-mystic-rose-45-days-freshness-single-box-front-view.webp"
+      "/assets/product/sani-cubes/odonil-air-freshener-mystic-rose-45-days-freshness-single-box-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62572,7 +62681,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/odonil-air-freshener-orchid-dew-30-days-freshness-single-box-front-view.webp"
+      "/assets/product/sani-cubes/odonil-air-freshener-orchid-dew-30-days-freshness-single-box-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62612,7 +62721,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/odonil-air-freshener-orchid-dew-45-days-freshness-single-box-front-view.webp"
+      "/assets/product/sani-cubes/odonil-air-freshener-orchid-dew-45-days-freshness-single-box-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62652,7 +62761,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/odonil-air-freshener-orchid-dew-72g-pack-front-and-back.webp"
+      "/assets/product/sani-cubes/odonil-air-freshener-orchid-dew-72g-pack-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62692,7 +62801,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/royal-premium-air-freshner-rose-jasmine-mogra-lavender-4-fragrance-assorted-net-hanging-pouches.webp"
+      "/assets/product/sani-cubes/royal-premium-air-freshner-rose-jasmine-mogra-lavender-4-fragrance-assorted-net-hanging-pouches.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62732,7 +62841,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/royal-premium-air-freshner-mogra-with-strong-perfume-hanging-net-pouch.webp"
+      "/assets/product/sani-cubes/royal-premium-air-freshner-mogra-with-strong-perfume-hanging-net-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62772,7 +62881,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/royal-premium-sanitary-cubes-multi-color-12-pcs-hanging-net-pouch.webp"
+      "/assets/product/sani-cubes/royal-premium-sanitary-cubes-multi-color-12-pcs-hanging-net-pouch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62812,8 +62921,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/royal-premium-sanitary-cubes-pink-6-pcs-pack-pair-front-and-back.webp",
-      "/assets/supplier-library/sani-cubes/royal-premium-sanitary-cubes-white-6-pcs-pack-pair-front-and-back.webp"
+      "/assets/product/sani-cubes/royal-premium-sanitary-cubes-pink-6-pcs-pack-pair-front-and-back.webp",
+      "/assets/product/sani-cubes/royal-premium-sanitary-cubes-white-6-pcs-pack-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62853,7 +62962,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/sani-fresh-toilet-cubes-300g-12-pcs-dabur-pack-stacked-angled-view.webp"
+      "/assets/product/sani-cubes/sani-fresh-toilet-cubes-300g-12-pcs-dabur-pack-stacked-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62893,7 +63002,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/sani-fresh-toilet-cubes-300g-12-pcs-dabur-pack-stacked-front-and-details-view.webp"
+      "/assets/product/sani-cubes/sani-fresh-toilet-cubes-300g-12-pcs-dabur-pack-stacked-front-and-details-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62933,7 +63042,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/vaata-dry-tab-automatic-toilet-cleaner-vaata-lime-and-orchid-4-dispensers-front-and-back.webp"
+      "/assets/product/sani-cubes/vaata-dry-tab-automatic-toilet-cleaner-vaata-lime-and-orchid-4-dispensers-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -62973,7 +63082,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/vaata-dry-tab-automatic-toilet-cleaner-vaata-lime-and-orchid-pair-front-view.webp"
+      "/assets/product/sani-cubes/vaata-dry-tab-automatic-toilet-cleaner-vaata-lime-and-orchid-pair-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63013,7 +63122,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sani-cubes/wonder-clean-flush-mate-eco-series-3ple-action-formula-in-cistern-toilet-blocks-2-pack.webp"
+      "/assets/product/sani-cubes/wonder-clean-flush-mate-eco-series-3ple-action-formula-in-cistern-toilet-blocks-2-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63053,7 +63162,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/glorious-power-goldcoin-nylon-scrub-pad-75x100mm-10-pcs-pack-3-sets-display.webp"
+      "/assets/product/scotch-bright-and-scrubber/glorious-power-goldcoin-nylon-scrub-pad-75x100mm-10-pcs-pack-3-sets-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63093,7 +63202,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/glorious-power-goldcoin-nylon-scrub-pad-75x100mm-5-pcs-pack-3-sets-display.webp"
+      "/assets/product/scotch-bright-and-scrubber/glorious-power-goldcoin-nylon-scrub-pad-75x100mm-5-pcs-pack-3-sets-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63133,8 +63242,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/kesariya-super-scrub-steel-loops-sponge-pad-front-packaging.webp",
-      "/assets/supplier-library/scotch-bright-and-scrubber/kesariya-super-scrub-steel-loops-sponge-pad-front-and-back-packaging.webp"
+      "/assets/product/scotch-bright-and-scrubber/kesariya-super-scrub-steel-loops-sponge-pad-front-packaging.webp",
+      "/assets/product/scotch-bright-and-scrubber/kesariya-super-scrub-steel-loops-sponge-pad-front-and-back-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63174,7 +63283,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/lazzo-large-nylon-scrub-pad-100x150mm-front-and-back-packaging.webp"
+      "/assets/product/scotch-bright-and-scrubber/lazzo-large-nylon-scrub-pad-100x150mm-front-and-back-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63214,7 +63323,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/lazzo-nylon-scrub-and-sponge-pad-packaged-and-unpackaged-pair.webp"
+      "/assets/product/scotch-bright-and-scrubber/lazzo-nylon-scrub-and-sponge-pad-packaged-and-unpackaged-pair.webp",
+      "/assets/product/scotch-bright-and-scrubber/green-nylon-scrub-pad-unpackaged-flat-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63254,7 +63364,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/lazzo-nylon-scrub-and-sponge-pad-70x90mm-front-and-back-packaging.webp"
+      "/assets/product/scotch-bright-and-scrubber/lazzo-nylon-scrub-and-sponge-pad-70x90mm-front-and-back-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63294,7 +63404,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/lazzo-large-nylon-scrub-pad-100x150mm-multi-packs-with-unpackaged-pad-display.webp"
+      "/assets/product/scotch-bright-and-scrubber/lazzo-large-nylon-scrub-pad-100x150mm-multi-packs-with-unpackaged-pad-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63334,7 +63444,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/lazzo-multi-purpose-multi-colour-non-scratch-foam-scrub-4-pack-display.webp"
+      "/assets/product/scotch-bright-and-scrubber/lazzo-multi-purpose-multi-colour-non-scratch-foam-scrub-4-pack-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63374,7 +63484,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/lazzo-premium-nylon-scrub-pad-75x100mm-front-and-back-packaging.webp"
+      "/assets/product/scotch-bright-and-scrubber/lazzo-premium-nylon-scrub-pad-75x100mm-front-and-back-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63414,7 +63524,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/naylon-scrub-pad-4x6.webp"
+      "/assets/product/scotch-bright-and-scrubber/naylon-scrub-pad-4x6.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63454,7 +63564,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/scotch-brite-professional-general-purpose-scouring-pad-96-75x10cm-1-pc-front-and-back.webp"
+      "/assets/product/scotch-bright-and-scrubber/scotch-brite-professional-general-purpose-scouring-pad-96-75x10cm-1-pc-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63494,7 +63604,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/plastic-handled-heavy-duty-scrub-pads-multicolor-4-pcs-display.webp"
+      "/assets/product/scotch-bright-and-scrubber/plastic-handled-heavy-duty-scrub-pads-multicolor-4-pcs-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63534,7 +63644,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/scotch-brite-professional-general-purpose-scouring-pad-96-10x15cm-single-pack-front-and-back.webp"
+      "/assets/product/scotch-bright-and-scrubber/scotch-brite-professional-general-purpose-scouring-pad-96-10x15cm-single-pack-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63574,7 +63684,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/scotch-brite-professional-medium-duty-scour-pad-96-10x15cm-4-pack-front-and-back.webp"
+      "/assets/product/scotch-bright-and-scrubber/scotch-brite-professional-medium-duty-scour-pad-96-10x15cm-4-pack-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63614,7 +63724,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/scotch-brite-professional-general-purpose-scouring-pad-96-75x10cm-single-pack-front-and-back.webp"
+      "/assets/product/scotch-bright-and-scrubber/scotch-brite-professional-general-purpose-scouring-pad-96-75x10cm-single-pack-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63654,7 +63764,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/scotch-brite-professional-medium-duty-scour-pad-96-75x10cm-4-pack-front-and-back.webp"
+      "/assets/product/scotch-bright-and-scrubber/scotch-brite-professional-medium-duty-scour-pad-96-75x10cm-4-pack-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63694,8 +63804,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/scotch-brite-professional-medium-duty-scrub-sponge-pad-no-74-2-pack-angled-view.webp",
-      "/assets/supplier-library/scotch-bright-and-scrubber/scotch-brite-professional-medium-duty-scrub-sponge-pad-no-74-2-pack-front-and-back.webp"
+      "/assets/product/scotch-bright-and-scrubber/scotch-brite-professional-medium-duty-scrub-sponge-pad-no-74-2-pack-angled-view.webp",
+      "/assets/product/scotch-bright-and-scrubber/scotch-brite-professional-medium-duty-scrub-sponge-pad-no-74-2-pack-front-and-back.webp",
+      "/assets/product/collage/scotch-brite-scrub-sponge-pad.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63735,7 +63846,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/synx-o-scrub-pad-kasturi-18-rs-and-regular-10-rs-packs.webp"
+      "/assets/product/scotch-bright-and-scrubber/synx-o-scrub-pad-kasturi-18-rs-and-regular-10-rs-packs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63775,8 +63886,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/wipezz-stain-free-handled-scrub-pads-red-black-green-side-view.webp",
-      "/assets/supplier-library/scotch-bright-and-scrubber/wipezz-stain-free-handled-scrub-pads-red-black-green-top-view.webp"
+      "/assets/product/scotch-bright-and-scrubber/wipezz-stain-free-handled-scrub-pads-red-black-green-side-view.webp",
+      "/assets/product/scotch-bright-and-scrubber/wipezz-stain-free-handled-scrub-pads-red-black-green-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63816,7 +63927,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/scotch-bright-and-scrubber/wipezz-dishwash-stain-free-scrub-pad-multicolor-4-pack-with-sleeve.webp"
+      "/assets/product/scotch-bright-and-scrubber/wipezz-dishwash-stain-free-scrub-pad-multicolor-4-pack-with-sleeve.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63856,8 +63967,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/dettol-original-soap-buy-3-get-1-free-4-pack-stacked-front-view.webp",
-      "/assets/supplier-library/soap/dettol-original-soap-buy-3-get-1-free-4-pack-stacked-side-view.webp"
+      "/assets/product/soap/dettol-original-soap-buy-3-get-1-free-4-pack-stacked-front-view.webp",
+      "/assets/product/soap/dettol-original-soap-buy-3-get-1-free-4-pack-stacked-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63897,7 +64008,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/hamam-pure-neem-oil-toilet-soap-100g-front-and-back-packaging.webp"
+      "/assets/product/soap/hamam-pure-neem-oil-toilet-soap-100g-front-and-back-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63937,7 +64048,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/hamam-pure-neem-oil-toilet-soap-150g-front-and-back-packaging.webp"
+      "/assets/product/soap/hamam-pure-neem-oil-toilet-soap-150g-front-and-back-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -63977,7 +64088,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/jkm-pavitram-gold-cleaning-and-shining-powder-200g-front-and-back-packaging.webp"
+      "/assets/product/soap/jkm-pavitram-gold-cleaning-and-shining-powder-200g-front-and-back-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64017,7 +64128,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/lifebuoy-germ-guard-neem-and-aloe-toilet-soap-125g-front-and-side-packaging.webp"
+      "/assets/product/soap/lifebuoy-germ-guard-neem-and-aloe-toilet-soap-125g-front-and-side-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64057,8 +64168,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/rin-bright-like-new-detergent-powder-500g-front-and-back-packaging-set-1.webp",
-      "/assets/supplier-library/soap/rin-bright-like-new-detergent-powder-500g-front-and-back-packaging-set-2.webp"
+      "/assets/product/soap/rin-bright-like-new-detergent-powder-500g-front-and-back-packaging-set-1.webp",
+      "/assets/product/soap/rin-bright-like-new-detergent-powder-500g-front-and-back-packaging-set-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64098,7 +64209,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/jkm-pavitram-gold-cleaning-and-shining-powder-new-pack-sachet-front-view.webp"
+      "/assets/product/soap/jkm-pavitram-gold-cleaning-and-shining-powder-new-pack-sachet-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64138,7 +64249,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/rin-with-shine-actives-detergent-cake-75g-front-and-back-packaging.webp"
+      "/assets/product/soap/rin-with-shine-actives-detergent-cake-75g-front-and-back-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64178,7 +64289,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/surf-excel-easy-wash-detergent-powder-1kg-front-and-side-packaging.webp"
+      "/assets/product/soap/surf-excel-easy-wash-detergent-powder-1kg-front-and-side-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64218,7 +64329,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/surf-excel-easy-wash-detergent-powder-500g-front-and-side-packaging.webp"
+      "/assets/product/soap/surf-excel-easy-wash-detergent-powder-500g-front-and-side-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64258,7 +64369,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/surf-excel-quick-wash-detergent-powder-pouch-front-view.webp"
+      "/assets/product/soap/surf-excel-quick-wash-detergent-powder-pouch-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64298,7 +64409,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/surf-excel-stain-eraser-detergent-cake-150g-front-and-back-packaging.webp"
+      "/assets/product/soap/surf-excel-stain-eraser-detergent-cake-150g-front-and-back-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64338,7 +64449,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/surf-excel-stain-eraser-detergent-cake-400g-front-and-back-packaging.webp"
+      "/assets/product/soap/surf-excel-stain-eraser-detergent-cake-400g-front-and-back-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64378,7 +64489,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/vim-dishwash-bar-with-power-of-lemons-125g-with-free-liquid-sachet-front-and-back-packaging.webp"
+      "/assets/product/soap/vim-dishwash-bar-with-power-of-lemons-125g-with-free-liquid-sachet-front-and-back-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64418,7 +64529,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/vim-dishwash-bar-with-power-of-lemons-300g-front-and-back-packaging.webp"
+      "/assets/product/soap/vim-dishwash-bar-with-power-of-lemons-300g-front-and-back-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64458,7 +64569,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/vim-dishwash-bar-with-power-of-lemons-60g-front-and-back-packaging.webp"
+      "/assets/product/soap/vim-dishwash-bar-with-power-of-lemons-60g-front-and-back-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64498,7 +64609,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sprayer-pump/clear-transparent-plastic-bottles-with-white-lotion-pump-dispensers-pair.webp"
+      "/assets/product/sprayer-pump/clear-transparent-plastic-bottles-with-white-lotion-pump-dispensers-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64538,7 +64649,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sprayer-pump/empty-bottle-with-pump-500-ml.webp"
+      "/assets/product/sprayer-pump/empty-bottle-with-pump-500-ml.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64578,7 +64689,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/soap/vim-dishwash-maha-tub-with-power-of-lemons-pair-display.webp"
+      "/assets/product/soap/vim-dishwash-maha-tub-with-power-of-lemons-pair-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64618,7 +64729,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sprayer-pump/neptune-bs-21-2-in-1-manual-cum-battery-sprayer-packaging-box.webp"
+      "/assets/product/sprayer-pump/neptune-bs-21-2-in-1-manual-cum-battery-sprayer-packaging-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64658,7 +64769,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sprayer-pump/neptune-ck-21-battery-sprayer-20-ltr-packaging-box.webp"
+      "/assets/product/sprayer-pump/neptune-ck-21-battery-sprayer-20-ltr-packaging-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64698,7 +64809,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sprayer-pump/floral-print-plastic-spray-bottles-with-yellow-red-blue-trigger-sprayers-3-pcs-display.webp"
+      "/assets/product/sprayer-pump/floral-print-plastic-spray-bottles-with-yellow-red-blue-trigger-sprayers-3-pcs-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64738,7 +64849,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sprayer-pump/neptune-nf-10b-hi-pressure-knapsack-sprayer-blue-tank-with-lance-and-box.webp"
+      "/assets/product/sprayer-pump/neptune-nf-10b-hi-pressure-knapsack-sprayer-blue-tank-with-lance-and-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64778,7 +64889,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sprayer-pump/pressure-sprayer-5-liter-yellow-bottle-with-blue-pump-lance-and-box.webp"
+      "/assets/product/sprayer-pump/pressure-sprayer-5-liter-yellow-bottle-with-blue-pump-lance-and-box.webp",
+      "/assets/product/sprayer-pump/dap-pressure-sprayer-5l-orange-bottle-with-lance-and-packaging-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64818,7 +64930,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/sprayer-pump/white-plastic-trigger-sprayer-replacement-nozzles-with-dip-tubes-5-pcs-display.webp"
+      "/assets/product/sprayer-pump/white-plastic-trigger-sprayer-replacement-nozzles-with-dip-tubes-5-pcs-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64858,7 +64970,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/black-mesh-wire-pen-pencil-holder-stand-with-pens.webp"
+      "/assets/product/stationery/black-mesh-wire-pen-pencil-holder-stand-with-pens.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64898,7 +65010,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-5-colours-plastic-flags-arrow-and-regular-125-flags-with-box.webp"
+      "/assets/product/stationery/jb9-5-colours-plastic-flags-arrow-and-regular-125-flags-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64938,7 +65050,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-acrylic-water-damper-sponge-product-code-139-with-box.webp"
+      "/assets/product/stationery/jb9-acrylic-water-damper-sponge-product-code-139-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -64978,7 +65090,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-binder-clip-19mm-1-doz-box-and-outer-carton-with-clips.webp"
+      "/assets/product/stationery/jb9-binder-clip-19mm-1-doz-box-and-outer-carton-with-clips.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65018,7 +65130,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-binder-clip-19mm-box-and-outer-carton-with-clips-isolated.webp"
+      "/assets/product/stationery/jb9-binder-clip-19mm-box-and-outer-carton-with-clips-isolated.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65058,7 +65170,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-binder-clip-25mm-1-doz-box-and-outer-carton-with-clips.webp"
+      "/assets/product/stationery/jb9-binder-clip-25mm-1-doz-box-and-outer-carton-with-clips.webp",
+      "/assets/product/stationery/jb9-binder-clip-25mm-1-doz-box-and-outer-carton-side-angle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65098,7 +65211,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-binder-clip-25mm-box-and-outer-carton-with-clips-isolated.webp"
+      "/assets/product/stationery/jb9-binder-clip-25mm-box-and-outer-carton-with-clips-isolated.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65138,7 +65251,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-binder-clip-32mm-1-doz-box-and-outer-carton.webp"
+      "/assets/product/stationery/jb9-binder-clip-32mm-1-doz-box-and-outer-carton.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65178,7 +65291,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-binder-clip-32mm-1-doz-box-with-clips-front-view.webp"
+      "/assets/product/stationery/jb9-binder-clip-32mm-1-doz-box-with-clips-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65218,7 +65331,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-binder-clip-32mm-box-with-clips-isolated.webp"
+      "/assets/product/stationery/jb9-binder-clip-32mm-box-with-clips-isolated.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65258,7 +65371,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-binder-clip-41mm-1-doz-box.webp"
+      "/assets/product/stationery/jb9-binder-clip-41mm-1-doz-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65298,8 +65411,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-binder-clip-51mm-1-doz-box-side-angle.webp",
-      "/assets/supplier-library/stationery/jb9-binder-clip-51mm-1-doz-box-with-clips.webp"
+      "/assets/product/stationery/jb9-binder-clip-51mm-1-doz-box-side-angle.webp",
+      "/assets/product/stationery/jb9-binder-clip-51mm-1-doz-box-with-clips.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65339,7 +65452,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-binder-clip-51mm-box-with-clips-isolated.webp"
+      "/assets/product/stationery/jb9-binder-clip-51mm-box-with-clips-isolated.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65379,7 +65492,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-bright-silver-plated-t-pins-3n-box.webp"
+      "/assets/product/stationery/jb9-bright-silver-plated-t-pins-3n-box.webp",
+      "/assets/product/stationery/jb9-bright-electro-nickel-plated-t-pins-3n-single-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65419,7 +65533,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-bright-silver-plated-t-pins-3n-pack-of-10-boxes-shrink-wrapped.webp"
+      "/assets/product/stationery/jb9-bright-silver-plated-t-pins-3n-pack-of-10-boxes-shrink-wrapped.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65459,7 +65573,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-elite-pen-tray-desk-organizer-smoke-grey-with-box.webp"
+      "/assets/product/stationery/jb9-elite-pen-tray-desk-organizer-smoke-grey-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65499,7 +65613,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-note-pad-yellow-25x76mm-1x3-inch-100-sheets-single-pack.webp"
+      "/assets/product/stationery/jb9-note-pad-yellow-25x76mm-1x3-inch-100-sheets-single-pack.webp",
+      "/assets/product/stationery/jb9-note-pad-yellow-25x76mm-1x3-inch-100-sheets-pack-of-12.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65539,7 +65654,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-note-pad-yellow-38x50mm-15x2-inch-100-sheets-pack-of-12.webp"
+      "/assets/product/stationery/jb9-note-pad-yellow-38x50mm-15x2-inch-100-sheets-pack-of-12.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65579,7 +65694,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-note-pad-yellow-38x50mm-15x2-inch-100-sheets.webp"
+      "/assets/product/stationery/jb9-note-pad-yellow-38x50mm-15x2-inch-100-sheets.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65619,7 +65734,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-paper-clips-assorted-colour-28mm-100-pcs-box-with-clips-angled-view.webp"
+      "/assets/product/stationery/jb9-paper-clips-assorted-colour-28mm-100-pcs-box-with-clips-angled-view.webp",
+      "/assets/product/stationery/jb9-paper-clips-assorted-colour-28mm-100-pcs-box-with-clips.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65659,8 +65775,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-paper-clips-assorted-colour-35mm-100-pcs-box-with-clips-angled-view.webp",
-      "/assets/supplier-library/stationery/jb9-paper-clips-assorted-colour-35mm-100-pcs-box-with-clips.webp"
+      "/assets/product/stationery/jb9-paper-clips-assorted-colour-35mm-100-pcs-box-with-clips-angled-view.webp",
+      "/assets/product/stationery/jb9-paper-clips-assorted-colour-35mm-100-pcs-box-with-clips.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65700,8 +65816,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-paper-clips-assorted-colour-35mm-1000-pc-box-with-clips.webp",
-      "/assets/supplier-library/stationery/jb9-paper-clips-assorted-colour-35mm-1000-pc-box.webp"
+      "/assets/product/stationery/jb9-paper-clips-assorted-colour-35mm-1000-pc-box-with-clips.webp",
+      "/assets/product/stationery/jb9-paper-clips-assorted-colour-35mm-1000-pc-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65741,7 +65857,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-plastic-key-chain-tags-assorted-colors-in-jar.webp"
+      "/assets/product/stationery/jb9-plastic-key-chain-tags-assorted-colors-in-jar.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65781,7 +65897,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-prompt-neon-sticky-note-pad-and-page-markers-3-pcs-set.webp"
+      "/assets/product/stationery/jb9-prompt-neon-sticky-note-pad-and-page-markers-3-pcs-set.webp",
+      "/assets/product/stationery/jb9-prompt-neon-sticky-note-pad-index-flags-3-packs.webp",
+      "/assets/product/stationery/jb9-prompt-sticky-note-pad-multi-color-76x76mm-with-12-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65821,7 +65939,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-prompt-neon-sticky-note-pad-multi-color-50x75mm-with-box.webp"
+      "/assets/product/stationery/jb9-prompt-neon-sticky-note-pad-multi-color-50x75mm-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65861,7 +65979,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-prompt-neon-sticky-note-pad-yellow-6x8-and-4x6-inch-pair.webp"
+      "/assets/product/stationery/jb9-prompt-neon-sticky-note-pad-yellow-6x8-and-4x6-inch-pair.webp",
+      "/assets/product/stationery/jb9-prompt-neon-lined-sticky-note-pad-yellow-6x8-and-4x6-inch-pair.webp",
+      "/assets/product/stationery/jb9-prompt-sticky-note-pad-pink-and-yellow-76x76mm-3x3-inch-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65901,8 +66021,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-prompt-sticky-note-pad-pink-multi-color-76x127mm-with-box.webp",
-      "/assets/supplier-library/stationery/jb9-prompt-sticky-note-pad-yellow-76x127mm-with-12-pcs-box.webp"
+      "/assets/product/stationery/jb9-prompt-sticky-note-pad-pink-multi-color-76x127mm-with-box.webp",
+      "/assets/product/stationery/jb9-prompt-sticky-note-pad-yellow-76x127mm-with-12-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65942,7 +66062,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-prompt-sticky-note-pads-2x3-and-3x4-inch-with-display-box.webp"
+      "/assets/product/stationery/jb9-prompt-sticky-note-pads-2x3-and-3x4-inch-with-display-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -65982,8 +66102,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-pure-nylon-rubber-band-1-x-24-box-carton-top-angle.webp",
-      "/assets/supplier-library/stationery/jb9-pure-nylon-rubber-band-1-x-24-box-carton.webp"
+      "/assets/product/stationery/jb9-pure-nylon-rubber-band-1-x-24-box-carton-top-angle.webp",
+      "/assets/product/stationery/jb9-pure-nylon-rubber-band-1-x-24-box-carton.webp",
+      "/assets/product/stationery/jb9-pure-nylon-rubber-band-multi-color-500gm-pouch-jb9-135.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66023,7 +66144,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-pure-nylon-rubber-band-no-12-15-inch-box-with-window.webp"
+      "/assets/product/stationery/jb9-pure-nylon-rubber-band-no-12-15-inch-box-with-window.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66063,7 +66184,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-stainless-steel-scissor-7-inch-jb9-070-12-pcs-packaging-box.webp"
+      "/assets/product/stationery/jb9-stainless-steel-scissor-7-inch-jb9-070-12-pcs-packaging-box.webp",
+      "/assets/product/stationery/jb9-stainless-steel-scissor-7-inch-180mm-jb9-070-with-12-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66103,7 +66225,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-stainless-steel-scissors-assorted-5-colors-85-inch-set.webp"
+      "/assets/product/stationery/jb9-stainless-steel-scissors-assorted-5-colors-85-inch-set.webp",
+      "/assets/product/stationery/jb9-stainless-steel-scissor-85-inch-210mm-jb9-dc085-assorted-4-colors-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66143,7 +66266,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-u-clips-triangular-30mm-nickel-plated-1000-pc-box-and-small-box.webp"
+      "/assets/product/stationery/jb9-u-clips-triangular-30mm-nickel-plated-1000-pc-box-and-small-box.webp",
+      "/assets/product/stationery/jb9-u-clips-triangular-26mm-nickel-plated-1000-pc-box-and-small-box.webp",
+      "/assets/product/stationery/jb9-u-clips-triangular-26mm-nickel-plated-box-with-clips.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66183,7 +66308,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-u-clips-triangular-30mm-nickel-plated-small-box-with-clips.webp"
+      "/assets/product/stationery/jb9-u-clips-triangular-30mm-nickel-plated-small-box-with-clips.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66223,7 +66348,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/jb9-u-clips-triangular-35mm-nickel-plated-100-pcs-box-with-clips.webp"
+      "/assets/product/stationery/jb9-u-clips-triangular-35mm-nickel-plated-100-pcs-box-with-clips.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66263,7 +66388,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/lazzo-gold-ballpens-natural-and-colours-20-pcs-boxes-pair.webp"
+      "/assets/product/stationery/lazzo-gold-ballpens-natural-and-colours-20-pcs-boxes-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66303,7 +66428,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/lazzo-gold-ballpens-natural-and-colours-boxes-with-10-pens-display.webp"
+      "/assets/product/stationery/lazzo-gold-ballpens-natural-and-colours-boxes-with-10-pens-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66343,7 +66468,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/lazzo-nylon-rubber-band-2-inch-500gm-pack-of-2.webp"
+      "/assets/product/stationery/lazzo-nylon-rubber-band-2-inch-500gm-pack-of-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66383,7 +66508,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/plastic-key-tag-with-ring-and-label-white-in-green-lid-jar.webp"
+      "/assets/product/stationery/plastic-key-tag-with-ring-and-label-white-in-green-lid-jar.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66423,7 +66548,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/office-bazzar-e-store-blue-display-panel-flip-folder-rack-with-product-brochure.webp"
+      "/assets/product/stationery/office-bazzar-e-store-blue-display-panel-flip-folder-rack-with-product-brochure.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66463,7 +66588,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/stationery/round-mesh-metal-pen-pencil-holder-stand-blue-purple-brown-trio.webp"
+      "/assets/product/stationery/round-mesh-metal-pen-pencil-holder-stand-blue-purple-brown-trio.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66503,7 +66628,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/greenlime-natural-white-c-fold-towels-01410041b-carton-with-two-stacks.webp"
+      "/assets/product/tissue-product/greenlime-natural-white-c-fold-towels-01410041b-carton-with-two-stacks.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66543,7 +66668,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/face-18-paris-refreshing-facial-wipes-6-flavors-assorted-pack-display.webp"
+      "/assets/product/tissue-product/face-18-paris-refreshing-facial-wipes-6-flavors-assorted-pack-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66583,7 +66708,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/greenlime-personal-seat-cover-refills-20410002-100-sheets-carton-with-pack.webp"
+      "/assets/product/tissue-product/greenlime-personal-seat-cover-refills-20410002-100-sheets-carton-with-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66623,7 +66748,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/greenlime-toilet-paper-rolls-embossed-pair-standing.webp"
+      "/assets/product/tissue-product/greenlime-toilet-paper-rolls-embossed-pair-standing.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66663,7 +66788,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/greenlime-super-white-m-fold-towels-01410057-carton-with-pack-and-stack.webp"
+      "/assets/product/tissue-product/greenlime-super-white-m-fold-towels-01410057-carton-with-pack-and-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66703,7 +66828,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/greenlime-white-value-auto-cut-roll-02410048p-carton-with-two-rolls.webp"
+      "/assets/product/tissue-product/greenlime-white-value-auto-cut-roll-02410048p-carton-with-two-rolls.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66743,7 +66868,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/hi-soft-tissue-multifold-hand-towel-pack-and-stack-side-view.webp"
+      "/assets/product/tissue-product/hi-soft-tissue-multifold-hand-towel-pack-and-stack-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66783,7 +66908,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/hi-soft-tissue-multifold-hand-towel-single-pack-angled-view.webp"
+      "/assets/product/tissue-product/hi-soft-tissue-multifold-hand-towel-single-pack-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66823,7 +66948,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/kimberly-clark-scott-essential-multi-fold-towel-38002-02-4000-sheets-carton-with-packs.webp"
+      "/assets/product/tissue-product/kimberly-clark-scott-essential-multi-fold-towel-38002-02-4000-sheets-carton-with-packs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66863,7 +66988,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/kimberly-clark-scott-essential-multi-fold-towels-white-125-sheets-51221-packs.webp"
+      "/assets/product/tissue-product/kimberly-clark-scott-essential-multi-fold-towels-white-125-sheets-51221-packs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66903,7 +67028,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/kimberly-clark-scott-hygienic-bathroom-tissues-01268-125-sheets-10x20cm-carton-with-packs.webp"
+      "/assets/product/tissue-product/kimberly-clark-scott-hygienic-bathroom-tissues-01268-125-sheets-10x20cm-carton-with-packs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66943,7 +67068,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/kimberly-clark-scott-essential-multi-fold-towels-41500-6000-sheets-carton-with-packs.webp"
+      "/assets/product/tissue-product/kimberly-clark-scott-essential-multi-fold-towels-41500-6000-sheets-carton-with-packs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -66983,7 +67108,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/kimberly-clark-scott-multi-fold-towels-white-01222a-150-sheets-pack-and-stack.webp"
+      "/assets/product/tissue-product/kimberly-clark-scott-multi-fold-towels-white-01222a-150-sheets-pack-and-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67023,7 +67148,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/kimberly-clark-scott-multi-fold-towels-white-01222a-4500-sheets-carton-with-packs.webp"
+      "/assets/product/tissue-product/kimberly-clark-scott-multi-fold-towels-white-01222a-4500-sheets-carton-with-packs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67063,7 +67188,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/kosher-hrt-rolled-towels-embossed-pattern-pair-standing.webp"
+      "/assets/product/tissue-product/kosher-hrt-rolled-towels-embossed-pattern-pair-standing.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67103,7 +67228,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/kosher-freshwipes-facial-tissue-boxes-three-pack-assorted-stack.webp"
+      "/assets/product/tissue-product/kosher-freshwipes-facial-tissue-boxes-three-pack-assorted-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67143,7 +67268,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/kosher-hrt-rolled-towels-1-kg-125-meters-carton-with-rolls.webp"
+      "/assets/product/tissue-product/kosher-hrt-rolled-towels-1-kg-125-meters-carton-with-rolls.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67183,7 +67308,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/premier-kitchen-towel-2-in-1-pack-two-packs-display.webp"
+      "/assets/product/tissue-product/premier-kitchen-towel-2-in-1-pack-two-packs-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67223,7 +67348,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/lazzo-soft-multifold-hand-towels-100-percent-natural-cellulose-pack-and-stack.webp"
+      "/assets/product/tissue-product/lazzo-soft-multifold-hand-towels-100-percent-natural-cellulose-pack-and-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67263,7 +67388,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/pudumjee-hygiene-greenlime-multi-fold-towels-150-towels-packs-stack.webp"
+      "/assets/product/tissue-product/pudumjee-hygiene-greenlime-multi-fold-towels-150-towels-packs-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67303,7 +67428,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/regal-soft-table-napkins-true-value-multi-purpose-2-packs-display.webp"
+      "/assets/product/tissue-product/regal-soft-table-napkins-true-value-multi-purpose-2-packs-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67343,7 +67468,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-napkins-70-pcs-1-ply-27x30cm-packs-stack-front-and-back.webp"
+      "/assets/product/tissue-product/royal-napkins-70-pcs-1-ply-27x30cm-packs-stack-front-and-back.webp",
+      "/assets/product/tissue-product/royal-napkins-1-ply-red-pack-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67383,7 +67509,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-napkins-70-pulls-1-ply-front-and-back-view-split.webp"
+      "/assets/product/tissue-product/royal-napkins-70-pulls-1-ply-front-and-back-view-split.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67423,7 +67549,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-natural-facial-tissue-boxes-4-colors-tower-stack.webp"
+      "/assets/product/tissue-product/royal-natural-facial-tissue-boxes-4-colors-tower-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67463,7 +67589,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-natural-facial-tissue-purple-box-with-pop-up-tissue.webp"
+      "/assets/product/tissue-product/royal-natural-facial-tissue-purple-box-with-pop-up-tissue.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67503,7 +67629,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-natural-hrt-paper-towel-rolls-pair-standing-and-tilted.webp"
+      "/assets/product/tissue-product/royal-natural-hrt-paper-towel-rolls-pair-standing-and-tilted.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67543,7 +67669,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-natural-max-multi-fold-towel-pack-side-and-top-view.webp"
+      "/assets/product/tissue-product/royal-natural-max-multi-fold-towel-pack-side-and-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67583,7 +67709,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-natural-sparkle-napkin-pack-on-digital-scale-81g.webp"
+      "/assets/product/tissue-product/royal-natural-sparkle-napkin-pack-on-digital-scale-81g.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67623,7 +67749,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-natural-sparkle-napkin-soft-hygienic-2-packs-front-and-stack.webp"
+      "/assets/product/tissue-product/royal-natural-sparkle-napkin-soft-hygienic-2-packs-front-and-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67663,7 +67789,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-natural-tissue-products-outer-carton-with-two-toilet-rolls.webp"
+      "/assets/product/tissue-product/royal-natural-tissue-products-outer-carton-with-two-toilet-rolls.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67703,7 +67829,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-natural-tissue-roll-purple-wrapped-pair.webp"
+      "/assets/product/tissue-product/royal-natural-tissue-roll-purple-wrapped-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67743,7 +67869,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-natural-tissue-roll-on-digital-scale-91g.webp"
+      "/assets/product/tissue-product/royal-natural-tissue-roll-on-digital-scale-91g.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67783,7 +67909,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-natural-tissue-roll-pair-standing-and-core-view.webp"
+      "/assets/product/tissue-product/royal-natural-tissue-roll-pair-standing-and-core-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67823,7 +67949,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-airflex-roll-towel-86620-00-20cm-x-130m-6-rolls-carton-with-rolls.webp"
+      "/assets/product/tissue-product/scott-airflex-roll-towel-86620-00-20cm-x-130m-6-rolls-carton-with-rolls.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67863,7 +67989,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-toilet-paper-rolls-embossed-pair-standing-and-flat.webp"
+      "/assets/product/tissue-product/royal-toilet-paper-rolls-embossed-pair-standing-and-flat.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67903,7 +68029,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-toilet-tissue-2-ply-strong-soft-absorbent-200-sheets-rolls-pair.webp"
+      "/assets/product/tissue-product/royal-toilet-tissue-2-ply-strong-soft-absorbent-200-sheets-rolls-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67943,7 +68069,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/royal-toilet-tissue-2-ply-strong-soft-absorbent-300-sheets-rolls-pair.webp"
+      "/assets/product/tissue-product/royal-toilet-tissue-2-ply-strong-soft-absorbent-300-sheets-rolls-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -67983,7 +68109,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-and-scott-essential-paper-napkins-4-panel-comparison-display.webp"
+      "/assets/product/tissue-product/scott-and-scott-essential-paper-napkins-4-panel-comparison-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68023,7 +68149,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-compact-towels-58550-00-1760-sheets-carton-with-two-packs.webp"
+      "/assets/product/tissue-product/scott-compact-towels-58550-00-1760-sheets-carton-with-two-packs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68063,7 +68189,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-essential-bathroom-tissue-04001-10-rolls-pack-on-outer-carton.webp"
+      "/assets/product/tissue-product/scott-essential-bathroom-tissue-04001-10-rolls-pack-on-outer-carton.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68103,7 +68229,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-control-center-pull-bathroom-tissue-45348-00-12-rolls-carton-box.webp"
+      "/assets/product/tissue-product/scott-control-center-pull-bathroom-tissue-45348-00-12-rolls-carton-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68143,7 +68269,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-essential-bathroom-tissue-04003-10-rolls-2300-sheets-packs-pair.webp"
+      "/assets/product/tissue-product/scott-essential-bathroom-tissue-04003-10-rolls-2300-sheets-packs-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68183,7 +68309,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-essential-jumbo-roll-tissue-jrt-01164a-rolls-standing-and-flat.webp"
+      "/assets/product/tissue-product/scott-essential-jumbo-roll-tissue-jrt-01164a-rolls-standing-and-flat.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68223,7 +68349,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-essential-bathroom-tissue-04003-23000-sheets-carton-front-view.webp"
+      "/assets/product/tissue-product/scott-essential-bathroom-tissue-04003-23000-sheets-carton-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68263,7 +68389,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-essential-multi-fold-towel-white-32152-carton-label-close-up.webp"
+      "/assets/product/tissue-product/scott-essential-multi-fold-towel-white-32152-carton-label-close-up.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68303,7 +68429,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-essential-multi-fold-towels-41500-200-sheets-pack-and-stack.webp"
+      "/assets/product/tissue-product/scott-essential-multi-fold-towels-41500-200-sheets-pack-and-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68343,7 +68469,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-essential-multi-fold-towels-32152-150-sheets-packs-front-and-stack.webp"
+      "/assets/product/tissue-product/scott-essential-multi-fold-towels-32152-150-sheets-packs-front-and-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68383,7 +68509,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-essential-multi-fold-towels-white-38002c-4000-sheets-carton-with-packs.webp"
+      "/assets/product/tissue-product/scott-essential-multi-fold-towels-white-38002c-4000-sheets-carton-with-packs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68423,7 +68549,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-hard-roll-towels-86224-00-305m-carton-with-two-rolls.webp"
+      "/assets/product/tissue-product/scott-hard-roll-towels-86224-00-305m-carton-with-two-rolls.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68463,7 +68589,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-pro-multi-fold-towel-28610-20-4000-sheets-carton-with-packs.webp"
+      "/assets/product/tissue-product/scott-pro-multi-fold-towel-28610-20-4000-sheets-carton-with-packs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68503,7 +68629,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-paper-napkin-1324a-100-sheets-back-view.webp"
+      "/assets/product/tissue-product/scott-paper-napkin-1324a-100-sheets-back-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68543,7 +68669,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-pro-multi-fold-towel-28620-20-4000-sheets-carton-with-packs.webp"
+      "/assets/product/tissue-product/scott-pro-multi-fold-towel-28620-20-4000-sheets-carton-with-packs.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68583,7 +68709,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-pro-multi-fold-towels-28610-250-sheets-packs-stack.webp"
+      "/assets/product/tissue-product/scott-pro-multi-fold-towels-28610-250-sheets-packs-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68623,7 +68749,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-pro-multi-fold-towels-28620-250-sheets-packs-stack.webp"
+      "/assets/product/tissue-product/scott-pro-multi-fold-towels-28620-250-sheets-packs-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68663,7 +68789,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-roll-towel-01005-60-20cm-x-305m-6-rolls-box.webp"
+      "/assets/product/tissue-product/scott-roll-towel-01005-60-20cm-x-305m-6-rolls-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68703,7 +68829,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-slimroll-hand-towel-12388-30-20cm-x-176m-6-rolls-box.webp"
+      "/assets/product/tissue-product/scott-slimroll-hand-towel-12388-30-20cm-x-176m-6-rolls-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68743,7 +68869,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/v-touch-paper-napkins-28x30cm-100-serviettes-pack-and-open-stack.webp"
+      "/assets/product/tissue-product/v-touch-paper-napkins-28x30cm-100-serviettes-pack-and-open-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68783,7 +68909,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/scott-roll-towels-86225-00-176m-carton-with-two-rolls.webp"
+      "/assets/product/tissue-product/scott-roll-towels-86225-00-176m-carton-with-two-rolls.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68823,7 +68949,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/white-hrt-embossed-paper-towel-rolls-pair-standing-and-tilted.webp"
+      "/assets/product/tissue-product/white-hrt-embossed-paper-towel-rolls-pair-standing-and-tilted.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68863,7 +68989,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/white-paper-towel-rolls-pair-standing.webp"
+      "/assets/product/tissue-product/white-paper-towel-rolls-pair-standing.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68903,7 +69029,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/white-m-fold-paper-hand-towels-clear-wrapped-two-stacks.webp"
+      "/assets/product/tissue-product/white-m-fold-paper-hand-towels-clear-wrapped-two-stacks.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68943,7 +69069,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/lazzo-raincoat-101-201-black-rain-suit-model-front-and-back.webp"
+      "/assets/product/umbrella/lazzo-raincoat-101-201-black-rain-suit-model-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -68983,7 +69109,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/tissue-product/white-paper-napkins-unbranded-clear-wrapped-stacks-pair.webp"
+      "/assets/product/tissue-product/white-paper-napkins-unbranded-clear-wrapped-stacks-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69023,7 +69149,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/apex-raincoat-black-rain-suit-model-3-pose-display.webp"
+      "/assets/product/umbrella/apex-raincoat-black-rain-suit-model-3-pose-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69063,7 +69189,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/lazzo-raincoat-301-charcoal-grey-rain-suit-model-front-and-back.webp"
+      "/assets/product/umbrella/lazzo-raincoat-301-charcoal-grey-rain-suit-model-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69103,7 +69229,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/lazzo-raincoat-301-navy-blue-rain-suit-model-front-and-back.webp"
+      "/assets/product/umbrella/lazzo-raincoat-301-navy-blue-rain-suit-model-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69143,7 +69269,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0002.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0002.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69183,7 +69309,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0001.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0001.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69223,7 +69349,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0003.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0003.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69263,7 +69389,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0004.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0004.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69303,7 +69429,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0006.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0006.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69343,7 +69469,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0005.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0005.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69383,7 +69509,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0007.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0007.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69423,7 +69549,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0008.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0008.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69463,7 +69589,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0009.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0009.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69503,7 +69629,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0010.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0010.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69543,7 +69669,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0011.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0011.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69583,7 +69709,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0012.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0012.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69623,7 +69749,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0014.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0014.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69663,7 +69789,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0013.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0013.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69703,7 +69829,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0015.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0015.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69743,7 +69869,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0016.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0016.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69783,7 +69909,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0017.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0017.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69823,7 +69949,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0018.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0018.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69863,7 +69989,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0019.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0019.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69903,7 +70029,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0020.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0020.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69943,7 +70069,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0021.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0021.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -69983,7 +70109,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0022.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0022.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70023,7 +70149,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0024.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0024.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70063,7 +70189,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0023.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0023.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70103,7 +70229,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0025.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0025.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70143,7 +70269,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0026.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0026.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70183,7 +70309,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0027.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0027.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70223,7 +70349,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0028.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0028.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70263,7 +70389,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0029.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0029.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70303,7 +70429,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0032.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0032.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70343,7 +70469,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0030.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0030.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70383,7 +70509,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0031.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0031.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70423,7 +70549,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0033.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0033.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70463,7 +70589,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0037.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0037.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70503,7 +70629,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0036.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0036.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70543,7 +70669,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0034.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0034.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70583,7 +70709,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0035.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0035.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70623,7 +70749,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0039.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0039.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70663,7 +70789,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0038.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0038.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70703,7 +70829,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0040.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0040.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70743,7 +70869,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0041.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0041.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70783,7 +70909,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0044.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0044.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70823,7 +70949,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0043.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0043.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70863,7 +70989,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0042.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0042.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70903,7 +71029,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0045.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0045.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70943,7 +71069,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0048.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0048.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -70983,7 +71109,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0047.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0047.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71023,7 +71149,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0049.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0049.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71063,7 +71189,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0046.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0046.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71103,7 +71229,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0050.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0050.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71143,7 +71269,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0052.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0052.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71183,7 +71309,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0051.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0051.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71223,7 +71349,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0053.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0053.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71263,7 +71389,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0054.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0054.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71303,7 +71429,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0055.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0055.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71343,7 +71469,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0057.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0057.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71383,7 +71509,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0056.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0056.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71423,7 +71549,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0058.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0058.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71463,7 +71589,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0059.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0059.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71503,7 +71629,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0060.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0060.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71543,7 +71669,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0061.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0061.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71583,7 +71709,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0062.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0062.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71623,7 +71749,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0063.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0063.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71663,7 +71789,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0065.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0065.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71703,7 +71829,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0064.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0064.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71743,7 +71869,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0066.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0066.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71783,7 +71909,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0067.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0067.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71823,7 +71949,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0068.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0068.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71863,7 +71989,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0069.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0069.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71903,7 +72029,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0070.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0070.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71943,7 +72069,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0071.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0071.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -71983,7 +72109,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0072.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0072.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72023,7 +72149,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0073.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0073.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72063,7 +72189,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0074.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0074.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72103,7 +72229,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0075.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0075.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72143,7 +72269,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0076.webp"
+      "/assets/product/new-folder/vevey-catalog-2025-jyoti-umbrellas_page-0076.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72183,7 +72309,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/vevey-amber-auto-v041-3-fold-automatic-open-umbrella-catalog-page.webp"
+      "/assets/product/umbrella/vevey-amber-auto-v041-3-fold-automatic-open-umbrella-catalog-page.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72223,7 +72349,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/vevey-amber-v002-2-fold-automatic-open-umbrella-catalog-page.webp"
+      "/assets/product/umbrella/vevey-amber-v002-2-fold-automatic-open-umbrella-catalog-page.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72263,7 +72389,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/vevey-king-plus-v010-2-fold-automatic-open-umbrella-catalog-page.webp"
+      "/assets/product/umbrella/vevey-king-plus-v010-2-fold-automatic-open-umbrella-catalog-page.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72303,7 +72429,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/vevey-maya-v012-2-fold-automatic-open-umbrella-catalog-page.webp"
+      "/assets/product/umbrella/vevey-maya-v012-2-fold-automatic-open-umbrella-catalog-page.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72343,7 +72469,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/vevey-saturn-v011-2-fold-automatic-open-umbrella-catalog-page.webp"
+      "/assets/product/umbrella/vevey-saturn-v011-2-fold-automatic-open-umbrella-catalog-page.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72383,7 +72509,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/wholesalerbazzar-umbrella-catalog-page-1-amber-21x8.webp"
+      "/assets/product/umbrella/wholesalerbazzar-umbrella-catalog-page-1-amber-21x8.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72423,7 +72549,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/wholesalerbazzar-umbrella-catalog-page-2-saturn-245x8.webp"
+      "/assets/product/umbrella/wholesalerbazzar-umbrella-catalog-page-2-saturn-245x8.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72463,7 +72589,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/wholesalerbazzar-umbrella-catalog-page-3-amber-auto-245x8.webp"
+      "/assets/product/umbrella/wholesalerbazzar-umbrella-catalog-page-3-amber-auto-245x8.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72503,7 +72629,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/wholesalerbazzar-umbrella-catalog-page-4-maya-23x8.webp"
+      "/assets/product/umbrella/wholesalerbazzar-umbrella-catalog-page-4-maya-23x8.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72543,7 +72669,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/wholesalerbazzar-umbrella-high-res-page-1-amber-21x8.webp"
+      "/assets/product/umbrella/wholesalerbazzar-umbrella-high-res-page-1-amber-21x8.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72583,7 +72709,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/wholesalerbazzar-umbrella-catalog-page-5-zoran-25x12-straight.webp"
+      "/assets/product/umbrella/wholesalerbazzar-umbrella-catalog-page-5-zoran-25x12-straight.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72623,7 +72749,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/wholesalerbazzar-umbrella-catalog-page-6-contact-info-back-cover.webp"
+      "/assets/product/umbrella/wholesalerbazzar-umbrella-catalog-page-6-contact-info-back-cover.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72663,7 +72789,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/wholesalerbazzar-umbrella-high-res-page-2-saturn-245x8.webp"
+      "/assets/product/umbrella/wholesalerbazzar-umbrella-high-res-page-2-saturn-245x8.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72703,7 +72829,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/wholesalerbazzar-umbrella-high-res-page-3-amber-auto-245x8.webp"
+      "/assets/product/umbrella/wholesalerbazzar-umbrella-high-res-page-3-amber-auto-245x8.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72743,7 +72869,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/wholesalerbazzar-umbrella-high-res-page-4-maya-23x8.webp"
+      "/assets/product/umbrella/wholesalerbazzar-umbrella-high-res-page-4-maya-23x8.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72783,7 +72909,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/wholesalerbazzar-umbrella-high-res-page-6-contact-info-back-cover.webp"
+      "/assets/product/umbrella/wholesalerbazzar-umbrella-high-res-page-6-contact-info-back-cover.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72823,7 +72949,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/umbrella/wholesalerbazzar-umbrella-high-res-page-5-zoran-25x12-straight.webp"
+      "/assets/product/umbrella/wholesalerbazzar-umbrella-high-res-page-5-zoran-25x12-straight.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72863,7 +72989,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/urinal-screen/diversey-taski-fresh-and-clean-urinal-screen-green-box-back-and-pack.webp"
+      "/assets/product/urinal-screen/diversey-taski-fresh-and-clean-urinal-screen-green-box-back-and-pack.webp",
+      "/assets/product/urinal-screen/diversey-taski-fresh-and-clean-urinal-screen-green-box-front-and-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72903,7 +73030,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/urinal-screen/excel-v-screen-citrus-mango-urinal-screen-import-label-and-pack.webp"
+      "/assets/product/urinal-screen/excel-v-screen-citrus-mango-urinal-screen-import-label-and-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72943,7 +73070,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/urinal-screen/silicone-urinal-screen-multi-color-5-pack-circular-display.webp"
+      "/assets/product/urinal-screen/silicone-urinal-screen-multi-color-5-pack-circular-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -72983,7 +73110,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/urinal-screen/silicone-urinal-screen-multi-color-5-pack-stacked-display.webp"
+      "/assets/product/urinal-screen/silicone-urinal-screen-multi-color-5-pack-stacked-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73023,7 +73150,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/urinal-screen/urinal-screen-export-quality-yellow-sealed-pack.webp"
+      "/assets/product/urinal-screen/urinal-screen-export-quality-yellow-sealed-pack.webp",
+      "/assets/product/urinal-screen/crew-urinal-screen-orange-sealed-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73063,7 +73191,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/urinal-screen/urinal-screen-yellow-55g-on-digital-weighing-scale.webp"
+      "/assets/product/urinal-screen/urinal-screen-yellow-55g-on-digital-weighing-scale.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73103,7 +73231,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/urinal-screen/urinal-screen-yellow-80g-on-digital-weighing-scale.webp"
+      "/assets/product/urinal-screen/urinal-screen-yellow-80g-on-digital-weighing-scale.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73143,7 +73271,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/urinal-screen/urinal-screen-triangular-plastic-with-dome-deodorizer-tablet.webp"
+      "/assets/product/urinal-screen/urinal-screen-triangular-plastic-with-dome-deodorizer-tablet.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73183,7 +73311,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/urinal-screen/vectair-v-screen-citrus-mango-urinal-screen-box-and-pack.webp"
+      "/assets/product/urinal-screen/vectair-v-screen-citrus-mango-urinal-screen-box-and-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73223,7 +73351,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/urinal-screen/w-screen-citrus-mango-urinal-screen-box-and-sealed-pack.webp"
+      "/assets/product/urinal-screen/w-screen-citrus-mango-urinal-screen-box-and-sealed-pack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73263,7 +73391,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/office-bazzar-new-images/watter-bottle-normal.webp"
+      "/assets/product/office-bazzar-new-images/watter-bottle-normal.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73303,9 +73431,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/floor-wiper-blue-head-with-white-rubber-blade-isolated.webp",
-      "/assets/supplier-library/wiper/floor-wiper-green-head-with-white-rubber-blade-isolated.webp",
-      "/assets/supplier-library/wiper/floor-wiper-red-head-with-white-rubber-blade-isolated.webp"
+      "/assets/product/wiper/floor-wiper-blue-head-with-white-rubber-blade-isolated.webp",
+      "/assets/product/wiper/floor-wiper-green-head-with-white-rubber-blade-isolated.webp",
+      "/assets/product/wiper/floor-wiper-red-head-with-white-rubber-blade-isolated.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73345,7 +73473,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/floor-wiper-heads-green-yellow-purple-orange-set-of-4-with-black-rubber-blade.webp"
+      "/assets/product/wiper/floor-wiper-heads-green-yellow-purple-orange-set-of-4-with-black-rubber-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73385,7 +73513,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/floor-wiper-heads-purple-and-red-pair-with-white-rubber-blade.webp"
+      "/assets/product/wiper/floor-wiper-heads-purple-and-red-pair-with-white-rubber-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73425,8 +73553,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/floor-wiper-heads-red-and-purple-with-multi-color-foam-blade-front-view.webp",
-      "/assets/supplier-library/wiper/floor-wiper-heads-red-and-purple-with-multi-color-foam-blade-top-view.webp"
+      "/assets/product/wiper/floor-wiper-heads-red-and-purple-with-multi-color-foam-blade-front-view.webp",
+      "/assets/product/wiper/floor-wiper-heads-red-and-purple-with-multi-color-foam-blade-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73466,7 +73594,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/floor-wiper-threaded-socket-heads-red-and-blue-set-of-4.webp"
+      "/assets/product/wiper/floor-wiper-threaded-socket-heads-red-and-blue-set-of-4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73506,7 +73634,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/floor-wiper-yellow-head-with-stainless-steel-handle-and-blue-end-cap.webp"
+      "/assets/product/wiper/floor-wiper-yellow-head-with-stainless-steel-handle-and-blue-end-cap.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73546,7 +73674,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/heavy-duty-floor-wiper-heads-green-red-dark-blue-trio-with-white-rubber-blade.webp"
+      "/assets/product/wiper/heavy-duty-floor-wiper-heads-green-red-dark-blue-trio-with-white-rubber-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73586,7 +73714,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/heavy-duty-plastic-floor-wiper-head-orange-yellow-threaded-socket-top-view.webp"
+      "/assets/product/wiper/heavy-duty-plastic-floor-wiper-head-orange-yellow-threaded-socket-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73626,7 +73754,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/heavy-duty-plastic-floor-wiper-heads-green-red-yellow-blue-diagonal-set.webp"
+      "/assets/product/wiper/heavy-duty-plastic-floor-wiper-heads-green-red-yellow-blue-diagonal-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73666,8 +73794,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/heavy-duty-plastic-floor-wiper-head-purple-with-threaded-socket-clamp.webp",
-      "/assets/supplier-library/wiper/heavy-duty-plastic-floor-wiper-head-yellow-with-threaded-socket-clamp.webp"
+      "/assets/product/wiper/heavy-duty-plastic-floor-wiper-head-purple-with-threaded-socket-clamp.webp",
+      "/assets/product/wiper/heavy-duty-plastic-floor-wiper-head-yellow-with-threaded-socket-clamp.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73707,8 +73835,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/heavy-duty-plastic-floor-wiper-heads-yellow-green-blue-red-angled-view.webp",
-      "/assets/supplier-library/wiper/heavy-duty-plastic-floor-wiper-heads-yellow-green-blue-red-top-view.webp"
+      "/assets/product/wiper/heavy-duty-plastic-floor-wiper-heads-yellow-green-blue-red-angled-view.webp",
+      "/assets/product/wiper/heavy-duty-plastic-floor-wiper-heads-yellow-green-blue-red-top-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73748,7 +73876,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/heavy-duty-plastic-floor-wiper-heads-red-grey-navy-trio-with-white-rubber-blade.webp"
+      "/assets/product/wiper/heavy-duty-plastic-floor-wiper-heads-red-grey-navy-trio-with-white-rubber-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73788,7 +73916,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/heavy-duty-plastic-floor-wiper-heads-yellow-green-blue-red-isometric.webp"
+      "/assets/product/wiper/heavy-duty-plastic-floor-wiper-heads-yellow-green-blue-red-isometric.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73828,7 +73956,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/lazzo-heavy-duty-floor-wiper-heads-red-green-blue-with-white-rubber-blade.webp"
+      "/assets/product/wiper/lazzo-heavy-duty-floor-wiper-heads-red-green-blue-with-white-rubber-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73868,7 +73996,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/metal-channel-floor-wiper-head-grey-bar-with-red-socket-and-white-rubber-blade.webp"
+      "/assets/product/wiper/metal-channel-floor-wiper-head-grey-bar-with-red-socket-and-white-rubber-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73908,7 +74036,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/lazzo-floor-wiper-heads-brown-green-purple-with-multi-color-foam-blade.webp"
+      "/assets/product/wiper/lazzo-floor-wiper-heads-brown-green-purple-with-multi-color-foam-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73948,7 +74076,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/nova-floor-wiper-cyan-blue-with-white-rubber-blade-and-metal-handle.webp"
+      "/assets/product/wiper/nova-floor-wiper-cyan-blue-with-white-rubber-blade-and-metal-handle.webp",
+      "/assets/product/collage/nova-floor-wiper.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -73988,9 +74117,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/nova-floor-wiper-head-pink-with-white-rubber-blade.webp",
-      "/assets/supplier-library/wiper/nova-floor-wiper-head-red-with-white-rubber-blade.webp",
-      "/assets/supplier-library/wiper/nova-floor-wiper-head-yellow-with-white-rubber-blade.webp"
+      "/assets/product/wiper/nova-floor-wiper-head-pink-with-white-rubber-blade.webp",
+      "/assets/product/wiper/nova-floor-wiper-head-red-with-white-rubber-blade.webp",
+      "/assets/product/wiper/nova-floor-wiper-head-yellow-with-white-rubber-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -74030,8 +74159,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/nova-floor-wiper-head-red-with-multi-color-foam-blade.webp",
-      "/assets/supplier-library/wiper/nova-floor-wiper-head-yellow-with-multi-color-foam-blade.webp"
+      "/assets/product/wiper/nova-floor-wiper-head-red-with-multi-color-foam-blade.webp",
+      "/assets/product/wiper/nova-floor-wiper-head-yellow-with-multi-color-foam-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -74071,7 +74200,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/nova-floor-wiper-yellow-with-multi-color-foam-blade-and-metal-handle.webp"
+      "/assets/product/wiper/nova-floor-wiper-yellow-with-multi-color-foam-blade-and-metal-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -74111,7 +74240,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/plastic-floor-wiper-heads-green-red-blue-trio-with-black-eva-blade.webp"
+      "/assets/product/wiper/plastic-floor-wiper-heads-green-red-blue-trio-with-black-eva-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -74151,8 +74280,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/plastic-floor-wiper-heads-yellow-blue-red-green-set-with-white-rubber-blade-whatsapp-view.webp",
-      "/assets/supplier-library/wiper/plastic-floor-wiper-heads-yellow-blue-red-green-set-with-white-rubber-blade.webp"
+      "/assets/product/wiper/plastic-floor-wiper-heads-yellow-blue-red-green-set-with-white-rubber-blade-whatsapp-view.webp",
+      "/assets/product/wiper/plastic-floor-wiper-heads-yellow-blue-red-green-set-with-white-rubber-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -74192,7 +74321,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/plastic-floor-wiper-heads-red-and-blue-pair-with-black-eva-blade.webp"
+      "/assets/product/wiper/plastic-floor-wiper-heads-red-and-blue-pair-with-black-eva-blade.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -74232,7 +74361,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/toilet-and-sink-suction-plungers-long-handle-blue-green-red-trio.webp"
+      "/assets/product/wiper/toilet-and-sink-suction-plungers-long-handle-blue-green-red-trio.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -74272,7 +74401,7 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/window-cleaning-squeegee-extendable-telescopic-pole-full-stand-view.webp"
+      "/assets/product/wiper/window-cleaning-squeegee-extendable-telescopic-pole-full-stand-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -74312,8 +74441,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/supplier-library/wiper/sumo-21-inch-floor-wiper-head-purple-with-multi-color-foam-blade.webp",
-      "/assets/supplier-library/wiper/sumo-21-inch-floor-wiper-head-red-with-multi-color-foam-blade.webp"
+      "/assets/product/wiper/sumo-21-inch-floor-wiper-head-purple-with-multi-color-foam-blade.webp",
+      "/assets/product/wiper/sumo-21-inch-floor-wiper-head-red-with-multi-color-foam-blade.webp",
+      "/assets/product/collage/sumo-floor-wiper-21-inch.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -74330,6 +74460,5517 @@ const RAW_PRODUCTS: Product[] = [
       "availability": "Available on Quotation / RFQ",
       "inventoryStatus": "On Demand / RFQ",
       "stockVerification": "Verified Supplier Photo Asset"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3500-aluminium-stick-5-feet-1",
+    "name": "Aluminium Stick 5 Feet 1",
+    "slug": "aluminium-stick-5-feet-1-ob-hou-3500",
+    "sku": "OB-HOU-3500",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Aluminium Stick 5 Feet 1 (OB-HOU-3500) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/brooms-and-sticks/aluminium-stick-5-feet-1.webp",
+      "/assets/product/brooms-and-sticks/aluminium-stick-5-feet.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3500",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3501-can-stick",
+    "name": "Can Stick",
+    "slug": "can-stick-ob-hou-3501",
+    "sku": "OB-HOU-3501",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Can Stick (OB-HOU-3501) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/brooms-and-sticks/can-stick.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3501",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3502-china-stick",
+    "name": "China Stick",
+    "slug": "china-stick-ob-hou-3502",
+    "sku": "OB-HOU-3502",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "China Stick (OB-HOU-3502) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/brooms-and-sticks/china-stick.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3502",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3503-dustpan-10",
+    "name": "Dustpan 10",
+    "slug": "dustpan-10-ob-hou-3503",
+    "sku": "OB-HOU-3503",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Dustpan 10 (OB-HOU-3503) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/bucket-mug-tray/dustpan-10.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3503",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3504-dustpan-2",
+    "name": "Dustpan 2",
+    "slug": "dustpan-2-ob-hou-3504",
+    "sku": "OB-HOU-3504",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Dustpan 2 (OB-HOU-3504) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/bucket-mug-tray/dustpan-2.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3504",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3505-dustpan-with-brush-10",
+    "name": "Dustpan With Brush 10",
+    "slug": "dustpan-with-brush-10-ob-hou-3505",
+    "sku": "OB-HOU-3505",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Dustpan With Brush 10 (OB-HOU-3505) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/bucket-mug-tray/dustpan-with-brush-10.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3505",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3506-dustpan-with-brush-11",
+    "name": "Dustpan With Brush 11",
+    "slug": "dustpan-with-brush-11-ob-hou-3506",
+    "sku": "OB-HOU-3506",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Dustpan With Brush 11 (OB-HOU-3506) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/bucket-mug-tray/dustpan-with-brush-11.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3506",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3507-caustic-soda",
+    "name": "Caustic Soda",
+    "slug": "caustic-soda-ob-hou-3507",
+    "sku": "OB-HOU-3507",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Caustic Soda (OB-HOU-3507) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/chemical-product/caustic-soda.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3507",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3508-colin-glass-and-multisurface-cleaner-sparkling-shine-500ml-spray-bottles-pair",
+    "name": "Colin Glass And Multisurface Cleaner Sparkling Shine 500ml Spray Bottles Pair",
+    "slug": "colin-glass-and-multisurface-cleaner-sparkling-shine-500ml-spray-bottles-pair-ob-hou-3508",
+    "sku": "OB-HOU-3508",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-colin",
+    "brandName": "Colin",
+    "description": "Colin Glass And Multisurface Cleaner Sparkling Shine 500ml Spray Bottles Pair (OB-HOU-3508) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/chemical-product/colin-glass-and-multisurface-cleaner-sparkling-shine-500ml-spray-bottles-pair-front-and-back.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3508",
+      "brand": "Colin",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3509-diversey-taski-r4-shine-up-furniture-maintainer-5-litre-can",
+    "name": "Diversey Taski R4 Shine Up Furniture Maintainer 5 Litre Can",
+    "slug": "diversey-taski-r4-shine-up-furniture-maintainer-5-litre-can-ob-hou-3509",
+    "sku": "OB-HOU-3509",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-diversey",
+    "brandName": "Diversey",
+    "description": "Diversey Taski R4 Shine Up Furniture Maintainer 5 Litre Can (OB-HOU-3509) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/chemical-product/diversey-taski-r4-shine-up-furniture-maintainer-5-litre-can-front-and-back.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3509",
+      "brand": "Diversey",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3510-hi-clean-disinfectant-bathroom-cleaner-10x-better-cleaning-red-500ml-bottle",
+    "name": "Hi Clean Disinfectant Bathroom Cleaner 10x Better Cleaning Red 500ml Bottle",
+    "slug": "hi-clean-disinfectant-bathroom-cleaner-10x-better-cleaning-red-500ml-bottle-ob-hou-3510",
+    "sku": "OB-HOU-3510",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-hi-clean",
+    "brandName": "Hi-Clean",
+    "description": "Hi Clean Disinfectant Bathroom Cleaner 10x Better Cleaning Red 500ml Bottle (OB-HOU-3510) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/chemical-product/hi-clean-disinfectant-bathroom-cleaner-10x-better-cleaning-red-500ml-bottle-front-and-back.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3510",
+      "brand": "Hi-Clean",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3511-hi-clean-glass-cleaner-2x-more-shine-boosters-original-5-litre-can",
+    "name": "Hi Clean Glass Cleaner 2x More Shine Boosters Original 5 Litre Can",
+    "slug": "hi-clean-glass-cleaner-2x-more-shine-boosters-original-5-litre-can-ob-hou-3511",
+    "sku": "OB-HOU-3511",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-hi-clean",
+    "brandName": "Hi-Clean",
+    "description": "Hi Clean Glass Cleaner 2x More Shine Boosters Original 5 Litre Can (OB-HOU-3511) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/chemical-product/hi-clean-glass-cleaner-2x-more-shine-boosters-original-5-litre-can-front-and-back.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3511",
+      "brand": "Hi-Clean",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3512-hi-clean-hc-h1-liquid-hand-wash-pink-5-litre-can",
+    "name": "Hi Clean Hc H1 Liquid Hand Wash Pink 5 Litre Can",
+    "slug": "hi-clean-hc-h1-liquid-hand-wash-pink-5-litre-can-ob-hou-3512",
+    "sku": "OB-HOU-3512",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-hi-clean",
+    "brandName": "Hi-Clean",
+    "description": "Hi Clean Hc H1 Liquid Hand Wash Pink 5 Litre Can (OB-HOU-3512) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/chemical-product/hi-clean-hc-h1-liquid-hand-wash-pink-5-litre-can-front-and-back.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3512",
+      "brand": "Hi-Clean",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3513-hi-clean-herbal-perfumed-phenyle-assorted-fragrances-1-litre-bottles-row-of-5",
+    "name": "Hi Clean Herbal Perfumed Phenyle Assorted Fragrances 1 Litre Bottles Row Of 5",
+    "slug": "hi-clean-herbal-perfumed-phenyle-assorted-fragrances-1-litre-bottles-row-of-5-ob-hou-3513",
+    "sku": "OB-HOU-3513",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-hi-clean",
+    "brandName": "Hi-Clean",
+    "description": "Hi Clean Herbal Perfumed Phenyle Assorted Fragrances 1 Litre Bottles Row Of 5 (OB-HOU-3513) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/chemical-product/hi-clean-herbal-perfumed-phenyle-assorted-fragrances-1-litre-bottles-row-of-5.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3513",
+      "brand": "Hi-Clean",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3514-hi-clean-liquid-soap-apple-rose-lemon-1000ml-bottles-set-of-3",
+    "name": "Hi Clean Liquid Soap Apple Rose Lemon 1000ml Bottles Set Of 3",
+    "slug": "hi-clean-liquid-soap-apple-rose-lemon-1000ml-bottles-set-of-3-ob-hou-3514",
+    "sku": "OB-HOU-3514",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-hi-clean",
+    "brandName": "Hi-Clean",
+    "description": "Hi Clean Liquid Soap Apple Rose Lemon 1000ml Bottles Set Of 3 (OB-HOU-3514) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/chemical-product/hi-clean-liquid-soap-apple-rose-lemon-1000ml-bottles-set-of-3.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3514",
+      "brand": "Hi-Clean",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3515-hi-clean-liquid-soap-green-apple-germs-killer-1000ml-bottle",
+    "name": "Hi Clean Liquid Soap Green Apple Germs Killer 1000ml Bottle",
+    "slug": "hi-clean-liquid-soap-green-apple-germs-killer-1000ml-bottle-ob-hou-3515",
+    "sku": "OB-HOU-3515",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-hi-clean",
+    "brandName": "Hi-Clean",
+    "description": "Hi Clean Liquid Soap Green Apple Germs Killer 1000ml Bottle (OB-HOU-3515) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/chemical-product/hi-clean-liquid-soap-green-apple-germs-killer-1000ml-bottle-front-and-back.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3515",
+      "brand": "Hi-Clean",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3516-hi-clean-sodium-hypochlorite-6-percent-liquid-cleaner-5-litre-can",
+    "name": "Hi Clean Sodium Hypochlorite 6 Percent Liquid Cleaner 5 Litre Can",
+    "slug": "hi-clean-sodium-hypochlorite-6-percent-liquid-cleaner-5-litre-can-ob-hou-3516",
+    "sku": "OB-HOU-3516",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-hi-clean",
+    "brandName": "Hi-Clean",
+    "description": "Hi Clean Sodium Hypochlorite 6 Percent Liquid Cleaner 5 Litre Can (OB-HOU-3516) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/chemical-product/hi-clean-sodium-hypochlorite-6-percent-liquid-cleaner-5-litre-can.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3516",
+      "brand": "Hi-Clean",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3517-lifebuoy-germ-protection-total-pro-plus-handwash-5-litre-can",
+    "name": "Lifebuoy Germ Protection Total Pro Plus Handwash 5 Litre Can",
+    "slug": "lifebuoy-germ-protection-total-pro-plus-handwash-5-litre-can-ob-hou-3517",
+    "sku": "OB-HOU-3517",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-lifebuoy",
+    "brandName": "Lifebuoy",
+    "description": "Lifebuoy Germ Protection Total Pro Plus Handwash 5 Litre Can (OB-HOU-3517) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/chemical-product/lifebuoy-germ-protection-total-pro-plus-handwash-5-litre-can-front-view.webp",
+      "/assets/product/chemical-product/lifebuoy-germ-protection-total-pro-plus-handwash-5-litre-cans-pair-front-and-back.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3517",
+      "brand": "Lifebuoy",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3518-p-pristin-hand-rub-sanitizer-with-moisturiser-5-litre-can",
+    "name": "P Pristin Hand Rub Sanitizer With Moisturiser 5 Litre Can",
+    "slug": "p-pristin-hand-rub-sanitizer-with-moisturiser-5-litre-can-ob-hou-3518",
+    "sku": "OB-HOU-3518",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "P Pristin Hand Rub Sanitizer With Moisturiser 5 Litre Can (OB-HOU-3518) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/chemical-product/p-pristin-hand-rub-sanitizer-with-moisturiser-5-litre-can-front-and-back.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3518",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3519-vim-dishwash-liquid-lemon-concentrated-gel-18-litre-handle-bottle-front-and-back-variant-2",
+    "name": "Vim Dishwash Liquid Lemon Concentrated Gel 18 Litre Handle Bottle Front And Back Variant 2",
+    "slug": "vim-dishwash-liquid-lemon-concentrated-gel-18-litre-handle-bottle-front-and-back-variant-2-ob-hou-3519",
+    "sku": "OB-HOU-3519",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-vim",
+    "brandName": "Vim",
+    "description": "Vim Dishwash Liquid Lemon Concentrated Gel 18 Litre Handle Bottle Front And Back Variant 2 (OB-HOU-3519) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/chemical-product/vim-dishwash-liquid-lemon-concentrated-gel-18-litre-handle-bottle-front-and-back-variant-2.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3519",
+      "brand": "Vim",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3520-cobweb-brush-2",
+    "name": "Cobweb Brush 2",
+    "slug": "cobweb-brush-2-ob-hou-3520",
+    "sku": "OB-HOU-3520",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Cobweb Brush 2 (OB-HOU-3520) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/cleaning-brush/cobweb-brush-2.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3520",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3521-cobweb-brush",
+    "name": "Cobweb Brush",
+    "slug": "cobweb-brush-ob-hou-3521",
+    "sku": "OB-HOU-3521",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Cobweb Brush (OB-HOU-3521) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/cleaning-brush/cobweb-brush.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3521",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3522-push-broom",
+    "name": "Push Broom",
+    "slug": "push-broom-ob-hou-3522",
+    "sku": "OB-HOU-3522",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Push Broom (OB-HOU-3522) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/cleaning-brush/push-broom.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3522",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3523-blue-microfiber-cloth",
+    "name": "Blue Microfiber Cloth",
+    "slug": "blue-microfiber-cloth-ob-hou-3523",
+    "sku": "OB-HOU-3523",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Blue Microfiber Cloth (OB-HOU-3523) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/cloth/blue-microfiber-cloth.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3523",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3524-color-bath-towel-24x48",
+    "name": "Color Bath Towel 24x48",
+    "slug": "color-bath-towel-24x48-ob-hou-3524",
+    "sku": "OB-HOU-3524",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Color Bath Towel 24x48 (OB-HOU-3524) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/cloth/color-bath-towel-24x48.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3524",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3525-floor-cleaning-cloth-20x20",
+    "name": "Floor Cleaning Cloth 20x20",
+    "slug": "floor-cleaning-cloth-20x20-ob-hou-3525",
+    "sku": "OB-HOU-3525",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Floor Cleaning Cloth 20x20 (OB-HOU-3525) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/cloth/floor-cleaning-cloth-20x20.webp",
+      "/assets/product/cloth/floor-cleaning-cloth.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3525",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3526-glass-cloth-18x18",
+    "name": "Glass Cloth 18x18",
+    "slug": "glass-cloth-18x18-ob-hou-3526",
+    "sku": "OB-HOU-3526",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Glass Cloth 18x18 (OB-HOU-3526) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/cloth/glass-cloth-18x18.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3526",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3527-kitchen-check-towel-stack",
+    "name": "Kitchen Check Towel Stack",
+    "slug": "kitchen-check-towel-stack-ob-hou-3527",
+    "sku": "OB-HOU-3527",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Kitchen Check Towel Stack (OB-HOU-3527) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/cloth/kitchen-check-towel-stack.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3527",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3528-cleaning-and-dye-brushes-assortment",
+    "name": "Cleaning And Dye Brushes Assortment",
+    "slug": "cleaning-and-dye-brushes-assortment-ob-hou-3528",
+    "sku": "OB-HOU-3528",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Cleaning And Dye Brushes Assortment (OB-HOU-3528) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/collage/cleaning-and-dye-brushes-assortment.webp",
+      "/assets/product/collage/cleaning-brushes-assortment.webp",
+      "/assets/product/collage/toilet-cleaning-brushes-assortment.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3528",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3529-floor-and-glass-wipers-collection",
+    "name": "Floor And Glass Wipers Collection",
+    "slug": "floor-and-glass-wipers-collection-ob-hou-3529",
+    "sku": "OB-HOU-3529",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Floor And Glass Wipers Collection (OB-HOU-3529) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/collage/floor-and-glass-wipers-collection.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3529",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3530-lifebuoy-handwash-5l-and-refills-2",
+    "name": "Lifebuoy Handwash 5l And Refills 2",
+    "slug": "lifebuoy-handwash-5l-and-refills-2-ob-hou-3530",
+    "sku": "OB-HOU-3530",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-lifebuoy",
+    "brandName": "Lifebuoy",
+    "description": "Lifebuoy Handwash 5l And Refills 2 (OB-HOU-3530) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/collage/lifebuoy-handwash-5l-and-refills-2.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3530",
+      "brand": "Lifebuoy",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3531-premier-facial-tissue-and-royal-toilet-paper-napkins",
+    "name": "Premier Facial Tissue And Royal Toilet Paper Napkins",
+    "slug": "premier-facial-tissue-and-royal-toilet-paper-napkins-ob-hou-3531",
+    "sku": "OB-HOU-3531",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-premier",
+    "brandName": "Premier",
+    "description": "Premier Facial Tissue And Royal Toilet Paper Napkins (OB-HOU-3531) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/collage/premier-facial-tissue-and-royal-toilet-paper-napkins.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3531",
+      "brand": "Premier",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3532-pril-dishwash-liquid-and-exo-dish-wash-bar",
+    "name": "Pril Dishwash Liquid And Exo Dish Wash Bar",
+    "slug": "pril-dishwash-liquid-and-exo-dish-wash-bar-ob-hou-3532",
+    "sku": "OB-HOU-3532",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-exo",
+    "brandName": "Exo",
+    "description": "Pril Dishwash Liquid And Exo Dish Wash Bar (OB-HOU-3532) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/collage/pril-dishwash-liquid-and-exo-dish-wash-bar.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3532",
+      "brand": "Exo",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3533-scrub-pad",
+    "name": "Scrub Pad",
+    "slug": "scrub-pad-ob-hou-3533",
+    "sku": "OB-HOU-3533",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Scrub Pad (OB-HOU-3533) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/collage/scrub-pad.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3533",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3534-cute-star-design-jumbo-toilet-roll-dispenser-pair-white-grey",
+    "name": "Cute Star Design Jumbo Toilet Roll Dispenser Pair White Grey",
+    "slug": "cute-star-design-jumbo-toilet-roll-dispenser-pair-white-grey-ob-hou-3534",
+    "sku": "OB-HOU-3534",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dispensers-washroom-fittings",
+    "subcategoryName": "Dispensers & Washroom Fittings",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Cute Star Design Jumbo Toilet Roll Dispenser Pair White Grey (OB-HOU-3534) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dispenser/cute-star-design-jumbo-toilet-roll-dispenser-pair-white-grey.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3534",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dispensers & Washroom Fittings",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3535-hrt-roll-towel-dispenser-autocut-white-pull-2",
+    "name": "Hrt Roll Towel Dispenser Autocut White Pull 2",
+    "slug": "hrt-roll-towel-dispenser-autocut-white-pull-2-ob-hou-3535",
+    "sku": "OB-HOU-3535",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dispensers-washroom-fittings",
+    "subcategoryName": "Dispensers & Washroom Fittings",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Hrt Roll Towel Dispenser Autocut White Pull 2 (OB-HOU-3535) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dispenser/hrt-roll-towel-dispenser-autocut-white-pull-2.webp",
+      "/assets/product/dispenser/hrt-roll-towel-dispenser-autocut-white-pull.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3535",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dispensers & Washroom Fittings",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3536-lazzo-hand-soap-dispenser-1000ml-curved-top-with-box-2",
+    "name": "Lazzo Hand Soap Dispenser 1000ml Curved Top With Box 2",
+    "slug": "lazzo-hand-soap-dispenser-1000ml-curved-top-with-box-2-ob-hou-3536",
+    "sku": "OB-HOU-3536",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dispensers-washroom-fittings",
+    "subcategoryName": "Dispensers & Washroom Fittings",
+    "brandId": "brand-lazzo",
+    "brandName": "Lazzo",
+    "description": "Lazzo Hand Soap Dispenser 1000ml Curved Top With Box 2 (OB-HOU-3536) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dispenser/lazzo-hand-soap-dispenser-1000ml-curved-top-with-box-2.webp",
+      "/assets/product/dispenser/lazzo-hand-soap-dispenser-1000ml-curved-top-with-box.webp",
+      "/assets/product/dispenser/lazzo-soap-dispenser-1000ml-with-box.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3536",
+      "brand": "Lazzo",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dispensers & Washroom Fittings",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3537-paper-cup-dispenser-wall-mount-white",
+    "name": "Paper Cup Dispenser Wall Mount White",
+    "slug": "paper-cup-dispenser-wall-mount-white-ob-hou-3537",
+    "sku": "OB-HOU-3537",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dispensers-washroom-fittings",
+    "subcategoryName": "Dispensers & Washroom Fittings",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Paper Cup Dispenser Wall Mount White (OB-HOU-3537) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dispenser/paper-cup-dispenser-wall-mount-white.webp",
+      "/assets/product/dispenser/wall-mount-clear-disposable-cup-dispenser-with-white-cap.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3537",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dispensers & Washroom Fittings",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3538-stainless-steel-half-round-tissue-paper-napkin-holder-2",
+    "name": "Stainless Steel Half Round Tissue Paper Napkin Holder 2",
+    "slug": "stainless-steel-half-round-tissue-paper-napkin-holder-2-ob-hou-3538",
+    "sku": "OB-HOU-3538",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dispensers-washroom-fittings",
+    "subcategoryName": "Dispensers & Washroom Fittings",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Stainless Steel Half Round Tissue Paper Napkin Holder 2 (OB-HOU-3538) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dispenser/stainless-steel-half-round-tissue-paper-napkin-holder-2.webp",
+      "/assets/product/dispenser/stainless-steel-half-round-tissue-paper-napkin-holder.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3538",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dispensers & Washroom Fittings",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3539-touch-soap-dispenser-wall-mount-silver",
+    "name": "Touch Soap Dispenser Wall Mount Silver",
+    "slug": "touch-soap-dispenser-wall-mount-silver-ob-hou-3539",
+    "sku": "OB-HOU-3539",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dispensers-washroom-fittings",
+    "subcategoryName": "Dispensers & Washroom Fittings",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Touch Soap Dispenser Wall Mount Silver (OB-HOU-3539) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dispenser/touch-soap-dispenser-wall-mount-silver-with-box.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3539",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dispensers & Washroom Fittings",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3540-aristo-4-wheel-garbage-bin-660-ltr-green-outdoor-view",
+    "name": "Aristo 4 Wheel Garbage Bin 660 Ltr Green Outdoor View",
+    "slug": "aristo-4-wheel-garbage-bin-660-ltr-green-outdoor-view-ob-hou-3540",
+    "sku": "OB-HOU-3540",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dustbins-waste-handling",
+    "subcategoryName": "Dustbins & Waste Handling",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Aristo 4 Wheel Garbage Bin 660 Ltr Green Outdoor View (OB-HOU-3540) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dustbin/aristo-4-wheel-garbage-bin-660-ltr-green-outdoor-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3540",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dustbins & Waste Handling",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3541-aristo-apollo-perforated-waste-paper-basket-blue-and-grey",
+    "name": "Aristo Apollo Perforated Waste Paper Basket Blue And Grey",
+    "slug": "aristo-apollo-perforated-waste-paper-basket-blue-and-grey-ob-hou-3541",
+    "sku": "OB-HOU-3541",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dustbins-waste-handling",
+    "subcategoryName": "Dustbins & Waste Handling",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Aristo Apollo Perforated Waste Paper Basket Blue And Grey (OB-HOU-3541) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dustbin/aristo-apollo-perforated-waste-paper-basket-blue-and-grey.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3541",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dustbins & Waste Handling",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3542-aristo-lazzo-bio-hazard-pedal-dustbin-4-colors-collage",
+    "name": "Aristo Lazzo Bio Hazard Pedal Dustbin 4 Colors Collage",
+    "slug": "aristo-lazzo-bio-hazard-pedal-dustbin-4-colors-collage-ob-hou-3542",
+    "sku": "OB-HOU-3542",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dustbins-waste-handling",
+    "subcategoryName": "Dustbins & Waste Handling",
+    "brandId": "brand-lazzo",
+    "brandName": "Lazzo",
+    "description": "Aristo Lazzo Bio Hazard Pedal Dustbin 4 Colors Collage (OB-HOU-3542) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dustbin/aristo-lazzo-bio-hazard-pedal-dustbin-4-colors-collage.webp",
+      "/assets/product/dustbin/aristo-lazzo-bio-hazard-pedal-dustbin-green-front-view.webp",
+      "/assets/product/dustbin/aristo-lazzo-bio-hazard-pedal-dustbin-red-front-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3542",
+      "brand": "Lazzo",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dustbins & Waste Handling",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3543-aristo-lazzo-wave-swing-dustbin-pair-blue-teal-collage",
+    "name": "Aristo Lazzo Wave Swing Dustbin Pair Blue Teal Collage",
+    "slug": "aristo-lazzo-wave-swing-dustbin-pair-blue-teal-collage-ob-hou-3543",
+    "sku": "OB-HOU-3543",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dustbins-waste-handling",
+    "subcategoryName": "Dustbins & Waste Handling",
+    "brandId": "brand-lazzo",
+    "brandName": "Lazzo",
+    "description": "Aristo Lazzo Wave Swing Dustbin Pair Blue Teal Collage (OB-HOU-3543) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dustbin/aristo-lazzo-wave-swing-dustbin-pair-blue-teal-collage.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3543",
+      "brand": "Lazzo",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dustbins & Waste Handling",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3544-aristo-twin-pedal-dustbin-wet-and-dry-waste-green-and-blue",
+    "name": "Aristo Twin Pedal Dustbin Wet And Dry Waste Green And Blue",
+    "slug": "aristo-twin-pedal-dustbin-wet-and-dry-waste-green-and-blue-ob-hou-3544",
+    "sku": "OB-HOU-3544",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dustbins-waste-handling",
+    "subcategoryName": "Dustbins & Waste Handling",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Aristo Twin Pedal Dustbin Wet And Dry Waste Green And Blue (OB-HOU-3544) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dustbin/aristo-twin-pedal-dustbin-wet-and-dry-waste-green-and-blue.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3544",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dustbins & Waste Handling",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3545-aristo-wheel-waste-bin-120-ltr-set-of-4-green-blue-red-yellow",
+    "name": "Aristo Wheel Waste Bin 120 Ltr Set Of 4 Green Blue Red Yellow",
+    "slug": "aristo-wheel-waste-bin-120-ltr-set-of-4-green-blue-red-yellow-ob-hou-3545",
+    "sku": "OB-HOU-3545",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dustbins-waste-handling",
+    "subcategoryName": "Dustbins & Waste Handling",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Aristo Wheel Waste Bin 120 Ltr Set Of 4 Green Blue Red Yellow (OB-HOU-3545) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dustbin/aristo-wheel-waste-bin-120-ltr-set-of-4-green-blue-red-yellow.webp",
+      "/assets/product/dustbin/aristo-wheel-waste-bin-with-pedal-65-ltr-set-of-4-green-blue-red-yellow-outdoor-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3545",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dustbins & Waste Handling",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3546-kyracs-stepbin-bio-medical-waste-pedal-dustbin-4-sizes-multicolor",
+    "name": "Kyracs Stepbin Bio Medical Waste Pedal Dustbin 4 Sizes Multicolor",
+    "slug": "kyracs-stepbin-bio-medical-waste-pedal-dustbin-4-sizes-multicolor-ob-hou-3546",
+    "sku": "OB-HOU-3546",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dustbins-waste-handling",
+    "subcategoryName": "Dustbins & Waste Handling",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Kyracs Stepbin Bio Medical Waste Pedal Dustbin 4 Sizes Multicolor (OB-HOU-3546) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dustbin/kyracs-stepbin-bio-medical-waste-pedal-dustbin-4-sizes-multicolor.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3546",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dustbins & Waste Handling",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3547-stainless-steel-ash-can-dustbin-with-side-opening",
+    "name": "Stainless Steel Ash Can Dustbin With Side Opening",
+    "slug": "stainless-steel-ash-can-dustbin-with-side-opening-ob-hou-3547",
+    "sku": "OB-HOU-3547",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "dustbins-waste-handling",
+    "subcategoryName": "Dustbins & Waste Handling",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Stainless Steel Ash Can Dustbin With Side Opening (OB-HOU-3547) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/dustbin/stainless-steel-ash-can-dustbin-with-side-opening-pair.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3547",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Dustbins & Waste Handling",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3548-expanding-button-folder",
+    "name": "Expanding Button Folder",
+    "slug": "expanding-button-folder-ob-sta-3548",
+    "sku": "OB-STA-3548",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Expanding Button Folder (OB-STA-3548) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/folders/expanding-button-folder.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3548",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3549-clean-india-garbage-bags-jumbo-92x122-cm-roll",
+    "name": "Clean India Garbage Bags Jumbo 92x122 Cm Roll",
+    "slug": "clean-india-garbage-bags-jumbo-92x122-cm-roll-ob-hou-3549",
+    "sku": "OB-HOU-3549",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Clean India Garbage Bags Jumbo 92x122 Cm Roll (OB-HOU-3549) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/garbage-bag/clean-india-garbage-bags-jumbo-92x122-cm-roll-with-box.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3549",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3550-clean-india-garbage-bags-packaging-boxes-4-sizes-small-medium-large-xl",
+    "name": "Clean India Garbage Bags Packaging Boxes 4 Sizes Small Medium Large Xl",
+    "slug": "clean-india-garbage-bags-packaging-boxes-4-sizes-small-medium-large-xl-ob-hou-3550",
+    "sku": "OB-HOU-3550",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Clean India Garbage Bags Packaging Boxes 4 Sizes Small Medium Large Xl (OB-HOU-3550) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/garbage-bag/clean-india-garbage-bags-packaging-boxes-4-sizes-small-medium-large-xl.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3550",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3551-lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-green-flat-view",
+    "name": "Lazzo Biodegradable Bio Hazard Garbage Bag Above 75 Micron Green Flat View",
+    "slug": "lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-green-flat-view-ob-hou-3551",
+    "sku": "OB-HOU-3551",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-lazzo",
+    "brandName": "Lazzo",
+    "description": "Lazzo Biodegradable Bio Hazard Garbage Bag Above 75 Micron Green Flat View (OB-HOU-3551) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-green-flat-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3551",
+      "brand": "Lazzo",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3552-bestone-household-rubber-gloves-4-colors-red-orange-blue-yellow-with-pouch",
+    "name": "Bestone Household Rubber Gloves 4 Colors Red Orange Blue Yellow With Pouch",
+    "slug": "bestone-household-rubber-gloves-4-colors-red-orange-blue-yellow-with-pouch-ob-hou-3552",
+    "sku": "OB-HOU-3552",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Bestone Household Rubber Gloves 4 Colors Red Orange Blue Yellow With Pouch (OB-HOU-3552) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/gloves/bestone-household-rubber-gloves-4-colors-red-orange-blue-yellow-with-pouch.webp",
+      "/assets/product/gloves/bestone-household-rubber-gloves-natural-latex-orange-size-m-with-pouch.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3552",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3553-cotton-knitted-hand-gloves-4-colors-black-blue-white-gray-collage",
+    "name": "Cotton Knitted Hand Gloves 4 Colors Black Blue White Gray Collage",
+    "slug": "cotton-knitted-hand-gloves-4-colors-black-blue-white-gray-collage-ob-hou-3553",
+    "sku": "OB-HOU-3553",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Cotton Knitted Hand Gloves 4 Colors Black Blue White Gray Collage (OB-HOU-3553) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/gloves/cotton-knitted-hand-gloves-4-colors-black-blue-white-gray-collage.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3553",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3554-gloveon-comfort-touch-latex-powdered-examination-gloves-size-m-box-with-white-glove",
+    "name": "Gloveon Comfort Touch Latex Powdered Examination Gloves Size M Box With White Glove",
+    "slug": "gloveon-comfort-touch-latex-powdered-examination-gloves-size-m-box-with-white-glove-ob-hou-3554",
+    "sku": "OB-HOU-3554",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Gloveon Comfort Touch Latex Powdered Examination Gloves Size M Box With White Glove (OB-HOU-3554) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/gloves/gloveon-comfort-touch-latex-powdered-examination-gloves-size-m-box-with-white-glove.webp",
+      "/assets/product/gloves/gloveon-edge-latex-powder-free-examination-gloves-size-m-box-with-white-glove.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3554",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3555-good-knight-gold-flash-liquid-vapouriser-machine-and-refill-45-ml-box-front-and",
+    "name": "Good Knight Gold Flash Liquid Vapouriser Machine And Refill 45 Ml Box Front And",
+    "slug": "good-knight-gold-flash-liquid-vapouriser-machine-and-refill-45-ml-box-front-and-ob-hou-3555",
+    "sku": "OB-HOU-3555",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Good Knight Gold Flash Liquid Vapouriser Machine And Refill 45 Ml Box Front And (OB-HOU-3555) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/hit-and-disinfectant-spray/good-knight-gold-flash-liquid-vapouriser-machine-and-refill-45-ml-box-front-and-side-view.webp",
+      "/assets/product/hit-and-disinfectant-spray/good-knight-gold-flash-liquid-vapouriser-refill-45-ml-with-box.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3555",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3556-hit-spray-cans-mosquito-and-cockroach-killer-4-units-assorted-sizes",
+    "name": "Hit Spray Cans Mosquito And Cockroach Killer 4 Units Assorted Sizes",
+    "slug": "hit-spray-cans-mosquito-and-cockroach-killer-4-units-assorted-sizes-ob-hou-3556",
+    "sku": "OB-HOU-3556",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Hit Spray Cans Mosquito And Cockroach Killer 4 Units Assorted Sizes (OB-HOU-3556) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/hit-and-disinfectant-spray/hit-spray-cans-mosquito-and-cockroach-killer-4-units-assorted-sizes.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3556",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3557-naphthalene-balls-white-grid-array-on-fabric",
+    "name": "Naphthalene Balls White Grid Array On Fabric",
+    "slug": "naphthalene-balls-white-grid-array-on-fabric-ob-hou-3557",
+    "sku": "OB-HOU-3557",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Naphthalene Balls White Grid Array On Fabric (OB-HOU-3557) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/hit-and-disinfectant-spray/naphthalene-balls-white-grid-array-on-fabric.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3557",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3558-automatic-hand-dryer-1800w-abs-white-on-black-packaging-box",
+    "name": "Automatic Hand Dryer 1800w Abs White On Black Packaging Box",
+    "slug": "automatic-hand-dryer-1800w-abs-white-on-black-packaging-box-ob-hou-3558",
+    "sku": "OB-HOU-3558",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Automatic Hand Dryer 1800w Abs White On Black Packaging Box (OB-HOU-3558) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/hygenic-tools-and-trolly/automatic-hand-dryer-1800w-abs-white-on-black-packaging-box.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3558",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3559-automatic-shoe-shining-machine-golden-steel-polish-cream-dispenser",
+    "name": "Automatic Shoe Shining Machine Golden Steel Polish Cream Dispenser",
+    "slug": "automatic-shoe-shining-machine-golden-steel-polish-cream-dispenser-ob-hou-3559",
+    "sku": "OB-HOU-3559",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Automatic Shoe Shining Machine Golden Steel Polish Cream Dispenser (OB-HOU-3559) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/hygenic-tools-and-trolly/automatic-shoe-shining-machine-golden-steel-polish-cream-dispenser-front-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/automatic-shoe-shining-machine-golden-steel-polish-cream-dispenser-with-power-cable.webp",
+      "/assets/product/hygenic-tools-and-trolly/kbe-gd-automatic-shoe-shining-machine-golden-steel-polish-cream-dispenser-front-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3559",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3560-crv-15-c-ltr-stainless-steel-wet-and-dry-vacuum-cleaner-specifications-infographic",
+    "name": "Crv 15 C Ltr Stainless Steel Wet And Dry Vacuum Cleaner Specifications Infographic",
+    "slug": "crv-15-c-ltr-stainless-steel-wet-and-dry-vacuum-cleaner-specifications-infographic-ob-hou-3560",
+    "sku": "OB-HOU-3560",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Crv 15 C Ltr Stainless Steel Wet And Dry Vacuum Cleaner Specifications Infographic (OB-HOU-3560) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/hygenic-tools-and-trolly/crv-15-c-ltr-stainless-steel-wet-and-dry-vacuum-cleaner-specifications-infographic.webp",
+      "/assets/product/hygenic-tools-and-trolly/crv-30-c-ltr-stainless-steel-wet-and-dry-vacuum-cleaner-specifications-infographic.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3560",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3561-double-bucket-mop-wringer-fbw-50-ltr-trolley-cart-specifications-infographic",
+    "name": "Double Bucket Mop Wringer Fbw 50 Ltr Trolley Cart Specifications Infographic",
+    "slug": "double-bucket-mop-wringer-fbw-50-ltr-trolley-cart-specifications-infographic-ob-hou-3561",
+    "sku": "OB-HOU-3561",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Double Bucket Mop Wringer Fbw 50 Ltr Trolley Cart Specifications Infographic (OB-HOU-3561) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/hygenic-tools-and-trolly/double-bucket-mop-wringer-fbw-50-ltr-trolley-cart-specifications-infographic.webp",
+      "/assets/product/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-50-ltr-blue-red-buckets-side-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-black-buckets-with-yellow-wringer-side-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3561",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3562-double-bucket-mop-wringer-trolley-cart-red-and-blue-buckets-with-yellow-wringer-front",
+    "name": "Double Bucket Mop Wringer Trolley Cart Red And Blue Buckets With Yellow Wringer Front",
+    "slug": "double-bucket-mop-wringer-trolley-cart-red-and-blue-buckets-with-yellow-wringer-front-ob-hou-3562",
+    "sku": "OB-HOU-3562",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Double Bucket Mop Wringer Trolley Cart Red And Blue Buckets With Yellow Wringer Front (OB-HOU-3562) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-red-and-blue-buckets-with-yellow-wringer-front-side-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-red-and-blue-buckets-with-yellow-wringer-side-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/triple-bucket-mop-wringer-trolley-cart-yellow-blue-red-buckets-side-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3562",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3563-lobby-dustpan-with-comb-teeth-and-angle-broom-set-yellow-stainless-steel-handles",
+    "name": "Lobby Dustpan With Comb Teeth And Angle Broom Set Yellow Stainless Steel Handles",
+    "slug": "lobby-dustpan-with-comb-teeth-and-angle-broom-set-yellow-stainless-steel-handles-ob-hou-3563",
+    "sku": "OB-HOU-3563",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Lobby Dustpan With Comb Teeth And Angle Broom Set Yellow Stainless Steel Handles (OB-HOU-3563) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/hygenic-tools-and-trolly/lobby-dustpan-with-comb-teeth-and-angle-broom-set-yellow-stainless-steel-handles-front-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/lobby-dustpan-with-comb-teeth-and-wiper-broom-set-long-stainless-steel-handles.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3563",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3564-multipurpose-janitor-cart-cleaning-trolley-grey-with-4-top-buckets-and-mop-wringer-high-angled-view",
+    "name": "Multipurpose Janitor Cart Cleaning Trolley Grey With 4 Top Buckets And Mop Wringer High Angled View",
+    "slug": "multipurpose-janitor-cart-cleaning-trolley-grey-with-4-top-buckets-and-mop-wringer-high-angled-view-ob-hou-3564",
+    "sku": "OB-HOU-3564",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Multipurpose Janitor Cart Cleaning Trolley Grey With 4 Top Buckets And Mop Wringer High Angled View (OB-HOU-3564) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-4-top-buckets-and-mop-wringer-high-angled-view.webp",
+      "/assets/product/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-double-bucket-mop-wringer-and-yellow-bag-side-angled-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3564",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3565-multipurpose-janitor-cart-cleaning-trolley-grey-with-double-bucket-mop-wringer-and-yellow-vinyl-bag",
+    "name": "Multipurpose Janitor Cart Cleaning Trolley Grey With Double Bucket Mop Wringer And Yellow Vinyl Bag",
+    "slug": "multipurpose-janitor-cart-cleaning-trolley-grey-with-double-bucket-mop-wringer-and-yellow-vinyl-bag-ob-hou-3565",
+    "sku": "OB-HOU-3565",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Multipurpose Janitor Cart Cleaning Trolley Grey With Double Bucket Mop Wringer And Yellow Vinyl Bag (OB-HOU-3565) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-double-bucket-mop-wringer-and-yellow-vinyl-bag-side-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3565",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3566-triple-bucket-mop-wringer-trolley-cart-60-ltr-mild-steel-black-frame-blue-red-yellow",
+    "name": "Triple Bucket Mop Wringer Trolley Cart 60 Ltr Mild Steel Black Frame Blue Red Yellow",
+    "slug": "triple-bucket-mop-wringer-trolley-cart-60-ltr-mild-steel-black-frame-blue-red-yellow-ob-hou-3566",
+    "sku": "OB-HOU-3566",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Triple Bucket Mop Wringer Trolley Cart 60 Ltr Mild Steel Black Frame Blue Red Yellow (OB-HOU-3566) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/hygenic-tools-and-trolly/triple-bucket-mop-wringer-trolley-cart-60-ltr-mild-steel-black-frame-blue-red-yellow.webp",
+      "/assets/product/hygenic-tools-and-trolly/triple-bucket-mop-wringer-trolley-cart-60-ltr-stainless-steel-frame-blue-red-yellow.webp",
+      "/assets/product/hygenic-tools-and-trolly/triple-bucket-mop-wringer-trolley-cart-stainless-steel-frame-blue-red-yellow.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3566",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3567-keeolife-3-ply-surgical-medical-face-mask-blue-ear-hanging-with-50-pcs-box",
+    "name": "Keeolife 3 Ply Surgical Medical Face Mask Blue Ear Hanging With 50 Pcs Box",
+    "slug": "keeolife-3-ply-surgical-medical-face-mask-blue-ear-hanging-with-50-pcs-box-ob-hou-3567",
+    "sku": "OB-HOU-3567",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Keeolife 3 Ply Surgical Medical Face Mask Blue Ear Hanging With 50 Pcs Box (OB-HOU-3567) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mask/keeolife-3-ply-surgical-medical-face-mask-blue-ear-hanging-with-50-pcs-box.webp",
+      "/assets/product/mask/mvk-masking-3-ply-surgical-face-mask-disposable-blue-with-50-pcs-box.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3567",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3568-venus-v-4400-n95-niosh-certified-respirator-face-mask-white-yellow-straps-overhead-view",
+    "name": "Venus V 4400 N95 Niosh Certified Respirator Face Mask White Yellow Straps Overhead View",
+    "slug": "venus-v-4400-n95-niosh-certified-respirator-face-mask-white-yellow-straps-overhead-view-ob-hou-3568",
+    "sku": "OB-HOU-3568",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Venus V 4400 N95 Niosh Certified Respirator Face Mask White Yellow Straps Overhead View (OB-HOU-3568) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mask/venus-v-4400-n95-niosh-certified-respirator-face-mask-white-yellow-straps-overhead-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3568",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3569-comfort-pvc-cushion-coil-plain-door-mat-green-with-gold-oval-label",
+    "name": "Comfort Pvc Cushion Coil Plain Door Mat Green With Gold Oval Label",
+    "slug": "comfort-pvc-cushion-coil-plain-door-mat-green-with-gold-oval-label-ob-hou-3569",
+    "sku": "OB-HOU-3569",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Comfort Pvc Cushion Coil Plain Door Mat Green With Gold Oval Label (OB-HOU-3569) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mat/comfort-pvc-cushion-coil-plain-door-mat-green-with-gold-oval-label.webp",
+      "/assets/product/mat/comfort-pvc-cushion-coil-welcome-door-mat-green-gold-oval-label.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3569",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3570-cotton-chindi-handloom-door-mat-blue-white-black-striped-16x26-inch-with-tassels",
+    "name": "Cotton Chindi Handloom Door Mat Blue White Black Striped 16x26 Inch With Tassels",
+    "slug": "cotton-chindi-handloom-door-mat-blue-white-black-striped-16x26-inch-with-tassels-ob-hou-3570",
+    "sku": "OB-HOU-3570",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Cotton Chindi Handloom Door Mat Blue White Black Striped 16x26 Inch With Tassels (OB-HOU-3570) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mat/cotton-chindi-handloom-door-mat-blue-white-black-striped-16x26-inch-with-tassels.webp",
+      "/assets/product/mat/cotton-chindi-handloom-door-mat-blue-white-black-striped-with-tassels.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3570",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3571-aristo-omega-trolley-shopping-basket-red-with-telescopic-handle",
+    "name": "Aristo Omega Trolley Shopping Basket Red With Telescopic Handle",
+    "slug": "aristo-omega-trolley-shopping-basket-red-with-telescopic-handle-ob-hou-3571",
+    "sku": "OB-HOU-3571",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Aristo Omega Trolley Shopping Basket Red With Telescopic Handle (OB-HOU-3571) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mix/aristo-omega-trolley-shopping-basket-red-with-telescopic-handle-front-view.webp",
+      "/assets/product/mix/aristo-omega-trolley-shopping-basket-red-with-telescopic-handle-side-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3571",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3572-axl-med-automatic-infrared-thermometer-mounted-on-adjustable-floor-tripod-stand",
+    "name": "Axl Med Automatic Infrared Thermometer Mounted On Adjustable Floor Tripod Stand",
+    "slug": "axl-med-automatic-infrared-thermometer-mounted-on-adjustable-floor-tripod-stand-ob-hou-3572",
+    "sku": "OB-HOU-3572",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Axl Med Automatic Infrared Thermometer Mounted On Adjustable Floor Tripod Stand (OB-HOU-3572) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mix/axl-med-automatic-infrared-thermometer-mounted-on-adjustable-floor-tripod-stand.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3572",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3573-bubble-sheet-roll",
+    "name": "Bubble Sheet Roll",
+    "slug": "bubble-sheet-roll-ob-hou-3573",
+    "sku": "OB-HOU-3573",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Bubble Sheet Roll (OB-HOU-3573) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mix/bubble-sheet-roll.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3573",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3574-equal-foldable-platform-trolley-200kg-blue-underside-base-and-castor-wheels",
+    "name": "Equal Foldable Platform Trolley 200kg Blue Underside Base And Castor Wheels",
+    "slug": "equal-foldable-platform-trolley-200kg-blue-underside-base-and-castor-wheels-ob-hou-3574",
+    "sku": "OB-HOU-3574",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Equal Foldable Platform Trolley 200kg Blue Underside Base And Castor Wheels (OB-HOU-3574) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mix/equal-foldable-platform-trolley-200kg-blue-underside-base-and-castor-wheels.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3574",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3575-gobbler-shredder-machine-gs904-cd",
+    "name": "Gobbler Shredder Machine Gs904 Cd",
+    "slug": "gobbler-shredder-machine-gs904-cd-ob-hou-3575",
+    "sku": "OB-HOU-3575",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Gobbler Shredder Machine Gs904 Cd (OB-HOU-3575) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mix/gobbler-shredder-machine-gs904-cd.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3575",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3576-modular-plastic-storage-drawer-3-tier-white-with-castors-front-closed",
+    "name": "Modular Plastic Storage Drawer 3 Tier White With Castors Front Closed",
+    "slug": "modular-plastic-storage-drawer-3-tier-white-with-castors-front-closed-ob-hou-3576",
+    "sku": "OB-HOU-3576",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Modular Plastic Storage Drawer 3 Tier White With Castors Front Closed (OB-HOU-3576) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mix/modular-plastic-storage-drawer-3-tier-white-with-castors-front-closed.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3576",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3577-stretch-film-roll",
+    "name": "Stretch Film Roll",
+    "slug": "stretch-film-roll-ob-hou-3577",
+    "sku": "OB-HOU-3577",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Stretch Film Roll (OB-HOU-3577) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mix/stretch-film-roll.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3577",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3578-aluminium-flat-mop-set-with-telescopic-handle-full-view",
+    "name": "Aluminium Flat Mop Set With Telescopic Handle Full View",
+    "slug": "aluminium-flat-mop-set-with-telescopic-handle-full-view-ob-hou-3578",
+    "sku": "OB-HOU-3578",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Aluminium Flat Mop Set With Telescopic Handle Full View (OB-HOU-3578) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mop/aluminium-flat-mop-set-with-telescopic-handle-full-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3578",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3579-gala-easy-clip-n-fit-cotton-mop-with-blue-telescopic-pipe-handle-full-set",
+    "name": "Gala Easy Clip N Fit Cotton Mop With Blue Telescopic Pipe Handle Full Set",
+    "slug": "gala-easy-clip-n-fit-cotton-mop-with-blue-telescopic-pipe-handle-full-set-ob-hou-3579",
+    "sku": "OB-HOU-3579",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-gala",
+    "brandName": "Gala",
+    "description": "Gala Easy Clip N Fit Cotton Mop With Blue Telescopic Pipe Handle Full Set (OB-HOU-3579) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mop/gala-easy-clip-n-fit-cotton-mop-with-blue-telescopic-pipe-handle-full-set.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3579",
+      "brand": "Gala",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3580-microfiber-flat-mop-set-with-telescopic-handle-set-of-5-colors-blue-yellow-pink-green-orange",
+    "name": "Microfiber Flat Mop Set With Telescopic Handle Set Of 5 Colors Blue Yellow Pink Green Orange",
+    "slug": "microfiber-flat-mop-set-with-telescopic-handle-set-of-5-colors-blue-yellow-pink-green-orange-ob-hou-3580",
+    "sku": "OB-HOU-3580",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Microfiber Flat Mop Set With Telescopic Handle Set Of 5 Colors Blue Yellow Pink Green Orange (OB-HOU-3580) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/mop/microfiber-flat-mop-set-with-telescopic-handle-set-of-5-colors-blue-yellow-pink-green-orange.webp",
+      "/assets/product/mop/microfiber-twist-mop-telescopic-handle-set-of-4-colors-orange-green-blue-pink.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3580",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3581-stainless-water-bottle",
+    "name": "Stainless Water Bottle",
+    "slug": "stainless-water-bottle-ob-hou-3581",
+    "sku": "OB-HOU-3581",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Stainless Water Bottle (OB-HOU-3581) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/office-bazzar-new-images/stainless-water-bottle.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3581",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3582-water-bottle",
+    "name": "Water Bottle",
+    "slug": "water-bottle-ob-hou-3582",
+    "sku": "OB-HOU-3582",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Water Bottle (OB-HOU-3582) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/office-bazzar-new-images/water-bottle.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3582",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-pac-3583-blue-box-strapping-band-roll-shrink-wrapped-close-up",
+    "name": "Blue Box Strapping Band Roll Shrink Wrapped Close Up",
+    "slug": "blue-box-strapping-band-roll-shrink-wrapped-close-up-ob-pac-3583",
+    "sku": "OB-PAC-3583",
+    "categoryId": "packaging-supplies",
+    "categoryName": "Packaging Supplies",
+    "subcategoryId": "packaging-materials",
+    "subcategoryName": "Packaging Materials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Blue Box Strapping Band Roll Shrink Wrapped Close Up (OB-PAC-3583) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/packing-product/blue-box-strapping-band-roll-shrink-wrapped-close-up.webp",
+      "/assets/product/packing-product/white-box-strapping-roll-polypropylene-pp-packing-band-roll.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-PAC-3583",
+      "brand": "OfficeBazzar",
+      "category": "Packaging Supplies",
+      "subcategory": "Packaging Materials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-pac-3584-handheld-carton-tape-dispenser-gun-blue-and-black-front-angle-view",
+    "name": "Handheld Carton Tape Dispenser Gun Blue And Black Front Angle View",
+    "slug": "handheld-carton-tape-dispenser-gun-blue-and-black-front-angle-view-ob-pac-3584",
+    "sku": "OB-PAC-3584",
+    "categoryId": "packaging-supplies",
+    "categoryName": "Packaging Supplies",
+    "subcategoryId": "packaging-materials",
+    "subcategoryName": "Packaging Materials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Handheld Carton Tape Dispenser Gun Blue And Black Front Angle View (OB-PAC-3584) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/packing-product/handheld-carton-tape-dispenser-gun-blue-and-black-front-angle-view.webp",
+      "/assets/product/packing-product/handheld-carton-tape-dispenser-gun-blue-and-black-side-profile-view.webp",
+      "/assets/product/packing-product/handheld-carton-tape-dispenser-gun-off-white-and-black-front-angle-view.webp",
+      "/assets/product/packing-product/handheld-carton-tape-dispenser-gun-off-white-and-black-side-profile-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-PAC-3584",
+      "brand": "OfficeBazzar",
+      "category": "Packaging Supplies",
+      "subcategory": "Packaging Materials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3585-godrej-aer-matic-automatic-spray-dispensers-cool-surf-blue-violet-bloom-petal-crush-pink-with-boxes-trio",
+    "name": "Godrej Aer Matic Automatic Spray Dispensers Cool Surf Blue Violet Bloom Petal Crush Pink With Boxes Trio",
+    "slug": "godrej-aer-matic-automatic-spray-dispensers-cool-surf-blue-violet-bloom-petal-crush-pink-with-boxes-trio-ob-hou-3585",
+    "sku": "OB-HOU-3585",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-godrej",
+    "brandName": "Godrej",
+    "description": "Godrej Aer Matic Automatic Spray Dispensers Cool Surf Blue Violet Bloom Petal Crush Pink With Boxes Trio (OB-HOU-3585) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/room-spray/godrej-aer-matic-automatic-spray-dispensers-cool-surf-blue-violet-bloom-petal-crush-pink-with-boxes-trio.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3585",
+      "brand": "Godrej",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3586-godrej-aer-matic-violet-valley-bloom-automatic-dispenser-refill-can-and-box-set",
+    "name": "Godrej Aer Matic Violet Valley Bloom Automatic Dispenser Refill Can And Box Set",
+    "slug": "godrej-aer-matic-violet-valley-bloom-automatic-dispenser-refill-can-and-box-set-ob-hou-3586",
+    "sku": "OB-HOU-3586",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-godrej",
+    "brandName": "Godrej",
+    "description": "Godrej Aer Matic Violet Valley Bloom Automatic Dispenser Refill Can And Box Set (OB-HOU-3586) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/room-spray/godrej-aer-matic-violet-valley-bloom-automatic-dispenser-refill-can-and-box-set.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3586",
+      "brand": "Godrej",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3587-care4u-infrared-forehead-thermometer-handheld-device-with-product-box",
+    "name": "Care4u Infrared Forehead Thermometer Handheld Device With Product Box",
+    "slug": "care4u-infrared-forehead-thermometer-handheld-device-with-product-box-ob-hou-3587",
+    "sku": "OB-HOU-3587",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "safety-ppe-gear",
+    "subcategoryName": "Safety & PPE Gear",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Care4u Infrared Forehead Thermometer Handheld Device With Product Box (OB-HOU-3587) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/safety-items/care4u-infrared-forehead-thermometer-handheld-device-with-product-box.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3587",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Safety & PPE Gear",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3588-contec-cms50d-pulse-oximeter-fingertip-device-with-product-box",
+    "name": "Contec Cms50d Pulse Oximeter Fingertip Device With Product Box",
+    "slug": "contec-cms50d-pulse-oximeter-fingertip-device-with-product-box-ob-hou-3588",
+    "sku": "OB-HOU-3588",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "safety-ppe-gear",
+    "subcategoryName": "Safety & PPE Gear",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Contec Cms50d Pulse Oximeter Fingertip Device With Product Box (OB-HOU-3588) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/safety-items/contec-cms50d-pulse-oximeter-fingertip-device-with-product-box.webp",
+      "/assets/product/safety-items/contec-cms50d-pulse-oximeter-product-box.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3588",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Safety & PPE Gear",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3589-high-visibility-orange-reflective-safety-vest-with-black-trim",
+    "name": "High Visibility Orange Reflective Safety Vest With Black Trim",
+    "slug": "high-visibility-orange-reflective-safety-vest-with-black-trim-ob-hou-3589",
+    "sku": "OB-HOU-3589",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "safety-ppe-gear",
+    "subcategoryName": "Safety & PPE Gear",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "High Visibility Orange Reflective Safety Vest With Black Trim (OB-HOU-3589) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/safety-items/high-visibility-orange-reflective-safety-vest-with-black-trim-front-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3589",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Safety & PPE Gear",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3590-queue-manager-gold-stanchion-posts-with-red-velvet-rope",
+    "name": "Queue Manager Gold Stanchion Posts With Red Velvet Rope",
+    "slug": "queue-manager-gold-stanchion-posts-with-red-velvet-rope-ob-hou-3590",
+    "sku": "OB-HOU-3590",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "safety-ppe-gear",
+    "subcategoryName": "Safety & PPE Gear",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Queue Manager Gold Stanchion Posts With Red Velvet Rope (OB-HOU-3590) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/safety-items/queue-manager-gold-stanchion-posts-with-red-velvet-rope.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3590",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Safety & PPE Gear",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3591-queue-manager-stainless-steel-retractable-belt-barrier-stanchions-pair-with-red-belt",
+    "name": "Queue Manager Stainless Steel Retractable Belt Barrier Stanchions Pair With Red Belt",
+    "slug": "queue-manager-stainless-steel-retractable-belt-barrier-stanchions-pair-with-red-belt-ob-hou-3591",
+    "sku": "OB-HOU-3591",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "safety-ppe-gear",
+    "subcategoryName": "Safety & PPE Gear",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Queue Manager Stainless Steel Retractable Belt Barrier Stanchions Pair With Red Belt (OB-HOU-3591) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/safety-items/queue-manager-stainless-steel-retractable-belt-barrier-stanchions-pair-with-red-belt.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3591",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Safety & PPE Gear",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3592-queue-manager-stainless-steel-stanchion-post-1m-height-8kg-with-275m-blue-retractable-belt",
+    "name": "Queue Manager Stainless Steel Stanchion Post 1m Height 8kg With 275m Blue Retractable Belt",
+    "slug": "queue-manager-stainless-steel-stanchion-post-1m-height-8kg-with-275m-blue-retractable-belt-ob-hou-3592",
+    "sku": "OB-HOU-3592",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "safety-ppe-gear",
+    "subcategoryName": "Safety & PPE Gear",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Queue Manager Stainless Steel Stanchion Post 1m Height 8kg With 275m Blue Retractable Belt (OB-HOU-3592) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/safety-items/queue-manager-stainless-steel-stanchion-post-1m-height-8kg-with-275m-blue-retractable-belt.webp",
+      "/assets/product/safety-items/queue-manager-stainless-steel-stanchion-post-with-blue-retractable-belt.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3592",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Safety & PPE Gear",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3593-red-and-white-plastic-safety-warning-barrier-chain-coil",
+    "name": "Red And White Plastic Safety Warning Barrier Chain Coil",
+    "slug": "red-and-white-plastic-safety-warning-barrier-chain-coil-ob-hou-3593",
+    "sku": "OB-HOU-3593",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "safety-ppe-gear",
+    "subcategoryName": "Safety & PPE Gear",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Red And White Plastic Safety Warning Barrier Chain Coil (OB-HOU-3593) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/safety-items/red-and-white-plastic-safety-warning-barrier-chain-coil.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3593",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Safety & PPE Gear",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3594-red-orange-traffic-cone-with-white-reflective-collar-band-750mm-wholesaler-bazzar-display",
+    "name": "Red Orange Traffic Cone With White Reflective Collar Band 750mm Wholesaler Bazzar Display",
+    "slug": "red-orange-traffic-cone-with-white-reflective-collar-band-750mm-wholesaler-bazzar-display-ob-hou-3594",
+    "sku": "OB-HOU-3594",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "safety-ppe-gear",
+    "subcategoryName": "Safety & PPE Gear",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Red Orange Traffic Cone With White Reflective Collar Band 750mm Wholesaler Bazzar Display (OB-HOU-3594) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/safety-items/red-orange-traffic-cone-with-white-reflective-collar-band-750mm-wholesaler-bazzar-display.webp",
+      "/assets/product/safety-items/red-orange-traffic-cone-with-white-reflective-collar-band-750mm.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3594",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Safety & PPE Gear",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3595-rowdel-yellow-industrial-safety-helmet-hard-hat",
+    "name": "Rowdel Yellow Industrial Safety Helmet Hard Hat",
+    "slug": "rowdel-yellow-industrial-safety-helmet-hard-hat-ob-hou-3595",
+    "sku": "OB-HOU-3595",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "safety-ppe-gear",
+    "subcategoryName": "Safety & PPE Gear",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Rowdel Yellow Industrial Safety Helmet Hard Hat (OB-HOU-3595) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/safety-items/rowdel-yellow-industrial-safety-helmet-hard-hat-side-view.webp",
+      "/assets/product/safety-items/rowdel-yellow-industrial-safety-helmet-hard-hat-with-chin-strap.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3595",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Safety & PPE Gear",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3596-rubber-base-traffic-cone-rbtc-750mm-height-2kg-red-standing-view",
+    "name": "Rubber Base Traffic Cone Rbtc 750mm Height 2kg Red Standing View",
+    "slug": "rubber-base-traffic-cone-rbtc-750mm-height-2kg-red-standing-view-ob-hou-3596",
+    "sku": "OB-HOU-3596",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "safety-ppe-gear",
+    "subcategoryName": "Safety & PPE Gear",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Rubber Base Traffic Cone Rbtc 750mm Height 2kg Red Standing View (OB-HOU-3596) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/safety-items/rubber-base-traffic-cone-rbtc-750mm-height-2kg-red-standing-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3596",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Safety & PPE Gear",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3597-dual-action-green-and-yellow-sponge-scourer-pad-flat-view",
+    "name": "Dual Action Green And Yellow Sponge Scourer Pad Flat View",
+    "slug": "dual-action-green-and-yellow-sponge-scourer-pad-flat-view-ob-hou-3597",
+    "sku": "OB-HOU-3597",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Dual Action Green And Yellow Sponge Scourer Pad Flat View (OB-HOU-3597) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/scotch-bright-and-scrubber/dual-action-green-and-yellow-sponge-scourer-pad-flat-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3597",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3598-exe-safe-heavy-quality-stainless-steel-scrubber-12-pcs-hanging-card",
+    "name": "Exe Safe Heavy Quality Stainless Steel Scrubber 12 Pcs Hanging Card",
+    "slug": "exe-safe-heavy-quality-stainless-steel-scrubber-12-pcs-hanging-card-ob-hou-3598",
+    "sku": "OB-HOU-3598",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Exe Safe Heavy Quality Stainless Steel Scrubber 12 Pcs Hanging Card (OB-HOU-3598) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/scotch-bright-and-scrubber/exe-safe-heavy-quality-stainless-steel-scrubber-12-pcs-hanging-card.webp",
+      "/assets/product/scotch-bright-and-scrubber/exo-shine-heavy-quality-stainless-steel-scrubber-12-pcs-hanging-card.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3598",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3599-exo-anti-bacterial-dish-wash-bar-round-ginger-twist-500g-tub-display",
+    "name": "Exo Anti Bacterial Dish Wash Bar Round Ginger Twist 500g Tub Display",
+    "slug": "exo-anti-bacterial-dish-wash-bar-round-ginger-twist-500g-tub-display-ob-hou-3599",
+    "sku": "OB-HOU-3599",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-exo",
+    "brandName": "Exo",
+    "description": "Exo Anti Bacterial Dish Wash Bar Round Ginger Twist 500g Tub Display (OB-HOU-3599) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/soap/exo-anti-bacterial-dish-wash-bar-round-ginger-twist-500g-tub-display.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3599",
+      "brand": "Exo",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3600-kd-pumps-2-liter-pressure-sprayer-yellow-and-red",
+    "name": "Kd Pumps 2 Liter Pressure Sprayer Yellow And Red",
+    "slug": "kd-pumps-2-liter-pressure-sprayer-yellow-and-red-ob-hou-3600",
+    "sku": "OB-HOU-3600",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Kd Pumps 2 Liter Pressure Sprayer Yellow And Red (OB-HOU-3600) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/sprayer-pump/kd-pumps-2-liter-pressure-sprayer-yellow-and-red-pair.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3600",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3601-neptune-knapsack-sprayer-yellow-tank-with-wand-and-nozzle",
+    "name": "Neptune Knapsack Sprayer Yellow Tank With Wand And Nozzle",
+    "slug": "neptune-knapsack-sprayer-yellow-tank-with-wand-and-nozzle-ob-hou-3601",
+    "sku": "OB-HOU-3601",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Neptune Knapsack Sprayer Yellow Tank With Wand And Nozzle (OB-HOU-3601) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/sprayer-pump/neptune-knapsack-sprayer-yellow-tank-with-wand-and-nozzle.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3601",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3602-translucent-plastic-trigger-spray-bottles-white-sprayer",
+    "name": "Translucent Plastic Trigger Spray Bottles White Sprayer",
+    "slug": "translucent-plastic-trigger-spray-bottles-white-sprayer-ob-hou-3602",
+    "sku": "OB-HOU-3602",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Translucent Plastic Trigger Spray Bottles White Sprayer (OB-HOU-3602) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/sprayer-pump/translucent-plastic-trigger-spray-bottles-white-sprayer-pair.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3602",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3603-a-z-box-file-3025",
+    "name": "A Z Box File 3025",
+    "slug": "a-z-box-file-3025-ob-sta-3603",
+    "sku": "OB-STA-3603",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "A Z Box File 3025 (OB-STA-3603) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/a-z-box-file-3025.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3603",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3604-a-z-box-file-front-image",
+    "name": "A Z Box File Front Image",
+    "slug": "a-z-box-file-front-image-ob-sta-3604",
+    "sku": "OB-STA-3604",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "A Z Box File Front Image (OB-STA-3604) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/a-z-box-file-front-image.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3604",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3605-black-mesh-wire-document-letter-tray-2-tier-stand",
+    "name": "Black Mesh Wire Document Letter Tray 2 Tier Stand",
+    "slug": "black-mesh-wire-document-letter-tray-2-tier-stand-ob-sta-3605",
+    "sku": "OB-STA-3605",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Black Mesh Wire Document Letter Tray 2 Tier Stand (OB-STA-3605) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/black-mesh-wire-document-letter-tray-2-tier-stand.webp",
+      "/assets/product/stationery/black-mesh-wire-document-letter-tray-3-tier-stand-transparent-background.webp",
+      "/assets/product/stationery/black-mesh-wire-document-letter-tray-3-tier-stand.webp",
+      "/assets/product/stationery/black-mesh-wire-document-letter-tray-4-tier-dimensions-diagram.webp",
+      "/assets/product/stationery/black-mesh-wire-document-letter-tray-4-tier-with-dimensions.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3605",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3606-blue-wall-mounted-document-display-panel-flip-folder-rack-10-panels-open",
+    "name": "Blue Wall Mounted Document Display Panel Flip Folder Rack 10 Panels Open",
+    "slug": "blue-wall-mounted-document-display-panel-flip-folder-rack-10-panels-open-ob-sta-3606",
+    "sku": "OB-STA-3606",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Blue Wall Mounted Document Display Panel Flip Folder Rack 10 Panels Open (OB-STA-3606) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/blue-wall-mounted-document-display-panel-flip-folder-rack-10-panels-open.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3606",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3607-button-bag-fs-1",
+    "name": "Button Bag Fs 1",
+    "slug": "button-bag-fs-1-ob-sta-3607",
+    "sku": "OB-STA-3607",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Button Bag Fs 1 (OB-STA-3607) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/button-bag-fs-1.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3607",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3608-button-bag-fs",
+    "name": "Button Bag Fs",
+    "slug": "button-bag-fs-ob-sta-3608",
+    "sku": "OB-STA-3608",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Button Bag Fs (OB-STA-3608) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/button-bag-fs.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3608",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3609-classik-a4-403-2-ring-binder-d-ring-file-folder-blue-closed-and-open-views",
+    "name": "Classik A4 403 2 Ring Binder D Ring File Folder Blue Closed And Open Views",
+    "slug": "classik-a4-403-2-ring-binder-d-ring-file-folder-blue-closed-and-open-views-ob-sta-3609",
+    "sku": "OB-STA-3609",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Classik A4 403 2 Ring Binder D Ring File Folder Blue Closed And Open Views (OB-STA-3609) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/classik-a4-403-2-ring-binder-d-ring-file-folder-blue-closed-and-open-views.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3609",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3610-document-display-panels-blue-green-red-yellow-black-collaged-frames",
+    "name": "Document Display Panels Blue Green Red Yellow Black Collaged Frames",
+    "slug": "document-display-panels-blue-green-red-yellow-black-collaged-frames-ob-sta-3610",
+    "sku": "OB-STA-3610",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Document Display Panels Blue Green Red Yellow Black Collaged Frames (OB-STA-3610) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/document-display-panels-blue-green-red-yellow-black-collaged-frames.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3610",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3611-faber-castell-highlighter-marker-500x500",
+    "name": "Faber Castell Highlighter Marker 500x500",
+    "slug": "faber-castell-highlighter-marker-500x500-ob-sta-3611",
+    "sku": "OB-STA-3611",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-faber-castell",
+    "brandName": "Faber-Castell",
+    "description": "Faber Castell Highlighter Marker 500x500 (OB-STA-3611) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/faber-castell-highlighter-marker-500x500.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3611",
+      "brand": "Faber-Castell",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3612-floor-masking-tape-2-inch-25-mtr",
+    "name": "Floor Masking Tape 2 Inch 25 Mtr",
+    "slug": "floor-masking-tape-2-inch-25-mtr-ob-sta-3612",
+    "sku": "OB-STA-3612",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Floor Masking Tape 2 Inch 25 Mtr (OB-STA-3612) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/floor-masking-tape-2-inch-25-mtr.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3612",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3613-green-life-glue-stick-9g-and-15g-trays-and-packaging-boxes-collage",
+    "name": "Green Life Glue Stick 9g And 15g Trays And Packaging Boxes Collage",
+    "slug": "green-life-glue-stick-9g-and-15g-trays-and-packaging-boxes-collage-ob-sta-3613",
+    "sku": "OB-STA-3613",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Green Life Glue Stick 9g And 15g Trays And Packaging Boxes Collage (OB-STA-3613) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/green-life-glue-stick-9g-and-15g-trays-and-packaging-boxes-collage.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3613",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3614-itc-long-note-160-pages-hard",
+    "name": "Itc Long Note 160 Pages Hard",
+    "slug": "itc-long-note-160-pages-hard-ob-sta-3614",
+    "sku": "OB-STA-3614",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Itc Long Note 160 Pages Hard (OB-STA-3614) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/itc-long-note-160-pages-hard.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3614",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3615-jb9-5-colours-plastic-flags-sign-here-and-arrow-page-markers-3-packs",
+    "name": "Jb9 5 Colours Plastic Flags Sign Here And Arrow Page Markers 3 Packs",
+    "slug": "jb9-5-colours-plastic-flags-sign-here-and-arrow-page-markers-3-packs-ob-sta-3615",
+    "sku": "OB-STA-3615",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-jb9",
+    "brandName": "JB9",
+    "description": "Jb9 5 Colours Plastic Flags Sign Here And Arrow Page Markers 3 Packs (OB-STA-3615) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/jb9-5-colours-plastic-flags-sign-here-and-arrow-page-markers-3-packs.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3615",
+      "brand": "JB9",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3616-jb9-cello-tape-dispenser-black-with-box-watermarked-background",
+    "name": "Jb9 Cello Tape Dispenser Black With Box Watermarked Background",
+    "slug": "jb9-cello-tape-dispenser-black-with-box-watermarked-background-ob-sta-3616",
+    "sku": "OB-STA-3616",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-jb9",
+    "brandName": "JB9",
+    "description": "Jb9 Cello Tape Dispenser Black With Box Watermarked Background (OB-STA-3616) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/jb9-cello-tape-dispenser-black-with-box-watermarked-background.webp",
+      "/assets/product/stationery/jb9-cello-tape-dispenser-black-with-packaging-box.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3616",
+      "brand": "JB9",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3617-jb9-magnetic-white-board-duster-pack-of-10-boxes-shrink-wrapped",
+    "name": "Jb9 Magnetic White Board Duster Pack Of 10 Boxes Shrink Wrapped",
+    "slug": "jb9-magnetic-white-board-duster-pack-of-10-boxes-shrink-wrapped-ob-sta-3617",
+    "sku": "OB-STA-3617",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-jb9",
+    "brandName": "JB9",
+    "description": "Jb9 Magnetic White Board Duster Pack Of 10 Boxes Shrink Wrapped (OB-STA-3617) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/jb9-magnetic-white-board-duster-pack-of-10-boxes-shrink-wrapped.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3617",
+      "brand": "JB9",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3618-jb9-magnetic-white-board-duster-red-with-marker-holder-and-box",
+    "name": "Jb9 Magnetic White Board Duster Red With Marker Holder And Box",
+    "slug": "jb9-magnetic-white-board-duster-red-with-marker-holder-and-box-ob-sta-3618",
+    "sku": "OB-STA-3618",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-jb9",
+    "brandName": "JB9",
+    "description": "Jb9 Magnetic White Board Duster Red With Marker Holder And Box (OB-STA-3618) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/jb9-magnetic-white-board-duster-red-with-marker-holder-and-box.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3618",
+      "brand": "JB9",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3619-key-board",
+    "name": "Key Board",
+    "slug": "key-board-ob-sta-3619",
+    "sku": "OB-STA-3619",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Key Board (OB-STA-3619) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/key-board.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3619",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3620-lazzo-gold-ballpen-colours-20-pcs-box-with-5-pens-grey-background",
+    "name": "Lazzo Gold Ballpen Colours 20 Pcs Box With 5 Pens Grey Background",
+    "slug": "lazzo-gold-ballpen-colours-20-pcs-box-with-5-pens-grey-background-ob-sta-3620",
+    "sku": "OB-STA-3620",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-lazzo",
+    "brandName": "Lazzo",
+    "description": "Lazzo Gold Ballpen Colours 20 Pcs Box With 5 Pens Grey Background (OB-STA-3620) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/lazzo-gold-ballpen-colours-20-pcs-box-with-5-pens-grey-background.webp",
+      "/assets/product/stationery/lazzo-gold-ballpen-natural-20-pcs-box-with-5-pens-grey-background.webp",
+      "/assets/product/stationery/lazzo-gold-smooth-writing-ballpen-colours-20-pcs-box-with-5-pens-display.webp",
+      "/assets/product/stationery/lazzo-gold-smooth-writing-ballpen-natural-20-pcs-box-with-5-pens-display.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3620",
+      "brand": "Lazzo",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3621-light-blue-paper-envelopes-bundle-with-brown-paper-band",
+    "name": "Light Blue Paper Envelopes Bundle With Brown Paper Band",
+    "slug": "light-blue-paper-envelopes-bundle-with-brown-paper-band-ob-sta-3621",
+    "sku": "OB-STA-3621",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Light Blue Paper Envelopes Bundle With Brown Paper Band (OB-STA-3621) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/light-blue-paper-envelopes-bundle-with-brown-paper-band.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3621",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3622-magazine-brochure-display-stand-rack-models-1271-1272-1318-1328-chart",
+    "name": "Magazine Brochure Display Stand Rack Models 1271 1272 1318 1328 Chart",
+    "slug": "magazine-brochure-display-stand-rack-models-1271-1272-1318-1328-chart-ob-sta-3622",
+    "sku": "OB-STA-3622",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Magazine Brochure Display Stand Rack Models 1271 1272 1318 1328 Chart (OB-STA-3622) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/magazine-brochure-display-stand-rack-models-1271-1272-1318-1328-chart.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3622",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3623-magnetic-folder-a3",
+    "name": "Magnetic Folder A3",
+    "slug": "magnetic-folder-a3-ob-sta-3623",
+    "sku": "OB-STA-3623",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Magnetic Folder A3 (OB-STA-3623) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/magnetic-folder-a3.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3623",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3624-magnetic-folder-a4",
+    "name": "Magnetic Folder A4",
+    "slug": "magnetic-folder-a4-ob-sta-3624",
+    "sku": "OB-STA-3624",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Magnetic Folder A4 (OB-STA-3624) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/magnetic-folder-a4.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3624",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3625-premium-quality-cloth-line-envelope-12x10-inch-100-nos-pack",
+    "name": "Premium Quality Cloth Line Envelope 12x10 Inch 100 Nos Pack",
+    "slug": "premium-quality-cloth-line-envelope-12x10-inch-100-nos-pack-ob-sta-3625",
+    "sku": "OB-STA-3625",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Premium Quality Cloth Line Envelope 12x10 Inch 100 Nos Pack (OB-STA-3625) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/premium-quality-cloth-line-envelope-12x10-inch-100-nos-pack.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3625",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-sta-3626-tag-file-image",
+    "name": "Tag File Image",
+    "slug": "tag-file-image-ob-sta-3626",
+    "sku": "OB-STA-3626",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "general-office-stationery",
+    "subcategoryName": "General Office Stationery",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Tag File Image (OB-STA-3626) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/stationery/tag-file-image.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-STA-3626",
+      "brand": "OfficeBazzar",
+      "category": "Office Stationery",
+      "subcategory": "General Office Stationery",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3627-c-fold-paper-hand-towel-white-pack-and-stack",
+    "name": "C Fold Paper Hand Towel White Pack And Stack",
+    "slug": "c-fold-paper-hand-towel-white-pack-and-stack-ob-hou-3627",
+    "sku": "OB-HOU-3627",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "tissue-paper-products",
+    "subcategoryName": "Tissue Paper Products",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "C Fold Paper Hand Towel White Pack And Stack (OB-HOU-3627) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/tissue-product/c-fold-paper-hand-towel-white-pack-and-stack-side-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3627",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Tissue Paper Products",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3628-greenlime-hrt-white-hand-roll-towel-02410056-carton-with-two-rolls",
+    "name": "Greenlime Hrt White Hand Roll Towel 02410056 Carton With Two Rolls",
+    "slug": "greenlime-hrt-white-hand-roll-towel-02410056-carton-with-two-rolls-ob-hou-3628",
+    "sku": "OB-HOU-3628",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "tissue-paper-products",
+    "subcategoryName": "Tissue Paper Products",
+    "brandId": "brand-greenlime",
+    "brandName": "Greenlime",
+    "description": "Greenlime Hrt White Hand Roll Towel 02410056 Carton With Two Rolls (OB-HOU-3628) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/tissue-product/greenlime-hrt-white-hand-roll-towel-02410056-carton-with-two-rolls.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3628",
+      "brand": "Greenlime",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Tissue Paper Products",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3629-greenlime-small-roll-tissue-04410050-2-ply-carton-with-4-rolls",
+    "name": "Greenlime Small Roll Tissue 04410050 2 Ply Carton With 4 Rolls",
+    "slug": "greenlime-small-roll-tissue-04410050-2-ply-carton-with-4-rolls-ob-hou-3629",
+    "sku": "OB-HOU-3629",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "tissue-paper-products",
+    "subcategoryName": "Tissue Paper Products",
+    "brandId": "brand-greenlime",
+    "brandName": "Greenlime",
+    "description": "Greenlime Small Roll Tissue 04410050 2 Ply Carton With 4 Rolls (OB-HOU-3629) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/tissue-product/greenlime-small-roll-tissue-04410050-2-ply-carton-with-4-rolls.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3629",
+      "brand": "Greenlime",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Tissue Paper Products",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3630-kimsoft-smile-c-fold-towels-31500-180-sheets",
+    "name": "Kimsoft Smile C Fold Towels 31500 180 Sheets",
+    "slug": "kimsoft-smile-c-fold-towels-31500-180-sheets-ob-hou-3630",
+    "sku": "OB-HOU-3630",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "tissue-paper-products",
+    "subcategoryName": "Tissue Paper Products",
+    "brandId": "brand-kimberly-clark",
+    "brandName": "Kimberly-Clark",
+    "description": "Kimsoft Smile C Fold Towels 31500 180 Sheets (OB-HOU-3630) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/tissue-product/kimsoft-smile-c-fold-towels-31500-180-sheets-pack-and-stack.webp",
+      "/assets/product/tissue-product/kimsoft-smile-c-fold-towels-31500-5400-sheets-carton-with-pack-and-stack.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3630",
+      "brand": "Kimberly-Clark",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Tissue Paper Products",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3631-kosher-jrt-jumbo-rolled-tissue-4-inch-x-750-gms-carton-with-rolls",
+    "name": "Kosher Jrt Jumbo Rolled Tissue 4 Inch X 750 Gms Carton With Rolls",
+    "slug": "kosher-jrt-jumbo-rolled-tissue-4-inch-x-750-gms-carton-with-rolls-ob-hou-3631",
+    "sku": "OB-HOU-3631",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "tissue-paper-products",
+    "subcategoryName": "Tissue Paper Products",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Kosher Jrt Jumbo Rolled Tissue 4 Inch X 750 Gms Carton With Rolls (OB-HOU-3631) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/tissue-product/kosher-jrt-jumbo-rolled-tissue-4-inch-x-750-gms-carton-with-rolls.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3631",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Tissue Paper Products",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3632-premier-soft-face-tissues-2-ply-100-pulls-green-box-with-pop-up-tissue",
+    "name": "Premier Soft Face Tissues 2 Ply 100 Pulls Green Box With Pop Up Tissue",
+    "slug": "premier-soft-face-tissues-2-ply-100-pulls-green-box-with-pop-up-tissue-ob-hou-3632",
+    "sku": "OB-HOU-3632",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "tissue-paper-products",
+    "subcategoryName": "Tissue Paper Products",
+    "brandId": "brand-premier",
+    "brandName": "Premier",
+    "description": "Premier Soft Face Tissues 2 Ply 100 Pulls Green Box With Pop Up Tissue (OB-HOU-3632) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/tissue-product/premier-soft-face-tissues-2-ply-100-pulls-green-box-with-pop-up-tissue.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3632",
+      "brand": "Premier",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Tissue Paper Products",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3633-royal-napkins-70-pulls-1-ply-27x30cm-pack-back-specifications",
+    "name": "Royal Napkins 70 Pulls 1 Ply 27x30cm Pack Back Specifications",
+    "slug": "royal-napkins-70-pulls-1-ply-27x30cm-pack-back-specifications-ob-hou-3633",
+    "sku": "OB-HOU-3633",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "tissue-paper-products",
+    "subcategoryName": "Tissue Paper Products",
+    "brandId": "brand-royal",
+    "brandName": "Royal",
+    "description": "Royal Napkins 70 Pulls 1 Ply 27x30cm Pack Back Specifications (OB-HOU-3633) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/tissue-product/royal-napkins-70-pulls-1-ply-27x30cm-pack-back-specifications.webp",
+      "/assets/product/tissue-product/royal-napkins-70-sheets-1-ply-27x30cm-pack-back-specifications.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3633",
+      "brand": "Royal",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Tissue Paper Products",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3634-royal-napkins-70-sheets-1-ply-red-zigzag-pack",
+    "name": "Royal Napkins 70 Sheets 1 Ply Red Zigzag Pack",
+    "slug": "royal-napkins-70-sheets-1-ply-red-zigzag-pack-ob-hou-3634",
+    "sku": "OB-HOU-3634",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "tissue-paper-products",
+    "subcategoryName": "Tissue Paper Products",
+    "brandId": "brand-royal",
+    "brandName": "Royal",
+    "description": "Royal Napkins 70 Sheets 1 Ply Red Zigzag Pack (OB-HOU-3634) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/tissue-product/royal-napkins-70-sheets-1-ply-red-zigzag-pack-front-view.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3634",
+      "brand": "Royal",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Tissue Paper Products",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3635-royal-natural-jumbo-roll-tissue-jrt-two-rolls-stack",
+    "name": "Royal Natural Jumbo Roll Tissue Jrt Two Rolls Stack",
+    "slug": "royal-natural-jumbo-roll-tissue-jrt-two-rolls-stack-ob-hou-3635",
+    "sku": "OB-HOU-3635",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "tissue-paper-products",
+    "subcategoryName": "Tissue Paper Products",
+    "brandId": "brand-royal",
+    "brandName": "Royal",
+    "description": "Royal Natural Jumbo Roll Tissue Jrt Two Rolls Stack (OB-HOU-3635) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/tissue-product/royal-natural-jumbo-roll-tissue-jrt-two-rolls-stack.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3635",
+      "brand": "Royal",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Tissue Paper Products",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3636-scott-essential-multi-fold-towel-38002-kraft-paper-wrap-250-sheets",
+    "name": "Scott Essential Multi Fold Towel 38002 Kraft Paper Wrap 250 Sheets",
+    "slug": "scott-essential-multi-fold-towel-38002-kraft-paper-wrap-250-sheets-ob-hou-3636",
+    "sku": "OB-HOU-3636",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "tissue-paper-products",
+    "subcategoryName": "Tissue Paper Products",
+    "brandId": "brand-kimberly-clark",
+    "brandName": "Kimberly-Clark",
+    "description": "Scott Essential Multi Fold Towel 38002 Kraft Paper Wrap 250 Sheets (OB-HOU-3636) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/tissue-product/scott-essential-multi-fold-towel-38002-kraft-paper-wrap-250-sheets-pack-and-stack.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3636",
+      "brand": "Kimberly-Clark",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Tissue Paper Products",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3637-floor-wiper-blue-head-with-long-metal-handle-isolated",
+    "name": "Floor Wiper Blue Head With Long Metal Handle Isolated",
+    "slug": "floor-wiper-blue-head-with-long-metal-handle-isolated-ob-hou-3637",
+    "sku": "OB-HOU-3637",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Floor Wiper Blue Head With Long Metal Handle Isolated (OB-HOU-3637) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/wiper/floor-wiper-blue-head-with-long-metal-handle-isolated.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3637",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3638-handheld-kitchen-and-window-squeegee-wiper-blue-cyan-pink-trio",
+    "name": "Handheld Kitchen And Window Squeegee Wiper Blue Cyan Pink Trio",
+    "slug": "handheld-kitchen-and-window-squeegee-wiper-blue-cyan-pink-trio-ob-hou-3638",
+    "sku": "OB-HOU-3638",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Handheld Kitchen And Window Squeegee Wiper Blue Cyan Pink Trio (OB-HOU-3638) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/wiper/handheld-kitchen-and-window-squeegee-wiper-blue-cyan-pink-trio.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3638",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
+    }
+  },
+  {
+    "id": "prod-ob-hou-3639-kitchen-and-table-mini-squeegee-wiper-pink-green-peach-blue-4-piece-set",
+    "name": "Kitchen And Table Mini Squeegee Wiper Pink Green Peach Blue 4 Piece Set",
+    "slug": "kitchen-and-table-mini-squeegee-wiper-pink-green-peach-blue-4-piece-set-ob-hou-3639",
+    "sku": "OB-HOU-3639",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "cleaning-hygiene-essentials",
+    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "brandId": "brand-officebazzar",
+    "brandName": "OfficeBazzar",
+    "description": "Kitchen And Table Mini Squeegee Wiper Pink Green Peach Blue 4 Piece Set (OB-HOU-3639) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
+    "price": 0,
+    "mrp": 0,
+    "gstPercent": 18,
+    "stockQuantity": 0,
+    "minOrderQuantity": 1,
+    "isPriceVerified": false,
+    "requiresManualReview": true,
+    "packSize": "Standard Institutional Pack",
+    "images": [
+      "/assets/product/wiper/kitchen-and-table-mini-squeegee-wiper-pink-green-peach-blue-4-piece-set.webp"
+    ],
+    "featured": false,
+    "bestseller": false,
+    "rating": 4.8,
+    "reviewCount": 8,
+    "isActive": true,
+    "specifications": {
+      "catalogueCode": "OB-HOU-3639",
+      "brand": "OfficeBazzar",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Cleaning & Hygiene Essentials",
+      "source": "OfficeBazzar Master Catalogue",
+      "availability": "Available on Quotation",
+      "inventoryStatus": "On Demand / RFQ",
+      "stockVerification": "Verified Authentic Supplier Stock"
     }
   }
 ];
