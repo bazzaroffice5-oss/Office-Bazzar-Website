@@ -1471,7 +1471,8 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1012.webp",
-      "/assets/products/catalog_2026/OB-HOU-1012_alt1.webp"
+      "/assets/products/catalog_2026/OB-HOU-1012_alt1.webp",
+      "/assets/supplier-library/collage/housekeeping-and-cleaning-equipment-collection.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1501,7 +1502,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1013.webp",
-      "/assets/products/catalog_2026/OB-HOU-1013-alt-1.webp"
+      "/assets/products/catalog_2026/OB-HOU-1013-alt-1.webp",
+      "/assets/supplier-library/collage/tissue-and-paper-towel-dispensers-collection.webp",
+      "/assets/supplier-library/tissue-product/hi-soft-tissue-travel-pack-cocktail-napkin-two-packs-display.webp",
+      "/assets/supplier-library/tissue-product/scott-essential-paper-napkin-01324-front-and-back-view-split.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1534,7 +1538,9 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1014.webp"
+      "/assets/products/catalog_2026/OB-HOU-1014.webp",
+      "/assets/supplier-library/wiper/mini-table-window-squeegee-wiper-6-piece-hexagonal-assorted-display.webp",
+      "/assets/supplier-library/wiper/window-and-table-squeegee-wiper-with-sponge-heads-4-piece-assorted-set.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1569,7 +1575,9 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1015.webp",
       "/assets/products/catalog_2026/OB-HOU-1015-alt-1.webp",
-      "/assets/products/catalog_2026/OB-HOU-1015-alt-2.webp"
+      "/assets/products/catalog_2026/OB-HOU-1015-alt-2.webp",
+      "/assets/supplier-library/cleaning-brush/bed-cleaning-brush-3.webp",
+      "/assets/supplier-library/cleaning-brush/bed-cleaning-brush-2.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1635,7 +1643,11 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1017.webp"
+      "/assets/products/catalog_2026/OB-HOU-1017.webp",
+      "/assets/supplier-library/collage/victor-rubber-household-gloves.webp",
+      "/assets/supplier-library/gloves/dual-color-household-rubber-gloves-4-colors-blue-green-orange-pink-with-yellow-cuff.webp",
+      "/assets/supplier-library/gloves/flockline-hand-care-household-rubber-gloves-blue-size-l-with-pouch.webp",
+      "/assets/supplier-library/gloves/flockline-hand-care-household-rubber-gloves-orange-size-l-with-pouch.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1695,7 +1707,8 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1019.webp"
+      "/assets/products/catalog_2026/OB-HOU-1019.webp",
+      "/assets/supplier-library/wiper/window-glass-wiper-with-sponge-squeegee-blue-and-green-long-handle-pair.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1731,7 +1744,8 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-HOU-1020.webp",
       "/assets/products/catalog_2026/OB-HOU-1020-alt-1.webp",
       "/assets/products/catalog_2026/OB-HOU-1020-alt-2.webp",
-      "/assets/products/catalog_2026/OB-HOU-1020-alt-3.webp"
+      "/assets/products/catalog_2026/OB-HOU-1020-alt-3.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/plastic-cleaning-caddy-basket-grey-with-handle-3-compartments-top-view.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1765,7 +1779,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1021.webp",
-      "/assets/products/catalog_2026/OB-HOU-1021-alt-1.webp"
+      "/assets/products/catalog_2026/OB-HOU-1021-alt-1.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-front-left-angled-view.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-front-right-angled-view.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-front-view.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1900,7 +1917,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1025.webp",
-      "/assets/products/catalog_2026/OB-HOU-1025-alt-1.webp"
+      "/assets/products/catalog_2026/OB-HOU-1025-alt-1.webp",
+      "/assets/supplier-library/room-spray/dyna-fresh-pocket-air-freshener-green-apple-dispenser-box.webp",
+      "/assets/supplier-library/room-spray/dyna-fresh-pocket-air-freshener-lavender-dispenser-box.webp",
+      "/assets/supplier-library/room-spray/dyna-fresh-pocket-air-freshener-mix-fruit-dispenser-box.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1934,7 +1954,8 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-HOU-1026.webp",
-      "/assets/products/catalog_2026/OB-HOU-1026_alt1.webp"
+      "/assets/products/catalog_2026/OB-HOU-1026_alt1.webp",
+      "/assets/supplier-library/office-bazzar-new-images/milton-small-water-bottle-450.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -1963,7 +1984,11 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1027.webp"
+      "/assets/products/catalog_2026/OB-HOU-1027.webp",
+      "/assets/supplier-library/collage/apple-paper-napkins-and-toilet-roll.webp",
+      "/assets/supplier-library/collage/auto-cut-roll-towel-dispenser.webp",
+      "/assets/supplier-library/collage/greenlime-toilet-roll-and-multi-fold-towels.webp",
+      "/assets/supplier-library/collage/toilet-paper-and-roll-dispensers-collection.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -1997,7 +2022,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-GAR-1028.webp",
-      "/assets/products/catalog_2026/OB-GAR-1028-alt-1.webp"
+      "/assets/products/catalog_2026/OB-GAR-1028-alt-1.webp",
+      "/assets/supplier-library/dustbin/lazzo-stainless-steel-pedal-bin-7x11-with-box.webp",
+      "/assets/supplier-library/dustbin/lazzo-stainless-steel-pedal-bin-7x11-matte-black-open-lid-with-box.webp",
+      "/assets/supplier-library/dustbin/lazzo-stainless-steel-pedal-bin-8x13-with-box.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2063,7 +2091,11 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-GAR-1030.webp"
+      "/assets/products/catalog_2026/OB-GAR-1030.webp",
+      "/assets/supplier-library/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-black-flat-view.webp",
+      "/assets/supplier-library/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-blue-flat-view.webp",
+      "/assets/supplier-library/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-red-flat-view.webp",
+      "/assets/supplier-library/garbage-bag/lazzo-biodegradable-bio-hazard-garbage-bag-above-75-micron-yellow-flat-view.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2608,7 +2640,9 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-BOA-1049.webp",
-      "/assets/products/catalog_2026/OB-BOA-1049-alt-1.webp"
+      "/assets/products/catalog_2026/OB-BOA-1049-alt-1.webp",
+      "/assets/supplier-library/stationery/jb9-chalk-board-and-non-magnetic-white-board-duster-packaging-box.webp",
+      "/assets/supplier-library/stationery/jb9-chalk-board-and-non-magnetic-white-board-duster-with-box.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -2857,7 +2891,11 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PAC-1057.webp"
+      "/assets/products/catalog_2026/OB-PAC-1057.webp",
+      "/assets/supplier-library/packing-product/handheld-carton-tape-dispenser-gun-yellow-front-angle-view.webp",
+      "/assets/supplier-library/packing-product/handheld-carton-tape-dispenser-gun-yellow-low-angle-view.webp",
+      "/assets/supplier-library/packing-product/handheld-carton-tape-dispenser-gun-yellow-side-profile-view.webp",
+      "/assets/supplier-library/packing-product/handheld-carton-tape-dispenser-gun-yellow-metal-plastic-side-angle.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3249,7 +3287,8 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-HOU-1070.webp",
       "/assets/products/catalog_2026/OB-HOU-1070-alt-1.webp",
       "/assets/products/catalog_2026/OB-HOU-1070-alt-2.webp",
-      "/assets/products/catalog_2026/OB-HOU-1070-alt-3.webp"
+      "/assets/products/catalog_2026/OB-HOU-1070-alt-3.webp",
+      "/assets/supplier-library/tissue-product/royal-napkins-70-pcs-1-ply-27x30cm-packs-side-by-side.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3311,7 +3350,10 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-HOU-1072.webp"
+      "/assets/products/catalog_2026/OB-HOU-1072.webp",
+      "/assets/supplier-library/mix/modular-plastic-storage-drawer-3-tier-white-with-castors-side-open.webp",
+      "/assets/supplier-library/mix/multipurpose-3-tier-plastic-storage-rack-with-pull-out-baskets-yellow-green-blue-front-view.webp",
+      "/assets/supplier-library/mix/multipurpose-3-tier-plastic-storage-rack-with-pull-out-baskets-yellow-green-blue-side-view.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3720,7 +3762,8 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-CLE-1087.webp"
+      "/assets/products/catalog_2026/OB-CLE-1087.webp",
+      "/assets/supplier-library/chemical-product/diversey-taski-r4-shine-up-furniture-maintainer-5-litre-can-front-view.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3753,7 +3796,11 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-CLE-1088.webp"
+      "/assets/products/catalog_2026/OB-CLE-1088.webp",
+      "/assets/supplier-library/chemical-product/diversey-taski-r6-toilet-bowl-cleaner-5-litre-can-front-view.webp",
+      "/assets/supplier-library/chemical-product/diversey-taski-r6-toilet-bowl-cleaner-500ml-angular-neck-bottle-front-and-back.webp",
+      "/assets/supplier-library/chemical-product/domex-professional-disinfectant-toilet-bowl-cleaner-5-litre-can-front-view-angle-2.webp",
+      "/assets/supplier-library/chemical-product/domex-professional-disinfectant-toilet-bowl-cleaner-5-litre-can-front-and-back.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3876,7 +3923,11 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-CLE-1092.webp"
+      "/assets/products/catalog_2026/OB-CLE-1092.webp",
+      "/assets/supplier-library/chemical-product/lizol-all-in-1-pine-disinfectant-surface-cleaner-500ml-bottles-pair-front-and-back.webp",
+      "/assets/supplier-library/chemical-product/lizol-all-in-1-citrus-disinfectant-surface-cleaner-975ml-bottles-pair-front-and-back.webp",
+      "/assets/supplier-library/chemical-product/lizol-all-in-1-lavender-disinfectant-surface-cleaner-5-litre-can-front-view.webp",
+      "/assets/supplier-library/chemical-product/lizol-all-in-1-lavender-disinfectant-surface-cleaner-5-litre-cans-pair-front-and-back.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3909,7 +3960,11 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-CLE-1093.webp"
+      "/assets/products/catalog_2026/OB-CLE-1093.webp",
+      "/assets/supplier-library/chemical-product/domex-professional-disinfectant-toilet-bowl-cleaner-5-litre-can-front-view.webp",
+      "/assets/supplier-library/chemical-product/domex-professional-disinfectant-toilet-bowl-cleaner-5-litre-cans-pair-front-and-back-angle-2.webp",
+      "/assets/supplier-library/chemical-product/harpic-disinfectant-bathroom-cleaner-lemon-fresh-500ml-bottle-front-and-back.webp",
+      "/assets/supplier-library/chemical-product/harpic-toilet-cleaner-5-ltr.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3938,7 +3993,8 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-CLE-1094.webp"
+      "/assets/products/catalog_2026/OB-CLE-1094.webp",
+      "/assets/supplier-library/chemical-product/hi-clean-hc-r-1-cleaning-and-sanitising-of-bathroom-and-floor-disinfectant-surface-cleaner-5-litre-can-front-and-back.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -3997,7 +4053,11 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-TIS-1096.webp"
+      "/assets/products/catalog_2026/OB-TIS-1096.webp",
+      "/assets/supplier-library/tissue-product/scott-essential-paper-napkin-01324-100-sheets-back-view.webp",
+      "/assets/supplier-library/tissue-product/scott-essential-paper-napkin-100-sheets-30x30cm-front-view.webp",
+      "/assets/supplier-library/tissue-product/scott-paper-napkin-100-napkins-soft-and-hygienic-front-view.webp",
+      "/assets/supplier-library/tissue-product/scott-paper-napkin-1324a-front-and-back-view-split.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -4030,7 +4090,10 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-TIS-1097.webp"
+      "/assets/products/catalog_2026/OB-TIS-1097.webp",
+      "/assets/supplier-library/tissue-product/apple-soft-tissue-paper-napkins-and-toilet-roll-pair.webp",
+      "/assets/supplier-library/tissue-product/apple-soft-tissue-paper-napkins-pack.webp",
+      "/assets/supplier-library/tissue-product/royal-natural-tissue-products-outer-carton-with-two-paper-towel-rolls.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4059,7 +4122,8 @@ const RAW_PRODUCTS: Product[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-TIS-1098.webp"
+      "/assets/products/catalog_2026/OB-TIS-1098.webp",
+      "/assets/supplier-library/tissue-product/hi-soft-tissue-multi-fold-hand-towel-carton-with-packs.webp"
     ],
     "featured": true,
     "bestseller": false,
@@ -4156,7 +4220,9 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-TIS-1101.webp",
-      "/assets/products/catalog_2026/OB-TIS-1101-alt-1.webp"
+      "/assets/products/catalog_2026/OB-TIS-1101-alt-1.webp",
+      "/assets/supplier-library/tissue-product/apple-toilet-roll-paper-single-roll.webp",
+      "/assets/supplier-library/tissue-product/skotch-toilet-roll-33-mtr-cocktail-palm-graphic.webp"
     ],
     "featured": true,
     "bestseller": true,
@@ -4196,7 +4262,8 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-003.webp",
       "/assets/products/catalog_2026/OB-003-alt-1.webp",
       "/assets/products/catalog_2026/OB-003-alt-2.webp",
-      "/assets/products/catalog_2026/OB-003-alt-3.webp"
+      "/assets/products/catalog_2026/OB-003-alt-3.webp",
+      "/assets/supplier-library/dispenser/shoe-cover-dispenser-aluminium-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4237,7 +4304,8 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-004.webp",
-      "/assets/products/catalog_2026/OB-004-alt-1.webp"
+      "/assets/products/catalog_2026/OB-004-alt-1.webp",
+      "/assets/supplier-library/collage/multipurpose-mop-holder-and-cup-holder-dispenser.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4277,7 +4345,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-005.webp"
+      "/assets/products/catalog_2026/OB-005.webp",
+      "/assets/supplier-library/collage/automatic-hand-dryer-black-and-white.webp",
+      "/assets/supplier-library/collage/automatic-hand-dryer-specifications.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4318,7 +4388,9 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-006.webp",
-      "/assets/products/catalog_2026/OB-006-alt-1.webp"
+      "/assets/products/catalog_2026/OB-006-alt-1.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/industrial-wet-and-dry-vacuum-cleaner-stainless-steel-small-and-large-set.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/industrial-wet-and-dry-vacuum-cleaner-stainless-steel-with-complete-accessories-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4440,7 +4512,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-009.webp"
+      "/assets/products/catalog_2026/OB-009.webp",
+      "/assets/supplier-library/safety-items/queue-manager-ss-retractable-queue-post-detailed-specification-sheet.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4480,7 +4553,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-011.webp"
+      "/assets/products/catalog_2026/OB-011.webp",
+      "/assets/supplier-library/dispenser/greenlime-soap-dispenser-abs-500-ml.webp",
+      "/assets/supplier-library/dispenser/liquid-soap-and-lotion-dispenser-extra-grip-a-1-500ml.webp",
+      "/assets/supplier-library/dispenser/soap-dispenser-abs-260-ml-1.webp",
+      "/assets/supplier-library/dispenser/soap-dispenser-abs-260-ml-4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4523,7 +4600,8 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-012.webp",
       "/assets/products/catalog_2026/OB-012-alt-1.webp",
       "/assets/products/catalog_2026/OB-012-alt-2.webp",
-      "/assets/products/catalog_2026/OB-012-alt-3.webp"
+      "/assets/products/catalog_2026/OB-012-alt-3.webp",
+      "/assets/supplier-library/dispenser/soap-dispenser-abs-260-ml-7.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4603,7 +4681,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-014.webp"
+      "/assets/products/catalog_2026/OB-014.webp",
+      "/assets/supplier-library/dispenser/soap-dispenser-abs-500500-ml-6.webp",
+      "/assets/supplier-library/dispenser/soap-dispenser-abs-500500-ml-3.webp",
+      "/assets/supplier-library/dispenser/soap-dispenser-abs-260ml-white-with-box.webp",
+      "/assets/supplier-library/dispenser/soap-dispenser-abs-pair-large-and-small-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4683,7 +4765,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-016.webp"
+      "/assets/products/catalog_2026/OB-016.webp",
+      "/assets/supplier-library/collage/liquid-soap-dispenser-chrome-and-white.webp",
+      "/assets/supplier-library/dispenser/decorative-soap-dispenser-bottle-dot-pattern-white.webp",
+      "/assets/supplier-library/dispenser/gel-soap-sanitizer-dispenser-dp-350-white-with-box.webp",
+      "/assets/supplier-library/dispenser/gel-soap-sanitizer-dispenser-dt-1000-white-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4723,7 +4809,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-017.webp"
+      "/assets/products/catalog_2026/OB-017.webp",
+      "/assets/supplier-library/collage/soap-dispenser-2.webp",
+      "/assets/supplier-library/collage/soap-dispenser-3.webp",
+      "/assets/supplier-library/collage/soap-dispenser-dp-350.webp",
+      "/assets/supplier-library/collage/soap-dispenser-dt-1000-and-dt-500.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4763,7 +4853,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-018.webp"
+      "/assets/products/catalog_2026/OB-018.webp",
+      "/assets/supplier-library/dispenser/touch-soap-dispenser-cylindrical-white-with-box-2.webp",
+      "/assets/supplier-library/dispenser/touch-soap-dispenser-cylindrical-white-with-box.webp",
+      "/assets/supplier-library/dispenser/touch-soap-dispenser-cylindrical-black-with-box.webp",
+      "/assets/supplier-library/dispenser/touch-soap-dispenser-wall-mount-silver-with-box-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4803,7 +4897,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-019.webp"
+      "/assets/products/catalog_2026/OB-019.webp",
+      "/assets/supplier-library/collage/wooden-top-tissue-box-dispenser.webp",
+      "/assets/supplier-library/dispenser/kimberly-clark-aquarius-folded-toilet-tissue-dispenser-69460-2.webp",
+      "/assets/supplier-library/dispenser/kimberly-clark-aquarius-folded-toilet-tissue-dispenser-69460.webp",
+      "/assets/supplier-library/dispenser/kimberly-clark-aquarius-m-fold-towel-dispenser-70220.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4883,7 +4981,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-021.webp"
+      "/assets/products/catalog_2026/OB-021.webp",
+      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-round-teardrop-window-white-front-view.webp",
+      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-round-teardrop-window-white.webp",
+      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-round-white-2.webp",
+      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-star-clear-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4923,7 +5025,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-023.webp"
+      "/assets/products/catalog_2026/OB-023.webp",
+      "/assets/supplier-library/dispenser/autocut-roll-paper-towel-dispenser-white-front-view.webp",
+      "/assets/supplier-library/dispenser/autocut-roll-paper-towel-dispenser-white-side-view.webp",
+      "/assets/supplier-library/dispenser/autocut-roll-paper-towel-dispenser-white-large-and-small-pair.webp",
+      "/assets/supplier-library/dispenser/hrt-roll-towel-dispenser-black-with-dimensions.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -4963,7 +5069,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-024.webp"
+      "/assets/products/catalog_2026/OB-024.webp",
+      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-round-white.webp",
+      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-white-2.webp",
+      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-white-3.webp",
+      "/assets/supplier-library/dispenser/jumbo-toilet-roll-dispenser-white.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5006,7 +5116,8 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-025.webp",
       "/assets/products/catalog_2026/OB-025-alt-1.webp",
       "/assets/products/catalog_2026/OB-025-alt-2.webp",
-      "/assets/products/catalog_2026/OB-025-alt-3.webp"
+      "/assets/products/catalog_2026/OB-025-alt-3.webp",
+      "/assets/supplier-library/dispenser/hrt-roll-towel-dispenser-black-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5047,7 +5158,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-026.webp",
-      "/assets/products/catalog_2026/OB-026-alt-1.webp"
+      "/assets/products/catalog_2026/OB-026-alt-1.webp",
+      "/assets/supplier-library/dispenser/autocut-roll-paper-towel-dispenser-mechanism-open-front-view.webp",
+      "/assets/supplier-library/dispenser/autocut-roll-paper-towel-dispenser-white-collage.webp",
+      "/assets/supplier-library/dispenser/autocut-roll-paper-towel-dispenser-mechanism-open-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5087,7 +5201,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-027.webp"
+      "/assets/products/catalog_2026/OB-027.webp",
+      "/assets/supplier-library/dispenser/hrt-roll-towel-dispenser-white-front-view.webp",
+      "/assets/supplier-library/dispenser/hrt-roll-towel-dispenser-white-with-dimensions.webp",
+      "/assets/supplier-library/dispenser/industrial-heavy-duty-roll-towel-dispenser-blue.webp",
+      "/assets/supplier-library/dispenser/industrial-roll-towel-dispenser-blue-with-dimensions.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5127,7 +5245,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-030.webp"
+      "/assets/products/catalog_2026/OB-030.webp",
+      "/assets/supplier-library/collage/premier-soft-face-tissues-200-pulls.webp",
+      "/assets/supplier-library/tissue-product/premier-and-royal-tissue-products-4-grid-collage-display.webp",
+      "/assets/supplier-library/tissue-product/premier-merry-christmas-soft-face-tissues-2-ply-100-pulls-box.webp",
+      "/assets/supplier-library/tissue-product/premier-soft-face-tissues-2-ply-100-pulls-4-boxes-stack.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5167,7 +5289,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-033.webp"
+      "/assets/products/catalog_2026/OB-033.webp",
+      "/assets/supplier-library/tissue-product/kosher-hrt-rolled-towels-8-inch-roll-175-meters-carton-with-rolls.webp",
+      "/assets/supplier-library/tissue-product/kosher-hrt-rolled-towels-k00304-16-kgs-200-meters-single-roll.webp",
+      "/assets/supplier-library/tissue-product/lazzo-hrt-roll-1-kg-rolled-towels-carton-with-rolls.webp",
+      "/assets/supplier-library/tissue-product/kosher-hrt-rolled-towels-k00306-20-kgs-220-meters-single-roll.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5208,7 +5334,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-035.webp",
-      "/assets/products/catalog_2026/OB-035-alt-1.webp"
+      "/assets/products/catalog_2026/OB-035-alt-1.webp",
+      "/assets/supplier-library/tissue-product/regal-restroom-tissue-roll-r00202-magenta-wrapped-close-up-pair.webp",
+      "/assets/supplier-library/tissue-product/regal-restroom-tissue-roll-r00202-magenta-wrapped-pair.webp",
+      "/assets/supplier-library/tissue-product/royal-natural-premium-kitchen-roll-wrapped-pair-standing-and-tilted.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5572,7 +5701,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-047.webp"
+      "/assets/products/catalog_2026/OB-047.webp",
+      "/assets/supplier-library/collage/lazzo-nylon-scrub-sponge-pad.webp",
+      "/assets/supplier-library/collage/scotch-brite-scouring-pad-and-sponge.webp",
+      "/assets/supplier-library/scotch-bright-and-scrubber/gala-super-scrub-2-in-1-steel-loops-scrub-sponge-front-and-back-packaging.webp",
+      "/assets/supplier-library/scotch-bright-and-scrubber/glorious-power-goldcoin-nylon-scrub-pad-100x150mm-5-pcs-pack-3-sets-display.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5612,7 +5745,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-048.webp"
+      "/assets/products/catalog_2026/OB-048.webp",
+      "/assets/supplier-library/scotch-bright-and-scrubber/nylon-scrubber-777-1.webp",
+      "/assets/supplier-library/scotch-bright-and-scrubber/nylon-scrubber-777.webp",
+      "/assets/supplier-library/scotch-bright-and-scrubber/nylon-scrubber-hero.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5653,7 +5789,9 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-049.webp",
-      "/assets/products/catalog_2026/OB-049-alt-1.webp"
+      "/assets/products/catalog_2026/OB-049-alt-1.webp",
+      "/assets/supplier-library/scotch-bright-and-scrubber/exo-stainless-steel-scrubber-rust-free-12-pcs-hanging-card-display.webp",
+      "/assets/supplier-library/scotch-bright-and-scrubber/steel-scrubber-exe.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5733,7 +5871,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-051.webp"
+      "/assets/products/catalog_2026/OB-051.webp",
+      "/assets/supplier-library/chemical-product/pril-kraft-mint-dishwashing-liquid-425ml-bottles-pair-front-and-back.webp",
+      "/assets/supplier-library/chemical-product/vim-dishwash-liquid-lemon-concentrated-gel-18-litre-handle-bottle-front-and-back.webp",
+      "/assets/supplier-library/chemical-product/vim-dishwash-liquid-lemon-concentrated-gel-140ml-refill-pouch-front-and-back.webp",
+      "/assets/supplier-library/chemical-product/vim-pro-no-fragrance-hand-dishwash-liquid-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5813,7 +5955,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-053.webp"
+      "/assets/products/catalog_2026/OB-053.webp",
+      "/assets/supplier-library/chemical-product/hi-clean-liquid-hand-wash-5-ltr.webp",
+      "/assets/supplier-library/chemical-product/hi-clean-liquid-handwash-assorted-fragrances-250ml-pump-bottles-row-of-5.webp",
+      "/assets/supplier-library/chemical-product/hi-clean-liquid-handwash-rose-fragrance-250ml-pump-bottle-front-and-back.webp",
+      "/assets/supplier-library/chemical-product/vim-pro-no-fragrance-hand-dishwash-liquid-5-litre-cans-pair-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5894,7 +6040,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-055.webp"
+      "/assets/products/catalog_2026/OB-055.webp",
+      "/assets/supplier-library/cleaning-brush/double-sided-hockey-toilet-brush.webp",
+      "/assets/supplier-library/cleaning-brush/double-sided-hockey-toilet-brush-3.webp",
+      "/assets/supplier-library/cleaning-brush/hockey-toilet-brush.webp",
+      "/assets/supplier-library/cleaning-brush/hockey-toilet-brush-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -5934,7 +6084,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-057.webp"
+      "/assets/products/catalog_2026/OB-057.webp",
+      "/assets/supplier-library/cleaning-brush/round-toilet-brush-2.webp",
+      "/assets/supplier-library/cleaning-brush/sink-brush-round.webp",
+      "/assets/supplier-library/cleaning-brush/round-toilet-brush.webp",
+      "/assets/supplier-library/cleaning-brush/steel-handle-toilet-brush.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6014,7 +6168,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-059.webp"
+      "/assets/products/catalog_2026/OB-059.webp",
+      "/assets/supplier-library/cleaning-brush/bed-cleaning-brush-4.webp",
+      "/assets/supplier-library/cleaning-brush/bed-cleaning-brush.webp",
+      "/assets/supplier-library/cleaning-brush/bottle-cleaning-brush.webp",
+      "/assets/supplier-library/cleaning-brush/wooden-cleaning-brush-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6054,7 +6212,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-060.webp"
+      "/assets/products/catalog_2026/OB-060.webp",
+      "/assets/supplier-library/cleaning-brush/cloth-washing-brush-2.webp",
+      "/assets/supplier-library/cleaning-brush/cloth-washing-brush-3.webp",
+      "/assets/supplier-library/cleaning-brush/cloth-washing-brush-4.webp",
+      "/assets/supplier-library/cleaning-brush/cloth-washing-brush-5.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6216,7 +6378,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-065.webp"
+      "/assets/products/catalog_2026/OB-065.webp",
+      "/assets/supplier-library/dustbin/aristo-lazzo-bio-hazard-pedal-dustbin-blue-front-view.webp",
+      "/assets/supplier-library/dustbin/aristo-lazzo-bio-hazard-pedal-dustbin-yellow-front-view.webp",
+      "/assets/supplier-library/dustbin/aristo-pedal-dustbin-70-ltr-set-of-4-blue-red-green-yellow.webp",
+      "/assets/supplier-library/dustbin/aristo-pedal-dustbin-70-ltr-set-of-4-red-green-blue-yellow.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6256,7 +6422,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-066.webp"
+      "/assets/products/catalog_2026/OB-066.webp",
+      "/assets/supplier-library/dustbin/decoplast-round-swing-dustbin-30l-50l-80l-set-of-3.webp",
+      "/assets/supplier-library/dustbin/decoplast-round-swing-dustbin-green.webp",
+      "/assets/supplier-library/dustbin/decoplast-round-swing-dustbin-blue.webp",
+      "/assets/supplier-library/dustbin/decoplast-round-swing-dustbin-green-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6339,7 +6509,8 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-069.webp",
       "/assets/products/catalog_2026/OB-069-alt-1.webp",
       "/assets/products/catalog_2026/OB-069-alt-2.webp",
-      "/assets/products/catalog_2026/OB-069-alt-3.webp"
+      "/assets/products/catalog_2026/OB-069-alt-3.webp",
+      "/assets/supplier-library/dustbin/lazzo-stainless-steel-pedal-bin-10x15-packaging-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6379,7 +6550,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-070.webp"
+      "/assets/products/catalog_2026/OB-070.webp",
+      "/assets/supplier-library/dustbin/stainless-steel-perforated-bin-and-pedal-dustbin-sizes-infographic.webp",
+      "/assets/supplier-library/dustbin/stainless-steel-perforated-dustbin-10x14-front-view.webp",
+      "/assets/supplier-library/dustbin/stainless-steel-perforated-dustbin-10x14-on-weighing-scale.webp",
+      "/assets/supplier-library/dustbin/stainless-steel-perforated-dustbin-7x10-on-weighing-scale.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6460,7 +6635,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-072.webp"
+      "/assets/products/catalog_2026/OB-072.webp",
+      "/assets/supplier-library/dustbin/aristo-utility-swing-dustbin-range-5l-to-28l-multicolor.webp",
+      "/assets/supplier-library/dustbin/aristo-vento-swing-dustbin-range-9l-to-28l-red-green-blue.webp",
+      "/assets/supplier-library/dustbin/bhupendra-international-executive-swing-dustbin-with-handle-black.webp",
+      "/assets/supplier-library/dustbin/decoplast-round-swing-dustbin-30l-50l-80l-with-labels.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6581,7 +6760,8 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-075.webp",
-      "/assets/products/catalog_2026/OB-075-alt-1.webp"
+      "/assets/products/catalog_2026/OB-075-alt-1.webp",
+      "/assets/supplier-library/wiper/kitchen-and-window-squeegee-wiper-white-with-blue-loop-handle.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6662,7 +6842,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-077.webp"
+      "/assets/products/catalog_2026/OB-077.webp",
+      "/assets/supplier-library/wiper/floor-wiper-with-long-aluminum-handle-green-blue-red-yellow-4-piece-set.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6866,7 +7047,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-084.webp"
+      "/assets/products/catalog_2026/OB-084.webp",
+      "/assets/supplier-library/mop/blue-wet-floor-mop-kentucky-refill-stitched-headband.webp",
+      "/assets/supplier-library/mop/blue-wet-floor-mop-with-steel-pipe-handle-and-refill-collage.webp",
+      "/assets/supplier-library/mop/shreenath-flat-microfiber-floor-and-solar-cleaning-mop-assembled.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6946,7 +7130,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-086.webp"
+      "/assets/products/catalog_2026/OB-086.webp",
+      "/assets/supplier-library/mat/heavy-duty-hollow-ring-rubber-drainage-door-mat-black-stack-bundle-of-5.webp",
+      "/assets/supplier-library/mat/heavy-duty-rubber-backed-polypropylene-ribbed-geometric-square-door-mat-grey-black-border.webp",
+      "/assets/supplier-library/mat/pvc-cushion-coil-welcome-door-mat-assorted-colors-set-of-5-fan-stacked.webp",
+      "/assets/supplier-library/mat/pvc-cushion-coil-welcome-door-mat-assorted-colors-set-of-6-fan-stacked-with-grey-on-top.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -6987,7 +7175,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-087.webp",
-      "/assets/products/catalog_2026/OB-087-alt-1.webp"
+      "/assets/products/catalog_2026/OB-087-alt-1.webp",
+      "/assets/supplier-library/mat/cotton-chindi-handloom-door-mat-multicolored-striped-14x22-inch-with-tassels.webp",
+      "/assets/supplier-library/mat/cotton-chindi-handloom-door-mat-multicolored-striped-with-tassels.webp",
+      "/assets/supplier-library/mat/cotton-handloom-woven-floor-mat-blue-and-dark-blue-vertical-striped.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -7713,7 +7904,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-108.webp"
+      "/assets/products/catalog_2026/OB-108.webp",
+      "/assets/supplier-library/chemical-product/british-clean-british-lime-fragrance-300ml-trigger-spray-bottle-front-and-back.webp",
+      "/assets/supplier-library/chemical-product/sterill-g-advanced-handrub-disinfectant-500ml-trigger-spray-bottle-front-and-back.webp",
+      "/assets/supplier-library/chemical-product/varaa-alcohol-based-liquid-hand-sanitizer-500ml-trigger-spray-bottle-front-and-back.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8035,7 +8229,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-116.webp"
+      "/assets/products/catalog_2026/OB-116.webp",
+      "/assets/supplier-library/brooms-and-sticks/dhoom-3-steel-handle-soft-broom.webp",
+      "/assets/supplier-library/brooms-and-sticks/dhoom-3-v-handle-soft-broom.webp",
+      "/assets/supplier-library/brooms-and-sticks/micky-soft-broom-steel-handle.webp",
+      "/assets/supplier-library/brooms-and-sticks/nisha-v-handle-soft-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8075,7 +8273,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-117.webp"
+      "/assets/products/catalog_2026/OB-117.webp",
+      "/assets/supplier-library/brooms-and-sticks/gala-broom.webp",
+      "/assets/supplier-library/brooms-and-sticks/non-dust-broom.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8436,7 +8636,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-128.webp"
+      "/assets/products/catalog_2026/OB-128.webp",
+      "/assets/supplier-library/collage/lifebuoy-handwash-5l-and-refills.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8637,7 +8838,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-133.webp"
+      "/assets/products/catalog_2026/OB-133.webp",
+      "/assets/supplier-library/gloves/heavy-duty-rubber-gloves-orange-long-size-l-pair-palm-view.webp",
+      "/assets/supplier-library/gloves/household-rubber-gloves-orange-long-heavy-duty-pair-palm-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8680,7 +8883,8 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-134.webp",
       "/assets/products/catalog_2026/OB-134-alt-1.webp",
       "/assets/products/catalog_2026/OB-134-alt-2.webp",
-      "/assets/products/catalog_2026/OB-134-alt-3.webp"
+      "/assets/products/catalog_2026/OB-134-alt-3.webp",
+      "/assets/supplier-library/gloves/cotton-knitted-hand-gloves-40-gms-blue-3.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8760,7 +8964,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-137.webp"
+      "/assets/products/catalog_2026/OB-137.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-rear-angled-view.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-cart-grey-with-caddy-tray-side-view.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/double-bucket-mop-wringer-trolley-mwt-50-ltr-specifications-infographic.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/single-bucket-mop-wringer-trolley-20-ltr-yellow-caution-wet-floor-on-box-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8803,7 +9011,8 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-138.webp",
       "/assets/products/catalog_2026/OB-138-alt-1.webp",
       "/assets/products/catalog_2026/OB-138-alt-2.webp",
-      "/assets/products/catalog_2026/OB-138-alt-3.webp"
+      "/assets/products/catalog_2026/OB-138-alt-3.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/single-bucket-mop-wringer-trolley-20-ltr-blue-red-green-yellow-set-of-4.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -8970,7 +9179,8 @@ const RAW_PRODUCTS: Product[] = [
       "/assets/products/catalog_2026/OB-142.webp",
       "/assets/products/catalog_2026/OB-142-alt-1.webp",
       "/assets/products/catalog_2026/OB-142-alt-2.webp",
-      "/assets/products/catalog_2026/OB-142-alt-3.webp"
+      "/assets/products/catalog_2026/OB-142-alt-3.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-mop-wringer-and-yellow-vinyl-bag-side-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9012,7 +9222,9 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-143.webp",
       "/assets/products/catalog_2026/OB-143-alt-1.webp",
-      "/assets/products/catalog_2026/OB-143-alt-2.webp"
+      "/assets/products/catalog_2026/OB-143-alt-2.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-double-buckets-wringer-and-yellow-vinyl-bag.webp",
+      "/assets/supplier-library/hygenic-tools-and-trolly/multipurpose-janitor-cart-cleaning-trolley-grey-with-mop-wringer-and-yellow-vinyl-bag-angled-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9337,7 +9549,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-203.webp"
+      "/assets/products/catalog_2026/OB-203.webp",
+      "/assets/supplier-library/chemical-product/diversey-taski-r1-super-bathroom-cleaner-concentrate-5-litre-can-front-and-back.webp",
+      "/assets/supplier-library/chemical-product/diversey-taski-r1-super-bathroom-cleaner-concentrate-5-litre-can-front-view.webp",
+      "/assets/supplier-library/chemical-product/diversey-taski-r2-hygienic-hard-surface-cleaner-concentrate-5-litre-can-front-view.webp",
+      "/assets/supplier-library/chemical-product/diversey-taski-r3-glass-cleaner-concentrate-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9417,7 +9633,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-158.webp"
+      "/assets/products/catalog_2026/OB-158.webp",
+      "/assets/supplier-library/chemical-product/diversey-taski-r5-air-freshener-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9497,7 +9714,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-160.webp"
+      "/assets/products/catalog_2026/OB-160.webp",
+      "/assets/supplier-library/chemical-product/diversey-taski-r7-floor-cleaner-concentrate-5-litre-can-front-view.webp",
+      "/assets/supplier-library/chemical-product/diversey-taski-r9-bathroom-cleaner-concentrate-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -9577,7 +9796,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-162.webp"
+      "/assets/products/catalog_2026/OB-162.webp",
+      "/assets/supplier-library/chemical-product/diversey-suma-inox-d71-stainless-steel-polish-5-litre-can-front-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11408,7 +11628,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-DES-57.webp"
+      "/assets/products/catalog_2026/OB-DES-57.webp",
+      "/assets/supplier-library/packing-product/zen-pp-twine-sutli-roll-brown-red-color-mesh-packaging.webp",
+      "/assets/supplier-library/packing-product/zen-pp-twine-sutli-roll-green-color-mesh-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11763,7 +11985,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-NOT-70.webp"
+      "/assets/products/catalog_2026/OB-NOT-70.webp",
+      "/assets/supplier-library/collage/lazzo-nylon-rubber-band.webp",
+      "/assets/supplier-library/mix/office-bazzar-100-percent-nylon-rubber-band-packaging-box-die-cut-cyan-blue.webp",
+      "/assets/supplier-library/mix/office-bazzar-100-percent-nylon-rubber-band-packaging-box-die-cut-floral-blue-hexagon-window.webp",
+      "/assets/supplier-library/mix/office-bazzar-100-percent-nylon-rubber-band-packaging-box-die-cut-light-green.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12473,7 +12699,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-01.webp"
+      "/assets/products/catalog_2026/OB-COV-01.webp",
+      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-black-front-and-back-view-pair.webp",
+      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-black-front-and-back-extended-earloops-pair.webp",
+      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-black-pair-with-earloops-front-and-back.webp",
+      "/assets/supplier-library/mask/disposable-3-ply-surgical-face-mask-blue-earloop-back-view-pair.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12513,7 +12743,9 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-02.webp"
+      "/assets/products/catalog_2026/OB-COV-02.webp",
+      "/assets/supplier-library/mask/venus-v-4400-n95-particulate-respirator-face-mask-with-red-box.webp",
+      "/assets/supplier-library/mask/venus-v-4400-n95-niosh-certified-respirator-face-mask-white-yellow-straps.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12555,7 +12787,9 @@ const RAW_PRODUCTS: Product[] = [
     "images": [
       "/assets/products/catalog_2026/OB-COV-03.webp",
       "/assets/products/catalog_2026/OB-COV-03-alt-1.webp",
-      "/assets/products/catalog_2026/OB-COV-03-alt-2.webp"
+      "/assets/products/catalog_2026/OB-COV-03-alt-2.webp",
+      "/assets/supplier-library/mask/washable-reusable-cotton-cloth-face-masks-multicolor-set-of-8-vertical-display.webp",
+      "/assets/supplier-library/mask/washable-reusable-cotton-cloth-face-masks-multicolor-set-of-8.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12595,7 +12829,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-04.webp"
+      "/assets/products/catalog_2026/OB-COV-04.webp",
+      "/assets/supplier-library/mask/classik-n95-eco-virus-protective-face-mask-white-with-single-pouch-packaging.webp",
+      "/assets/supplier-library/mask/classik-n95-eco-virus-protective-face-mask-grey-with-single-pouch-packaging.webp",
+      "/assets/supplier-library/mask/classik-n95-premium-headloop-virus-protective-face-mask-white-with-single-pouch.webp",
+      "/assets/supplier-library/mask/classik-n95-premium-virus-protective-face-mask-white-with-single-pouch-packaging.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12635,7 +12873,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-05.webp"
+      "/assets/products/catalog_2026/OB-COV-05.webp",
+      "/assets/supplier-library/mask/kingfa-disposable-protective-face-mask-blue-with-100-pcs-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12675,7 +12914,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-06.webp"
+      "/assets/products/catalog_2026/OB-COV-06.webp",
+      "/assets/supplier-library/collage/knitted-cotton-safety-gloves.webp",
+      "/assets/supplier-library/collage/lazzo-disposable-plastic-gloves-and-cotton-safety-gloves.webp",
+      "/assets/supplier-library/gloves/cotton-knitted-hand-gloves-40-gms-gray.webp",
+      "/assets/supplier-library/gloves/cotton-knitted-hand-gloves-40-gms-gray-2.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12878,7 +13121,8 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-COV-12.webp",
-      "/assets/products/catalog_2026/OB-COV-12-alt-1.webp"
+      "/assets/products/catalog_2026/OB-COV-12-alt-1.webp",
+      "/assets/supplier-library/safety-items/zebronics-fingertip-pulse-oximeter-zeb-fpo500-device-with-product-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13279,7 +13523,10 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-22.webp"
+      "/assets/products/catalog_2026/OB-COV-22.webp",
+      "/assets/supplier-library/mix/disposable-non-woven-head-cap.webp",
+      "/assets/supplier-library/mix/disposable-non-woven-bouffant-clip-caps-green-and-white-set-of-10.webp",
+      "/assets/supplier-library/mix/disposable-non-woven-bouffant-clip-caps-blue-white-green-9-strips.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13320,7 +13567,8 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-COV-23.webp",
-      "/assets/products/catalog_2026/OB-COV-23-alt-1.webp"
+      "/assets/products/catalog_2026/OB-COV-23-alt-1.webp",
+      "/assets/supplier-library/mix/disposable-non-woven-shoe-covers.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13400,7 +13648,11 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": true,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-25.webp"
+      "/assets/products/catalog_2026/OB-COV-25.webp",
+      "/assets/supplier-library/mix/care4u-non-contact-digital-infrared-forehead-thermometer-features-diagram.webp",
+      "/assets/supplier-library/mix/care4u-non-contact-digital-infrared-forehead-thermometer-with-desk-plant.webp",
+      "/assets/supplier-library/mix/care4u-non-contact-digital-infrared-forehead-thermometer-with-packaging-box.webp",
+      "/assets/supplier-library/mix/xech-inframount-automatic-contactless-wall-mounted-infrared-thermometer-with-box.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13762,7 +14014,10 @@ const RAW_PRODUCTS: Product[] = [
     "packSize": "Standard Pack",
     "images": [
       "/assets/products/catalog_2026/OB-RDS-01.webp",
-      "/assets/products/catalog_2026/OB-RDS-01-alt-1.webp"
+      "/assets/products/catalog_2026/OB-RDS-01-alt-1.webp",
+      "/assets/supplier-library/safety-items/red-orange-traffic-cone-750mm-side-and-bottom-base-view-collage.webp",
+      "/assets/supplier-library/safety-items/rubber-base-traffic-cone-rbtc-750mm-height-32kg-side-and-bottom-view.webp",
+      "/assets/supplier-library/safety-items/rubber-base-traffic-cone-rbtc-750mm-semi-virgin-15kg-standing-and-base-view.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -14821,7 +15076,8 @@ const RAW_PRODUCTS: Product[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-17.webp"
+      "/assets/products/catalog_2026/OB-RDS-17.webp",
+      "/assets/supplier-library/safety-items/high-visibility-orange-reflective-safety-vest-with-reflective-stripes.webp"
     ],
     "featured": false,
     "bestseller": false,
