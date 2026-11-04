@@ -284,3 +284,4 @@ run().catch(err => {
   console.error('Fatal error during soft-deactivation:', err);
   process.exit(1);
 });
+

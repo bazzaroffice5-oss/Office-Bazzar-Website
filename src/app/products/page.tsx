@@ -72,7 +72,7 @@ export default async function ProductsPage({
   searchParams: Promise<{ query?: string; category?: string; brand?: string; sub?: string }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  const { products } = await getProducts({ limit: 1000 });
+  const { products } = await getProducts({ limit: 5000 });
   const allCategories = await getCategories();
   const categories = APPROVED_CATEGORIES.map((slug) =>
     allCategories.find((c) => c.slug === slug)

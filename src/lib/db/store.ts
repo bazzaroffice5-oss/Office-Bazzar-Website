@@ -391,7 +391,7 @@ export async function getProducts(filters?: FilterParams): Promise<{ products: P
 
   const total = result.length;
   const page = filters?.page || 1;
-  const limit = filters?.limit ?? 500;
+  const limit = filters?.limit ?? 5000;
   const startIndex = (page - 1) * limit;
   const paginated = result.slice(startIndex, startIndex + limit);
 

@@ -40,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // 3. Dynamic Products
-  const { products } = await getProducts({ limit: 1000 });
+  const { products } = await getProducts({ limit: 5000 });
   const seenSlugs = new Set<string>(['kangaro-staplers-hd-10d-1', 'tissue-paper-napkin-1']);
   const productRoutes: MetadataRoute.Sitemap = products
     .filter((prod) => {

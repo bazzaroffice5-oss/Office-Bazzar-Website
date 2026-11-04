@@ -1,0 +1,170 @@
+[
+  {
+    "testId": 1,
+    "name": "1,948 Active Products Integrity",
+    "target": 1948,
+    "actual": 1948,
+    "uniqueSkus": 1948,
+    "uniqueSlugs": 1948,
+    "activeCount": 1948,
+    "status": "PASS"
+  },
+  {
+    "testId": 2,
+    "name": "Four Categories Accurate Counts",
+    "counts": {
+      "office-stationery": 341,
+      "housekeeping-hygiene": 1536,
+      "printers-technology": 28,
+      "packaging-supplies": 43
+    },
+    "liveHttpStatuses": {
+      "office-stationery": 200,
+      "housekeeping-hygiene": 200,
+      "printers-technology": 200,
+      "packaging-supplies": 200
+    },
+    "status": "PASS"
+  },
+  {
+    "testId": 3,
+    "name": "Product Search by SKU & Name",
+    "results": [
+      {
+        "query": "OB-003",
+        "type": "SKU",
+        "matchesCount": 1,
+        "passed": true
+      },
+      {
+        "query": "OB-HOU-2027",
+        "type": "SKU",
+        "matchesCount": 1,
+        "passed": true
+      },
+      {
+        "query": "OB-PAP-01",
+        "type": "SKU",
+        "matchesCount": 1,
+        "passed": true
+      },
+      {
+        "query": "Shoe Cover Dispenser",
+        "type": "Exact Name",
+        "matchesCount": 4,
+        "passed": true
+      },
+      {
+        "query": "dustbin",
+        "type": "Partial Name",
+        "matchesCount": 78,
+        "passed": true
+      },
+      {
+        "query": "stapler",
+        "type": "Partial Name",
+        "matchesCount": 3,
+        "passed": true
+      }
+    ],
+    "status": "PASS"
+  },
+  {
+    "testId": 4,
+    "name": "Product Detail Pages Integrity",
+    "results": [
+      {
+        "slug": "ob-003-shoe-cover-dispenser",
+        "status": 200,
+        "hasImage": true,
+        "hasDesc": true,
+        "hasSpecs": true,
+        "pass": true
+      },
+      {
+        "slug": "ob-004-paper-cup-dispenser",
+        "status": 200,
+        "hasImage": true,
+        "hasDesc": true,
+        "hasSpecs": true,
+        "pass": true
+      },
+      {
+        "slug": "cardboard-tag-file",
+        "status": 200,
+        "hasImage": true,
+        "hasDesc": true,
+        "hasSpecs": true,
+        "pass": true
+      },
+      {
+        "slug": "3025-box-file",
+        "status": 200,
+        "hasImage": true,
+        "hasDesc": true,
+        "hasSpecs": true,
+        "pass": true
+      }
+    ],
+    "status": "PASS"
+  },
+  {
+    "testId": 5,
+    "name": "Cart and Quote Cart Routes",
+    "quoteCartInitialStatus": 308,
+    "quoteCartFinalStatus": 200,
+    "cartStatus": 200,
+    "consolidatedToCart": true,
+    "status": "PASS"
+  },
+  {
+    "testId": 6,
+    "name": "Live RFQ Submission in Zoho CRM",
+    "httpStatus": 201,
+    "zohoQuoteId": "1476900000000597204",
+    "quotationNumber": "OB-RFQ-261104-0002",
+    "assignedAdmin": "marketing@officebazzar.com",
+    "status": "PASS"
+  },
+  {
+    "testId": 7,
+    "name": "Inactive Duplicates Isolation",
+    "deactivatedIdsInMapping": 0,
+    "duplicateSkuMatches": 0,
+    "status": "PASS"
+  },
+  {
+    "testId": 8,
+    "name": "Responsive Visual Layouts",
+    "screenshotsCaptured": 12,
+    "screenshots": [
+      "phase3_desktop_homepage.png",
+      "phase3_desktop_products.png",
+      "phase3_desktop_category_stationery.png",
+      "phase3_desktop_pdp_shoe_cover.png",
+      "phase3_tablet_homepage.png",
+      "phase3_tablet_products.png",
+      "phase3_tablet_category_stationery.png",
+      "phase3_tablet_pdp_shoe_cover.png",
+      "phase3_mobile_homepage.png",
+      "phase3_mobile_products.png",
+      "phase3_mobile_category_stationery.png",
+      "phase3_mobile_pdp_shoe_cover.png"
+    ],
+    "status": "PASS"
+  },
+  {
+    "testId": 9,
+    "name": "Production Deployment Health",
+    "httpStatus": 200,
+    "vercelId": "bom1::7jvhg-1793792179844-a2976fed7c6d",
+    "cacheControl": "public, max-age=0, must-revalidate",
+    "status": "PASS"
+  },
+  {
+    "testId": 10,
+    "name": "No Exposed API Credentials or Secrets",
+    "exposuresFound": 0,
+    "status": "PASS"
+  }
+]
