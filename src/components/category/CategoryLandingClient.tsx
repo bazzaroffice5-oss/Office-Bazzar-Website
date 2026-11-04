@@ -11,6 +11,7 @@ import {
   Package,
 } from 'lucide-react';
 import ProductCard from '@/components/product/ProductCard';
+import WindowPagination from '@/components/ui/WindowPagination';
 import { Product, Category, Subcategory } from '@/types';
 import { CATEGORY_MAP, isProductInSubcategory } from '@/lib/data/catalog';
 
@@ -35,8 +36,9 @@ export default function CategoryLandingClient({
   // Read current view & sub from URL search params with fallback to initial props
   const viewParam = searchParams.get('view') || initialView || '';
   const subParam = searchParams.get('sub') || initialSub || '';
+  const pageParam = parseInt(searchParams.get('page') || '1', 10);
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(!isNaN(pageParam) && pageParam > 0 ? pageParam : 1);
   const itemsPerPage = 48;
 
   // Filter products belonging to this main category
@@ -346,53 +348,16 @@ export default function CategoryLandingClient({
         </div>
       )}
 
-      {/* Pagination Controls */}
-      {totalPages > 1 && (
-        <div className="mx-auto flex w-full justify-center items-center gap-2 mt-12 pb-8 flex-wrap">
-          <button
-            type="button"
-            onClick={() => {
-              setCurrentPage((p) => Math.max(1, p - 1));
-              window.scrollTo({ top: 100, behavior: 'smooth' });
-            }}
-            disabled={currentPage === 1}
-            className="px-3.5 py-2 rounded-xl border border-gray-300 text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
-          >
-            Previous
-          </button>
-          {Array.from({ length: totalPages }).map((_, idx) => {
-            const page = idx + 1;
-            return (
-              <button
-                key={page}
-                type="button"
-                onClick={() => {
-                  setCurrentPage(page);
-                  window.scrollTo({ top: 100, behavior: 'smooth' });
-                }}
-                className={`w-9 h-9 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
-                  page === currentPage
-                    ? 'bg-[#004b87] text-white shadow-xs'
-                    : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
-                }`}
-              >
-                {page}
-              </button>
-            );
-          })}
-          <button
-            type="button"
-            onClick={() => {
-              setCurrentPage((p) => Math.min(totalPages, p + 1));
-              window.scrollTo({ top: 100, behavior: 'smooth' });
-            }}
-            disabled={currentPage === totalPages}
-            className="px-3.5 py-2 rounded-xl border border-gray-300 text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
-          >
-            Next
-          </button>
-        </div>
-      )}
+      {/* Window-Based Pagination Controls (Max 6 pages at a time) */}
+      <WindowPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={(p) => {
+          setCurrentPage(p);
+          window.scrollTo({ top: 100, behavior: 'smooth' });
+        }}
+        className="mt-12 pb-8"
+      />
     </div>
   );
 }

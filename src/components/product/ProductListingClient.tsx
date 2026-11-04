@@ -11,6 +11,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import ProductCard from './ProductCard';
+import WindowPagination from '@/components/ui/WindowPagination';
 import { Product, Category, Brand } from '@/types';
 import { NINE_SUBCATEGORIES, isProductInSubcategory } from '@/lib/data/catalog';
 
@@ -23,6 +24,7 @@ interface ProductListingClientProps {
   initialSubcategorySlug?: string;
   initialBrandSlug?: string;
   initialQuery?: string;
+  initialPage?: number;
   showAllCategoriesHeader?: boolean;
 }
 
@@ -36,6 +38,7 @@ export default function ProductListingClient({
   initialSubcategorySlug = '',
   initialBrandSlug = '',
   initialQuery = '',
+  initialPage = 1,
 }: ProductListingClientProps) {
   // State for search and filters
   const [searchQuery, setSearchQuery] = useState<string>(initialQuery);
@@ -44,7 +47,7 @@ export default function ProductListingClient({
   );
   const [selectedBrand, setSelectedBrand] = useState<string>(initialBrandSlug);
   const [sortBy, setSortBy] = useState<SortOption>('relevance');
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(initialPage || 1);
   const itemsPerPage = 24;
 
   // Sync state if initial props change
@@ -73,6 +76,7 @@ export default function ProductListingClient({
         const cat = params.get('category') || '';
         const sub = params.get('sub') || '';
         const brand = params.get('brand') || '';
+        const pageParam = parseInt(params.get('page') || '1', 10);
         setSearchQuery(q);
         if (sub) {
           setSelectedFilter(`sub:${sub}`);
@@ -82,7 +86,7 @@ export default function ProductListingClient({
           setSelectedFilter('all');
         }
         setSelectedBrand(brand);
-        setCurrentPage(1);
+        setCurrentPage(!isNaN(pageParam) && pageParam > 0 ? pageParam : 1);
       }
     };
     window.addEventListener('popstate', handlePopState);
@@ -90,13 +94,14 @@ export default function ProductListingClient({
   }, []);
 
   // Update browser URL query params without reloading
-  const updateUrl = (q: string, filter: string, brand: string) => {
+  const updateUrl = (q: string, filter: string, brand: string, pageNum: number = 1) => {
     if (typeof window === 'undefined') return;
     const params = new URLSearchParams();
     if (q.trim()) params.set('query', q.trim());
     if (filter.startsWith('cat:')) params.set('category', filter.replace('cat:', ''));
     if (filter.startsWith('sub:')) params.set('sub', filter.replace('sub:', ''));
     if (brand) params.set('brand', brand);
+    if (pageNum > 1) params.set('page', pageNum.toString());
 
     const queryStr = params.toString();
     const newUrl = queryStr ? `/products?${queryStr}` : '/products';
@@ -106,19 +111,19 @@ export default function ProductListingClient({
   const handleSearchChange = (val: string) => {
     setSearchQuery(val);
     setCurrentPage(1);
-    updateUrl(val, selectedFilter, selectedBrand);
+    updateUrl(val, selectedFilter, selectedBrand, 1);
   };
 
   const handleFilterChange = (val: string) => {
     setSelectedFilter(val);
     setCurrentPage(1);
-    updateUrl(searchQuery, val, selectedBrand);
+    updateUrl(searchQuery, val, selectedBrand, 1);
   };
 
   const handleBrandChange = (val: string) => {
     setSelectedBrand(val);
     setCurrentPage(1);
-    updateUrl(searchQuery, selectedFilter, val);
+    updateUrl(searchQuery, selectedFilter, val, 1);
   };
 
   const handleClearAll = () => {
@@ -269,6 +274,7 @@ export default function ProductListingClient({
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+    updateUrl(searchQuery, selectedFilter, selectedBrand, page);
     if (typeof window !== 'undefined') {
       const el = document.getElementById('products-grid-top');
       if (el) {
@@ -501,46 +507,13 @@ export default function ProductListingClient({
         </div>
       )}
 
-      {/* Pagination Controls */}
-      {totalPages > 1 && (
-        <div className="mx-auto flex w-full justify-center items-center gap-1.5 sm:gap-2 mt-12 mb-6 flex-wrap">
-          <button
-            type="button"
-            onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
-            disabled={currentPage === 1}
-            className="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
-          >
-            Previous
-          </button>
-
-          {Array.from({ length: totalPages }).map((_, idx) => {
-            const page = idx + 1;
-            return (
-              <button
-                key={page}
-                type="button"
-                onClick={() => handlePageChange(page)}
-                className={`w-9 h-9 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                  page === currentPage
-                    ? 'bg-[#004b87] text-white shadow-xs'
-                    : 'border border-slate-200 text-slate-700 hover:bg-slate-50'
-                }`}
-              >
-                {page}
-              </button>
-            );
-          })}
-
-          <button
-            type="button"
-            onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
-            disabled={currentPage === totalPages}
-            className="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
-          >
-            Next
-          </button>
-        </div>
-      )}
+      {/* Window-Based Pagination Controls (Max 6 pages at a time) */}
+      <WindowPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+        className="mt-12 mb-6"
+      />
 
       {/* Corporate Procurement Quotation CTA Banner */}
       <div className="mt-14 p-6 sm:p-8 bg-gradient-to-r from-slate-900 to-[#002f57] rounded-2xl text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">

@@ -69,7 +69,7 @@ const APPROVED_CATEGORIES = [
 export default async function ProductsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ query?: string; category?: string; brand?: string; sub?: string }>;
+  searchParams: Promise<{ query?: string; category?: string; brand?: string; sub?: string; page?: string }>;
 }) {
   const resolvedSearchParams = await searchParams;
   const { products } = await getProducts({ limit: 5000 });
@@ -84,6 +84,8 @@ export default async function ProductsPage({
     { name: 'All Products', url: '/products' },
   ]);
 
+  const parsedPage = resolvedSearchParams?.page ? parseInt(resolvedSearchParams.page, 10) : 1;
+
   return (
     <main className="min-h-screen bg-slate-50">
       <JsonLd data={breadcrumbJsonLd} />
@@ -95,6 +97,7 @@ export default async function ProductsPage({
         initialCategorySlug={resolvedSearchParams?.category}
         initialSubcategorySlug={resolvedSearchParams?.sub}
         initialBrandSlug={resolvedSearchParams?.brand}
+        initialPage={!isNaN(parsedPage) && parsedPage > 0 ? parsedPage : 1}
       />
     </main>
   );
