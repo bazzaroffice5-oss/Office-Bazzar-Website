@@ -137,6 +137,11 @@ async function syncProductsFromZohoInternal(): Promise<Product[]> {
 
         const existing = productsMap.get(sku);
         if (existing) {
+          // Guard against inactive duplicate Zoho records overwriting active products
+          if (existing.isActive && zRec.Product_Active === false) {
+            continue;
+          }
+
           const price = zRec.Unit_Price !== undefined ? Number(zRec.Unit_Price) : (Number(existing.price) || 0);
           const stock = zRec.Qty_in_Stock !== undefined ? Number(zRec.Qty_in_Stock) : (Number(existing.stockQuantity) || 0);
           const isDup = DUPLICATE_INACTIVE_SLUGS.has(existing.slug);
