@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { ShoppingCart, Check } from 'lucide-react';
 import { Product } from '@/types';
 import { useCart } from '@/context/CartContext';
+import { getVersionedImageUrl } from '@/lib/utils/image';
 
 interface ProductCardProps {
   product: Product;
@@ -60,7 +61,9 @@ export default function ProductCard({
     (rawImage.startsWith('/assets/products/catalog_2026/') ||
       rawImage.startsWith('/assets/supplier-library/') ||
       rawImage.startsWith('/assets/product/'));
-  const initialImage = isValidNewImage ? rawImage : '/assets/placeholder-product.svg';
+  const initialImage = isValidNewImage
+    ? getVersionedImageUrl(rawImage)
+    : getVersionedImageUrl('/assets/placeholder-product.svg');
   const [imgSrc, setImgSrc] = useState<string>(initialImage);
 
   const brandDisplayName = product.brandName || 'OfficeBazzar';
@@ -107,7 +110,7 @@ export default function ProductCard({
           priority={priority}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           className="object-contain p-1 sm:p-1.5 transition-transform duration-200 ease-out group-hover:scale-105"
-          onError={() => setImgSrc('/assets/placeholder-product.svg')}
+          onError={() => setImgSrc(getVersionedImageUrl('/assets/placeholder-product.svg'))}
         />
       </Link>
 

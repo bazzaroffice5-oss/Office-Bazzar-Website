@@ -155,7 +155,7 @@ export async function POST(req: Request) {
         );
       }
 
-      let prod = await getProductById(rawItem.productId);
+      let prod = rawItem.productId ? await getProductById(rawItem.productId) : null;
       if (!prod && rawItem.sku) {
         const { products } = await getProducts();
         prod = products.find((p) => p.sku === rawItem.sku) || null;

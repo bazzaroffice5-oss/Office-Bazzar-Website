@@ -8,6 +8,7 @@ import { Brand, Product } from '@/types';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { getBrandLogoUrl } from '@/lib/utils/brandLogos';
+import { getVersionedImageUrl } from '@/lib/utils/image';
 import ProductCard from './ProductCard';
 
 interface ProductDetailClientProps {
@@ -32,7 +33,8 @@ export default function ProductDetailClient({
   const validImages = (product.images && product.images.length > 0 ? product.images : []).filter(
     (img) => typeof img === 'string' && (img.startsWith('/assets/products/catalog_2026/') || img.startsWith('/assets/supplier-library/') || img.startsWith('/assets/product/'))
   );
-  const productImages = validImages.length > 0 ? validImages : [FALLBACK_IMAGE];
+  const rawImages = validImages.length > 0 ? validImages : [FALLBACK_IMAGE];
+  const productImages = rawImages.map((img) => getVersionedImageUrl(img));
   const [activeImage, setActiveImage] = useState<string>(productImages[0]);
 
   const inWishlist = isInWishlist(product.id);
@@ -107,6 +109,7 @@ export default function ProductDetailClient({
               priority
               sizes="(max-width: 768px) 100vw, 480px"
               className="object-contain p-4 transition-transform duration-300 hover:scale-105"
+              onError={() => setActiveImage(getVersionedImageUrl(FALLBACK_IMAGE))}
             />
           </div>
 

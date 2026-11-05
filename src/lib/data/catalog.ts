@@ -1375,9 +1375,7 @@ const RAW_PRODUCTS: any[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-      "/assets/products/catalog_2026/OB-STA-1009.webp"
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -1685,9 +1683,7 @@ const RAW_PRODUCTS: any[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-      "/assets/products/catalog_2026/OB-HOU-1018.webp"
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -2410,9 +2406,7 @@ const RAW_PRODUCTS: any[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-      "/assets/products/catalog_2026/OB-COM-1040.webp"
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -11828,10 +11822,7 @@ const RAW_PRODUCTS: any[] = [
     "isPriceVerified": false,
     "requiresManualReview": false,
     "packSize": "Standard Pack",
-    "images": [
-      "/assets/products/catalog_2026/OB-DES-60.webp",
-      "/assets/products/catalog_2026/OB-DES-60-alt-1.webp"
-    ],
+    "images": [],
     "featured": false,
     "bestseller": false,
     "rating": 4.8,

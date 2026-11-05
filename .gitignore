@@ -67,3 +67,8 @@ test_shot.png
 
 .chrome_qa_profile/
 .chrome_qa_profile_phase3/
+
+# Chrome automated test profiles
+.chrome_*
+.chrome_dom_profile
+.chrome_pag_profile

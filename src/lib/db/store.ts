@@ -420,6 +420,7 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
 });
 
 export const getProductById = cache(async (id: string): Promise<Product | null> => {
+  if (!id || typeof id !== 'string') return null;
   const cleanId = id.trim();
   const products = await getProductsFromZoho();
   const pool = products && products.length > 0 ? products : storeState.productsList;
