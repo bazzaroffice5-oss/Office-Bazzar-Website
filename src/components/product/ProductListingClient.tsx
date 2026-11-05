@@ -52,6 +52,12 @@ export default function ProductListingClient({
 
   // Sync state if initial props change
   useEffect(() => {
+    if (initialPage !== undefined && !isNaN(initialPage) && initialPage > 0) {
+      setCurrentPage(initialPage);
+    }
+  }, [initialPage]);
+
+  useEffect(() => {
     if (initialQuery !== undefined) setSearchQuery(initialQuery);
   }, [initialQuery]);
 
@@ -124,6 +130,12 @@ export default function ProductListingClient({
     setSelectedBrand(val);
     setCurrentPage(1);
     updateUrl(searchQuery, selectedFilter, val, 1);
+  };
+
+  const handleSortChange = (val: SortOption) => {
+    setSortBy(val);
+    setCurrentPage(1);
+    updateUrl(searchQuery, selectedFilter, selectedBrand, 1);
   };
 
   const handleClearAll = () => {
@@ -234,19 +246,35 @@ export default function ProductListingClient({
       );
     }
 
-    // 4. Sorting
+    // 4. Sorting with deterministic SKU tie-breaker to ensure stable pagination
     switch (sortBy) {
       case 'price-low':
-        result.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
+        result.sort((a, b) => {
+          const diff = (a.price ?? 0) - (b.price ?? 0);
+          if (diff !== 0) return diff;
+          return a.sku.localeCompare(b.sku);
+        });
         break;
       case 'price-high':
-        result.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
+        result.sort((a, b) => {
+          const diff = (b.price ?? 0) - (a.price ?? 0);
+          if (diff !== 0) return diff;
+          return a.sku.localeCompare(b.sku);
+        });
         break;
       case 'rating':
-        result.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+        result.sort((a, b) => {
+          const diff = (b.rating ?? 0) - (a.rating ?? 0);
+          if (diff !== 0) return diff;
+          return a.sku.localeCompare(b.sku);
+        });
         break;
       case 'name':
-        result.sort((a, b) => a.name.localeCompare(b.name));
+        result.sort((a, b) => {
+          const diff = a.name.localeCompare(b.name);
+          if (diff !== 0) return diff;
+          return a.sku.localeCompare(b.sku);
+        });
         break;
       case 'relevance':
       default:
@@ -255,7 +283,9 @@ export default function ProductListingClient({
           if (!a.bestseller && b.bestseller) return 1;
           if (a.featured && !b.featured) return -1;
           if (!a.featured && b.featured) return 1;
-          return (b.rating ?? 0) - (a.rating ?? 0);
+          const ratingDiff = (b.rating ?? 0) - (a.rating ?? 0);
+          if (ratingDiff !== 0) return ratingDiff;
+          return a.sku.localeCompare(b.sku);
         });
         break;
     }
@@ -265,16 +295,30 @@ export default function ProductListingClient({
 
   // Pagination calculation
   const totalItems = filteredProducts.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
-  const startIndex = (currentPage - 1) * itemsPerPage;
+  const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
+  // Safely clamp currentPage between 1 and totalPages
+  const safeCurrentPage = Math.min(Math.max(1, currentPage), totalPages);
+  const startIndex = (safeCurrentPage - 1) * itemsPerPage;
   const paginatedProducts = filteredProducts.slice(
     startIndex,
     startIndex + itemsPerPage
   );
 
+  // Sync state if currentPage is out of bounds
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+      updateUrl(searchQuery, selectedFilter, selectedBrand, totalPages);
+    } else if (currentPage < 1) {
+      setCurrentPage(1);
+      updateUrl(searchQuery, selectedFilter, selectedBrand, 1);
+    }
+  }, [currentPage, totalPages, searchQuery, selectedFilter, selectedBrand]);
+
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    updateUrl(searchQuery, selectedFilter, selectedBrand, page);
+    const validPage = Math.min(Math.max(1, page), totalPages);
+    setCurrentPage(validPage);
+    updateUrl(searchQuery, selectedFilter, selectedBrand, validPage);
     if (typeof window !== 'undefined') {
       const el = document.getElementById('products-grid-top');
       if (el) {
@@ -445,7 +489,7 @@ export default function ProductListingClient({
             <div className="relative flex-1 sm:flex-initial">
               <select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as SortOption)}
+                onChange={(e) => handleSortChange(e.target.value as SortOption)}
                 aria-label="Sort products"
                 className="w-full sm:w-auto min-w-[150px] py-2.5 pl-3.5 pr-8 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-medium text-slate-800 focus:bg-white focus:outline-none focus:border-[#004b87] focus:ring-2 focus:ring-[#004b87]/20 transition-all cursor-pointer"
               >
@@ -509,7 +553,7 @@ export default function ProductListingClient({
 
       {/* Window-Based Pagination Controls (Max 6 pages at a time) */}
       <WindowPagination
-        currentPage={currentPage}
+        currentPage={safeCurrentPage}
         totalPages={totalPages}
         onPageChange={handlePageChange}
         className="mt-12 mb-6"
