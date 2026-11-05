@@ -7,7 +7,7 @@ import {
   getNotificationRecipients,
 } from '@/lib/notifications/service';
 import { syncQuotationToZoho, ZohoSyncResult } from '@/lib/zoho/crm';
-import { getNextLeadAssignee } from '@/lib/zoho/round-robin';
+import { getNextLeadAssignee, getLeadAssigneeForCustomer } from '@/lib/zoho/round-robin';
 
 // In-memory sliding window rate limiter to protect public quotation submission
 const submissionRateMap = new Map<string, number[]>();
@@ -210,11 +210,13 @@ export async function POST(req: Request) {
 
     const indicativeTotal = indicativeSubtotal + indicativeGstAmount;
 
-    // 4. Concurrency-Safe Round-Robin Customer Lead Assignment
-    // Customer 1 -> Sales (sales4@officebazzar.com)
-    // Customer 2 -> Marketing (marketing@officebazzar.com)
-    // Alternates sequentially with atomic serialization and persistent storage.
-    const leadAssignee = await getNextLeadAssignee();
+    // 4. Concurrency-Safe Customer Lead Assignment:
+    // If repeat customer, preserves their existing assigned owner in Zoho CRM.
+    // If new customer, alternates sequentially via persistent round-robin:
+    // New Customer 1 -> Sales (sales4@officebazzar.com)
+    // New Customer 2 -> Marketing (marketing@officebazzar.com)
+    // New Customer 3 -> Sales (sales4@officebazzar.com)
+    const leadAssignee = await getLeadAssigneeForCustomer(email.trim().toLowerCase(), cleanPhone);
 
     // 5. Construct Quotation Record in Memory (No Supabase write — Zoho CRM is the primary database)
     const savedQuotation = await createQuotation({
@@ -270,17 +272,26 @@ export async function POST(req: Request) {
       savedQuotation.id = zohoSyncResult.quoteId;
     }
 
-    // 7. Send Notification ONLY to the assigned Admin recipient (Round-Robin)
-    // Sales leads go strictly to sales4@officebazzar.com
-    // Marketing leads go strictly to marketing@officebazzar.com
+    // 7. Send Notification ONLY to the assigned Admin recipient if and only if
+    // a genuine customer submission was successfully created as a new record in Zoho CRM
     let notificationResults: NotificationResult[] = [];
-    try {
-      notificationResults = await dispatchQuotationNotifications(savedQuotation, {
-        zohoQuoteId: zohoSyncResult.quoteId,
-        zohoContactId: zohoSyncResult.contactId,
-      });
-    } catch (notifyErr) {
-      console.error('[Quotation API] Notification dispatch error:', notifyErr);
+    if (zohoSyncResult.success && zohoSyncResult.quoteId && zohoSyncResult.action === 'created') {
+      try {
+        notificationResults = await dispatchQuotationNotifications(savedQuotation, {
+          source: 'production_customer_submission',
+          zohoQuoteId: zohoSyncResult.quoteId,
+          zohoContactId: zohoSyncResult.contactId,
+          zohoAccountId: zohoSyncResult.accountId,
+          action: zohoSyncResult.action,
+          idempotencyKey,
+        });
+      } catch (notifyErr) {
+        console.error('[Quotation API] Notification dispatch error:', notifyErr);
+      }
+    } else {
+      console.log(
+        `[Quotation API] Skipping admin notification: Zoho CRM sync action was "${zohoSyncResult?.action}" (not a new submission event)`
+      );
     }
 
     const { salesEmail, marketingEmail } = getNotificationRecipients();

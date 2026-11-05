@@ -20,7 +20,7 @@
  */
 
 import { zohoFetch, isZohoConfigured } from './client';
-import { extractStructuredMeta } from './quotes';
+import { extractStructuredMeta, getCustomerQuotationsFromZoho } from './quotes';
 
 export type LeadAssigneeName = 'Sales' | 'Marketing';
 export type LeadAssigneeRole = 'ADMIN_1_SALES' | 'ADMIN_2_MARKETING';
@@ -368,6 +368,72 @@ export async function getNextLeadAssignee(): Promise<LeadAssignee> {
       assignedAt,
     };
   });
+}
+
+/**
+ * Determine Lead Assignee for a quotation submission:
+ * 1. Checks if customer is a repeat customer who already has an assigned owner in Zoho CRM.
+ *    If yes, preserves that exact assigned owner unchanged for repeat RFQs.
+ * 2. If new customer, applies persistent concurrency-safe alternating round-robin:
+ *    New Customer 1 -> sales4@officebazzar.com
+ *    New Customer 2 -> marketing@officebazzar.com
+ *    New Customer 3 -> sales4@officebazzar.com
+ */
+export async function getLeadAssigneeForCustomer(
+  customerEmail: string,
+  _customerPhone?: string
+): Promise<LeadAssignee> {
+  const cleanEmail = (customerEmail || '').trim().toLowerCase();
+  const { salesEmail, marketingEmail } = getAdminRecipients();
+
+  if (cleanEmail) {
+    try {
+      const priorQuotes = await getCustomerQuotationsFromZoho(cleanEmail);
+      if (Array.isArray(priorQuotes) && priorQuotes.length > 0) {
+        // Find existing assigned admin from previous quotes (newest first)
+        for (const q of priorQuotes) {
+          const emailCheck = (q.assignedEmail || '').toLowerCase();
+          const toCheck = q.assignedTo || '';
+
+          if (emailCheck.includes('marketing') || /marketing/i.test(toCheck)) {
+            console.log(
+              `[RoundRobin] Repeat RFQ for customer [${cleanEmail}]: Retaining assigned owner Marketing (${marketingEmail})`
+            );
+            return {
+              name: 'Marketing',
+              email: marketingEmail,
+              label: `Marketing (${marketingEmail})`,
+              role: 'ADMIN_2_MARKETING',
+              sequenceNumber: q.assignedSequence || 0,
+              assignedAt: new Date().toISOString(),
+            };
+          }
+
+          if (emailCheck.includes('sales') || /sales/i.test(toCheck)) {
+            console.log(
+              `[RoundRobin] Repeat RFQ for customer [${cleanEmail}]: Retaining assigned owner Sales (${salesEmail})`
+            );
+            return {
+              name: 'Sales',
+              email: salesEmail,
+              label: `Sales (${salesEmail})`,
+              role: 'ADMIN_1_SALES',
+              sequenceNumber: q.assignedSequence || 0,
+              assignedAt: new Date().toISOString(),
+            };
+          }
+        }
+      }
+    } catch (err: any) {
+      console.warn(
+        `[RoundRobin] Warning: Could not check prior customer quotes for [${cleanEmail}]:`,
+        err?.message
+      );
+    }
+  }
+
+  // New Customer: Alternate via persistent, concurrency-safe round-robin
+  return await getNextLeadAssignee();
 }
 
 /**

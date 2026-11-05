@@ -151,7 +151,11 @@ async function runTests() {
     createdAt: new Date().toISOString(),
   };
 
-  const salesNotifyResults = await dispatchQuotationNotifications(salesQuotation);
+  const salesNotifyResults = await dispatchQuotationNotifications(salesQuotation, {
+    source: 'production_customer_submission',
+    zohoQuoteId: 'test-quote-sales-101',
+    action: 'created',
+  });
   console.log(`Sales Quote Notifications sent (${salesNotifyResults.length} recipient):`);
   salesNotifyResults.forEach((r) => console.log(`  -> Recipient: ${r.recipient} | Channel: ${r.channel} | Status: ${r.status}`));
 
@@ -182,7 +186,11 @@ async function runTests() {
     createdAt: new Date().toISOString(),
   };
 
-  const marketingNotifyResults = await dispatchQuotationNotifications(marketingQuotation);
+  const marketingNotifyResults = await dispatchQuotationNotifications(marketingQuotation, {
+    source: 'production_customer_submission',
+    zohoQuoteId: 'test-quote-mkt-102',
+    action: 'created',
+  });
   console.log(`Marketing Quote Notifications sent (${marketingNotifyResults.length} recipient):`);
   marketingNotifyResults.forEach((r) => console.log(`  -> Recipient: ${r.recipient} | Channel: ${r.channel} | Status: ${r.status}`));
 

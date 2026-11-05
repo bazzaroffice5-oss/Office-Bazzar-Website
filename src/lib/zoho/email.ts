@@ -154,6 +154,7 @@ export async function sendZohoEmail(params: {
   replyTo?: string;
   quoteId?: string;
   contactId?: string;
+  attachInventoryPdf?: boolean;
 }): Promise<ZohoEmailDispatchResult> {
   const recipient = params.toEmail.trim().toLowerCase();
 
@@ -195,7 +196,9 @@ export async function sendZohoEmail(params: {
           mail_format: 'html',
         };
 
-        if (targetModule === 'Quotes') {
+        // Attach inventory template PDF only when explicitly requested (e.g., approved final customer quotation)
+        // Initial Admin RFQ notification emails strictly omit inventory_details to ensure ZERO attachments
+        if (targetModule === 'Quotes' && params.attachInventoryPdf === true) {
           const templateId = await resolveQuoteInventoryTemplateId();
           mailItem.inventory_details = {
             inventory_template: {

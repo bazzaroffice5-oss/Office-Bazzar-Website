@@ -2468,9 +2468,7 @@ const RAW_PRODUCTS: any[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-      "/assets/products/catalog_2026/OB-BOA-1042.webp"
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -3287,9 +3285,7 @@ const RAW_PRODUCTS: any[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [
-      "/assets/products/catalog_2026/OB-SHR-1069.webp"
-    ],
+    "images": [],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,

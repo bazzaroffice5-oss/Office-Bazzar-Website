@@ -110,7 +110,7 @@ export function clearSentQuoteEmailKeys(): void {
 export function buildQuotationEmailText(
   quotation: Quotation,
   recipientEmail: string = 'sales4@officebazzar.com',
-  partnerEmail: string = 'marketing@officebazzar.com'
+  _partnerEmail: string = 'marketing@officebazzar.com'
 ): string {
   const siteUrl = BUSINESS_CONFIG.websiteUrl;
   const adminUrl = `${siteUrl}/admin?tab=quotations&quote=${encodeURIComponent(quotation.quotationNumber)}`;
@@ -118,35 +118,38 @@ export function buildQuotationEmailText(
   const itemsText = quotation.items
     .map((item, idx) => {
       const productUrl = `${siteUrl}/product/${item.productId || item.sku}`;
+      const originalQty = item.originalQuantity ?? item.quantity;
       return `${idx + 1}. [${item.sku}] ${item.productName}
    Product Link: ${productUrl}
-   Quantity: ${item.quantity} ${item.packSize || 'Units'} | Indicative Unit: ₹${item.indicativeUnitPrice.toLocaleString('en-IN')} | Indicative Total: ₹${item.indicativeTotalPrice.toLocaleString('en-IN')}`;
+   Original Requested Quantity: ${originalQty} ${item.packSize || 'Units'}
+   Indicative Unit: ₹${item.indicativeUnitPrice.toLocaleString('en-IN')} | Indicative Total: ₹${item.indicativeTotalPrice.toLocaleString('en-IN')}`;
     })
     .join('\n\n');
 
   return `OFFICEBAZZAR REQUEST FOR QUOTATION (RFQ)
 ==================================================
-RFQ Reference    : ${quotation.quotationNumber}
-Submission Date  : ${new Date(quotation.createdAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST (${quotation.createdAt})
-Assigned Lead Owner: ${quotation.assignedTo || recipientEmail} (Round-Robin Customer Lead Assignment)
-Admin Recipient  : ${recipientEmail}
-Zoho CRM Status  : Saved in Zoho CRM (Contacts, Accounts, Quotes & Quoted_Items)
+RFQ Reference       : ${quotation.quotationNumber}
+Submission Date     : ${new Date(quotation.createdAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST
+Assigned Lead Owner : ${quotation.assignedTo || recipientEmail}
+Admin Recipient     : ${recipientEmail}
+Zoho CRM Status     : Registered in Zoho CRM (Quotes, Contacts & Accounts)
 
 CUSTOMER & BUSINESS DETAILS:
 --------------------------------------------------
-Customer Name    : ${quotation.customerName}
-Company Name     : ${quotation.companyName || 'Not Provided'}
-Email Address    : ${quotation.email}
-Phone Number     : ${quotation.phone}
-GSTIN            : ${quotation.gstin || 'Not Provided'}
-Delivery Address : ${quotation.deliveryLocation ? `${quotation.deliveryLocation} - ` : ''}PIN ${quotation.pincode}
-Preferred Contact: ${quotation.preferredContactMethod.toUpperCase()}
+Customer Name       : ${quotation.customerName || 'Not Provided'}
+Company Name        : ${quotation.companyName || 'Not Provided'}
+Email Address       : ${quotation.email || 'Not Provided'}
+Phone Number        : ${quotation.phone || 'Not Provided'}
+GSTIN               : ${quotation.gstin || 'Not Provided'}
+Delivery Address    : ${quotation.deliveryLocation || 'Not Provided'}
+PIN Code            : ${quotation.pincode || 'Not Provided'}
+Preferred Contact   : ${(quotation.preferredContactMethod || 'email').toUpperCase()}
 
 CUSTOMER MESSAGE / REQUIREMENTS:
 --------------------------------------------------
-${quotation.additionalRequirements || 'None specified'}
+${quotation.additionalRequirements || 'Not Provided'}
 
-PRODUCTS REQUESTED (${quotation.items.length} Line Items):
+REQUESTED PRODUCTS (${quotation.items.length} Line Items):
 --------------------------------------------------
 ${itemsText}
 
@@ -156,7 +159,7 @@ Subtotal (Excl. Tax) : ₹${quotation.indicativeSubtotal.toLocaleString('en-IN')
 Estimated GST (18%)  : ₹${quotation.indicativeGstAmount.toLocaleString('en-IN')}
 Estimated Total      : ₹${quotation.indicativeTotal.toLocaleString('en-IN')}
 
-ADMIN REVIEW:
+ADMIN DASHBOARD REVIEW:
 --------------------------------------------------
 ${adminUrl}
 `;
@@ -168,7 +171,7 @@ ${adminUrl}
 export function buildQuotationEmailHtml(
   quotation: Quotation,
   recipientEmail: string = 'sales4@officebazzar.com',
-  partnerEmail: string = 'marketing@officebazzar.com'
+  _partnerEmail: string = 'marketing@officebazzar.com'
 ): string {
   const siteUrl = BUSINESS_CONFIG.websiteUrl;
   const adminUrl = `${siteUrl}/admin?tab=quotations&quote=${encodeURIComponent(quotation.quotationNumber)}`;
@@ -176,14 +179,15 @@ export function buildQuotationEmailHtml(
   const itemsRows = quotation.items
     .map((item) => {
       const productUrl = `${siteUrl}/product/${item.productId || item.sku}`;
+      const originalQty = item.originalQuantity ?? item.quantity;
       return `
       <tr style="border-bottom: 1px solid #e5e7eb;">
         <td style="padding: 12px 10px; font-size: 13px; color: #111827;">
-          <a href="${productUrl}" target="_blank" style="color: #1d4ed8; text-decoration: none; font-weight: 700; font-size: 13px;">${item.productName}</a><br />
-          <span style="color: #6b7280; font-size: 12px;">SKU: ${item.sku} | Pack: ${item.packSize || 'Standard'}</span>
+          <a href="${productUrl}" target="_blank" style="color: #004b87; text-decoration: none; font-weight: 700; font-size: 13px;">${item.productName}</a><br />
+          <span style="color: #6b7280; font-size: 12px;"><strong>SKU:</strong> ${item.sku} &bull; Pack: ${item.packSize || 'Standard'}</span>
         </td>
-        <td style="padding: 12px 10px; font-size: 13px; text-align: center; color: #111827; font-weight: 600;">
-          ${item.quantity}
+        <td style="padding: 12px 10px; font-size: 13px; text-align: center; color: #111827; font-weight: 700;">
+          ${originalQty}
         </td>
         <td style="padding: 12px 10px; font-size: 13px; text-align: right; color: #4b5563;">
           ₹${item.indicativeUnitPrice.toLocaleString('en-IN')}
@@ -204,7 +208,7 @@ export function buildQuotationEmailHtml(
 </head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f3f4f6; margin: 0; padding: 20px;">
   <div style="max-width: 650px; margin: 0 auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e5e7eb;">
-    <div style="background-color: #d9232d; padding: 20px 24px; color: #ffffff;">
+    <div style="background-color: #004b87; padding: 20px 24px; color: #ffffff;">
       <h1 style="margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.5px;">OfficeBazzar &bull; Quotation Alert</h1>
       <p style="margin: 6px 0 0 0; font-size: 13px; opacity: 0.9;">New Request for Quotation Saved in Zoho CRM</p>
     </div>
@@ -213,10 +217,10 @@ export function buildQuotationEmailHtml(
       <strong>Assigned Lead Owner:</strong> ${quotation.assignedTo || recipientEmail} &nbsp;&bull;&nbsp; Round-Robin Customer Lead Assignment
     </div>
 
-    <div style="background-color: #fef2f2; border-bottom: 1px solid #fee2e2; padding: 14px 24px;">
+    <div style="background-color: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 14px 24px;">
       <div>
-        <span style="font-size: 12px; color: #991b1b; text-transform: uppercase; font-weight: 700;">RFQ Reference</span>
-        <div style="font-size: 18px; font-weight: 800; color: #d9232d;">${quotation.quotationNumber}</div>
+        <span style="font-size: 12px; color: #004b87; text-transform: uppercase; font-weight: 700;">RFQ Reference</span>
+        <div style="font-size: 18px; font-weight: 800; color: #004b87;">${quotation.quotationNumber}</div>
       </div>
       <div style="margin-top: 6px; font-size: 12px; color: #374151;">
         <strong>Quotation Submission Date:</strong> ${new Date(quotation.createdAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST
@@ -230,33 +234,37 @@ export function buildQuotationEmailHtml(
       <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
         <tr>
           <td style="padding: 6px 0; color: #6b7280; width: 35%;">Customer Name:</td>
-          <td style="padding: 6px 0; color: #111827; font-weight: 600;">${quotation.customerName}</td>
+          <td style="padding: 6px 0; color: #111827; font-weight: 600;">${quotation.customerName || 'Not Provided'}</td>
         </tr>
         <tr>
           <td style="padding: 6px 0; color: #6b7280;">Company Name:</td>
-          <td style="padding: 6px 0; color: #111827; font-weight: 600;">${quotation.companyName || '<em>Not Provided</em>'}</td>
+          <td style="padding: 6px 0; color: #111827; font-weight: 600;">${quotation.companyName || 'Not Provided'}</td>
         </tr>
         <tr>
           <td style="padding: 6px 0; color: #6b7280;">Email Address:</td>
-          <td style="padding: 6px 0; color: #111827;"><a href="mailto:${quotation.email}" style="color: #d9232d;">${quotation.email}</a></td>
+          <td style="padding: 6px 0; color: #111827;"><a href="mailto:${quotation.email}" style="color: #004b87;">${quotation.email || 'Not Provided'}</a></td>
         </tr>
         <tr>
           <td style="padding: 6px 0; color: #6b7280;">Phone Number:</td>
-          <td style="padding: 6px 0; color: #111827;"><a href="tel:${quotation.phone}" style="color: #d9232d;">${quotation.phone}</a></td>
+          <td style="padding: 6px 0; color: #111827;"><a href="tel:${quotation.phone}" style="color: #004b87;">${quotation.phone || 'Not Provided'}</a></td>
         </tr>
         <tr>
           <td style="padding: 6px 0; color: #6b7280;">GSTIN:</td>
-          <td style="padding: 6px 0; color: #111827; font-weight: 600;">${quotation.gstin || '<em style="color:#9ca3af">Not Provided</em>'}</td>
+          <td style="padding: 6px 0; color: #111827; font-weight: 600;">${quotation.gstin || 'Not Provided'}</td>
         </tr>
         <tr>
-          <td style="padding: 6px 0; color: #6b7280;">Delivery Address / PIN:</td>
-          <td style="padding: 6px 0; color: #111827;">${quotation.deliveryLocation ? `${quotation.deliveryLocation} - ` : ''}<strong>PIN: ${quotation.pincode}</strong></td>
+          <td style="padding: 6px 0; color: #6b7280;">Delivery Address:</td>
+          <td style="padding: 6px 0; color: #111827;">${quotation.deliveryLocation || 'Not Provided'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #6b7280;">PIN Code:</td>
+          <td style="padding: 6px 0; color: #111827; font-weight: 600;">${quotation.pincode || 'Not Provided'}</td>
         </tr>
       </table>
 
-      <div style="background-color: #f8fafc; border-left: 4px solid #3b82f6; padding: 12px 16px; margin: 20px 0; border-radius: 0 4px 4px 0;">
-        <div style="font-size: 12px; color: #1e40af; font-weight: 700; text-transform: uppercase;">Customer Message:</div>
-        <div style="font-size: 13px; color: #1e293b; margin-top: 4px; white-space: pre-wrap;">${quotation.additionalRequirements || 'None specified'}</div>
+      <div style="background-color: #f8fafc; border-left: 4px solid #004b87; padding: 12px 16px; margin: 20px 0; border-radius: 0 4px 4px 0;">
+        <div style="font-size: 12px; color: #004b87; font-weight: 700; text-transform: uppercase;">Customer Message:</div>
+        <div style="font-size: 13px; color: #1e293b; margin-top: 4px; white-space: pre-wrap;">${quotation.additionalRequirements || 'Not Provided'}</div>
       </div>
 
       <h3 style="font-size: 14px; text-transform: uppercase; color: #374151; letter-spacing: 0.5px; border-bottom: 2px solid #f3f4f6; padding-bottom: 8px; margin-top: 24px;">
@@ -266,9 +274,9 @@ export function buildQuotationEmailHtml(
         <thead>
           <tr style="background-color: #f9fafb; border-bottom: 1px solid #e5e7eb;">
             <th style="padding: 8px 10px; text-align: left; font-size: 12px; color: #6b7280;">Product &amp; SKU</th>
-            <th style="padding: 8px 10px; text-align: center; font-size: 12px; color: #6b7280;">Quantity</th>
-            <th style="padding: 8px 10px; text-align: right; font-size: 12px; color: #6b7280;">Unit (₹)</th>
-            <th style="padding: 8px 10px; text-align: right; font-size: 12px; color: #6b7280;">Total (₹)</th>
+            <th style="padding: 8px 10px; text-align: center; font-size: 12px; color: #6b7280;">Original Requested Qty</th>
+            <th style="padding: 8px 10px; text-align: right; font-size: 12px; color: #6b7280;">Indicative Unit (₹)</th>
+            <th style="padding: 8px 10px; text-align: right; font-size: 12px; color: #6b7280;">Indicative Total (₹)</th>
           </tr>
         </thead>
         <tbody>
@@ -285,14 +293,14 @@ export function buildQuotationEmailHtml(
           </tr>
           <tr style="border-top: 1px solid #e5e7eb;">
             <td colspan="3" style="padding: 10px; text-align: right; font-size: 14px; color: #111827; font-weight: 700;">Indicative Total:</td>
-            <td style="padding: 10px; text-align: right; font-size: 15px; color: #d9232d; font-weight: 800;">₹${quotation.indicativeTotal.toLocaleString('en-IN')}</td>
+            <td style="padding: 10px; text-align: right; font-size: 15px; color: #004b87; font-weight: 800;">₹${quotation.indicativeTotal.toLocaleString('en-IN')}</td>
           </tr>
         </tfoot>
       </table>
 
       <div style="text-align: center; margin: 28px 0 12px 0;">
-        <a href="${adminUrl}" style="background-color: #d9232d; color: #ffffff; text-decoration: none; padding: 12px 28px; font-size: 14px; font-weight: 700; border-radius: 6px; display: inline-block;">
-          View Quotation in Zoho CRM / Admin Dashboard &rarr;
+        <a href="${adminUrl}" style="background-color: #004b87; color: #ffffff; text-decoration: none; padding: 12px 28px; font-size: 14px; font-weight: 700; border-radius: 6px; display: inline-block;">
+          View Quotation in Admin Dashboard &rarr;
         </a>
       </div>
     </div>
@@ -301,8 +309,18 @@ export function buildQuotationEmailHtml(
 </html>`;
 }
 
+export interface QuotationNotificationContext {
+  source: 'production_customer_submission';
+  zohoQuoteId: string;
+  zohoContactId?: string;
+  zohoAccountId?: string;
+  action?: 'created' | 'skipped' | 'updated' | 'failed';
+  idempotencyKey?: string;
+}
+
 /**
  * Send official quote notification to a single Admin recipient via Zoho Mail / Zoho CRM Send Mail API
+ * Strictly omits any PDF or inventory template attachments (ZERO attachments on initial notification)
  */
 export async function sendAdminQuotationEmail(
   quotation: Quotation,
@@ -314,6 +332,7 @@ export async function sendAdminQuotationEmail(
   const cleanRecipient = recipientEmail.trim().toLowerCase();
   const dedupKey = `${quotation.idempotencyKey || quotation.quotationNumber || quotation.id}:${cleanRecipient}`;
 
+  // 1. In-memory deduplication check
   if (sentQuoteRecipientKeys.has(dedupKey)) {
     return {
       recipient: cleanRecipient,
@@ -325,10 +344,32 @@ export async function sendAdminQuotationEmail(
     };
   }
 
+  // 2. Persistent log check to prevent duplicate notifications across server restarts
+  try {
+    const existingLogs = await getNotificationLogs(quotation.id);
+    const alreadySent = existingLogs.some(
+      (l) => l.recipient.trim().toLowerCase() === cleanRecipient && l.status === 'sent'
+    );
+    if (alreadySent) {
+      sentQuoteRecipientKeys.add(dedupKey);
+      return {
+        recipient: cleanRecipient,
+        role: roleLabel,
+        success: true,
+        status: 'sent',
+        provider: 'zoho_crm_send_mail',
+        messageId: 'already_sent_persistent_dedup',
+      };
+    }
+  } catch {
+    // Continue if log check fails
+  }
+
   const subject = `New Quote Request — ${quotation.quotationNumber} (${quotation.companyName || quotation.customerName}) | Office Bazzar`;
   const html = buildQuotationEmailHtml(quotation, cleanRecipient, partnerEmail);
   const text = buildQuotationEmailText(quotation, cleanRecipient, partnerEmail);
 
+  // Send ONLY to the assigned admin. attachInventoryPdf: false ensures ZERO attachments!
   const zohoResult: ZohoEmailDispatchResult = await sendZohoEmail({
     toEmail: cleanRecipient,
     toName: roleLabel,
@@ -338,6 +379,7 @@ export async function sendAdminQuotationEmail(
     text,
     quoteId: crmContext?.zohoQuoteId,
     contactId: crmContext?.zohoContactId,
+    attachInventoryPdf: false,
   });
 
   if (zohoResult.success) {
@@ -403,14 +445,30 @@ export async function sendQuoteEmailNotification(
  * - If assigned to Sales: sales4@officebazzar.com ONLY
  * - If assigned to Marketing: marketing@officebazzar.com ONLY
  * Does NOT send to both admins. Does NOT send a customer email notification.
- * Tracks the assigned admin recipient independently and allows retry without duplicating CRM records.
+ * Dispatches only after authoritative Zoho CRM record creation with zero attachments.
  */
 export async function dispatchQuotationNotifications(
   quotation: Quotation,
-  crmContext?: { zohoQuoteId?: string; zohoContactId?: string }
+  crmContext: QuotationNotificationContext
 ): Promise<NotificationResult[]> {
   const results: NotificationResult[] = [];
   const { salesEmail, marketingEmail } = getNotificationRecipients();
+
+  // 1. Production submission source validation
+  if (!crmContext || crmContext.source !== 'production_customer_submission') {
+    console.warn(
+      `[NotificationService] Notification rejected: Invalid or non-production submission source.`
+    );
+    return [];
+  }
+
+  // 2. Authoritative Zoho CRM record validation: Must be a newly created Quote
+  if (!crmContext.zohoQuoteId || crmContext.action !== 'created') {
+    console.log(
+      `[NotificationService] Notification skipped: Quotation [${quotation.quotationNumber}] action is "${crmContext?.action}" (not a newly created Zoho CRM record).`
+    );
+    return [];
+  }
 
   // Determine assigned admin from quotation metadata
   const isMarketing =
@@ -942,6 +1000,7 @@ export async function sendFinalQuotationToCustomer(
     text,
     quoteId: zohoQuoteId,
     contactId: quotation.zohoContactId,
+    attachInventoryPdf: true, // Preserve approved quotation PDF attachment for customer email
   });
 
   await createNotificationLog({

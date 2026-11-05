@@ -193,8 +193,10 @@ async function runE2E() {
     // 4. Dispatch notification
     console.log(`Dispatching notification for RFQ [${ref}]...`);
     const notifyResults = await dispatchQuotationNotifications(quotation, {
-      zohoQuoteId: crmResult.quoteId,
+      source: 'production_customer_submission',
+      zohoQuoteId: crmResult.quoteId || '',
       zohoContactId: crmResult.contactId,
+      action: crmResult.action,
     });
 
     assert(

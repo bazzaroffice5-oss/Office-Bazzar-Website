@@ -9,7 +9,6 @@ import { getProducts, createQuotation } from '@/lib/db/store';
 import { INITIAL_PRODUCTS } from '@/lib/data/catalog';
 import { Product } from '@/types';
 import { syncQuotationToZoho } from '@/lib/zoho/crm';
-import { dispatchQuotationNotifications } from '@/lib/notifications/service';
 import { getNextLeadAssignee } from '@/lib/zoho/round-robin';
 
 export interface ProductCardSuggestion {
@@ -610,9 +609,6 @@ export async function processBazzarAIChat(
             } catch {}
 
             const assignee = await getNextLeadAssignee();
-            dispatchQuotationNotifications(quotation, {
-              zohoQuoteId: zohoResult.leadId || undefined,
-            }).catch(() => {});
 
             toolResult = {
               success: true,
