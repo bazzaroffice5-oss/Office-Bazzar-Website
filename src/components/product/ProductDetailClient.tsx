@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShoppingCart, Check, Heart, ShieldCheck, CheckCircle } from 'lucide-react';
+import { ShoppingCart, Check, Heart, ShieldCheck } from 'lucide-react';
 import { Brand, Product } from '@/types';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';

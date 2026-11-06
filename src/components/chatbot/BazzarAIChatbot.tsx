@@ -60,6 +60,17 @@ function clampPosition(
   };
 }
 
+function createMessageId(prefix: string): string {
+  return `${prefix}-${Date.now()}`;
+}
+
+function formatCurrentTime(): string {
+  return new Date().toLocaleTimeString('en-IN', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
 export default function BazzarAIChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
@@ -286,10 +297,7 @@ export default function BazzarAIChatbot() {
         id: 'msg-welcome',
         sender: 'assistant',
         text: INITIAL_WELCOME_TEXT,
-        timestamp: new Date().toLocaleTimeString('en-IN', {
-          hour: '2-digit',
-          minute: '2-digit',
-        }),
+        timestamp: formatCurrentTime(),
         suggestedActions: DEFAULT_SUGGESTIONS,
         quickLinks: [
           { title: 'Browse Catalog', url: '/categories' },
@@ -300,18 +308,15 @@ export default function BazzarAIChatbot() {
     ]);
   };
 
-  const sendMessage = async (contentToSend: string) => {
+  const handleSendMessage = async (contentToSend: string) => {
     const trimmed = contentToSend.trim();
     if (!trimmed || isTyping) return;
 
     const userMessage: Message = {
-      id: `usr-${Date.now()}`,
+      id: createMessageId('usr'),
       sender: 'user',
       text: trimmed,
-      timestamp: new Date().toLocaleTimeString('en-IN', {
-        hour: '2-digit',
-        minute: '2-digit',
-      }),
+      timestamp: formatCurrentTime(),
     };
 
     setMessages((prev) => [...prev, userMessage]);
@@ -337,13 +342,10 @@ export default function BazzarAIChatbot() {
       const data = await res.json();
 
       const assistantMessage: Message = {
-        id: `ast-${Date.now()}`,
+        id: createMessageId('ast'),
         sender: 'assistant',
         text: data.reply || "I'm here to assist you with office supplies. How can I help?",
-        timestamp: new Date().toLocaleTimeString('en-IN', {
-          hour: '2-digit',
-          minute: '2-digit',
-        }),
+        timestamp: formatCurrentTime(),
         productCards: data.productCards,
         quickLinks: data.quickLinks,
         suggestedActions: data.suggestedActions || DEFAULT_SUGGESTIONS,
@@ -354,14 +356,11 @@ export default function BazzarAIChatbot() {
       setMessages((prev) => [
         ...prev,
         {
-          id: `err-${Date.now()}`,
+          id: createMessageId('err'),
           sender: 'assistant',
           text:
             "I'm currently unable to reach the server, but our customer support desk is ready to help at **+91 7200800040** or **sales4@officebazzar.com**.",
-          timestamp: new Date().toLocaleTimeString('en-IN', {
-            hour: '2-digit',
-            minute: '2-digit',
-          }),
+          timestamp: formatCurrentTime(),
           suggestedActions: ['Find Products', 'Contact Support', 'Get a Quotation'],
           quickLinks: [
             { title: 'Contact Support', url: '/contact' },
@@ -376,11 +375,11 @@ export default function BazzarAIChatbot() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    sendMessage(inputMessage);
+    handleSendMessage(inputMessage);
   };
 
   const handleSuggestionClick = (suggestion: string) => {
-    sendMessage(suggestion);
+    handleSendMessage(suggestion);
   };
 
   return (

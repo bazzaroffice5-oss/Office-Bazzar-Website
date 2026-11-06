@@ -121,7 +121,7 @@ export default function AdminQuotationEditor({
   const [additionalCharges, setAdditionalCharges] = useState<number>(
     quotation.additionalCharges ?? 0
   );
-  const [validUntil, setValidUntil] = useState<string>(
+  const [validUntil, setValidUntil] = useState<string>(() =>
     quotation.validUntil ||
       new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
   );

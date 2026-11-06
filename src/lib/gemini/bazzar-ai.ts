@@ -790,7 +790,7 @@ export function parseConversationState(
 
     // Chairs detection
     if (/\b(chair|chairs|நாற்காலி|kursi)\b/i.test(lower)) {
-      let p = state.products.get('chairs') || { category: 'chairs', name: 'Office Chairs' };
+      const p = state.products.get('chairs') || { category: 'chairs', name: 'Office Chairs' };
       if (/\b(ergonomic|mesh|lumbar)\b/i.test(lower)) p.type = 'Ergonomic';
       if (/\b(executive|high\s*back)\b/i.test(lower)) p.type = 'Executive';
       if (/\b(visitor|waiting)\b/i.test(lower)) p.type = 'Visitor';
@@ -802,7 +802,7 @@ export function parseConversationState(
       }
       state.products.set('chairs', p);
     } else if (state.products.has('chairs')) {
-      let p = state.products.get('chairs')!;
+      const p = state.products.get('chairs')!;
       if (/\b(ergonomic|mesh|lumbar)\b/i.test(lower)) p.type = 'Ergonomic';
       if (/\b(executive|high\s*back)\b/i.test(lower)) p.type = 'Executive';
       if (/\b(visitor|waiting)\b/i.test(lower)) p.type = 'Visitor';
@@ -817,7 +817,7 @@ export function parseConversationState(
 
     // Copier Paper detection
     if (/\b(paper|copier|ream|reams|பேப்பர்)\b/i.test(lower) && !/\b(shredder|cutter|napkin|tissue)\b/i.test(lower)) {
-      let p = state.products.get('paper') || { category: 'paper', name: 'Copier Paper' };
+      const p = state.products.get('paper') || { category: 'paper', name: 'Copier Paper' };
       if (/\b(jk|jk copier)\b/i.test(lower)) p.brand = 'JK Copier';
       if (/\btnpl\b/i.test(lower)) p.brand = 'TNPL';
       if (/\bbilt\b/i.test(lower)) p.brand = 'Bilt';
@@ -832,7 +832,7 @@ export function parseConversationState(
       }
       state.products.set('paper', p);
     } else if (state.products.has('paper')) {
-      let p = state.products.get('paper')!;
+      const p = state.products.get('paper')!;
       if (/\b(jk|jk copier)\b/i.test(lower)) p.brand = 'JK Copier';
       if (/\btnpl\b/i.test(lower)) p.brand = 'TNPL';
       if (/\b(75\s*gsm|70\s*gsm|80\s*gsm)\b/i.test(lower)) {

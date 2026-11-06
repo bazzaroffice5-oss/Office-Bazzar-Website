@@ -1091,7 +1091,7 @@ export const BRANDS: Brand[] = [
   }
 ];
 
-// @ts-ignore
+// @ts-expect-error Expression produces a union type that is too complex to represent
 const RAW_PRODUCTS: any[] = [
   {
     "id": "prod-cardboard-tag-file",
