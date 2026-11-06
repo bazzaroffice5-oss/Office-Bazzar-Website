@@ -4309,13 +4309,12 @@
     "category": "Office Stationery",
     "primaryImage": "/assets/products/catalog_2026/OB-EQP-83.webp",
     "galleryImages": [
-      "/assets/products/catalog_2026/OB-EQP-83.webp",
-      "/assets/products/catalog_2026/OB-EQP-83-alt-1.webp"
+      "/assets/products/catalog_2026/OB-EQP-83.webp"
     ],
-    "fileSize": 23684,
+    "fileSize": 143080,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-06T15:42:00+05:30"
   },
   "OB-EQP-84": {
     "sku": "OB-EQP-84",

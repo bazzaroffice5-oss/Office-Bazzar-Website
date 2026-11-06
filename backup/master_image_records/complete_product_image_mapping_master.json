@@ -4030,7 +4030,12 @@
     ],
     "category": "Office Stationery",
     "brand": "OfficeBazzar",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "fileSize": 143080,
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-EQP-83.webp"
+    ],
+    "lastVerifiedAt": "2026-11-06T15:42:00+05:30"
   },
   "OB-EQP-84": {
     "productId": "prod-ob-eqp-84-desk-visiting-card-holder-book",
