@@ -3,12 +3,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   ShoppingCart,
   ChevronDown,
   Menu,
   X,
+  Search,
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
@@ -22,14 +23,28 @@ const PRODUCT_CATEGORIES = [
 
 export default function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const { itemCount } = useCart();
 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
 
   const productsRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const queryVal = ((formData.get('query') as string) || searchQuery).trim();
+    if (queryVal) {
+      router.push(`/products?query=${encodeURIComponent(queryVal)}`);
+      setIsMobileSearchOpen(false);
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   // Click outside listener
   useEffect(() => {
@@ -50,6 +65,7 @@ export default function Header() {
     setIsMobileMenuOpen(false);
     setIsProductsOpen(false);
     setIsMobileProductsOpen(false);
+    setIsMobileSearchOpen(false);
   }, [pathname]);
 
   const handleMouseEnter = () => {
@@ -160,8 +176,47 @@ export default function Header() {
           })}
         </nav>
 
+        {/* Desktop / Tablet Search Bar & Button */}
+        <form
+          action="/products"
+          method="GET"
+          onSubmit={handleSearchSubmit}
+          role="search"
+          className="hidden md:flex items-center h-9 w-44 lg:w-56 xl:w-72 bg-slate-50 border border-slate-200/90 rounded-full pl-3 pr-1 py-0.5 focus-within:border-[#004b87] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#004b87]/15 transition-all shadow-2xs shrink-0"
+        >
+          <Search className="w-4 h-4 text-slate-400 shrink-0 mr-1.5 pointer-events-none" />
+          <input
+            type="search"
+            name="query"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search products..."
+            aria-label="Search products"
+            className="w-full bg-transparent text-xs xl:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none min-w-0"
+          />
+          <button
+            type="submit"
+            aria-label="Submit search"
+            title="Search"
+            className="h-7 px-3 bg-[#004b87] hover:bg-[#003866] active:scale-95 text-white text-xs font-semibold rounded-full flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs ml-1"
+          >
+            Search
+          </button>
+        </form>
+
         {/* Right: Cart, Get a Quote Button */}
         <div className="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
+          {/* Mobile Search Toggle Button */}
+          <button
+            type="button"
+            onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
+            className="flex items-center justify-center w-9 h-9 text-slate-700 hover:text-[#004b87] hover:bg-slate-100 rounded-full md:hidden transition-colors cursor-pointer"
+            aria-label="Toggle search bar"
+            title="Search products"
+          >
+            <Search className="w-5 h-5" />
+          </button>
+
           {/* Cart Icon - Visible only when cart contains products */}
           {itemCount > 0 && (
             <Link
@@ -197,10 +252,69 @@ export default function Header() {
         </div>
       </div>
 
+      {/* Mobile Expandable Search Bar */}
+      {isMobileSearchOpen && (
+        <div className="md:hidden border-t border-slate-100 bg-white/98 px-4 py-2.5 animate-in slide-in-from-top-1 duration-150 shadow-xs">
+          <form
+            action="/products"
+            method="GET"
+            onSubmit={handleSearchSubmit}
+            role="search"
+            className="flex items-center h-9 w-full bg-slate-50 border border-slate-200 rounded-full pl-3 pr-1 py-0.5 focus-within:border-[#004b87] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#004b87]/15 transition-all shadow-2xs"
+          >
+            <Search className="w-4 h-4 text-slate-400 shrink-0 mr-1.5 pointer-events-none" />
+            <input
+              type="search"
+              name="query"
+              autoFocus
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search products, brands, SKUs..."
+              aria-label="Search products"
+              className="w-full bg-transparent text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none min-w-0"
+            />
+            <button
+              type="submit"
+              aria-label="Submit search"
+              className="h-7 px-3 bg-[#004b87] hover:bg-[#003866] active:scale-95 text-white text-xs font-semibold rounded-full flex items-center justify-center shrink-0 cursor-pointer shadow-2xs ml-1"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+      )}
+
       {/* Mobile Menu Drawer */}
       {isMobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 top-[68px] bg-slate-950/40 backdrop-blur-xs z-50">
           <div className="bg-white w-full max-h-[calc(100vh-68px)] overflow-y-auto border-b border-slate-200 shadow-xl p-5 space-y-4 animate-in slide-in-from-top-2 duration-200">
+            {/* Mobile Drawer Search Form */}
+            <form
+              action="/products"
+              method="GET"
+              onSubmit={handleSearchSubmit}
+              role="search"
+              className="flex items-center h-10 w-full bg-slate-50 border border-slate-200 rounded-full pl-3.5 pr-1 py-0.5 focus-within:border-[#004b87] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#004b87]/15 transition-all shadow-2xs mb-2"
+            >
+              <Search className="w-4 h-4 text-slate-400 shrink-0 mr-2 pointer-events-none" />
+              <input
+                type="search"
+                name="query"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search products, brands, SKUs..."
+                aria-label="Search products"
+                className="w-full bg-transparent text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none min-w-0"
+              />
+              <button
+                type="submit"
+                aria-label="Submit search"
+                className="h-8 px-3.5 bg-[#004b87] hover:bg-[#003866] active:scale-95 text-white text-xs font-semibold rounded-full flex items-center justify-center shrink-0 cursor-pointer shadow-2xs ml-1"
+              >
+                Search
+              </button>
+            </form>
+
             {/* Mobile Nav Links */}
             <div className="divide-y divide-slate-100 text-sm font-medium text-slate-800">
               {/* Products Accordion showing exactly the 4 categories */}
