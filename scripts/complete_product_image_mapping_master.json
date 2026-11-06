@@ -4201,13 +4201,12 @@
     "category": "Office Stationery",
     "primaryImage": "/assets/products/catalog_2026/OB-NOT-75.webp",
     "galleryImages": [
-      "/assets/products/catalog_2026/OB-NOT-75.webp",
-      "/assets/products/catalog_2026/OB-NOT-75-alt-1.webp"
+      "/assets/products/catalog_2026/OB-NOT-75.webp"
     ],
-    "fileSize": 13990,
+    "fileSize": 39394,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-06T11:52:23.142Z"
   },
   "OB-NOT-76": {
     "sku": "OB-NOT-76",
