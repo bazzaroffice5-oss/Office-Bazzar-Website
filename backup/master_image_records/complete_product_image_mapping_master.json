@@ -4073,7 +4073,12 @@
     ],
     "category": "Printers & Technology",
     "brand": "OfficeBazzar",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "fileSize": 50250,
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-EQP-87.webp"
+    ],
+    "lastVerifiedAt": "2026-11-06T16:18:00+05:30"
   },
   "OB-EQP-89": {
     "productId": "prod-ob-eqp-89-acrylic-id-card-badge-holder-with-lanyard",
