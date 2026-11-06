@@ -3706,7 +3706,12 @@
     ],
     "category": "Packaging Supplies",
     "brand": "OfficeBazzar",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "fileSize": 52944,
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-DES-53.webp"
+    ],
+    "lastVerifiedAt": "2026-11-06T15:22:00+05:30"
   },
   "OB-DES-55": {
     "productId": "prod-ob-des-55-heavy-duty-tape-dispenser-1-inch-2-inch",

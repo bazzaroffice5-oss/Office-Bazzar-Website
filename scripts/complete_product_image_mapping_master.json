@@ -3969,13 +3969,12 @@
     "category": "Packaging Supplies",
     "primaryImage": "/assets/products/catalog_2026/OB-DES-53.webp",
     "galleryImages": [
-      "/assets/products/catalog_2026/OB-DES-53.webp",
-      "/assets/products/catalog_2026/OB-DES-53-alt-1.webp"
+      "/assets/products/catalog_2026/OB-DES-53.webp"
     ],
-    "fileSize": 18486,
+    "fileSize": 52944,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-06T15:22:00+05:30"
   },
   "OB-DES-55": {
     "sku": "OB-DES-55",
