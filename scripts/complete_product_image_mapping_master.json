@@ -3617,13 +3617,12 @@
     "category": "Office Stationery",
     "primaryImage": "/assets/products/catalog_2026/OB-FIL-20.webp",
     "galleryImages": [
-      "/assets/products/catalog_2026/OB-FIL-20.webp",
-      "/assets/products/catalog_2026/OB-FIL-20-alt-1.webp"
+      "/assets/products/catalog_2026/OB-FIL-20.webp"
     ],
-    "fileSize": 21310,
+    "fileSize": 54430,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-06T11:08:22.244Z"
   },
   "OB-FIL-24": {
     "sku": "OB-FIL-24",
@@ -3631,13 +3630,12 @@
     "category": "Office Stationery",
     "primaryImage": "/assets/products/catalog_2026/OB-FIL-24.webp",
     "galleryImages": [
-      "/assets/products/catalog_2026/OB-FIL-24.webp",
-      "/assets/products/catalog_2026/OB-FIL-24-alt-1.webp"
+      "/assets/products/catalog_2026/OB-FIL-24.webp"
     ],
-    "fileSize": 15382,
+    "fileSize": 21706,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-06T11:08:22.244Z"
   },
   "OB-FIL-26": {
     "sku": "OB-FIL-26",
@@ -3659,13 +3657,12 @@
     "category": "Office Stationery",
     "primaryImage": "/assets/products/catalog_2026/OB-FIL-28.webp",
     "galleryImages": [
-      "/assets/products/catalog_2026/OB-FIL-28.webp",
-      "/assets/products/catalog_2026/OB-FIL-28-alt-1.webp"
+      "/assets/products/catalog_2026/OB-FIL-28.webp"
     ],
-    "fileSize": 16882,
+    "fileSize": 118294,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-06T11:08:22.244Z"
   },
   "OB-FIL-29": {
     "sku": "OB-FIL-29",
@@ -4362,13 +4359,12 @@
     "category": "Office Stationery",
     "primaryImage": "/assets/products/catalog_2026/OB-EQP-89.webp",
     "galleryImages": [
-      "/assets/products/catalog_2026/OB-EQP-89.webp",
-      "/assets/products/catalog_2026/OB-EQP-89-alt-1.webp"
+      "/assets/products/catalog_2026/OB-EQP-89.webp"
     ],
-    "fileSize": 6322,
+    "fileSize": 24468,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-06T11:08:22.242Z"
   },
   "OB-COV-01": {
     "sku": "OB-COV-01",

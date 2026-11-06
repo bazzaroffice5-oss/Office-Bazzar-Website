@@ -3380,7 +3380,14 @@
     ],
     "category": "Office Stationery",
     "brand": "OfficeBazzar",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-FIL-20.webp"
+    ],
+    "fileSize": 54430,
+    "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
+    "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
+    "lastVerifiedAt": "2026-11-06T11:08:22.275Z"
   },
   "OB-FIL-24": {
     "productId": "prod-ob-fil-24-spring-file-plastic-body",
@@ -3393,7 +3400,14 @@
     ],
     "category": "Office Stationery",
     "brand": "OfficeBazzar",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-FIL-24.webp"
+    ],
+    "fileSize": 21706,
+    "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
+    "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
+    "lastVerifiedAt": "2026-11-06T11:08:22.275Z"
   },
   "OB-FIL-26": {
     "productId": "prod-ob-fil-26-officebazzar-box-file",
@@ -3419,7 +3433,14 @@
     ],
     "category": "Office Stationery",
     "brand": "OfficeBazzar",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-FIL-28.webp"
+    ],
+    "fileSize": 118294,
+    "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
+    "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
+    "lastVerifiedAt": "2026-11-06T11:08:22.275Z"
   },
   "OB-FIL-29": {
     "productId": "prod-ob-fil-29-1-to-10-index-file-separator",
@@ -4091,7 +4112,14 @@
     ],
     "category": "Office Stationery",
     "brand": "OfficeBazzar",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-EQP-89.webp"
+    ],
+    "fileSize": 24468,
+    "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
+    "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
+    "lastVerifiedAt": "2026-11-06T11:08:22.275Z"
   },
   "OB-COV-01": {
     "productId": "prod-ob-cov-01-3-ply-surgical-disposable-face-mask",

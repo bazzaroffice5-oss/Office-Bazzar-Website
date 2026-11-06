@@ -10611,8 +10611,7 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-FIL-20.webp",
-      "/assets/products/catalog_2026/OB-FIL-20-alt-1.webp"
+      "/assets/products/catalog_2026/OB-FIL-20.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10652,8 +10651,7 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-FIL-24.webp",
-      "/assets/products/catalog_2026/OB-FIL-24-alt-1.webp"
+      "/assets/products/catalog_2026/OB-FIL-24.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -10734,8 +10732,7 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-FIL-28.webp",
-      "/assets/products/catalog_2026/OB-FIL-28-alt-1.webp"
+      "/assets/products/catalog_2026/OB-FIL-28.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -12841,8 +12838,7 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-EQP-89.webp",
-      "/assets/products/catalog_2026/OB-EQP-89-alt-1.webp"
+      "/assets/products/catalog_2026/OB-EQP-89.webp"
     ],
     "featured": false,
     "bestseller": false,
