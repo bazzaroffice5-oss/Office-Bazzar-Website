@@ -123,16 +123,6 @@ const nextConfig: NextConfig = {
 
     const duplicateProductRedirects = [
       {
-        source: '/product/kangaro-staplers-hd-10d',
-        destination: '/category/office-stationery',
-        permanent: true,
-      },
-      {
-        source: '/product/kangaro-staplers-hd-10d-1',
-        destination: '/category/office-stationery',
-        permanent: true,
-      },
-      {
         source: '/product/tissue-paper-napkin-1',
         destination: '/product/tissue-paper-napkin',
         permanent: true,

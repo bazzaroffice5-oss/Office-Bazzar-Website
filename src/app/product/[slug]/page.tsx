@@ -14,8 +14,6 @@ export async function generateStaticParams() {
 }
 
 const DUPLICATE_PRODUCT_REDIRECTS: Record<string, string> = {
-  'kangaro-staplers-hd-10d': '/category/office-stationery',
-  'kangaro-staplers-hd-10d-1': '/category/office-stationery',
   'tissue-paper-napkin-1': '/product/tissue-paper-napkin',
 };
 import JsonLd from '@/components/seo/JsonLd';
@@ -26,6 +24,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (slug === 'kangaro-staplers-hd-10d' || slug === 'kangaro-staplers-hd-10d-1') {
+    return {
+      title: 'Product Not Found | Office Bazzar',
+      robots: { index: false, follow: false },
+    };
+  }
   if (DUPLICATE_PRODUCT_REDIRECTS[slug]) {
     return {
       alternates: {
@@ -97,6 +101,9 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (slug === 'kangaro-staplers-hd-10d' || slug === 'kangaro-staplers-hd-10d-1') {
+    notFound();
+  }
   if (DUPLICATE_PRODUCT_REDIRECTS[slug]) {
     permanentRedirect(DUPLICATE_PRODUCT_REDIRECTS[slug]);
   }

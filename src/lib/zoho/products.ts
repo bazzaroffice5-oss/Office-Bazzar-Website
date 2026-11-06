@@ -33,7 +33,7 @@ export interface ZohoProductMappingItem {
 }
 
 // In-memory cache for high-speed edge retrieval
-const DUPLICATE_INACTIVE_SLUGS = new Set<string>(['kangaro-staplers-hd-10d']);
+const DUPLICATE_INACTIVE_SLUGS = new Set<string>(['kangaro-staplers-hd-10d', 'kangaro-staplers-hd-10d-1']);
 let cachedProducts: Product[] | null = null;
 let lastCacheSync = 0;
 let inflightSyncPromise: Promise<Product[]> | null = null;

@@ -1690,7 +1690,7 @@ const RAW_PRODUCTS: any[] = [
     "bestseller": false,
     "rating": 4.8,
     "reviewCount": 15,
-    "isActive": true,
+    "isActive": false,
     "specifications": {},
     "subcategoryId": "desk-accessories-tools",
     "subcategoryName": "Desk Organization & Tools",

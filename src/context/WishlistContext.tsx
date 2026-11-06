@@ -22,7 +22,8 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
     try {
       const saved = localStorage.getItem('officebazzar_wishlist');
       if (saved) {
-        setWishlist(JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        setWishlist(Array.isArray(parsed) ? parsed.filter((p: Product) => p.isActive !== false) : []);
       }
     } catch {
       // Ignore
@@ -41,6 +42,7 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   }, [wishlist, isInitialized]);
 
   const addToWishlist = (product: Product) => {
+    if (product.isActive === false) return;
     setWishlist((prev) => {
       if (prev.some((p) => p.id === product.id)) return prev;
       return [...prev, product];
@@ -59,6 +61,7 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
     if (isInWishlist(product.id)) {
       removeFromWishlist(product.id);
     } else {
+      if (product.isActive === false) return;
       addToWishlist(product);
     }
   };
