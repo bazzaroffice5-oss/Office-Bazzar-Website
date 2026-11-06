@@ -1382,7 +1382,7 @@ const RAW_PRODUCTS: any[] = [
     "bestseller": false,
     "rating": 4.8,
     "reviewCount": 15,
-    "isActive": true,
+    "isActive": false,
     "specifications": {
       "catalogueCode": "OB-DES-59",
       "cataloguePage": "25",

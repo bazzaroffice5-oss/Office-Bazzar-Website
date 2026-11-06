@@ -554,7 +554,7 @@ export async function getBestsellers(limit = 8): Promise<Product[]> {
 export async function getRelatedProducts(productId: string, limit = 4): Promise<Product[]> {
   const current = await getProductById(productId);
   const { products: allCatalog } = await getProducts();
-  const pool = allCatalog.length > 0 ? allCatalog : productsList;
+  const pool = (allCatalog.length > 0 ? allCatalog : productsList).filter((p) => p.isActive !== false);
 
   if (!current) return pool.slice(0, limit);
 

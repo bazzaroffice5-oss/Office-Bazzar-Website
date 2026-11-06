@@ -123,8 +123,13 @@ const nextConfig: NextConfig = {
 
     const duplicateProductRedirects = [
       {
+        source: '/product/kangaro-staplers-hd-10d',
+        destination: '/category/office-stationery',
+        permanent: true,
+      },
+      {
         source: '/product/kangaro-staplers-hd-10d-1',
-        destination: '/product/kangaro-staplers-hd-10d',
+        destination: '/category/office-stationery',
         permanent: true,
       },
       {

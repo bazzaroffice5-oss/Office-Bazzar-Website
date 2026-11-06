@@ -51,9 +51,9 @@ export async function POST(req: Request) {
 
     for (const rawItem of items) {
       const prod = await getProductById(rawItem.productId);
-      if (!prod) {
+      if (!prod || prod.isActive === false) {
         return NextResponse.json(
-          { error: `Product with ID "${rawItem.productId}" is no longer available in catalog.` },
+          { error: `Product "${prod?.name || rawItem.productId}" is currently unavailable or inactive.` },
           { status: 400 }
         );
       }

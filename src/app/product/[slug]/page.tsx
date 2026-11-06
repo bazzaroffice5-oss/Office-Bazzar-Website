@@ -14,7 +14,8 @@ export async function generateStaticParams() {
 }
 
 const DUPLICATE_PRODUCT_REDIRECTS: Record<string, string> = {
-  'kangaro-staplers-hd-10d-1': '/product/kangaro-staplers-hd-10d',
+  'kangaro-staplers-hd-10d': '/category/office-stationery',
+  'kangaro-staplers-hd-10d-1': '/category/office-stationery',
   'tissue-paper-napkin-1': '/product/tissue-paper-napkin',
 };
 import JsonLd from '@/components/seo/JsonLd';

@@ -44,7 +44,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     try {
       const savedCart = localStorage.getItem('officebazzar_cart');
       if (savedCart) {
-        setItems(JSON.parse(savedCart));
+        const parsed = JSON.parse(savedCart);
+        setItems(Array.isArray(parsed) ? parsed.filter((item: CartItem) => item.product?.isActive !== false) : []);
       }
       const savedCoupon = localStorage.getItem('officebazzar_coupon');
       if (savedCoupon) {
@@ -83,6 +84,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   };
 
   const addToCart = (product: Product, quantity = 1, selectedPackSize?: string, openDrawer = false) => {
+    if (product.isActive === false) {
+      showToast('This product is currently unavailable');
+      return;
+    }
     setItems((prev) => {
       const existingIndex = prev.findIndex((item) => item.product.id === product.id);
       if (existingIndex > -1) {

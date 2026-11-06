@@ -41,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 3. Dynamic Products
   const { products } = await getProducts({ limit: 5000 });
-  const seenSlugs = new Set<string>(['kangaro-staplers-hd-10d-1', 'tissue-paper-napkin-1']);
+  const seenSlugs = new Set<string>(['kangaro-staplers-hd-10d', 'kangaro-staplers-hd-10d-1', 'tissue-paper-napkin-1']);
   const productRoutes: MetadataRoute.Sitemap = products
     .filter((prod) => {
       if (prod.isActive === false || seenSlugs.has(prod.slug)) return false;
