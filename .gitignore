@@ -72,3 +72,5 @@ test_shot.png
 .chrome_*
 .chrome_dom_profile
 .chrome_pag_profile
+*.zip
+
