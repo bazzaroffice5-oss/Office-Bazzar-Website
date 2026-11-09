@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: 'https://officebazzar.com/',
+    canonical: `${SITE_CONFIG.url}/`,
   },
   robots: {
     index: true,
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     title: 'Office Bazzar | Office Supplies & Corporate Procurement India',
     description:
       'Office Bazzar provides office stationery, housekeeping and hygiene products, printer consumables and packaging supplies for businesses across India. Explore corporate and bulk procurement solutions.',
-    url: 'https://officebazzar.com/',
+    url: `${SITE_CONFIG.url}/`,
     siteName: SITE_CONFIG.name,
     locale: 'en_IN',
     type: 'website',

@@ -121,6 +121,20 @@ const nextConfig: NextConfig = {
       permanent: true,
     }));
 
+    const apexToWwwRedirects = [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host' as const,
+            value: 'officebazzar.com',
+          },
+        ],
+        destination: 'https://www.officebazzar.com/:path*',
+        statusCode: 301,
+      },
+    ];
+
     const duplicateProductRedirects = [
       {
         source: '/product/tissue-paper-napkin-1',
@@ -129,7 +143,7 @@ const nextConfig: NextConfig = {
       },
     ];
 
-    return [...legacyRedirects, ...mainCategoryAliases, ...duplicateProductRedirects];
+    return [...apexToWwwRedirects, ...legacyRedirects, ...mainCategoryAliases, ...duplicateProductRedirects];
   },
   async rewrites() {
     return [

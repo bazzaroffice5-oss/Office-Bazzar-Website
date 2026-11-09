@@ -15,7 +15,7 @@ import { getCategories } from '@/lib/db/store';
 const HOMEPAGE_TITLE = 'Office Bazzar | Office Supplies & Corporate Procurement India';
 const HOMEPAGE_DESCRIPTION =
   'Office Bazzar provides office stationery, housekeeping and hygiene products, printer consumables and packaging supplies for businesses across India. Explore corporate and bulk procurement solutions.';
-const HOMEPAGE_CANONICAL = 'https://officebazzar.com/';
+const HOMEPAGE_CANONICAL = `${SITE_CONFIG.url}/`;
 
 export const metadata: Metadata = {
   title: {

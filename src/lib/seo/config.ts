@@ -6,15 +6,32 @@ import { BlogPost } from '@/lib/data/blog';
  * Resolves the verified production domain:
  * 1. Honors process.env.NEXT_PUBLIC_SITE_URL if configured.
  * 2. Intercepts and excludes deprecated domains (e.g. officebazzar.co.in).
- * 3. Enforces primary production domain fallback: https://officebazzar.com
+ * 3. Enforces primary production domain fallback: https://www.officebazzar.com
  * 4. Ensures no trailing slash on the base URL.
  */
 function resolveProductionSiteUrl(): string {
   const envUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (envUrl && !envUrl.includes('officebazzar.co.in')) {
-    return envUrl.replace(/\/+$/, '');
+
+  // In production builds, ignore local development hostnames and enforce production domain
+  if (process.env.NODE_ENV === 'production') {
+    if (envUrl && !envUrl.includes('officebazzar.co.in') && !envUrl.includes('localhost') && !envUrl.includes('127.0.0.1')) {
+      const clean = envUrl.replace(/\/+$/, '');
+      if (clean === 'https://officebazzar.com' || clean === 'http://officebazzar.com') {
+        return 'https://www.officebazzar.com';
+      }
+      return clean;
+    }
+    return 'https://www.officebazzar.com';
   }
-  return 'https://officebazzar.com';
+
+  if (envUrl && !envUrl.includes('officebazzar.co.in')) {
+    const clean = envUrl.replace(/\/+$/, '');
+    if (clean === 'https://officebazzar.com' || clean === 'http://officebazzar.com') {
+      return 'https://www.officebazzar.com';
+    }
+    return clean;
+  }
+  return 'https://www.officebazzar.com';
 }
 
 export const SITE_CONFIG = {
