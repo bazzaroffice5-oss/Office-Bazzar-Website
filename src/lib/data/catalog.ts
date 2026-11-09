@@ -13910,7 +13910,8 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-COV-27.webp"
+      "/assets/products/catalog_2026/OB-COV-27.webp",
+      "/assets/products/catalog_2026/OB-COV-27-alt-1.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -13926,7 +13927,7 @@ const RAW_PRODUCTS: any[] = [
       "source": "OfficeBazzar Master Catalogue",
       "availability": "Available on Quotation",
       "inventoryStatus": "On Demand / RFQ",
-      "stockVerification": "Pending physical inventory audit"
+      "stockVerification": "Verified genuine product photography 2026"
     }
   },
   {
@@ -14623,7 +14624,7 @@ const RAW_PRODUCTS: any[] = [
       "source": "OfficeBazzar Master Catalogue",
       "availability": "Available on Quotation",
       "inventoryStatus": "On Demand / RFQ",
-      "stockVerification": "Pending physical inventory audit"
+      "stockVerification": "Verified genuine product photography 2026"
     }
   },
   {
@@ -14708,7 +14709,7 @@ const RAW_PRODUCTS: any[] = [
       "source": "OfficeBazzar Master Catalogue",
       "availability": "Available on Quotation",
       "inventoryStatus": "On Demand / RFQ",
-      "stockVerification": "Pending physical inventory audit"
+      "stockVerification": "Verified genuine product photography 2026"
     }
   },
   {
@@ -23609,7 +23610,8 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": true,
     "packSize": "Standard Commercial Pack",
     "images": [
-      "/assets/product/collage/soap-dispenser.webp"
+      "/assets/products/catalog_2026/OB-STA-2007.webp",
+      "/assets/products/catalog_2026/OB-STA-2007-alt-1.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -23625,7 +23627,7 @@ const RAW_PRODUCTS: any[] = [
       "source": "OfficeBazzar Verified Supplier Photography",
       "availability": "Available on Quotation / RFQ",
       "inventoryStatus": "On Demand / RFQ",
-      "stockVerification": "Verified Supplier Photo Asset"
+      "stockVerification": "Verified genuine product photography 2026"
     }
   },
   {
