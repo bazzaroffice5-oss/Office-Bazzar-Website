@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyOtpTicket, setSessionCookie, SessionUser } from '@/lib/auth/service';
-import { syncCustomerToZohoContact, getCustomerProfileFromZoho } from '@/lib/zoho/contacts';
+import { syncCustomerToZohoContact } from '@/lib/zoho/contacts';
 
 export const dynamic = 'force-dynamic';
 
@@ -8,7 +8,6 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const otp = body?.otp?.trim();
-    const submittedEmail = body?.email?.trim()?.toLowerCase();
     const name = body?.name?.trim();
     const companyName = body?.companyName?.trim();
     const phone = body?.phone?.trim();

@@ -3,7 +3,7 @@
 import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { LogIn, AlertCircle, Shield, KeyRound, Mail, CheckCircle2 } from 'lucide-react';
+import { LogIn, AlertCircle, Shield, CheckCircle2 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 function LoginForm() {

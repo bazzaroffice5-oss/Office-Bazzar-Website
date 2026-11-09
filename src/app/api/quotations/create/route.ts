@@ -7,7 +7,7 @@ import {
   getNotificationRecipients,
 } from '@/lib/notifications/service';
 import { syncQuotationToZoho, ZohoSyncResult } from '@/lib/zoho/crm';
-import { getNextLeadAssignee, getLeadAssigneeForCustomer } from '@/lib/zoho/round-robin';
+import { getLeadAssigneeForCustomer } from '@/lib/zoho/round-robin';
 
 // In-memory sliding window rate limiter to protect public quotation submission
 const submissionRateMap = new Map<string, number[]>();

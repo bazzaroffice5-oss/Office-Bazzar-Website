@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { UserPlus, ShieldCheck, AlertCircle, Building2, Shield } from 'lucide-react';
+import { UserPlus, ShieldCheck, AlertCircle, Shield } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 export default function RegisterPage() {

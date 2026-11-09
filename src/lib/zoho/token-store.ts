@@ -36,7 +36,7 @@ export interface VaultPayload {
   source?: string;
 }
 
-interface EncryptedEnvelope {
+export interface EncryptedEnvelope {
   v: 1;
   iv: string;
   tag: string;

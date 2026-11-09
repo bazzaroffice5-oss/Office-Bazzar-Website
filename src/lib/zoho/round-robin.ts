@@ -203,7 +203,7 @@ async function writeStateToZohoVariable(state: StoredRoundRobinState): Promise<v
     }
 
     // Try finding by reading first
-    const existing = await readStateFromZohoVariable();
+    await readStateFromZohoVariable();
     if (cachedVarId) {
       await zohoFetch(`/settings/variables/${cachedVarId}`, {
         method: 'PUT',

@@ -654,6 +654,7 @@ export async function processBazzarAIChat(
             toolResult = {
               success: true,
               quotationNumber: quotation.id,
+              leadId: zohoResult.leadId,
               assignedExecutive: assignee.name,
               email: assignee.email,
             };

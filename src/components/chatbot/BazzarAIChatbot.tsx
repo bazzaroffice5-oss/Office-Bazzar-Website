@@ -560,11 +560,12 @@ export default function BazzarAIChatbot() {
                               >
                                 {prod.imageUrl ? (
                                   <div className="w-10 h-10 bg-white rounded-lg p-1 border border-slate-200 shrink-0 flex items-center justify-center">
-                                    <img
+                                    <Image
                                       src={prod.imageUrl}
                                       alt={prod.name}
+                                      width={40}
+                                      height={40}
                                       className="max-h-full max-w-full object-contain"
-                                      loading="lazy"
                                     />
                                   </div>
                                 ) : (

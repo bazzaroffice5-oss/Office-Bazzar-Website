@@ -239,7 +239,7 @@ function mapDbBulkRFQ(row: any): BulkRFQ {
 
 // Map database row to Quotation interface
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mapDbQuotation(row: any, itemsRows: any[] = []): Quotation {
+export function mapDbQuotation(row: any, itemsRows: any[] = []): Quotation {
   return {
     id: row.id,
     quotationNumber: row.quotation_number,
@@ -284,7 +284,7 @@ function mapDbQuotation(row: any, itemsRows: any[] = []): Quotation {
 
 // Map database row to NotificationLog interface
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mapDbNotificationLog(row: any): NotificationLog {
+export function mapDbNotificationLog(row: any): NotificationLog {
   return {
     id: row.id,
     quotationId: row.quotation_id,

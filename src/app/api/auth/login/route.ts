@@ -7,7 +7,7 @@ import {
   setOtpTicketCookie,
   SessionUser,
 } from '@/lib/auth/service';
-import { getCustomerProfileFromZoho, syncCustomerToZohoContact } from '@/lib/zoho/contacts';
+import { getCustomerProfileFromZoho } from '@/lib/zoho/contacts';
 
 export const dynamic = 'force-dynamic';
 

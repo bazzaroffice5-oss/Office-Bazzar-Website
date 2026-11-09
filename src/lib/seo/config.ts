@@ -46,7 +46,7 @@ export const SITE_CONFIG = {
     instagram: 'https://www.instagram.com/officebazzar',
   },
   defaultOgImage: '/android-chrome-512x512.png',
-  logoUrl: '/images/brand-logo.svg',
+  logoUrl: '/images/officebazzar-logo-transparent.png',
 };
 
 /**
