@@ -14517,7 +14517,8 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-06.webp"
+      "/assets/products/catalog_2026/OB-RDS-06.webp",
+      "/assets/products/catalog_2026/OB-RDS-06-alt-1.webp"
     ],
     "featured": false,
     "bestseller": false,
