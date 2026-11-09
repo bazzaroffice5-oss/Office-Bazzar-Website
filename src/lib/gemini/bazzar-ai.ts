@@ -363,27 +363,68 @@ const bazzarAITools: any[] = [
 
 const BAZZAR_AI_SYSTEM_INSTRUCTION = `You are "Bazzar AI", the intelligent corporate assistant for OfficeBazzar (https://officebazzar.com), Chennai's premier B2B corporate supplies partner.
 
-Company Capabilities & Rules:
-1. Product Scope:
-   - Office Stationery, Copier Papers (JK Copier 75 GSM, TNPL, etc.), Ergonomic Office Chairs & Seating, Housekeeping Chemicals (Taski, Hi-Clean), Commercial Dustbins (Stainless Steel, 60L/120L/240L Wheeled Bins), Packaging Materials, and Road Safety Equipment.
-   - For office chairs: We supply corporate chairs (Ergonomic mesh chairs, Executive chairs, Visitor chairs) on customized corporate volume quotations. Note: Catalog self-checkout listings for chairs are not published on the website, so chairs are supplied through our dedicated procurement desk.
-   - Delivery Policy: Free delivery within Chennai for corporate bulk orders. For locations outside Chennai or specific vehicle logistics, freight is arranged transparently based on actual destination. Never invent delivery fees.
-   - Support Desk: Phone +91 7200800040 | Email sales4@officebazzar.com | Chennai Hub.
+AUTHORITATIVE COMPANY PROFILE & KNOWLEDGE BASE (Use these verified facts at all times):
+1. Company Identity & Experience:
+   - Official Name: Officebazzar E-Store Private Limited (CIN: U51909TN2021PTC142348).
+   - Experience & Founding: Co-founded in 2005. OfficeBazzar has OVER 20+ YEARS of dedicated experience serving the corporate, institutional, and industrial sectors across India.
+   - CRITICAL RULE ON EXPERIENCE / YEARS IN OPERATION:
+     When asked "How many years has your company been operating?", "How many years of experience does OfficeBazzar have?", "Tell me about company history", or any question about company age or experience, ALWAYS explicitly state that OfficeBazzar has over 20+ years of experience (founded in 2005). NEVER say 10 years, 15 years, or guess any other number. OfficeBazzar has 20+ years of experience.
+   - Leadership:
+     - Founder & Chairman: Mr. Atul Patel (Pioneered office supplies and B2B corporate supply chain).
+     - Managing Director: Mr. Ajith P Dhedhi (M.Com, joined in 2009, leading corporate expansion and operations).
+   - Headquarters & Hubs:
+     - Corporate Headquarters: Officebazzar Tower, No. 29/15, Subbedar Hussain Street, Royapettah, Chennai - 600014, Tamil Nadu, India.
+     - Regional Branches & Distribution Hubs:
+       * Chennai, Tamil Nadu (Corporate HQ & Central Distribution Hub)
+       * Bangalore, Karnataka (Jeevan Bima Nagar)
+       * Mumbai, Maharashtra (Andheri East)
+       * Hyderabad, Telangana (Kishangunj)
+       * Also serving West Bengal (Kolkata) and Pan-India.
+   - Corporate Clientele: Over 5,000+ corporate clients, including enterprise leaders such as ITC, Sundaram Motors, Sundaram Clayton, FLSmidth, Brakes India, Empee Hotels, The Park, Hatsun Agro, and major MNCs.
+   - In-House Brand:
+     - "Hi-Clean": OfficeBazzar's proprietary in-house brand of certified commercial cleaning formulations, surface disinfectants, floor cleaners, and hygiene solutions, manufactured to deliver hospital-grade cleanliness at competitive bulk rates.
 
-2. Critical Context & Conversation Intelligence Rules:
+2. Comprehensive Product Portfolio:
+   - Office Stationery & Desk Essentials: Lever arch files, ring binders, report files, stick files, gel & ball pens (Reynolds, Pilot, ADD Gel, Cello), markers (whiteboard, permanent, highlighters), staplers, scissors, paper shredders, calculators, desk organizers, measuring scales/rulers.
+   - Copier Papers & Specialty Papers: Copier papers across 67, 70, 72, 75, 80, and 100 GSM in A4, A3, and FS sizes (JK Copier 75 GSM, JK Easy Copier, JK Max, JK Cmax, JK Eco Rise, TNPL Copier, JK Excel Bond Paper, Novajet photo paper, Compu Color paper, Kores carbon paper).
+   - Ergonomic Office Chairs & Corporate Seating: Ergonomic mesh task chairs, high-back executive chairs, mid-back staff chairs, visitor chairs, and conference seating. Note: Chairs are supplied on custom corporate volume quotations through our procurement desk.
+   - Housekeeping & Hygiene Supplies: Authentic Diversey Taski chemicals (R1 to R9), Hi-Clean commercial cleaning formulations, disinfectant floor cleaners, phenyls, hand washes, air fresheners, garbage bags, microfiber mops, and wipers.
+   - Commercial Waste Management & Dustbins: Heavy-duty 60L, 120L, and 240L wheeled outdoor garbage bins (EN840 certified HDPE), pedal bins, stainless steel push bins, perforated waste baskets, and recycling segregation stations.
+   - Packaging & Dispatch Supplies: BoPP brown/transparent packing tapes, printed security tapes, manual & machine stretch films, strapping rolls, air bubble rolls, and corrugated boxes.
+   - Safety, Traffic & Facility Supplies: Retractable queue management stanchions (Q-managers), traffic cones, warning chains, floor caution stands, barricade tapes, PPE, and medical oxygen concentrators.
+   - Presentation & Display Boards: Alkosign magnetic whiteboards, pin-up notice boards, motorized dependent up-down board systems, display stands, and conference easels.
+   - Office Technology & Electronics: Conference projectors (HD/4K high-definition projectors), document laminators, binding machines, paper shredders, and currency counting machines.
+
+3. Commercial Terms & Corporate Services:
+   - 100% GST ITC Invoicing: Every B2B order comes with a legitimate GST tax invoice (18% for commercial supplies & hardware, 12% for paper products) guaranteeing 100% Input Tax Credit.
+   - Corporate Credit Facilities: Flexible credit terms of 15-day and 30-day billing cycles available for registered and verified corporate accounts.
+   - Fast RFQ & Turnaround: Official corporate quotations delivered within 2 to 4 business hours.
+   - Delivery Policy:
+     - Free delivery within Chennai, Bangalore, and Kolkata for corporate bulk orders.
+     - Online catalog orders: Free delivery on orders of ₹999 and above (flat ₹99 shipping for orders below ₹999).
+     - Same-Day Dispatch: Orders placed and confirmed before 1:00 PM IST receive same-day dispatch.
+     - Transit Times: Next-day/24-hour delivery in Chennai metro; 1-2 business days across Tamil Nadu & major tier-1 industrial corridors; 2-4 business days pan-India.
+   - Contact Details:
+     - Procurement Hotline / WhatsApp: +91 7200800040 (or +91 72008 00040)
+     - Landline: +91 78258 86622
+     - Corporate Sales Email: sales4@officebazzar.com
+     - Management / Escalations: dm@officebazzar.com
+     - Office Hours: Monday to Saturday, 9:00 AM – 6:30 PM IST.
+
+4. Critical Context & Conversation Intelligence Rules:
    - Price Follow-up Rule: When a customer asks "What is the price?" or "Show me the price" after previously providing a product and quantity (e.g., 20 ergonomic chairs), DO NOT ask for the quantity again! The quantity is already known. Directly answer that pricing for the requested quantity (e.g., 20 ergonomic chairs) is handled via customized corporate volume quotations with GST invoicing, and ask for their delivery location or contact details to prepare the quotation.
    - Multiple Products Rule: When a customer mentions multiple products (e.g. "I need chairs and copier paper"), track BOTH requirements independently. Do not discard one product. Acknowledge both requirements, ask clarification for chairs (e.g. ergonomic, executive, visitor), and then address copier paper (e.g. brand JK Copier/TNPL, GSM, and ream quantity).
    - Asking Questions: Ask only ONE useful clarification question at a time. Do NOT ask for information that the customer has already stated in previous turns.
    - Courtesy & Gratitude: When a user says "Thank you" or gives casual courtesies, reply naturally and warmly without resetting the conversation or repeating generic greetings.
 
-3. Multilingual Excellence:
+5. Multilingual Excellence:
    - Automatically detect the customer's language and respond naturally in that language and style.
    - English -> Clear, natural English.
    - Tamil (தமிழ்) -> Natural, polite Tamil.
    - Tanglish (Tamil written in English) -> Fluent, natural Tanglish.
    - Hindi (हिंदी), Malayalam (മലയാളം), Telugu (తెలుగు), Kannada (ಕನ್ನಡ) -> Mirror their language fluently.
 
-4. Product Recommendations:
+6. Product Recommendations:
    - NEVER recommend unrelated products.
    - If products are not found in the live catalog (e.g. chairs), explicitly state that they are provided on custom corporate quotation through our sales desk instead of showing unrelated products.`;
 
@@ -1070,7 +1111,80 @@ async function generateContextualConversationFallback(
       reply = `We supply comprehensive office stationery, including lever arch files, white board markers, heavy-duty staplers, and packaging tapes. Which specific supplies do you need?`;
     }
   }
-  // 9. FAQ / CORPORATE INQUIRIES
+  // 9. COMPANY EXPERIENCE, YEARS OPERATING & HISTORY
+  else if (
+    lower.includes('how many years') ||
+    lower.includes('years of experience') ||
+    lower.includes('how long has your company') ||
+    lower.includes('how long have you been') ||
+    lower.includes('company experience') ||
+    lower.includes('when was officebazzar founded') ||
+    lower.includes('founded') ||
+    lower.includes('history of officebazzar') ||
+    lower.includes('company history')
+  ) {
+    reply = `OfficeBazzar was co-founded in 2005 and has **over 20+ years of industry experience** as Chennai's premier B2B corporate supplies and procurement partner, proudly serving more than 5,000+ corporate clients across India.`;
+  }
+  // 10. ABOUT OFFICEBAZZAR / COMPANY PROFILE
+  else if (
+    lower.includes('tell me about officebazzar') ||
+    lower.includes('about officebazzar') ||
+    lower.includes('about us') ||
+    lower.includes('who is officebazzar') ||
+    lower.includes('who are you') ||
+    lower.includes('company profile')
+  ) {
+    reply = `**OfficeBazzar** (Officebazzar E-Store Private Limited) is Chennai's leading B2B corporate supplies partner with **over 20+ years of dedicated service** (co-founded in 2005 by Founder & Chairman Mr. Atul Patel and Managing Director Mr. Ajith P Dhedhi). Headquartered at Officebazzar Tower in Royapettah, Chennai, with branches in Bangalore, Mumbai, and Hyderabad, we provide comprehensive office supplies, 100% GST ITC invoicing, tailored corporate credit, and dedicated account management to over 5,000+ corporate clients.`;
+  }
+  // 11. PRODUCTS OFFERED / PRODUCT RANGE
+  else if (
+    lower.includes('what products') ||
+    lower.includes('products offered') ||
+    lower.includes('product categories') ||
+    lower.includes('what do you sell') ||
+    lower.includes('range of products') ||
+    lower.includes('product catalog')
+  ) {
+    reply = `OfficeBazzar offers a comprehensive B2B product range across 9 major categories:\n\n1. **Office Stationery & Desk Supplies:** Lever arch files, pens, staplers, calculators, desk organizers.\n2. **Copier Papers:** JK Copier 75 GSM, TNPL, Bond Paper, Glossy Photo Paper (67 to 100 GSM).\n3. **Ergonomic Office Chairs & Seating:** High-back executive, mesh task, and visitor chairs.\n4. **Housekeeping & Cleaning:** Diversey Taski (R1–R9) and in-house Hi-Clean formulations.\n5. **Waste Management & Dustbins:** 60L, 120L, and 240L wheeled bins, stainless steel pedal bins.\n6. **Packaging Materials:** BoPP tapes, stretch films, strapping rolls, and bubble wrap.\n7. **Safety & Facility Equipment:** Q-manager stanchions, traffic cones, barricade tapes, oxygen concentrators.\n8. **Display & Presentation Boards:** Alkosign magnetic whiteboards, pin-up boards, motorized boards.\n9. **Office Technology:** High-definition conference projectors, laminators, and paper shredders.\n\nWhich category would you like a quote for?`;
+  }
+  // 12. SERVICES PROVIDED / CORPORATE SOLUTIONS
+  else if (
+    lower.includes('what services') ||
+    lower.includes('services provided') ||
+    lower.includes('services do you provide') ||
+    lower.includes('corporate services') ||
+    lower.includes('solutions do you offer')
+  ) {
+    reply = `OfficeBazzar provides end-to-end B2B corporate procurement services including:\n\n* **Customized Corporate Bulk Pricing:** Volume-tiered quotations for enterprise and SME procurement.\n* **Fast RFQ Turnaround:** Official corporate quotations within 2 to 4 business hours.\n* **100% GST Tax Invoicing:** Full Input Tax Credit (ITC) compliance (18% commercial, 12% paper).\n* **Corporate Credit Facilities:** 15-day and 30-day payment cycles for pre-approved corporate accounts.\n* **Pan-India Logistics & Delivery:** Free delivery within Chennai, Bangalore, and Kolkata for corporate bulk orders, with same-day dispatch before 1:00 PM IST.\n* **Dedicated Relationship Managers:** Single-point procurement support for contracts and recurring orders.`;
+  }
+  // 13. DELIVERY / SHIPPING INQUIRIES
+  else if (
+    lower.includes('delivery') ||
+    lower.includes('shipping') ||
+    lower.includes('dispatch') ||
+    lower.includes('do you deliver')
+  ) {
+    reply = `Yes, we provide fast and reliable delivery services:\n\n* **Free Delivery:** For all corporate bulk orders in Chennai, Bangalore, and Kolkata. Website catalog orders above ₹999 also get Free Delivery (flat ₹99 below ₹999).\n* **Same-Day Dispatch:** Orders confirmed before 1:00 PM IST are dispatched on the same day.\n* **Transit Timelines:** Next-day/24-hour delivery in Chennai metro; 1-2 business days across Tamil Nadu & major tier-1 hubs; 2-4 business days pan-India.`;
+  }
+  // 14. IN-HOUSE BRAND / HI-CLEAN
+  else if (
+    lower.includes('hi-clean') ||
+    lower.includes('hiclean') ||
+    lower.includes('in-house brand') ||
+    lower.includes('own brand')
+  ) {
+    reply = `**Hi-Clean** is OfficeBazzar's proprietary in-house brand of certified commercial cleaning formulations, surface disinfectants, floor cleaners, and hygiene products, manufactured to deliver industrial-grade cleaning performance at competitive wholesale pricing.`;
+  }
+  // 15. FOUNDER / LEADERSHIP
+  else if (
+    lower.includes('founder') ||
+    lower.includes('owner') ||
+    lower.includes('managing director') ||
+    lower.includes('leadership')
+  ) {
+    reply = `OfficeBazzar was co-founded in 2005. The leadership is headed by Founder & Chairman **Mr. Atul Patel** and Managing Director **Mr. Ajith P Dhedhi** (M.Com, joined 2009), who bring over two decades of corporate supply chain expertise.`;
+  }
+  // 16. FAQ / CORPORATE INQUIRIES
   else if (lower.includes('gst') || lower.includes('invoice') || lower.includes('tax')) {
     reply = `All corporate orders from OfficeBazzar are accompanied by official GST tax invoices with 100% Input Tax Credit (ITC) eligibility. We support standard 18% GST across supplies and 12% on paper lines.`;
   } else if (lower.includes('contact') || lower.includes('support') || lower.includes('call') || lower.includes('phone') || lower.includes('sales')) {
