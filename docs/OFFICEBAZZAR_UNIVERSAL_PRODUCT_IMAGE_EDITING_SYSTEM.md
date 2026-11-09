@@ -80,3 +80,4 @@ Before deploying any product image produced under this system, verify:
 - [ ] Are all product labels, barcodes, dimensions, and colors 100% faithful to the original?
 - [ ] Is the product cleanly masked with zero background halo or fringing?
 - [ ] Is the final asset encoded in high-efficiency WebP format at Quality 90+?
+
