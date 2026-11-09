@@ -612,10 +612,10 @@
     "galleryImages": [
       "/assets/products/catalog_2026/OB-BOA-1044.webp"
     ],
-    "fileSize": 13290,
+    "fileSize": 32648,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-09T05:59:05.026Z"
   },
   "OB-BOA-1045": {
     "sku": "OB-BOA-1045",
@@ -3379,13 +3379,12 @@
     "category": "Office Stationery",
     "primaryImage": "/assets/products/catalog_2026/OB-PAP-01.webp",
     "galleryImages": [
-      "/assets/products/catalog_2026/OB-PAP-01.webp",
-      "/assets/products/catalog_2026/OB-PAP-01-alt-1.webp"
+      "/assets/products/catalog_2026/OB-PAP-01.webp"
     ],
-    "fileSize": 33394,
+    "fileSize": 58746,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-09T05:59:05.026Z"
   },
   "OB-PAP-02": {
     "sku": "OB-PAP-02",
@@ -3393,13 +3392,12 @@
     "category": "Office Stationery",
     "primaryImage": "/assets/products/catalog_2026/OB-PAP-02.webp",
     "galleryImages": [
-      "/assets/products/catalog_2026/OB-PAP-02.webp",
-      "/assets/products/catalog_2026/OB-PAP-02-alt-1.webp"
+      "/assets/products/catalog_2026/OB-PAP-02.webp"
     ],
-    "fileSize": 32958,
+    "fileSize": 64168,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-09T05:59:05.026Z"
   },
   "OB-PAP-03": {
     "sku": "OB-PAP-03",
@@ -3907,13 +3905,12 @@
     "category": "Office Stationery",
     "primaryImage": "/assets/products/catalog_2026/OB-PEN-47.webp",
     "galleryImages": [
-      "/assets/products/catalog_2026/OB-PEN-47.webp",
-      "/assets/products/catalog_2026/OB-PEN-47-alt-1.webp"
+      "/assets/products/catalog_2026/OB-PEN-47.webp"
     ],
-    "fileSize": 7264,
+    "fileSize": 103824,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-09T05:59:05.025Z"
   },
   "OB-PEN-48": {
     "sku": "OB-PEN-48",
@@ -3921,13 +3918,12 @@
     "category": "Office Stationery",
     "primaryImage": "/assets/products/catalog_2026/OB-PEN-48.webp",
     "galleryImages": [
-      "/assets/products/catalog_2026/OB-PEN-48.webp",
-      "/assets/products/catalog_2026/OB-PEN-48-alt-1.webp"
+      "/assets/products/catalog_2026/OB-PEN-48.webp"
     ],
-    "fileSize": 9460,
+    "fileSize": 160462,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-09T05:59:05.026Z"
   },
   "OB-DES-51": {
     "sku": "OB-DES-51",

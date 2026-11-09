@@ -579,7 +579,14 @@
     ],
     "category": "Office Stationery",
     "brand": "Alkosign",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-BOA-1044.webp"
+    ],
+    "fileSize": 32648,
+    "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
+    "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
+    "lastVerifiedAt": "2026-11-09T05:59:05.039Z"
   },
   "OB-BOA-1045": {
     "productId": "prod-alkosign-horizontal-sliding-board",
@@ -3159,7 +3166,14 @@
     ],
     "category": "Office Stationery",
     "brand": "JK Paper",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-PAP-01.webp"
+    ],
+    "fileSize": 58746,
+    "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
+    "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
+    "lastVerifiedAt": "2026-11-09T05:59:05.039Z"
   },
   "OB-PAP-02": {
     "productId": "prod-ob-pap-02-jk-cmax-copier-paper-72-gsm-a4",
@@ -3172,7 +3186,14 @@
     ],
     "category": "Office Stationery",
     "brand": "JK Paper",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-PAP-02.webp"
+    ],
+    "fileSize": 64168,
+    "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
+    "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
+    "lastVerifiedAt": "2026-11-09T05:59:05.039Z"
   },
   "OB-PAP-03": {
     "productId": "prod-ob-pap-03-jk-easy-copier-paper-70-gsm-a4",
@@ -3712,7 +3733,14 @@
     ],
     "category": "Office Stationery",
     "brand": "Apsara",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-PEN-47.webp"
+    ],
+    "fileSize": 103824,
+    "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
+    "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
+    "lastVerifiedAt": "2026-11-09T05:59:05.039Z"
   },
   "OB-PEN-48": {
     "productId": "prod-ob-pen-48-desk-pencil-sharpener-pack",
@@ -3725,7 +3753,14 @@
     ],
     "category": "Office Stationery",
     "brand": "Nataraj",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-PEN-48.webp"
+    ],
+    "fileSize": 160462,
+    "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
+    "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
+    "lastVerifiedAt": "2026-11-09T05:59:05.039Z"
   },
   "OB-DES-51": {
     "productId": "prod-ob-des-51-fevicol-mr-adhesive-tube",
