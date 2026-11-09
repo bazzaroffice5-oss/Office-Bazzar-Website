@@ -11053,8 +11053,7 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-36.webp",
-      "/assets/products/catalog_2026/OB-PEN-36-alt-1.webp"
+      "/assets/products/catalog_2026/OB-PEN-36.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11094,8 +11093,7 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-37.webp",
-      "/assets/products/catalog_2026/OB-PEN-37-alt-1.webp"
+      "/assets/products/catalog_2026/OB-PEN-37.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11377,8 +11375,7 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-44.webp",
-      "/assets/products/catalog_2026/OB-PEN-44-alt-1.webp"
+      "/assets/products/catalog_2026/OB-PEN-44.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11418,8 +11415,7 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-45.webp",
-      "/assets/products/catalog_2026/OB-PEN-45-alt-1.webp"
+      "/assets/products/catalog_2026/OB-PEN-45.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -11459,8 +11455,7 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-PEN-46.webp",
-      "/assets/products/catalog_2026/OB-PEN-46-alt-1.webp"
+      "/assets/products/catalog_2026/OB-PEN-46.webp"
     ],
     "featured": false,
     "bestseller": false,
