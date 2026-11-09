@@ -56,8 +56,8 @@ export const BUSINESS_CONFIG: BusinessConfig = {
     process.env.NEXT_PUBLIC_SITE_URL &&
     !process.env.NEXT_PUBLIC_SITE_URL.includes('officebazzar.co.in') &&
     !(process.env.NODE_ENV === 'production' && (process.env.NEXT_PUBLIC_SITE_URL.includes('localhost') || process.env.NEXT_PUBLIC_SITE_URL.includes('127.0.0.1')))
-      ? process.env.NEXT_PUBLIC_SITE_URL.replace(/\/+$/, '').replace(/^https?:\/\/officebazzar\.com$/, 'https://www.officebazzar.com')
-      : 'https://www.officebazzar.com',
+      ? process.env.NEXT_PUBLIC_SITE_URL.replace(/\/+$/, '').replace(/^https?:\/\/www\.officebazzar\.com$/, 'https://officebazzar.com')
+      : 'https://officebazzar.com',
   headquarters: {
     address: '"Officebazzar Tower", No. 29/15, Subbedar Hussain street, Royapettah',
     city: 'Chennai',
