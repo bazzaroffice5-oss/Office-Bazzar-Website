@@ -498,7 +498,11 @@ function buildInitialStructuredMeta(quotation: Quotation, validTill: string): Zo
       pincode: quotation.pincode,
       preferredContactMethod: quotation.preferredContactMethod || 'email',
       additionalRequirements: quotation.additionalRequirements,
-      photoUrls: quotation.photoUrls,
+      photoUrls: quotation.photoUrls?.map((url, idx) =>
+        url.startsWith('data:')
+          ? `[Photo #${idx + 1}: Embedded WebP Data URI (${(url.length / 1024).toFixed(1)} KB)]`
+          : url
+      ),
       submittedAt: quotation.createdAt || new Date().toISOString(),
       indicativeSubtotal: quotation.indicativeSubtotal || subtotal,
       indicativeGstAmount: quotation.indicativeGstAmount || gstAmount,
@@ -671,14 +675,16 @@ export async function syncQuotationToZohoQuote(
 
       // Record customer uploaded reference photos if provided
       if (quotation.photoUrls && quotation.photoUrls.length > 0) {
-        await appendZohoQuoteAuditNote(
-          quoteId,
-          `${cleanRef} — Customer Attached Reference Photos (${quotation.photoUrls.length} file(s))`,
-          `Customer attached ${quotation.photoUrls.length} reference photo(s) to this quotation request:\n\n` +
-            quotation.photoUrls
-              .map((url, i) => `Photo #${i + 1}:\n${url.startsWith('data:') ? `[Embedded WebP Image Data - ${(url.length / 1024).toFixed(0)} KB payload retained in Quote metadata]` : url}`)
-              .join('\n\n')
-        );
+        for (let i = 0; i < quotation.photoUrls.length; i++) {
+          const url = quotation.photoUrls[i];
+          const isDataUri = url.startsWith('data:');
+          const noteTitle = `${cleanRef} — Customer Photo #${i + 1}`;
+          // Ensure note content never exceeds Zoho CRM Notes limit of 65,535 chars
+          const noteContent = isDataUri && url.length < 60000
+            ? `Customer attached photo #${i + 1} (WebP Data URI):\n\n${url}`
+            : `Customer attached photo #${i + 1}:\n${url}`;
+          await appendZohoQuoteAuditNote(quoteId, noteTitle, noteContent);
+        }
       }
 
       return {

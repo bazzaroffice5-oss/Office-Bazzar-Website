@@ -33,6 +33,9 @@ interface ZohoModuleResponse {
   }>;
 }
 
+// In-memory mapping from OrderNumber -> Zoho Sales Order ID for instant status updates
+const orderNumberToZohoIdMap = new Map<string, string>();
+
 /**
  * Map an internal website Order to Zoho CRM Sales_Orders payload
  */
@@ -134,6 +137,9 @@ export async function syncOrderToZohoSalesOrder(order: Order): Promise<ZohoOrder
     const firstItem = res.data?.[0];
     if (firstItem && (firstItem.code === 'SUCCESS' || firstItem.status === 'success')) {
       const salesOrderId = firstItem.details?.id;
+      if (salesOrderId) {
+        orderNumberToZohoIdMap.set(order.orderNumber, salesOrderId);
+      }
       console.log(`[ZohoOrders] Successfully created Sales Order #${order.orderNumber} in Zoho CRM (ID: ${salesOrderId})`);
       return {
         success: true,
@@ -173,14 +179,21 @@ export async function updateZohoSalesOrderStatus(
   if (!(await isZohoConfigured())) return true;
 
   try {
-    // Search for existing Sales Order by Customer_No or Subject
-    const searchRes = await zohoFetch<any>(
-      `/Sales_Orders/search?criteria=(Customer_No:equals:${encodeURIComponent(orderNumberOrId)})`,
-      { method: 'GET' }
-    );
+    // 1. Resolve Zoho Sales Order ID directly from fast memory cache or numeric ID
+    let zohoOrderId = /^\d{15,22}$/.test(orderNumberOrId)
+      ? orderNumberOrId
+      : orderNumberToZohoIdMap.get(orderNumberOrId);
 
-    const zohoOrder = searchRes?.data?.[0];
-    if (!zohoOrder?.id) {
+    // 2. Fallback to search by Customer_No if not in cache
+    if (!zohoOrderId) {
+      const searchRes = await zohoFetch<any>(
+        `/Sales_Orders/search?criteria=(Customer_No:equals:${encodeURIComponent(orderNumberOrId)})`,
+        { method: 'GET' }
+      );
+      zohoOrderId = searchRes?.data?.[0]?.id;
+    }
+
+    if (!zohoOrderId) {
       console.log(`[ZohoOrders] No Zoho Sales Order found with Customer_No "${orderNumberOrId}" to update.`);
       return false;
     }
@@ -188,9 +201,9 @@ export async function updateZohoSalesOrderStatus(
     const updatePayload = {
       data: [
         {
-          id: zohoOrder.id,
+          id: zohoOrderId,
           Status: orderStatus === 'confirmed' || paymentStatus === 'paid' ? 'Approved' : orderStatus === 'cancelled' ? 'Cancelled' : 'Created',
-          Description: `${zohoOrder.Description || ''}\n[Update ${new Date().toISOString()}]: Status: ${orderStatus}, Payment: ${paymentStatus || 'unchanged'}${paymentId ? ' (ID: ' + paymentId + ')' : ''}`,
+          Description: `[Update ${new Date().toISOString()}]: Status: ${orderStatus}, Payment: ${paymentStatus || 'unchanged'}${paymentId ? ' (ID: ' + paymentId + ')' : ''}`,
         },
       ],
     };
@@ -202,7 +215,7 @@ export async function updateZohoSalesOrderStatus(
 
     const success = updateRes?.data?.[0]?.code === 'SUCCESS';
     if (success) {
-      console.log(`[ZohoOrders] Updated Zoho Sales Order ${zohoOrder.id} status to ${orderStatus}/${paymentStatus}`);
+      console.log(`[ZohoOrders] Updated Zoho Sales Order ${zohoOrderId} status to ${orderStatus}/${paymentStatus}`);
     }
     return success;
   } catch (err) {
