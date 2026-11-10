@@ -117,9 +117,10 @@ async function syncProductsFromZohoInternal(): Promise<Product[]> {
       const zohoRecords: ZohoProductRecord[] = [];
 
       while (hasMore) {
+        // Optimized pagination: per_page=200 cuts total API requests in half for ~1,946 products
         const endpoint: string = pageToken
-          ? `/Products?fields=id,Product_Name,Product_Code,Unit_Price,Qty_in_Stock,Product_Active,Description,Modified_Time&per_page=100&page_token=${pageToken}`
-          : `/Products?fields=id,Product_Name,Product_Code,Unit_Price,Qty_in_Stock,Product_Active,Description,Modified_Time&per_page=100`;
+          ? `/Products?fields=id,Product_Name,Product_Code,Unit_Price,Qty_in_Stock,Product_Active,Description,Modified_Time&per_page=200&page_token=${pageToken}`
+          : `/Products?fields=id,Product_Name,Product_Code,Unit_Price,Qty_in_Stock,Product_Active,Description,Modified_Time&per_page=200`;
 
         const res = await zohoFetch<any>(endpoint, { method: 'GET' });
 

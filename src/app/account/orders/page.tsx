@@ -1,8 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { getAllOrders } from '@/lib/db/store';
+import { cookies } from 'next/headers';
+import { getOrdersByCustomer, getAllOrders } from '@/lib/db/store';
+import { verifySessionToken } from '@/lib/auth/service';
 import CustomerOrdersClient from '@/components/account/CustomerOrdersClient';
+import { Order } from '@/types';
 
 export const metadata = {
   title: 'Order History & Tax Invoices | OfficeBazzar',
@@ -12,7 +15,25 @@ export const metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function AccountOrdersPage() {
-  const orders = await getAllOrders();
+  // Enforce server-side customer isolation:
+  // Strictly resolve active session from HttpOnly cookie and query ONLY the customer's orders
+  let isolatedOrders: Order[] = [];
+  try {
+    const cookieStore = await cookies();
+    const sessionToken = cookieStore.get('ob_session')?.value;
+    if (sessionToken) {
+      const { valid, user } = verifySessionToken(sessionToken);
+      if (valid && user) {
+        if (user.role === 'admin') {
+          isolatedOrders = await getAllOrders();
+        } else if (user.email) {
+          isolatedOrders = await getOrdersByCustomer(user.email);
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('[AccountOrdersPage] Session read error:', err);
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -42,7 +63,7 @@ export default async function AccountOrdersPage() {
         </Link>
       </div>
 
-      <CustomerOrdersClient initialOrders={orders} />
+      <CustomerOrdersClient initialOrders={isolatedOrders} />
     </div>
   );
 }

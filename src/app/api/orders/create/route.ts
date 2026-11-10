@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
 import { createOrder, getProductById, validateCoupon } from '@/lib/db/store';
+import { reserveStock, commitStockReservation, releaseStockReservation } from '@/lib/inventory/reservation';
 import { OrderItem, Address, PaymentMethod } from '@/types';
 
 export async function POST(req: Request) {
+  let reservationId: string | undefined = undefined;
   try {
     const body = await req.json();
     const idempotencyHeader = req.headers.get('Idempotency-Key') || req.headers.get('x-idempotency-key');
@@ -44,7 +46,27 @@ export async function POST(req: Request) {
       );
     }
 
-    // Revalidate items against server catalogue (authoritative pricing & inventory check)
+    // 1. Genuinely Atomic Stock Reservation:
+    // Locks stock for all requested items simultaneously. Prevents overselling under concurrent checkout.
+    const reserveItems = items.map((raw) => ({
+      productId: raw.productId,
+      sku: raw.sku || raw.productId,
+      quantity: Number(raw.quantity) || 1,
+    }));
+
+    const reservationResult = await reserveStock(reserveItems);
+    if (!reservationResult.success || !reservationResult.reservationId) {
+      return NextResponse.json(
+        {
+          error: reservationResult.error || 'Insufficient stock to fulfill this order.',
+          unavailableItem: reservationResult.unavailableItem,
+        },
+        { status: 409 }
+      );
+    }
+    reservationId = reservationResult.reservationId;
+
+    // 2. Revalidate items against server catalogue (authoritative pricing & inventory check)
     const validatedItems: OrderItem[] = [];
     let subtotal = 0;
     let computedGst = 0;
@@ -52,23 +74,16 @@ export async function POST(req: Request) {
     for (const rawItem of items) {
       const prod = await getProductById(rawItem.productId);
       if (!prod || prod.isActive === false) {
+        if (reservationId) await releaseStockReservation(reservationId);
         return NextResponse.json(
           { error: `Product "${prod?.name || rawItem.productId}" is currently unavailable or inactive.` },
           { status: 400 }
         );
       }
 
-      if (prod.stockQuantity < rawItem.quantity) {
-        return NextResponse.json(
-          {
-            error: `Insufficient inventory for "${prod.name}". Available: ${prod.stockQuantity}, Requested: ${rawItem.quantity}.`,
-          },
-          { status: 400 }
-        );
-      }
-
       const unitPrice = prod.price ?? 0;
-      const itemTotal = unitPrice * rawItem.quantity;
+      const quantity = Number(rawItem.quantity) || 1;
+      const itemTotal = unitPrice * quantity;
       const itemGstRate = prod.gstPercent || 18;
       const itemGst = (itemTotal * itemGstRate) / 100;
 
@@ -83,7 +98,7 @@ export async function POST(req: Request) {
         unitPrice: unitPrice,
         gstPercent: itemGstRate,
         hsnCode: prod.hsnCode,
-        quantity: rawItem.quantity,
+        quantity,
         totalPrice: itemTotal,
         productImage: prod.images[0] || '',
         packSize: prod.packSize,
@@ -144,8 +159,14 @@ export async function POST(req: Request) {
         : 'Awaiting Razorpay gateway capture / verification',
     });
 
+    // 3. Commit the stock reservation permanently to the created order
+    await commitStockReservation(reservationId, newOrder.orderNumber);
+
     return NextResponse.json({ success: true, order: newOrder });
   } catch (error: unknown) {
+    if (reservationId) {
+      await releaseStockReservation(reservationId).catch(() => {});
+    }
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Server error creating order.' },
       { status: 500 }

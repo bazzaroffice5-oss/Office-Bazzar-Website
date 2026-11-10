@@ -14,30 +14,26 @@ export async function GET(req: NextRequest) {
     const queryCustomerId = searchParams.get('customerId')?.trim();
 
     // Data Isolation Enforcement:
-    // If authenticated as a customer, they can ONLY view their own quotations.
+    // Only authenticated sessions can retrieve quotation lists.
+    // Unauthenticated requests must not leak customer quotation histories.
+    if (!sessionUser) {
+      return NextResponse.json(
+        { error: 'Unauthorized: Authentication required to view quotation history. Please sign in.' },
+        { status: 401 }
+      );
+    }
+
     let targetEmail: string;
     let targetCustomerId: string | undefined = undefined;
 
-    if (sessionUser) {
-      if (sessionUser.role === 'admin') {
-        // Admin can inspect any customer's quotations
-        targetEmail = queryEmail || sessionUser.email;
-        targetCustomerId = queryCustomerId;
-      } else {
-        // Regular customer: strictly bound to authenticated session identity
-        targetEmail = sessionUser.email;
-        targetCustomerId = sessionUser.id;
-      }
-    } else {
-      // Unauthenticated request: require explicit identifier
-      if (!queryEmail && !queryCustomerId) {
-        return NextResponse.json(
-          { error: 'Unauthorized: Authentication required to view quotation history.' },
-          { status: 401 }
-        );
-      }
-      targetEmail = queryEmail || '';
+    if (sessionUser.role === 'admin') {
+      // Admin can inspect any customer's quotations
+      targetEmail = queryEmail || sessionUser.email;
       targetCustomerId = queryCustomerId;
+    } else {
+      // Regular customer: strictly bound to authenticated session identity
+      targetEmail = sessionUser.email;
+      targetCustomerId = sessionUser.id;
     }
 
     const primaryIdentifier = targetEmail || targetCustomerId || '';

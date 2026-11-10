@@ -426,6 +426,22 @@ export async function getAllOrders(): Promise<Order[]> {
   return ordersList;
 }
 
+/**
+ * Customer Isolation: Retrieve only orders strictly belonging to a specific customer
+ * identified by email address and optional phone number.
+ */
+export async function getOrdersByCustomer(email: string, phone?: string): Promise<Order[]> {
+  if (!email && !phone) return [];
+  const cleanEmail = email ? email.trim().toLowerCase() : '';
+  const cleanPhone = phone ? phone.trim() : '';
+
+  return ordersList.filter((o) => {
+    const emailMatch = cleanEmail && o.customerEmail && o.customerEmail.trim().toLowerCase() === cleanEmail;
+    const phoneMatch = cleanPhone && o.customerPhone && o.customerPhone.trim() === cleanPhone;
+    return emailMatch || phoneMatch;
+  });
+}
+
 export async function updateOrderStatus(
   orderId: string,
   status: OrderStatus,

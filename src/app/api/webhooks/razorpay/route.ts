@@ -1,10 +1,66 @@
 import { NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
 import { verifyRazorpayWebhookSignature } from '@/lib/payments/razorpay';
 import { getOrderByNumber, getOrderById, updateOrderStatus } from '@/lib/db/store';
 import { updateZohoSalesOrderStatus, syncOrderToZohoSalesOrder } from '@/lib/zoho/orders';
 
-// In-memory set of processed webhook event IDs to guarantee idempotency across retries
-const processedEvents = new Set<string>();
+// In-memory set + cross-instance disk journal to guarantee idempotency across serverless workers
+const memoryProcessedEvents = new Set<string>();
+
+function getDedupFilePath(): string {
+  try {
+    fs.accessSync(process.cwd(), fs.constants.W_OK);
+    return path.join(process.cwd(), '.razorpay_webhook_dedup.json');
+  } catch {
+    return path.join(os.tmpdir(), '.razorpay_webhook_dedup.json');
+  }
+}
+
+function hasEventBeenProcessed(eventId: string): boolean {
+  if (memoryProcessedEvents.has(eventId)) return true;
+  try {
+    const filePath = getDedupFilePath();
+    if (fs.existsSync(filePath)) {
+      const raw = fs.readFileSync(filePath, 'utf8');
+      const list = JSON.parse(raw);
+      if (Array.isArray(list)) {
+        for (const id of list) memoryProcessedEvents.add(id);
+        return memoryProcessedEvents.has(eventId);
+      }
+    }
+  } catch {
+    // Ignore read errors
+  }
+  return false;
+}
+
+function markEventProcessed(eventId: string): void {
+  memoryProcessedEvents.add(eventId);
+  try {
+    const filePath = getDedupFilePath();
+    let list: string[] = [];
+    if (fs.existsSync(filePath)) {
+      try {
+        const raw = fs.readFileSync(filePath, 'utf8');
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) list = parsed;
+      } catch {
+        list = [];
+      }
+    }
+    if (!list.includes(eventId)) {
+      list.push(eventId);
+      if (list.length > 500) list = list.slice(-500); // Retain last 500 event IDs
+      const tempPath = `${filePath}.tmp.${Date.now()}`;
+      fs.writeFileSync(tempPath, JSON.stringify(list), 'utf8');
+      fs.renameSync(tempPath, filePath);
+    }
+  } catch {
+    // Ignore write errors
+  }
+}
 
 export async function POST(req: Request) {
   try {
@@ -24,9 +80,12 @@ export async function POST(req: Request) {
     const payload = JSON.parse(rawBody);
     const eventId = payload.event_id || payload.payload?.payment?.entity?.id;
 
-    // Idempotency check: Ignore duplicate events already handled
-    if (eventId && processedEvents.has(eventId)) {
+    // Cross-instance idempotency check: Ignore duplicate events already handled
+    if (eventId && hasEventBeenProcessed(eventId)) {
       return NextResponse.json({ received: true, deduplicated: true });
+    }
+    if (eventId) {
+      markEventProcessed(eventId);
     }
 
     const event = payload.event;
@@ -105,7 +164,7 @@ export async function POST(req: Request) {
     }
 
     if (eventId) {
-      processedEvents.add(eventId);
+      markEventProcessed(eventId);
     }
 
     return NextResponse.json({ status: 'ok', event });
