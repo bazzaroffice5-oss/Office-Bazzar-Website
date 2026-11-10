@@ -3286,7 +3286,7 @@ const RAW_PRODUCTS: any[] = [
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-SHR-1069.webp"
+      "/assets/products/catalog_2026/OB-SHR-1069-v2.webp"
     ],
     "featured": true,
     "bestseller": false,

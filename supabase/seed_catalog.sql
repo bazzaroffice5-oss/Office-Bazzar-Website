@@ -5139,7 +5139,7 @@ INSERT INTO products (
     0,    -- Stock unverified / on-demand B2B procurement
     1,
     'Standard Pack',
-    '["https://officebazzar.co.in/wp-content/uploads/2022/12/gobbler-px9900-currency-counting-machine-500x500-1.webp"]'::jsonb,
+    '["/assets/products/catalog_2026/OB-SHR-1069-v2.webp"]'::jsonb,
     TRUE,
     FALSE,
     TRUE,
