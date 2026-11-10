@@ -87,7 +87,7 @@ export default async function ProductsPage({
   const parsedPage = resolvedSearchParams?.page ? parseInt(resolvedSearchParams.page, 10) : 1;
 
   return (
-    <main className="min-h-screen bg-slate-50">
+    <main className="min-h-screen bg-[#F5FAF6]">
       <JsonLd data={breadcrumbJsonLd} />
       <ProductListingClient
         initialProducts={products}

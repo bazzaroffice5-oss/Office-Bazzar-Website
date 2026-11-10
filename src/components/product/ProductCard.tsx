@@ -71,7 +71,7 @@ export default function ProductCard({
   return (
     <div
       onClick={handleCardClick}
-      className={`group relative flex flex-col justify-between bg-white border border-gray-200/90 hover:border-gray-300 rounded-2xl p-3 sm:p-4 transition-all duration-200 ease-out hover:shadow-lg hover:-translate-y-1 h-full select-none cursor-pointer ${className}`}
+      className={`group relative flex flex-col justify-between bg-white border border-[#E2EBE3] hover:border-[#163A5F]/40 rounded-2xl p-3 sm:p-4 transition-all duration-200 ease-out hover:shadow-lg hover:-translate-y-1 h-full select-none cursor-pointer ${className}`}
     >
       {/* Top Action: Compact Cart Icon Button at top-right of product card matching Reference */}
       <div className="relative z-10 flex items-center justify-end w-full">
@@ -85,7 +85,7 @@ export default function ProductCard({
           className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center transition-all duration-200 shadow-2xs border ${
             showAddedConfirmation
               ? 'bg-emerald-600 border-emerald-600 text-white opacity-100 scale-105'
-              : 'bg-white border-gray-200/90 text-slate-700 hover:text-white hover:bg-[#ea580c] hover:border-[#ea580c] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 cursor-pointer active:scale-95'
+              : 'bg-white border-[#E2EBE3] text-[#526174] hover:text-white hover:bg-[#F97316] hover:border-[#F97316] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 cursor-pointer active:scale-95'
           }`}
         >
           {showAddedConfirmation ? (
@@ -119,7 +119,7 @@ export default function ProductCard({
         {/* Product Name clearly visible near bottom */}
         <Link
           href={productUrl}
-          className="text-xs sm:text-sm font-medium text-slate-800 group-hover:text-[#004b87] line-clamp-2 leading-snug transition-colors flex-1 hover:underline"
+          className="text-xs sm:text-sm font-medium text-[#111827] group-hover:text-[#163A5F] line-clamp-2 leading-snug transition-colors flex-1 hover:underline"
           title={product.name}
         >
           <h3 className="line-clamp-2">{product.name}</h3>
@@ -127,7 +127,7 @@ export default function ProductCard({
 
         {/* Brand Name in orange near the lower-right portion, fading in on hover */}
         <span
-          className="text-[11px] sm:text-xs font-semibold text-[#ea580c] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200 shrink-0 text-right truncate max-w-[120px] pb-0.5"
+          className="text-[11px] sm:text-xs font-semibold text-[#F97316] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200 shrink-0 text-right truncate max-w-[120px] pb-0.5"
           title={brandDisplayName}
         >
           {brandDisplayName}

@@ -134,7 +134,7 @@ export default async function CategoryPage({
   const breadcrumbJsonLd = getBreadcrumbJsonLd(breadcrumbItems);
 
   return (
-    <main className="min-h-screen bg-slate-50">
+    <main className="min-h-screen bg-[#F5FAF6]">
       <JsonLd data={breadcrumbJsonLd} />
       <CategoryLandingClient
         category={category}

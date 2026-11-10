@@ -19,12 +19,33 @@
   --brand-border-subtle: #f1f5f9;
   --brand-surface: #ffffff;
   --brand-surface-alt: #f8fafc;
+
+  /* OfficeBazzar Product Pages Theme Palette (Light Green + Navy Blue + Orange) */
+  --product-page-bg: #F5FAF6;
+  --product-filter-bg: #EFF6F0;
+  --product-card-bg: #FFFFFF;
+  --product-card-border: #E2EBE3;
+  --product-heading: #111827;
+  --product-secondary-text: #526174;
+  --product-navy: #163A5F;
+  --product-orange: #F97316;
+  --product-hover-bg: #EDF5EF;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
+
+  --color-product-page-bg: var(--product-page-bg);
+  --color-product-filter-bg: var(--product-filter-bg);
+  --color-product-card-bg: var(--product-card-bg);
+  --color-product-card-border: var(--product-card-border);
+  --color-product-heading: var(--product-heading);
+  --color-product-secondary: var(--product-secondary-text);
+  --color-product-navy: var(--product-navy);
+  --color-product-orange: var(--product-orange);
+  --color-product-hover-bg: var(--product-hover-bg);
 }
 
 html {

@@ -71,7 +71,7 @@ export default async function ShopPage() {
   });
 
   return (
-    <main className="min-h-screen bg-slate-50">
+    <main className="min-h-screen bg-[#F5FAF6]">
       <ShopPageClient
         categories={categories}
         categoryStats={categoryStats}

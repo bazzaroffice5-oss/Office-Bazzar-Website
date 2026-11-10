@@ -63,36 +63,36 @@ export default function ProductDetailClient({
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 bg-white text-gray-900">
+    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 text-[#111827]">
       {/* 1. Breadcrumbs */}
       <nav
         aria-label="Breadcrumb"
-        className="flex items-center space-x-1.5 text-xs text-gray-500 mb-6 flex-wrap gap-y-1 font-normal"
+        className="flex items-center space-x-1.5 text-xs text-[#526174] mb-6 flex-wrap gap-y-1 font-normal"
       >
-        <Link href="/categories" className="text-gray-500 hover:text-gray-900 transition-colors">
+        <Link href="/categories" className="text-[#526174] hover:text-[#163A5F] transition-colors">
           Categories
         </Link>
-        <span className="text-gray-300">/</span>
+        <span className="text-[#526174]/40">/</span>
 
         {product.categoryName && (
           <>
-            <Link href={categoryHref} className="text-gray-500 hover:text-gray-900 transition-colors">
+            <Link href={categoryHref} className="text-[#526174] hover:text-[#163A5F] transition-colors">
               {product.categoryName}
             </Link>
-            <span className="text-gray-300">/</span>
+            <span className="text-[#526174]/40">/</span>
           </>
         )}
 
         {product.subcategoryName && subcategoryHref && (
           <>
-            <Link href={subcategoryHref} className="text-gray-500 hover:text-gray-900 transition-colors">
+            <Link href={subcategoryHref} className="text-[#526174] hover:text-[#163A5F] transition-colors">
               {product.subcategoryName}
             </Link>
-            <span className="text-gray-300">/</span>
+            <span className="text-[#526174]/40">/</span>
           </>
         )}
 
-        <span className="font-semibold text-gray-900 truncate max-w-xs sm:max-w-md">
+        <span className="font-semibold text-[#111827] truncate max-w-xs sm:max-w-md">
           {product.name}
         </span>
       </nav>
@@ -101,7 +101,7 @@ export default function ProductDetailClient({
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
         {/* Left Column — Large Product Image Container */}
         <div className="md:col-span-5 lg:col-span-5 flex flex-col space-y-4">
-          <div className="w-full aspect-square rounded-2xl border border-gray-200 bg-white p-6 flex items-center justify-center relative overflow-hidden shadow-xs">
+          <div className="w-full aspect-square rounded-2xl border border-[#E2EBE3] bg-white p-6 flex items-center justify-center relative overflow-hidden shadow-xs">
             <Image
               src={activeImage}
               alt={product.name}
@@ -123,8 +123,8 @@ export default function ProductDetailClient({
                   onClick={() => setActiveImage(img)}
                   className={`relative w-16 h-16 rounded-xl border p-1 bg-white shrink-0 overflow-hidden transition-all cursor-pointer ${
                     activeImage === img
-                      ? 'border-[#ea580c] ring-2 ring-[#ea580c]/30 shadow-xs'
-                      : 'border-gray-200 hover:border-gray-300'
+                      ? 'border-[#F97316] ring-2 ring-[#F97316]/30 shadow-xs'
+                      : 'border-[#E2EBE3] hover:border-[#163A5F]/40'
                   }`}
                 >
                   <Image
@@ -139,8 +139,8 @@ export default function ProductDetailClient({
           )}
 
           {/* OfficeBazzar Authenticity Badge */}
-          <div className="p-3.5 rounded-xl bg-orange-50/60 border border-orange-100 flex items-center justify-center gap-2 text-xs text-orange-950 font-medium text-center">
-            <ShieldCheck className="w-4 h-4 text-[#ea580c] shrink-0" />
+          <div className="p-3.5 rounded-xl bg-[#EFF6F0] border border-[#E2EBE3] flex items-center justify-center gap-2 text-xs text-[#163A5F] font-medium text-center">
+            <ShieldCheck className="w-4 h-4 text-[#F97316] shrink-0" />
             <span>OfficeBazzar Certified Procurement • Royapettah Fulfillment Hub</span>
           </div>
         </div>
@@ -151,10 +151,10 @@ export default function ProductDetailClient({
           <div className="flex items-center justify-between gap-3 flex-wrap">
             <Link
               href={brandHref}
-              className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#ea580c] hover:text-[#c2410c] transition-colors"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#F97316] hover:text-[#F97316]/80 transition-colors"
             >
               {brandLogo && (
-                <div className="relative h-7 w-12 shrink-0 bg-white border border-gray-200 rounded-md p-0.5 flex items-center justify-center shadow-2xs">
+                <div className="relative h-7 w-12 shrink-0 bg-white border border-[#E2EBE3] rounded-md p-0.5 flex items-center justify-center shadow-2xs">
                   <Image
                     src={brandLogo}
                     alt={product.brandName}
@@ -166,44 +166,44 @@ export default function ProductDetailClient({
               <span>{product.brandName}</span>
             </Link>
 
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#526174] bg-white px-2.5 py-0.5 rounded-md border border-[#E2EBE3]">
               Corporate Catalogue
             </span>
           </div>
 
           {/* Large Product Title */}
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-snug tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111827] leading-snug tracking-tight">
             {product.name}
           </h1>
 
           {/* Key Specifications & Metadata Table */}
-          <div className="bg-gray-50/70 border border-gray-200 rounded-2xl p-4 sm:p-5 space-y-3">
+          <div className="bg-[#EFF6F0] border border-[#E2EBE3] rounded-2xl p-4 sm:p-5 space-y-3">
             {/* Product Name */}
             <div className="flex items-baseline text-xs sm:text-sm">
-              <span className="w-36 font-semibold text-gray-900 shrink-0">Product Name:</span>
-              <span className="font-normal text-gray-700 break-words">{product.name}</span>
+              <span className="w-36 font-semibold text-[#111827] shrink-0">Product Name:</span>
+              <span className="font-normal text-[#526174] break-words">{product.name}</span>
             </div>
 
             {/* Product Code / SKU */}
             <div className="flex items-baseline text-xs sm:text-sm">
-              <span className="w-36 font-semibold text-gray-900 shrink-0">Product Code:</span>
-              <span className="font-mono font-medium text-gray-900 px-2 py-0.5 rounded bg-white border border-gray-200 text-xs">
+              <span className="w-36 font-semibold text-[#111827] shrink-0">Product Code:</span>
+              <span className="font-mono font-medium text-[#111827] px-2 py-0.5 rounded bg-white border border-[#E2EBE3] text-xs">
                 {product.sku || product.id}
               </span>
             </div>
 
             {/* Unit in Business */}
             <div className="flex items-baseline text-xs sm:text-sm">
-              <span className="w-36 font-semibold text-gray-900 shrink-0">Unit in Business:</span>
-              <span className="font-semibold text-gray-900">{product.packSize || 'Standard Pack'}</span>
+              <span className="w-36 font-semibold text-[#111827] shrink-0">Unit in Business:</span>
+              <span className="font-semibold text-[#111827]">{product.packSize || 'Standard Pack'}</span>
             </div>
 
             {/* Category */}
             <div className="flex items-baseline text-xs sm:text-sm">
-              <span className="w-36 font-semibold text-gray-900 shrink-0">Category:</span>
+              <span className="w-36 font-semibold text-[#111827] shrink-0">Category:</span>
               <Link
                 href={categoryHref}
-                className="font-medium text-[#ea580c] hover:underline"
+                className="font-medium text-[#163A5F] hover:underline"
               >
                 {product.categoryName}
               </Link>
@@ -211,10 +211,10 @@ export default function ProductDetailClient({
 
             {/* Brand */}
             <div className="flex items-baseline text-xs sm:text-sm">
-              <span className="w-36 font-semibold text-gray-900 shrink-0">Brand:</span>
+              <span className="w-36 font-semibold text-[#111827] shrink-0">Brand:</span>
               <Link
                 href={brandHref}
-                className="font-medium text-[#ea580c] hover:underline"
+                className="font-medium text-[#163A5F] hover:underline"
               >
                 {product.brandName}
               </Link>
@@ -223,8 +223,8 @@ export default function ProductDetailClient({
 
           {/* Product Description */}
           {product.description && (
-            <div className="pt-2 text-sm text-gray-600 leading-relaxed space-y-2">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-gray-900">
+            <div className="pt-2 text-sm text-[#526174] leading-relaxed space-y-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-[#111827]">
                 Product Overview
               </h2>
               <p className="whitespace-pre-line">{product.description}</p>
@@ -241,7 +241,7 @@ export default function ProductDetailClient({
               className={`flex h-11 items-center justify-center space-x-2 px-5 rounded-xl border text-sm font-semibold transition-all duration-200 cursor-pointer ${
                 inWishlist
                   ? 'border-rose-500 bg-rose-50 text-rose-600 hover:bg-rose-100'
-                  : 'border-slate-800 text-slate-800 hover:border-[#ea580c] hover:bg-[#ea580c] hover:text-white'
+                  : 'border-[#163A5F] text-[#163A5F] hover:border-[#163A5F] hover:bg-[#163A5F] hover:text-white'
               }`}
             >
               <Heart className={`w-4 h-4 ${inWishlist ? 'fill-rose-500 text-rose-500' : ''}`} />
@@ -256,7 +256,7 @@ export default function ProductDetailClient({
               className={`flex h-11 items-center justify-center space-x-2 px-6 rounded-xl text-sm font-bold text-white shadow-md transition-all duration-200 cursor-pointer ${
                 addedFeedback
                   ? 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-600/20'
-                  : 'bg-[#ea580c] hover:bg-[#c2410c] shadow-[#ea580c]/25'
+                  : 'bg-[#F97316] hover:bg-[#F97316]/90 shadow-[#F97316]/25'
               }`}
             >
               {addedFeedback ? (
@@ -275,7 +275,7 @@ export default function ProductDetailClient({
             {cartItem && !addedFeedback && (
               <Link
                 href="/cart"
-                className="text-xs font-semibold text-slate-600 hover:text-[#ea580c] underline ml-2 cursor-pointer transition-colors"
+                className="text-xs font-semibold text-[#526174] hover:text-[#F97316] underline ml-2 cursor-pointer transition-colors"
                 title="View Dedicated Quote Cart"
               >
                 In quote cart: {cartItem.quantity} (View Cart)
@@ -289,19 +289,19 @@ export default function ProductDetailClient({
       {/* 3. Similar Products Section */}
       {relatedProducts.length > 0 && (
         <section
-          className="mt-14 pt-8 border-t border-gray-100"
+          className="mt-14 pt-8 border-t border-[#E2EBE3]"
           aria-labelledby="similar-products-heading"
         >
           <div className="flex items-center justify-between mb-4">
             <h2
               id="similar-products-heading"
-              className="text-lg sm:text-xl font-bold text-gray-900"
+              className="text-lg sm:text-xl font-bold text-[#111827]"
             >
               Similar Procurement Products
             </h2>
             <Link
               href={categoryHref}
-              className="text-xs font-semibold text-[#ea580c] hover:underline"
+              className="text-xs font-semibold text-[#F97316] hover:underline"
             >
               View More in {product.categoryName} →
             </Link>

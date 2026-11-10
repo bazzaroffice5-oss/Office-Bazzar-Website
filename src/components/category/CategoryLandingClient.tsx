@@ -137,25 +137,25 @@ export default function CategoryLandingClient({
         {/* Breadcrumb Navigation: Home → Main Category */}
         <nav
           aria-label="Breadcrumb"
-          className="flex items-center flex-wrap gap-1.5 text-xs sm:text-sm text-slate-500 mb-6"
+          className="flex items-center flex-wrap gap-1.5 text-xs sm:text-sm text-[#526174] mb-6"
         >
-          <Link href="/" className="hover:text-[#004b87] transition-colors font-medium">
+          <Link href="/" className="hover:text-[#163A5F] transition-colors font-medium">
             Home
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-          <span className="font-semibold text-slate-900 truncate">
+          <ChevronRight className="w-3.5 h-3.5 text-[#526174]/50 shrink-0" />
+          <span className="font-semibold text-[#111827] truncate">
             {category.name}
           </span>
         </nav>
 
         {/* Centered Category Heading with orange underline */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 px-2">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#111827] tracking-tight">
             {category.name}
           </h1>
-          <div className="w-16 h-[3px] bg-[#ea580c] mx-auto mt-3 rounded-full" />
+          <div className="w-16 h-[3px] bg-[#F97316] mx-auto mt-3 rounded-full" />
           {category.description && (
-            <p className="text-xs sm:text-sm text-slate-600 mt-3 font-normal max-w-xl mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#526174] mt-3 font-normal max-w-xl mx-auto leading-relaxed">
               {category.description}
             </p>
           )}
@@ -167,7 +167,7 @@ export default function CategoryLandingClient({
             <Link
               key={card.id}
               href={card.href}
-              className="group relative flex flex-col w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 bg-slate-100 border border-slate-200/90 hover:border-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004b87] focus-visible:ring-offset-2"
+              className="group relative flex flex-col w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 bg-slate-100 border border-[#E2EBE3] hover:border-[#163A5F]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#163A5F] focus-visible:ring-offset-2"
             >
               {/* Category Image with Smooth Hover Zoom */}
               <Image
@@ -217,31 +217,31 @@ export default function CategoryLandingClient({
       {/* Breadcrumb Navigation: Home → Main Category → All Products / Subcategory */}
       <nav
         aria-label="Breadcrumb"
-        className="flex items-center flex-wrap gap-1.5 text-xs sm:text-sm text-slate-500 mb-6"
+        className="flex items-center flex-wrap gap-1.5 text-xs sm:text-sm text-[#526174] mb-6"
       >
-        <Link href="/" className="hover:text-[#004b87] transition-colors font-medium">
+        <Link href="/" className="hover:text-[#163A5F] transition-colors font-medium">
           Home
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+        <ChevronRight className="w-3.5 h-3.5 text-[#526174]/50 shrink-0" />
         <Link
           href={categoryBaseUrl}
-          className="hover:text-[#004b87] transition-colors font-medium"
+          className="hover:text-[#163A5F] transition-colors font-medium"
         >
           {category.name}
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-        <span className="font-semibold text-[#004b87] truncate">
+        <ChevronRight className="w-3.5 h-3.5 text-[#526174]/50 shrink-0" />
+        <span className="font-semibold text-[#163A5F] truncate">
           {isViewingAll ? 'All Products' : (activeSubcategory?.name || 'Products')}
         </span>
       </nav>
 
       {/* Listing Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-slate-200 gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-[#E2EBE3] gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#111827] tracking-tight">
             {activeTitle}
           </h1>
-          <p className="text-sm text-slate-600 mt-1 font-normal">
+          <p className="text-sm text-[#526174] mt-1 font-normal">
             {activeSubtitle}
           </p>
         </div>
@@ -250,33 +250,33 @@ export default function CategoryLandingClient({
           {/* Back to Category Landing Page */}
           <Link
             href={categoryBaseUrl}
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#004b87] hover:text-[#003866] bg-blue-50/80 hover:bg-blue-100/80 px-3.5 py-1.5 rounded-full transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#163A5F] hover:text-[#163A5F]/90 bg-[#EFF6F0] hover:bg-[#EDF5EF] px-3.5 py-1.5 rounded-full transition-colors border border-[#E2EBE3]"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to {category.name}</span>
           </Link>
 
           {/* Product count badge */}
-          <span className="text-xs sm:text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
-            <strong className="text-[#004b87] font-semibold">{totalItems}</strong> products
+          <span className="text-xs sm:text-sm font-medium text-[#526174] bg-white px-3 py-1 rounded-full border border-[#E2EBE3]">
+            <strong className="text-[#163A5F] font-semibold">{totalItems}</strong> products
           </span>
         </div>
       </div>
 
       {/* Subcategory Filter Switcher Tabs / Pills */}
-      <div className="flex flex-wrap items-center gap-2 mb-8 pb-2 border-b border-slate-100">
+      <div className="flex flex-wrap items-center gap-2 mb-8 pb-2 border-b border-[#E2EBE3]">
         <Link
           href={`${categoryBaseUrl}?view=all`}
           className={`px-4 py-2 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 ${
             isViewingAll
-              ? 'bg-[#004b87] text-white shadow-sm ring-2 ring-[#004b87]/30'
-              : 'bg-white border border-slate-200 text-slate-700 hover:border-[#004b87] hover:text-[#004b87]'
+              ? 'bg-[#163A5F] text-white shadow-xs'
+              : 'bg-white border border-[#E2EBE3] text-[#526174] hover:border-[#163A5F] hover:text-[#163A5F] hover:bg-[#EDF5EF]'
           }`}
         >
           <span>All {category.name}</span>
           <span
             className={`text-[11px] px-1.5 py-0.5 rounded-full font-semibold ${
-              isViewingAll ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
+              isViewingAll ? 'bg-white/20 text-white' : 'bg-[#EFF6F0] text-[#526174]'
             }`}
           >
             {categoryProducts.length}
@@ -293,14 +293,14 @@ export default function CategoryLandingClient({
               href={`${categoryBaseUrl}?sub=${sub.slug}`}
               className={`px-4 py-2 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 ${
                 isSelected
-                  ? 'bg-[#004b87] text-white shadow-sm ring-2 ring-[#004b87]/30'
-                  : 'bg-white border border-slate-200 text-slate-700 hover:border-[#004b87] hover:text-[#004b87]'
+                  ? 'bg-[#163A5F] text-white shadow-xs'
+                  : 'bg-white border border-[#E2EBE3] text-[#526174] hover:border-[#163A5F] hover:text-[#163A5F] hover:bg-[#EDF5EF]'
               }`}
             >
               <span>{sub.name}</span>
               <span
                 className={`text-[11px] px-1.5 py-0.5 rounded-full font-semibold ${
-                  isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
+                  isSelected ? 'bg-white/20 text-white' : 'bg-[#EFF6F0] text-[#526174]'
                 }`}
               >
                 {count}
@@ -313,14 +313,14 @@ export default function CategoryLandingClient({
       {/* Responsive Product Cards Grid */}
       <h2 className="sr-only">{activeTitle} Catalogue</h2>
       {paginatedProducts.length === 0 ? (
-        <div className="w-full bg-white rounded-2xl border border-gray-200 p-8 sm:p-12 text-center space-y-4 my-8">
-          <div className="w-14 h-14 rounded-full bg-blue-50 text-[#004b87] mx-auto flex items-center justify-center">
-            <Package className="w-7 h-7 text-[#004b87]" />
+        <div className="w-full bg-white rounded-2xl border border-[#E2EBE3] p-8 sm:p-12 text-center space-y-4 my-8">
+          <div className="w-14 h-14 rounded-full bg-[#EFF6F0] text-[#163A5F] mx-auto flex items-center justify-center">
+            <Package className="w-7 h-7 text-[#526174]" />
           </div>
-          <h2 className="text-xl font-bold text-gray-900">
+          <h2 className="text-xl font-bold text-[#111827]">
             {categoryProducts.length === 0 ? 'Corporate Catalogue Available on RFQ' : 'No products found in this subcategory'}
           </h2>
-          <p className="text-sm text-gray-600 max-w-lg mx-auto">
+          <p className="text-sm text-[#526174] max-w-lg mx-auto">
             {categoryProducts.length === 0
               ? `${category.name} supplies are available under our Annual Rate Contract (ARC) and bulk B2B procurement agreements. Submit an RFQ with your requirement specs.`
               : `There are currently no catalog items matching this filter. You can request custom quotes or view all items in ${category.name}.`}
@@ -328,13 +328,13 @@ export default function CategoryLandingClient({
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <Link
               href="/request-quote"
-              className="inline-flex items-center gap-2 bg-[#004b87] hover:bg-[#003866] text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl shadow-sm transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 bg-[#163A5F] hover:bg-[#163A5F]/90 text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl shadow-xs transition-colors cursor-pointer"
             >
               <span>Request Corporate Quote</span>
             </Link>
             <Link
               href={categoryBaseUrl}
-              className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 bg-[#EFF6F0] hover:bg-[#EDF5EF] text-[#163A5F] text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors cursor-pointer border border-[#E2EBE3]"
             >
               <span>Back to {category.name}</span>
             </Link>

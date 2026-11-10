@@ -26,29 +26,29 @@ export default function ShopPageClient({
   categoryStats,
 }: ShopPageClientProps) {
   return (
-    <div className="w-full min-h-screen bg-slate-50">
+    <div className="w-full min-h-screen bg-[#F5FAF6]">
       {/* Breadcrumb Navigation: Home → Shop */}
       <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         <nav
           aria-label="Breadcrumb"
-          className="flex items-center flex-wrap gap-1.5 text-xs sm:text-sm text-slate-500 mb-6"
+          className="flex items-center flex-wrap gap-1.5 text-xs sm:text-sm text-[#526174] mb-6"
         >
-          <Link href="/" className="hover:text-[#004b87] transition-colors font-medium">
+          <Link href="/" className="hover:text-[#163A5F] transition-colors font-medium">
             Home
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-          <span className="font-semibold text-slate-900">Shop</span>
+          <ChevronRight className="w-3.5 h-3.5 text-[#526174]/50 shrink-0" />
+          <span className="font-semibold text-[#111827]">Shop</span>
         </nav>
       </div>
 
       {/* Hero / Header Section matching Procura Business Shop */}
       <section className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10 text-center">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#111827] tracking-tight">
             Categories We Offer
           </h1>
-          <div className="w-16 h-[3px] bg-[#ea580c] mx-auto mt-3.5 rounded-full" />
-          <p className="mt-4 text-sm sm:text-base text-slate-600 max-w-xl mx-auto leading-relaxed font-normal">
+          <div className="w-16 h-[3px] bg-[#F97316] mx-auto mt-3.5 rounded-full" />
+          <p className="mt-4 text-sm sm:text-base text-[#526174] max-w-xl mx-auto leading-relaxed font-normal">
             We specialize in delivering workplace procurement solutions with pre-negotiated corporate rates and 100% GST tax credit.
           </p>
         </div>
@@ -67,7 +67,7 @@ export default function ShopPageClient({
             return (
               <div
                 key={cat.id}
-                className="group flex flex-col justify-between bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="group flex flex-col justify-between bg-white rounded-2xl border border-[#E2EBE3] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 {/* Image & Overlapping Metadata Badge */}
                 <div>
@@ -83,7 +83,7 @@ export default function ShopPageClient({
                   </div>
 
                   {/* Procura-style Overlapping Orange Metadata Badge */}
-                  <div className="mx-4 -mt-4 relative z-10 flex items-center justify-center gap-3 bg-[#ea580c] py-2 px-3 rounded-lg text-xs font-bold text-white shadow-sm">
+                  <div className="mx-4 -mt-4 relative z-10 flex items-center justify-center gap-3 bg-[#F97316] py-2 px-3 rounded-lg text-xs font-bold text-white shadow-sm">
                     <div className="flex items-center gap-1.5">
                       <Store className="w-3.5 h-3.5" />
                       <span>{stats.brandCount}+ Brands</span>
@@ -97,11 +97,11 @@ export default function ShopPageClient({
 
                   {/* Card Content Body */}
                   <div className="px-5 pt-4 pb-2">
-                    <h2 className="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-[#004b87] transition-colors leading-snug">
+                    <h2 className="text-lg sm:text-xl font-bold text-[#111827] group-hover:text-[#163A5F] transition-colors leading-snug">
                       {cat.name}
                     </h2>
                     {cat.description && (
-                      <p className="mt-2 text-xs sm:text-sm text-slate-500 line-clamp-2 leading-relaxed font-normal">
+                      <p className="mt-2 text-xs sm:text-sm text-[#526174] line-clamp-2 leading-relaxed font-normal">
                         {cat.description}
                       </p>
                     )}
@@ -112,7 +112,7 @@ export default function ShopPageClient({
                 <div className="p-5 pt-3">
                   <Link
                     href="/shop/categories"
-                    className="w-full py-2.5 px-4 rounded-xl bg-[#004b87] hover:bg-[#003866] active:bg-[#002f57] text-white flex items-center justify-center gap-2 text-sm font-semibold transition-all shadow-xs cursor-pointer"
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#163A5F] hover:bg-[#163A5F]/90 active:bg-[#163A5F] text-white flex items-center justify-center gap-2 text-sm font-semibold transition-all shadow-xs cursor-pointer"
                   >
                     <span>View Products</span>
                     <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />

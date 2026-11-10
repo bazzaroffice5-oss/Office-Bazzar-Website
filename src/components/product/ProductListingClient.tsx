@@ -356,25 +356,25 @@ export default function ProductListingClient({
       {/* Breadcrumb Navigation */}
       <nav
         aria-label="Breadcrumb"
-        className="flex items-center flex-wrap gap-1.5 text-xs sm:text-sm text-slate-500 mb-6"
+        className="flex items-center flex-wrap gap-1.5 text-xs sm:text-sm text-[#526174] mb-6"
       >
-        <Link href="/" className="hover:text-[#004b87] transition-colors font-medium">
+        <Link href="/" className="hover:text-[#163A5F] transition-colors font-medium">
           Home
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+        <ChevronRight className="w-3.5 h-3.5 text-[#526174]/50 shrink-0" />
         <Link
           href="/products"
           onClick={handleClearAll}
-          className={`hover:text-[#004b87] transition-colors font-medium ${
-            !activeFilterLabel && !searchQuery ? 'text-slate-900 font-bold' : ''
+          className={`hover:text-[#163A5F] transition-colors font-medium ${
+            !activeFilterLabel && !searchQuery ? 'text-[#111827] font-bold' : ''
           }`}
         >
           All Products
         </Link>
         {activeFilterLabel && (
           <>
-            <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-            <span className="font-semibold text-[#004b87] truncate">
+            <ChevronRight className="w-3.5 h-3.5 text-[#526174]/50 shrink-0" />
+            <span className="font-semibold text-[#163A5F] truncate">
               {activeFilterLabel}
             </span>
           </>
@@ -385,25 +385,25 @@ export default function ProductListingClient({
       <div id="products-grid-top" className="mb-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#111827] tracking-tight">
               {searchQuery.trim()
                 ? `Search: "${searchQuery.trim()}"`
                 : activeFilterLabel
                 ? activeFilterLabel
                 : 'All Products'}
             </h1>
-            <div className="w-16 h-[3px] bg-[#ea580c] mt-3 rounded-full" />
-            <p className="text-xs sm:text-sm text-slate-600 mt-2.5 max-w-2xl font-normal leading-relaxed">
+            <div className="w-16 h-[3px] bg-[#F97316] mt-3 rounded-full" />
+            <p className="text-xs sm:text-sm text-[#526174] mt-2.5 max-w-2xl font-normal leading-relaxed">
               Explore our complete wholesale workplace catalogue across all categories with pre-negotiated corporate rates, volume packaging, and 100% GST input tax credit.
             </p>
           </div>
 
           {/* Product Count Display */}
           <div className="flex items-center gap-2 self-start md:self-auto shrink-0">
-            <span className="text-xs sm:text-sm font-medium text-slate-600 bg-white px-3.5 py-1.5 rounded-full border border-slate-200/90 shadow-2xs flex items-center gap-1.5">
-              <Package className="w-4 h-4 text-[#004b87]" />
+            <span className="text-xs sm:text-sm font-medium text-[#526174] bg-white px-3.5 py-1.5 rounded-full border border-[#E2EBE3] shadow-2xs flex items-center gap-1.5">
+              <Package className="w-4 h-4 text-[#163A5F]" />
               <span>
-                Showing <strong className="text-[#004b87] font-bold">{totalItems}</strong> of {activeProducts.length} products
+                Showing <strong className="text-[#163A5F] font-bold">{totalItems}</strong> of {activeProducts.length} products
               </span>
             </span>
           </div>
@@ -411,11 +411,11 @@ export default function ProductListingClient({
       </div>
 
       {/* Filter & Search Bar */}
-      <div className="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 mb-8 shadow-xs">
+      <div className="bg-[#EFF6F0] rounded-2xl border border-[#E2EBE3] p-4 sm:p-5 mb-8 shadow-xs">
         <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 items-stretch lg:items-center justify-between">
           {/* Live Search Input */}
           <div className="relative flex-1 min-w-[240px]">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Search className="w-4 h-4 text-[#526174]/60 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <label htmlFor="catalog-search-input" className="sr-only">
               Search products, brands, SKUs or specifications
             </label>
@@ -426,13 +426,13 @@ export default function ProductListingClient({
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder="Search products, brands, SKUs or specifications..."
-              className="w-full pl-10 pr-9 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-[#004b87] focus:ring-2 focus:ring-[#004b87]/20 transition-all"
+              className="w-full pl-10 pr-9 py-2.5 bg-white border border-[#E2EBE3] rounded-xl text-sm text-[#111827] placeholder:text-[#526174]/70 focus:bg-white focus:outline-none focus:border-[#163A5F] focus:ring-2 focus:ring-[#163A5F]/20 transition-all"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => handleSearchChange('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5 cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#526174]/60 hover:text-[#111827] p-0.5 cursor-pointer"
                 title="Clear search"
               >
                 <X className="w-4 h-4" />
@@ -448,7 +448,7 @@ export default function ProductListingClient({
                 value={selectedFilter}
                 onChange={(e) => handleFilterChange(e.target.value)}
                 aria-label="Filter by category"
-                className="w-full sm:w-auto min-w-[170px] py-2.5 pl-3.5 pr-8 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-medium text-slate-800 focus:bg-white focus:outline-none focus:border-[#004b87] focus:ring-2 focus:ring-[#004b87]/20 transition-all cursor-pointer"
+                className="w-full sm:w-auto min-w-[170px] py-2.5 pl-3.5 pr-8 bg-white border border-[#E2EBE3] rounded-xl text-xs sm:text-sm font-medium text-[#111827] focus:bg-white focus:outline-none focus:border-[#163A5F] focus:ring-2 focus:ring-[#163A5F]/20 hover:bg-[#EDF5EF] transition-all cursor-pointer"
               >
                 <option value="all">All Categories ({activeProducts.length})</option>
                 <optgroup label="Main Categories">
@@ -474,7 +474,7 @@ export default function ProductListingClient({
                 value={selectedBrand}
                 onChange={(e) => handleBrandChange(e.target.value)}
                 aria-label="Filter by brand"
-                className="w-full sm:w-auto min-w-[140px] py-2.5 pl-3.5 pr-8 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-medium text-slate-800 focus:bg-white focus:outline-none focus:border-[#004b87] focus:ring-2 focus:ring-[#004b87]/20 transition-all cursor-pointer"
+                className="w-full sm:w-auto min-w-[140px] py-2.5 pl-3.5 pr-8 bg-white border border-[#E2EBE3] rounded-xl text-xs sm:text-sm font-medium text-[#111827] focus:bg-white focus:outline-none focus:border-[#163A5F] focus:ring-2 focus:ring-[#163A5F]/20 hover:bg-[#EDF5EF] transition-all cursor-pointer"
               >
                 <option value="">All Brands ({activeProducts.length})</option>
                 {availableBrands.map((b) => (
@@ -491,7 +491,7 @@ export default function ProductListingClient({
                 value={sortBy}
                 onChange={(e) => handleSortChange(e.target.value as SortOption)}
                 aria-label="Sort products"
-                className="w-full sm:w-auto min-w-[150px] py-2.5 pl-3.5 pr-8 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-medium text-slate-800 focus:bg-white focus:outline-none focus:border-[#004b87] focus:ring-2 focus:ring-[#004b87]/20 transition-all cursor-pointer"
+                className="w-full sm:w-auto min-w-[150px] py-2.5 pl-3.5 pr-8 bg-white border border-[#E2EBE3] rounded-xl text-xs sm:text-sm font-medium text-[#111827] focus:bg-white focus:outline-none focus:border-[#163A5F] focus:ring-2 focus:ring-[#163A5F]/20 hover:bg-[#EDF5EF] transition-all cursor-pointer"
               >
                 <option value="relevance">Sort: Featured</option>
                 <option value="price-low">Price: Low to High</option>
@@ -520,19 +520,19 @@ export default function ProductListingClient({
       {/* Product Cards Grid: Desktop 4 cols, Medium screens 3 cols, Tablets 2 cols, Mobile 1 col */}
       <h2 className="sr-only">Product Catalogue Grid</h2>
       {paginatedProducts.length === 0 ? (
-        <div className="w-full bg-white rounded-2xl border border-slate-200/90 p-12 sm:p-16 text-center space-y-4 my-6">
-          <div className="w-14 h-14 rounded-full bg-blue-50 text-[#004b87] mx-auto flex items-center justify-center">
-            <Package className="w-7 h-7 text-slate-400" />
+        <div className="w-full bg-white rounded-2xl border border-[#E2EBE3] p-12 sm:p-16 text-center space-y-4 my-6">
+          <div className="w-14 h-14 rounded-full bg-[#EFF6F0] text-[#163A5F] mx-auto flex items-center justify-center">
+            <Package className="w-7 h-7 text-[#526174]" />
           </div>
-          <h2 className="text-xl font-bold text-slate-900">No products found</h2>
-          <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
+          <h2 className="text-xl font-bold text-[#111827]">No products found</h2>
+          <p className="text-xs sm:text-sm text-[#526174] max-w-md mx-auto leading-relaxed">
             We couldn&apos;t find any products matching your current search or filter criteria. Try resetting filters to browse our full workplace catalogue.
           </p>
           <div className="pt-2">
             <button
               type="button"
               onClick={handleClearAll}
-              className="inline-flex items-center gap-2 bg-[#004b87] hover:bg-[#003866] text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors cursor-pointer shadow-xs"
+              className="inline-flex items-center gap-2 bg-[#163A5F] hover:bg-[#163A5F]/90 text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors cursor-pointer shadow-xs"
             >
               <RotateCcw className="w-4 h-4" />
               <span>Show All Products</span>
@@ -560,7 +560,7 @@ export default function ProductListingClient({
       />
 
       {/* Corporate Procurement Quotation CTA Banner */}
-      <div className="mt-14 p-6 sm:p-8 bg-gradient-to-r from-slate-900 to-[#002f57] rounded-2xl text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
+      <div className="mt-14 p-6 sm:p-8 bg-gradient-to-r from-[#111827] to-[#163A5F] rounded-2xl text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
         <div className="space-y-1 text-center md:text-left">
           <h2 className="text-lg sm:text-xl font-bold tracking-tight">
             Need Bulk Enterprise Pricing or Custom Invoicing?
@@ -571,7 +571,7 @@ export default function ProductListingClient({
         </div>
         <Link
           href="/request-quote"
-          className="inline-flex items-center gap-2 bg-[#ea580c] hover:bg-[#d94e08] text-white font-semibold px-6 py-3 rounded-full text-sm transition-all shadow-xs shrink-0 cursor-pointer active:scale-95"
+          className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#F97316]/90 text-white font-semibold px-6 py-3 rounded-full text-sm transition-all shadow-xs shrink-0 cursor-pointer active:scale-95"
         >
           <span>Request Corporate Quote</span>
           <ArrowRight className="w-4 h-4" />

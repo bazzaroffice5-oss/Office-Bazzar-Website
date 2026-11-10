@@ -34,22 +34,22 @@ export default function AllCategoriesClient({
       {/* Breadcrumb Navigation: Home → All Categories */}
       <nav
         aria-label="Breadcrumb"
-        className="flex items-center flex-wrap gap-1.5 text-xs sm:text-sm text-slate-500 mb-6"
+        className="flex items-center flex-wrap gap-1.5 text-xs sm:text-sm text-[#526174] mb-6"
       >
-        <Link href="/" className="hover:text-[#004b87] transition-colors font-medium">
+        <Link href="/" className="hover:text-[#163A5F] transition-colors font-medium">
           Home
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-        <span className="font-semibold text-slate-900">All Categories</span>
+        <ChevronRight className="w-3.5 h-3.5 text-[#526174]/50 shrink-0" />
+        <span className="font-semibold text-[#111827]">All Categories</span>
       </nav>
 
       {/* Page Header: Clean, centered "All Categories" heading */}
       <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 px-2">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#111827] tracking-tight">
           All Categories
         </h1>
-        <div className="w-16 h-[3px] bg-[#ea580c] mx-auto mt-3 rounded-full" />
-        <p className="text-xs sm:text-sm text-slate-600 mt-3 font-normal max-w-xl mx-auto leading-relaxed">
+        <div className="w-16 h-[3px] bg-[#F97316] mx-auto mt-3 rounded-full" />
+        <p className="text-xs sm:text-sm text-[#526174] mt-3 font-normal max-w-xl mx-auto leading-relaxed">
           Explore our complete workplace catalogue across specialized procurement categories for enterprises, institutions, and facility managers across India.
         </p>
       </div>
@@ -71,7 +71,7 @@ export default function AllCategoriesClient({
             <Link
               key={cat.id}
               href={href}
-              className="group relative flex flex-col w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 bg-slate-100 border border-slate-200/90 hover:border-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004b87] focus-visible:ring-offset-2"
+              className="group relative flex flex-col w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 bg-slate-100 border border-[#E2EBE3] hover:border-[#163A5F]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#163A5F] focus-visible:ring-offset-2"
             >
               {/* Category Image with Smooth Hover Zoom */}
               <Image
@@ -106,35 +106,35 @@ export default function AllCategoriesClient({
       </div>
 
       {/* Corporate Procurement Trust Highlights */}
-      <div className="mt-8 pt-8 border-t border-slate-200/80">
+      <div className="mt-8 pt-8 border-t border-[#E2EBE3]">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-          <div className="p-4 bg-white rounded-xl border border-slate-200/80 shadow-2xs space-y-1">
-            <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#004b87] mx-auto flex items-center justify-center mb-1">
+          <div className="p-4 bg-white rounded-xl border border-[#E2EBE3] shadow-2xs space-y-1">
+            <div className="w-8 h-8 rounded-lg bg-[#EFF6F0] text-[#163A5F] mx-auto flex items-center justify-center mb-1">
               <Award className="w-4 h-4" />
             </div>
-            <h3 className="text-xs sm:text-sm font-bold text-slate-900">100% Genuine Supplies</h3>
-            <p className="text-[11px] text-slate-500">Authorized brand distributors</p>
+            <h3 className="text-xs sm:text-sm font-bold text-[#111827]">100% Genuine Supplies</h3>
+            <p className="text-[11px] text-[#526174]">Authorized brand distributors</p>
           </div>
-          <div className="p-4 bg-white rounded-xl border border-slate-200/80 shadow-2xs space-y-1">
+          <div className="p-4 bg-white rounded-xl border border-[#E2EBE3] shadow-2xs space-y-1">
             <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#16a34a] mx-auto flex items-center justify-center mb-1">
               <ShieldCheck className="w-4 h-4" />
             </div>
-            <h3 className="text-xs sm:text-sm font-bold text-slate-900">100% GST Tax Credit</h3>
-            <p className="text-[11px] text-slate-500">Valid GST B2B invoice with ITC</p>
+            <h3 className="text-xs sm:text-sm font-bold text-[#111827]">100% GST Tax Credit</h3>
+            <p className="text-[11px] text-[#526174]">Valid GST B2B invoice with ITC</p>
           </div>
-          <div className="p-4 bg-white rounded-xl border border-slate-200/80 shadow-2xs space-y-1">
-            <div className="w-8 h-8 rounded-lg bg-sky-50 text-[#0284c7] mx-auto flex items-center justify-center mb-1">
+          <div className="p-4 bg-white rounded-xl border border-[#E2EBE3] shadow-2xs space-y-1">
+            <div className="w-8 h-8 rounded-lg bg-[#EFF6F0] text-[#163A5F] mx-auto flex items-center justify-center mb-1">
               <Truck className="w-4 h-4" />
             </div>
-            <h3 className="text-xs sm:text-sm font-bold text-slate-900">Doorstep Metro Fleet</h3>
-            <p className="text-[11px] text-slate-500">24-48 hr corporate dispatch</p>
+            <h3 className="text-xs sm:text-sm font-bold text-[#111827]">Doorstep Metro Fleet</h3>
+            <p className="text-[11px] text-[#526174]">24-48 hr corporate dispatch</p>
           </div>
-          <div className="p-4 bg-white rounded-xl border border-slate-200/80 shadow-2xs space-y-1">
-            <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 mx-auto flex items-center justify-center mb-1">
+          <div className="p-4 bg-white rounded-xl border border-[#E2EBE3] shadow-2xs space-y-1">
+            <div className="w-8 h-8 rounded-lg bg-amber-50 text-[#F97316] mx-auto flex items-center justify-center mb-1">
               <Headphones className="w-4 h-4" />
             </div>
-            <h3 className="text-xs sm:text-sm font-bold text-slate-900">ARC &amp; Bulk Support</h3>
-            <p className="text-[11px] text-slate-500">Custom pricing for institutions</p>
+            <h3 className="text-xs sm:text-sm font-bold text-[#111827]">ARC &amp; Bulk Support</h3>
+            <p className="text-[11px] text-[#526174]">Custom pricing for institutions</p>
           </div>
         </div>
       </div>

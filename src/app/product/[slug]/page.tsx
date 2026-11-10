@@ -136,7 +136,7 @@ export default async function ProductPage({
   ]);
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#F5FAF6]">
       <JsonLd data={productJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
       <ProductDetailClient

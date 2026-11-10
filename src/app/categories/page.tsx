@@ -88,7 +88,7 @@ export default async function AllCategoriesPage({
   });
 
   return (
-    <main className="min-h-screen bg-slate-50">
+    <main className="min-h-screen bg-[#F5FAF6]">
       <JsonLd data={getBreadcrumbJsonLd([{ name: 'Home', url: '/' }, { name: 'All Categories', url: '/categories' }])} />
       <AllCategoriesClient
         categories={categories}

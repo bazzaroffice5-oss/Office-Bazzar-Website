@@ -63,7 +63,7 @@ export default function WindowPagination({
         onClick={handlePrevious}
         disabled={!hasPrevious}
         aria-label="Go to previous page"
-        className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer select-none"
+        className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-2 rounded-xl border border-[#E2EBE3] text-xs font-semibold text-[#526174] bg-white hover:bg-[#EDF5EF] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer select-none"
       >
         <ChevronLeft className="w-3.5 h-3.5" />
         <span>Previous</span>
@@ -76,12 +76,12 @@ export default function WindowPagination({
             type="button"
             onClick={() => onPageChange(1)}
             aria-label="Go to page 1"
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer select-none"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-xs font-bold bg-white border border-[#E2EBE3] text-[#526174] hover:bg-[#EDF5EF] transition-colors cursor-pointer select-none"
           >
             1
           </button>
           {startPage > 2 && (
-            <span className="px-1 text-xs font-bold text-slate-400 select-none">...</span>
+            <span className="px-1 text-xs font-bold text-[#526174]/60 select-none">...</span>
           )}
         </div>
       )}
@@ -99,8 +99,8 @@ export default function WindowPagination({
               aria-label={`Page ${page}`}
               className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-xs font-bold transition-all cursor-pointer select-none ${
                 isSelected
-                  ? 'bg-[#004b87] text-white shadow-xs scale-105'
-                  : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300'
+                  ? 'bg-[#163A5F] text-white shadow-xs scale-105 border border-[#163A5F]'
+                  : 'bg-white border border-[#E2EBE3] text-[#526174] hover:bg-[#EDF5EF] hover:border-[#163A5F]/40'
               }`}
             >
               {page}
@@ -113,13 +113,13 @@ export default function WindowPagination({
       {endPage < totalPages && (
         <div className="hidden sm:flex items-center gap-1 sm:gap-1.5">
           {endPage < totalPages - 1 && (
-            <span className="px-1 text-xs font-bold text-slate-400 select-none">...</span>
+            <span className="px-1 text-xs font-bold text-[#526174]/60 select-none">...</span>
           )}
           <button
             type="button"
             onClick={() => onPageChange(totalPages)}
             aria-label={`Go to page ${totalPages}`}
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer select-none"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-xs font-bold bg-white border border-[#E2EBE3] text-[#526174] hover:bg-[#EDF5EF] transition-colors cursor-pointer select-none"
           >
             {totalPages}
           </button>
@@ -132,7 +132,7 @@ export default function WindowPagination({
         onClick={handleNext}
         disabled={!hasNext}
         aria-label="Go to next page"
-        className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer select-none"
+        className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-2 rounded-xl border border-[#E2EBE3] text-xs font-semibold text-[#526174] bg-white hover:bg-[#EDF5EF] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer select-none"
       >
         <span>Next</span>
         <ChevronRight className="w-3.5 h-3.5" />
