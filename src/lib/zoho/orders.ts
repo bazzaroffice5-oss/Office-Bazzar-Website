@@ -48,6 +48,19 @@ export function normalizeOrderReference(ref?: string | null): string {
   return ref.trim().toUpperCase();
 }
 
+/**
+ * Validate that an order reference conforms to immutable standards:
+ * - Must be a non-empty string between 3 and 50 characters.
+ * - Must not contain control characters or unsafe scripts.
+ * - Standard pattern: starts with OB-ORD- or alphanumeric hyphenated/underscored identifier.
+ */
+export function validateOrderReference(ref?: string | null): boolean {
+  if (!ref || typeof ref !== 'string') return false;
+  const clean = ref.trim();
+  if (clean.length < 3 || clean.length > 50) return false;
+  return /^[A-Za-z0-9_-]+$/.test(clean);
+}
+
 function escapeRegex(str: string): string {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -150,6 +163,28 @@ export async function findZohoSalesOrderId(
       if (match?.id) {
         orderNumberToZohoIdMap.set(rawKey, match.id);
         orderNumberToZohoIdMap.set(canonicalKey, match.id);
+
+        // Reference Drift Detection & Audit Trail Recording
+        const candidateNo = normalizeOrderReference(match.Customer_No);
+        if (candidateNo !== canonicalKey) {
+          const timestamp = new Date().toISOString();
+          console.warn(
+            `[ZohoOrders Audit Trail] [${timestamp}] Order reference drift detected on Sales Order ${match.id}: CRM Customer_No="${match.Customer_No}", website canonical="#${canonicalKey}". Preserving website reference as immutable authority.`
+          );
+          // Append audit trail note into Zoho Sales Order description non-destructively
+          zohoFetch('/Sales_Orders', {
+            method: 'PUT',
+            body: JSON.stringify({
+              data: [
+                {
+                  id: match.id,
+                  Description: `[IMMUTABLE AUDIT TRAIL ${timestamp}]: CRM record matched website canonical reference #${canonicalKey}. Existing CRM Customer_No was "${match.Customer_No || 'empty'}". Authoritative website canonical reference maintained.\n\n${match.Description || ''}`.slice(0, 31000),
+                },
+              ],
+            }),
+          }).catch(() => {});
+        }
+
         return match.id;
       }
     }
@@ -191,6 +226,28 @@ export async function findZohoSalesOrderId(
       if (match?.id) {
         orderNumberToZohoIdMap.set(rawKey, match.id);
         orderNumberToZohoIdMap.set(canonicalKey, match.id);
+
+        // Reference Drift Detection & Audit Trail Recording
+        const candidateNo = normalizeOrderReference(match.Customer_No);
+        if (candidateNo !== canonicalKey) {
+          const timestamp = new Date().toISOString();
+          console.warn(
+            `[ZohoOrders Audit Trail] [${timestamp}] Order reference drift detected on Sales Order ${match.id}: CRM Customer_No="${match.Customer_No}", website canonical="#${canonicalKey}". Preserving website reference as immutable authority.`
+          );
+          // Append audit trail note into Zoho Sales Order description non-destructively
+          zohoFetch('/Sales_Orders', {
+            method: 'PUT',
+            body: JSON.stringify({
+              data: [
+                {
+                  id: match.id,
+                  Description: `[IMMUTABLE AUDIT TRAIL ${timestamp}]: CRM record matched website canonical reference #${canonicalKey}. Existing CRM Customer_No was "${match.Customer_No || 'empty'}". Authoritative website canonical reference maintained.\n\n${match.Description || ''}`.slice(0, 31000),
+                },
+              ],
+            }),
+          }).catch(() => {});
+        }
+
         return match.id;
       }
     }
@@ -496,6 +553,11 @@ export async function syncOrderToZohoSalesOrder(order: Order): Promise<ZohoOrder
         reconcileDuplicateSalesOrdersSafely(order.orderNumber, salesOrderId, order).catch((err) =>
           console.warn('[ZohoOrders] Non-blocking reconciliation warning:', err?.message)
         );
+
+        // Opportunistically drain pending downtime outbox now that Zoho CRM is responsive
+        import('./downtime-recovery')
+          .then((m) => m.drainZohoDowntimeOutbox(false))
+          .catch(() => {});
       }
       console.log(`[ZohoOrders] Successfully created Sales Order #${order.orderNumber} in Zoho CRM (ID: ${salesOrderId})`);
       return {
@@ -507,6 +569,12 @@ export async function syncOrderToZohoSalesOrder(order: Order): Promise<ZohoOrder
 
     const errorMsg = firstItem?.message || JSON.stringify(res);
     console.warn(`[ZohoOrders] Failed to create Sales Order in Zoho CRM for #${order.orderNumber}:`, errorMsg);
+
+    // Enqueue order in durable downtime recovery buffer (no data loss)
+    import('./downtime-recovery')
+      .then((m) => m.enqueueOrderForDowntimeRecovery(order, 'create_sales_order', errorMsg))
+      .catch((err) => console.error('[ZohoOrders] Failed to enqueue into downtime outbox:', err));
+
     return {
       success: false,
       action: 'failed',
@@ -516,6 +584,12 @@ export async function syncOrderToZohoSalesOrder(order: Order): Promise<ZohoOrder
   } catch (err) {
     const errorMsg = err instanceof Error ? err.message : String(err);
     console.error(`[ZohoOrders] Exception creating Sales Order #${order.orderNumber}:`, err);
+
+    // Enqueue order in durable downtime recovery buffer upon network / timeout exception
+    import('./downtime-recovery')
+      .then((m) => m.enqueueOrderForDowntimeRecovery(order, 'create_sales_order', errorMsg))
+      .catch((e) => console.error('[ZohoOrders] Failed to enqueue into downtime outbox:', e));
+
     return {
       success: false,
       action: 'failed',
@@ -543,15 +617,35 @@ export async function updateZohoSalesOrderStatus(
 ): Promise<boolean> {
   if (!(await isZohoConfigured())) return true;
 
+  // Validate order reference to prevent silent mutations or invalid reference injection
+  const canonicalKey = normalizeOrderReference(orderNumberOrId);
+  if (!validateOrderReference(canonicalKey) && !/^\d{15,22}$/.test(orderNumberOrId.trim())) {
+    console.warn(`[ZohoOrders] Rejected update with invalid order reference: "${orderNumberOrId}"`);
+    return false;
+  }
+
   try {
     // Resolve Zoho Sales Order ID using robust multi-tier fallback with customer association
     const zohoOrderId = await findZohoSalesOrderId(orderNumberOrId, customerName);
 
     if (!zohoOrderId) {
-      console.log(`[ZohoOrders] No Zoho Sales Order found for "${orderNumberOrId}" to update.`);
+      console.log(`[ZohoOrders] No Zoho Sales Order found for "${orderNumberOrId}" to update. Enqueueing for recovery buffer...`);
+      import('./downtime-recovery')
+        .then((m) =>
+          m.enqueueStatusUpdateForDowntimeRecovery(
+            orderNumberOrId,
+            orderStatus,
+            paymentStatus,
+            paymentId,
+            customerName,
+            'Sales Order not found during status update'
+          )
+        )
+        .catch(() => {});
       return false;
     }
 
+    // STRICT IMMUTABILITY: Customer_No is NEVER included in update payload. It is permanently immutable.
     const updatePayload = {
       data: [
         {
@@ -570,10 +664,35 @@ export async function updateZohoSalesOrderStatus(
     const success = updateRes?.data?.[0]?.code === 'SUCCESS';
     if (success) {
       console.log(`[ZohoOrders] Updated Zoho Sales Order ${zohoOrderId} status to ${orderStatus}/${paymentStatus}`);
+    } else {
+      import('./downtime-recovery')
+        .then((m) =>
+          m.enqueueStatusUpdateForDowntimeRecovery(
+            orderNumberOrId,
+            orderStatus,
+            paymentStatus,
+            paymentId,
+            customerName,
+            `Update response status: ${JSON.stringify(updateRes)}`
+          )
+        )
+        .catch(() => {});
     }
     return success;
-  } catch (err) {
+  } catch (err: any) {
     console.warn(`[ZohoOrders] Error updating Zoho Sales Order status for ${orderNumberOrId}:`, err);
+    import('./downtime-recovery')
+      .then((m) =>
+        m.enqueueStatusUpdateForDowntimeRecovery(
+          orderNumberOrId,
+          orderStatus,
+          paymentStatus,
+          paymentId,
+          customerName,
+          err?.message || 'Exception during status update'
+        )
+      )
+      .catch(() => {});
     return false;
   }
 }

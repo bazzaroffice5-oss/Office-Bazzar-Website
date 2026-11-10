@@ -35,6 +35,10 @@ export async function POST(req: Request) {
       customerPhone: order.customerPhone,
     });
 
+    // Attach gateway order reference to internal order for reconciliation tracking
+    order.razorpayOrderId = rzpOrder.id;
+    order.updatedAt = new Date().toISOString();
+
     return NextResponse.json({
       configured: true,
       razorpayOrderId: rzpOrder.id,

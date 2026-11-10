@@ -56,7 +56,17 @@ export async function POST(req: Request) {
           order.notes = wasAlreadyPaid
             ? order.notes || `Payment confirmed: ${paymentId}`
             : `Payment captured via Razorpay webhook: ${paymentId}`;
-          order.updatedAt = new Date().toISOString();
+          const timestamp = new Date().toISOString();
+          order.updatedAt = timestamp;
+
+          if (!order.auditTrail) order.auditTrail = [];
+          order.auditTrail.push({
+            timestamp,
+            action: 'webhook_payment_captured',
+            newValue: paymentId,
+            reason: `Razorpay webhook event: ${event}`,
+            actor: 'razorpay_webhook',
+          });
 
           await updateOrderStatus(order.id, 'confirmed');
 

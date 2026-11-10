@@ -74,7 +74,17 @@ export async function POST(req: Request) {
     order.paymentId = razorpay_payment_id;
     order.orderStatus = 'confirmed';
     order.notes = `Verified Razorpay payment captured: ${razorpay_payment_id}`;
-    order.updatedAt = new Date().toISOString();
+    const timestamp = new Date().toISOString();
+    order.updatedAt = timestamp;
+
+    if (!order.auditTrail) order.auditTrail = [];
+    order.auditTrail.push({
+      timestamp,
+      action: 'payment_verified_hmac',
+      newValue: razorpay_payment_id,
+      reason: 'Checkout signature verified with gateway',
+      actor: 'razorpay_checkout_verify',
+    });
 
     await updateOrderStatus(orderId, 'confirmed');
 

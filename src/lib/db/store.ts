@@ -367,7 +367,17 @@ export async function createOrder(
     ...orderData,
     id: orderId,
     orderNumber,
+    originalOrderNumber: orderNumber,
     createdAt,
+    auditTrail: [
+      {
+        timestamp: createdAt,
+        action: 'order_created',
+        newValue: orderNumber,
+        reason: 'Order placed by customer with immutable canonical reference',
+        actor: 'store_checkout',
+      },
+    ],
   };
 
   // 2. Atomic Inventory Decrement in runtime memory
@@ -404,7 +414,11 @@ export async function getOrderById(id: string): Promise<Order | null> {
 
 export async function getOrderByNumber(orderNumber: string): Promise<Order | null> {
   const cleanNumber = orderNumber.trim().toUpperCase();
-  const order = ordersList.find((o) => o.orderNumber.trim().toUpperCase() === cleanNumber);
+  const order = ordersList.find(
+    (o) =>
+      o.orderNumber.trim().toUpperCase() === cleanNumber ||
+      (o.originalOrderNumber && o.originalOrderNumber.trim().toUpperCase() === cleanNumber)
+  );
   return order || null;
 }
 
@@ -416,17 +430,30 @@ export async function updateOrderStatus(
   orderId: string,
   status: OrderStatus,
   trackingNumber?: string,
-  courierName?: string
+  courierName?: string,
+  actor = 'system'
 ): Promise<Order | null> {
   const order = ordersList.find((o) => o.id === orderId);
   if (!order) return null;
+  const previousStatus = order.orderStatus;
   order.orderStatus = status;
   if (trackingNumber) order.trackingNumber = trackingNumber;
   if (courierName) order.courierName = courierName;
-  order.updatedAt = new Date().toISOString();
+  const timestamp = new Date().toISOString();
+  order.updatedAt = timestamp;
+
+  if (!order.auditTrail) order.auditTrail = [];
+  order.auditTrail.push({
+    timestamp,
+    action: 'status_updated',
+    previousValue: previousStatus,
+    newValue: status,
+    reason: trackingNumber ? `Tracking added: ${trackingNumber} (${courierName || 'standard'})` : 'Status transition',
+    actor,
+  });
 
   // Sync update to Zoho CRM Sales_Orders
-  updateZohoSalesOrderStatus(order.orderNumber, status).catch((e) =>
+  updateZohoSalesOrderStatus(order.orderNumber, status, order.paymentStatus, order.paymentId, order.customerName).catch((e) =>
     console.warn(`[Order Service] Failed to update Zoho Sales Order status for ${order.orderNumber}:`, e)
   );
 

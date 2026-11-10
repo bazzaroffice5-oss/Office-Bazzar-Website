@@ -154,11 +154,21 @@ export interface Order {
   paymentMethod: PaymentMethod;
   paymentStatus: PaymentStatus;
   paymentId?: string;
+  razorpayOrderId?: string;
+  originalOrderNumber?: string;
   zohoSalesOrderId?: string;
   orderStatus: OrderStatus;
   trackingNumber?: string;
   courierName?: string;
   notes?: string;
+  auditTrail?: Array<{
+    timestamp: string;
+    action: string;
+    previousValue?: string;
+    newValue?: string;
+    reason?: string;
+    actor?: string;
+  }>;
   createdAt: string;
   updatedAt?: string;
 }
