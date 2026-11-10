@@ -4,21 +4,30 @@ import { reserveStock, commitStockReservation, releaseStockReservation } from '@
 import {
   checkAndSetDurableIdempotency,
   recordDurableIdempotencyResult,
+  clearDurableIdempotency,
 } from '@/lib/distributed/coordinator';
 import { OrderItem, Address, PaymentMethod } from '@/types';
 
 export async function POST(req: Request) {
   let reservationId: string | undefined = undefined;
+  let idempotencyKey: string | undefined = undefined;
   try {
     const body = await req.json();
     const idempotencyHeader = req.headers.get('Idempotency-Key') || req.headers.get('x-idempotency-key');
-    const idempotencyKey = idempotencyHeader || body.idempotencyKey;
+    idempotencyKey = idempotencyHeader || body.idempotencyKey;
 
     // Cross-Instance Durable Idempotency Check
     if (idempotencyKey) {
-      const { isDuplicate, cachedData } = await checkAndSetDurableIdempotency(idempotencyKey, 86400);
-      if (isDuplicate && cachedData && cachedData.orderNumber) {
-        return NextResponse.json({ success: true, order: cachedData, idempotent: true });
+      // 120s in-flight lease prevents duplicate processing, while auto-clearing if worker crashes
+      const { isDuplicate, cachedData } = await checkAndSetDurableIdempotency(idempotencyKey, 120);
+      if (isDuplicate) {
+        if (cachedData && cachedData.orderNumber) {
+          return NextResponse.json({ success: true, order: cachedData, idempotent: true });
+        }
+        return NextResponse.json(
+          { error: 'An order with this Idempotency-Key is currently being processed. Please wait a moment.' },
+          { status: 409 }
+        );
       }
     }
 
@@ -181,6 +190,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true, order: newOrder });
   } catch (error: unknown) {
+    if (idempotencyKey) {
+      // Clear in-flight idempotency lease on failure so the user can legitimately retry
+      await clearDurableIdempotency(idempotencyKey).catch(() => {});
+    }
     if (reservationId) {
       await releaseStockReservation(reservationId).catch(() => {});
     }

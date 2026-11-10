@@ -95,6 +95,70 @@ class UpstashRedisRestServer {
         return this.cleanKey(key);
       }
 
+      case 'EVAL': {
+        const script = String(args[1]);
+        const numKeys = Number(args[2]);
+        const keys = args.slice(3, 3 + numKeys);
+        const argv = args.slice(3 + numKeys);
+
+        if (script.includes('Phase 1: All-or-nothing stock availability check')) {
+          const now = Number(argv[0]);
+          const ttlMs = Number(argv[1]);
+          const reservationId = String(argv[2]);
+          const payloadJson = String(argv[3]);
+          const expiresAt = now + ttlMs;
+
+          let argOffset = 4;
+          for (let i = 0; i < numKeys; i++) {
+            const zsetKey = String(keys[i]);
+            const sku = String(argv[argOffset]);
+            const requestedQty = Number(argv[argOffset + 1]);
+            const authStock = Number(argv[argOffset + 2]);
+
+            // 1. Prune expired
+            if (this.zsets.has(zsetKey)) {
+              const map = this.zsets.get(zsetKey);
+              for (const [m, s] of map.entries()) {
+                if (s <= now) map.delete(m);
+              }
+            }
+
+            // 2. Sum active
+            let activeReserved = 0;
+            if (this.zsets.has(zsetKey)) {
+              for (const [m] of this.zsets.get(zsetKey).entries()) {
+                const parts = String(m).split(':');
+                const qty = parseInt(parts[parts.length - 1], 10);
+                if (!isNaN(qty)) activeReserved += qty;
+              }
+            }
+
+            const availableStock = authStock - activeReserved;
+            if (requestedQty > availableStock) {
+              return `INSUFFICIENT:${sku}:${availableStock}`;
+            }
+
+            argOffset += 3;
+          }
+
+          // Phase 2: All items passed, record leases
+          argOffset = 4;
+          for (let i = 0; i < numKeys; i++) {
+            const zsetKey = String(keys[i]);
+            const requestedQty = Number(argv[argOffset + 1]);
+            const member = `${reservationId}:${requestedQty}`;
+            if (!this.zsets.has(zsetKey)) this.zsets.set(zsetKey, new Map());
+            this.zsets.get(zsetKey).set(member, expiresAt);
+            argOffset += 3;
+          }
+
+          // Phase 3: Set reservation detail record
+          this.store.set(`resv:${reservationId}`, { value: payloadJson, expiresAt });
+          return 'OK';
+        }
+        return 'OK';
+      }
+
       case 'ZADD': {
         const key = String(args[1]);
         const score = Number(args[2]);
@@ -305,6 +369,24 @@ if (process.argv.includes('--worker')) {
         process.exit(0);
       }
 
+      if (taskType === 'clear_idempotency') {
+        const { key } = payload;
+        await coordinator.clearDurableIdempotency(key);
+        process.send({ success: true });
+        process.exit(0);
+      }
+
+      if (taskType === 'multi_sku_reserve') {
+        const { items, stockMap } = payload;
+        const res = await coordinator.atomicReserveInventory(
+          items,
+          async (target) => stockMap[target] !== undefined ? stockMap[target] : 1,
+          10000
+        );
+        process.send(res);
+        process.exit(0);
+      }
+
       if (taskType === 'check_webhook') {
         const { eventId } = payload;
         const isDup = await coordinator.isDistributedWebhookDuplicate(eventId, 86400);
@@ -476,6 +558,47 @@ async function main() {
     console.log('✓ PASS: Exactly 1 instance reserved final unit; 9 rejected with 0 overselling.\n');
 
     // ------------------------------------------------------------------
+    // TEST SUITE 2B: MULTI-SKU CART ALL-OR-NOTHING ATOMICITY
+    // ------------------------------------------------------------------
+    console.log('--- 2B. MULTI-SKU CART ALL-OR-NOTHING ATOMICITY ---');
+    const skuA = `SKU-A-${Date.now()}`;
+    const skuB = `SKU-B-${Date.now()}`;
+    const stockMap = { [skuA]: 1, [skuB]: 0 }; // SKU-B has 0 stock
+
+    // Cart 1 requests both SKU-A and SKU-B
+    const multiRes1 = await runChildTask(
+      'multi_sku_reserve',
+      {
+        items: [
+          { productId: skuA, sku: skuA, quantity: 1 },
+          { productId: skuB, sku: skuB, quantity: 1 },
+        ],
+        stockMap,
+      },
+      cloudEnv
+    );
+    console.log(`Cart 1 (SKU-A:1 + SKU-B:1 with SKU-B OOS): success = ${multiRes1.success} (expected false)`);
+
+    // Cart 2 requests only SKU-A: must succeed (proves SKU-A was NOT partially reserved)
+    const multiRes2 = await runChildTask(
+      'reserve_stock',
+      { sku: skuA, productId: skuA, quantity: 1, totalStock: 1 },
+      cloudEnv
+    );
+    console.log(`Cart 2 (SKU-A only after Cart 1 rejection): success = ${multiRes2.success} (expected true)`);
+
+    if (multiRes1.success || !multiRes2.success) {
+      throw new Error('Multi-SKU cart atomicity failed! Partial reservation leaked.');
+    }
+    verificationResults.crossInstanceFailureTests.multiSkuAllOrNothing = {
+      cart1Rejected: !multiRes1.success,
+      cart2Preserved: multiRes2.success,
+      partialReservations: 0,
+      passed: true,
+    };
+    console.log('✓ PASS: Multi-SKU cart reservation is 100% all-or-nothing (zero partial leaks).\n');
+
+    // ------------------------------------------------------------------
     // TEST SUITE 3: CROSS-INSTANCE ORDER IDEMPOTENCY (10 CONCURRENT CLAIMS)
     // ------------------------------------------------------------------
     console.log('--- 3. CROSS-INSTANCE ORDER IDEMPOTENCY CLAIMS (10 PROCESSES) ---');
@@ -500,6 +623,34 @@ async function main() {
       passed: true,
     };
     console.log('✓ PASS: Exactly 1 order claim acquired in-flight status; 9 detected as duplicate.\n');
+
+    // ------------------------------------------------------------------
+    // TEST SUITE 3B: FAILED ORDER REQUEST IDEMPOTENCY RECOVERY
+    // ------------------------------------------------------------------
+    console.log('--- 3B. FAILED ORDER REQUEST IDEMPOTENCY RECOVERY ---');
+    const failedOrderKey = `idemp_fail_test_${Date.now()}`;
+    // Process A claims the key
+    const failClaim1 = await runChildTask('claim_idempotency', { key: failedOrderKey }, cloudEnv);
+    console.log(`Initial claim by Process A: isDuplicate = ${failClaim1.isDuplicate} (expected false)`);
+
+    // Process A encounters server error and clears in-flight idempotency
+    await runChildTask('clear_idempotency', { key: failedOrderKey }, cloudEnv);
+    console.log(`Process A failed and cleared in-flight idempotency key.`);
+
+    // Process B retries with same idempotency key: must be allowed (not blocked)
+    const retryClaim = await runChildTask('claim_idempotency', { key: failedOrderKey }, cloudEnv);
+    console.log(`Retry attempt by Process B: isDuplicate = ${retryClaim.isDuplicate} (expected false)`);
+
+    if (failClaim1.isDuplicate || retryClaim.isDuplicate) {
+      throw new Error('Failed order idempotency recovery failed! Retries were permanently blocked.');
+    }
+    verificationResults.crossInstanceFailureTests.idempotencyFailureRecovery = {
+      initialClaim: !failClaim1.isDuplicate,
+      clearedOnFailure: true,
+      retryAllowed: !retryClaim.isDuplicate,
+      passed: true,
+    };
+    console.log('✓ PASS: Failed requests do not permanently block legitimate subsequent retries.\n');
 
     // ------------------------------------------------------------------
     // TEST SUITE 4: CROSS-INSTANCE WEBHOOK DEDUPLICATION (10 CONCURRENT DELIVERIES)

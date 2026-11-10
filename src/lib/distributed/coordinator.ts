@@ -317,10 +317,68 @@ export interface DistributedReservationResult {
   availableStock?: number;
 }
 
+// Lua script for genuinely atomic multi-SKU inventory reservation
+const LUA_ATOMIC_RESERVE_SCRIPT = `
+local now = tonumber(ARGV[1])
+local ttlMs = tonumber(ARGV[2])
+local reservationId = ARGV[3]
+local payloadJson = ARGV[4]
+local expiresAt = now + ttlMs
+local numKeys = #KEYS
+
+-- Phase 1: All-or-nothing stock availability check
+local argOffset = 5
+for i = 1, numKeys do
+    local zsetKey = KEYS[i]
+    local sku = ARGV[argOffset]
+    local requestedQty = tonumber(ARGV[argOffset + 1])
+    local authStock = tonumber(ARGV[argOffset + 2])
+
+    -- 1. Atomic lease pruning of expired members
+    redis.call('ZREMRANGEBYSCORE', zsetKey, 0, now)
+
+    -- 2. Sum remaining active members
+    local members = redis.call('ZRANGE', zsetKey, 0, -1)
+    local activeReserved = 0
+    for _, m in ipairs(members) do
+        local parts = {}
+        for part in string.gmatch(m, "[^:]+") do
+            table.insert(parts, part)
+        end
+        local qty = tonumber(parts[#parts])
+        if qty then
+            activeReserved = activeReserved + qty
+        end
+    end
+
+    local availableStock = authStock - activeReserved
+    if requestedQty > availableStock then
+        return "INSUFFICIENT:" .. sku .. ":" .. tostring(availableStock)
+    end
+
+    argOffset = argOffset + 3
+end
+
+-- Phase 2: All items passed check. Record leases atomically.
+argOffset = 5
+for i = 1, numKeys do
+    local zsetKey = KEYS[i]
+    local requestedQty = tonumber(ARGV[argOffset + 1])
+    local member = reservationId .. ":" .. tostring(requestedQty)
+    redis.call('ZADD', zsetKey, expiresAt, member)
+    argOffset = argOffset + 3
+end
+
+-- Phase 3: Set reservation detail record
+redis.call('SET', 'resv:' .. reservationId, payloadJson, 'PX', ttlMs)
+
+return "OK"
+`;
+
 /**
  * Atomically reserve inventory across multiple independent instances.
  * Guarantees that even if 100 separate Lambda functions invoke simultaneously,
- * inventory cannot be oversold.
+ * inventory cannot be oversold. Multi-SKU cart reservations are 100% all-or-nothing.
  */
 export async function atomicReserveInventory(
   items: InventoryItemToReserve[],
@@ -336,59 +394,98 @@ export async function atomicReserveInventory(
 
   // A. Cloud-Native KV (Vercel KV / Upstash Redis)
   if (config) {
-    // Acquire a distributed lock across all requested SKUs
-    const primarySku = items[0].sku || items[0].productId;
-    const lock = await acquireDistributedLock(`inv:${primarySku}`, 8000, 5000);
-    if (!lock.acquired) {
-      return { success: false, error: 'High checkout traffic: lock acquisition timed out. Please retry.' };
-    }
-
     try {
       const now = Date.now();
-      // Calculate active reservations for each item in cloud KV via sorted sets
-      for (const item of items) {
+      // Prefetch authoritative stock for all cart items in parallel
+      const authStocks: number[] = await Promise.all(
+        items.map((i) => getAuthoritativeStock(i.productId || i.sku))
+      );
+
+      const keys: string[] = [];
+      const argv: (string | number)[] = [
+        now,
+        ttlMs,
+        reservationId,
+        JSON.stringify({ items, status: 'reserved', expiresAt: now + ttlMs }),
+      ];
+
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
         const sku = item.productId || item.sku;
-        const zsetKey = `inv:resv_zset:${sku}`;
+        keys.push(`inv:resv_zset:${sku}`);
+        argv.push(sku, item.quantity, authStocks[i]);
+      }
 
-        // Atomic prune: prune all expired reservation members
-        await callKV(['ZREMRANGEBYSCORE', zsetKey, 0, now]);
+      // Execute atomic Redis Lua script
+      const evalRes = await callKV<string>([
+        'EVAL',
+        LUA_ATOMIC_RESERVE_SCRIPT,
+        keys.length,
+        ...keys,
+        ...argv,
+      ]);
 
-        // Retrieve current active reservation leases
-        const activeMembers = await callKV<string[]>(['ZRANGE', zsetKey, 0, -1]);
-        let activeReserved = 0;
-        if (Array.isArray(activeMembers)) {
-          for (const m of activeMembers) {
-            const parts = String(m).split(':');
-            const qty = parseInt(parts[parts.length - 1], 10);
-            if (!isNaN(qty)) activeReserved += qty;
+      if (evalRes === 'OK') {
+        return { success: true, reservationId };
+      }
+
+      if (typeof evalRes === 'string' && evalRes.startsWith('INSUFFICIENT:')) {
+        const parts = evalRes.split(':');
+        const availableStock = parseInt(parts[2], 10) || 0;
+        const failedItem = items.find((i) => (i.productId || i.sku) === parts[1]);
+        return {
+          success: false,
+          error: `Insufficient stock for product. Available: ${availableStock}, Requested: ${failedItem?.quantity || 1}.`,
+          availableStock,
+        };
+      }
+
+      // Fallback to sorted set pipeline with multi-key lock if EVAL returned null
+      const primarySku = items[0].sku || items[0].productId;
+      const lock = await acquireDistributedLock(`inv:${primarySku}`, 8000, 5000);
+      if (!lock.acquired) {
+        return { success: false, error: 'High checkout traffic: lock acquisition timed out. Please retry.' };
+      }
+
+      try {
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          const sku = item.productId || item.sku;
+          const zsetKey = `inv:resv_zset:${sku}`;
+          await callKV(['ZREMRANGEBYSCORE', zsetKey, 0, now]);
+          const activeMembers = await callKV<string[]>(['ZRANGE', zsetKey, 0, -1]);
+          let activeReserved = 0;
+          if (Array.isArray(activeMembers)) {
+            for (const m of activeMembers) {
+              const parts = String(m).split(':');
+              const qty = parseInt(parts[parts.length - 1], 10);
+              if (!isNaN(qty)) activeReserved += qty;
+            }
+          }
+          const availableStock = Math.max(0, authStocks[i] - activeReserved);
+          if (item.quantity > availableStock) {
+            return {
+              success: false,
+              error: `Insufficient stock for product. Available: ${availableStock}, Requested: ${item.quantity}.`,
+              availableStock,
+            };
           }
         }
 
-        const authoritativeStock = await getAuthoritativeStock(sku);
-        const availableStock = Math.max(0, authoritativeStock - activeReserved);
-
-        if (item.quantity > availableStock) {
-          return {
-            success: false,
-            error: `Insufficient stock for product. Available: ${availableStock}, Requested: ${item.quantity}.`,
-            availableStock,
-          };
+        const pipeline: (string | number)[][] = [];
+        for (const item of items) {
+          const sku = item.productId || item.sku;
+          const zsetKey = `inv:resv_zset:${sku}`;
+          pipeline.push(['ZADD', zsetKey, now + ttlMs, `${reservationId}:${item.quantity}`]);
         }
+        pipeline.push(['SET', `resv:${reservationId}`, JSON.stringify({ items, status: 'reserved', expiresAt: now + ttlMs }), 'PX', ttlMs]);
+        await callKVPipeline(pipeline);
+        return { success: true, reservationId };
+      } finally {
+        await lock.release();
       }
-
-      // All items available: record lease in ZSET with score = now + ttlMs
-      const pipeline: (string | number)[][] = [];
-      for (const item of items) {
-        const sku = item.productId || item.sku;
-        const zsetKey = `inv:resv_zset:${sku}`;
-        pipeline.push(['ZADD', zsetKey, now + ttlMs, `${reservationId}:${item.quantity}`]);
-      }
-      pipeline.push(['SET', `resv:${reservationId}`, JSON.stringify({ items, status: 'reserved', expiresAt: now + ttlMs }), 'PX', ttlMs]);
-
-      await callKVPipeline(pipeline);
-      return { success: true, reservationId };
-    } finally {
-      await lock.release();
+    } catch (err: any) {
+      console.warn('[DistributedKV] Fallback during atomic reservation:', err);
     }
   }
 
@@ -599,6 +696,42 @@ export async function recordDurableIdempotencyResult(
       expiresAt: now + ttlSec * 1000,
     };
     writeSharedStateAtomic(state);
+  } finally {
+    unlock();
+  }
+}
+
+/**
+ * Clear in-flight idempotency key if an operation failed before completion.
+ * Prevents transient errors from blocking legitimate subsequent retries.
+ * Only clears keys that are still in 'in_flight' status (never clears completed results).
+ */
+export async function clearDurableIdempotency(key: string): Promise<void> {
+  const fullKey = `idempotency:${key}`;
+  const config = getKVConfig();
+
+  if (config) {
+    const existing = await callKV<string>(['GET', fullKey]);
+    if (existing) {
+      try {
+        const parsed = JSON.parse(existing);
+        if (parsed.status === 'in_flight') {
+          await callKV(['DEL', fullKey]);
+        }
+      } catch {
+        await callKV(['DEL', fullKey]);
+      }
+    }
+    return;
+  }
+
+  const unlock = await acquireProcessFileLock();
+  try {
+    const state = readSharedState();
+    if (state.idempotency[key]?.data?.status === 'in_flight') {
+      delete state.idempotency[key];
+      writeSharedStateAtomic(state);
+    }
   } finally {
     unlock();
   }
