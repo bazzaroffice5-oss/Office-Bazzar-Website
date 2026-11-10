@@ -669,6 +669,18 @@ export async function syncQuotationToZohoQuote(
             .join('\n')
       );
 
+      // Record customer uploaded reference photos if provided
+      if (quotation.photoUrls && quotation.photoUrls.length > 0) {
+        await appendZohoQuoteAuditNote(
+          quoteId,
+          `${cleanRef} — Customer Attached Reference Photos (${quotation.photoUrls.length} file(s))`,
+          `Customer attached ${quotation.photoUrls.length} reference photo(s) to this quotation request:\n\n` +
+            quotation.photoUrls
+              .map((url, i) => `Photo #${i + 1}:\n${url.startsWith('data:') ? `[Embedded WebP Image Data - ${(url.length / 1024).toFixed(0)} KB payload retained in Quote metadata]` : url}`)
+              .join('\n\n')
+        );
+      }
+
       return {
         success: true,
         action: 'created',

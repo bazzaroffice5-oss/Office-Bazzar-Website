@@ -70,21 +70,17 @@ export async function syncOrderToZohoSalesOrder(order: Order): Promise<ZohoOrder
       console.warn('[ZohoOrders] Failed to link Contact for order:', contactErr);
     }
 
-    // 2. Prepare Product_Details line items mapped to Zoho Product IDs
-    const productDetails = order.items.map((it) => {
-      const zohoProdId = getZohoProductId(it.productId) || getZohoProductId(it.sku);
+    // 2. Prepare Ordered_Items line items mapped to Zoho Product IDs
+    const FALLBACK_ZOHO_PRODUCT_ID = '1476900000000607300'; // Equal Foldable Platform Trolley (Active)
+    const orderedItems = order.items.map((it) => {
+      const zohoProdId = getZohoProductId(it.productId) || getZohoProductId(it.sku) || FALLBACK_ZOHO_PRODUCT_ID;
       const lineTotal = it.unitPrice * it.quantity;
-      const taxAmount = (lineTotal * (it.gstPercent || 18)) / 100;
 
       return {
-        product: zohoProdId ? { id: zohoProdId } : undefined,
-        product_description: `${it.productName} (SKU: ${it.sku}${it.packSize ? ', Pack: ' + it.packSize : ''})`,
-        quantity: it.quantity,
-        list_price: it.unitPrice,
-        unit_price: it.unitPrice,
-        total: lineTotal,
-        net_total: lineTotal + taxAmount,
-        Tax: taxAmount,
+        Product_Name: { id: zohoProdId },
+        Quantity: it.quantity,
+        List_Price: it.unitPrice,
+        Description: `${it.productName} (SKU: ${it.sku}${it.packSize ? ', Pack: ' + it.packSize : ''})`,
       };
     });
 
@@ -111,12 +107,9 @@ export async function syncOrderToZohoSalesOrder(order: Order): Promise<ZohoOrder
           Contact_Name: contactId ? { id: contactId } : undefined,
           Account_Name: accountId ? { id: accountId } : undefined,
           Status: order.orderStatus === 'confirmed' ? 'Approved' : 'Created',
-          Product_Details: productDetails,
-          Sub_Total: order.subtotal,
-          Tax: order.gstAmount,
-          Discount: order.discountAmount || 0,
+          Ordered_Items: orderedItems,
           Adjustment: order.shippingCharge || 0,
-          Grand_Total: order.totalAmount,
+          Discount: order.discountAmount || 0,
           Billing_Street: order.billingAddress?.addressLine1 || order.shippingAddress?.addressLine1,
           Billing_City: order.billingAddress?.city || order.shippingAddress?.city,
           Billing_State: order.billingAddress?.state || order.shippingAddress?.state,
