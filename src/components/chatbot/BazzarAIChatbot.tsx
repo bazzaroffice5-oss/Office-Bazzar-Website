@@ -508,8 +508,14 @@ export default function BazzarAIChatbot() {
           </div>
 
           {/* B. CHAT BODY */}
-          {/* Messages Container */}
-          <div className="flex-1 overflow-y-auto p-3.5 sm:p-4 space-y-3.5 text-xs bg-gradient-to-b from-slate-50 via-slate-50 to-blue-50/30">
+          {/* Messages Container (Smooth scroll with hidden native scrollbar) */}
+          <div
+            className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-none bazzar-chat-messages p-3.5 sm:p-4 space-y-3.5 text-xs bg-gradient-to-b from-slate-50 via-slate-50 to-blue-50/30"
+            style={{
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+            }}
+          >
                 {messages.map((msg) => (
                   <div
                     key={msg.id}

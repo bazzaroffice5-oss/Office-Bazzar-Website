@@ -383,6 +383,28 @@ body {
   background: #94a3b8;
 }
 
+/* Hide scrollbar utility while maintaining smooth scroll functionality */
+.scrollbar-none,
+.no-scrollbar,
+.bazzar-chat-messages {
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: none !important; /* Firefox */
+}
+
+.scrollbar-none::-webkit-scrollbar,
+.no-scrollbar::-webkit-scrollbar,
+.bazzar-chat-messages::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Edge WebKit */
+  width: 0px !important;
+  height: 0px !important;
+  background: transparent !important;
+}
+
+.bazzar-chat-messages {
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
 
 /* Bazzar AI 3D Robot Avatar Custom Animations */
 @keyframes bazzarAvatarFloat {
