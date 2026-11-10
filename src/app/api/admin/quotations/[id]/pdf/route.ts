@@ -1,6 +1,7 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getQuotationById } from '@/lib/db/store';
 import { BUSINESS_CONFIG } from '@/lib/config/business';
+import { getSessionFromRequest } from '@/lib/auth/service';
 
 function numberToIndianWords(amount: number): string {
   const rounded = Math.round(amount);
@@ -54,7 +55,7 @@ function escapeHtml(str?: string | number | null): string {
 }
 
 export async function GET(
-  req: Request,
+  req: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
   try {
@@ -68,6 +69,21 @@ export async function GET(
       return NextResponse.json(
         { error: `Quotation "${decodedId}" not found in Zoho CRM.` },
         { status: 404 }
+      );
+    }
+
+    // Role-based customer isolation check
+    const sessionUser = getSessionFromRequest(req);
+    if (!sessionUser) {
+      return NextResponse.json(
+        { error: 'Unauthorized. Please sign in to view this quotation document.' },
+        { status: 401 }
+      );
+    }
+    if (sessionUser.role === 'customer' && sessionUser.email.toLowerCase() !== quotation.email.toLowerCase()) {
+      return NextResponse.json(
+        { error: 'Forbidden. You do not have permission to view this quotation.' },
+        { status: 403 }
       );
     }
 

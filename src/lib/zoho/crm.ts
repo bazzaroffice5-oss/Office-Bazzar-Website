@@ -121,10 +121,11 @@ export async function syncContactEnquiryToZoho(
           Description: description,
         },
       ],
+      duplicate_check_fields: ['Email'],
       trigger: ['approval', 'workflow', 'blueprint'],
     };
 
-    const result = await zohoFetch<ZohoModuleResponse>('/Leads', {
+    const result = await zohoFetch<ZohoModuleResponse>('/Leads/upsert', {
       method: 'POST',
       body: JSON.stringify(leadPayload),
     });
@@ -236,10 +237,11 @@ export async function syncBulkRfqToZohoLead(rfq: BulkRfqLeadPayload): Promise<Zo
           City: rfq.deliveryLocation || undefined,
         },
       ],
+      duplicate_check_fields: ['Email'],
       trigger: ['approval', 'workflow', 'blueprint'],
     };
 
-    const result = await zohoFetch<ZohoModuleResponse>('/Leads', {
+    const result = await zohoFetch<ZohoModuleResponse>('/Leads/upsert', {
       method: 'POST',
       body: JSON.stringify(leadPayload),
     });

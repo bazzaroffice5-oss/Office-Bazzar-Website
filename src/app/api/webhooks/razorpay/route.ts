@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { verifyRazorpayWebhookSignature } from '@/lib/payments/razorpay';
 import { getOrderByNumber, getOrderById, updateOrderStatus } from '@/lib/db/store';
-import { updateZohoSalesOrderStatus } from '@/lib/zoho/orders';
+import { updateZohoSalesOrderStatus, syncOrderToZohoSalesOrder } from '@/lib/zoho/orders';
 
 // In-memory set of processed webhook event IDs to guarantee idempotency across retries
 const processedEvents = new Set<string>();
@@ -54,9 +54,17 @@ export async function POST(req: Request) {
 
           await updateOrderStatus(order.id, 'confirmed');
 
-          updateZohoSalesOrderStatus(order.orderNumber, 'confirmed', 'paid', paymentId).catch((e) =>
-            console.warn('[Razorpay Webhook] Zoho Sales Order update error:', e)
-          );
+          // Ensure authoritative Sales Order exists in Zoho CRM with paid status
+          updateZohoSalesOrderStatus(order.orderNumber, 'confirmed', 'paid', paymentId)
+            .then(async (updated) => {
+              if (!updated) {
+                console.log(`[Razorpay Webhook] Sales Order #${order.orderNumber} not found to update. Creating authoritative Sales Order in Zoho CRM now...`);
+                await syncOrderToZohoSalesOrder(order);
+              }
+            })
+            .catch((e) =>
+              console.warn('[Razorpay Webhook] Zoho Sales Order update error:', e)
+            );
         } else if (event === 'payment.failed') {
           const reason = paymentEntity?.error_description || 'Payment transaction failed';
           order.paymentStatus = 'failed';

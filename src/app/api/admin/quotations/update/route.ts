@@ -56,11 +56,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Identify Admin actor from session cookie if available
+    // Enforce Admin authorization on update endpoint
     const sessionUser = getSessionFromRequest(req);
-    const actor = sessionUser?.email
-      ? `${sessionUser.name || 'Admin'} (${sessionUser.email})`
-      : body.actor || 'Office Bazzar Admin';
+    if (!sessionUser || (sessionUser.role !== 'admin' && sessionUser.role !== 'staff')) {
+      return NextResponse.json(
+        { error: 'Unauthorized. Administrative session required to modify quotation.' },
+        { status: 401 }
+      );
+    }
+    const actor = `${sessionUser.name || 'Admin'} (${sessionUser.email})`;
 
     // Determine effective editor action
     const effectiveAction: AdminQuotationUpdateInput['action'] =

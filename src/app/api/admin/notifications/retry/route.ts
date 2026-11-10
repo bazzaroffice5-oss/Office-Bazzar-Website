@@ -1,8 +1,16 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { retryNotification } from '@/lib/notifications/service';
+import { getSessionFromRequest } from '@/lib/auth/service';
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
+    const sessionUser = getSessionFromRequest(req);
+    if (!sessionUser || (sessionUser.role !== 'admin' && sessionUser.role !== 'staff')) {
+      return NextResponse.json(
+        { error: 'Unauthorized. Administrative session required to retry notifications.' },
+        { status: 401 }
+      );
+    }
     const body = await req.json();
     const { logId } = body;
 

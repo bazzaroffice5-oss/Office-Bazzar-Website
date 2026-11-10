@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getOrderById, updateOrderStatus } from '@/lib/db/store';
 import { verifyRazorpaySignature, isRazorpayConfigured } from '@/lib/payments/razorpay';
-import { updateZohoSalesOrderStatus } from '@/lib/zoho/orders';
+import { updateZohoSalesOrderStatus, syncOrderToZohoSalesOrder } from '@/lib/zoho/orders';
 
 export async function POST(req: Request) {
   try {
@@ -58,10 +58,17 @@ export async function POST(req: Request) {
 
     await updateOrderStatus(orderId, 'confirmed');
 
-    // Update authoritative Sales Order in Zoho CRM
-    updateZohoSalesOrderStatus(order.orderNumber, 'confirmed', 'paid', razorpay_payment_id).catch((e) =>
-      console.warn('[Razorpay Verify] Zoho Sales Order sync error:', e)
-    );
+    // Update authoritative Sales Order in Zoho CRM with paid status, or create if missing
+    updateZohoSalesOrderStatus(order.orderNumber, 'confirmed', 'paid', razorpay_payment_id)
+      .then(async (updated) => {
+        if (!updated) {
+          console.log(`[Razorpay Verify] Sales Order #${order.orderNumber} not found to update. Creating authoritative Sales Order in Zoho CRM now...`);
+          await syncOrderToZohoSalesOrder(order);
+        }
+      })
+      .catch((e) =>
+        console.warn('[Razorpay Verify] Zoho Sales Order sync error:', e)
+      );
 
     return NextResponse.json({
       success: true,

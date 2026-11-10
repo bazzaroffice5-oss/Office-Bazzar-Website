@@ -453,7 +453,9 @@ export class ZohoApiError extends Error {
 
 /**
  * Execute an authenticated request against the Zoho CRM v6 API.
- * Automatically handles Bearer header injection and retries once ONLY if access token expired (not on OAUTH_SCOPE_MISMATCH).
+ * Automatically handles Bearer header injection, token expiry refresh (401),
+ * rate-limit backoff (429), and transient gateway failure retries (502/503/504)
+ * with exponential backoff and jitter.
  */
 export async function zohoFetch<T = unknown>(
   endpoint: string,
@@ -465,67 +467,103 @@ export async function zohoFetch<T = unknown>(
     ? `${apiDomain}${cleanEndpoint}`
     : `${apiDomain}/crm/v6${cleanEndpoint}`;
 
-  let token = await getZohoAccessToken();
+  const method = (options.method || 'GET').toUpperCase();
+  const isIdempotent = method === 'GET' || method === 'HEAD' || method === 'PUT';
+  const MAX_ATTEMPTS = 3;
+  const REQUEST_TIMEOUT_MS = 8000;
 
-  let response = await fetch(fullUrl, {
-    ...options,
-    signal: options.signal || AbortSignal.timeout(6000),
-    headers: {
-      Authorization: `Zoho-oauthtoken ${token}`,
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      ...options.headers,
-    },
-  });
+  let lastError: unknown = null;
 
-  let rawText = await response.text();
-  let parsed: any = null;
-  try {
-    parsed = rawText ? JSON.parse(rawText) : {};
-  } catch {
-    parsed = { raw: rawText };
-  }
-
-  // Only refresh token on 401 if it is an expired/invalid token, NOT an OAUTH_SCOPE_MISMATCH
-  if (response.status === 401 && parsed?.code !== 'OAUTH_SCOPE_MISMATCH') {
-    cachedAccessToken = null;
-    tokenExpiresAt = 0;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
     try {
-      const mod = getServerNodeFs();
-      const cacheFile = getTokenCacheFilePath();
-      if (mod && cacheFile && mod.fs.existsSync(cacheFile)) mod.fs.unlinkSync(cacheFile);
-    } catch {
-      // Ignore
-    }
+      let token = await getZohoAccessToken();
 
-    token = await getZohoAccessToken();
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
-    response = await fetch(fullUrl, {
-      ...options,
-      signal: options.signal || AbortSignal.timeout(6000),
-      headers: {
-        Authorization: `Zoho-oauthtoken ${token}`,
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        ...options.headers,
-      },
-    });
+      let response: Response;
+      try {
+        response = await fetch(fullUrl, {
+          ...options,
+          signal: options.signal || controller.signal,
+          headers: {
+            Authorization: `Zoho-oauthtoken ${token}`,
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            ...options.headers,
+          },
+        });
+      } finally {
+        clearTimeout(timeoutId);
+      }
 
-    rawText = await response.text();
-    try {
-      parsed = rawText ? JSON.parse(rawText) : {};
-    } catch {
-      parsed = { raw: rawText };
+      let rawText = await response.text();
+      let parsed: any = null;
+      try {
+        parsed = rawText ? JSON.parse(rawText) : {};
+      } catch {
+        parsed = { raw: rawText };
+      }
+
+      // 1. Handle Expired OAuth Access Token (401)
+      if (response.status === 401 && parsed?.code !== 'OAUTH_SCOPE_MISMATCH' && attempt < MAX_ATTEMPTS) {
+        cachedAccessToken = null;
+        tokenExpiresAt = 0;
+        try {
+          const mod = getServerNodeFs();
+          const cacheFile = getTokenCacheFilePath();
+          if (mod && cacheFile && mod.fs.existsSync(cacheFile)) mod.fs.unlinkSync(cacheFile);
+        } catch {
+          // Ignore
+        }
+        // Next attempt will automatically request a fresh token
+        continue;
+      }
+
+      // 2. Handle Rate Limiting (429)
+      if (response.status === 429 && attempt < MAX_ATTEMPTS) {
+        const retryAfterHeader = response.headers.get('Retry-After');
+        const retryAfterSec = retryAfterHeader ? parseInt(retryAfterHeader, 10) : 0;
+        const backoffMs = retryAfterSec > 0
+          ? retryAfterSec * 1000
+          : Math.min(2500, Math.pow(2, attempt) * 500 + Math.floor(Math.random() * 200));
+        console.warn(`[ZohoClient] Rate limit (429) hit for ${endpoint}. Retrying in ${backoffMs}ms (attempt ${attempt}/${MAX_ATTEMPTS})...`);
+        await new Promise((r) => setTimeout(r, backoffMs));
+        continue;
+      }
+
+      // 3. Handle Transient Gateway / Service Outage (502, 503, 504)
+      if ((response.status === 502 || response.status === 503 || response.status === 504) && attempt < MAX_ATTEMPTS && isIdempotent) {
+        const backoffMs = Math.pow(2, attempt) * 400 + Math.floor(Math.random() * 150);
+        console.warn(`[ZohoClient] Gateway status ${response.status} for ${endpoint}. Retrying in ${backoffMs}ms (attempt ${attempt}/${MAX_ATTEMPTS})...`);
+        await new Promise((r) => setTimeout(r, backoffMs));
+        continue;
+      }
+
+      if (!response.ok) {
+        throw new ZohoApiError(
+          `Zoho CRM API request to ${endpoint} failed with HTTP ${response.status}`,
+          response.status,
+          parsed
+        );
+      }
+
+      return parsed as T;
+    } catch (err: any) {
+      lastError = err;
+      const isAbortOrTimeout = err?.name === 'AbortError' || err?.name === 'TimeoutError' || (typeof err?.message === 'string' && err.message.includes('timeout'));
+      const isNetworkErr = err instanceof TypeError && (err.message.includes('fetch') || err.message.includes('network'));
+
+      if ((isAbortOrTimeout || isNetworkErr) && attempt < MAX_ATTEMPTS && isIdempotent) {
+        const backoffMs = Math.pow(2, attempt) * 300 + Math.floor(Math.random() * 100);
+        console.warn(`[ZohoClient] Network interruption/timeout on ${endpoint}. Retrying in ${backoffMs}ms (attempt ${attempt}/${MAX_ATTEMPTS})...`);
+        await new Promise((r) => setTimeout(r, backoffMs));
+        continue;
+      }
+
+      throw err;
     }
   }
 
-  if (!response.ok) {
-    throw new ZohoApiError(
-      `Zoho CRM API request to ${endpoint} failed with HTTP ${response.status}`,
-      response.status,
-      parsed
-    );
-  }
-
-  return parsed as T;
+  throw lastError;
 }
