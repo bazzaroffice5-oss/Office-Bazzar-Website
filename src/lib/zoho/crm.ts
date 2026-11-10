@@ -93,6 +93,35 @@ function buildContactDescription(enquiry: ContactEnquiryPayload): string {
 /**
  * Synchronize a general contact form or bulk inquiry submission into Zoho CRM Leads
  */
+/**
+ * Append an immutable Audit Note to a Zoho CRM Lead (non-blocking)
+ */
+async function appendZohoLeadAuditNote(
+  leadId: string,
+  title: string,
+  content: string
+): Promise<void> {
+  try {
+    await zohoFetch(`/Leads/${leadId}/Notes`, {
+      method: 'POST',
+      body: JSON.stringify({
+        data: [
+          {
+            Note_Title: title,
+            Note_Content: content,
+          },
+        ],
+      }),
+    });
+  } catch (err: any) {
+    console.warn(`[ZohoCRM] Non-blocking warning: Failed to append Note to Lead ${leadId}:`, err?.message);
+  }
+}
+
+/**
+ * Synchronize a general contact form enquiry to Zoho CRM Leads.
+ * Preserves historical enquiry records across repeated enquiries from the same email.
+ */
 export async function syncContactEnquiryToZoho(
   enquiry: ContactEnquiryPayload
 ): Promise<ZohoSyncResult> {
@@ -108,6 +137,34 @@ export async function syncContactEnquiryToZoho(
   try {
     const { firstName, lastName } = parseCustomerName(enquiry.name);
     const description = buildContactDescription(enquiry);
+    const cleanEmail = enquiry.email.trim().toLowerCase();
+
+    // Check if a Lead already exists for this email to preserve prior enquiry history
+    let existingLeadDescription = '';
+    try {
+      const searchRes = await zohoFetch<any>(
+        `/Leads/search?criteria=(Email:equals:${encodeURIComponent(cleanEmail)})&fields=id,Description`
+      );
+      if (Array.isArray(searchRes?.data) && searchRes.data.length > 0) {
+        existingLeadDescription = searchRes.data[0]?.Description || '';
+      } else {
+        // Fallback for rapid repeat submissions before search indexing lag
+        const recentRes = await zohoFetch<any>(
+          `/Leads?fields=id,Email,Description&sort_by=Created_Time&sort_order=desc&per_page=20`
+        );
+        const match = recentRes?.data?.find((l: any) => l.Email?.toLowerCase() === cleanEmail);
+        if (match?.Description) {
+          existingLeadDescription = match.Description;
+        }
+      }
+    } catch {
+      // If search fails or returns 204, proceed with fresh description
+    }
+
+    // Preserve enquiry history in Description if lead already exists
+    const combinedDescription = existingLeadDescription
+      ? `${existingLeadDescription.trim()}\n\n--- Subsequent Contact Enquiry [Ref: ${enquiry.referenceNumber}] (${new Date().toISOString()}) ---\n${description}`.slice(0, 31000)
+      : description;
 
     const leadPayload = {
       data: [
@@ -115,10 +172,10 @@ export async function syncContactEnquiryToZoho(
           First_Name: firstName || undefined,
           Last_Name: lastName,
           Company: enquiry.companyName?.trim() || 'Individual Customer',
-          Email: enquiry.email.trim().toLowerCase(),
+          Email: cleanEmail,
           Phone: enquiry.phone.trim(),
           Lead_Source: 'Website Contact Form',
-          Description: description,
+          Description: combinedDescription,
         },
       ],
       duplicate_check_fields: ['Email'],
@@ -133,16 +190,27 @@ export async function syncContactEnquiryToZoho(
     const firstItem = result.data?.[0];
     if (firstItem && (firstItem.code === 'SUCCESS' || firstItem.status === 'success')) {
       const leadId = firstItem.details?.id;
-      console.log(`[ZohoCRM] Successfully synced Contact Enquiry [${enquiry.referenceNumber}] to Zoho Lead ID: ${leadId}`);
+      const actionType = (firstItem as any)?.action === 'update' ? 'updated' : 'created';
+      console.log(`[ZohoCRM] Successfully synced Contact Enquiry [${enquiry.referenceNumber}] to Zoho Lead ID: ${leadId} (${actionType})`);
+
+      // Attach a dedicated, permanent Zoho Note for this specific enquiry event
+      if (leadId) {
+        await appendZohoLeadAuditNote(
+          leadId,
+          `Website Contact Enquiry [Ref: ${enquiry.referenceNumber}]`,
+          `Reference: ${enquiry.referenceNumber}\nDate: ${new Date().toISOString()}\nSubject: ${(enquiry as any)?.subject || 'General Enquiry'}\n\n${description}`
+        );
+      }
+
       return {
         success: true,
-        action: 'created',
+        action: actionType,
         leadId,
       };
     }
 
     const errDetail = firstItem?.message || JSON.stringify(result);
-    console.warn(`[ZohoCRM] Failed to create lead for ${enquiry.referenceNumber}:`, errDetail);
+    console.warn(`[ZohoCRM] Failed to create/update lead for ${enquiry.referenceNumber}:`, errDetail);
     return {
       success: false,
       action: 'failed',
@@ -224,16 +292,44 @@ export async function syncBulkRfqToZohoLead(rfq: BulkRfqLeadPayload): Promise<Zo
       `======================================`,
     ].filter(Boolean).join('\n');
 
+    const cleanEmail = rfq.email.trim().toLowerCase();
+
+    // Check if a Lead already exists for this email to preserve prior enquiry history
+    let existingLeadDescription = '';
+    try {
+      const searchRes = await zohoFetch<any>(
+        `/Leads/search?criteria=(Email:equals:${encodeURIComponent(cleanEmail)})&fields=id,Description`
+      );
+      if (Array.isArray(searchRes?.data) && searchRes.data.length > 0) {
+        existingLeadDescription = searchRes.data[0]?.Description || '';
+      } else {
+        // Fallback for rapid repeat submissions before search indexing lag
+        const recentRes = await zohoFetch<any>(
+          `/Leads?fields=id,Email,Description&sort_by=Created_Time&sort_order=desc&per_page=20`
+        );
+        const match = recentRes?.data?.find((l: any) => l.Email?.toLowerCase() === cleanEmail);
+        if (match?.Description) {
+          existingLeadDescription = match.Description;
+        }
+      }
+    } catch {
+      // If search fails or returns 204, proceed with fresh description
+    }
+
+    const combinedDescription = existingLeadDescription
+      ? `${existingLeadDescription.trim()}\n\n--- Subsequent Institutional RFQ (${new Date().toISOString()}) ---\n${description}`.slice(0, 31000)
+      : description;
+
     const leadPayload = {
       data: [
         {
           First_Name: firstName || undefined,
           Last_Name: lastName,
           Company: rfq.companyName.trim() || 'Institutional Customer',
-          Email: rfq.email.trim().toLowerCase(),
+          Email: cleanEmail,
           Phone: rfq.phone.trim(),
           Lead_Source: 'Website Institutional RFQ',
-          Description: description,
+          Description: combinedDescription,
           City: rfq.deliveryLocation || undefined,
         },
       ],
@@ -249,10 +345,21 @@ export async function syncBulkRfqToZohoLead(rfq: BulkRfqLeadPayload): Promise<Zo
     const firstItem = result.data?.[0];
     if (firstItem && (firstItem.code === 'SUCCESS' || firstItem.status === 'success')) {
       const leadId = firstItem.details?.id;
-      console.log(`[ZohoCRM] Successfully synced Bulk RFQ to Zoho Lead ID: ${leadId}`);
+      const actionType = (firstItem as any)?.action === 'update' ? 'updated' : 'created';
+      console.log(`[ZohoCRM] Successfully synced Bulk RFQ to Zoho Lead ID: ${leadId} (${actionType})`);
+
+      // Attach a dedicated, permanent Zoho Note for this specific RFQ event
+      if (leadId) {
+        await appendZohoLeadAuditNote(
+          leadId,
+          `Website Institutional RFQ [${rfq.companyName || 'Corporate Customer'}]`,
+          `Date: ${new Date().toISOString()}\nCompany: ${rfq.companyName}\nRequirements:\n${description}`
+        );
+      }
+
       return {
         success: true,
-        action: 'created',
+        action: actionType,
         leadId,
       };
     }

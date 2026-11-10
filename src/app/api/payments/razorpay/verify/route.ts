@@ -26,6 +26,18 @@ export async function POST(req: Request) {
       );
     }
 
+    // Fast idempotency: If order was already confirmed and paid, return success immediately
+    if (order.paymentStatus === 'paid' && order.orderStatus === 'confirmed') {
+      return NextResponse.json({
+        success: true,
+        verified: true,
+        orderId: order.id,
+        orderNumber: order.orderNumber,
+        paymentId: order.paymentId || razorpay_payment_id,
+        idempotent: true,
+      });
+    }
+
     // Cryptographic verification using HMAC SHA256
     const isValid = verifyRazorpaySignature({
       razorpayOrderId: razorpay_order_id,
@@ -34,6 +46,14 @@ export async function POST(req: Request) {
     });
 
     if (!isValid) {
+      // Do NOT cancel an order if it was already marked paid by concurrent webhook
+      if (order.paymentStatus === 'paid' || order.orderStatus === 'confirmed') {
+        return NextResponse.json(
+          { verified: false, error: 'Signature mismatch, but order is already verified.' },
+          { status: 400 }
+        );
+      }
+
       // Record failed payment attempt
       order.paymentStatus = 'failed';
       order.notes = `Payment verification failed at ${new Date().toISOString()} (signature mismatch)`;

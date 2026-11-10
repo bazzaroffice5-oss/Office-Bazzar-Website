@@ -1,73 +1,94 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { isZohoConfigured, getZohoConfigDiagnostics } from '@/lib/zoho/client';
 import { getProducts } from '@/lib/db/store';
+import { getSessionFromRequest } from '@/lib/auth/service';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   const startTime = Date.now();
-  const checks: Record<string, { status: 'healthy' | 'degraded' | 'unconfigured'; latencyMs?: number; details?: unknown }> = {};
 
   // 1. Zoho CRM Connectivity Check
+  let zohoHealthy = false;
+  let zohoLatency = 0;
+  let zohoDiagnostics: any = null;
   try {
     const zohoStart = Date.now();
-    const isConfigured = await isZohoConfigured();
-    const zohoDiagnostics = await getZohoConfigDiagnostics();
-    const zohoLatency = Date.now() - zohoStart;
-
-    checks.zohoCrm = {
-      status: isConfigured ? 'healthy' : 'unconfigured',
-      latencyMs: zohoLatency,
-      details: {
-        configured: isConfigured,
-        accountsUrl: zohoDiagnostics.accountsUrl,
-        apiDomain: zohoDiagnostics.apiDomain,
-        hasClientId: zohoDiagnostics.hasClientId,
-        hasClientSecret: zohoDiagnostics.hasClientSecret,
-        hasRefreshToken: zohoDiagnostics.hasRefreshToken,
-      },
-    };
-  } catch (err: unknown) {
-    checks.zohoCrm = {
-      status: 'degraded',
-      details: err instanceof Error ? err.message : 'Unknown Zoho error',
-    };
+    zohoHealthy = await isZohoConfigured();
+    zohoLatency = Date.now() - zohoStart;
+    zohoDiagnostics = await getZohoConfigDiagnostics();
+  } catch {
+    zohoHealthy = false;
   }
 
   // 2. Product Catalog Store Check
+  let catalogHealthy = false;
+  let catalogCount = 0;
+  let catalogLatency = 0;
   try {
-    const catalogStart = Date.now();
+    const catStart = Date.now();
     const { total } = await getProducts();
-    const catalogLatency = Date.now() - catalogStart;
-
-    checks.catalogStore = {
-      status: total >= 1900 ? 'healthy' : 'degraded',
-      latencyMs: catalogLatency,
-      details: {
-        activeProducts: total,
-      },
-    };
-  } catch (err: unknown) {
-    checks.catalogStore = {
-      status: 'degraded',
-      details: err instanceof Error ? err.message : 'Catalog store lookup error',
-    };
+    catalogCount = total;
+    catalogLatency = Date.now() - catStart;
+    catalogHealthy = total >= 1900;
+  } catch {
+    catalogHealthy = false;
   }
 
-  const overallHealthy =
-    checks.zohoCrm?.status === 'healthy' &&
-    checks.catalogStore?.status === 'healthy';
+  const overallHealthy = zohoHealthy && catalogHealthy;
 
-  const totalDuration = Date.now() - startTime;
+  // Check authorization for detailed diagnostics (Admin session or internal secret)
+  const sessionUser = getSessionFromRequest(req);
+  const isAdmin = sessionUser && (sessionUser.role === 'admin' || sessionUser.role === 'staff');
+  const internalAuth = req.headers.get('x-health-auth-key');
+  const isAuthorized = isAdmin || (Boolean(process.env.CRON_SECRET) && internalAuth === process.env.CRON_SECRET);
 
+  // 1. Clean, unexposed public health response for anonymous callers / uptime monitors
+  if (!isAuthorized) {
+    return NextResponse.json(
+      {
+        status: overallHealthy ? 'ok' : 'degraded',
+        timestamp: new Date().toISOString(),
+        services: {
+          crm: zohoHealthy ? 'operational' : 'degraded',
+          catalog: catalogHealthy ? 'operational' : 'degraded',
+        },
+      },
+      {
+        status: overallHealthy ? 200 : 503,
+        headers: {
+          'Cache-Control': 'no-store, max-age=0',
+        },
+      }
+    );
+  }
+
+  // 2. Protected detailed diagnostics for authenticated administrators
   return NextResponse.json(
     {
       status: overallHealthy ? 'ok' : 'degraded',
       timestamp: new Date().toISOString(),
       uptimeSeconds: Math.floor(process.uptime()),
-      executionTimeMs: totalDuration,
+      executionTimeMs: Date.now() - startTime,
       environment: process.env.NODE_ENV || 'production',
-      checks,
+      diagnostics: {
+        zohoCrm: {
+          status: zohoHealthy ? 'healthy' : 'degraded',
+          latencyMs: zohoLatency,
+          configured: zohoHealthy,
+          accountsUrl: zohoDiagnostics?.accountsUrl,
+          apiDomain: zohoDiagnostics?.apiDomain,
+        },
+        catalogStore: {
+          status: catalogHealthy ? 'healthy' : 'degraded',
+          activeProducts: catalogCount,
+          latencyMs: catalogLatency,
+        },
+        memory: {
+          rssMb: Math.round(process.memoryUsage().rss / (1024 * 1024)),
+          heapUsedMb: Math.round(process.memoryUsage().heapUsed / (1024 * 1024)),
+        },
+      },
     },
     {
       status: overallHealthy ? 200 : 503,

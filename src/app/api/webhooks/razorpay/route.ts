@@ -46,10 +46,16 @@ export async function POST(req: Request) {
       if (order) {
         if (event === 'payment.captured' || event === 'order.paid') {
           const paymentId = paymentEntity?.id || orderEntity?.id;
+
+          // If order is already paid, idempotently ensure Zoho CRM status is synced without state duplication
+          const wasAlreadyPaid = order.paymentStatus === 'paid' && order.orderStatus === 'confirmed';
+
           order.paymentStatus = 'paid';
           order.paymentId = paymentId;
           order.orderStatus = 'confirmed';
-          order.notes = `Payment captured via Razorpay webhook: ${paymentId}`;
+          order.notes = wasAlreadyPaid
+            ? order.notes || `Payment confirmed: ${paymentId}`
+            : `Payment captured via Razorpay webhook: ${paymentId}`;
           order.updatedAt = new Date().toISOString();
 
           await updateOrderStatus(order.id, 'confirmed');
@@ -66,6 +72,12 @@ export async function POST(req: Request) {
               console.warn('[Razorpay Webhook] Zoho Sales Order update error:', e)
             );
         } else if (event === 'payment.failed') {
+          // CRITICAL: Never downgrade an already confirmed or paid order to failed
+          if (order.paymentStatus === 'paid' || order.orderStatus === 'confirmed') {
+            console.log(`[Razorpay Webhook] Ignoring delayed payment.failed event for already paid/confirmed order #${order.orderNumber}`);
+            return NextResponse.json({ received: true, ignored: true, reason: 'Order already paid/confirmed' });
+          }
+
           const reason = paymentEntity?.error_description || 'Payment transaction failed';
           order.paymentStatus = 'failed';
           order.notes = `Payment failed: ${reason}`;

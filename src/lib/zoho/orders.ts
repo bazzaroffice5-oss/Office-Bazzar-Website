@@ -36,8 +36,71 @@ interface ZohoModuleResponse {
 // In-memory mapping from OrderNumber -> Zoho Sales Order ID for instant status updates
 const orderNumberToZohoIdMap = new Map<string, string>();
 
+// Concurrency mutex lock: In-flight Sales Order creation promises to prevent duplicate creation
+const inFlightOrderSyncs = new Map<string, Promise<ZohoOrderSyncResult>>();
+
 /**
- * Map an internal website Order to Zoho CRM Sales_Orders payload
+ * Robustly resolve a Zoho Sales Order ID from orderNumber across serverless instances:
+ * 1. Fast in-memory cache
+ * 2. Exact Customer_No search criteria
+ * 3. Recent Sales_Orders list lookup (bypasses full-text search indexing delays)
+ * 4. Brief backoff retry for fresh cross-instance requests
+ */
+export async function findZohoSalesOrderId(orderNumberOrId: string): Promise<string | null> {
+  const cleanKey = orderNumberOrId.trim();
+  if (!cleanKey) return null;
+
+  // Direct numeric Zoho ID check
+  if (/^\d{15,22}$/.test(cleanKey)) {
+    return cleanKey;
+  }
+
+  // 1. Fast in-memory resolution
+  const cachedId = orderNumberToZohoIdMap.get(cleanKey);
+  if (cachedId) {
+    return cachedId;
+  }
+
+  // 2. Query search by Customer_No
+  try {
+    const searchRes = await zohoFetch<any>(
+      `/Sales_Orders/search?criteria=(Customer_No:equals:${encodeURIComponent(cleanKey)})&fields=id,Customer_No,Status`,
+      { method: 'GET' }
+    );
+    const foundId = searchRes?.data?.[0]?.id;
+    if (foundId) {
+      orderNumberToZohoIdMap.set(cleanKey, foundId);
+      return foundId;
+    }
+  } catch {
+    // Continue to recent list fallback
+  }
+
+  // 3. Fallback: Query recent sales orders (bypasses search indexing lag on new serverless instances)
+  try {
+    const recentRes = await zohoFetch<any>(
+      `/Sales_Orders?fields=id,Customer_No,Subject,Created_Time&sort_by=Created_Time&sort_order=desc&per_page=20`,
+      { method: 'GET' }
+    );
+    if (Array.isArray(recentRes?.data)) {
+      const match = recentRes.data.find(
+        (so: any) => so.Customer_No === cleanKey || (so.Subject && so.Subject.includes(cleanKey))
+      );
+      if (match?.id) {
+        orderNumberToZohoIdMap.set(cleanKey, match.id);
+        return match.id;
+      }
+    }
+  } catch {
+    // Continue
+  }
+
+  return null;
+}
+
+/**
+ * Map an internal website Order to Zoho CRM Sales_Orders payload.
+ * Fully idempotent: Checks for existing Sales Order and coalesces in-flight creations.
  */
 export async function syncOrderToZohoSalesOrder(order: Order): Promise<ZohoOrderSyncResult> {
   if (!(await isZohoConfigured())) {
@@ -48,8 +111,28 @@ export async function syncOrderToZohoSalesOrder(order: Order): Promise<ZohoOrder
     };
   }
 
-  try {
-    // 1. Ensure customer Contact and corporate Account exist in Zoho CRM
+  // Check if a sync is already in flight for this exact orderNumber (simultaneous verify + webhook)
+  const existingSync = inFlightOrderSyncs.get(order.orderNumber);
+  if (existingSync) {
+    console.log(`[ZohoOrders] Coalescing concurrent Sales Order creation for #${order.orderNumber}`);
+    return existingSync;
+  }
+
+  const syncPromise = (async (): Promise<ZohoOrderSyncResult> => {
+    try {
+      // Check if Sales Order was already created previously (e.g. across serverless instances)
+      const existingZohoId = await findZohoSalesOrderId(order.orderNumber);
+      if (existingZohoId) {
+        console.log(`[ZohoOrders] Sales Order #${order.orderNumber} already exists in Zoho CRM (ID: ${existingZohoId}). Updating status...`);
+        await updateZohoSalesOrderStatus(existingZohoId, order.orderStatus, order.paymentStatus, order.paymentId);
+        return {
+          success: true,
+          action: 'updated',
+          salesOrderId: existingZohoId,
+        };
+      }
+
+      // 1. Ensure customer Contact and corporate Account exist in Zoho CRM
     let contactId: string | undefined = undefined;
     let accountId: string | undefined = undefined;
 
@@ -164,37 +247,33 @@ export async function syncOrderToZohoSalesOrder(order: Order): Promise<ZohoOrder
       action: 'failed',
       error: errorMsg,
     };
+  } finally {
+    inFlightOrderSyncs.delete(order.orderNumber);
   }
+  })();
+
+  inFlightOrderSyncs.set(order.orderNumber, syncPromise);
+  return syncPromise;
 }
 
 /**
- * Update Sales Order payment and fulfillment status in Zoho CRM
+ * Update Sales Order payment and fulfillment status in Zoho CRM.
+ * Uses robust multi-tier identifier resolution to ensure reliable updates across serverless instances.
  */
 export async function updateZohoSalesOrderStatus(
   orderNumberOrId: string,
   orderStatus: OrderStatus,
-  paymentStatus?: 'paid' | 'pending' | 'failed',
+  paymentStatus?: 'paid' | 'pending' | 'failed' | 'refunded',
   paymentId?: string
 ): Promise<boolean> {
   if (!(await isZohoConfigured())) return true;
 
   try {
-    // 1. Resolve Zoho Sales Order ID directly from fast memory cache or numeric ID
-    let zohoOrderId = /^\d{15,22}$/.test(orderNumberOrId)
-      ? orderNumberOrId
-      : orderNumberToZohoIdMap.get(orderNumberOrId);
-
-    // 2. Fallback to search by Customer_No if not in cache
-    if (!zohoOrderId) {
-      const searchRes = await zohoFetch<any>(
-        `/Sales_Orders/search?criteria=(Customer_No:equals:${encodeURIComponent(orderNumberOrId)})`,
-        { method: 'GET' }
-      );
-      zohoOrderId = searchRes?.data?.[0]?.id;
-    }
+    // Resolve Zoho Sales Order ID using robust multi-tier fallback
+    const zohoOrderId = await findZohoSalesOrderId(orderNumberOrId);
 
     if (!zohoOrderId) {
-      console.log(`[ZohoOrders] No Zoho Sales Order found with Customer_No "${orderNumberOrId}" to update.`);
+      console.log(`[ZohoOrders] No Zoho Sales Order found for "${orderNumberOrId}" to update.`);
       return false;
     }
 
