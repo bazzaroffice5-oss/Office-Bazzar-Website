@@ -61,7 +61,7 @@ export async function POST(req: Request) {
           await updateOrderStatus(order.id, 'confirmed');
 
           // Ensure authoritative Sales Order exists in Zoho CRM with paid status
-          updateZohoSalesOrderStatus(order.orderNumber, 'confirmed', 'paid', paymentId)
+          updateZohoSalesOrderStatus(order.orderNumber, 'confirmed', 'paid', paymentId, order.customerName)
             .then(async (updated) => {
               if (!updated) {
                 console.log(`[Razorpay Webhook] Sales Order #${order.orderNumber} not found to update. Creating authoritative Sales Order in Zoho CRM now...`);
@@ -83,7 +83,7 @@ export async function POST(req: Request) {
           order.notes = `Payment failed: ${reason}`;
           order.updatedAt = new Date().toISOString();
 
-          updateZohoSalesOrderStatus(order.orderNumber, 'cancelled', 'failed').catch((e) =>
+          updateZohoSalesOrderStatus(order.orderNumber, 'cancelled', 'failed', undefined, order.customerName).catch((e) =>
             console.warn('[Razorpay Webhook] Zoho Sales Order update error:', e)
           );
         }

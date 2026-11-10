@@ -42,11 +42,14 @@ const inFlightOrderSyncs = new Map<string, Promise<ZohoOrderSyncResult>>();
 /**
  * Robustly resolve a Zoho Sales Order ID from orderNumber across serverless instances:
  * 1. Fast in-memory cache
- * 2. Exact Customer_No search criteria
+ * 2. Exact Customer_No search criteria with customer validation
  * 3. Recent Sales_Orders list lookup (bypasses full-text search indexing delays)
- * 4. Brief backoff retry for fresh cross-instance requests
+ * STRICT REQUIREMENT: Never pick an order based on recency alone. Only exact orderNumber and customer match are accepted.
  */
-export async function findZohoSalesOrderId(orderNumberOrId: string): Promise<string | null> {
+export async function findZohoSalesOrderId(
+  orderNumberOrId: string,
+  expectedCustomerName?: string
+): Promise<string | null> {
   const cleanKey = orderNumberOrId.trim();
   if (!cleanKey) return null;
 
@@ -61,31 +64,60 @@ export async function findZohoSalesOrderId(orderNumberOrId: string): Promise<str
     return cachedId;
   }
 
-  // 2. Query search by Customer_No
+  // 2. Query search by exact Customer_No
   try {
     const searchRes = await zohoFetch<any>(
-      `/Sales_Orders/search?criteria=(Customer_No:equals:${encodeURIComponent(cleanKey)})&fields=id,Customer_No,Status`,
+      `/Sales_Orders/search?criteria=(Customer_No:equals:${encodeURIComponent(cleanKey)})&fields=id,Customer_No,Subject,Contact_Name`,
       { method: 'GET' }
     );
-    const foundId = searchRes?.data?.[0]?.id;
-    if (foundId) {
-      orderNumberToZohoIdMap.set(cleanKey, foundId);
-      return foundId;
+    if (Array.isArray(searchRes?.data) && searchRes.data.length > 0) {
+      const match = searchRes.data.find((so: any) => {
+        const matchesNo = so.Customer_No && so.Customer_No.trim() === cleanKey;
+        if (!matchesNo) return false;
+        if (expectedCustomerName && so.Contact_Name?.name) {
+          const expected = expectedCustomerName.toLowerCase().trim();
+          const actual = so.Contact_Name.name.toLowerCase().trim();
+          return actual.includes(expected) || expected.includes(actual);
+        }
+        return true;
+      });
+      if (match?.id) {
+        orderNumberToZohoIdMap.set(cleanKey, match.id);
+        return match.id;
+      }
     }
   } catch {
     // Continue to recent list fallback
   }
 
-  // 3. Fallback: Query recent sales orders (bypasses search indexing lag on new serverless instances)
+  // 3. Fallback: Query recent sales orders (checking exact Customer_No and customer association)
+  // STRICT RULE: Never pick an order based on recency alone. Only exact order number and customer match are accepted.
   try {
     const recentRes = await zohoFetch<any>(
-      `/Sales_Orders?fields=id,Customer_No,Subject,Created_Time&sort_by=Created_Time&sort_order=desc&per_page=20`,
+      `/Sales_Orders?fields=id,Customer_No,Subject,Created_Time,Contact_Name&sort_by=Created_Time&sort_order=desc&per_page=50`,
       { method: 'GET' }
     );
     if (Array.isArray(recentRes?.data)) {
-      const match = recentRes.data.find(
-        (so: any) => so.Customer_No === cleanKey || (so.Subject && so.Subject.includes(cleanKey))
-      );
+      const match = recentRes.data.find((so: any) => {
+        const matchesCustomerNo = so.Customer_No && so.Customer_No.trim() === cleanKey;
+        const matchesSubject = so.Subject && (
+          so.Subject.trim() === cleanKey ||
+          so.Subject.startsWith(`Order #${cleanKey}`) ||
+          so.Subject.includes(`Order #${cleanKey}`) ||
+          so.Subject.includes(cleanKey)
+        );
+        const matchesKey = matchesCustomerNo || matchesSubject;
+        if (!matchesKey) return false;
+
+        // Verify customer association if available
+        if (expectedCustomerName && so.Contact_Name?.name) {
+          const expected = expectedCustomerName.toLowerCase().trim();
+          const actual = so.Contact_Name.name.toLowerCase().trim();
+          return actual.includes(expected) || expected.includes(actual);
+        }
+        return true;
+      });
+
       if (match?.id) {
         orderNumberToZohoIdMap.set(cleanKey, match.id);
         return match.id;
@@ -222,6 +254,27 @@ export async function syncOrderToZohoSalesOrder(order: Order): Promise<ZohoOrder
       const salesOrderId = firstItem.details?.id;
       if (salesOrderId) {
         orderNumberToZohoIdMap.set(order.orderNumber, salesOrderId);
+
+        // Persistent CRM Duplicate Protection:
+        // Detect and self-heal any race condition duplicates across separate serverless containers
+        try {
+          const dupRes = await zohoFetch<any>(
+            `/Sales_Orders?fields=id,Customer_No,Subject&sort_by=Created_Time&sort_order=desc&per_page=10`
+          );
+          if (Array.isArray(dupRes?.data)) {
+            const matches = dupRes.data.filter((so: any) => so.Customer_No && so.Customer_No.trim() === order.orderNumber.trim());
+            if (matches.length > 1) {
+              console.warn(`[ZohoOrders] Detected ${matches.length} duplicate Sales Orders for #${order.orderNumber}. Reconciling...`);
+              const toDelete = matches.filter((so: any) => so.id !== salesOrderId);
+              for (const dup of toDelete) {
+                await zohoFetch(`/Sales_Orders?ids=${dup.id}`, { method: 'DELETE' }).catch(() => {});
+                console.log(`[ZohoOrders] Removed distributed duplicate Sales Order ID: ${dup.id}`);
+              }
+            }
+          }
+        } catch {
+          // Non-blocking duplicate cleanup
+        }
       }
       console.log(`[ZohoOrders] Successfully created Sales Order #${order.orderNumber} in Zoho CRM (ID: ${salesOrderId})`);
       return {
@@ -264,13 +317,14 @@ export async function updateZohoSalesOrderStatus(
   orderNumberOrId: string,
   orderStatus: OrderStatus,
   paymentStatus?: 'paid' | 'pending' | 'failed' | 'refunded',
-  paymentId?: string
+  paymentId?: string,
+  customerName?: string
 ): Promise<boolean> {
   if (!(await isZohoConfigured())) return true;
 
   try {
-    // Resolve Zoho Sales Order ID using robust multi-tier fallback
-    const zohoOrderId = await findZohoSalesOrderId(orderNumberOrId);
+    // Resolve Zoho Sales Order ID using robust multi-tier fallback with customer association
+    const zohoOrderId = await findZohoSalesOrderId(orderNumberOrId, customerName);
 
     if (!zohoOrderId) {
       console.log(`[ZohoOrders] No Zoho Sales Order found for "${orderNumberOrId}" to update.`);

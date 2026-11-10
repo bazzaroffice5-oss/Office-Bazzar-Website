@@ -59,7 +59,7 @@ export async function POST(req: Request) {
       order.notes = `Payment verification failed at ${new Date().toISOString()} (signature mismatch)`;
       order.updatedAt = new Date().toISOString();
 
-      updateZohoSalesOrderStatus(order.orderNumber, 'cancelled', 'failed').catch((e) =>
+      updateZohoSalesOrderStatus(order.orderNumber, 'cancelled', 'failed', undefined, order.customerName).catch((e) =>
         console.warn('[Razorpay Verify] Zoho Sales Order update error:', e)
       );
 
@@ -79,7 +79,7 @@ export async function POST(req: Request) {
     await updateOrderStatus(orderId, 'confirmed');
 
     // Update authoritative Sales Order in Zoho CRM with paid status, or create if missing
-    updateZohoSalesOrderStatus(order.orderNumber, 'confirmed', 'paid', razorpay_payment_id)
+    updateZohoSalesOrderStatus(order.orderNumber, 'confirmed', 'paid', razorpay_payment_id, order.customerName)
       .then(async (updated) => {
         if (!updated) {
           console.log(`[Razorpay Verify] Sales Order #${order.orderNumber} not found to update. Creating authoritative Sales Order in Zoho CRM now...`);
