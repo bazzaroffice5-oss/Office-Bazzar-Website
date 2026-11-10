@@ -40,26 +40,88 @@ const orderNumberToZohoIdMap = new Map<string, string>();
 const inFlightOrderSyncs = new Map<string, Promise<ZohoOrderSyncResult>>();
 
 /**
+ * Consistently normalize order references for canonical comparison across systems.
+ * Trims accidental leading/trailing whitespace and normalizes case.
+ */
+export function normalizeOrderReference(ref?: string | null): string {
+  if (!ref) return '';
+  return ref.trim().toUpperCase();
+}
+
+function escapeRegex(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * Score candidate Sales Order authoritativeness using the strict priority hierarchy:
+ * 1. Existing verified zohoSalesOrderId association (+1000 pts)
+ * 2. Verified successful payment and matching Razorpay payment reference (+500 pts)
+ * 3. Valid active order status and transaction association (+100 to +250 pts)
+ * 4. Creation timestamp only as a final tie-breaker (handled during sort)
+ */
+function scoreCandidateAuthoritativeness(so: any, order: Order): { score: number; reasons: string[]; paymentRef?: string } {
+  let score = 0;
+  const reasons: string[] = [];
+  const desc = so.Description || '';
+  const status = (so.Status || '').toLowerCase();
+
+  // Extract payment reference if present (e.g. pay_xxxxxxxxxxxxxx)
+  const payMatch = desc.match(/pay_[a-zA-Z0-9_-]+/i);
+  const paymentRef = payMatch ? payMatch[0] : undefined;
+
+  // Priority 1: Direct match with order.zohoSalesOrderId
+  if (order.zohoSalesOrderId && so.id === order.zohoSalesOrderId) {
+    score += 1000;
+    reasons.push('direct_zohoSalesOrderId_match');
+  }
+
+  // Priority 2: Verified successful payment matching Razorpay payment reference
+  if (order.paymentId && paymentRef && paymentRef.toLowerCase() === order.paymentId.toLowerCase()) {
+    score += 500;
+    reasons.push('matching_razorpay_payment_id');
+  } else if (paymentRef) {
+    score += 300;
+    reasons.push(`has_payment_ref_${paymentRef}`);
+  }
+
+  // Priority 3: Valid active order status and transaction association
+  if (status === 'delivered' || status === 'shipped') {
+    score += 250;
+    reasons.push(`fulfillment_${status}`);
+  } else if (status === 'invoiced') {
+    score += 200;
+    reasons.push('invoiced');
+  } else if (status === 'approved') {
+    score += 100;
+    reasons.push('approved');
+  }
+
+  return { score, reasons, paymentRef };
+}
+
+/**
  * Robustly resolve a Zoho Sales Order ID from orderNumber across serverless instances:
- * 1. Fast in-memory cache
+ * 1. Fast in-memory cache (raw and canonical keys)
  * 2. Exact Customer_No search criteria with customer validation
- * 3. Recent Sales_Orders list lookup (bypasses full-text search indexing delays)
- * STRICT REQUIREMENT: Never pick an order based on recency alone. Only exact orderNumber and customer match are accepted.
+ * 3. Recent Sales_Orders list lookup with strict boundary pattern (never a loose substring)
+ * STRICT REQUIREMENT: Never pick an order based on recency alone. Only exact canonical orderNumber and customer match are accepted.
  */
 export async function findZohoSalesOrderId(
   orderNumberOrId: string,
   expectedCustomerName?: string
 ): Promise<string | null> {
-  const cleanKey = orderNumberOrId.trim();
-  if (!cleanKey) return null;
+  const rawKey = orderNumberOrId.trim();
+  if (!rawKey) return null;
 
   // Direct numeric Zoho ID check
-  if (/^\d{15,22}$/.test(cleanKey)) {
-    return cleanKey;
+  if (/^\d{15,22}$/.test(rawKey)) {
+    return rawKey;
   }
 
-  // 1. Fast in-memory resolution
-  const cachedId = orderNumberToZohoIdMap.get(cleanKey);
+  const canonicalKey = normalizeOrderReference(rawKey);
+
+  // 1. Fast in-memory resolution (check both raw and canonical keys)
+  const cachedId = orderNumberToZohoIdMap.get(rawKey) || orderNumberToZohoIdMap.get(canonicalKey);
   if (cachedId) {
     return cachedId;
   }
@@ -67,22 +129,27 @@ export async function findZohoSalesOrderId(
   // 2. Query search by exact Customer_No
   try {
     const searchRes = await zohoFetch<any>(
-      `/Sales_Orders/search?criteria=(Customer_No:equals:${encodeURIComponent(cleanKey)})&fields=id,Customer_No,Subject,Contact_Name`,
+      `/Sales_Orders/search?criteria=(Customer_No:equals:${encodeURIComponent(rawKey)})&fields=id,Customer_No,Subject,Contact_Name,Status`,
       { method: 'GET' }
     );
     if (Array.isArray(searchRes?.data) && searchRes.data.length > 0) {
       const match = searchRes.data.find((so: any) => {
-        const matchesNo = so.Customer_No && so.Customer_No.trim() === cleanKey;
-        if (!matchesNo) return false;
+        const candidateNo = normalizeOrderReference(so.Customer_No);
+        if (candidateNo !== canonicalKey) return false;
+
+        // Customer identity validation: Never merge unrelated orders
         if (expectedCustomerName && so.Contact_Name?.name) {
           const expected = expectedCustomerName.toLowerCase().trim();
           const actual = so.Contact_Name.name.toLowerCase().trim();
-          return actual.includes(expected) || expected.includes(actual);
+          if (expected !== actual && !expected.includes(actual) && !actual.includes(expected)) {
+            return false;
+          }
         }
         return true;
       });
       if (match?.id) {
-        orderNumberToZohoIdMap.set(cleanKey, match.id);
+        orderNumberToZohoIdMap.set(rawKey, match.id);
+        orderNumberToZohoIdMap.set(canonicalKey, match.id);
         return match.id;
       }
     }
@@ -90,36 +157,40 @@ export async function findZohoSalesOrderId(
     // Continue to recent list fallback
   }
 
-  // 3. Fallback: Query recent sales orders (checking exact Customer_No and customer association)
-  // STRICT RULE: Never pick an order based on recency alone. Only exact order number and customer match are accepted.
+  // 3. Fallback: Query recent sales orders (checking exact Customer_No and strict subject boundaries)
+  // STRICT RULE: Never pick an order based on recency alone. Only exact canonical order number and customer match are accepted.
   try {
     const recentRes = await zohoFetch<any>(
-      `/Sales_Orders?fields=id,Customer_No,Subject,Created_Time,Contact_Name&sort_by=Created_Time&sort_order=desc&per_page=50`,
+      `/Sales_Orders?fields=id,Customer_No,Subject,Created_Time,Contact_Name,Status&sort_by=Created_Time&sort_order=desc&per_page=50`,
       { method: 'GET' }
     );
     if (Array.isArray(recentRes?.data)) {
       const match = recentRes.data.find((so: any) => {
-        const matchesCustomerNo = so.Customer_No && so.Customer_No.trim() === cleanKey;
-        const matchesSubject = so.Subject && (
-          so.Subject.trim() === cleanKey ||
-          so.Subject.startsWith(`Order #${cleanKey}`) ||
-          so.Subject.includes(`Order #${cleanKey}`) ||
-          so.Subject.includes(cleanKey)
-        );
-        const matchesKey = matchesCustomerNo || matchesSubject;
-        if (!matchesKey) return false;
+        const candidateNo = normalizeOrderReference(so.Customer_No);
+        const matchesExactCustomerNo = candidateNo === canonicalKey;
+
+        // Strict subject matching: Boundary-validated, never a loose partial substring
+        const subject = (so.Subject || '').trim();
+        const matchesExactSubject =
+          normalizeOrderReference(subject) === canonicalKey ||
+          new RegExp(`(?:^|Order\\s*#?\\s*)${escapeRegex(canonicalKey)}(?:\\s*-|\\s*$|\\b)`, 'i').test(subject);
+
+        if (!matchesExactCustomerNo && !matchesExactSubject) return false;
 
         // Verify customer association if available
         if (expectedCustomerName && so.Contact_Name?.name) {
           const expected = expectedCustomerName.toLowerCase().trim();
           const actual = so.Contact_Name.name.toLowerCase().trim();
-          return actual.includes(expected) || expected.includes(actual);
+          if (expected !== actual && !expected.includes(actual) && !actual.includes(expected)) {
+            return false;
+          }
         }
         return true;
       });
 
       if (match?.id) {
-        orderNumberToZohoIdMap.set(cleanKey, match.id);
+        orderNumberToZohoIdMap.set(rawKey, match.id);
+        orderNumberToZohoIdMap.set(canonicalKey, match.id);
         return match.id;
       }
     }
@@ -136,8 +207,12 @@ export async function findZohoSalesOrderId(
  * Adheres to enterprise audit safety requirements:
  * 1. PREVENTS deletion if candidate has successful payments, invoices, shipments, or linked transactions.
  * 2. VALIDATES exact orderNumber, customer identity, payment reference, and creation timestamps before classification.
- * 3. PRESERVES the earliest authoritative Sales Order as primary.
- * 4. FLAGS conflicting payment states for manual administrative review rather than automatic cancellation.
+ * 3. SELECTS authoritative primary based on:
+ *    - Existing verified zohoSalesOrderId association
+ *    - Matching Razorpay payment reference
+ *    - Active status (delivered/shipped/invoiced/approved)
+ *    - Creation timestamp only as final tie-breaker
+ * 4. FLAGS conflicting payment states for manual administrative review without modification.
  * 5. LOGS all reconciliation actions with ISO timestamps, primary ID, and candidate IDs.
  * 6. ISOLATES reconciliation errors so CRM API failures never compromise the order's confirmed payment state.
  */
@@ -147,46 +222,115 @@ export async function reconcileDuplicateSalesOrdersSafely(
   order: Order
 ): Promise<void> {
   const timestamp = new Date().toISOString();
+  const canonicalOrderNumber = normalizeOrderReference(orderNumber);
+
   try {
     const searchRes = await zohoFetch<any>(
-      `/Sales_Orders?fields=id,Customer_No,Subject,Status,Created_Time,Contact_Name,Description&sort_by=Created_Time&sort_order=desc&per_page=20`
+      `/Sales_Orders?fields=id,Customer_No,Subject,Status,Created_Time,Contact_Name,Description&sort_by=Created_Time&sort_order=desc&per_page=30`
     );
     if (!Array.isArray(searchRes?.data)) return;
 
-    // Strict filter: Must match exact Customer_No
-    const candidates = searchRes.data.filter(
-      (so: any) => so.Customer_No && so.Customer_No.trim() === orderNumber.trim()
-    );
+    // 1. Strict Canonical Matching & Customer Association Filtering
+    const candidates = searchRes.data.filter((so: any) => {
+      const candidateNo = normalizeOrderReference(so.Customer_No);
+      const subject = (so.Subject || '').trim();
+      const matchesNo = candidateNo === canonicalOrderNumber;
+      const matchesSubject =
+        normalizeOrderReference(subject) === canonicalOrderNumber ||
+        new RegExp(`(?:^|Order\\s*#?\\s*)${escapeRegex(canonicalOrderNumber)}(?:\\s*-|\\s*$|\\b)`, 'i').test(subject);
+
+      if (!matchesNo && !matchesSubject) return false;
+
+      // Customer identity validation: Never merge unrelated orders
+      if (order.customerName && so.Contact_Name?.name) {
+        const expected = order.customerName.toLowerCase().trim();
+        const actual = so.Contact_Name.name.toLowerCase().trim();
+        if (expected !== actual && !expected.includes(actual) && !actual.includes(expected)) {
+          console.warn(`[ZohoOrders Reconciliation] Excluding SO ${so.id} with mismatched customer "${so.Contact_Name.name}" (expected "${order.customerName}")`);
+          return false;
+        }
+      }
+
+      return true;
+    });
 
     if (candidates.length <= 1) return;
 
-    console.warn(`[ZohoOrders Reconciliation] [${timestamp}] Multiple Sales Orders (${candidates.length}) detected for #${orderNumber}. Initiating safe audit...`);
+    console.warn(`[ZohoOrders Reconciliation] [${timestamp}] Multiple matching Sales Orders (${candidates.length}) detected for canonical #${canonicalOrderNumber}. Initiating hierarchical evaluation...`);
 
-    // Sort by Created_Time ascending: The earliest created record is preserved as authoritative primary
-    candidates.sort((a: any, b: any) => new Date(a.Created_Time).getTime() - new Date(b.Created_Time).getTime());
-    const authoritativePrimary = candidates[0];
-    const duplicateCandidates = candidates.slice(1);
+    // 2. Authoritative Primary Order Selection Priority:
+    const scoredCandidates = candidates.map((so: any) => {
+      const { score, reasons, paymentRef } = scoreCandidateAuthoritativeness(so, order);
+      return { so, score, reasons, paymentRef };
+    });
 
-    for (const dup of duplicateCandidates) {
+    // Detect conflicting payment references across candidates
+    const distinctPaymentRefs = new Set<string>();
+    for (const item of scoredCandidates) {
+      if (item.paymentRef) {
+        distinctPaymentRefs.add(item.paymentRef.toLowerCase());
+      }
+    }
+
+    // Rule: If payment states conflict (multiple distinct payments) or authoritative record cannot be determined safely:
+    // Retain ALL records and flag for manual review. NEVER cancel or modify!
+    if (distinctPaymentRefs.size > 1) {
+      console.warn(
+        `[ZohoOrders Reconciliation] [${timestamp}] CONFLICT DETECTED: Multiple distinct payment references (${Array.from(distinctPaymentRefs).join(', ')}) found across Sales Orders for #${canonicalOrderNumber}. Retaining all records for manual review.`
+      );
+
+      for (const item of scoredCandidates) {
+        await zohoFetch('/Sales_Orders', {
+          method: 'PUT',
+          body: JSON.stringify({
+            data: [
+              {
+                id: item.so.id,
+                Description: `[AUDIT ALERT ${timestamp}]: Conflicting payment references detected across multiple Sales Orders for #${canonicalOrderNumber} (${Array.from(distinctPaymentRefs).join(', ')}). RETAINED FOR MANUAL REVIEW.\n\n${item.so.Description || ''}`.slice(0, 31000),
+              },
+            ],
+          }),
+        }).catch(() => {});
+      }
+      return;
+    }
+
+    // Sort by score descending; if score tied, earliest Created_Time takes precedence as final tie-breaker
+    scoredCandidates.sort((a: any, b: any) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return new Date(a.so.Created_Time).getTime() - new Date(b.so.Created_Time).getTime();
+    });
+
+    const authoritativePrimary = scoredCandidates[0].so;
+    const duplicates = scoredCandidates.slice(1).map((s: any) => s.so);
+
+    console.log(
+      `[ZohoOrders Reconciliation] [${timestamp}] Selected authoritative primary SO ${authoritativePrimary.id} (Score: ${scoredCandidates[0].score}, Reasons: ${scoredCandidates[0].reasons.join(', ')})`
+    );
+
+    // Keep memory cache aligned with authoritative primary
+    orderNumberToZohoIdMap.set(canonicalOrderNumber, authoritativePrimary.id);
+    orderNumberToZohoIdMap.set(orderNumber, authoritativePrimary.id);
+
+    // Process duplicate candidates safely
+    for (const dup of duplicates) {
       const dupStatus = (dup.Status || '').toLowerCase();
       const dupDesc = dup.Description || '';
-      const hasPayment = dupDesc.includes('Payment ID:') || dupDesc.includes('Payment: paid') || dupStatus === 'approved';
+      const hasPayment = dupDesc.includes('pay_') || dupStatus === 'approved';
       const hasInvoiceOrShipment = dupStatus === 'invoiced' || dupStatus === 'shipped' || dupStatus === 'delivered';
 
-      // Rule 4: If candidate has conflicting payment or linked transactions, DO NOT delete! Flag for manual review.
+      // If duplicate has an active transaction or payment, NEVER delete and NEVER cancel: Flag for manual review
       if (hasPayment || hasInvoiceOrShipment) {
         console.warn(
-          `[ZohoOrders Reconciliation] [${timestamp}] Candidate ID ${dup.id} has linked transaction/payment status (${dup.Status}). Retaining and flagging for MANUAL REVIEW. Primary authoritative ID: ${authoritativePrimary.id}`
+          `[ZohoOrders Reconciliation] [${timestamp}] Duplicate candidate ${dup.id} has active status (${dup.Status}) or payment reference. Retaining and flagging for MANUAL REVIEW. Primary authoritative ID: ${authoritativePrimary.id}`
         );
-
-        // Update description with Audit Alert
         await zohoFetch('/Sales_Orders', {
           method: 'PUT',
           body: JSON.stringify({
             data: [
               {
                 id: dup.id,
-                Description: `[AUDIT ALERT ${timestamp}]: Potential duplicate with active transaction/payment status (${dup.Status}). Retained for administrative review. Authoritative Order ID: ${authoritativePrimary.id}\n\n${dupDesc}`.slice(0, 31000),
+                Description: `[AUDIT ALERT ${timestamp}]: Retained for manual review. Authoritative primary order is ${authoritativePrimary.id}.\n\n${dupDesc}`.slice(0, 31000),
               },
             ],
           }),
@@ -194,12 +338,10 @@ export async function reconcileDuplicateSalesOrdersSafely(
         continue;
       }
 
-      // Rule 1 & 2: If candidate is an unapproved, un-invoiced ghost duplicate created during simultaneous checkout:
-      // Cancel it safely with full audit trail rather than hard deleting.
+      // Only unapproved, unpaid ghost duplicates with zero linked payments are safely cancelled (never deleted)
       console.log(
-        `[ZohoOrders Reconciliation] [${timestamp}] Safely cancelling unpaid redundant duplicate ID ${dup.id}. Authoritative primary retained: ${authoritativePrimary.id}`
+        `[ZohoOrders Reconciliation] [${timestamp}] Safely marking unpaid ghost duplicate ${dup.id} as Cancelled. Authoritative primary: ${authoritativePrimary.id}`
       );
-
       await zohoFetch('/Sales_Orders', {
         method: 'PUT',
         body: JSON.stringify({
@@ -207,16 +349,16 @@ export async function reconcileDuplicateSalesOrdersSafely(
             {
               id: dup.id,
               Status: 'Cancelled',
-              Description: `[AUTO-RECONCILED DUPLICATE ${timestamp}]: Cancelled redundant duplicate created during concurrent checkout. Authoritative Order ID: ${authoritativePrimary.id}\n\n${dupDesc}`.slice(0, 31000),
+              Description: `[AUTO-RECONCILED DUPLICATE ${timestamp}]: Redundant ghost checkout record cancelled. Authoritative primary Sales Order: ${authoritativePrimary.id}\n\n${dupDesc}`.slice(0, 31000),
             },
           ],
         }),
       }).catch((err) => {
-        console.warn(`[ZohoOrders Reconciliation] Non-blocking warning updating duplicate ${dup.id}:`, err?.message);
+        console.warn(`[ZohoOrders Reconciliation] Non-blocking error updating ghost duplicate ${dup.id}:`, err?.message);
       });
     }
   } catch (err: any) {
-    // Rule 6: CRM API failures during reconciliation must NEVER affect primary payment/order state
+    // Non-blocking isolation: Reconciliation failures NEVER compromise order's confirmed payment state
     console.warn(`[ZohoOrders Reconciliation] Non-blocking error during duplicate reconciliation for #${orderNumber}:`, err?.message);
   }
 }
