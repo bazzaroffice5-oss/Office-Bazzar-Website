@@ -154,6 +154,7 @@ export interface Order {
   paymentMethod: PaymentMethod;
   paymentStatus: PaymentStatus;
   paymentId?: string;
+  zohoSalesOrderId?: string;
   orderStatus: OrderStatus;
   trackingNumber?: string;
   courierName?: string;

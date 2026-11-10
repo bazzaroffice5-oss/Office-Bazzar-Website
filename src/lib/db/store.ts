@@ -384,9 +384,15 @@ export async function createOrder(
   }
 
   // 3. Authoritative Order Synchronization to Zoho CRM Sales_Orders Module
-  syncOrderToZohoSalesOrder(newOrder).catch((zohoErr) =>
-    console.error(`[Order Service] Failed to sync Order #${orderNumber} to Zoho Sales Orders:`, zohoErr)
-  );
+  syncOrderToZohoSalesOrder(newOrder)
+    .then((res) => {
+      if (res.salesOrderId) {
+        newOrder.zohoSalesOrderId = res.salesOrderId;
+      }
+    })
+    .catch((zohoErr) =>
+      console.error(`[Order Service] Failed to sync Order #${orderNumber} to Zoho Sales Orders:`, zohoErr)
+    );
 
   return newOrder;
 }
