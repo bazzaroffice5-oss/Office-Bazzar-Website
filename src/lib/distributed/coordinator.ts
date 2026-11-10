@@ -345,13 +345,26 @@ export async function atomicReserveInventory(
 
     try {
       const now = Date.now();
-      // Calculate active reservations for each item in cloud KV
+      // Calculate active reservations for each item in cloud KV via sorted sets
       for (const item of items) {
-        const skuKey = `inv:active_resv:${item.productId || item.sku}`;
-        const activeResvStr = await callKV<string>(['GET', skuKey]);
-        const activeReserved = activeResvStr ? parseInt(activeResvStr, 10) : 0;
+        const sku = item.productId || item.sku;
+        const zsetKey = `inv:resv_zset:${sku}`;
 
-        const authoritativeStock = await getAuthoritativeStock(item.productId || item.sku);
+        // Atomic prune: prune all expired reservation members
+        await callKV(['ZREMRANGEBYSCORE', zsetKey, 0, now]);
+
+        // Retrieve current active reservation leases
+        const activeMembers = await callKV<string[]>(['ZRANGE', zsetKey, 0, -1]);
+        let activeReserved = 0;
+        if (Array.isArray(activeMembers)) {
+          for (const m of activeMembers) {
+            const parts = String(m).split(':');
+            const qty = parseInt(parts[parts.length - 1], 10);
+            if (!isNaN(qty)) activeReserved += qty;
+          }
+        }
+
+        const authoritativeStock = await getAuthoritativeStock(sku);
         const availableStock = Math.max(0, authoritativeStock - activeReserved);
 
         if (item.quantity > availableStock) {
@@ -363,11 +376,12 @@ export async function atomicReserveInventory(
         }
       }
 
-      // All items available: increment active reservation and save lease
+      // All items available: record lease in ZSET with score = now + ttlMs
       const pipeline: (string | number)[][] = [];
       for (const item of items) {
-        const skuKey = `inv:active_resv:${item.productId || item.sku}`;
-        pipeline.push(['INCRBY', skuKey, item.quantity]);
+        const sku = item.productId || item.sku;
+        const zsetKey = `inv:resv_zset:${sku}`;
+        pipeline.push(['ZADD', zsetKey, now + ttlMs, `${reservationId}:${item.quantity}`]);
       }
       pipeline.push(['SET', `resv:${reservationId}`, JSON.stringify({ items, status: 'reserved', expiresAt: now + ttlMs }), 'PX', ttlMs]);
 
@@ -443,7 +457,15 @@ export async function atomicCommitInventory(reservationId: string): Promise<bool
     if (!raw) return true;
     const resv = typeof raw === 'string' ? JSON.parse(raw) : raw;
     resv.status = 'committed';
-    await callKV(['SET', `resv:${reservationId}`, JSON.stringify(resv), 'PX', 86400000]);
+    const pipeline: (string | number)[][] = [];
+    if (resv.items && Array.isArray(resv.items)) {
+      for (const item of resv.items) {
+        const sku = item.productId || item.sku;
+        pipeline.push(['ZREM', `inv:resv_zset:${sku}`, `${reservationId}:${item.quantity}`]);
+      }
+    }
+    pipeline.push(['SET', `resv:${reservationId}`, JSON.stringify(resv), 'PX', 86400000]);
+    await callKVPipeline(pipeline);
     return true;
   }
 
@@ -469,9 +491,11 @@ export async function atomicReleaseInventory(reservationId: string): Promise<boo
     if (resv.status === 'reserved') {
       resv.status = 'released';
       const pipeline: (string | number)[][] = [];
-      for (const item of resv.items) {
-        const skuKey = `inv:active_resv:${item.productId || item.sku}`;
-        pipeline.push(['DECRBY', skuKey, item.quantity]);
+      if (resv.items && Array.isArray(resv.items)) {
+        for (const item of resv.items) {
+          const sku = item.productId || item.sku;
+          pipeline.push(['ZREM', `inv:resv_zset:${sku}`, `${reservationId}:${item.quantity}`]);
+        }
       }
       pipeline.push(['DEL', `resv:${reservationId}`]);
       await callKVPipeline(pipeline);
@@ -504,6 +528,22 @@ export async function checkAndSetDurableIdempotency<T = any>(
   const config = getKVConfig();
 
   if (config) {
+    // 1. Attempt atomic lease acquisition with SET NX EX
+    const setRes = await callKV<string>([
+      'SET',
+      fullKey,
+      JSON.stringify({ status: 'in_flight' }),
+      'NX',
+      'EX',
+      ttlSec,
+    ]);
+
+    // If setRes === 'OK', this instance uniquely won the race and claimed the idempotency key!
+    if (setRes === 'OK') {
+      return { isDuplicate: false };
+    }
+
+    // Otherwise, key already exists (in-flight or completed) -> Retrieve existing cached data
     const existing = await callKV<string>(['GET', fullKey]);
     if (existing) {
       try {
@@ -512,9 +552,8 @@ export async function checkAndSetDurableIdempotency<T = any>(
         return { isDuplicate: true };
       }
     }
-    // Set pending sentinel
-    await callKV(['SET', fullKey, JSON.stringify({ status: 'in_flight' }), 'NX', 'EX', ttlSec]);
-    return { isDuplicate: false };
+
+    return { isDuplicate: true };
   }
 
   const unlock = await acquireProcessFileLock();

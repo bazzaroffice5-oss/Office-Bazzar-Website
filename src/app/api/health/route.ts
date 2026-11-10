@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isZohoConfigured, getZohoConfigDiagnostics } from '@/lib/zoho/client';
 import { getProducts } from '@/lib/db/store';
 import { getSessionFromRequest } from '@/lib/auth/service';
+import { getDistributedDiagnostics } from '@/lib/distributed/coordinator';
 
 export const dynamic = 'force-dynamic';
 
@@ -52,6 +53,7 @@ export async function GET(req: NextRequest) {
         services: {
           crm: zohoHealthy ? 'operational' : 'degraded',
           catalog: catalogHealthy ? 'operational' : 'degraded',
+          coordinator: getDistributedDiagnostics().coordinatorType,
         },
       },
       {
@@ -84,6 +86,7 @@ export async function GET(req: NextRequest) {
           activeProducts: catalogCount,
           latencyMs: catalogLatency,
         },
+        coordinator: getDistributedDiagnostics(),
         memory: {
           rssMb: Math.round(process.memoryUsage().rss / (1024 * 1024)),
           heapUsedMb: Math.round(process.memoryUsage().heapUsed / (1024 * 1024)),
