@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
       console.warn('[Customer Quotes API] Zoho CRM query error, falling back to local database:', crmErr);
     }
 
-    // 2. Secondary / Fallback: If no records in Zoho CRM, query Supabase database
+    // 2. Secondary / Fallback: If no records in Zoho CRM, query runtime store
     if (quotations.length === 0) {
       try {
         const fallbackQuotes = await getQuotationsByCustomer(primaryIdentifier);

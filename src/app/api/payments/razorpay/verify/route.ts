@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getOrderById, updateOrderStatus } from '@/lib/db/store';
 import { verifyRazorpaySignature, isRazorpayConfigured } from '@/lib/payments/razorpay';
-import { supabaseAdmin, supabase, isSupabaseConfigured } from '@/lib/db/supabase';
+import { updateZohoSalesOrderStatus } from '@/lib/zoho/orders';
 
 export async function POST(req: Request) {
   try {
@@ -35,17 +35,14 @@ export async function POST(req: Request) {
 
     if (!isValid) {
       // Record failed payment attempt
-      if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-        const client = supabaseAdmin || supabase!;
-        await client
-          .from('orders')
-          .update({
-            payment_status: 'failed',
-            notes: `Payment verification failed at ${new Date().toISOString()} (signature mismatch)`,
-            updated_at: new Date().toISOString(),
-          })
-          .eq('id', orderId);
-      }
+      order.paymentStatus = 'failed';
+      order.notes = `Payment verification failed at ${new Date().toISOString()} (signature mismatch)`;
+      order.updatedAt = new Date().toISOString();
+
+      updateZohoSalesOrderStatus(order.orderNumber, 'cancelled', 'failed').catch((e) =>
+        console.warn('[Razorpay Verify] Zoho Sales Order update error:', e)
+      );
+
       return NextResponse.json(
         { verified: false, error: 'Cryptographic signature mismatch. Payment cannot be verified.' },
         { status: 400 }
@@ -53,26 +50,18 @@ export async function POST(req: Request) {
     }
 
     // Mark as PAID only upon verified gateway confirmation
-    if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-      const client = supabaseAdmin || supabase!;
-      await client
-        .from('orders')
-        .update({
-          payment_status: 'paid',
-          payment_id: razorpay_payment_id,
-          order_status: 'confirmed',
-          notes: `Verified Razorpay payment captured: ${razorpay_payment_id}`,
-          updated_at: new Date().toISOString(),
-        })
-        .eq('id', orderId);
-    } else {
-      order.paymentStatus = 'paid';
-      order.paymentId = razorpay_payment_id;
-      order.orderStatus = 'confirmed';
-      order.notes = `Verified Razorpay payment captured: ${razorpay_payment_id}`;
-    }
+    order.paymentStatus = 'paid';
+    order.paymentId = razorpay_payment_id;
+    order.orderStatus = 'confirmed';
+    order.notes = `Verified Razorpay payment captured: ${razorpay_payment_id}`;
+    order.updatedAt = new Date().toISOString();
 
     await updateOrderStatus(orderId, 'confirmed');
+
+    // Update authoritative Sales Order in Zoho CRM
+    updateZohoSalesOrderStatus(order.orderNumber, 'confirmed', 'paid', razorpay_payment_id).catch((e) =>
+      console.warn('[Razorpay Verify] Zoho Sales Order sync error:', e)
+    );
 
     return NextResponse.json({
       success: true,

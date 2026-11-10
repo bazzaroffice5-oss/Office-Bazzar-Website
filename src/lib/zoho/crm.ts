@@ -181,3 +181,90 @@ export async function syncQuotationToZoho(
     details: quoteRes.details,
   };
 }
+
+export interface BulkRfqLeadPayload {
+  companyName: string;
+  contactPerson: string;
+  email: string;
+  phone: string;
+  category?: string;
+  requirements: string;
+  estimatedQuantity?: string;
+  deliveryLocation?: string;
+  gstin?: string;
+}
+
+/**
+ * Synchronize a Bulk / Institutional RFQ directly into Zoho CRM Leads module
+ */
+export async function syncBulkRfqToZohoLead(rfq: BulkRfqLeadPayload): Promise<ZohoSyncResult> {
+  if (!(await isZohoConfigured())) {
+    return {
+      success: true,
+      action: 'skipped',
+    };
+  }
+
+  try {
+    const { firstName, lastName } = parseCustomerName(rfq.contactPerson);
+    const description = [
+      `=== WEBSITE INSTITUTIONAL BULK RFQ ===`,
+      `Company: ${rfq.companyName}`,
+      `Contact Person: ${rfq.contactPerson}`,
+      `Email: ${rfq.email}`,
+      `Phone: ${rfq.phone}`,
+      rfq.gstin ? `GSTIN: ${rfq.gstin}` : '',
+      rfq.category ? `Category: ${rfq.category}` : '',
+      rfq.estimatedQuantity ? `Estimated Spend / Quantity: ${rfq.estimatedQuantity}` : '',
+      rfq.deliveryLocation ? `Delivery Location: ${rfq.deliveryLocation}` : '',
+      ``,
+      `--- Detailed Requirements ---`,
+      rfq.requirements,
+      `======================================`,
+    ].filter(Boolean).join('\n');
+
+    const leadPayload = {
+      data: [
+        {
+          First_Name: firstName || undefined,
+          Last_Name: lastName,
+          Company: rfq.companyName.trim() || 'Institutional Customer',
+          Email: rfq.email.trim().toLowerCase(),
+          Phone: rfq.phone.trim(),
+          Lead_Source: 'Website Institutional RFQ',
+          Description: description,
+          City: rfq.deliveryLocation || undefined,
+        },
+      ],
+      trigger: ['approval', 'workflow', 'blueprint'],
+    };
+
+    const result = await zohoFetch<ZohoModuleResponse>('/Leads', {
+      method: 'POST',
+      body: JSON.stringify(leadPayload),
+    });
+
+    const firstItem = result.data?.[0];
+    if (firstItem && (firstItem.code === 'SUCCESS' || firstItem.status === 'success')) {
+      const leadId = firstItem.details?.id;
+      console.log(`[ZohoCRM] Successfully synced Bulk RFQ to Zoho Lead ID: ${leadId}`);
+      return {
+        success: true,
+        action: 'created',
+        leadId,
+      };
+    }
+
+    return {
+      success: false,
+      action: 'failed',
+      error: firstItem?.message || 'Failed to create Lead in Zoho CRM',
+    };
+  } catch (err) {
+    return {
+      success: false,
+      action: 'failed',
+      error: err instanceof Error ? err.message : String(err),
+    };
+  }
+}

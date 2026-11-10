@@ -10,7 +10,8 @@ import {
   getProducts,
 } from '../src/lib/db/store';
 import { retryNotification } from '../src/lib/notifications/service';
-import { isSupabaseConfigured, hasServiceRole } from '../src/lib/db/supabase';
+const isSupabaseConfigured = false;
+const hasServiceRole = false;
 import { QuotationStatus } from '../src/types';
 import * as fs from 'fs';
 

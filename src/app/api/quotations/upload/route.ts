@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
-import { supabaseAdmin, supabase, isSupabaseConfigured } from '@/lib/db/supabase';
 
 // Allowed formats and limits
 const ALLOWED_MIME_TYPES = new Set([
@@ -105,31 +104,7 @@ export async function POST(req: Request) {
 
       // Write to local public storage
       await writeFile(filePath, buffer);
-      let publicUrl = `/uploads/quotations/${fileName}`;
-
-      // Optional: If Supabase Storage is configured, attempt upload to storage bucket
-      if (isSupabaseConfigured && (supabaseAdmin || supabase)) {
-        try {
-          const client = supabaseAdmin || supabase!;
-          const { data, error } = await client.storage
-            .from('quotations')
-            .upload(`photos/${fileName}`, buffer, {
-              contentType: file.type || 'image/jpeg',
-              upsert: true,
-            });
-
-          if (!error && data?.path) {
-            const { data: publicData } = client.storage
-              .from('quotations')
-              .getPublicUrl(`photos/${fileName}`);
-            if (publicData?.publicUrl) {
-              publicUrl = publicData.publicUrl;
-            }
-          }
-        } catch {
-          // Local fallback remains authoritatively stored and served
-        }
-      }
+      const publicUrl = `/uploads/quotations/${fileName}`;
 
       uploadedFiles.push({
         url: publicUrl,

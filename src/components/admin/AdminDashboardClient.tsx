@@ -353,7 +353,7 @@ export default function AdminDashboardClient({
             Your authenticated account (<strong className="text-slate-900">{user.email}</strong>) does not have the <code className="px-1.5 py-0.5 bg-slate-100 rounded text-slate-800">admin</code> role assigned in the database profiles directory.
           </p>
           <p className="text-[11px] text-slate-400 mb-6">
-            If you are a member of the OfficeBazzar operations team, request an administrative role grant in the Supabase management console.
+            If you are a member of the OfficeBazzar operations team, request an administrative role grant in your operations console or contact the system administrator.
           </p>
           <Link
             href="/account"

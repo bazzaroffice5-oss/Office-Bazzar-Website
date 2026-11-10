@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { verifyRazorpayWebhookSignature } from '@/lib/payments/razorpay';
-import { supabaseAdmin, supabase, isSupabaseConfigured } from '@/lib/db/supabase';
-import { getOrderByNumber, getOrderById } from '@/lib/db/store';
+import { getOrderByNumber, getOrderById, updateOrderStatus } from '@/lib/db/store';
+import { updateZohoSalesOrderStatus } from '@/lib/zoho/orders';
 
 // In-memory set of processed webhook event IDs to guarantee idempotency across retries
 const processedEvents = new Set<string>();
@@ -44,42 +44,28 @@ export async function POST(req: Request) {
         : null;
 
       if (order) {
-        const client = isSupabaseConfigured && (supabaseAdmin || supabase) ? (supabaseAdmin || supabase!) : null;
-
         if (event === 'payment.captured' || event === 'order.paid') {
           const paymentId = paymentEntity?.id || orderEntity?.id;
-          if (client) {
-            await client
-              .from('orders')
-              .update({
-                payment_status: 'paid',
-                payment_id: paymentId,
-                order_status: 'confirmed',
-                notes: `Payment captured via Razorpay webhook: ${paymentId}`,
-                updated_at: new Date().toISOString(),
-              })
-              .eq('id', order.id);
-          } else {
-            order.paymentStatus = 'paid';
-            order.paymentId = paymentId;
-            order.orderStatus = 'confirmed';
-            order.notes = `Payment captured via Razorpay webhook: ${paymentId}`;
-          }
+          order.paymentStatus = 'paid';
+          order.paymentId = paymentId;
+          order.orderStatus = 'confirmed';
+          order.notes = `Payment captured via Razorpay webhook: ${paymentId}`;
+          order.updatedAt = new Date().toISOString();
+
+          await updateOrderStatus(order.id, 'confirmed');
+
+          updateZohoSalesOrderStatus(order.orderNumber, 'confirmed', 'paid', paymentId).catch((e) =>
+            console.warn('[Razorpay Webhook] Zoho Sales Order update error:', e)
+          );
         } else if (event === 'payment.failed') {
           const reason = paymentEntity?.error_description || 'Payment transaction failed';
-          if (client) {
-            await client
-              .from('orders')
-              .update({
-                payment_status: 'failed',
-                notes: `Payment failed: ${reason}`,
-                updated_at: new Date().toISOString(),
-              })
-              .eq('id', order.id);
-          } else {
-            order.paymentStatus = 'failed';
-            order.notes = `Payment failed: ${reason}`;
-          }
+          order.paymentStatus = 'failed';
+          order.notes = `Payment failed: ${reason}`;
+          order.updatedAt = new Date().toISOString();
+
+          updateZohoSalesOrderStatus(order.orderNumber, 'cancelled', 'failed').catch((e) =>
+            console.warn('[Razorpay Webhook] Zoho Sales Order update error:', e)
+          );
         }
       }
     }
