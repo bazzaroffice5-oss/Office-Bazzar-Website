@@ -24,29 +24,157 @@ import os from 'os';
 // Configuration & Environment Detection
 // ----------------------------------------------------------------------
 
-interface KVConfig {
+export interface KVConfig {
   url: string;
   token: string;
   isCloud: boolean;
+  sourceUrlKey: string;
+  sourceTokenKey: string;
 }
 
-function getKVConfig(): KVConfig | null {
-  const url =
-    process.env.KV_REST_API_URL ||
-    process.env.UPSTASH_REDIS_REST_URL ||
-    process.env.REDIS_REST_URL;
+export function isProductionEnvironment(): boolean {
+  return process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL);
+}
 
-  const token =
-    process.env.KV_REST_API_TOKEN ||
-    process.env.UPSTASH_REDIS_REST_TOKEN ||
-    process.env.REDIS_REST_TOKEN;
+function normalizeRestUrl(rawUrl: string): string | null {
+  try {
+    let cleaned = rawUrl.trim().replace(/^["']|["']$/g, '').replace(/\/+$/, '');
+    if (!cleaned) return null;
+    if (!cleaned.startsWith('http://') && !cleaned.startsWith('https://')) {
+      cleaned = `https://${cleaned}`;
+    }
+    const parsed = new URL(cleaned);
+    return `${parsed.protocol}//${parsed.host}`;
+  } catch {
+    return null;
+  }
+}
 
-  if (url && token) {
-    return {
-      url: url.trim().replace(/\/+$/, ''),
-      token: token.trim(),
-      isCloud: true,
-    };
+export function getKVConfig(): KVConfig | null {
+  // 1. Direct candidate pairs in order of preference:
+  // Covers standard Vercel KV, Upstash integration, and custom prefixes (especially STORAGE)
+  const candidatePairs: [string, string][] = [
+    // Standard Vercel KV
+    ['KV_REST_API_URL', 'KV_REST_API_TOKEN'],
+    // Standard Upstash Redis integration
+    ['UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN'],
+    // Vercel KV with 'STORAGE' custom prefix (generated when database is named or prefixed 'STORAGE')
+    ['STORAGE_KV_REST_API_URL', 'STORAGE_KV_REST_API_TOKEN'],
+    // Upstash integration with 'STORAGE' prefix
+    ['STORAGE_UPSTASH_REDIS_REST_URL', 'STORAGE_UPSTASH_REDIS_REST_TOKEN'],
+    // Generic REST with 'STORAGE' prefix
+    ['STORAGE_REST_API_URL', 'STORAGE_REST_API_TOKEN'],
+    // Generic REDIS REST
+    ['REDIS_REST_URL', 'REDIS_REST_TOKEN'],
+    ['STORAGE_REDIS_REST_URL', 'STORAGE_REDIS_REST_TOKEN'],
+    // Generic URL/TOKEN with STORAGE prefix
+    ['STORAGE_URL', 'STORAGE_TOKEN'],
+  ];
+
+  for (const [urlKey, tokenKey] of candidatePairs) {
+    const rawUrl = process.env[urlKey];
+    const rawToken = process.env[tokenKey];
+    if (rawUrl && rawToken) {
+      const cleanUrl = normalizeRestUrl(rawUrl);
+      const cleanToken = rawToken.trim().replace(/^["']|["']$/g, '');
+      if (cleanUrl && cleanToken) {
+        return {
+          url: cleanUrl,
+          token: cleanToken,
+          isCloud: true,
+          sourceUrlKey: urlKey,
+          sourceTokenKey: tokenKey,
+        };
+      }
+    }
+  }
+
+  // 2. Dynamic pattern matching across all environment variables for custom prefixes
+  const envKeys = Object.keys(process.env);
+  const urlKeys = envKeys.filter(
+    (k) =>
+      /(KV_REST_API_URL|UPSTASH_REDIS_REST_URL|REST_API_URL|REDIS_REST_URL)$/i.test(k) &&
+      Boolean(process.env[k])
+  );
+
+  for (const urlKey of urlKeys) {
+    const rawUrl = process.env[urlKey];
+    if (!rawUrl) continue;
+
+    // Look for matching token key by substituting URL suffix with TOKEN suffix
+    const candidateTokenKey = urlKey
+      .replace(/REST_API_URL$/i, 'REST_API_TOKEN')
+      .replace(/REDIS_REST_URL$/i, 'REDIS_REST_TOKEN')
+      .replace(/URL$/i, 'TOKEN');
+
+    let token = process.env[candidateTokenKey];
+    let sourceTokenKey = candidateTokenKey;
+
+    if (!token) {
+      // Try common token fallbacks
+      const fallbackTokenKeys = [
+        'KV_REST_API_TOKEN',
+        'UPSTASH_REDIS_REST_TOKEN',
+        'STORAGE_KV_REST_API_TOKEN',
+        'STORAGE_REST_API_TOKEN',
+        'STORAGE_UPSTASH_REDIS_REST_TOKEN',
+        'REDIS_REST_TOKEN',
+      ];
+      for (const ftk of fallbackTokenKeys) {
+        if (process.env[ftk]) {
+          token = process.env[ftk];
+          sourceTokenKey = ftk;
+          break;
+        }
+      }
+    }
+
+    if (rawUrl && token) {
+      const cleanUrl = normalizeRestUrl(rawUrl);
+      const cleanToken = token.trim().replace(/^["']|["']$/g, '');
+      if (cleanUrl && cleanToken) {
+        return {
+          url: cleanUrl,
+          token: cleanToken,
+          isCloud: true,
+          sourceUrlKey: urlKey,
+          sourceTokenKey,
+        };
+      }
+    }
+  }
+
+  // 3. Fallback: Parse Upstash / Vercel Redis connection strings (redis:// or rediss://)
+  // e.g. rediss://default:<password>@<host>:<port> -> REST URL = https://<host>, Token = <password>
+  const redisUriKeys = [
+    'STORAGE_KV_URL',
+    'STORAGE_UPSTASH_REDIS_URL',
+    'STORAGE_URL',
+    'KV_URL',
+    'UPSTASH_REDIS_URL',
+    'REDIS_URL',
+  ];
+
+  for (const uriKey of redisUriKeys) {
+    const rawUri = process.env[uriKey];
+    if (rawUri && (rawUri.startsWith('redis://') || rawUri.startsWith('rediss://'))) {
+      try {
+        const parsed = new URL(rawUri);
+        const host = parsed.hostname;
+        const password = parsed.password ? decodeURIComponent(parsed.password) : '';
+        if (host && password) {
+          return {
+            url: `https://${host}`,
+            token: password,
+            isCloud: true,
+            sourceUrlKey: `${uriKey} (parsed URI)`,
+            sourceTokenKey: `${uriKey} (parsed URI)`,
+          };
+        }
+      } catch {
+        // Ignore parse error
+      }
+    }
   }
 
   return null;
@@ -262,6 +390,12 @@ export async function acquireDistributedLock(
       }
       await new Promise((r) => setTimeout(r, 50 + Math.floor(Math.random() * 50)));
     }
+    return { acquired: false, release: async () => {} };
+  }
+
+  // In production, do not silently fall back to ephemeral /tmp file lock
+  if (isProductionEnvironment()) {
+    console.error('[DistributedLock] CRITICAL: Lock requested in production without active Cloud KV backend.');
     return { acquired: false, release: async () => {} };
   }
 
@@ -489,6 +623,15 @@ export async function atomicReserveInventory(
     }
   }
 
+  // In production, do not silently fall back to ephemeral /tmp journal
+  if (isProductionEnvironment()) {
+    console.error('[DistributedReservation] CRITICAL: Inventory reservation cannot proceed in production without active Cloud KV backend.');
+    return {
+      success: false,
+      error: 'Distributed inventory coordination backend is unavailable in production.',
+    };
+  }
+
   // B. Multi-Process Shared Coordination Store Fallback
   const unlockFile = await acquireProcessFileLock();
   try {
@@ -566,6 +709,11 @@ export async function atomicCommitInventory(reservationId: string): Promise<bool
     return true;
   }
 
+  if (isProductionEnvironment()) {
+    console.error('[DistributedReservation] CRITICAL: Commit requested in production without active Cloud KV backend.');
+    return false;
+  }
+
   const unlock = await acquireProcessFileLock();
   try {
     const state = readSharedState();
@@ -598,6 +746,11 @@ export async function atomicReleaseInventory(reservationId: string): Promise<boo
       await callKVPipeline(pipeline);
     }
     return true;
+  }
+
+  if (isProductionEnvironment()) {
+    console.error('[DistributedReservation] CRITICAL: Release requested in production without active Cloud KV backend.');
+    return false;
   }
 
   const unlock = await acquireProcessFileLock();
@@ -653,6 +806,11 @@ export async function checkAndSetDurableIdempotency<T = any>(
     return { isDuplicate: true };
   }
 
+  if (isProductionEnvironment()) {
+    console.error('[DistributedIdempotency] CRITICAL: Idempotency claim in production without active Cloud KV backend.');
+    throw new Error('Distributed coordination backend unavailable in production for idempotency claim');
+  }
+
   const unlock = await acquireProcessFileLock();
   try {
     const now = Date.now();
@@ -684,6 +842,11 @@ export async function recordDurableIdempotencyResult(
 
   if (config) {
     await callKV(['SET', fullKey, JSON.stringify(resultData), 'EX', ttlSec]);
+    return;
+  }
+
+  if (isProductionEnvironment()) {
+    console.error('[DistributedIdempotency] CRITICAL: Idempotency store in production without active Cloud KV backend.');
     return;
   }
 
@@ -725,6 +888,11 @@ export async function clearDurableIdempotency(key: string): Promise<void> {
     return;
   }
 
+  if (isProductionEnvironment()) {
+    console.error('[DistributedIdempotency] CRITICAL: Idempotency clear in production without active Cloud KV backend.');
+    return;
+  }
+
   const unlock = await acquireProcessFileLock();
   try {
     const state = readSharedState();
@@ -752,6 +920,11 @@ export async function isDistributedWebhookDuplicate(
     // SET NX returns "OK" if key was set (i.e. first time), null if already exists (duplicate)
     const res = await callKV<string>(['SET', key, '1', 'NX', 'EX', ttlSec]);
     return res !== 'OK';
+  }
+
+  if (isProductionEnvironment()) {
+    console.error('[DistributedWebhook] CRITICAL: Webhook deduplication in production without active Cloud KV backend.');
+    throw new Error('Distributed coordination backend unavailable in production for webhook deduplication');
   }
 
   const unlock = await acquireProcessFileLock();
@@ -812,6 +985,12 @@ export async function checkDistributedRateLimit(
     }
   }
 
+  // In production, do not silently fall back to ephemeral /tmp file
+  if (isProductionEnvironment()) {
+    console.warn('[DistributedRateLimit] Cloud KV not configured in production; allowing request to prevent service disruption.');
+    return { allowed: true, remaining: limit - 1, resetSec: windowSec };
+  }
+
   // Multi-Process File Store Fallback
   const unlock = await acquireProcessFileLock();
   try {
@@ -857,6 +1036,11 @@ export async function enqueueDurableOutboxOrder(orderPayload: any): Promise<void
     return;
   }
 
+  if (isProductionEnvironment()) {
+    console.error('[DistributedOutbox] CRITICAL: Outbox enqueue in production without active Cloud KV backend.');
+    throw new Error('Distributed coordination backend unavailable in production for outbox persistence');
+  }
+
   const unlock = await acquireProcessFileLock();
   try {
     const state = readSharedState();
@@ -888,6 +1072,11 @@ export async function dequeueDurableOutboxOrders(batchSize = 10): Promise<any[]>
     return items;
   }
 
+  if (isProductionEnvironment()) {
+    console.error('[DistributedOutbox] CRITICAL: Outbox dequeue in production without active Cloud KV backend.');
+    return [];
+  }
+
   const unlock = await acquireProcessFileLock();
   try {
     const state = readSharedState();
@@ -905,12 +1094,80 @@ export async function dequeueDurableOutboxOrders(batchSize = 10): Promise<any[]>
 export function getDistributedDiagnostics(): {
   isCloudKVConfigured: boolean;
   coordinatorType: 'cloud_kv_rest' | 'multi_process_shared_journal';
+  sourceUrlKey: string | null;
+  sourceTokenKey: string | null;
+  detectedEnvKeys: string[];
+  isProduction: boolean;
 } {
   const config = getKVConfig();
+  const detectedEnvKeys = Object.keys(process.env).filter((k) =>
+    /^(KV|UPSTASH|STORAGE|REDIS)/i.test(k)
+  );
+  const isProd = isProductionEnvironment();
+
   return {
     isCloudKVConfigured: Boolean(config),
     coordinatorType: config ? 'cloud_kv_rest' : 'multi_process_shared_journal',
+    sourceUrlKey: config?.sourceUrlKey || null,
+    sourceTokenKey: config?.sourceTokenKey || null,
+    detectedEnvKeys,
+    isProduction: isProd,
   };
+}
+
+/**
+ * End-to-end live testing helper for Cloud KV (PING, SET, GET, DEL)
+ */
+export async function testDistributedKV(): Promise<{
+  configured: boolean;
+  ping: string | null;
+  writeReadTest: boolean;
+  latencyMs: number;
+  error?: string;
+  sourceUrlKey?: string | null;
+  sourceTokenKey?: string | null;
+}> {
+  const config = getKVConfig();
+  if (!config) {
+    return {
+      configured: false,
+      ping: null,
+      writeReadTest: false,
+      latencyMs: 0,
+      error: 'Cloud KV not configured. No matching environment variables found.',
+    };
+  }
+
+  const start = Date.now();
+  try {
+    const pingRes = await callKV<string>(['PING']);
+    const testKey = `coord:health_test:${Date.now()}`;
+    const setRes = await callKV<string>(['SET', testKey, 'ok', 'PX', 10000]);
+    const getRes = await callKV<string>(['GET', testKey]);
+    await callKV(['DEL', testKey]);
+
+    const latencyMs = Date.now() - start;
+    const isWriteReadOk = setRes === 'OK' && getRes === 'ok';
+
+    return {
+      configured: true,
+      ping: pingRes,
+      writeReadTest: isWriteReadOk,
+      latencyMs,
+      sourceUrlKey: config.sourceUrlKey,
+      sourceTokenKey: config.sourceTokenKey,
+    };
+  } catch (err: any) {
+    return {
+      configured: true,
+      ping: null,
+      writeReadTest: false,
+      latencyMs: Date.now() - start,
+      error: err?.message || 'Failed to execute Redis operations',
+      sourceUrlKey: config.sourceUrlKey,
+      sourceTokenKey: config.sourceTokenKey,
+    };
+  }
 }
 
 /**

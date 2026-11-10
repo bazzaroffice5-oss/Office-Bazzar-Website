@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isZohoConfigured, getZohoConfigDiagnostics } from '@/lib/zoho/client';
 import { getProducts } from '@/lib/db/store';
 import { getSessionFromRequest } from '@/lib/auth/service';
-import { getDistributedDiagnostics } from '@/lib/distributed/coordinator';
+import { getDistributedDiagnostics, testDistributedKV } from '@/lib/distributed/coordinator';
 
 export const dynamic = 'force-dynamic';
 
@@ -38,6 +38,17 @@ export async function GET(req: NextRequest) {
 
   const overallHealthy = zohoHealthy && catalogHealthy;
 
+  // 3. Distributed Coordinator Health & Diagnostics
+  const coordDiag = getDistributedDiagnostics();
+  let redisTestResult: any = null;
+  if (coordDiag.isCloudKVConfigured) {
+    try {
+      redisTestResult = await testDistributedKV();
+    } catch (err: any) {
+      redisTestResult = { error: err?.message || 'Redis test failure' };
+    }
+  }
+
   // Check authorization for detailed diagnostics (Admin session or internal secret)
   const sessionUser = getSessionFromRequest(req);
   const isAdmin = sessionUser && (sessionUser.role === 'admin' || sessionUser.role === 'staff');
@@ -53,7 +64,24 @@ export async function GET(req: NextRequest) {
         services: {
           crm: zohoHealthy ? 'operational' : 'degraded',
           catalog: catalogHealthy ? 'operational' : 'degraded',
-          coordinator: getDistributedDiagnostics().coordinatorType,
+          coordinator: coordDiag.coordinatorType,
+        },
+        coordinatorDetails: {
+          isCloudKVConfigured: coordDiag.isCloudKVConfigured,
+          coordinatorType: coordDiag.coordinatorType,
+          sourceUrlKey: coordDiag.sourceUrlKey,
+          sourceTokenKey: coordDiag.sourceTokenKey,
+          detectedEnvKeys: coordDiag.detectedEnvKeys,
+          ...(redisTestResult
+            ? {
+                redisTest: {
+                  ping: redisTestResult.ping,
+                  writeRead: redisTestResult.writeReadTest,
+                  latencyMs: redisTestResult.latencyMs,
+                  error: redisTestResult.error,
+                },
+              }
+            : {}),
         },
       },
       {
@@ -86,7 +114,10 @@ export async function GET(req: NextRequest) {
           activeProducts: catalogCount,
           latencyMs: catalogLatency,
         },
-        coordinator: getDistributedDiagnostics(),
+        coordinator: {
+          ...coordDiag,
+          test: redisTestResult,
+        },
         memory: {
           rssMb: Math.round(process.memoryUsage().rss / (1024 * 1024)),
           heapUsedMb: Math.round(process.memoryUsage().heapUsed / (1024 * 1024)),
