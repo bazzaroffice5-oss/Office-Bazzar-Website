@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 import { createOrder, getProductById, validateCoupon } from '@/lib/db/store';
 import { reserveStock, commitStockReservation, releaseStockReservation } from '@/lib/inventory/reservation';
+import {
+  checkAndSetDurableIdempotency,
+  recordDurableIdempotencyResult,
+} from '@/lib/distributed/coordinator';
 import { OrderItem, Address, PaymentMethod } from '@/types';
 
 export async function POST(req: Request) {
@@ -9,6 +13,14 @@ export async function POST(req: Request) {
     const body = await req.json();
     const idempotencyHeader = req.headers.get('Idempotency-Key') || req.headers.get('x-idempotency-key');
     const idempotencyKey = idempotencyHeader || body.idempotencyKey;
+
+    // Cross-Instance Durable Idempotency Check
+    if (idempotencyKey) {
+      const { isDuplicate, cachedData } = await checkAndSetDurableIdempotency(idempotencyKey, 86400);
+      if (isDuplicate && cachedData && cachedData.orderNumber) {
+        return NextResponse.json({ success: true, order: cachedData, idempotent: true });
+      }
+    }
 
     const {
       customerName,
@@ -161,6 +173,11 @@ export async function POST(req: Request) {
 
     // 3. Commit the stock reservation permanently to the created order
     await commitStockReservation(reservationId, newOrder.orderNumber);
+
+    // 4. Record cross-instance durable idempotency result
+    if (idempotencyKey) {
+      await recordDurableIdempotencyResult(idempotencyKey, newOrder, 86400).catch(() => {});
+    }
 
     return NextResponse.json({ success: true, order: newOrder });
   } catch (error: unknown) {

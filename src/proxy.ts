@@ -1,52 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { checkDistributedRateLimit } from '@/lib/distributed/coordinator';
 
-// ----------------------------------------------------------------------
-// HIGH-TRAFFIC CONCURRENCY RATE LIMITER (SLIDING WINDOW)
-// ----------------------------------------------------------------------
-
-interface RateLimitRecord {
-  count: number;
-  resetAt: number;
-}
-
-// In-memory rate limiting map per client IP
-const rateLimitMap = new Map<string, RateLimitRecord>();
-
-function isRateLimited(key: string, limit: number, windowMs: number): boolean {
-  const now = Date.now();
-  const record = rateLimitMap.get(key);
-
-  if (!record || now > record.resetAt) {
-    rateLimitMap.set(key, { count: 1, resetAt: now + windowMs });
-    return false;
-  }
-
-  record.count++;
-  if (record.count > limit) {
-    return true;
-  }
-
-  return false;
-}
-
-// Periodically prune stale keys to prevent memory growth under continuous traffic
-let lastCleanup = Date.now();
-function cleanupRateLimitMap() {
-  const now = Date.now();
-  if (now - lastCleanup > 60000) {
-    lastCleanup = now;
-    for (const [key, record] of rateLimitMap.entries()) {
-      if (now > record.resetAt) {
-        rateLimitMap.delete(key);
-      }
-    }
-  }
-}
-
-export function proxy(request: NextRequest) {
-  cleanupRateLimitMap();
-
+export async function proxy(request: NextRequest) {
   const host = request.headers.get('host')?.toLowerCase();
 
   // 1. Domain Canonicalization:
@@ -66,39 +22,43 @@ export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const method = request.method.toUpperCase();
 
-  // 2. High-Concurrency Rate Limiting for Sensitive Endpoints
+  // 2. Cross-Instance Distributed Rate Limiting for Sensitive Endpoints
   if (pathname === '/api/auth/send-otp') {
-    if (isRateLimited(`otp-send:${ip}`, 6, 60000)) {
+    const rate = await checkDistributedRateLimit(`otp-send:${ip}`, 6, 60);
+    if (!rate.allowed) {
       return NextResponse.json(
-        { error: 'Too many verification code requests. Please wait 1 minute before retrying.' },
-        { status: 429, headers: { 'Retry-After': '60' } }
+        { error: 'Too many verification code requests. Please wait before retrying.' },
+        { status: 429, headers: { 'Retry-After': String(rate.resetSec) } }
       );
     }
   }
 
   if (pathname === '/api/auth/verify-otp') {
-    if (isRateLimited(`otp-verify:${ip}`, 12, 60000)) {
+    const rate = await checkDistributedRateLimit(`otp-verify:${ip}`, 12, 60);
+    if (!rate.allowed) {
       return NextResponse.json(
         { error: 'Too many verification attempts. Please wait before retrying.' },
-        { status: 429, headers: { 'Retry-After': '60' } }
+        { status: 429, headers: { 'Retry-After': String(rate.resetSec) } }
       );
     }
   }
 
   if (pathname === '/api/orders/create' && method === 'POST') {
-    if (isRateLimited(`order-create:${ip}`, 20, 60000)) {
+    const rate = await checkDistributedRateLimit(`order-create:${ip}`, 20, 60);
+    if (!rate.allowed) {
       return NextResponse.json(
         { error: 'Checkout rate limit exceeded. Please wait a moment before trying again.' },
-        { status: 429, headers: { 'Retry-After': '30' } }
+        { status: 429, headers: { 'Retry-After': String(rate.resetSec) } }
       );
     }
   }
 
   if (pathname === '/api/quotations/create' && method === 'POST') {
-    if (isRateLimited(`quote-create:${ip}`, 20, 60000)) {
+    const rate = await checkDistributedRateLimit(`quote-create:${ip}`, 20, 60);
+    if (!rate.allowed) {
       return NextResponse.json(
         { error: 'Quotation submission rate limit exceeded. Please wait a moment.' },
-        { status: 429, headers: { 'Retry-After': '30' } }
+        { status: 429, headers: { 'Retry-After': String(rate.resetSec) } }
       );
     }
   }

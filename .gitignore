@@ -45,6 +45,10 @@ yarn-error.log*
 .zoho_grant_code.txt
 .zoho_vercel_refresh_token.txt
 .zoho_authorize_url.txt
+.distributed_coordination_*
+.inventory_reservations.*
+.razorpay_webhook_dedup.json
+.zoho_orders_downtime_outbox.json
 
 # vercel
 .vercel
