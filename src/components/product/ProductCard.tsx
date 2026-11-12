@@ -71,11 +71,28 @@ export default function ProductCard({
   return (
     <div
       onClick={handleCardClick}
-      className={`group relative flex flex-col justify-between bg-white border border-[#E2EBE3] hover:border-[#3B82F6]/50 rounded-[22px] transition-all duration-300 ease-out shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05),0_2px_6px_-1px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_28px_-4px_rgba(0,0,0,0.1),0_4px_10px_-2px_rgba(0,0,0,0.05)] hover:-translate-y-1 h-full select-none cursor-pointer overflow-hidden ${className}`}
+      className={`group relative flex flex-col justify-between bg-white border-2 border-white hover:border-[#3B82F6]/40 rounded-[24px] transition-all duration-300 ease-out shadow-[0_8px_24px_-4px_rgba(22,58,95,0.08),0_2px_8px_-2px_rgba(22,58,95,0.04)] hover:shadow-[0_16px_36px_-4px_rgba(22,58,95,0.14),0_6px_14px_-2px_rgba(22,58,95,0.08)] hover:-translate-y-1.5 h-full select-none cursor-pointer overflow-hidden ${className}`}
     >
-      {/* 1. White Product Image Display Area (Strict IMAGE 2 Reference: Clean White Stage, Centered Product, Object-Fit Contain) */}
-      <div className="relative w-full h-56 sm:h-64 bg-white flex items-center justify-center p-3 sm:p-4 overflow-hidden">
-        {/* Floating Add-to-Cart Action (Preserves Full Cart Functionality, Elegant Hover) */}
+      {/* 1. Presentation Stage Area (Master Approved Design: Filled Sky-Blue Arches, Palm Foliage & 3D Podium) */}
+      <div className="relative w-full h-64 sm:h-72 bg-gradient-to-b from-[#A6D3F8] via-[#C4E2FB] to-[#E8F3FD] flex items-center justify-center overflow-hidden border-b border-[#D5E8F8]">
+        {/* Layered Filled Sky-Blue Architectural Arches */}
+        {/* Left Solid Filled Arch */}
+        <div className="absolute left-2.5 top-3 w-[62%] h-[78%] rounded-t-[100px] bg-gradient-to-b from-[#7FB4F1] via-[#92C4F5] to-[#A4D0F8] shadow-2xs pointer-events-none" />
+        {/* Right Solid Filled Arch */}
+        <div className="absolute right-2.5 top-7 w-[58%] h-[72%] rounded-t-[90px] bg-gradient-to-b from-[#94C5F6] via-[#A8D3F9] to-[#BCDDFB] pointer-events-none" />
+
+        {/* Botanical Palm Foliage on Left Side of Stage */}
+        <div className="absolute left-1 bottom-10 sm:bottom-12 w-12 sm:w-14 h-32 sm:h-36 pointer-events-none z-1 drop-shadow-sm">
+          <Image
+            src="/assets/decorations/stage_palm_foliage.webp"
+            alt=""
+            fill
+            className="object-contain object-left-bottom"
+            unoptimized
+          />
+        </div>
+
+        {/* Floating Add-to-Cart Action */}
         <button
           type="button"
           data-cart-button="true"
@@ -86,7 +103,7 @@ export default function ProductCard({
           className={`absolute top-3 right-3 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center transition-all duration-200 shadow-2xs border ${
             showAddedConfirmation
               ? 'bg-emerald-600 border-emerald-600 text-white opacity-100 scale-105'
-              : 'bg-white/95 backdrop-blur-xs border-[#E2EBE3] text-[#526174] hover:text-white hover:bg-[#2563EB] hover:border-[#2563EB] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 cursor-pointer active:scale-95'
+              : 'bg-white/95 backdrop-blur-xs border-[#CFDFEC] text-[#163A5F] hover:text-white hover:bg-[#2563EB] hover:border-[#2563EB] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 cursor-pointer active:scale-95'
           }`}
         >
           {showAddedConfirmation ? (
@@ -96,29 +113,39 @@ export default function ProductCard({
           )}
         </button>
 
-        {/* Clean Centered Image Stage */}
+        {/* Large 3D Circular White Podium Stage */}
+        <div className="absolute bottom-3 w-[88%] max-w-[235px] h-14 sm:h-16 flex flex-col items-center pointer-events-none">
+          {/* Ambient Contact Shadow Underneath Pedestal */}
+          <div className="absolute -bottom-2 w-[96%] h-6 bg-[#0B2545]/22 blur-[6px] rounded-[50%]" />
+          {/* Cylinder Base Rim (Depth & Curvature) */}
+          <div className="absolute bottom-0 w-[92%] h-6 bg-gradient-to-b from-white via-[#EFF4F9] to-[#C9D7E4] rounded-b-[50%] border-x border-b border-[#B2C5D6] shadow-xs" />
+          {/* Top Disc Surface (Bright Elliptical Platform) */}
+          <div className="absolute top-0 w-[92%] h-8 bg-gradient-to-b from-white via-[#FCFDFE] to-[#DFECF6] rounded-[50%] border border-[#C5D7E6] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.98),0_2px_5px_rgba(11,37,69,0.08)]" />
+        </div>
+
+        {/* Product Image on Podium (Prominent, Centered, Naturally Resting on 3D Disc) */}
         <Link
           href={productUrl}
-          className="relative z-10 w-full h-full flex items-center justify-center focus:outline-none"
+          className="relative z-10 w-[84%] h-[78%] max-h-[165px] sm:max-h-[180px] flex items-end justify-center mb-4 sm:mb-5 focus:outline-none mix-blend-multiply"
           tabIndex={-1}
           aria-hidden="true"
         >
-          <div className="relative w-full h-full transition-transform duration-300 ease-out group-hover:scale-105 flex items-center justify-center">
+          <div className="relative w-full h-full transition-transform duration-300 ease-out group-hover:scale-105 flex items-end justify-center">
             <Image
               src={imgSrc}
               alt={product.name}
               fill
               priority={priority}
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-contain object-center"
+              className="object-contain filter drop-shadow-[0_8px_14px_rgba(11,37,69,0.16)]"
               onError={() => setImgSrc(getVersionedImageUrl('/assets/placeholder-product.svg'))}
             />
           </div>
         </Link>
       </div>
 
-      {/* 2. Premium White Product Information Section (Strict IMAGE 2 Reference) */}
-      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between items-center text-center bg-white border-t border-slate-100/60">
+      {/* 2. Premium White Product Information Section */}
+      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between items-center text-center bg-white">
         {/* Navy-Blue Product Title */}
         <Link
           href={productUrl}
@@ -129,18 +156,15 @@ export default function ProductCard({
         </Link>
 
         {/* Sky-Blue Decorative Underline Below Product Name */}
-        <div className="w-10 sm:w-12 h-1 bg-[#4A9DF8] rounded-full mx-auto mt-2 transition-all duration-300 group-hover:w-16 group-hover:bg-[#2563EB]" />
+        <div className="w-11 sm:w-12 h-1 bg-[#4A9DF8] rounded-full mx-auto mt-2.5 transition-all duration-300 group-hover:w-16 group-hover:bg-[#2563EB]" />
 
-        {/* Brand Name on Left & Standard Pack on Right (Exact Match with IMAGE 2) */}
-        <div className="w-full flex items-center justify-between mt-4 pt-2.5 border-t border-slate-100">
-          <span
-            className="text-[11px] sm:text-xs font-semibold text-[#0B2545] truncate max-w-[130px] text-left"
-            title={brandDisplayName}
-          >
+        {/* Brand Name on Left & Standard Pack on Right */}
+        <div className="w-full flex items-center justify-between mt-3 pt-2.5 border-t border-[#F1F6FB] text-[11px] text-[#526174]">
+          <span className="font-semibold text-[#163A5F] truncate max-w-[120px] text-left" title={brandDisplayName}>
             {brandDisplayName}
           </span>
-          <span className="text-[10px] sm:text-[11px] font-normal text-slate-400 shrink-0 text-right">
-            Standard Pack
+          <span className="text-slate-400 font-normal shrink-0 text-right">
+            {product.packSize || 'Standard Pack'}
           </span>
         </div>
       </div>
