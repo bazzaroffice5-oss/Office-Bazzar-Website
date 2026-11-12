@@ -21,6 +21,7 @@ import {
 import { useAuth } from '@/context/AuthContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { Quotation, Address } from '@/types';
+import { getVersionedImageUrl } from '@/lib/utils/image';
 
 function CustomerAccountDashboardContent() {
   const router = useRouter();
@@ -573,7 +574,7 @@ function CustomerAccountDashboardContent() {
                         <div className="flex items-center gap-3 min-w-0">
                           <div className="relative w-12 h-12 rounded-lg bg-white border border-slate-200 overflow-hidden shrink-0 flex items-center justify-center">
                             <Image
-                              src={item.images?.[0] || '/assets/placeholder-product.svg'}
+                              src={getVersionedImageUrl(item.images?.[0] || '/assets/placeholder-product.svg')}
                               alt={item.name}
                               fill
                               className="object-contain p-1.5"

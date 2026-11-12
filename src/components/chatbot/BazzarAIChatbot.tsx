@@ -18,6 +18,7 @@ import {
   Search,
 } from 'lucide-react';
 import { ProductCardSuggestion } from '@/app/api/chat/route';
+import { getVersionedImageUrl } from '@/lib/utils/image';
 
 interface Message {
   id: string;
@@ -567,7 +568,7 @@ export default function BazzarAIChatbot() {
                                 {prod.imageUrl ? (
                                   <div className="w-10 h-10 bg-white rounded-lg p-1 border border-slate-200 shrink-0 flex items-center justify-center">
                                     <Image
-                                      src={prod.imageUrl}
+                                      src={getVersionedImageUrl(prod.imageUrl)}
                                       alt={prod.name}
                                       width={40}
                                       height={40}

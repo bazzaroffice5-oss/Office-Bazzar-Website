@@ -17,6 +17,7 @@ import {
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import { useLocation } from '@/context/LocationContext';
+import { getVersionedImageUrl } from '@/lib/utils/image';
 
 interface PhotoItem {
   id: string;
@@ -420,10 +421,10 @@ export default function RequestQuoteClient() {
                     <div className="flex items-center gap-2.5 min-w-0">
                       <div className="relative w-10 h-10 rounded-md bg-white border border-slate-200 overflow-hidden shrink-0 flex items-center justify-center">
                         <Image
-                          src={
+                          src={getVersionedImageUrl(
                             item.product.images?.[0] ||
                             '/assets/placeholder-product.svg'
-                          }
+                          )}
                           alt={item.product.name}
                           fill
                           className="object-contain p-1"

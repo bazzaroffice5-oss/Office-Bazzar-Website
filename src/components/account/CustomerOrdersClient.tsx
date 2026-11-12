@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { PackageCheck, Truck, FileText, Lock } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { Order } from '@/types';
+import { getVersionedImageUrl } from '@/lib/utils/image';
 
 interface CustomerOrdersClientProps {
   initialOrders: Order[];
@@ -120,7 +121,7 @@ export default function CustomerOrdersClient({ initialOrders }: CustomerOrdersCl
                   <div key={item.id} className="py-4 first:pt-0 last:pb-0 flex items-center space-x-4">
                     <div className="w-16 h-16 rounded-xl overflow-hidden bg-white relative shrink-0 border border-slate-200 flex items-center justify-center">
                       <Image
-                        src={((item.productImage?.startsWith('/assets/products/catalog_2026/') || item.productImage?.startsWith('/assets/supplier-library/') || item.productImage?.startsWith('/assets/product/')) ? item.productImage : '/assets/placeholder-product.svg')}
+                        src={getVersionedImageUrl((item.productImage?.startsWith('/assets/products/catalog_2026/') || item.productImage?.startsWith('/assets/supplier-library/') || item.productImage?.startsWith('/assets/product/')) ? item.productImage : '/assets/placeholder-product.svg')}
                         alt={item.productName}
                         fill
                         quality={85}
