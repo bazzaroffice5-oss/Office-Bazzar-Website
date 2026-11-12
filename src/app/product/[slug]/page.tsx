@@ -2,6 +2,7 @@ import React from 'react';
 import { notFound, permanentRedirect } from 'next/navigation';
 import ProductDetailClient from '@/components/product/ProductDetailClient';
 import { getProductBySlug, getRelatedProducts, getBrands, getProducts } from '@/lib/db/store';
+import { getVersionedImageUrl } from '@/lib/utils/image';
 import {
   getProductJsonLd,
   getBreadcrumbJsonLd,
@@ -130,8 +131,15 @@ export default async function ProductPage({
     { name: product.name, url: `/product/${product.slug}` },
   ]);
 
+  // Primary LCP Hero Image Preload
+  const primaryImage =
+    product.images && product.images.length > 0
+      ? getVersionedImageUrl(product.images[0])
+      : getVersionedImageUrl('/assets/placeholder-product.svg');
+
   return (
     <main className="min-h-screen bg-[#F5FAF6]">
+      <link rel="preload" as="image" href={primaryImage} fetchPriority="high" />
       <JsonLd data={productJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
       <ProductDetailClient

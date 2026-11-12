@@ -73,9 +73,18 @@ function formatCurrentTime(): string {
 }
 
 export default function BazzarAIChatbot() {
+  const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const timer = setTimeout(() => {
+      setIsMounted(true);
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Draggable robot position and animation states
   const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
@@ -383,6 +392,8 @@ export default function BazzarAIChatbot() {
     handleSendMessage(suggestion);
   };
 
+  if (!isMounted) return null;
+
   return (
     <>
       {/* 1. FLOATING LAUNCHER (Fully draggable across viewport, saved in localStorage, smooth animations) */}
@@ -423,7 +434,7 @@ export default function BazzarAIChatbot() {
             alt="Bazzar AI 3D Robot Assistant"
             width={90}
             height={100}
-            priority
+            loading="lazy"
             unoptimized
             draggable={false}
             className={`w-full h-full object-contain select-none pointer-events-none transition-all duration-200 ${
@@ -453,7 +464,7 @@ export default function BazzarAIChatbot() {
                   alt="Bazzar AI"
                   width={40}
                   height={40}
-                  priority
+                  loading="lazy"
                   unoptimized
                   className="w-full h-full object-contain select-none"
                 />

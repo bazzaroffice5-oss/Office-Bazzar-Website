@@ -107,6 +107,7 @@ export default function ProductDetailClient({
               alt={product.name}
               fill
               priority
+              fetchPriority="high"
               sizes="(max-width: 768px) 100vw, 480px"
               className="object-contain p-4 transition-transform duration-300 hover:scale-105"
               onError={() => setActiveImage(getVersionedImageUrl(FALLBACK_IMAGE))}
@@ -131,6 +132,8 @@ export default function ProductDetailClient({
                     src={img}
                     alt={`${product.name} thumbnail ${idx + 1}`}
                     fill
+                    loading="lazy"
+                    sizes="64px"
                     className="object-contain p-0.5"
                   />
                 </button>

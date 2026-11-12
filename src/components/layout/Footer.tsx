@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, ArrowRight, Navigation, ExternalLink } from 'lucide-react';
@@ -46,6 +46,27 @@ const SOCIAL_LINKS = [
 ];
 
 export default function Footer() {
+  const [shouldLoadMap, setShouldLoadMap] = useState(false);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (shouldLoadMap) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setShouldLoadMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '300px' }
+    );
+
+    if (mapContainerRef.current) {
+      observer.observe(mapContainerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [shouldLoadMap]);
   return (
     <footer id="footer" className="w-full bg-[#0a192f] text-slate-300 pt-12 sm:pt-14 pb-8 sm:pb-10 border-t border-slate-800">
       <h2 className="sr-only">Footer Navigation and Corporate Contact Information</h2>
@@ -58,7 +79,7 @@ export default function Footer() {
             <div className="h-7 flex items-center">
               <Link href="/" className="inline-block">
                 <Image
-                  src="/images/officebazzar-logo-transparent.png"
+                  src="/images/officebazzar-logo-transparent.webp"
                   alt="OfficeBazzar Logo"
                   width={150}
                   height={34}
@@ -244,16 +265,38 @@ export default function Footer() {
                 </h4>
 
                 {/* Interactive Google Map Embed - Exact Width Matching */}
-                <div className="relative w-full h-32 sm:h-36 rounded-xl overflow-hidden border border-slate-700/80 bg-slate-900 shadow-inner group">
-                  <iframe
-                    title="OfficeBazzar Central Logistics Hub Location Map"
-                    src={GOOGLE_MAPS_EMBED_URL}
-                    className="w-full h-full border-0 filter contrast-[1.05] opacity-90 group-hover:opacity-100 transition-opacity"
-                    loading="lazy"
-                    allowFullScreen
-                    referrerPolicy="no-referrer-when-downgrade"
-                    aria-label="Google Map showing OfficeBazzar Tower in Royapettah Chennai"
-                  />
+                <div
+                  ref={mapContainerRef}
+                  className="relative w-full h-32 sm:h-36 rounded-xl overflow-hidden border border-slate-700/80 bg-slate-900 shadow-inner group"
+                >
+                  {shouldLoadMap ? (
+                    <iframe
+                      title="OfficeBazzar Central Logistics Hub Location Map"
+                      src={GOOGLE_MAPS_EMBED_URL}
+                      className="w-full h-full border-0 filter contrast-[1.05] opacity-90 group-hover:opacity-100 transition-opacity"
+                      loading="lazy"
+                      allowFullScreen
+                      referrerPolicy="no-referrer-when-downgrade"
+                      aria-label="Google Map showing OfficeBazzar Tower in Royapettah Chennai"
+                    />
+                  ) : (
+                    <div
+                      onClick={() => setShouldLoadMap(true)}
+                      className="w-full h-full flex flex-col items-center justify-center text-slate-400 p-3 text-center cursor-pointer hover:bg-slate-800/80 transition-colors"
+                    >
+                      <MapPin className="w-5 h-5 text-[#ea580c] mb-1 animate-pulse" />
+                      <span className="text-[11px] font-medium text-slate-300">Officebazzar Tower, Royapettah</span>
+                      <span className="text-[10px] text-slate-500">Click or scroll to view live map</span>
+                    </div>
+                  )}
+                  <noscript>
+                    <iframe
+                      title="OfficeBazzar Central Logistics Hub Location Map"
+                      src={GOOGLE_MAPS_EMBED_URL}
+                      className="w-full h-full border-0"
+                      loading="lazy"
+                    />
+                  </noscript>
                 </div>
 
                 {/* Get Directions Button - Edge-to-Edge Matching with Map */}

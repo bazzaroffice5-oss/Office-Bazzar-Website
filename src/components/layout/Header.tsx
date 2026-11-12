@@ -102,11 +102,10 @@ export default function Header() {
             title="OfficeBazzar – Corporate Procurement"
           >
             <Image
-              src="/images/officebazzar-logo-transparent.png"
+              src="/images/officebazzar-logo-transparent.webp"
               alt="OfficeBazzar – The Biggest Choice of Office Needs"
               width={280}
               height={90}
-              priority
               className="w-[102px] sm:w-[112px] md:w-[124px] h-auto object-contain"
             />
           </Link>

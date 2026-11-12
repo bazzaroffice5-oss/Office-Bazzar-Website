@@ -4,7 +4,6 @@ import './globals.css';
 import Providers from '@/components/Providers';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import BazzarAIChatbot from '@/components/chatbot/BazzarAIChatbot';
 import JsonLd from '@/components/seo/JsonLd';
 import {
   SITE_CONFIG,
@@ -115,7 +114,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
           <div className="flex-1">{children}</div>
           <Footer />
-          <BazzarAIChatbot />
         </Providers>
       </body>
     </html>
