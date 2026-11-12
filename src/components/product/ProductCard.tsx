@@ -71,30 +71,30 @@ export default function ProductCard({
   return (
     <div
       onClick={handleCardClick}
-      className={`group relative flex flex-col justify-between bg-white border border-[#DCEBF8] hover:border-[#2563EB]/40 rounded-[24px] transition-all duration-300 ease-out shadow-[0_4px_20px_-2px_rgba(22,58,95,0.08),0_2px_6px_-1px_rgba(22,58,95,0.04)] hover:shadow-[0_16px_36px_-4px_rgba(22,58,95,0.14),0_6px_14px_-2px_rgba(22,58,95,0.08)] hover:-translate-y-1.5 h-full select-none cursor-pointer overflow-hidden ${className}`}
+      className={`group relative flex flex-col justify-between bg-white border-2 border-white hover:border-[#3B82F6]/40 rounded-[24px] transition-all duration-300 ease-out shadow-[0_8px_24px_-4px_rgba(22,58,95,0.08),0_2px_8px_-2px_rgba(22,58,95,0.04)] hover:shadow-[0_16px_36px_-4px_rgba(22,58,95,0.14),0_6px_14px_-2px_rgba(22,58,95,0.08)] hover:-translate-y-1.5 h-full select-none cursor-pointer overflow-hidden ${className}`}
     >
-      {/* 1. Presentation Stage Area (Strict Reference Replication: Light Blue Decorative Arches, Foliage & 3D Cylindrical Podium) */}
-      <div className="relative w-full h-52 sm:h-56 md:h-60 bg-gradient-to-b from-[#D2EBFE] via-[#E2F1FE] to-[#F2F8FE] flex items-center justify-center overflow-hidden border-b border-[#E0EDFA]">
-        {/* Layered Decorative Sky-Blue Arches */}
-        {/* Left Decorative Arch */}
-        <div className="absolute left-3 top-3 w-[56%] h-44 rounded-t-[84px] bg-gradient-to-b from-[#B8DCFD] via-[#CCE7FE] to-transparent/30 border-t border-x border-white/70 shadow-2xs pointer-events-none" />
-        {/* Right Decorative Arch */}
-        <div className="absolute right-3 top-7 w-[52%] h-40 rounded-t-[76px] bg-gradient-to-b from-[#C4E3FD] via-[#D8ECFE] to-transparent/25 border-t border-x border-white/80 pointer-events-none" />
-        
-        {/* Subtle Botanical Palm Leaf Silhouette on Left (Matching Reference) */}
+      {/* 1. Presentation Stage Area (Strict Reference Replication: Filled Sky-Blue Arches, Foliage & 3D Podium) */}
+      <div className="relative w-full h-64 sm:h-72 bg-gradient-to-b from-[#A6D3F8] via-[#C4E2FB] to-[#E8F3FD] flex items-center justify-center overflow-hidden border-b border-[#D5E8F8]">
+        {/* Layered Filled Sky-Blue Architectural Arches (Matching Reference Design Image 2) */}
+        {/* Left Solid Filled Arch */}
+        <div className="absolute left-2.5 top-3 w-[62%] h-[78%] rounded-t-[100px] bg-gradient-to-b from-[#7FB4F1] via-[#92C4F5] to-[#A4D0F8] shadow-2xs pointer-events-none" />
+        {/* Right Solid Filled Arch */}
+        <div className="absolute right-2.5 top-7 w-[58%] h-[72%] rounded-t-[90px] bg-gradient-to-b from-[#94C5F6] via-[#A8D3F9] to-[#BCDDFB] pointer-events-none" />
+
+        {/* Botanical Palm Foliage on Left Side of Stage (Exact Match with Image 2) */}
         <svg
-          className="absolute left-1 top-8 w-6 sm:w-7 h-28 text-emerald-600/80 pointer-events-none z-1 drop-shadow-xs"
-          viewBox="0 0 28 112"
+          className="absolute left-1.5 top-8 w-8 sm:w-9 h-36 text-emerald-600 pointer-events-none z-1 drop-shadow-sm"
+          viewBox="0 0 36 144"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
         >
-          <path d="M4 110C6 85 10 55 22 15" stroke="#16A34A" strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M12 25C18 20 25 18 26 22C27 26 21 30 14 30" fill="#22C55E" opacity="0.85" />
-          <path d="M10 40C16 35 24 34 25 38C26 42 19 46 11 45" fill="#16A34A" opacity="0.8" />
-          <path d="M8 58C14 53 22 53 23 57C24 61 17 64 9 63" fill="#22C55E" opacity="0.85" />
-          <path d="M7 76C12 72 20 72 21 76C22 80 15 82 8 81" fill="#15803D" opacity="0.75" />
-          <path d="M6 94C11 90 18 90 19 94C20 98 13 100 7 99" fill="#16A34A" opacity="0.7" />
+          <path d="M5 140C8 108 13 70 28 18" stroke="#15803D" strokeWidth="2" strokeLinecap="round" />
+          <path d="M14 28C22 22 31 20 33 24C34 29 27 34 17 34" fill="#22C55E" opacity="0.9" />
+          <path d="M12 46C20 40 30 38 31 43C32 48 24 53 14 52" fill="#16A34A" opacity="0.85" />
+          <path d="M10 68C18 62 28 61 29 66C30 71 21 75 11 74" fill="#22C55E" opacity="0.9" />
+          <path d="M9 90C16 84 25 84 26 89C27 94 18 97 10 96" fill="#15803D" opacity="0.85" />
+          <path d="M8 112C14 107 23 107 24 112C25 117 16 119 9 118" fill="#16A34A" opacity="0.8" />
         </svg>
 
         {/* Floating Add-to-Cart Action (Preserves Full Cart Functionality) */}
@@ -118,31 +118,31 @@ export default function ProductCard({
           )}
         </button>
 
-        {/* 3D Cylindrical Podium Stage (Direct Visual Replication of Reference) */}
-        <div className="absolute bottom-2.5 w-[84%] max-w-[215px] h-12 flex flex-col items-center pointer-events-none">
+        {/* Large 3D Circular White Podium Stage (Spans ~88% of Card Width Matching Image 2) */}
+        <div className="absolute bottom-3 w-[88%] max-w-[235px] h-14 sm:h-16 flex flex-col items-center pointer-events-none">
           {/* Ambient Contact Shadow Underneath Pedestal */}
-          <div className="absolute -bottom-1.5 w-[94%] h-5 bg-[#0F2942]/16 blur-[5px] rounded-[50%]" />
-          {/* Cylinder Base Rim (Depth) */}
-          <div className="absolute bottom-0 w-[90%] h-4 bg-gradient-to-b from-white via-[#EFF5FA] to-[#CFDDEB] rounded-b-[50%] border-x border-b border-[#B8CAD8] shadow-2xs" />
-          {/* Top Disc Surface */}
-          <div className="absolute top-0.5 w-[90%] h-7 bg-gradient-to-b from-white via-[#FAFCFE] to-[#E6F0F8] rounded-[50%] border border-[#CFDFEC] shadow-[inset_0_1px_2px_rgba(255,255,255,0.95),0_2px_4px_rgba(22,58,95,0.06)]" />
+          <div className="absolute -bottom-2 w-[96%] h-6 bg-[#0B2545]/22 blur-[6px] rounded-[50%]" />
+          {/* Cylinder Base Rim (Depth & Curvature) */}
+          <div className="absolute bottom-0 w-[92%] h-6 bg-gradient-to-b from-white via-[#EFF4F9] to-[#C9D7E4] rounded-b-[50%] border-x border-b border-[#B2C5D6] shadow-xs" />
+          {/* Top Disc Surface (Bright Elliptical Platform) */}
+          <div className="absolute top-0 w-[92%] h-8 bg-gradient-to-b from-white via-[#FCFDFE] to-[#DFECF6] rounded-[50%] border border-[#C5D7E6] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.98),0_2px_5px_rgba(11,37,69,0.08)]" />
         </div>
 
-        {/* Product Image on Podium (Centered, Proportional Scale, Resting on Disc) */}
+        {/* Product Image on Podium (Prominent, Centered, Resting on Disc) */}
         <Link
           href={productUrl}
-          className="relative z-10 w-[78%] h-[72%] max-h-[155px] sm:max-h-[170px] flex items-center justify-center mb-4.5 focus:outline-none"
+          className="relative z-10 w-full h-full flex items-center justify-center focus:outline-none"
           tabIndex={-1}
           aria-hidden="true"
         >
-          <div className="relative w-full h-full transition-transform duration-300 ease-out group-hover:scale-105 group-hover:-translate-y-1">
+          <div className="relative w-full h-full transition-transform duration-300 ease-out group-hover:scale-105">
             <Image
               src={imgSrc}
               alt={product.name}
               fill
               priority={priority}
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-contain mix-blend-multiply filter drop-shadow-[0_6px_10px_rgba(15,37,68,0.12)]"
+              className="object-cover"
               onError={() => setImgSrc(getVersionedImageUrl('/assets/placeholder-product.svg'))}
             />
           </div>
@@ -154,17 +154,17 @@ export default function ProductCard({
         {/* Navy-Blue Product Title */}
         <Link
           href={productUrl}
-          className="w-full text-xs sm:text-sm font-bold text-[#0F2942] group-hover:text-[#2563EB] line-clamp-2 leading-snug transition-colors hover:underline min-h-[38px] flex items-center justify-center text-center"
+          className="w-full text-xs sm:text-sm font-bold text-[#0B2545] group-hover:text-[#2563EB] line-clamp-2 leading-snug transition-colors hover:underline min-h-[38px] flex items-center justify-center text-center"
           title={product.name}
         >
           <h3 className="line-clamp-2">{product.name}</h3>
         </Link>
 
-        {/* Small Blue Decorative Underline Below Product Name (Matching Reference) */}
-        <div className="w-9 sm:w-11 h-1 bg-[#3B82F6] rounded-full mx-auto mt-2.5 transition-all duration-300 group-hover:w-14 group-hover:bg-[#2563EB]" />
+        {/* Sky-Blue Decorative Underline Below Product Name (Exact Reference Width & Style) */}
+        <div className="w-11 sm:w-12 h-1 bg-[#4A9DF8] rounded-full mx-auto mt-2.5 transition-all duration-300 group-hover:w-16 group-hover:bg-[#2563EB]" />
 
         {/* Metadata Footer: Brand & Pack Size */}
-        <div className="w-full mt-2.5 pt-2 border-t border-[#F1F6FB] flex items-center justify-between text-[11px] text-[#526174]">
+        <div className="w-full mt-3 pt-2.5 border-t border-[#F1F6FB] flex items-center justify-between text-[11px] text-[#526174]">
           <span className="font-semibold text-[#163A5F] truncate max-w-[110px]" title={brandDisplayName}>
             {brandDisplayName}
           </span>
