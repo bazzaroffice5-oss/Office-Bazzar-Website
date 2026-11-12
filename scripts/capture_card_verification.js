@@ -118,3 +118,4 @@ run().catch(err => {
   console.error('Fatal error in capture script:', err);
   process.exit(1);
 });
+

@@ -71,13 +71,31 @@ export default function ProductCard({
   return (
     <div
       onClick={handleCardClick}
-      className={`group relative flex flex-col justify-between bg-white border border-[#E2EBE3] hover:border-[#163A5F]/35 rounded-[22px] transition-all duration-300 ease-out shadow-[0_4px_20px_-2px_rgba(22,58,95,0.06),0_2px_6px_-1px_rgba(22,58,95,0.04)] hover:shadow-[0_16px_36px_-4px_rgba(22,58,95,0.12),0_6px_14px_-2px_rgba(22,58,95,0.06)] hover:-translate-y-1.5 h-full select-none cursor-pointer overflow-hidden ${className}`}
+      className={`group relative flex flex-col justify-between bg-white border border-[#DCEBF8] hover:border-[#2563EB]/40 rounded-[24px] transition-all duration-300 ease-out shadow-[0_4px_20px_-2px_rgba(22,58,95,0.08),0_2px_6px_-1px_rgba(22,58,95,0.04)] hover:shadow-[0_16px_36px_-4px_rgba(22,58,95,0.14),0_6px_14px_-2px_rgba(22,58,95,0.08)] hover:-translate-y-1.5 h-full select-none cursor-pointer overflow-hidden ${className}`}
     >
-      {/* 1. Presentation Stage Area (Matching Reference 3D Podium & Arched Backdrop) */}
-      <div className="relative w-full h-48 sm:h-52 md:h-56 bg-gradient-to-b from-[#FAFDFB] via-[#F4F8F5] to-white flex items-center justify-center overflow-hidden border-b border-[#EFF5F0]">
-        {/* Soft Layered Arched Backdrop */}
-        <div className="absolute top-3 w-[84%] h-44 rounded-t-[100px] bg-gradient-to-b from-white/90 via-[#EDF5EF]/60 to-transparent border-t border-x border-[#E2EBE3]/60 pointer-events-none" />
-        <div className="absolute top-6 w-[68%] h-36 rounded-t-[80px] bg-white/70 pointer-events-none" />
+      {/* 1. Presentation Stage Area (Strict Reference Replication: Light Blue Decorative Arches, Foliage & 3D Cylindrical Podium) */}
+      <div className="relative w-full h-52 sm:h-56 md:h-60 bg-gradient-to-b from-[#D2EBFE] via-[#E2F1FE] to-[#F2F8FE] flex items-center justify-center overflow-hidden border-b border-[#E0EDFA]">
+        {/* Layered Decorative Sky-Blue Arches */}
+        {/* Left Decorative Arch */}
+        <div className="absolute left-3 top-3 w-[56%] h-44 rounded-t-[84px] bg-gradient-to-b from-[#B8DCFD] via-[#CCE7FE] to-transparent/30 border-t border-x border-white/70 shadow-2xs pointer-events-none" />
+        {/* Right Decorative Arch */}
+        <div className="absolute right-3 top-7 w-[52%] h-40 rounded-t-[76px] bg-gradient-to-b from-[#C4E3FD] via-[#D8ECFE] to-transparent/25 border-t border-x border-white/80 pointer-events-none" />
+        
+        {/* Subtle Botanical Palm Leaf Silhouette on Left (Matching Reference) */}
+        <svg
+          className="absolute left-1 top-8 w-6 sm:w-7 h-28 text-emerald-600/80 pointer-events-none z-1 drop-shadow-xs"
+          viewBox="0 0 28 112"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path d="M4 110C6 85 10 55 22 15" stroke="#16A34A" strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M12 25C18 20 25 18 26 22C27 26 21 30 14 30" fill="#22C55E" opacity="0.85" />
+          <path d="M10 40C16 35 24 34 25 38C26 42 19 46 11 45" fill="#16A34A" opacity="0.8" />
+          <path d="M8 58C14 53 22 53 23 57C24 61 17 64 9 63" fill="#22C55E" opacity="0.85" />
+          <path d="M7 76C12 72 20 72 21 76C22 80 15 82 8 81" fill="#15803D" opacity="0.75" />
+          <path d="M6 94C11 90 18 90 19 94C20 98 13 100 7 99" fill="#16A34A" opacity="0.7" />
+        </svg>
 
         {/* Floating Add-to-Cart Action (Preserves Full Cart Functionality) */}
         <button
@@ -90,7 +108,7 @@ export default function ProductCard({
           className={`absolute top-3 right-3 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center transition-all duration-200 shadow-2xs border ${
             showAddedConfirmation
               ? 'bg-emerald-600 border-emerald-600 text-white opacity-100 scale-105'
-              : 'bg-white/90 backdrop-blur-xs border-[#E2EBE3] text-[#526174] hover:text-white hover:bg-[#F97316] hover:border-[#F97316] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 cursor-pointer active:scale-95'
+              : 'bg-white/95 backdrop-blur-xs border-[#CFDFEC] text-[#163A5F] hover:text-white hover:bg-[#2563EB] hover:border-[#2563EB] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 cursor-pointer active:scale-95'
           }`}
         >
           {showAddedConfirmation ? (
@@ -101,19 +119,19 @@ export default function ProductCard({
         </button>
 
         {/* 3D Cylindrical Podium Stage (Direct Visual Replication of Reference) */}
-        <div className="absolute bottom-2.5 w-[80%] max-w-[200px] h-11 flex flex-col items-center pointer-events-none">
+        <div className="absolute bottom-2.5 w-[84%] max-w-[215px] h-12 flex flex-col items-center pointer-events-none">
           {/* Ambient Contact Shadow Underneath Pedestal */}
-          <div className="absolute -bottom-1 w-[92%] h-4 bg-slate-900/[0.08] blur-[4px] rounded-[50%]" />
-          {/* Cylinder Base Rim */}
-          <div className="absolute bottom-0.5 w-[88%] h-4 bg-gradient-to-b from-white via-[#F2F6F3] to-[#DCE6DE] rounded-b-[50%] border-x border-b border-[#CBD8CE] shadow-2xs" />
+          <div className="absolute -bottom-1.5 w-[94%] h-5 bg-[#0F2942]/16 blur-[5px] rounded-[50%]" />
+          {/* Cylinder Base Rim (Depth) */}
+          <div className="absolute bottom-0 w-[90%] h-4 bg-gradient-to-b from-white via-[#EFF5FA] to-[#CFDDEB] rounded-b-[50%] border-x border-b border-[#B8CAD8] shadow-2xs" />
           {/* Top Disc Surface */}
-          <div className="absolute top-1 w-[88%] h-6 bg-gradient-to-b from-white to-[#F5FAF6] rounded-[50%] border border-[#DCE6DE] shadow-inner" />
+          <div className="absolute top-0.5 w-[90%] h-7 bg-gradient-to-b from-white via-[#FAFCFE] to-[#E6F0F8] rounded-[50%] border border-[#CFDFEC] shadow-[inset_0_1px_2px_rgba(255,255,255,0.95),0_2px_4px_rgba(22,58,95,0.06)]" />
         </div>
 
-        {/* Product Image on Podium (Smaller, Centered, Proportional Scale) */}
+        {/* Product Image on Podium (Centered, Proportional Scale, Resting on Disc) */}
         <Link
           href={productUrl}
-          className="relative z-10 w-[72%] h-[68%] max-h-[140px] sm:max-h-[155px] flex items-center justify-center mb-2.5 focus:outline-none"
+          className="relative z-10 w-[78%] h-[72%] max-h-[155px] sm:max-h-[170px] flex items-center justify-center mb-4.5 focus:outline-none"
           tabIndex={-1}
           aria-hidden="true"
         >
@@ -124,29 +142,29 @@ export default function ProductCard({
               fill
               priority={priority}
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-contain filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.08)]"
+              className="object-contain mix-blend-multiply filter drop-shadow-[0_6px_10px_rgba(15,37,68,0.12)]"
               onError={() => setImgSrc(getVersionedImageUrl('/assets/placeholder-product.svg'))}
             />
           </div>
         </Link>
       </div>
 
-      {/* 2. Card Content Area (Centered Typography & Distinctive Reference Accent Bar) */}
+      {/* 2. Premium White Product Information Section */}
       <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between items-center text-center bg-white">
-        {/* Centered Product Title */}
+        {/* Navy-Blue Product Title */}
         <Link
           href={productUrl}
-          className="w-full text-xs sm:text-sm font-bold text-[#111827] group-hover:text-[#163A5F] line-clamp-2 leading-snug transition-colors hover:underline min-h-[38px] flex items-center justify-center"
+          className="w-full text-xs sm:text-sm font-bold text-[#0F2942] group-hover:text-[#2563EB] line-clamp-2 leading-snug transition-colors hover:underline min-h-[38px] flex items-center justify-center text-center"
           title={product.name}
         >
           <h3 className="line-clamp-2">{product.name}</h3>
         </Link>
 
-        {/* Distinctive Reference Pill Accent Bar */}
-        <div className="w-8 sm:w-10 h-1 bg-[#163A5F] rounded-full mx-auto mt-2.5 transition-all duration-300 group-hover:w-14 group-hover:bg-[#F97316]" />
+        {/* Small Blue Decorative Underline Below Product Name (Matching Reference) */}
+        <div className="w-9 sm:w-11 h-1 bg-[#3B82F6] rounded-full mx-auto mt-2.5 transition-all duration-300 group-hover:w-14 group-hover:bg-[#2563EB]" />
 
-        {/* Metadata: Brand & Pack Size */}
-        <div className="w-full mt-2.5 pt-2 border-t border-[#F1F6F2] flex items-center justify-between text-[11px] text-[#526174]">
+        {/* Metadata Footer: Brand & Pack Size */}
+        <div className="w-full mt-2.5 pt-2 border-t border-[#F1F6FB] flex items-center justify-between text-[11px] text-[#526174]">
           <span className="font-semibold text-[#163A5F] truncate max-w-[110px]" title={brandDisplayName}>
             {brandDisplayName}
           </span>
