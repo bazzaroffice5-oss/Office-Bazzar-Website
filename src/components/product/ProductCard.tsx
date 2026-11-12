@@ -82,20 +82,15 @@ export default function ProductCard({
         <div className="absolute right-2.5 top-7 w-[58%] h-[72%] rounded-t-[90px] bg-gradient-to-b from-[#94C5F6] via-[#A8D3F9] to-[#BCDDFB] pointer-events-none" />
 
         {/* Botanical Palm Foliage on Left Side of Stage (Exact Match with Image 2) */}
-        <svg
-          className="absolute left-1.5 top-8 w-8 sm:w-9 h-36 text-emerald-600 pointer-events-none z-1 drop-shadow-sm"
-          viewBox="0 0 36 144"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path d="M5 140C8 108 13 70 28 18" stroke="#15803D" strokeWidth="2" strokeLinecap="round" />
-          <path d="M14 28C22 22 31 20 33 24C34 29 27 34 17 34" fill="#22C55E" opacity="0.9" />
-          <path d="M12 46C20 40 30 38 31 43C32 48 24 53 14 52" fill="#16A34A" opacity="0.85" />
-          <path d="M10 68C18 62 28 61 29 66C30 71 21 75 11 74" fill="#22C55E" opacity="0.9" />
-          <path d="M9 90C16 84 25 84 26 89C27 94 18 97 10 96" fill="#15803D" opacity="0.85" />
-          <path d="M8 112C14 107 23 107 24 112C25 117 16 119 9 118" fill="#16A34A" opacity="0.8" />
-        </svg>
+        <div className="absolute left-1 bottom-10 sm:bottom-12 w-12 sm:w-14 h-32 sm:h-36 pointer-events-none z-1 drop-shadow-sm">
+          <Image
+            src="/assets/decorations/stage_palm_foliage.webp"
+            alt=""
+            fill
+            className="object-contain object-left-bottom"
+            unoptimized
+          />
+        </div>
 
         {/* Floating Add-to-Cart Action (Preserves Full Cart Functionality) */}
         <button

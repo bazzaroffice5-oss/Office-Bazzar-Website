@@ -76,6 +76,13 @@ async function run() {
     mobile: false
   });
 
+  console.log('Navigating to http://localhost:3000/category/housekeeping-hygiene?sub=cloths-scrubbers-brushes ...');
+  await send('Page.navigate', { url: 'http://localhost:3000/category/housekeeping-hygiene?sub=cloths-scrubbers-brushes' });
+  await new Promise(r => setTimeout(r, 4000));
+
+  const housekeepingPath = path.join(ARTIFACT_DIR, 'replicated_product_cards_housekeeping.png');
+  await captureShot(housekeepingPath);
+
   console.log('Navigating to http://localhost:3000/products ...');
   await send('Page.navigate', { url: 'http://localhost:3000/products' });
   await new Promise(r => setTimeout(r, 4000));
