@@ -199,6 +199,64 @@ export default function CategoryLandingClient({
             </Link>
           ))}
         </div>
+
+        {/* Featured Category Products Section (Direct Internal HTML Crawl Paths & Immediate Catalog Access) */}
+        {categoryProducts.length > 0 && (
+          <section className="mt-14 pt-10 border-t border-[#E2EBE3]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#F97316]">
+                  Immediate Dispatch &amp; Stock Availability
+                </span>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-[#111827] mt-0.5">
+                  Featured &amp; Essential {category.name}
+                </h2>
+              </div>
+              <Link
+                href={`${categoryBaseUrl}?view=all`}
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#163A5F] hover:text-[#F97316] transition-colors group self-start sm:self-auto"
+              >
+                <span>Browse All {categoryProducts.length} Items</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {categoryProducts.slice(0, 16).map((product, idx) => (
+                <ProductCard key={product.id} product={product} priority={idx < 4} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Enterprise Procurement & Standards Guide */}
+        <section className="mt-14 p-6 sm:p-8 rounded-2xl bg-[#EFF6F0] border border-[#E2EBE3]">
+          <div className="max-w-3xl">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#163A5F]">
+              Corporate Buyer Guide
+            </span>
+            <h3 className="text-lg sm:text-xl font-bold text-[#111827] mt-1 mb-3">
+              Institutional Procurement &amp; GST Invoicing for {category.name}
+            </h3>
+            <p className="text-xs sm:text-sm text-[#526174] leading-relaxed mb-4">
+              Officebazzar E-Store Private Limited supplies certified {category.name.toLowerCase()} directly to enterprises, IT parks, educational institutions, healthcare centers, and industrial facilities across India. Every order includes a verified GST invoice ({category.name} standard HSN classification) enabling seamless 100% input tax credit (ITC) reconciliation in your monthly GSTR-2B filing.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-[#163A5F] font-medium">
+              <div className="p-3 bg-white rounded-xl border border-[#E2EBE3]">
+                <span className="font-bold block text-[#111827] mb-0.5">Fulfillment Central</span>
+                <span>Direct dispatch from Royapettah fulfillment hub in Chennai with surface cargo network.</span>
+              </div>
+              <div className="p-3 bg-white rounded-xl border border-[#E2EBE3]">
+                <span className="font-bold block text-[#111827] mb-0.5">Volume Discounts</span>
+                <span>Tiered B2B pricing on bulk cartons and scheduled quarterly supply agreements.</span>
+              </div>
+              <div className="p-3 bg-white rounded-xl border border-[#E2EBE3]">
+                <span className="font-bold block text-[#111827] mb-0.5">Zoho CRM Integrated</span>
+                <span>Official line-item quotations and instant purchase orders generated within 2-4 hours.</span>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }
@@ -354,7 +412,22 @@ export default function CategoryLandingClient({
         totalPages={totalPages}
         onPageChange={(p) => {
           setCurrentPage(p);
-          window.scrollTo({ top: 100, behavior: 'smooth' });
+          if (typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search);
+            if (p > 1) params.set('page', p.toString());
+            else params.delete('page');
+            const q = params.toString();
+            window.history.pushState({}, '', `${categoryBaseUrl}${q ? `?${q}` : ''}`);
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+          }
+        }}
+        getPageUrl={(p) => {
+          const params = new URLSearchParams();
+          if (viewParam) params.set('view', viewParam);
+          if (subParam) params.set('sub', subParam);
+          if (p > 1) params.set('page', p.toString());
+          const q = params.toString();
+          return `${categoryBaseUrl}${q ? `?${q}` : ''}`;
         }}
         className="mt-12 pb-8"
       />

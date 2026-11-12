@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShoppingCart, Check, Heart, ShieldCheck } from 'lucide-react';
+import { ShoppingCart, Check, Heart, ShieldCheck, Truck, FileText, CheckCircle2, Building, HelpCircle } from 'lucide-react';
 import { Brand, Product } from '@/types';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
@@ -285,6 +285,111 @@ export default function ProductDetailClient({
         </div>
       </div>
 
+      {/* 2.5 B2B Procurement Specifications, GST Invoicing & Fulfillment Details */}
+      <section
+        className="mt-10 pt-8 border-t border-[#E2EBE3]"
+        aria-labelledby="procurement-specs-heading"
+      >
+        <div className="mb-6">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#F97316]">
+            Commercial &amp; Compliance Details
+          </span>
+          <h2
+            id="procurement-specs-heading"
+            className="text-xl sm:text-2xl font-extrabold text-[#111827] mt-1"
+          >
+            B2B Procurement, GST Invoicing &amp; Fulfillment
+          </h2>
+          <p className="text-xs sm:text-sm text-[#526174] mt-1.5 max-w-3xl">
+            Official supply standards, regulatory compliance, and regional fulfillment policies for {product.name} (SKU: {product.sku || product.id}).
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+          {/* Card 1: 100% Tax Invoicing & ITC */}
+          <div className="p-5 rounded-2xl bg-white border border-[#E2EBE3] shadow-xs flex flex-col justify-between">
+            <div>
+              <div className="w-10 h-10 rounded-xl bg-[#EFF6F0] border border-[#E2EBE3] flex items-center justify-center text-[#163A5F] mb-3.5">
+                <FileText className="w-5 h-5 text-[#163A5F]" />
+              </div>
+              <h3 className="text-sm font-bold text-[#111827] mb-2">
+                100% GST Input Tax Credit (ITC)
+              </h3>
+              <p className="text-xs text-[#526174] leading-relaxed">
+                Every order of {product.name} includes an authentic B2B tax invoice with applicable {product.gstPercent || 18}% GST break-up. Enables corporate finance teams to claim full input tax credit seamlessly via GSTR-2B filing.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#E2EBE3] flex items-center gap-1.5 text-[11px] font-semibold text-[#163A5F]">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              <span>Compliant with Indian GST regulations</span>
+            </div>
+          </div>
+
+          {/* Card 2: Packaging & Batch Tiers */}
+          <div className="p-5 rounded-2xl bg-white border border-[#E2EBE3] shadow-xs flex flex-col justify-between">
+            <div>
+              <div className="w-10 h-10 rounded-xl bg-[#EFF6F0] border border-[#E2EBE3] flex items-center justify-center text-[#163A5F] mb-3.5">
+                <Building className="w-5 h-5 text-[#163A5F]" />
+              </div>
+              <h3 className="text-sm font-bold text-[#111827] mb-2">
+                Enterprise Packaging &amp; Bulk Tiers
+              </h3>
+              <p className="text-xs text-[#526174] leading-relaxed">
+                Supplied in verified industrial packaging ({product.packSize || 'Standard Pack'}). Minimum order quantity begins at {product.minOrderQuantity || 1} unit(s), with contract-tier pricing available for institutional procurement, IT parks, and facility managers.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#E2EBE3] flex items-center gap-1.5 text-[11px] font-semibold text-[#163A5F]">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              <span>Direct brand certified inventory</span>
+            </div>
+          </div>
+
+          {/* Card 3: Logistics & Fulfillment Hubs */}
+          <div className="p-5 rounded-2xl bg-white border border-[#E2EBE3] shadow-xs flex flex-col justify-between">
+            <div>
+              <div className="w-10 h-10 rounded-xl bg-[#EFF6F0] border border-[#E2EBE3] flex items-center justify-center text-[#163A5F] mb-3.5">
+                <Truck className="w-5 h-5 text-[#163A5F]" />
+              </div>
+              <h3 className="text-sm font-bold text-[#111827] mb-2">
+                Central Logistics &amp; Nationwide Dispatch
+              </h3>
+              <p className="text-xs text-[#526174] leading-relaxed">
+                Dispatched directly from the OfficeBazzar central fulfillment hub in Royapettah, Chennai, with regional support across Bangalore, Hyderabad, and Mumbai. Prompt doorstep surface cargo delivery across Tamil Nadu and major Indian industrial corridors.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#E2EBE3] flex items-center gap-1.5 text-[11px] font-semibold text-[#163A5F]">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              <span>Tracked business delivery partner network</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Corporate Procurement FAQs for Rich Snippet & Full Content Breadth */}
+        <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-[#EFF6F0] border border-[#E2EBE3]">
+          <h3 className="text-sm font-bold text-[#111827] flex items-center gap-2 mb-3">
+            <HelpCircle className="w-4 h-4 text-[#F97316]" />
+            <span>Frequently Asked Questions for {product.name}</span>
+          </h3>
+          <div className="space-y-3 text-xs sm:text-sm text-[#526174]">
+            <div>
+              <h4 className="font-semibold text-[#111827]">
+                How do we submit an official Corporate Purchase Order (PO) or Request for Quotation (RFQ)?
+              </h4>
+              <p className="mt-1 leading-relaxed">
+                Add the required quantity of {product.name} (SKU: {product.sku || product.id}) to your Quote Cart and submit the brief enquiry form with your company details and GSTIN. Our enterprise procurement desk in Chennai will issue a formal Zoho CRM quotation with line-item pricing within 2 to 4 business hours.
+              </p>
+            </div>
+            <div className="pt-2 border-t border-[#E2EBE3]">
+              <h4 className="font-semibold text-[#111827]">
+                Can we schedule recurring monthly or quarterly replenishment orders?
+              </h4>
+              <p className="mt-1 leading-relaxed">
+                Yes. OfficeBazzar provides scheduled monthly supply contracts and corporate rate-card agreements for institutional buyers across India. Contact our sales department at sales4@officebazzar.com or +91 72008 00040 to set up recurring billing and dedicated account management.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* 3. Similar Products Section */}
       {relatedProducts.length > 0 && (

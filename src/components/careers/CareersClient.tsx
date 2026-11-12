@@ -16,68 +16,6 @@ export default function CareersClient() {
     <div className="w-full bg-white text-slate-900 selection:bg-emerald-100 selection:text-emerald-950 overflow-x-hidden">
       {/* 1. HERO SECTION (Clean white background, balanced typography & centered CTA) */}
       <section className="relative w-full flex flex-col items-center justify-center pt-14 pb-8 sm:pt-16 sm:pb-10 lg:pt-20 lg:pb-12 px-4 sm:px-6 text-center overflow-hidden">
-        {/* Scoped CSS for Continuous Heading Glow Animation */}
-        <style>{`
-          .careers-glow-layer-1 {
-            position: absolute;
-            inset: -12%;
-            border-radius: 9999px;
-            background: radial-gradient(ellipse 70% 60% at 35% 45%, rgba(254, 215, 170, 0.5) 0%, rgba(254, 243, 199, 0.35) 45%, transparent 75%);
-            filter: blur(40px);
-            animation: careersGlowPulse1 10s ease-in-out infinite alternate;
-            will-change: transform, opacity;
-          }
-
-          .careers-glow-layer-2 {
-            position: absolute;
-            inset: -12%;
-            border-radius: 9999px;
-            background: radial-gradient(ellipse 70% 60% at 65% 55%, rgba(224, 242, 254, 0.55) 0%, rgba(254, 243, 199, 0.3) 45%, transparent 75%);
-            filter: blur(40px);
-            animation: careersGlowPulse2 10s ease-in-out infinite alternate;
-            will-change: transform, opacity;
-          }
-
-          @keyframes careersGlowPulse1 {
-            0% {
-              transform: translate(-5%, -6%) scale(0.94);
-              opacity: 0.6;
-            }
-            50% {
-              transform: translate(6%, 5%) scale(1.08);
-              opacity: 0.8;
-            }
-            100% {
-              transform: translate(-3%, 7%) scale(0.98);
-              opacity: 0.65;
-            }
-          }
-
-          @keyframes careersGlowPulse2 {
-            0% {
-              transform: translate(6%, 6%) scale(1.06);
-              opacity: 0.7;
-            }
-            50% {
-              transform: translate(-6%, -5%) scale(0.94);
-              opacity: 0.55;
-            }
-            100% {
-              transform: translate(4%, -7%) scale(1.02);
-              opacity: 0.75;
-            }
-          }
-
-          @media (prefers-reduced-motion: reduce) {
-            .careers-glow-layer-1,
-            .careers-glow-layer-2 {
-              animation: none !important;
-              transform: none !important;
-              opacity: 0.6 !important;
-            }
-          }
-        `}</style>
-
         <div className="relative max-w-2xl mx-auto space-y-3 sm:space-y-3.5">
           {/* Main Heading with Subtle Animated Ambient Glow */}
           <div className="relative inline-block w-full">
@@ -177,6 +115,34 @@ export default function CareersClient() {
               <p className="text-xs text-slate-600 leading-relaxed">
                 Drive product catalog intelligence, Zoho CRM integration, digital quotation consoles, and automated invoice delivery systems powering seamless B2B transactions.
               </p>
+            </div>
+          </div>
+
+          {/* 4. WHY BUILD YOUR CAREER AT OFFICE BAZZAR */}
+          <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200/80">
+            <h4 className="text-base sm:text-lg font-bold text-slate-900 mb-2">
+              Why Build Your Career at Office Bazzar?
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6 max-w-3xl">
+              As one of South India&apos;s fastest growing workplace procurement partners, Officebazzar E-Store Private Limited offers high-ownership roles, cross-functional mentorship, and direct exposure to corporate supply chain dynamics.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+              <div className="p-4 rounded-xl bg-white border border-slate-200/80 space-y-1.5 shadow-2xs">
+                <span className="font-bold text-slate-900 block">Merit-Based Growth</span>
+                <span className="text-slate-600">Transparent quarterly performance reviews and fast-track progression for top performers.</span>
+              </div>
+              <div className="p-4 rounded-xl bg-white border border-slate-200/80 space-y-1.5 shadow-2xs">
+                <span className="font-bold text-slate-900 block">Comprehensive Health Cover</span>
+                <span className="text-slate-600">Medical insurance coverage and safety protocols across warehouse and corporate facilities.</span>
+              </div>
+              <div className="p-4 rounded-xl bg-white border border-slate-200/80 space-y-1.5 shadow-2xs">
+                <span className="font-bold text-slate-900 block">Continuous Learning</span>
+                <span className="text-slate-600">Hands-on exposure to enterprise CRM tools, supply chain optimization, and corporate accounting.</span>
+              </div>
+              <div className="p-4 rounded-xl bg-white border border-slate-200/80 space-y-1.5 shadow-2xs">
+                <span className="font-bold text-slate-900 block">Inclusive Culture</span>
+                <span className="text-slate-600">Collaborative, respectful workplace focused on customer excellence and team camaraderie.</span>
+              </div>
             </div>
           </div>
         </div>

@@ -670,7 +670,7 @@ async function executeZohoRequest<T = unknown>(
   try {
     for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
       try {
-        let token = await getZohoAccessToken();
+        const token = await getZohoAccessToken();
 
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
@@ -691,7 +691,7 @@ async function executeZohoRequest<T = unknown>(
           clearTimeout(timeoutId);
         }
 
-        let rawText = await response.text();
+        const rawText = await response.text();
         let parsed: any = null;
         try {
           parsed = rawText ? JSON.parse(rawText) : {};

@@ -77,4 +77,7 @@ test_shot.png
 .chrome_dom_profile
 .chrome_pag_profile
 *.zip
+/docx_extracted/
+/seo_audit_nov09_2026/
+/seo_audit_nov2026/
 

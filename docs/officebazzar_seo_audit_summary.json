@@ -1,0 +1,14 @@
+{
+  "totalUrlsDiscovered": 1977,
+  "indexableUrls": 1974,
+  "nonIndexableUrls": 3,
+  "sitemapUrlCount": 1974,
+  "breakdown": {
+    "staticPages": 15,
+    "categories": 4,
+    "blogs": 10,
+    "products": 1948,
+    "redirects": 1,
+    "legacy404": 2
+  }
+}

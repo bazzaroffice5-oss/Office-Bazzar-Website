@@ -7,9 +7,12 @@ import JsonLd from '@/components/seo/JsonLd';
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: Promise<{ query?: string; category?: string; brand?: string; sub?: string }>;
+  searchParams: Promise<{ query?: string; category?: string; brand?: string; sub?: string; page?: string }>;
 }) {
   const resolved = await searchParams;
+  const parsedPage = resolved?.page ? parseInt(resolved.page, 10) : 1;
+  const isPaginated = !isNaN(parsedPage) && parsedPage > 1;
+
   let rawTitle = 'Corporate Office Supplies & B2B Catalogue';
   let description =
     'Browse 100+ verified corporate office stationery, housekeeping chemicals, printer toners, tissue napkins, and packaging supplies with bulk GST billing in India.';
@@ -24,8 +27,13 @@ export async function generateMetadata({
     description = `Explore wholesale pricing and bulk corporate packaging for "${resolved.query}" at Office Bazzar with 100% GST input tax credit across India.`;
   }
 
+  if (isPaginated) {
+    rawTitle = `${rawTitle} - Page ${parsedPage}`;
+  }
+
   const title = formatSeoTitle(rawTitle);
-  const canonicalUrl = getCanonicalUrl('/products');
+  const canonicalPath = isPaginated ? `/products?page=${parsedPage}` : '/products';
+  const canonicalUrl = getCanonicalUrl(canonicalPath);
   const ogImageUrl = `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`;
 
   return {

@@ -36,7 +36,7 @@ export default function RequestQuotePage() {
       <RequestQuoteClient />
 
       {/* Institutional Procurement Assurance Section */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-slate-200 text-xs text-slate-600">
           <div className="p-4 bg-white rounded-xl border border-slate-200/80 space-y-1.5 shadow-2xs">
             <div className="font-semibold text-slate-900">Dedicated Account Manager</div>
@@ -49,6 +49,31 @@ export default function RequestQuotePage() {
           <div className="p-4 bg-white rounded-xl border border-slate-200/80 space-y-1.5 shadow-2xs">
             <div className="font-semibold text-slate-900">Direct OEM Authenticity</div>
             <p>All items quoted are 100% genuine products sourced directly from manufacturers like JK Paper, Diversey, Kimberly-Clark, Kangaro, and 3M with manufacturer warranties.</p>
+          </div>
+        </div>
+
+        {/* 4-Step Procurement Workflow */}
+        <div className="p-6 bg-white rounded-2xl border border-slate-200/80 shadow-2xs">
+          <h3 className="text-base font-bold text-slate-900 mb-4">
+            How Our Corporate Quotation &amp; Supply Process Works
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70 space-y-1">
+              <span className="font-bold text-[#004b87] block">1. Submit RFQ</span>
+              <p className="text-slate-600">Specify products, required quantities, target delivery timeline, and recipient GST details.</p>
+            </div>
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70 space-y-1">
+              <span className="font-bold text-[#004b87] block">2. Commercial Quote</span>
+              <p className="text-slate-600">Receive a formalized Zoho CRM quotation with line-item HSN codes and volume discounts.</p>
+            </div>
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70 space-y-1">
+              <span className="font-bold text-[#004b87] block">3. PO Issuance</span>
+              <p className="text-slate-600">Confirm by issuing your company Purchase Order or approving the quote online.</p>
+            </div>
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70 space-y-1">
+              <span className="font-bold text-[#004b87] block">4. Direct Dispatch</span>
+              <p className="text-slate-600">Goods dispatched from Royapettah fulfillment center with GST e-way bill &amp; live tracking.</p>
+            </div>
           </div>
         </div>
       </div>

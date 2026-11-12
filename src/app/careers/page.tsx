@@ -4,6 +4,9 @@ import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 import CareersClient from '@/components/careers/CareersClient';
 
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 export const metadata: Metadata = constructMetadata({
   title: 'Careers in Corporate Procurement & Supply Chain',
   description:

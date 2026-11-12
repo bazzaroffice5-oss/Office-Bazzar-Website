@@ -3,6 +3,9 @@ import { getCategories, getProducts } from '@/lib/db/store';
 import { BLOG_POSTS } from '@/lib/data/blog';
 import { getCanonicalUrl } from '@/lib/seo/config';
 
+// Verified catalogue and website update timestamp
+const LATEST_UPDATE_DATE = new Date('2026-11-12T00:00:00.000Z');
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 1. Core Public Static Pages
   const staticPages = [
@@ -25,7 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticRoutes: MetadataRoute.Sitemap = staticPages.map((page) => ({
     url: getCanonicalUrl(page.path),
-    lastModified: new Date('2026-07-22T00:00:00.000Z'),
+    lastModified: LATEST_UPDATE_DATE,
     changeFrequency: page.changeFrequency,
     priority: page.priority,
   }));
@@ -34,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const categories = await getCategories();
   const categoryRoutes: MetadataRoute.Sitemap = categories.map((cat) => ({
     url: getCanonicalUrl(`/category/${cat.slug}`),
-    lastModified: new Date('2026-07-22T00:00:00.000Z'),
+    lastModified: LATEST_UPDATE_DATE,
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   }));
@@ -50,7 +53,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
     .map((prod) => ({
       url: getCanonicalUrl(`/product/${prod.slug}`),
-      lastModified: new Date('2026-07-22T00:00:00.000Z'),
+      lastModified: LATEST_UPDATE_DATE,
       changeFrequency: 'daily' as const,
       priority: prod.featured ? 0.9 : 0.8,
     }));

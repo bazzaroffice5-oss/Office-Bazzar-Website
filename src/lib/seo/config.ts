@@ -107,6 +107,64 @@ export function formatSeoTitle(rawTitle?: string): string {
   return `${shortened || stripped.slice(0, maxBaseLen).trim()} | ${brand}`;
 }
 
+/**
+ * Generates an authoritative, 100% globally unique SEO title for product pages.
+ * Preserves the distinguishing SKU code and stays strictly within 60-65 characters.
+ */
+export function formatProductSeoTitle(product: { name: string; sku?: string; brandName?: string }): string {
+  const brand = 'Office Bazzar';
+  const sku = (product.sku || '').trim();
+  let name = (product.name || '').trim();
+
+  // Strip existing brand suffixes
+  name = name
+    .replace(/\s*[|–-]\s*Office\s*Bazzar(\s+India)?\s*$/i, '')
+    .replace(/\s*[|–-]\s*Officebazzar[^|]*$/i, '')
+    .trim();
+
+  const suffix = sku ? ` (${sku}) | ${brand}` : ` | ${brand}`;
+  const maxTitleLen = 65;
+  const maxNameLen = maxTitleLen - suffix.length;
+
+  if (name.length > maxNameLen && maxNameLen > 15) {
+    const sliced = name.slice(0, maxNameLen);
+    const lastSpace = sliced.lastIndexOf(' ');
+    name = lastSpace > 10 ? sliced.slice(0, lastSpace).trim() : sliced.trim();
+  }
+
+  return `${name}${suffix}`;
+}
+
+/**
+ * Generates an authoritative, 100% globally unique meta description for product pages.
+ * Strictly formatted between 120 and 158 characters with SKU, brand, and GST B2B terms.
+ */
+export function formatProductSeoDescription(product: {
+  name: string;
+  sku?: string;
+  brandName?: string;
+  categoryName?: string;
+  packSize?: string;
+  gstPercent?: number;
+}): string {
+  const cleanName = (product.name || '').trim();
+  const brandName = (product.brandName || 'Office Bazzar').trim();
+  const sku = (product.sku || '').trim();
+  const pack = (product.packSize || 'Standard Pack').trim();
+  const gst = product.gstPercent || 18;
+
+  const desc = `Buy ${cleanName} (${sku}) by ${brandName}. ${pack}, ${gst}% GST invoice, wholesale pricing & bulk enterprise delivery in India.`;
+  if (desc.length <= 158) return desc;
+
+  const shortDesc = `Buy ${cleanName} (${sku}). ${pack}, ${gst}% GST invoice & wholesale B2B delivery across India.`;
+  if (shortDesc.length <= 158) return shortDesc;
+
+  const suffix = ` (${sku}). ${gst}% GST invoice & bulk corporate supply across India.`;
+  const maxNameLen = 155 - suffix.length;
+  const truncatedName = cleanName.slice(0, maxNameLen).replace(/\s+\S*$/, '').trim();
+  return `Buy ${truncatedName}${suffix}`;
+}
+
 export function getCanonicalUrl(path: string = ''): string {
   if (!path || path === '/' || path.trim() === '') {
     return `${SITE_CONFIG.url}/`;

@@ -187,6 +187,26 @@ export default function ContactPage() {
                 ))}
               </div>
             </div>
+
+            {/* Corporate Procurement Support Details */}
+            <div className="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-2xs space-y-4">
+              <h3 className="text-sm font-bold text-slate-900">
+                Institutional Procurement Desk &amp; Corporate Billing
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Officebazzar E-Store Private Limited operates dedicated sales and customer success desks for institutional buyers across India. For formal vendor registration, NDA execution, Master Service Agreements (MSA), or recurring purchase order (PO) workflows, contact our corporate affairs desk directly at <a href="mailto:dm@officebazzar.com" className="text-[#004b87] font-semibold underline">dm@officebazzar.com</a>.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-slate-600">
+                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/70">
+                  <span className="font-bold text-slate-900 block mb-0.5">Response Time SLA</span>
+                  <span>Quotations &amp; enquiries processed within 2 to 4 business hours.</span>
+                </div>
+                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/70">
+                  <span className="font-bold text-slate-900 block mb-0.5">GST Invoicing</span>
+                  <span>100% genuine tax invoices with verified HSN/SAC codes for ITC claim.</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

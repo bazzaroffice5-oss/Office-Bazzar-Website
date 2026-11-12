@@ -2,7 +2,14 @@ import React from 'react';
 import { notFound, permanentRedirect } from 'next/navigation';
 import ProductDetailClient from '@/components/product/ProductDetailClient';
 import { getProductBySlug, getRelatedProducts, getBrands, getProducts } from '@/lib/db/store';
-import { getProductJsonLd, getBreadcrumbJsonLd, getCanonicalUrl, SITE_CONFIG, formatSeoTitle } from '@/lib/seo/config';
+import {
+  getProductJsonLd,
+  getBreadcrumbJsonLd,
+  getCanonicalUrl,
+  SITE_CONFIG,
+  formatProductSeoTitle,
+  formatProductSeoDescription,
+} from '@/lib/seo/config';
 
 export const revalidate = 3600;
 
@@ -46,20 +53,8 @@ export async function generateMetadata({
     };
   }
 
-  const cleanName = product.name.trim();
-  const brandName = (product.brandName || 'Office Bazzar').trim();
-  const nameIncludesBrand = cleanName.toLowerCase().includes(brandName.toLowerCase());
-  const rawTitle =
-    !nameIncludesBrand && brandName.toLowerCase() !== 'officebazzar' && brandName.toLowerCase() !== 'office bazzar'
-      ? `${cleanName} (${brandName})`
-      : `${cleanName} (${product.sku})`;
-  const metaTitle = formatSeoTitle(rawTitle);
-
-  const rawDesc = `Buy ${cleanName} (SKU: ${product.sku}) by ${brandName} under ${product.categoryName}. ${product.packSize || 'Standard Pack'} with ${product.gstPercent}% GST invoice & bulk B2B supply in India.`;
-  const metaDescription =
-    rawDesc.length <= 158
-      ? rawDesc
-      : `Source ${cleanName} (${product.sku}) from ${brandName}. ${product.packSize || 'Standard Pack'}, ${product.gstPercent}% GST tax invoice, and bulk corporate supply across India.`.slice(0, 158);
+  const metaTitle = formatProductSeoTitle(product);
+  const metaDescription = formatProductSeoDescription(product);
 
   const canonicalUrl = getCanonicalUrl(`/product/${product.slug}`);
   const ogImage = product.images && product.images.length > 0 ? product.images[0] : `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`;

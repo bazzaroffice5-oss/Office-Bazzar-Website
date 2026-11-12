@@ -7,6 +7,7 @@ export interface WindowPaginationProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+  getPageUrl?: (page: number) => string;
   className?: string;
   windowSize?: number;
 }
@@ -15,11 +16,13 @@ export interface WindowPaginationProps {
  * Window-based pagination component.
  * Displays a maximum of `windowSize` (default: 6) page numbers at any time.
  * Previous and Next buttons navigate one page at a time with group window scrolling.
+ * Supports crawlable HTML links (getPageUrl) for search engine indexing.
  */
 export default function WindowPagination({
   currentPage,
   totalPages,
   onPageChange,
+  getPageUrl,
   className = '',
   windowSize = 6,
 }: WindowPaginationProps) {
@@ -40,17 +43,13 @@ export default function WindowPagination({
   const hasPrevious = validCurrentPage > 1;
   const hasNext = validCurrentPage < totalPages;
 
-  const handlePrevious = () => {
-    if (hasPrevious) {
-      onPageChange(validCurrentPage - 1);
-    }
+  const handlePageClick = (e: React.MouseEvent, page: number) => {
+    e.preventDefault();
+    onPageChange(page);
   };
 
-  const handleNext = () => {
-    if (hasNext) {
-      onPageChange(validCurrentPage + 1);
-    }
-  };
+  const prevUrl = getPageUrl && hasPrevious ? getPageUrl(validCurrentPage - 1) : '#';
+  const nextUrl = getPageUrl && hasNext ? getPageUrl(validCurrentPage + 1) : '#';
 
   return (
     <nav
@@ -58,28 +57,37 @@ export default function WindowPagination({
       className={`mx-auto flex w-full justify-center items-center gap-1 sm:gap-2 flex-wrap ${className}`}
     >
       {/* Previous Page Button */}
-      <button
-        type="button"
-        onClick={handlePrevious}
-        disabled={!hasPrevious}
-        aria-label="Go to previous page"
-        className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-2 rounded-xl border border-[#E2EBE3] text-xs font-semibold text-[#526174] bg-white hover:bg-[#EDF5EF] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer select-none"
-      >
-        <ChevronLeft className="w-3.5 h-3.5" />
-        <span>Previous</span>
-      </button>
+      {hasPrevious ? (
+        <a
+          href={prevUrl}
+          onClick={(e) => handlePageClick(e, validCurrentPage - 1)}
+          aria-label="Go to previous page"
+          className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-2 rounded-xl border border-[#E2EBE3] text-xs font-semibold text-[#526174] bg-white hover:bg-[#EDF5EF] transition-colors cursor-pointer select-none"
+        >
+          <ChevronLeft className="w-3.5 h-3.5" />
+          <span>Previous</span>
+        </a>
+      ) : (
+        <span
+          aria-disabled="true"
+          className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-2 rounded-xl border border-[#E2EBE3] text-xs font-semibold text-[#526174] bg-white opacity-40 cursor-not-allowed select-none"
+        >
+          <ChevronLeft className="w-3.5 h-3.5" />
+          <span>Previous</span>
+        </span>
+      )}
 
       {/* First Page Shortcut (Desktop Only) when beyond first group */}
       {startPage > 1 && (
         <div className="hidden sm:flex items-center gap-1 sm:gap-1.5">
-          <button
-            type="button"
-            onClick={() => onPageChange(1)}
+          <a
+            href={getPageUrl ? getPageUrl(1) : '#'}
+            onClick={(e) => handlePageClick(e, 1)}
             aria-label="Go to page 1"
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-xs font-bold bg-white border border-[#E2EBE3] text-[#526174] hover:bg-[#EDF5EF] transition-colors cursor-pointer select-none"
+            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-xl text-xs font-bold bg-white border border-[#E2EBE3] text-[#526174] hover:bg-[#EDF5EF] transition-colors cursor-pointer select-none"
           >
             1
-          </button>
+          </a>
           {startPage > 2 && (
             <span className="px-1 text-xs font-bold text-[#526174]/60 select-none">...</span>
           )}
@@ -90,21 +98,22 @@ export default function WindowPagination({
       <div className="flex items-center gap-1 sm:gap-1.5">
         {visiblePages.map((page) => {
           const isSelected = page === validCurrentPage;
+          const url = getPageUrl ? getPageUrl(page) : '#';
           return (
-            <button
+            <a
               key={page}
-              type="button"
-              onClick={() => onPageChange(page)}
+              href={url}
+              onClick={(e) => handlePageClick(e, page)}
               aria-current={isSelected ? 'page' : undefined}
               aria-label={`Page ${page}`}
-              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-xs font-bold transition-all cursor-pointer select-none ${
+              className={`w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-xl text-xs font-bold transition-all cursor-pointer select-none ${
                 isSelected
                   ? 'bg-[#163A5F] text-white shadow-xs scale-105 border border-[#163A5F]'
                   : 'bg-white border border-[#E2EBE3] text-[#526174] hover:bg-[#EDF5EF] hover:border-[#163A5F]/40'
               }`}
             >
               {page}
-            </button>
+            </a>
           );
         })}
       </div>
@@ -115,28 +124,37 @@ export default function WindowPagination({
           {endPage < totalPages - 1 && (
             <span className="px-1 text-xs font-bold text-[#526174]/60 select-none">...</span>
           )}
-          <button
-            type="button"
-            onClick={() => onPageChange(totalPages)}
+          <a
+            href={getPageUrl ? getPageUrl(totalPages) : '#'}
+            onClick={(e) => handlePageClick(e, totalPages)}
             aria-label={`Go to page ${totalPages}`}
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-xs font-bold bg-white border border-[#E2EBE3] text-[#526174] hover:bg-[#EDF5EF] transition-colors cursor-pointer select-none"
+            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-xl text-xs font-bold bg-white border border-[#E2EBE3] text-[#526174] hover:bg-[#EDF5EF] transition-colors cursor-pointer select-none"
           >
             {totalPages}
-          </button>
+          </a>
         </div>
       )}
 
       {/* Next Page Button */}
-      <button
-        type="button"
-        onClick={handleNext}
-        disabled={!hasNext}
-        aria-label="Go to next page"
-        className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-2 rounded-xl border border-[#E2EBE3] text-xs font-semibold text-[#526174] bg-white hover:bg-[#EDF5EF] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer select-none"
-      >
-        <span>Next</span>
-        <ChevronRight className="w-3.5 h-3.5" />
-      </button>
+      {hasNext ? (
+        <a
+          href={nextUrl}
+          onClick={(e) => handlePageClick(e, validCurrentPage + 1)}
+          aria-label="Go to next page"
+          className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-2 rounded-xl border border-[#E2EBE3] text-xs font-semibold text-[#526174] bg-white hover:bg-[#EDF5EF] transition-colors cursor-pointer select-none"
+        >
+          <span>Next</span>
+          <ChevronRight className="w-3.5 h-3.5" />
+        </a>
+      ) : (
+        <span
+          aria-disabled="true"
+          className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-2 rounded-xl border border-[#E2EBE3] text-xs font-semibold text-[#526174] bg-white opacity-40 cursor-not-allowed select-none"
+        >
+          <span>Next</span>
+          <ChevronRight className="w-3.5 h-3.5" />
+        </span>
+      )}
     </nav>
   );
 }

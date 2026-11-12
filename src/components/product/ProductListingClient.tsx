@@ -99,6 +99,18 @@ export default function ProductListingClient({
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  // Generate SEO crawlable page URL for pagination links
+  const getPageUrl = (page: number) => {
+    const params = new URLSearchParams();
+    if (searchQuery.trim()) params.set('query', searchQuery.trim());
+    if (selectedFilter.startsWith('cat:')) params.set('category', selectedFilter.replace('cat:', ''));
+    if (selectedFilter.startsWith('sub:')) params.set('sub', selectedFilter.replace('sub:', ''));
+    if (selectedBrand) params.set('brand', selectedBrand);
+    if (page > 1) params.set('page', page.toString());
+    const queryStr = params.toString();
+    return queryStr ? `/products?${queryStr}` : '/products';
+  };
+
   // Update browser URL query params without reloading
   const updateUrl = (q: string, filter: string, brand: string, pageNum: number = 1) => {
     if (typeof window === 'undefined') return;
@@ -556,6 +568,7 @@ export default function ProductListingClient({
         currentPage={safeCurrentPage}
         totalPages={totalPages}
         onPageChange={handlePageChange}
+        getPageUrl={getPageUrl}
         className="mt-12 mb-6"
       />
 

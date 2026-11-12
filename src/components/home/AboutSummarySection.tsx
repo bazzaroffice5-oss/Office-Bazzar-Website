@@ -73,10 +73,10 @@ export default function AboutSummarySection() {
           <div className="lg:col-span-6 relative flex items-center justify-center">
             <div className="relative w-full max-w-[500px] aspect-square rounded-2xl overflow-hidden border border-slate-200/90 shadow-xl bg-slate-100">
               <Image
-                src="/images/officebazzar-building.jpg?v=20261106_v5"
+                src="/images/officebazzar-building.webp?v=20261112_v1"
                 alt="Office Bazzar corporate headquarters building featuring glass facade and Officebazzar.com signage"
                 fill
-                quality={95}
+                quality={85}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 500px, 500px"
                 className="object-cover object-center"
                 priority
