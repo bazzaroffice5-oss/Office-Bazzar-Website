@@ -231,6 +231,40 @@ export default function ProductDetailClient({
             </div>
           )}
 
+          {/* Technical Specifications (if available) */}
+          {product.specifications && Object.keys(product.specifications).length > 0 && (
+            (() => {
+              const IGNORED_KEYS = new Set(['source', 'catalogueCode', 'brand', 'category', 'subcategory', 'inventoryStatus', '0', '1', '2', '3', '4', '5']);
+              const validEntries = Object.entries(product.specifications).filter(
+                ([k, v]) => !IGNORED_KEYS.has(k) && typeof v === 'string' && v.trim().length > 0 && isNaN(Number(k))
+              );
+              if (validEntries.length === 0) return null;
+
+              const formatKey = (k: string) => {
+                if (k === 'specs') return 'Technical Specifications';
+                if (k === 'cataloguePage') return 'Catalogue Reference Page';
+                if (k === 'stockVerification') return 'Verification Status';
+                return k.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase());
+              };
+
+              return (
+                <div className="pt-2 text-sm text-[#526174] leading-relaxed space-y-2">
+                  <h2 className="text-xs font-bold uppercase tracking-wider text-[#111827]">
+                    Technical Specifications
+                  </h2>
+                  <div className="border border-[#E2EBE3] rounded-xl overflow-hidden divide-y divide-[#E2EBE3] bg-white text-xs">
+                    {validEntries.map(([k, v]) => (
+                      <div key={k} className="flex px-3.5 py-2.5">
+                        <span className="w-44 font-semibold text-[#111827] shrink-0">{formatKey(k)}:</span>
+                        <span className="text-[#526174] break-words">{String(v)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()
+          )}
+
           {/* Action Buttons: Wishlist & Add Cart (Quote Cart) */}
           <div className="pt-4 flex flex-wrap items-center gap-3">
             {/* Wishlist Button */}
