@@ -5137,13 +5137,12 @@
     "category": "Packaging Supplies",
     "primaryImage": "/assets/products/catalog_2026/OB-RDS-24.webp",
     "galleryImages": [
-      "/assets/products/catalog_2026/OB-RDS-24.webp",
-      "/assets/products/catalog_2026/OB-RDS-24-alt-1.webp"
+      "/assets/products/catalog_2026/OB-RDS-24.webp"
     ],
-    "fileSize": 22798,
+    "fileSize": 142336,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-12T05:32:50.500Z"
   },
   "OB-RDS-25": {
     "sku": "OB-RDS-25",
@@ -5333,13 +5332,12 @@
     "category": "Packaging Supplies",
     "primaryImage": "/assets/products/catalog_2026/OB-RDS-38.webp",
     "galleryImages": [
-      "/assets/products/catalog_2026/OB-RDS-38.webp",
-      "/assets/products/catalog_2026/OB-RDS-38-alt-1.webp"
+      "/assets/products/catalog_2026/OB-RDS-38.webp"
     ],
-    "fileSize": 33708,
+    "fileSize": 144384,
     "imageStatus": "VERIFIED_GENUINE_PRODUCT_PHOTO",
     "requiredAction": "NONE_MAINTAIN_CURRENT_IMAGE",
-    "lastVerifiedAt": "2026-11-05T11:55:00+05:30"
+    "lastVerifiedAt": "2026-11-12T05:32:50.502Z"
   },
   "OB-RDS-39": {
     "sku": "OB-RDS-39",

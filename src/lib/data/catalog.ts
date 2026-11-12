@@ -15798,8 +15798,7 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-24.webp",
-      "/assets/products/catalog_2026/OB-RDS-24-alt-1.webp"
+      "/assets/products/catalog_2026/OB-RDS-24.webp"
     ],
     "featured": false,
     "bestseller": false,
@@ -16812,8 +16811,7 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-RDS-38.webp",
-      "/assets/products/catalog_2026/OB-RDS-38-alt-1.webp"
+      "/assets/products/catalog_2026/OB-RDS-38.webp"
     ],
     "featured": false,
     "bestseller": false,

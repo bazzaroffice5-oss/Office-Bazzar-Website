@@ -4929,7 +4929,12 @@
     ],
     "category": "Packaging Supplies",
     "brand": "OfficeBazzar",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-RDS-24.webp"
+    ],
+    "fileSize": 142336,
+    "lastVerifiedAt": "2026-11-12T05:32:50.538Z"
   },
   "OB-RDS-25": {
     "productId": "prod-ob-rds-25-heavy-duty-rubber-speed-breakers",
@@ -5111,7 +5116,12 @@
     ],
     "category": "Packaging Supplies",
     "brand": "OfficeBazzar",
-    "status": "GENUINE_PHOTOGRAPH"
+    "status": "GENUINE_PHOTOGRAPH",
+    "galleryImages": [
+      "/assets/products/catalog_2026/OB-RDS-38.webp"
+    ],
+    "fileSize": 144384,
+    "lastVerifiedAt": "2026-11-12T05:32:50.538Z"
   },
   "OB-RDS-39": {
     "productId": "prod-ob-rds-39-interlocking-plastic-water-filled-road-barrier",
