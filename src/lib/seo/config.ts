@@ -472,7 +472,7 @@ export function getArticleJsonLd(post: BlogPost) {
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': getCanonicalUrl(`/blogs/${post.slug}`),
+      '@id': getCanonicalUrl(`/blog/${post.slug}`),
     },
   };
 }

@@ -8,6 +8,18 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'cms.officebazzar.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.officebazzar.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'officebazzar.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'officebazzar.co.in',
         pathname: '/wp-content/uploads/**',
       },
@@ -147,7 +159,26 @@ const nextConfig: NextConfig = {
       },
     ];
 
-    return [...apexToWwwRedirects, ...legacyRedirects, ...mainCategoryAliases, ...duplicateProductRedirects];
+    const blogLegacyRedirects = [
+      {
+        source: '/blogs',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/blogs/:slug*',
+        destination: '/blog/:slug*',
+        permanent: true,
+      },
+    ];
+
+    return [
+      ...apexToWwwRedirects,
+      ...legacyRedirects,
+      ...mainCategoryAliases,
+      ...duplicateProductRedirects,
+      ...blogLegacyRedirects,
+    ];
   },
   async rewrites() {
     return [

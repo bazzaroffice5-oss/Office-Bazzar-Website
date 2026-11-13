@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getCategories, getProducts } from '@/lib/db/store';
-import { BLOG_POSTS } from '@/lib/data/blog';
+import { getWordPressPosts } from '@/lib/wordpress/client';
 import { getCanonicalUrl } from '@/lib/seo/config';
 
 // Verified catalogue and website update timestamp
@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '', changeFrequency: 'daily' as const, priority: 1.0 },
     { path: '/products', changeFrequency: 'daily' as const, priority: 0.9 },
     { path: '/categories', changeFrequency: 'weekly' as const, priority: 0.85 },
-    { path: '/blogs', changeFrequency: 'weekly' as const, priority: 0.8 },
+    { path: '/blog', changeFrequency: 'weekly' as const, priority: 0.8 },
     { path: '/about', changeFrequency: 'monthly' as const, priority: 0.75 },
     { path: '/bulk-orders', changeFrequency: 'monthly' as const, priority: 0.75 },
     { path: '/request-quote', changeFrequency: 'weekly' as const, priority: 0.8 },
@@ -58,11 +58,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: prod.featured ? 0.9 : 0.8,
     }));
 
-  // 4. Published Blog Posts (Canonical: /blogs/${slug})
-  const blogRoutes: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
-    url: getCanonicalUrl(`/blogs/${post.slug}`),
-    lastModified: new Date(post.publishedDate),
-    changeFrequency: 'monthly' as const,
+  // 4. Published Blog Posts (Canonical: /blog/${slug})
+  const { posts: blogPosts } = await getWordPressPosts({ perPage: 100 });
+  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: getCanonicalUrl(`/blog/${post.slug}`),
+    lastModified: new Date(post.modifiedIsoDate || post.publishedIsoDate),
+    changeFrequency: 'weekly' as const,
     priority: 0.7,
   }));
 

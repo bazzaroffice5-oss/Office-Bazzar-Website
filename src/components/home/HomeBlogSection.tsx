@@ -26,7 +26,7 @@ export default function HomeBlogSection() {
           </div>
 
           <Link
-            href="/blogs"
+            href="/blog"
             className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-[#16a34a] hover:text-[#15803d] transition-colors group"
           >
             <span>View All Blogs</span>
@@ -43,7 +43,7 @@ export default function HomeBlogSection() {
             >
               {/* Scaled Image Container */}
               <Link
-                href={`/blogs/${post.slug}`}
+                href={`/blog/${post.slug}`}
                 className="relative w-full h-36 sm:h-40 bg-slate-100 overflow-hidden block flex-shrink-0"
                 aria-label={post.title}
               >
@@ -77,7 +77,7 @@ export default function HomeBlogSection() {
 
                   {/* Title */}
                   <h3 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#004b87] transition-colors line-clamp-2 leading-snug min-h-[36px] flex items-start">
-                    <Link href={`/blogs/${post.slug}`}>
+                    <Link href={`/blog/${post.slug}`}>
                       {post.title}
                     </Link>
                   </h3>
@@ -91,7 +91,7 @@ export default function HomeBlogSection() {
                 {/* Navy Blue "Read More" Button */}
                 <div className="mt-3.5 pt-3 border-t border-slate-100">
                   <Link
-                    href={`/blogs/${post.slug}`}
+                    href={`/blog/${post.slug}`}
                     className="w-full py-2 px-3 rounded-lg sm:rounded-xl bg-[#004b87] hover:bg-[#003866] active:bg-[#002f57] border border-[#004b87] text-white flex items-center justify-center gap-2 text-xs sm:text-[13px] font-bold shadow-2xs transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004b87] focus-visible:ring-offset-2"
                   >
                     <span>Read More</span>
