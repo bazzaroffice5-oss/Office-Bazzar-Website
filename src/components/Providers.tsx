@@ -2,6 +2,7 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
 import { CartProvider } from '@/context/CartContext';
 import { WishlistProvider } from '@/context/WishlistContext';
 import { LocationProvider } from '@/context/LocationContext';
@@ -15,6 +16,15 @@ const BazzarAIChatbot = dynamic(() => import('@/components/chatbot/BazzarAIChatb
 });
 
 export default function Providers({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const isAdmin = pathname?.startsWith('/blog-admin-panel');
+
+  // Complete isolation for standalone blog admin:
+  // Do not load public e-commerce providers, floating cart drawer, pincode modal, or customer AI chatbot
+  if (isAdmin) {
+    return <>{children}</>;
+  }
+
   return (
     <AuthProvider>
       <LocationProvider>

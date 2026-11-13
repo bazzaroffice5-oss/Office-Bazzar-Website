@@ -89,9 +89,17 @@ export async function getBlogPosts(options: {
     console.warn('[Keystatic Reader] Error reading from disk:', error);
   }
 
-  // Filter drafts unless explicitly requested (e.g. preview mode)
+  // Filter drafts, scheduled future posts, and trash items unless explicitly requested (e.g. preview mode)
   if (!includeDrafts) {
-    rawPosts = rawPosts.filter((p) => p.entry.status === 'published');
+    const now = Date.now();
+    rawPosts = rawPosts.filter((p) => {
+      if (p.entry.status !== 'published') return false;
+      if (p.entry.publishedDate) {
+        const pubTime = new Date(p.entry.publishedDate).getTime();
+        if (!isNaN(pubTime) && pubTime > now) return false;
+      }
+      return true;
+    });
   }
 
   // Format into unified blog post interface
@@ -223,8 +231,16 @@ export async function getBlogPostBySlug(
   try {
     const entry = await reader.collections.posts.read(slug);
     if (entry) {
-      if (!includeDrafts && entry.status === 'draft') {
-        return null; // Do not expose drafts
+      if (!includeDrafts) {
+        if (entry.status !== 'published') {
+          return null; // Exclude non-published
+        }
+        if (entry.publishedDate) {
+          const pubTime = new Date(entry.publishedDate).getTime();
+          if (!isNaN(pubTime) && pubTime > Date.now()) {
+            return null; // Scheduled in the future
+          }
+        }
       }
       const content = await entry.content();
       const isoDate = entry.publishedDate
