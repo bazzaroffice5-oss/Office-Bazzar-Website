@@ -135,7 +135,7 @@ const nextConfig: NextConfig = {
           },
         ],
         destination: 'https://www.officebazzar.com/:path*',
-        permanent: true,
+        statusCode: 301,
       },
     ];
 
