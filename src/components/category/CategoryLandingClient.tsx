@@ -200,37 +200,8 @@ export default function CategoryLandingClient({
           ))}
         </div>
 
-        {/* Featured Category Products Section (Direct Internal HTML Crawl Paths & Immediate Catalog Access) */}
-        {categoryProducts.length > 0 && (
-          <section className="mt-14 pt-10 border-t border-[#E2EBE3]">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#F97316]">
-                  Immediate Dispatch &amp; Stock Availability
-                </span>
-                <h2 className="text-xl sm:text-2xl font-extrabold text-[#111827] mt-0.5">
-                  Featured &amp; Essential {category.name}
-                </h2>
-              </div>
-              <Link
-                href={`${categoryBaseUrl}?view=all`}
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#163A5F] hover:text-[#F97316] transition-colors group self-start sm:self-auto"
-              >
-                <span>Browse All {categoryProducts.length} Items</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {categoryProducts.slice(0, 16).map((product, idx) => (
-                <ProductCard key={product.id} product={product} priority={idx < 4} />
-              ))}
-            </div>
-          </section>
-        )}
-
         {/* Enterprise Procurement & Standards Guide */}
-        <section className="mt-14 p-6 sm:p-8 rounded-2xl bg-[#EFF6F0] border border-[#E2EBE3]">
+        <section className="mt-10 sm:mt-12 p-6 sm:p-8 rounded-2xl bg-[#EFF6F0] border border-[#E2EBE3]">
           <div className="max-w-3xl">
             <span className="text-xs font-bold uppercase tracking-wider text-[#163A5F]">
               Corporate Buyer Guide
