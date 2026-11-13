@@ -396,9 +396,11 @@ export function getBreadcrumbJsonLd(
  */
 export function getProductJsonLd(product: Product) {
   const hasValidPrice = typeof product.price === 'number' && product.price > 0;
+  const productUrl = getCanonicalUrl(`/product/${product.slug}`);
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Product',
+    '@id': `${productUrl}#product`,
     name: product.name,
     image:
       product.images && product.images.length > 0
@@ -411,7 +413,7 @@ export function getProductJsonLd(product: Product) {
     sku: product.sku || product.id,
     mpn: product.sku || product.id,
     category: product.categoryName,
-    url: getCanonicalUrl(`/product/${product.slug}`),
+    url: productUrl,
     brand: {
       '@type': 'Brand',
       name: product.brandName || SITE_CONFIG.name,
@@ -429,7 +431,7 @@ export function getProductJsonLd(product: Product) {
         product.stockQuantity > 0
           ? 'https://schema.org/InStock'
           : 'https://schema.org/OutOfStock',
-      url: getCanonicalUrl(`/product/${product.slug}`),
+      url: productUrl,
       seller: {
         '@type': 'Organization',
         name: SITE_CONFIG.legalName,

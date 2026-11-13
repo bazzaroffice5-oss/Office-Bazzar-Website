@@ -8,6 +8,8 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: '*',
         allow: '/',
         disallow: [
+          '/blog-admin-panel',
+          '/blog-admin-panel/',
           '/admin',
           '/admin/',
           '/account',
@@ -33,6 +35,8 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: 'Googlebot',
         allow: '/',
         disallow: [
+          '/blog-admin-panel',
+          '/blog-admin-panel/',
           '/admin/',
           '/account/',
           '/checkout/',

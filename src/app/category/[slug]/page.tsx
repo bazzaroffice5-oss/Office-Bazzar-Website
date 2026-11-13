@@ -45,8 +45,8 @@ export async function generateMetadata({
 
   const rawTitle = activeSub
     ? `${activeSub.name} - ${category.name}`
-    : `${category.name} & Bulk Corporate Supplies`;
-  const metaTitle = formatSeoTitle(rawTitle);
+    : `${category.name} - Corporate Procurement`;
+  const metaTitle = activeSub ? formatSeoTitle(rawTitle) : rawTitle;
   const metaDescription = activeSub?.description
     ? activeSub.description
     : `${category.description} Request bulk B2B quotes and GST tax invoicing across India.`;
