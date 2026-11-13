@@ -133,7 +133,7 @@ export default function CategoryLandingClient({
     ];
 
     return (
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-6 md:py-10">
+      <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
         {/* Breadcrumb Navigation: Home → Main Category */}
         <nav
           aria-label="Breadcrumb"
@@ -161,13 +161,13 @@ export default function CategoryLandingClient({
           )}
         </div>
 
-        {/* 10 Category Cards in Responsive Grid: 5 columns on desktop (2 balanced rows of 5), 4 on laptops, 3 on tablets, 2 on mobile */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-3.5 md:gap-4">
+        {/* 10 Category Cards in Responsive Grid: Desktop 4 cols, Medium screens 3 cols, Tablets 2 cols, Mobile 1 col */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
           {cards.map((card, index) => (
             <Link
               key={card.id}
               href={card.href}
-              className="group relative flex flex-col w-full aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-slate-100 border border-[#E2EBE3] hover:border-[#163A5F]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#163A5F] focus-visible:ring-offset-2"
+              className="group relative flex flex-col w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 bg-slate-100 border border-[#E2EBE3] hover:border-[#163A5F]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#163A5F] focus-visible:ring-offset-2"
             >
               {/* Category Image with Smooth Hover Zoom */}
               <Image
@@ -176,22 +176,22 @@ export default function CategoryLandingClient({
                 fill
                 priority={index < 4}
                 className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
 
               {/* Subtle Overall Gradient/Tint on Hover */}
               <div className="absolute inset-0 bg-slate-900/15 group-hover:bg-slate-900/25 transition-colors duration-300" />
 
               {/* Bottom Gradient Overlay with Category Name & Description */}
-              <div className="absolute inset-x-0 bottom-0 z-10 pt-10 pb-3 sm:pb-3.5 px-3 sm:px-3.5 bg-gradient-to-t from-black/85 via-black/45 to-transparent">
-                <div className="flex items-center justify-between gap-1.5">
-                  <h2 className="text-sm sm:text-base font-bold text-white tracking-tight drop-shadow-sm group-hover:text-blue-100 transition-colors leading-snug truncate">
+              <div className="absolute inset-x-0 bottom-0 z-10 pt-16 pb-4 sm:pb-5 px-4 sm:px-5 bg-gradient-to-t from-black/85 via-black/45 to-transparent">
+                <div className="flex items-center justify-between gap-2">
+                  <h2 className="text-base sm:text-lg font-bold text-white tracking-tight drop-shadow-sm group-hover:text-blue-100 transition-colors leading-snug">
                     {card.name}
                   </h2>
-                  <ArrowRight className="w-3.5 h-3.5 text-white/80 group-hover:text-white group-hover:translate-x-1 transition-all shrink-0" />
+                  <ArrowRight className="w-4 h-4 text-white/80 group-hover:text-white group-hover:translate-x-1 transition-all shrink-0" />
                 </div>
                 {card.description && (
-                  <p className="text-[11px] sm:text-xs text-slate-200/90 line-clamp-1 sm:line-clamp-2 mt-0.5 font-normal drop-shadow-sm leading-relaxed">
+                  <p className="text-xs text-slate-200/90 line-clamp-2 mt-1 font-normal drop-shadow-sm leading-relaxed">
                     {card.description}
                   </p>
                 )}
@@ -213,7 +213,7 @@ export default function CategoryLandingClient({
     : `Displaying all ${displayedProducts.length} products in ${activeSubcategory?.name}`;
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-6 md:py-10">
+    <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
       {/* Breadcrumb Navigation: Home → Main Category → All Products / Subcategory */}
       <nav
         aria-label="Breadcrumb"
@@ -341,7 +341,7 @@ export default function CategoryLandingClient({
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-3.5 md:gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
           {paginatedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

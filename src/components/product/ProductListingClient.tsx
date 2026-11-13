@@ -364,7 +364,7 @@ export default function ProductListingClient({
   }, [selectedFilter, categories]);
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-6 md:py-10">
+    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
       {/* Breadcrumb Navigation */}
       <nav
         aria-label="Breadcrumb"
@@ -552,7 +552,7 @@ export default function ProductListingClient({
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-3.5 md:gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 w-full">
           {paginatedProducts.map((product, index) => (
             <ProductCard
               key={product.id}
