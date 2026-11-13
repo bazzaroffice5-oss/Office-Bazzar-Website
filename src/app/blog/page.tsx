@@ -85,23 +85,12 @@ export default async function BlogListingPage({ searchParams }: BlogPageProps) {
           )}
         </nav>
 
-        {/* Hero Header */}
-        <header className="mb-10 pb-6 border-b border-slate-100">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold text-[#16a34a] mb-2 px-3 py-1 bg-emerald-50 rounded-full border border-emerald-100/80">
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Knowledge &amp; Corporate Advisory</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
-            Latest Insights &amp; Procurement Guides
-          </h1>
-          <p className="text-sm text-slate-600 mt-2 max-w-3xl leading-relaxed">
-            Actionable manuals, facility checklists, product comparisons, and procurement
-            strategies to streamline workplace operations and maximize GST input tax credits
-            for Indian enterprises.
-          </p>
+        {/* Accessible Page Heading for SEO & Screen Readers */}
+        <h1 className="sr-only">OfficeBazzar Blog - Corporate Procurement Guides &amp; Insights</h1>
 
-          {/* Search & Category Filter Controls */}
-          <div className="mt-8 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+        {/* Search & Category Filter Controls */}
+        <header className="mb-8 pb-6 border-b border-slate-100">
+          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
             {/* Search form */}
             <form
               action="/blog"
