@@ -133,7 +133,7 @@ export async function POST(req: Request) {
         category: 'Customer Contact Inquiry',
         requirements: `[Contact Form Ref: ${referenceNumber}]\n${cleanMessage}`,
         estimatedQuantity: 'N/A',
-        deliveryLocation: 'officebazzar.com/contact',
+        deliveryLocation: 'www.officebazzar.com/contact',
       });
     } catch (dbErr) {
       console.error('[Contact API] Failed to persist enquiry to database:', dbErr);
@@ -163,7 +163,7 @@ export async function POST(req: Request) {
         phone: cleanPhone,
         message: cleanMessage,
         submittedAt,
-        deliveryLocation: 'officebazzar.com/contact',
+        deliveryLocation: 'www.officebazzar.com/contact',
       });
     } catch (zohoErr) {
       console.error('[Contact API] Unexpected error during Zoho CRM synchronization:', zohoErr);

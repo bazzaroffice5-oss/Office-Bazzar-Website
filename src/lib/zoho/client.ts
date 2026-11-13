@@ -144,7 +144,7 @@ export function buildZohoAuthorizationUrl(redirectUriOverride?: string): string 
   const redirectUri =
     redirectUriOverride ||
     (process.env.ZOHO_REDIRECT_URI || '').trim() ||
-    'https://officebazzar.com/api/zoho/callback';
+    'https://www.officebazzar.com/api/zoho/callback';
 
   const params = new URLSearchParams({
     scope: ZOHO_REQUIRED_SCOPES,

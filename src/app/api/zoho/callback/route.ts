@@ -122,7 +122,7 @@ function resolveRedirectUri(req: Request): string {
     return process.env.ZOHO_REDIRECT_URI.trim();
   }
 
-  const defaultProductionUri = 'https://officebazzar.com/api/zoho/callback';
+  const defaultProductionUri = 'https://www.officebazzar.com/api/zoho/callback';
   const host = req.headers.get('host') || '';
   if (host.includes('localhost') || host.includes('127.0.0.1')) {
     return `http://${host}/api/zoho/callback`;
@@ -149,7 +149,7 @@ export async function GET(req: Request) {
         vaultUpdatedAt: storeStatus.vaultUpdatedAt,
         tokenFingerprint: storeStatus.tokenFingerprint,
         requiredScopes: ZOHO_REQUIRED_SCOPES,
-        authorizeEndpoint: 'https://officebazzar.com/api/zoho/authorize',
+        authorizeEndpoint: 'https://www.officebazzar.com/api/zoho/authorize',
       });
     }
 

@@ -125,17 +125,17 @@ const nextConfig: NextConfig = {
       permanent: true,
     }));
 
-    const wwwToApexRedirects = [
+    const apexToWwwRedirects = [
       {
         source: '/:path*',
         has: [
           {
             type: 'host' as const,
-            value: 'www.officebazzar.com',
+            value: 'officebazzar.com',
           },
         ],
-        destination: 'https://officebazzar.com/:path*',
-        statusCode: 301,
+        destination: 'https://www.officebazzar.com/:path*',
+        permanent: true,
       },
     ];
 
@@ -147,7 +147,7 @@ const nextConfig: NextConfig = {
       },
     ];
 
-    return [...wwwToApexRedirects, ...legacyRedirects, ...mainCategoryAliases, ...duplicateProductRedirects];
+    return [...apexToWwwRedirects, ...legacyRedirects, ...mainCategoryAliases, ...duplicateProductRedirects];
   },
   async rewrites() {
     return [

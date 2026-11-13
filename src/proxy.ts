@@ -6,11 +6,11 @@ export async function proxy(request: NextRequest) {
   const host = request.headers.get('host')?.toLowerCase();
 
   // 1. Domain Canonicalization:
-  // If request arrives at WWW domain (www.officebazzar.com), permanently redirect (HTTP 301) to official primary domain (officebazzar.com)
-  if (host === 'www.officebazzar.com') {
+  // If request arrives at non-WWW apex domain (officebazzar.com), permanently redirect (HTTP 301) to official primary domain (www.officebazzar.com)
+  if (host === 'officebazzar.com') {
     const url = request.nextUrl.clone();
     url.protocol = 'https';
-    url.host = 'officebazzar.com';
+    url.host = 'www.officebazzar.com';
     return NextResponse.redirect(url, 301);
   }
 

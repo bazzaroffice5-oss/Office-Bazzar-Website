@@ -956,7 +956,7 @@ export function buildCustomerFinalQuotationEmailHtml(quotation: Quotation): stri
     </div>
 
     <div style="background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 14px 28px; text-align: center; font-size: 11px; color: #64748b;">
-      ${BUSINESS_CONFIG.legalEntityName} &bull; ${BUSINESS_CONFIG.contact.salesEmail} &bull; ${BUSINESS_CONFIG.contact.salesPhone} &bull; <a href="${siteUrl}" style="color: #1e3a8a;">officebazzar.com</a>
+      ${BUSINESS_CONFIG.legalEntityName} &bull; ${BUSINESS_CONFIG.contact.salesEmail} &bull; ${BUSINESS_CONFIG.contact.salesPhone} &bull; <a href="${siteUrl}" style="color: #1e3a8a;">www.officebazzar.com</a>
     </div>
   </div>
 </body>
