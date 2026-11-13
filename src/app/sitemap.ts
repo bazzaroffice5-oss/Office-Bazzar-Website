@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getCategories, getProducts } from '@/lib/db/store';
-import { getWordPressPosts } from '@/lib/wordpress/client';
+import { getBlogPosts } from '@/lib/keystatic/reader';
 import { getCanonicalUrl } from '@/lib/seo/config';
 
 // Verified catalogue and website update timestamp
@@ -59,7 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
   // 4. Published Blog Posts (Canonical: /blog/${slug})
-  const { posts: blogPosts } = await getWordPressPosts({ perPage: 100 });
+  const { posts: blogPosts } = await getBlogPosts({ perPage: 100 });
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: getCanonicalUrl(`/blog/${post.slug}`),
     lastModified: new Date(post.modifiedIsoDate || post.publishedIsoDate),

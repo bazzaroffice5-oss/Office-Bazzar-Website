@@ -16,11 +16,11 @@ import {
 import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 import {
-  getWordPressPosts,
-  getWordPressCategories,
-} from '@/lib/wordpress/client';
+  getBlogPosts,
+  getAllBlogCategories,
+} from '@/lib/keystatic/reader';
 
-export const revalidate = 600; // ISR: 10 minutes cache with on-demand webhook revalidation
+export const revalidate = 60; // ISR cache
 
 export const metadata: Metadata = constructMetadata({
   title: 'Corporate Procurement & Facility Guides',
@@ -43,16 +43,16 @@ export default async function BlogListingPage({ searchParams }: BlogPageProps) {
   const activeCategory = resolvedParams.category || '';
   const searchQuery = resolvedParams.search || '';
 
-  // Fetch live published posts and available categories
-  const [{ posts, totalPages, totalPosts, isFallback }, categories] =
+  // Fetch live published posts and available categories from Keystatic repository
+  const [{ posts, totalPages, totalPosts }, categories] =
     await Promise.all([
-      getWordPressPosts({
+      getBlogPosts({
         page: currentPage,
         perPage: 9,
         categorySlug: activeCategory || undefined,
         search: searchQuery || undefined,
       }),
-      getWordPressCategories(),
+      getAllBlogCategories(),
     ]);
 
   const breadcrumbJsonLd = getBreadcrumbJsonLd([
@@ -125,15 +125,6 @@ export default async function BlogListingPage({ searchParams }: BlogPageProps) {
             <div className="text-xs text-slate-500 flex items-center gap-2">
               <span className="font-semibold text-slate-800">{totalPosts}</span>
               <span>{totalPosts === 1 ? 'Article' : 'Articles'} Published</span>
-              {isFallback && (
-                <span
-                  title="Serving cached high-availability articles"
-                  className="inline-flex items-center gap-1 text-[11px] text-slate-400 bg-slate-100 px-2 py-0.5 rounded"
-                >
-                  <CheckCircle2 className="w-3 h-3 text-emerald-500" />
-                  Verified
-                </span>
-              )}
             </div>
           </div>
 

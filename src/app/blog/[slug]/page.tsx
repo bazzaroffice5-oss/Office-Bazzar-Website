@@ -18,14 +18,15 @@ import {
   getBreadcrumbJsonLd,
 } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
+import { DocumentRenderer } from '@keystatic/core/renderer';
 import {
-  getWordPressPostBySlug,
+  getBlogPostBySlug,
   getAllBlogSlugs,
-  getWordPressPosts,
-} from '@/lib/wordpress/client';
-import { UnifiedBlogPost } from '@/lib/wordpress/types';
+  getBlogPosts,
+  KeystaticBlogPost,
+} from '@/lib/keystatic/reader';
 
-export const revalidate = 3600; // ISR: 1 hour cache with on-demand webhook revalidation
+export const revalidate = 60; // ISR cache
 
 export async function generateStaticParams() {
   const slugs = await getAllBlogSlugs();
@@ -40,9 +41,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getWordPressPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug);
 
-  if (!post) {
+  if (!post || post.status === 'draft') {
     return {
       title: 'Article Not Found | OfficeBazzar',
       robots: { index: false, follow: false },
@@ -52,10 +53,10 @@ export async function generateMetadata({
   const metaTitle = post.seo?.title || formatSeoTitle(post.title);
   const metaDescription =
     post.seo?.description || post.excerpt.replace(/\s*\[\.\.\.\]\s*$/, '').trim();
-  const canonicalUrl = getCanonicalUrl(`/blog/${post.slug}`);
-  const ogImageUrl = post.seo?.ogImage || post.imageUrl.startsWith('http')
-    ? (post.seo?.ogImage || post.imageUrl)
-    : `${SITE_CONFIG.url}${post.imageUrl}`;
+  const canonicalUrl = post.seo?.canonical || getCanonicalUrl(`/blog/${post.slug}`);
+  const ogImageUrl = post.seo?.ogImage || (post.imageUrl.startsWith('http')
+    ? post.imageUrl
+    : `${SITE_CONFIG.url}${post.imageUrl}`);
 
   return {
     title: metaTitle,
@@ -101,7 +102,7 @@ export async function generateMetadata({
 /**
  * Generate Article / BlogPosting schema for search engine rich results.
  */
-function getUnifiedArticleJsonLd(post: UnifiedBlogPost) {
+function getUnifiedArticleJsonLd(post: KeystaticBlogPost) {
   const imageUrl = post.imageUrl.startsWith('http')
     ? post.imageUrl
     : `${SITE_CONFIG.url}${post.imageUrl}`;
@@ -139,14 +140,14 @@ export default async function BlogDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getWordPressPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug);
 
-  if (!post) {
+  if (!post || post.status === 'draft') {
     notFound();
   }
 
   // Fetch related articles
-  const { posts: allPosts } = await getWordPressPosts({ perPage: 4 });
+  const { posts: allPosts } = await getBlogPosts({ perPage: 4 });
   const relatedPosts = allPosts.filter((p) => p.slug !== slug).slice(0, 3);
 
   // Structured Data
@@ -263,7 +264,7 @@ export default async function BlogDetailPage({
           />
         </div>
 
-        {/* Article Content */}
+        {/* Article Content Rendered via DocumentRenderer */}
         <div
           className="prose prose-slate max-w-none text-sm sm:text-base text-slate-700 leading-relaxed border-b border-slate-200 pb-10
             [&>h2]:text-xl sm:[&>h2]:text-2xl [&>h2]:font-bold [&>h2]:text-slate-900 [&>h2]:mt-8 [&>h2]:mb-3
@@ -273,8 +274,13 @@ export default async function BlogDetailPage({
             [&>ol]:list-decimal [&>ol]:pl-5 [&>ol]:mb-4 [&>ol>li]:mb-1
             [&>blockquote]:border-l-4 [&>blockquote]:border-[#004b87] [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-slate-600
             [&>img]:rounded-xl [&>img]:border [&>img]:border-slate-200"
-          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-        />
+        >
+          {Array.isArray(post.content) ? (
+            <DocumentRenderer document={post.content} />
+          ) : (
+            <p className="leading-relaxed">{post.excerpt}</p>
+          )}
+        </div>
 
         {/* Tags */}
         {post.tags && post.tags.length > 0 && (
