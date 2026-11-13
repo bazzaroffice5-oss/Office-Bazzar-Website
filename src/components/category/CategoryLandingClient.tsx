@@ -199,35 +199,6 @@ export default function CategoryLandingClient({
             </Link>
           ))}
         </div>
-
-        {/* Enterprise Procurement & Standards Guide */}
-        <section className="mt-10 sm:mt-12 p-6 sm:p-8 rounded-2xl bg-[#EFF6F0] border border-[#E2EBE3]">
-          <div className="max-w-3xl">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#163A5F]">
-              Corporate Buyer Guide
-            </span>
-            <h3 className="text-lg sm:text-xl font-bold text-[#111827] mt-1 mb-3">
-              Institutional Procurement &amp; GST Invoicing for {category.name}
-            </h3>
-            <p className="text-xs sm:text-sm text-[#526174] leading-relaxed mb-4">
-              Officebazzar E-Store Private Limited supplies certified {category.name.toLowerCase()} directly to enterprises, IT parks, educational institutions, healthcare centers, and industrial facilities across India. Every order includes a verified GST invoice ({category.name} standard HSN classification) enabling seamless 100% input tax credit (ITC) reconciliation in your monthly GSTR-2B filing.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-[#163A5F] font-medium">
-              <div className="p-3 bg-white rounded-xl border border-[#E2EBE3]">
-                <span className="font-bold block text-[#111827] mb-0.5">Fulfillment Central</span>
-                <span>Direct dispatch from Royapettah fulfillment hub in Chennai with surface cargo network.</span>
-              </div>
-              <div className="p-3 bg-white rounded-xl border border-[#E2EBE3]">
-                <span className="font-bold block text-[#111827] mb-0.5">Volume Discounts</span>
-                <span>Tiered B2B pricing on bulk cartons and scheduled quarterly supply agreements.</span>
-              </div>
-              <div className="p-3 bg-white rounded-xl border border-[#E2EBE3]">
-                <span className="font-bold block text-[#111827] mb-0.5">Zoho CRM Integrated</span>
-                <span>Official line-item quotations and instant purchase orders generated within 2-4 hours.</span>
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
     );
   }
