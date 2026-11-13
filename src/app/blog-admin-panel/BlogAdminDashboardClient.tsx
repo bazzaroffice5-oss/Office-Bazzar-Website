@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -8,7 +8,6 @@ import {
   FileText,
   Plus,
   Image as ImageIcon,
-  Sparkles,
   Settings,
   FolderTree,
   Tag as TagIcon,
@@ -19,7 +18,6 @@ import {
   Copy,
   ExternalLink,
   Search,
-  Filter,
   CheckCircle2,
   AlertTriangle,
   LogOut,
@@ -29,7 +27,6 @@ import {
   X,
   Upload,
   Globe,
-  Share2,
   Heading2,
   Heading3,
   Bold,
@@ -39,22 +36,16 @@ import {
   Quote,
   Link as LinkIcon,
   Table as TableIcon,
-  Code,
   Save,
-  Check,
   RefreshCw,
   Monitor,
   Smartphone,
   CheckCircle,
-  XCircle,
   HelpCircle,
-  RotateCcw,
-  ArrowUpRight,
   Grid,
   ListFilter,
-  Calendar,
-  Layers,
   ShieldCheck,
+  Calendar,
 } from 'lucide-react';
 import { AdminBlogPost, MediaItem } from '@/lib/blog-admin/storage';
 
@@ -88,7 +79,6 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
   const [postStatusTab, setPostStatusTab] = useState<'all' | 'published' | 'scheduled' | 'draft' | 'trash'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('ALL');
-  const [selectedPostSlugs, setSelectedPostSlugs] = useState<string[]>([]);
 
   // Categories & Tags local state
   const [categoriesList, setCategoriesList] = useState<string[]>(DEFAULT_CATEGORIES);
@@ -103,20 +93,19 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
   const [mediaPickerOpen, setMediaPickerOpen] = useState(false);
   const [mediaPickerTarget, setMediaPickerTarget] = useState<'featured' | 'content'>('featured');
   const [uploadingMedia, setUploadingMedia] = useState(false);
-  const [selectedMediaItem, setSelectedMediaItem] = useState<MediaItem | null>(null);
 
-  // Editor form state
+  // Editor form state (Featured image is empty by default; manual selection only)
   const [editingSlug, setEditingSlug] = useState<string | null>(null);
   const [formData, setFormData] = useState<AdminBlogPost>({
     slug: '',
     title: '',
-    status: 'published',
+    status: 'draft',
     publishedDate: new Date().toISOString().split('T')[0],
     scheduledDate: '',
     author: 'Office Bazzar Team',
     category: 'Housekeeping & Hygiene',
-    tags: ['Housekeeping & Hygiene'],
-    featuredImage: '/images/categories/office-supplies-stationery.jpg',
+    tags: ['Procurement', 'Office Supplies'],
+    featuredImage: '',
     imageAlt: '',
     excerpt: '',
     seoTitle: '',
@@ -166,7 +155,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
     loadMedia();
   }, []);
 
-  // Post counts by status
+  // Post counts by status - Derived strictly from actual content
   const counts = useMemo(() => {
     const published = posts.filter((p) => p.status === 'published').length;
     const scheduled = posts.filter((p) => p.status === 'scheduled').length;
@@ -208,8 +197,8 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
     });
   }, [posts, postStatusTab, categoryFilter, searchQuery]);
 
-  // SEO Health metrics across all non-trash posts
-  const seoHealth = useMemo(() => {
+  // Real Editorial Health Audit (Factual counts, no arbitrary scores)
+  const auditData = useMemo(() => {
     const active = posts.filter((p) => p.status !== 'trash');
     let missingAlt = 0;
     let missingMeta = 0;
@@ -223,28 +212,15 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
       if (title.length < 35 || title.length > 65) titleLengthIssues++;
     });
 
-    const optimalCount = active.filter((p) => {
-      const hasAlt = Boolean(p.imageAlt && p.imageAlt.trim());
-      const desc = p.seoDescription || p.excerpt;
-      const goodDesc = Boolean(desc && desc.length >= 80 && desc.length <= 165);
-      const title = p.seoTitle || p.title;
-      const goodTitle = Boolean(title && title.length >= 35 && title.length <= 65);
-      return hasAlt && goodDesc && goodTitle;
-    }).length;
-
-    const percent = active.length > 0 ? Math.round((optimalCount / active.length) * 100) : 100;
-
     return {
       missingAlt,
       missingMeta,
       titleLengthIssues,
-      optimalCount,
-      percent,
       totalActive: active.length,
     };
   }, [posts]);
 
-  // Open New Post Editor
+  // Open New Post Editor (Featured image empty by default)
   const handleNewPost = () => {
     setEditingSlug(null);
     setFormData({
@@ -256,7 +232,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
       author: 'Office Bazzar Team',
       category: categoriesList[0] || 'Housekeeping & Hygiene',
       tags: ['Procurement', 'Office Supplies'],
-      featuredImage: '/images/categories/office-supplies-stationery.jpg',
+      featuredImage: '', // Manual only
       imageAlt: '',
       excerpt: '',
       seoTitle: '',
@@ -435,11 +411,12 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
 
       setSaveMessage({
         type: 'success',
-        text: targetStatus === 'published'
-          ? 'Post published live successfully!'
-          : targetStatus === 'scheduled'
-          ? 'Post scheduled for publication!'
-          : 'Post saved as draft.',
+        text:
+          targetStatus === 'published'
+            ? 'Post published live successfully.'
+            : targetStatus === 'scheduled'
+            ? 'Post scheduled for publication.'
+            : 'Post saved as draft.',
       });
 
       // Update state
@@ -465,7 +442,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
     }
   };
 
-  // Quick Draft from Dashboard
+  // Quick Draft from Dashboard (Featured image empty by default)
   const handleQuickDraftSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!quickDraftTitle.trim()) return;
@@ -484,8 +461,8 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
       author: 'Office Bazzar Team',
       category: categoriesList[0] || 'Housekeeping & Hygiene',
       tags: ['Draft'],
-      featuredImage: '/images/categories/office-supplies-stationery.jpg',
-      imageAlt: quickDraftTitle,
+      featuredImage: '', // No automatic image
+      imageAlt: '',
       excerpt: quickDraftContent.slice(0, 140),
       canonicalUrl: `https://www.officebazzar.com/blog/${slug}`,
       content: quickDraftContent,
@@ -556,7 +533,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
 
   return (
     <div className="min-h-screen bg-[#f0f2f5] text-slate-800 flex flex-col font-sans">
-      {/* ===================== WORDPRESS-STYLE TOP ADMIN BAR ===================== */}
+      {/* ===================== TOP ADMIN BAR ===================== */}
       <header className="sticky top-0 z-40 bg-[#004b87] text-white h-12 flex items-center justify-between px-3 sm:px-4 shadow-sm select-none border-b border-[#0a355c]">
         {/* Left: Brand & Mobile Toggle */}
         <div className="flex items-center gap-3">
@@ -600,11 +577,11 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
           </Link>
         </div>
 
-        {/* Right: Search, Admin profile & Logout */}
+        {/* Right: Environment indicator, Admin profile & Logout */}
         <div className="flex items-center gap-3 text-xs">
-          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#16a34a]/20 text-emerald-200 border border-[#16a34a]/40 text-[11px] font-semibold">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            Live Production
+          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-blue-100 border border-white/20 text-[11px] font-semibold">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#16a34a]" />
+            Production Environment
           </div>
 
           <div className="flex items-center gap-2">
@@ -619,7 +596,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
           <button
             onClick={handleLogout}
             title="Log out"
-            className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-rose-600/80 hover:bg-rose-600 text-white font-medium transition-colors cursor-pointer"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-rose-600 hover:bg-rose-700 text-white font-medium transition-colors cursor-pointer"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Logout</span>
@@ -653,7 +630,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
               {!sidebarCollapsed && <span>Dashboard</span>}
             </button>
 
-            {/* 2. Posts (With WordPress-style collapsible submenu) */}
+            {/* 2. Posts */}
             <div>
               <button
                 onClick={() => {
@@ -777,10 +754,10 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
               }`}
             >
               <div className="flex items-center gap-3">
-                <Sparkles className="w-4 h-4 shrink-0 text-[#16a34a]" />
-                {!sidebarCollapsed && <span>SEO Manager</span>}
+                <Search className="w-4 h-4 shrink-0 text-[#16a34a]" />
+                {!sidebarCollapsed && <span>SEO Audit</span>}
               </div>
-              {!sidebarCollapsed && seoHealth.missingAlt > 0 && (
+              {!sidebarCollapsed && auditData.missingAlt > 0 && (
                 <span className="w-2 h-2 rounded-full bg-amber-400" />
               )}
             </button>
@@ -917,17 +894,17 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
 
         {/* ===================== MAIN APPLICATION WORKSPACE ===================== */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto overflow-x-hidden">
-          {/* ===================== VIEW 1: WORDPRESS-STYLE DASHBOARD ===================== */}
+          {/* ===================== VIEW 1: DASHBOARD ===================== */}
           {currentView === 'dashboard' && (
             <div className="space-y-6">
               {/* Dashboard Welcome Header */}
               <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
-                  <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-                    <span>Welcome to OfficeBazzar CMS</span>
+                  <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+                    Corporate Blog Management
                   </h1>
                   <p className="text-xs text-slate-500 mt-1">
-                    Manage corporate supplies blog articles, SEO performance, media files, and scheduled publications.
+                    Manage office supplies articles, media assets, and scheduled corporate publications.
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -941,15 +918,15 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                 </div>
               </div>
 
-              {/* At a Glance Metric Widgets */}
+              {/* Real Content Metrics: 4 Factual Cards */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                   <div className="flex items-center justify-between text-slate-500">
-                    <span className="text-xs font-semibold uppercase tracking-wider">All Posts</span>
+                    <span className="text-xs font-semibold uppercase tracking-wider">Total Posts</span>
                     <FileText className="w-4 h-4 text-[#004b87]" />
                   </div>
                   <p className="text-2xl font-bold text-slate-900 mt-2">{counts.all}</p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Stored in Git repository</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">Stored in repository</p>
                 </div>
 
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
@@ -958,37 +935,35 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                     <CheckCircle2 className="w-4 h-4 text-[#16a34a]" />
                   </div>
                   <p className="text-2xl font-bold text-[#16a34a] mt-2">{counts.published}</p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Live on /blog & indexed</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">Live on /blog</p>
                 </div>
 
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                   <div className="flex items-center justify-between text-slate-500">
-                    <span className="text-xs font-semibold uppercase tracking-wider">Drafts & Scheduled</span>
+                    <span className="text-xs font-semibold uppercase tracking-wider">Drafts</span>
                     <Clock className="w-4 h-4 text-amber-500" />
                   </div>
-                  <p className="text-2xl font-bold text-amber-600 mt-2">{counts.drafts + counts.scheduled}</p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Excluded from public index</p>
+                  <p className="text-2xl font-bold text-amber-600 mt-2">{counts.drafts}</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">Unpublished working drafts</p>
                 </div>
 
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                   <div className="flex items-center justify-between text-slate-500">
-                    <span className="text-xs font-semibold uppercase tracking-wider">SEO Score</span>
-                    <Sparkles className="w-4 h-4 text-[#004b87]" />
+                    <span className="text-xs font-semibold uppercase tracking-wider">Scheduled</span>
+                    <Calendar className="w-4 h-4 text-blue-500" />
                   </div>
-                  <p className="text-2xl font-bold text-[#004b87] mt-2">{seoHealth.percent}%</p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">
-                    {seoHealth.optimalCount} of {seoHealth.totalActive} posts optimal
-                  </p>
+                  <p className="text-2xl font-bold text-blue-600 mt-2">{counts.scheduled}</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">Queued for future release</p>
                 </div>
               </div>
 
-              {/* 2-Column Dashboard Grid: Quick Draft + Recent Activity */}
+              {/* 2-Column Dashboard Grid: Quick Draft + Recently Updated Posts */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Left: Quick Draft Form */}
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
                   <div className="border-b border-slate-100 pb-3">
                     <h2 className="text-sm font-bold text-slate-900">Quick Draft</h2>
-                    <p className="text-xs text-slate-400 mt-0.5">Jot down a quick blog idea</p>
+                    <p className="text-xs text-slate-400 mt-0.5">Save an article idea to the repository</p>
                   </div>
 
                   <form onSubmit={handleQuickDraftSave} className="space-y-3">
@@ -1006,7 +981,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                         rows={4}
                         value={quickDraftContent}
                         onChange={(e) => setQuickDraftContent(e.target.value)}
-                        placeholder="What's on your mind? Write quick notes or excerpt..."
+                        placeholder="Write draft notes or summary..."
                         className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#004b87] resize-none"
                       />
                     </div>
@@ -1021,12 +996,12 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                   </form>
                 </div>
 
-                {/* Right: Recent Activity Table */}
+                {/* Right: Recently Updated Posts */}
                 <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
                   <div className="p-5 border-b border-slate-100 flex items-center justify-between">
                     <div>
-                      <h2 className="text-sm font-bold text-slate-900">Recent Activity</h2>
-                      <p className="text-xs text-slate-400 mt-0.5">Recently modified and published articles</p>
+                      <h2 className="text-sm font-bold text-slate-900">Recently Updated Posts</h2>
+                      <p className="text-xs text-slate-400 mt-0.5">Articles stored in repository</p>
                     </div>
                     <button
                       onClick={() => {
@@ -1092,10 +1067,9 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
             </div>
           )}
 
-          {/* ===================== VIEW 2: WORDPRESS-STYLE ALL POSTS DIRECTORY ===================== */}
+          {/* ===================== VIEW 2: POSTS DIRECTORY ===================== */}
           {currentView === 'posts' && (
             <div className="space-y-4">
-              {/* Header and Add button */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <h1 className="text-xl font-bold text-slate-900">Posts</h1>
@@ -1121,7 +1095,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                 )}
               </div>
 
-              {/* WordPress-style Status Tabs */}
+              {/* Status Tabs */}
               <div className="flex items-center gap-2 border-b border-slate-200 pb-2 text-xs text-slate-500 overflow-x-auto">
                 <button
                   onClick={() => setPostStatusTab('all')}
@@ -1213,7 +1187,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                         <th className="py-3 px-4">Categories</th>
                         <th className="py-3 px-4">Tags</th>
                         <th className="py-3 px-4">Date</th>
-                        <th className="py-3 px-4">SEO Health</th>
+                        <th className="py-3 px-4">Alt Text Status</th>
                         <th className="py-3 px-4 text-right">Actions</th>
                       </tr>
                     </thead>
@@ -1227,14 +1201,12 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                       ) : (
                         filteredPosts.map((post) => (
                           <tr key={post.slug} className="hover:bg-slate-50/70 transition-colors group">
-                            {/* Title & Hover Row Actions */}
                             <td className="py-3.5 px-4 max-w-xs sm:max-w-md">
                               <p className="font-bold text-slate-900 truncate">{post.title}</p>
                               <p className="text-[11px] text-slate-400 font-mono truncate">
                                 /blog/{post.slug}
                               </p>
 
-                              {/* WordPress-style Row Actions */}
                               <div className="flex items-center gap-2 mt-1 text-[11px] font-medium text-slate-400 opacity-90 group-hover:opacity-100">
                                 {post.status !== 'trash' ? (
                                   <>
@@ -1324,7 +1296,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                                 </span>
                               ) : (
                                 <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                                  <CheckCircle className="w-3 h-3" /> Optimal
+                                  <CheckCircle className="w-3 h-3" /> Configured
                                 </span>
                               )}
                             </td>
@@ -1347,7 +1319,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
             </div>
           )}
 
-          {/* ===================== VIEW 3: WORDPRESS-STYLE 2-COLUMN BLOG EDITOR ===================== */}
+          {/* ===================== VIEW 3: 2-COLUMN BLOG EDITOR ===================== */}
           {currentView === 'editor' && (
             <div className="space-y-4">
               {/* Top Editor Bar */}
@@ -1406,7 +1378,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
 
               {/* 2-Column WordPress Layout */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-                {/* ================= LEFT MAIN CANVAS ================= */}
+                {/* Left Main Column */}
                 <div className="lg:col-span-2 space-y-5">
                   {/* Title and Permalink */}
                   <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
@@ -1442,7 +1414,6 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
 
                   {/* Formatting Toolbar & Content Editor */}
                   <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
-                    {/* Gutenberg/Classic Toolbar */}
                     <div className="bg-slate-50 border-b border-slate-200 p-2.5 flex items-center justify-between flex-wrap gap-2">
                       <div className="flex items-center gap-1 flex-wrap">
                         <button
@@ -1560,14 +1531,13 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                       </div>
                     </div>
 
-                    {/* Textarea or Visual Preview */}
                     {editorActiveTab === 'edit' ? (
                       <textarea
                         id="blog-content-textarea"
                         rows={18}
                         value={formData.content}
                         onChange={(e) => setFormData((prev) => ({ ...prev, content: e.target.value }))}
-                        placeholder="Start writing or use Markdown formatting..."
+                        placeholder="Start writing article content using Markdown formatting..."
                         className="w-full p-5 font-mono text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none resize-y leading-relaxed"
                       />
                     ) : (
@@ -1591,17 +1561,17 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                       rows={2}
                       value={formData.excerpt}
                       onChange={(e) => setFormData((prev) => ({ ...prev, excerpt: e.target.value }))}
-                      placeholder="Write an excerpt (optional)..."
+                      placeholder="Write a concise excerpt (optional)..."
                       className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#004b87]"
                     />
                   </div>
 
-                  {/* ================= WORDPRESS-STYLE YOAST / RANKMATH SEO META BOX ================= */}
+                  {/* SEO Meta Box */}
                   <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
                     <div className="bg-slate-50 border-b border-slate-200 p-4 flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-[#004b87]" />
-                        <h2 className="text-sm font-bold text-slate-900">SEO Manager & Google SERP Preview</h2>
+                        <Search className="w-4 h-4 text-[#004b87]" />
+                        <h2 className="text-sm font-bold text-slate-900">SEO Settings & Search Snippet</h2>
                       </div>
                       <div className="flex bg-slate-200 rounded-lg p-0.5 text-xs">
                         <button
@@ -1724,10 +1694,10 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                           </div>
                         </div>
 
-                        {/* Real-time SEO Analysis Checklist */}
+                        {/* SEO Technical Checklist */}
                         <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
                           <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-                            SEO Checklist & Quality Audit
+                            Editorial Quality Checklist
                           </h4>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                             <div className="flex items-center gap-1.5">
@@ -1736,7 +1706,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                               ) : (
                                 <AlertTriangle className="w-4 h-4 text-amber-500" />
                               )}
-                              <span>SEO Title length optimal</span>
+                              <span>Title length optimal (35–65 chars)</span>
                             </div>
                             <div className="flex items-center gap-1.5">
                               {descLen >= 80 && descLen <= 165 ? (
@@ -1747,12 +1717,22 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                               <span>Meta Description length optimal</span>
                             </div>
                             <div className="flex items-center gap-1.5">
-                              {formData.imageAlt?.trim() ? (
-                                <CheckCircle className="w-4 h-4 text-[#16a34a]" />
+                              {formData.featuredImage ? (
+                                formData.imageAlt?.trim() ? (
+                                  <CheckCircle className="w-4 h-4 text-[#16a34a]" />
+                                ) : (
+                                  <AlertTriangle className="w-4 h-4 text-amber-500" />
+                                )
                               ) : (
-                                <AlertTriangle className="w-4 h-4 text-amber-500" />
+                                <HelpCircle className="w-4 h-4 text-slate-400" />
                               )}
-                              <span>Featured image has descriptive alt text</span>
+                              <span>
+                                {formData.featuredImage
+                                  ? formData.imageAlt?.trim()
+                                    ? 'Image has alt text'
+                                    : 'Image missing alt text'
+                                  : 'No image selected (optional)'}
+                              </span>
                             </div>
                             <div className="flex items-center gap-1.5">
                               {formData.focusKeyword &&
@@ -1770,7 +1750,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                   </div>
                 </div>
 
-                {/* ================= RIGHT SIDEBAR (WORDPRESS DOCUMENT SETTINGS) ================= */}
+                {/* Right Document Settings Sidebar */}
                 <div className="space-y-5">
                   {/* Summary / Publish Box */}
                   <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
@@ -1863,7 +1843,6 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                       ))}
                     </div>
 
-                    {/* Inline Add Category */}
                     <div className="pt-2 border-t border-slate-100 flex items-center gap-1.5">
                       <input
                         type="text"
@@ -1904,14 +1883,14 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                     </div>
                   </div>
 
-                  {/* Featured Image Box */}
+                  {/* Featured Image Box (Manual Only: Optional, with Remove button & empty state) */}
                   <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
                     <h3 className="text-sm font-bold text-slate-900 border-b border-slate-100 pb-2">
                       Featured Image
                     </h3>
 
                     {formData.featuredImage ? (
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         <div className="relative aspect-video rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
                           <Image
                             src={formData.featuredImage}
@@ -1920,55 +1899,74 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                             className="object-cover"
                           />
                         </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setMediaPickerTarget('featured');
+                              setMediaPickerOpen(true);
+                            }}
+                            className="flex-1 py-1.5 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold cursor-pointer"
+                          >
+                            Replace Image
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                featuredImage: '',
+                                imageAlt: '',
+                              }))
+                            }
+                            className="py-1.5 px-3 rounded-lg border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-semibold cursor-pointer"
+                          >
+                            Remove
+                          </button>
+                        </div>
+
+                        <div>
+                          <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
+                            Image Alt Text
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.imageAlt}
+                            onChange={(e) => setFormData((prev) => ({ ...prev, imageAlt: e.target.value }))}
+                            placeholder="Descriptive alt text for Google..."
+                            className="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+                          />
+                          {!formData.imageAlt && (
+                            <p className="text-[11px] text-amber-600 mt-1 font-medium">
+                              ⚠️ Alt text recommended when image is set.
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="border-2 border-dashed border-slate-200 rounded-xl p-5 text-center space-y-2">
+                        <ImageIcon className="w-8 h-8 text-slate-300 mx-auto" />
+                        <p className="text-xs text-slate-500 font-medium">No image selected</p>
+                        <p className="text-[11px] text-slate-400">Featured image is optional.</p>
                         <button
                           type="button"
                           onClick={() => {
                             setMediaPickerTarget('featured');
                             setMediaPickerOpen(true);
                           }}
-                          className="w-full py-1.5 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold cursor-pointer"
+                          className="mt-1 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg cursor-pointer"
                         >
-                          Replace Image
+                          Select from Media Library
                         </button>
                       </div>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setMediaPickerTarget('featured');
-                          setMediaPickerOpen(true);
-                        }}
-                        className="w-full py-8 border-2 border-dashed border-slate-200 hover:border-[#004b87] rounded-xl text-center text-xs font-semibold text-slate-600 cursor-pointer"
-                      >
-                        Set featured image
-                      </button>
                     )}
-
-                    {/* Image Alt Text */}
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
-                        Image Alt Text (SEO Required)
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.imageAlt}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, imageAlt: e.target.value }))}
-                        placeholder="Descriptive alt text for Google..."
-                        className="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs"
-                      />
-                      {!formData.imageAlt && (
-                        <p className="text-[11px] text-amber-600 mt-1 font-medium">
-                          ⚠️ Missing Alt Text is an SEO risk.
-                        </p>
-                      )}
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
           )}
 
-          {/* ===================== VIEW 4: WORDPRESS-STYLE MEDIA LIBRARY ===================== */}
+          {/* ===================== VIEW 4: MEDIA LIBRARY ===================== */}
           {currentView === 'media' && (
             <div className="space-y-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -1976,7 +1974,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                   <h1 className="text-xl font-bold text-slate-900">Media Library</h1>
                   <label className="px-3 py-1 rounded-md bg-[#004b87] hover:bg-[#0a355c] text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer">
                     <Upload className="w-3.5 h-3.5" />
-                    <span>Add New Media</span>
+                    <span>Upload Image</span>
                     <input
                       type="file"
                       accept="image/*"
@@ -2029,7 +2027,6 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                     .map((item) => (
                       <div
                         key={item.id}
-                        onClick={() => setSelectedMediaItem(item)}
                         className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs hover:border-[#004b87] transition-all cursor-pointer group"
                       >
                         <div className="aspect-square relative bg-slate-50">
@@ -2093,7 +2090,6 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
               <h1 className="text-xl font-bold text-slate-900">Categories</h1>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Add New Category form */}
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
                   <h2 className="text-sm font-bold text-slate-900">Add New Category</h2>
                   <div>
@@ -2119,14 +2115,13 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                   </button>
                 </div>
 
-                {/* Categories Table */}
                 <div className="md:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
                   <table className="w-full text-left text-xs">
                     <thead className="bg-slate-50 text-slate-600 border-b border-slate-200 uppercase text-[10px] font-bold">
                       <tr>
                         <th className="py-3 px-4">Name</th>
                         <th className="py-3 px-4">Slug</th>
-                        <th className="py-3 px-4 text-right">Count</th>
+                        <th className="py-3 px-4 text-right">Post Count</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
@@ -2196,29 +2191,29 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
             </div>
           )}
 
-          {/* ===================== VIEW 7: SEO HEALTH MANAGER ===================== */}
+          {/* ===================== VIEW 7: SEO AUDIT (FACTUAL CHECKLIST ONLY) ===================== */}
           {currentView === 'seo-manager' && (
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs">
-                <h1 className="text-xl font-bold text-slate-900">SEO Health Manager</h1>
+                <h1 className="text-xl font-bold text-slate-900">Editorial SEO Audit</h1>
                 <p className="text-xs text-slate-500 mt-1">
-                  Comprehensive audit of meta tags, search snippets, and image attributes across all published articles.
+                  Technical audit of image alt text, meta descriptions, and title lengths across all posts.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-5">
                   <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
                     <span className="text-xs font-semibold text-slate-500">Missing Image Alt Tags</span>
-                    <p className="text-2xl font-bold text-amber-600 mt-1">{seoHealth.missingAlt}</p>
-                    <p className="text-[11px] text-slate-400 mt-0.5">Required for image search</p>
+                    <p className="text-2xl font-bold text-amber-600 mt-1">{auditData.missingAlt}</p>
+                    <p className="text-[11px] text-slate-400 mt-0.5">Images without alt descriptions</p>
                   </div>
                   <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
                     <span className="text-xs font-semibold text-slate-500">Short Meta Descriptions</span>
-                    <p className="text-2xl font-bold text-blue-600 mt-1">{seoHealth.missingMeta}</p>
+                    <p className="text-2xl font-bold text-blue-600 mt-1">{auditData.missingMeta}</p>
                     <p className="text-[11px] text-slate-400 mt-0.5">Below 50 characters</p>
                   </div>
                   <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                    <span className="text-xs font-semibold text-slate-500">Title Length Issues</span>
-                    <p className="text-2xl font-bold text-purple-600 mt-1">{seoHealth.titleLengthIssues}</p>
+                    <span className="text-xs font-semibold text-slate-500">Title Length Warnings</span>
+                    <p className="text-2xl font-bold text-purple-600 mt-1">{auditData.titleLengthIssues}</p>
                     <p className="text-[11px] text-slate-400 mt-0.5">Outside 35–65 characters</p>
                   </div>
                 </div>
