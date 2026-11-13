@@ -2,8 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Providers from '@/components/Providers';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
+import PublicLayoutShell from '@/components/layout/PublicLayoutShell';
 import JsonLd from '@/components/seo/JsonLd';
 import {
   SITE_CONFIG,
@@ -111,9 +110,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={organizationSchema} id="organization-schema-root" />
         <JsonLd data={websiteSchema} id="website-schema-root" />
         <Providers>
-          <Header />
-          <div className="flex-1">{children}</div>
-          <Footer />
+          <PublicLayoutShell>{children}</PublicLayoutShell>
         </Providers>
       </body>
     </html>

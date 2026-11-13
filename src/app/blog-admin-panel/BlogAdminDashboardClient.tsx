@@ -34,6 +34,17 @@ import {
   Check,
   RefreshCw,
   Sliders,
+  LayoutDashboard,
+  ShieldAlert,
+  BarChart2,
+  Menu,
+  X,
+  Smartphone,
+  Monitor,
+  CheckCircle,
+  XCircle,
+  HelpCircle,
+  ChevronRight,
 } from 'lucide-react';
 import { AdminBlogPost } from '@/lib/blog-admin/storage';
 
@@ -54,9 +65,10 @@ const CATEGORIES = [
 
 export default function BlogAdminDashboardClient({ initialPosts, username }: Props) {
   const [posts, setPosts] = useState<AdminBlogPost[]>(initialPosts);
-  const [currentView, setCurrentView] = useState<'list' | 'editor'>('list');
+  const [currentView, setCurrentView] = useState<'dashboard' | 'posts' | 'editor' | 'seo-audit'>('dashboard');
   const [activeTab, setActiveTab] = useState<'content' | 'seo'>('content');
   const [editingSlug, setEditingSlug] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Search & Filter state
   const [searchQuery, setSearchQuery] = useState('');
@@ -91,7 +103,8 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [deleteModalSlug, setDeleteModalSlug] = useState<string | null>(null);
-  const [previewMode, setPreviewMode] = useState(false);
+  const [previewModalPost, setPreviewModalPost] = useState<AdminBlogPost | null>(null);
+  const [editorPreviewMode, setEditorPreviewMode] = useState(false);
   const [devicePreview, setDevicePreview] = useState<'desktop' | 'mobile'>('desktop');
 
   // Filtered posts for list view
@@ -107,8 +120,44 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
     });
   }, [posts, searchQuery, categoryFilter, statusFilter]);
 
+  // Aggregate stats
+  const totalCount = posts.length;
   const publishedCount = useMemo(() => posts.filter((p) => p.status === 'published').length, [posts]);
   const draftCount = useMemo(() => posts.filter((p) => p.status === 'draft').length, [posts]);
+
+  // SEO Health calculation across all posts
+  const seoAuditStats = useMemo(() => {
+    let missingAltCount = 0;
+    let missingDescCount = 0;
+    let titleLengthIssues = 0;
+
+    posts.forEach((p) => {
+      if (!p.imageAlt || !p.imageAlt.trim()) missingAltCount++;
+      const desc = p.seoDescription || p.excerpt;
+      if (!desc || desc.length < 50) missingDescCount++;
+      const title = p.seoTitle || p.title;
+      if (title.length < 30 || title.length > 70) titleLengthIssues++;
+    });
+
+    const perfectCount = posts.filter((p) => {
+      const hasAlt = Boolean(p.imageAlt && p.imageAlt.trim());
+      const desc = p.seoDescription || p.excerpt;
+      const goodDesc = Boolean(desc && desc.length >= 80 && desc.length <= 165);
+      const title = p.seoTitle || p.title;
+      const goodTitle = Boolean(title && title.length >= 35 && title.length <= 65);
+      return hasAlt && goodDesc && goodTitle;
+    }).length;
+
+    const healthPercent = totalCount > 0 ? Math.round((perfectCount / totalCount) * 100) : 100;
+
+    return {
+      missingAltCount,
+      missingDescCount,
+      titleLengthIssues,
+      healthPercent,
+      perfectCount,
+    };
+  }, [posts, totalCount]);
 
   // Open New Post Editor
   const handleNewPost = () => {
@@ -139,6 +188,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
     setActiveTab('content');
     setSaveMessage(null);
     setCurrentView('editor');
+    setMobileMenuOpen(false);
   };
 
   // Open Edit Post Editor
@@ -149,6 +199,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
     setActiveTab('content');
     setSaveMessage(null);
     setCurrentView('editor');
+    setMobileMenuOpen(false);
   };
 
   // Auto-generate slug from title
@@ -165,6 +216,14 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
     }
     setFormData((prev) => ({ ...prev, ...updates }));
   };
+
+  // Check duplicate slug
+  const isDuplicateSlug = useMemo(() => {
+    if (!formData.slug.trim()) return false;
+    return posts.some(
+      (p) => p.slug.toLowerCase() === formData.slug.trim().toLowerCase() && p.slug !== editingSlug
+    );
+  }, [posts, formData.slug, editingSlug]);
 
   // Insert markdown syntax helper
   const insertMarkdown = (prefix: string, suffix = '') => {
@@ -191,6 +250,13 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
     }
     if (!formData.slug.trim()) {
       setSaveMessage({ type: 'error', text: 'URL slug is required.' });
+      return;
+    }
+    if (isDuplicateSlug) {
+      setSaveMessage({
+        type: 'error',
+        text: 'This URL slug is already taken by another article. Please use a unique slug.',
+      });
       return;
     }
 
@@ -220,7 +286,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
 
       setSaveMessage({
         type: 'success',
-        text: data.message || 'Article successfully saved and committed.',
+        text: data.message || 'Article successfully saved.',
       });
 
       // Update local state list
@@ -257,7 +323,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
         setPosts((prev) => prev.filter((p) => p.slug !== deleteModalSlug));
         setDeleteModalSlug(null);
         if (currentView === 'editor' && editingSlug === deleteModalSlug) {
-          setCurrentView('list');
+          setCurrentView('posts');
         }
       }
     } catch (err) {
@@ -294,856 +360,1258 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
   const descCharCount = displaySeoDesc.length;
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans">
-      {/* Top Private Navigation Bar */}
-      <header className="sticky top-0 z-30 bg-white border-b border-slate-200 px-4 sm:px-8 py-3 flex items-center justify-between shadow-2xs">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-100" />
-            <span className="text-sm font-bold text-slate-900 tracking-tight">OfficeBazzar</span>
+    <div className="min-h-screen bg-slate-900 flex flex-col md:flex-row text-slate-100">
+      {/* ===================== SIDEBAR (Standalone CMS Navigation) ===================== */}
+      <aside
+        className={`fixed inset-y-0 left-0 z-40 w-64 bg-slate-950 border-r border-slate-800 flex flex-col transition-transform duration-200 ease-in-out md:translate-x-0 ${
+          mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        {/* Brand Header */}
+        <div className="p-5 border-b border-slate-800 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shadow-sm">
+              OB
+            </div>
+            <div>
+              <div className="text-sm font-bold tracking-tight text-white flex items-center gap-1.5">
+                <span>OfficeBazzar</span>
+              </div>
+              <p className="text-[10px] text-blue-400 font-medium uppercase tracking-wider">
+                Blog CMS Application
+              </p>
+            </div>
           </div>
-          <span className="text-slate-300">|</span>
-          <span className="text-xs font-semibold px-2.5 py-0.5 bg-slate-100 text-slate-700 rounded-md">
-            Private Blog Admin Panel
-          </span>
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className="md:hidden text-slate-400 hover:text-white"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
 
-        <div className="flex items-center gap-3 text-xs">
-          <span className="text-slate-500 hidden sm:inline">
-            Logged in as <strong className="text-slate-800 font-semibold">{username}</strong>
-          </span>
+        {/* Quick Action Button */}
+        <div className="p-4">
+          <button
+            onClick={handleNewPost}
+            className="w-full py-2.5 px-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-[#004b87] hover:from-blue-500 hover:to-[#003866] text-white flex items-center justify-center gap-2 text-xs font-semibold shadow-md shadow-blue-950/50 transition-all cursor-pointer"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Write New Article</span>
+          </button>
+        </div>
+
+        {/* Navigation Menu */}
+        <nav className="flex-1 px-3 space-y-1 overflow-y-auto">
+          <button
+            onClick={() => {
+              setCurrentView('dashboard');
+              setMobileMenuOpen(false);
+            }}
+            className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
+              currentView === 'dashboard'
+                ? 'bg-blue-600/15 text-blue-400 border border-blue-500/20'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+            }`}
+          >
+            <LayoutDashboard className="w-4 h-4" />
+            <span>Dashboard Overview</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setCurrentView('posts');
+              setMobileMenuOpen(false);
+            }}
+            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
+              currentView === 'posts'
+                ? 'bg-blue-600/15 text-blue-400 border border-blue-500/20'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <FileText className="w-4 h-4" />
+              <span>All Articles</span>
+            </div>
+            <span className="text-[11px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">
+              {totalCount}
+            </span>
+          </button>
+
+          <button
+            onClick={() => {
+              setCurrentView('seo-audit');
+              setMobileMenuOpen(false);
+            }}
+            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
+              currentView === 'seo-audit'
+                ? 'bg-blue-600/15 text-blue-400 border border-blue-500/20'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <ShieldAlert className="w-4 h-4" />
+              <span>SEO Health Audit</span>
+            </div>
+            {seoAuditStats.missingAltCount > 0 && (
+              <span className="w-2 h-2 rounded-full bg-amber-500" />
+            )}
+          </button>
+
+          <div className="pt-4 pb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+            External Shortcuts
+          </div>
+
           <Link
             href="/blog"
             target="_blank"
-            className="flex items-center gap-1 px-3 py-1.5 text-slate-600 hover:text-[#004b87] bg-slate-100 hover:bg-slate-200 rounded-lg font-medium transition-colors"
+            className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-900 transition-colors"
           >
-            <span>Live Blog</span>
-            <ExternalLink className="w-3.5 h-3.5" />
+            <div className="flex items-center gap-3">
+              <Globe className="w-4 h-4" />
+              <span>Live Public Blog</span>
+            </div>
+            <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
           </Link>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-1 px-3 py-1.5 text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-lg font-medium transition-colors"
-          >
-            <LogOut className="w-3.5 h-3.5" />
-            <span>Logout</span>
-          </button>
-        </div>
-      </header>
 
-      {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {/* ===================== LIST VIEW ===================== */}
-        {currentView === 'list' && (
-          <div className="space-y-6">
-            {/* Header & Metrics */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
-              <div>
-                <h1 className="text-xl font-bold text-slate-900 tracking-tight">Blog Management</h1>
-                <p className="text-xs text-slate-500 mt-0.5">
-                  Manage corporate guides, housekeeping manuals, and procurement articles.
+          <Link
+            href="/"
+            target="_blank"
+            className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-900 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <ExternalLink className="w-4 h-4" />
+              <span>OfficeBazzar Home</span>
+            </div>
+            <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
+          </Link>
+        </nav>
+
+        {/* User Profile Footer */}
+        <div className="p-3.5 border-t border-slate-800 bg-slate-950/60">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2.5 overflow-hidden">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-700 to-indigo-600 flex items-center justify-center text-xs font-bold text-white shrink-0">
+                {username.charAt(0).toUpperCase()}
+              </div>
+              <div className="overflow-hidden">
+                <p className="text-xs font-semibold text-slate-200 truncate">{username}</p>
+                <p className="text-[10px] text-emerald-400 flex items-center gap-1 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  Authenticated
                 </p>
               </div>
+            </div>
+            <button
+              onClick={handleLogout}
+              title="Sign Out"
+              aria-label="Sign Out"
+              className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-rose-950/40 rounded-lg transition-colors cursor-pointer"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </aside>
 
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl">
-                  <span className="flex items-center gap-1 font-semibold text-emerald-600">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    {publishedCount} Published
-                  </span>
-                  <span>•</span>
-                  <span className="flex items-center gap-1 font-semibold text-amber-600">
-                    <Clock className="w-3.5 h-3.5" />
-                    {draftCount} Drafts
-                  </span>
+      {/* Backdrop for mobile */}
+      {mobileMenuOpen && (
+        <div
+          onClick={() => setMobileMenuOpen(false)}
+          className="fixed inset-0 z-30 bg-black/60 backdrop-blur-xs md:hidden"
+        />
+      )}
+
+      {/* ===================== MAIN APPLICATION WORKSPACE ===================== */}
+      <div className="flex-1 md:ml-64 flex flex-col min-w-0 bg-slate-900 min-h-screen">
+        {/* Standalone CMS Top Navigation Bar */}
+        <header className="sticky top-0 z-20 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 px-4 sm:px-6 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="md:hidden p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+            <div className="flex items-center gap-2 text-xs font-medium">
+              <span className="text-slate-400">OfficeBazzar CMS</span>
+              <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
+              <span className="text-white font-semibold capitalize">
+                {currentView === 'dashboard' && 'Dashboard Overview'}
+                {currentView === 'posts' && 'Article Directory'}
+                {currentView === 'seo-audit' && 'SEO Health Audit'}
+                {currentView === 'editor' && (editingSlug ? `Editing: ${formData.title || editingSlug}` : 'New Article')}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800 text-[11px] font-medium text-slate-300 border border-slate-700">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              Production CMS
+            </span>
+            <Link
+              href="/blog"
+              target="_blank"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors"
+            >
+              <span>Live Blog</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </header>
+
+        {/* Content Canvas */}
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+          {/* ===================== VIEW 1: DASHBOARD OVERVIEW ===================== */}
+          {currentView === 'dashboard' && (
+            <div className="space-y-6">
+              {/* Welcome banner */}
+              <div className="bg-gradient-to-r from-blue-900/40 via-slate-900 to-indigo-900/30 p-6 rounded-3xl border border-blue-500/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                  <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                    Welcome to OfficeBazzar Blog Admin
+                  </h1>
+                  <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                    Manage corporate knowledge, SEO guides, and procurement insights.
+                  </p>
                 </div>
-
                 <button
                   onClick={handleNewPost}
-                  className="flex items-center gap-1.5 px-4 py-2.5 bg-[#004b87] hover:bg-[#003866] text-white rounded-xl text-xs font-semibold shadow-xs transition-colors"
+                  className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold tracking-wide flex items-center gap-2 shadow-lg shadow-blue-900/40 transition-all cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
-                  <span>Create New Blog</span>
+                  <span>Create New Post</span>
                 </button>
               </div>
-            </div>
 
-            {/* Filter and Search Bar */}
-            <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200">
-              <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                <input
-                  type="text"
-                  placeholder="Search articles by title, slug or summary..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-900 focus:outline-none focus:border-[#004b87] focus:bg-white"
-                />
+              {/* Metric stats cards */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-medium text-slate-400">Total Articles</span>
+                    <FileText className="w-4 h-4 text-blue-400" />
+                  </div>
+                  <p className="text-2xl font-bold text-white mt-2">{totalCount}</p>
+                  <p className="text-[11px] text-slate-500 mt-1">Stored in Git repository</p>
+                </div>
+
+                <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-medium text-slate-400">Published Live</span>
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  </div>
+                  <p className="text-2xl font-bold text-emerald-400 mt-2">{publishedCount}</p>
+                  <p className="text-[11px] text-slate-500 mt-1">Visible on /blog & sitemap</p>
+                </div>
+
+                <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-medium text-slate-400">Drafts</span>
+                    <Clock className="w-4 h-4 text-amber-400" />
+                  </div>
+                  <p className="text-2xl font-bold text-amber-400 mt-2">{draftCount}</p>
+                  <p className="text-[11px] text-slate-500 mt-1">Excluded from public index</p>
+                </div>
+
+                <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-medium text-slate-400">SEO Health</span>
+                    <Sparkles className="w-4 h-4 text-purple-400" />
+                  </div>
+                  <p className="text-2xl font-bold text-purple-400 mt-2">
+                    {seoAuditStats.healthPercent}%
+                  </p>
+                  <p className="text-[11px] text-slate-500 mt-1">
+                    {seoAuditStats.perfectCount} of {totalCount} optimized
+                  </p>
+                </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2 text-xs">
-                {/* Status Toggle */}
-                <div className="flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200">
+              {/* Recent posts list */}
+              <div className="bg-slate-950/80 rounded-2xl border border-slate-800 overflow-hidden">
+                <div className="p-5 border-b border-slate-800 flex items-center justify-between">
+                  <div>
+                    <h2 className="text-sm font-bold text-white">Recent Articles</h2>
+                    <p className="text-xs text-slate-400">Recently published and updated content</p>
+                  </div>
                   <button
-                    onClick={() => setStatusFilter('ALL')}
-                    className={`px-3 py-1 rounded-md font-medium transition-colors ${
-                      statusFilter === 'ALL' ? 'bg-white text-slate-900 shadow-2xs font-semibold' : 'text-slate-600'
-                    }`}
+                    onClick={() => setCurrentView('posts')}
+                    className="text-xs text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1 cursor-pointer"
                   >
-                    All ({posts.length})
-                  </button>
-                  <button
-                    onClick={() => setStatusFilter('published')}
-                    className={`px-3 py-1 rounded-md font-medium transition-colors ${
-                      statusFilter === 'published' ? 'bg-white text-emerald-700 shadow-2xs font-semibold' : 'text-slate-600'
-                    }`}
-                  >
-                    Published ({publishedCount})
-                  </button>
-                  <button
-                    onClick={() => setStatusFilter('draft')}
-                    className={`px-3 py-1 rounded-md font-medium transition-colors ${
-                      statusFilter === 'draft' ? 'bg-white text-amber-700 shadow-2xs font-semibold' : 'text-slate-600'
-                    }`}
-                  >
-                    Drafts ({draftCount})
+                    <span>View all ({totalCount})</span>
+                    <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
 
-                {/* Category Dropdown */}
-                <select
-                  value={categoryFilter}
-                  onChange={(e) => setCategoryFilter(e.target.value)}
-                  className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-700 focus:outline-none focus:border-[#004b87]"
-                >
-                  <option value="ALL">All Categories</option>
-                  {CATEGORIES.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
+                <div className="divide-y divide-slate-800/80">
+                  {posts.slice(0, 5).map((post) => (
+                    <div
+                      key={post.slug}
+                      className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-900/60 transition-colors"
+                    >
+                      <div className="space-y-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span
+                            className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                              post.status === 'published'
+                                ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                                : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                            }`}
+                          >
+                            {post.status}
+                          </span>
+                          <span className="text-xs text-slate-400">{post.category}</span>
+                          <span className="text-slate-600">•</span>
+                          <span className="text-xs text-slate-500">{post.publishedDate}</span>
+                        </div>
+                        <h3 className="text-sm font-semibold text-white truncate max-w-xl">
+                          {post.title}
+                        </h3>
+                        <p className="text-xs text-slate-400 line-clamp-1">{post.excerpt}</p>
+                      </div>
+
+                      <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
+                        <button
+                          onClick={() => handleToggleStatus(post)}
+                          className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors cursor-pointer"
+                        >
+                          {post.status === 'published' ? 'Switch to Draft' : 'Publish'}
+                        </button>
+                        <button
+                          onClick={() => setPreviewModalPost(post)}
+                          className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors cursor-pointer"
+                          title="Preview"
+                        >
+                          <Eye className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => handleEditPost(post)}
+                          className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                        >
+                          <Edit3 className="w-3.5 h-3.5" />
+                          <span>Edit</span>
+                        </button>
+                      </div>
+                    </div>
                   ))}
-                </select>
+                </div>
               </div>
             </div>
+          )}
 
-            {/* Articles Table */}
-            <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
-              {filteredPosts.length === 0 ? (
-                <div className="py-16 text-center text-slate-500">
-                  <FileText className="w-10 h-10 text-slate-300 mx-auto mb-2" />
-                  <p className="text-sm font-semibold text-slate-700">No blog articles found</p>
-                  <p className="text-xs text-slate-400 mt-0.5">Try clearing filters or search query.</p>
+          {/* ===================== VIEW 2: ALL POSTS DIRECTORY ===================== */}
+          {currentView === 'posts' && (
+            <div className="space-y-5">
+              {/* Header and filters */}
+              <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <h1 className="text-lg font-bold text-white">Articles Directory</h1>
+                    <p className="text-xs text-slate-400">
+                      Manage, edit, filter, and publish blog articles
+                    </p>
+                  </div>
+                  <button
+                    onClick={handleNewPost}
+                    className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold flex items-center gap-2 self-start sm:self-auto cursor-pointer"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>New Article</span>
+                  </button>
                 </div>
-              ) : (
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-800">
+                  <div className="relative">
+                    <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Search by title, slug, or content..."
+                      className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+                    />
+                  </div>
+
+                  <select
+                    value={categoryFilter}
+                    onChange={(e) => setCategoryFilter(e.target.value)}
+                    className="py-2 px-3 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500"
+                  >
+                    <option value="ALL">All Categories</option>
+                    {CATEGORIES.map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  </select>
+
+                  <div className="flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
+                    <button
+                      onClick={() => setStatusFilter('ALL')}
+                      className={`flex-1 py-1.5 text-xs rounded-lg font-medium transition-colors ${
+                        statusFilter === 'ALL'
+                          ? 'bg-blue-600 text-white'
+                          : 'text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      All ({totalCount})
+                    </button>
+                    <button
+                      onClick={() => setStatusFilter('published')}
+                      className={`flex-1 py-1.5 text-xs rounded-lg font-medium transition-colors ${
+                        statusFilter === 'published'
+                          ? 'bg-emerald-600 text-white'
+                          : 'text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      Live ({publishedCount})
+                    </button>
+                    <button
+                      onClick={() => setStatusFilter('draft')}
+                      className={`flex-1 py-1.5 text-xs rounded-lg font-medium transition-colors ${
+                        statusFilter === 'draft'
+                          ? 'bg-amber-600 text-white'
+                          : 'text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      Drafts ({draftCount})
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Posts Table */}
+              <div className="bg-slate-950/80 rounded-2xl border border-slate-800 overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs">
-                    <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold uppercase tracking-wider text-[11px]">
+                    <thead className="bg-slate-900/80 text-slate-400 border-b border-slate-800 font-semibold uppercase tracking-wider text-[10px]">
                       <tr>
                         <th className="py-3 px-4">Article</th>
                         <th className="py-3 px-4">Category</th>
-                        <th className="py-3 px-4">Status</th>
                         <th className="py-3 px-4">Date</th>
+                        <th className="py-3 px-4">Status</th>
+                        <th className="py-3 px-4">SEO Health</th>
                         <th className="py-3 px-4 text-right">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {filteredPosts.map((post) => (
-                        <tr key={post.slug} className="hover:bg-slate-50/70 transition-colors">
-                          <td className="py-3.5 px-4 max-w-md">
-                            <div className="flex items-center gap-3">
-                              <div className="relative w-12 h-12 rounded-lg bg-slate-100 overflow-hidden shrink-0 border border-slate-200">
-                                <Image
-                                  src={post.featuredImage || '/images/categories/office-supplies-stationery.jpg'}
-                                  alt={post.title}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                              <div className="min-w-0">
-                                <p className="font-semibold text-slate-900 truncate leading-snug">{post.title}</p>
-                                <p className="text-[11px] text-slate-400 font-mono truncate">/blog/{post.slug}</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="py-3.5 px-4 whitespace-nowrap">
-                            <span className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md font-medium text-[11px]">
-                              {post.category}
-                            </span>
-                          </td>
-                          <td className="py-3.5 px-4 whitespace-nowrap">
-                            <button
-                              onClick={() => handleToggleStatus(post)}
-                              title="Click to toggle status"
-                              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full font-semibold text-[11px] transition-colors ${
-                                post.status === 'published'
-                                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100'
-                                  : 'bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100'
-                              }`}
-                            >
-                              <span
-                                className={`w-1.5 h-1.5 rounded-full ${
-                                  post.status === 'published' ? 'bg-emerald-500' : 'bg-amber-500'
-                                }`}
-                              />
-                              {post.status === 'published' ? 'Published' : 'Draft'}
-                            </button>
-                          </td>
-                          <td className="py-3.5 px-4 whitespace-nowrap text-slate-500">{post.publishedDate}</td>
-                          <td className="py-3.5 px-4 text-right whitespace-nowrap space-x-1.5">
-                            {post.status === 'published' ? (
-                              <Link
-                                href={`/blog/${post.slug}`}
-                                target="_blank"
-                                className="p-1.5 text-slate-500 hover:text-[#004b87] hover:bg-slate-100 rounded-md inline-block"
-                                title="View public post"
-                              >
-                                <Eye className="w-4 h-4" />
-                              </Link>
-                            ) : (
-                              <button
-                                onClick={() => handleEditPost(post)}
-                                className="p-1.5 text-amber-600 hover:bg-amber-50 rounded-md"
-                                title="Draft preview in editor"
-                              >
-                                <Eye className="w-4 h-4" />
-                              </button>
-                            )}
-
-                            <button
-                              onClick={() => handleEditPost(post)}
-                              className="p-1.5 text-slate-600 hover:text-[#004b87] hover:bg-slate-100 rounded-md"
-                              title="Edit post"
-                            >
-                              <Edit3 className="w-4 h-4" />
-                            </button>
-
-                            <button
-                              onClick={() => setDeleteModalSlug(post.slug)}
-                              className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-md"
-                              title="Delete post"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
+                    <tbody className="divide-y divide-slate-800/70">
+                      {filteredPosts.length === 0 ? (
+                        <tr>
+                          <td colSpan={6} className="py-12 text-center text-slate-500">
+                            No articles match your search criteria.
                           </td>
                         </tr>
-                      ))}
+                      ) : (
+                        filteredPosts.map((post) => (
+                          <tr key={post.slug} className="hover:bg-slate-900/40 transition-colors">
+                            <td className="py-3.5 px-4 max-w-xs sm:max-w-md">
+                              <p className="font-semibold text-white truncate">{post.title}</p>
+                              <p className="text-[11px] text-slate-400 font-mono truncate">
+                                /{post.slug}
+                              </p>
+                            </td>
+                            <td className="py-3.5 px-4 text-slate-300 whitespace-nowrap">
+                              {post.category}
+                            </td>
+                            <td className="py-3.5 px-4 text-slate-400 whitespace-nowrap">
+                              {post.publishedDate}
+                            </td>
+                            <td className="py-3.5 px-4 whitespace-nowrap">
+                              <button
+                                onClick={() => handleToggleStatus(post)}
+                                title="Click to toggle status"
+                                className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider cursor-pointer ${
+                                  post.status === 'published'
+                                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20'
+                                    : 'bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20'
+                                }`}
+                              >
+                                {post.status}
+                              </button>
+                            </td>
+                            <td className="py-3.5 px-4 whitespace-nowrap">
+                              {!post.imageAlt ? (
+                                <span className="inline-flex items-center gap-1 text-[11px] text-amber-400 font-medium">
+                                  <AlertTriangle className="w-3.5 h-3.5" /> Missing Alt
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center gap-1 text-[11px] text-emerald-400 font-medium">
+                                  <CheckCircle className="w-3.5 h-3.5" /> Optimal
+                                </span>
+                              )}
+                            </td>
+                            <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                              <div className="flex items-center justify-end gap-1.5">
+                                <button
+                                  onClick={() => setPreviewModalPost(post)}
+                                  className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+                                  title="Preview post"
+                                >
+                                  <Eye className="w-4 h-4" />
+                                </button>
+                                <button
+                                  onClick={() => handleEditPost(post)}
+                                  className="p-1.5 rounded-lg text-blue-400 hover:text-blue-300 hover:bg-blue-950/40 transition-colors cursor-pointer"
+                                  title="Edit post"
+                                >
+                                  <Edit3 className="w-4 h-4" />
+                                </button>
+                                <button
+                                  onClick={() => setDeleteModalSlug(post.slug)}
+                                  className="p-1.5 rounded-lg text-rose-400 hover:text-rose-300 hover:bg-rose-950/40 transition-colors cursor-pointer"
+                                  title="Delete post"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                      )}
                     </tbody>
                   </table>
                 </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* ===================== EDITOR VIEW ===================== */}
-        {currentView === 'editor' && (
-          <div className="space-y-6">
-            {/* Editor Top Bar */}
-            <div className="flex items-center justify-between bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => setCurrentView('list')}
-                  className="flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
-                >
-                  <ArrowLeft className="w-3.5 h-3.5" />
-                  <span>Back to Articles</span>
-                </button>
-                <span className="text-xs font-bold text-slate-900">
-                  {editingSlug ? `Editing: ${formData.title || editingSlug}` : 'Create New Article'}
-                </span>
-                <span
-                  className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                    formData.status === 'published' ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'
-                  }`}
-                >
-                  {formData.status === 'published' ? 'Will Publish' : 'Draft'}
-                </span>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => handleSave('draft')}
-                  disabled={isSaving}
-                  className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition-colors disabled:opacity-50"
-                >
-                  Save as Draft
-                </button>
-
-                <button
-                  onClick={() => handleSave('published')}
-                  disabled={isSaving}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-[#004b87] hover:bg-[#003866] text-white rounded-xl text-xs font-semibold shadow-xs transition-colors disabled:opacity-50"
-                >
-                  {isSaving ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
-                  <span>{formData.status === 'published' ? 'Update & Publish' : 'Publish Live'}</span>
-                </button>
               </div>
             </div>
+          )}
 
-            {/* Save Status Banner */}
-            {saveMessage && (
-              <div
-                className={`p-3.5 rounded-xl text-xs flex items-center justify-between ${
-                  saveMessage.type === 'success'
-                    ? 'bg-emerald-50 border border-emerald-200 text-emerald-800'
-                    : 'bg-rose-50 border border-rose-200 text-rose-800'
-                }`}
-              >
-                <span>{saveMessage.text}</span>
-                <button onClick={() => setSaveMessage(null)} className="text-xs font-bold px-2">
-                  ×
-                </button>
+          {/* ===================== VIEW 3: SEO HEALTH AUDIT ===================== */}
+          {currentView === 'seo-audit' && (
+            <div className="space-y-6">
+              <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
+                <h1 className="text-lg font-bold text-white">SEO Health Audit</h1>
+                <p className="text-xs text-slate-400 mt-1">
+                  Automatic audit of titles, meta descriptions, image alt attributes, and robots directives.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-5">
+                  <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                    <span className="text-xs text-slate-400">Missing Image Alt Tags</span>
+                    <p className="text-2xl font-bold text-amber-400 mt-1">
+                      {seoAuditStats.missingAltCount}
+                    </p>
+                    <p className="text-[11px] text-slate-500 mt-0.5">Accessibility & image search risk</p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                    <span className="text-xs text-slate-400">Meta Description Warnings</span>
+                    <p className="text-2xl font-bold text-blue-400 mt-1">
+                      {seoAuditStats.missingDescCount}
+                    </p>
+                    <p className="text-[11px] text-slate-500 mt-0.5">Short or missing meta snippet</p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                    <span className="text-xs text-slate-400">Non-optimal Title Length</span>
+                    <p className="text-2xl font-bold text-purple-400 mt-1">
+                      {seoAuditStats.titleLengthIssues}
+                    </p>
+                    <p className="text-[11px] text-slate-500 mt-0.5">Outside 35-65 characters</p>
+                  </div>
+                </div>
               </div>
-            )}
 
-            {/* Navigation Tabs: Content vs SEO */}
-            <div className="flex border-b border-slate-200 bg-white rounded-t-2xl px-4 pt-2 gap-4 text-xs font-semibold">
-              <button
-                onClick={() => setActiveTab('content')}
-                className={`pb-3 px-2 flex items-center gap-2 border-b-2 transition-colors ${
-                  activeTab === 'content'
-                    ? 'border-[#004b87] text-[#004b87]'
-                    : 'border-transparent text-slate-500 hover:text-slate-800'
-                }`}
-              >
-                <FileText className="w-4 h-4" />
-                <span>1. Content &amp; Editorial</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('seo')}
-                className={`pb-3 px-2 flex items-center gap-2 border-b-2 transition-colors ${
-                  activeTab === 'seo'
-                    ? 'border-[#004b87] text-[#004b87]'
-                    : 'border-transparent text-slate-500 hover:text-slate-800'
-                }`}
-              >
-                <Globe className="w-4 h-4" />
-                <span>2. SEO &amp; Search Preview</span>
-                <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 font-bold">
-                  Recommended
-                </span>
-              </button>
-            </div>
-
-            {/* TAB 1: CONTENT & EDITORIAL */}
-            {activeTab === 'content' && (
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Left 2 Cols: Main Editor */}
-                <div className="lg:col-span-2 space-y-5 bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs">
-                  {/* Article Title */}
-                  <div>
-                    <label className="block text-xs font-bold text-slate-900 mb-1.5">Article Title *</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Complete Guide to Industrial Housekeeping Chemicals"
-                      value={formData.title}
-                      onChange={handleTitleChange}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-900 focus:outline-none focus:border-[#004b87] focus:bg-white"
-                    />
-                  </div>
-
-                  {/* URL Slug */}
-                  <div>
-                    <label className="block text-xs font-bold text-slate-900 mb-1.5">
-                      URL Slug * <span className="font-normal text-slate-400">(/blog/[slug])</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.slug}
-                      onChange={(e) =>
-                        setFormData((prev) => ({
-                          ...prev,
-                          slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]+/g, '-'),
-                          canonicalUrl: `https://www.officebazzar.com/blog/${e.target.value}`,
-                        }))
-                      }
-                      className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-800 focus:outline-none focus:border-[#004b87] focus:bg-white"
-                    />
-                  </div>
-
-                  {/* Excerpt */}
-                  <div>
-                    <label className="block text-xs font-bold text-slate-900 mb-1.5">
-                      Article Summary / Excerpt *
-                    </label>
-                    <textarea
-                      rows={2}
-                      placeholder="Brief overview of this guide for listing cards and search engine snippets..."
-                      value={formData.excerpt}
-                      onChange={(e) => setFormData((prev) => ({ ...prev, excerpt: e.target.value }))}
-                      className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-[#004b87] focus:bg-white leading-relaxed"
-                    />
-                  </div>
-
-                  {/* Content Editor Toolbar */}
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-xs font-bold text-slate-900">Article Content (Markdown Supported)</label>
-                      <button
-                        type="button"
-                        onClick={() => setPreviewMode(!previewMode)}
-                        className="text-xs font-semibold text-[#004b87] hover:underline"
+              {/* Items requiring attention */}
+              <div className="bg-slate-950/80 rounded-2xl border border-slate-800 overflow-hidden">
+                <div className="p-4 border-b border-slate-800">
+                  <h2 className="text-sm font-bold text-white">Articles Requiring Optimization</h2>
+                </div>
+                <div className="divide-y divide-slate-800/80">
+                  {posts
+                    .filter(
+                      (p) =>
+                        !p.imageAlt ||
+                        (p.seoDescription || p.excerpt).length < 50 ||
+                        (p.seoTitle || p.title).length > 70
+                    )
+                    .map((post) => (
+                      <div
+                        key={post.slug}
+                        className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-900/50"
                       >
-                        {previewMode ? 'Hide Preview' : 'Show Live Preview'}
-                      </button>
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-1 p-2 bg-slate-100 border border-slate-200 rounded-t-xl text-slate-700">
-                      <button
-                        type="button"
-                        onClick={() => insertMarkdown('# ')}
-                        className="p-1.5 hover:bg-white rounded font-bold text-xs"
-                        title="Heading 1"
-                      >
-                        H1
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => insertMarkdown('## ')}
-                        className="p-1.5 hover:bg-white rounded font-bold text-xs"
-                        title="Heading 2"
-                      >
-                        H2
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => insertMarkdown('### ')}
-                        className="p-1.5 hover:bg-white rounded font-bold text-xs"
-                        title="Heading 3"
-                      >
-                        H3
-                      </button>
-                      <span className="text-slate-300">|</span>
-                      <button
-                        type="button"
-                        onClick={() => insertMarkdown('**', '**')}
-                        className="p-1.5 hover:bg-white rounded"
-                        title="Bold"
-                      >
-                        <Bold className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => insertMarkdown('*', '*')}
-                        className="p-1.5 hover:bg-white rounded"
-                        title="Italic"
-                      >
-                        <Italic className="w-3.5 h-3.5" />
-                      </button>
-                      <span className="text-slate-300">|</span>
-                      <button
-                        type="button"
-                        onClick={() => insertMarkdown('- ')}
-                        className="p-1.5 hover:bg-white rounded"
-                        title="Bullet List"
-                      >
-                        <List className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => insertMarkdown('1. ')}
-                        className="p-1.5 hover:bg-white rounded"
-                        title="Numbered List"
-                      >
-                        <ListOrdered className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => insertMarkdown('> ')}
-                        className="p-1.5 hover:bg-white rounded"
-                        title="Quote"
-                      >
-                        <Quote className="w-3.5 h-3.5" />
-                      </button>
-                      <span className="text-slate-300">|</span>
-                      <button
-                        type="button"
-                        onClick={() => insertMarkdown('[Link Text](', ')')}
-                        className="p-1.5 hover:bg-white rounded"
-                        title="Insert Link"
-                      >
-                        <LinkIcon className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => insertMarkdown('![Image Alt Text](', ')')}
-                        className="p-1.5 hover:bg-white rounded"
-                        title="Insert Image"
-                      >
-                        <ImageIcon className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-
-                    <textarea
-                      id="blog-content-textarea"
-                      rows={16}
-                      value={formData.content}
-                      onChange={(e) => setFormData((prev) => ({ ...prev, content: e.target.value }))}
-                      placeholder="Write your article in formatted Markdown..."
-                      className="w-full p-4 font-mono text-xs text-slate-900 bg-slate-50 border-x border-b border-slate-200 rounded-b-xl focus:outline-none focus:border-[#004b87] focus:bg-white leading-relaxed"
-                    />
-
-                    {previewMode && (
-                      <div className="mt-4 p-5 bg-white border border-slate-200 rounded-xl">
-                        <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Live Body Preview</h4>
-                        <div className="prose prose-slate max-w-none text-xs sm:text-sm whitespace-pre-line leading-relaxed">
-                          {formData.content}
+                        <div className="space-y-1">
+                          <h3 className="text-xs font-semibold text-white">{post.title}</h3>
+                          <div className="flex items-center gap-3 text-[11px]">
+                            {!post.imageAlt && (
+                              <span className="text-amber-400 font-medium">⚠️ Missing Alt Text</span>
+                            )}
+                            {(post.seoDescription || post.excerpt).length < 50 && (
+                              <span className="text-blue-400 font-medium">⚠️ Short Meta Description</span>
+                            )}
+                          </div>
                         </div>
+                        <button
+                          onClick={() => handleEditPost(post)}
+                          className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold self-start sm:self-auto cursor-pointer"
+                        >
+                          Optimize Now
+                        </button>
                       </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Right 1 Col: Sidebar Metadata */}
-                <div className="space-y-5">
-                  {/* Publishing Status Card */}
-                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
-                    <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Publishing Status</h3>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">Status</label>
-                      <select
-                        value={formData.status}
-                        onChange={(e) =>
-                          setFormData((prev) => ({ ...prev, status: e.target.value as 'published' | 'draft' }))
-                        }
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900"
-                      >
-                        <option value="published">Published (Live on Website)</option>
-                        <option value="draft">Draft (Private)</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">Publication Date</label>
-                      <input
-                        type="date"
-                        value={formData.publishedDate}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, publishedDate: e.target.value }))}
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">Author Name</label>
-                      <input
-                        type="text"
-                        value={formData.author}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, author: e.target.value }))}
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">Category</label>
-                      <select
-                        value={formData.category}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, category: e.target.value }))}
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800"
-                      >
-                        {CATEGORIES.map((c) => (
-                          <option key={c} value={c}>
-                            {c}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">Tags (Comma-separated)</label>
-                      <input
-                        type="text"
-                        value={tagInput}
-                        onChange={(e) => setTagInput(e.target.value)}
-                        placeholder="Housekeeping, Office, Procurement"
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Featured Image Card */}
-                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
-                    <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Featured Image</h3>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">Image URL or Local Path</label>
-                      <input
-                        type="text"
-                        value={formData.featuredImage}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, featuredImage: e.target.value }))}
-                        placeholder="/images/blog/example.jpeg"
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 font-mono"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">
-                        Image Alt Text *
-                        {!formData.imageAlt && (
-                          <span className="text-[11px] text-amber-600 font-normal ml-1">
-                            (Missing: Required for SEO)
-                          </span>
-                        )}
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.imageAlt}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, imageAlt: e.target.value }))}
-                        placeholder="Descriptive alt text for Google Image SEO"
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800"
-                      />
-                    </div>
-
-                    {formData.featuredImage && (
-                      <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
-                        <Image
-                          src={formData.featuredImage}
-                          alt={formData.imageAlt || 'Hero preview'}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
-                  </div>
+                    ))}
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
-            {/* TAB 2: SEO & GOOGLE PREVIEW */}
-            {activeTab === 'seo' && (
-              <div className="space-y-6">
-                {/* Google Snippet Live Preview */}
-                <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs">
-                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
-                    <div className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-emerald-600" />
-                      <h3 className="text-sm font-bold text-slate-900">Google Search Snippet Preview</h3>
-                    </div>
-
-                    <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg text-[11px]">
-                      <button
-                        type="button"
-                        onClick={() => setDevicePreview('desktop')}
-                        className={`px-2.5 py-1 rounded font-semibold ${
-                          devicePreview === 'desktop' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-500'
-                        }`}
-                      >
-                        Desktop
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setDevicePreview('mobile')}
-                        className={`px-2.5 py-1 rounded font-semibold ${
-                          devicePreview === 'mobile' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-500'
-                        }`}
-                      >
-                        Mobile
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Google Card Representation */}
-                  <div className="max-w-xl p-4 bg-white rounded-xl border border-slate-200 font-sans">
-                    <div className="flex items-center gap-2 text-xs text-slate-600 mb-1">
-                      <div className="w-4 h-4 rounded-full bg-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-600">
-                        OB
-                      </div>
-                      <span className="font-semibold text-slate-800">OfficeBazzar</span>
-                      <span className="text-slate-400">›</span>
-                      <span className="text-slate-500 font-mono text-[11px]">blog › {formData.slug || 'url-slug'}</span>
-                    </div>
-
-                    <h4 className="text-base sm:text-lg text-[#1a0dab] hover:underline font-normal cursor-pointer leading-snug line-clamp-1">
-                      {displaySeoTitle}
-                    </h4>
-
-                    <p className="text-xs text-slate-600 mt-1 leading-relaxed line-clamp-2">
-                      {displaySeoDesc || 'Your article summary will be displayed here in Google search engine result pages.'}
+          {/* ===================== VIEW 4: SEO BLOG EDITOR ===================== */}
+          {currentView === 'editor' && (
+            <div className="space-y-6">
+              {/* Sticky Action Bar */}
+              <div className="bg-slate-950/90 backdrop-blur-md p-4 rounded-2xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sticky top-16 z-10 shadow-lg">
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setCurrentView('posts')}
+                    className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 transition-colors cursor-pointer"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                  </button>
+                  <div>
+                    <h1 className="text-sm font-bold text-white truncate max-w-sm sm:max-w-md">
+                      {editingSlug ? `Edit: ${formData.title || editingSlug}` : 'Create New Article'}
+                    </h1>
+                    <p className="text-[11px] text-slate-400">
+                      {formData.status === 'published' ? '🟢 Will be live immediately' : '🟡 Draft article'}
                     </p>
                   </div>
                 </div>
 
-                {/* SEO Input Controls */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Left Col: Titles & Description */}
-                  <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
-                    <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Search Engine Tags</h3>
+                <div className="flex items-center gap-2 self-end sm:self-auto flex-wrap">
+                  {saveMessage && (
+                    <span
+                      className={`text-xs px-2.5 py-1 rounded-lg font-medium animate-in fade-in duration-200 ${
+                        saveMessage.type === 'success'
+                          ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800'
+                          : 'bg-rose-950/80 text-rose-300 border border-rose-800'
+                      }`}
+                    >
+                      {saveMessage.text}
+                    </span>
+                  )}
 
-                    {/* SEO Title */}
+                  <button
+                    onClick={() => setEditorPreviewMode((prev) => !prev)}
+                    className="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>{editorPreviewMode ? 'Edit Mode' : 'Preview'}</span>
+                  </button>
+
+                  <button
+                    onClick={() => handleSave('draft')}
+                    disabled={isSaving}
+                    className="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
+                  >
+                    <span>Save Draft</span>
+                  </button>
+
+                  <button
+                    onClick={() => handleSave('published')}
+                    disabled={isSaving}
+                    className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-md shadow-blue-900/40 transition-colors cursor-pointer disabled:opacity-50"
+                  >
+                    {isSaving ? (
+                      <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                    ) : (
+                      <Save className="w-3.5 h-3.5" />
+                    )}
+                    <span>{formData.status === 'published' ? 'Update & Publish' : 'Publish Article'}</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Editor Tabs: Content vs SEO */}
+              <div className="flex border-b border-slate-800">
+                <button
+                  onClick={() => setActiveTab('content')}
+                  className={`py-2.5 px-5 text-xs font-bold tracking-wide border-b-2 transition-colors cursor-pointer ${
+                    activeTab === 'content'
+                      ? 'border-blue-500 text-blue-400 bg-slate-950/40'
+                      : 'border-transparent text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  📝 Content & Article Body
+                </button>
+                <button
+                  onClick={() => setActiveTab('seo')}
+                  className={`py-2.5 px-5 text-xs font-bold tracking-wide border-b-2 transition-colors cursor-pointer flex items-center gap-1.5 ${
+                    activeTab === 'seo'
+                      ? 'border-blue-500 text-blue-400 bg-slate-950/40'
+                      : 'border-transparent text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+                  <span>⚡ SEO & Social Suite</span>
+                </button>
+              </div>
+
+              {/* TAB 1: CONTENT */}
+              {activeTab === 'content' && (
+                <div className="space-y-6">
+                  {/* Article metadata card */}
+                  <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-4">
                     <div>
-                      <div className="flex items-center justify-between mb-1">
-                        <label className="text-xs font-semibold text-slate-700">SEO Title</label>
-                        <span
-                          className={`text-[11px] font-mono ${
-                            titleCharCount >= 45 && titleCharCount <= 60 ? 'text-emerald-600 font-bold' : 'text-amber-600'
-                          }`}
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                        Article Title *
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.title}
+                        onChange={handleTitleChange}
+                        placeholder="e.g. Complete Guide to Industrial Dustbin Selection for Warehouses"
+                        className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm font-semibold text-white focus:outline-none focus:border-blue-500"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                          URL Slug *
+                        </label>
+                        <div className="relative">
+                          <span className="text-slate-500 text-xs absolute left-3.5 top-1/2 -translate-y-1/2 font-mono">
+                            /blog/
+                          </span>
+                          <input
+                            type="text"
+                            value={formData.slug}
+                            onChange={(e) =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                slug: e.target.value
+                                  .toLowerCase()
+                                  .replace(/[^a-z0-9]+/g, '-')
+                                  .replace(/^-+|-+$/g, ''),
+                                canonicalUrl: `https://www.officebazzar.com/blog/${e.target.value}`,
+                              }))
+                            }
+                            className="w-full pl-16 pr-4 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs font-mono text-white focus:outline-none focus:border-blue-500"
+                          />
+                        </div>
+                        {isDuplicateSlug && (
+                          <p className="text-[11px] text-rose-400 mt-1 font-medium">
+                            ⚠️ This slug is already in use by another article.
+                          </p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                          Category
+                        </label>
+                        <select
+                          value={formData.category}
+                          onChange={(e) => setFormData((prev) => ({ ...prev, category: e.target.value }))}
+                          className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500"
                         >
-                          {titleCharCount}/60 chars
+                          {CATEGORIES.map((c) => (
+                            <option key={c} value={c}>
+                              {c}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                          Author Name
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.author}
+                          onChange={(e) => setFormData((prev) => ({ ...prev, author: e.target.value }))}
+                          className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                          Publication Date
+                        </label>
+                        <input
+                          type="date"
+                          value={formData.publishedDate}
+                          onChange={(e) => setFormData((prev) => ({ ...prev, publishedDate: e.target.value }))}
+                          className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Featured Image & Alt */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-800">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                          Featured Image URL
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.featuredImage}
+                          onChange={(e) => setFormData((prev) => ({ ...prev, featuredImage: e.target.value }))}
+                          placeholder="/images/categories/..."
+                          className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs font-mono text-white focus:outline-none focus:border-blue-500"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 flex items-center justify-between">
+                          <span>Image Alt Text (Crucial for SEO)</span>
+                          {!formData.imageAlt && (
+                            <span className="text-amber-400 text-[10px] lowercase font-normal">
+                              required
+                            </span>
+                          )}
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.imageAlt}
+                          onChange={(e) => setFormData((prev) => ({ ...prev, imageAlt: e.target.value }))}
+                          placeholder="Descriptive image keywords for Google bot"
+                          className={`w-full px-3 py-2 bg-slate-900 border rounded-xl text-xs text-white focus:outline-none ${
+                            !formData.imageAlt
+                              ? 'border-amber-500/60 focus:border-amber-400'
+                              : 'border-slate-800 focus:border-blue-500'
+                          }`}
+                        />
+                      </div>
+                    </div>
+
+                    {!formData.imageAlt && (
+                      <div className="p-3 rounded-xl bg-amber-950/40 border border-amber-800/60 text-amber-200 text-xs flex items-center gap-2">
+                        <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+                        <span>
+                          Missing Alt Text: Google Image Search and web accessibility guidelines require descriptive alt text.
                         </span>
                       </div>
+                    )}
+
+                    {/* Excerpt */}
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 flex items-center justify-between">
+                        <span>Short Excerpt (Catalog Summary)</span>
+                        <span className="text-[11px] text-slate-500">{formData.excerpt.length} chars</span>
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={formData.excerpt}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, excerpt: e.target.value }))}
+                        placeholder="Concise 1-2 sentence preview shown on blog cards..."
+                        className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500"
+                      />
+                    </div>
+
+                    {/* Tags */}
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                        Tags (comma-separated)
+                      </label>
+                      <input
+                        type="text"
+                        value={tagInput}
+                        onChange={(e) => setTagInput(e.target.value)}
+                        placeholder="Housekeeping, Office Supplies, Procurement"
+                        className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Rich Text Editor / Markdown Body */}
+                  <div className="bg-slate-950/80 rounded-2xl border border-slate-800 overflow-hidden">
+                    {/* Toolbar */}
+                    <div className="p-3 bg-slate-900 border-b border-slate-800 flex items-center gap-1 flex-wrap">
+                      <button
+                        type="button"
+                        onClick={() => insertMarkdown('## ', '\n')}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer"
+                        title="Heading 2"
+                      >
+                        <Heading2 className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => insertMarkdown('### ', '\n')}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer"
+                        title="Heading 3"
+                      >
+                        <Heading3 className="w-4 h-4" />
+                      </button>
+                      <div className="w-px h-4 bg-slate-800 mx-1" />
+                      <button
+                        type="button"
+                        onClick={() => insertMarkdown('**', '**')}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer"
+                        title="Bold"
+                      >
+                        <Bold className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => insertMarkdown('*', '*')}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer"
+                        title="Italic"
+                      >
+                        <Italic className="w-4 h-4" />
+                      </button>
+                      <div className="w-px h-4 bg-slate-800 mx-1" />
+                      <button
+                        type="button"
+                        onClick={() => insertMarkdown('- ', '\n')}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer"
+                        title="Bulleted List"
+                      >
+                        <List className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => insertMarkdown('1. ', '\n')}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer"
+                        title="Numbered List"
+                      >
+                        <ListOrdered className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => insertMarkdown('> ', '\n')}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer"
+                        title="Quote"
+                      >
+                        <Quote className="w-4 h-4" />
+                      </button>
+                      <div className="w-px h-4 bg-slate-800 mx-1" />
+                      <button
+                        type="button"
+                        onClick={() => insertMarkdown('[', '](https://www.officebazzar.com/)')}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer"
+                        title="Insert Link"
+                      >
+                        <LinkIcon className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => insertMarkdown('![Image description](', ')')}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer"
+                        title="Insert Image"
+                      >
+                        <ImageIcon className="w-4 h-4" />
+                      </button>
+                    </div>
+
+                    {/* Textarea or Preview */}
+                    {editorPreviewMode ? (
+                      <div className="p-6 bg-slate-900/50 min-h-[400px] prose prose-invert prose-blue max-w-none text-xs sm:text-sm">
+                        <div className="whitespace-pre-wrap font-sans leading-relaxed text-slate-200">
+                          {formData.content || '(No content written yet)'}
+                        </div>
+                      </div>
+                    ) : (
+                      <textarea
+                        id="blog-content-textarea"
+                        rows={18}
+                        value={formData.content}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, content: e.target.value }))}
+                        placeholder="Write article content using Markdown formatting (headings, lists, links, images)..."
+                        className="w-full p-4 bg-slate-950 font-mono text-xs sm:text-sm text-slate-100 placeholder:text-slate-600 focus:outline-none resize-y leading-relaxed"
+                      />
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 2: SEO SUITE */}
+              {activeTab === 'seo' && (
+                <div className="space-y-6">
+                  {/* Google Search Snippet Preview */}
+                  <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                        <Globe className="w-4 h-4 text-blue-400" />
+                        <span>Google Search Snippet Preview</span>
+                      </h2>
+                      <div className="flex bg-slate-900 border border-slate-800 rounded-lg p-0.5 text-xs">
+                        <button
+                          onClick={() => setDevicePreview('desktop')}
+                          className={`px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium transition-colors ${
+                            devicePreview === 'desktop'
+                              ? 'bg-blue-600 text-white'
+                              : 'text-slate-400 hover:text-white'
+                          }`}
+                        >
+                          <Monitor className="w-3.5 h-3.5" />
+                          <span>Desktop</span>
+                        </button>
+                        <button
+                          onClick={() => setDevicePreview('mobile')}
+                          className={`px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium transition-colors ${
+                            devicePreview === 'mobile'
+                              ? 'bg-blue-600 text-white'
+                              : 'text-slate-400 hover:text-white'
+                          }`}
+                        >
+                          <Smartphone className="w-3.5 h-3.5" />
+                          <span>Mobile</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Google SERP Card */}
+                    <div
+                      className={`bg-white rounded-xl p-4 text-slate-900 shadow-sm border border-slate-200 ${
+                        devicePreview === 'mobile' ? 'max-w-sm mx-auto' : 'w-full'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 mb-1">
+                        <div className="w-4 h-4 rounded-full bg-[#004b87] flex items-center justify-center text-[9px] font-bold text-white">
+                          OB
+                        </div>
+                        <div className="text-[11px] text-slate-700 truncate">
+                          <span>Office Bazzar</span>
+                          <span className="text-slate-400 mx-1">›</span>
+                          <span className="text-slate-500">blog › {formData.slug || 'article-slug'}</span>
+                        </div>
+                      </div>
+                      <h3 className="text-[#1a0dab] hover:underline text-sm sm:text-base font-normal leading-snug cursor-pointer line-clamp-1">
+                        {displaySeoTitle}
+                      </h3>
+                      <p className="text-slate-600 text-xs sm:text-xs leading-relaxed mt-1 line-clamp-2">
+                        {displaySeoDesc || 'Search engines will generate a snippet from your article body.'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* SEO Metadata Form */}
+                  <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 flex items-center justify-between">
+                        <span>SEO Title</span>
+                        <span
+                          className={`text-[11px] font-mono ${
+                            titleCharCount >= 40 && titleCharCount <= 60
+                              ? 'text-emerald-400'
+                              : 'text-amber-400'
+                          }`}
+                        >
+                          {titleCharCount} / 60 chars (Optimal: 40-60)
+                        </span>
+                      </label>
                       <input
                         type="text"
                         value={formData.seoTitle || ''}
                         onChange={(e) => setFormData((prev) => ({ ...prev, seoTitle: e.target.value }))}
-                        placeholder={formData.title ? `${formData.title} | OfficeBazzar` : 'Enter SEO title'}
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800"
+                        placeholder={formData.title ? `${formData.title} | OfficeBazzar` : 'SEO Title'}
+                        className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500 font-medium"
                       />
-                      <p className="text-[11px] text-slate-400 mt-1">Recommended: 50–60 characters.</p>
                     </div>
 
-                    {/* SEO Meta Description */}
                     <div>
-                      <div className="flex items-center justify-between mb-1">
-                        <label className="text-xs font-semibold text-slate-700">Meta Description</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 flex items-center justify-between">
+                        <span>Meta Description</span>
                         <span
                           className={`text-[11px] font-mono ${
-                            descCharCount >= 120 && descCharCount <= 160 ? 'text-emerald-600 font-bold' : 'text-amber-600'
+                            descCharCount >= 120 && descCharCount <= 160
+                              ? 'text-emerald-400'
+                              : 'text-amber-400'
                           }`}
                         >
-                          {descCharCount}/155 chars
+                          {descCharCount} / 155 chars (Optimal: 120-155)
                         </span>
-                      </div>
+                      </label>
                       <textarea
                         rows={3}
                         value={formData.seoDescription || ''}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, seoDescription: e.target.value }))}
-                        placeholder={formData.excerpt || 'Enter meta description'}
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 leading-relaxed"
-                      />
-                      <p className="text-[11px] text-slate-400 mt-1">Recommended: 120–155 characters.</p>
-                    </div>
-
-                    {/* Canonical URL */}
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">Canonical URL Override</label>
-                      <input
-                        type="text"
-                        value={formData.canonicalUrl || ''}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, canonicalUrl: e.target.value }))}
-                        placeholder={`https://www.officebazzar.com/blog/${formData.slug}`}
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 font-mono"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Right Col: Keywords & Indexing */}
-                  <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
-                    <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Keywords &amp; Robots</h3>
-
-                    {/* Focus Keyword */}
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">Focus Keyword</label>
-                      <input
-                        type="text"
-                        value={formData.focusKeyword || ''}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, focusKeyword: e.target.value }))}
-                        placeholder="e.g. industrial housekeeping dustbins"
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800"
-                      />
-                      <p className="text-[11px] text-slate-400 mt-1">
-                        Used for internal content auditing and editorial alignment.
-                      </p>
-                    </div>
-
-                    {/* Secondary Keywords */}
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">Secondary Keywords</label>
-                      <input
-                        type="text"
-                        value={formData.secondaryKeywords || ''}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, secondaryKeywords: e.target.value }))}
-                        placeholder="waste segregation bins, office dustbins wholesale"
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800"
-                      />
-                    </div>
-
-                    {/* Robots Indexing */}
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">Search Engine Indexing</label>
-                      <select
-                        value={formData.indexRobots ? 'true' : 'false'}
                         onChange={(e) =>
-                          setFormData((prev) => ({ ...prev, indexRobots: e.target.value === 'true' }))
+                          setFormData((prev) => ({ ...prev, seoDescription: e.target.value }))
                         }
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800"
-                      >
-                        <option value="true">index, follow (Allow Google indexing)</option>
-                        <option value="false">noindex, nofollow (Block search engines)</option>
-                      </select>
+                        placeholder={formData.excerpt || 'Enter meta description for search engines...'}
+                        className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500 font-medium"
+                      />
                     </div>
 
-                    {/* SEO Health Check Panel */}
-                    <div className="mt-4 p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-                      <span className="text-xs font-bold text-slate-800 block">Content Health Checks</span>
-                      <div className="flex items-center gap-2 text-xs">
-                        {formData.title ? (
-                          <Check className="w-3.5 h-3.5 text-emerald-600" />
-                        ) : (
-                          <AlertTriangle className="w-3.5 h-3.5 text-rose-500" />
-                        )}
-                        <span>Title provided</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                          Focus Keyword
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.focusKeyword || ''}
+                          onChange={(e) =>
+                            setFormData((prev) => ({ ...prev, focusKeyword: e.target.value }))
+                          }
+                          placeholder="e.g. industrial dustbin supplier"
+                          className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500"
+                        />
                       </div>
-                      <div className="flex items-center gap-2 text-xs">
-                        {formData.imageAlt ? (
-                          <Check className="w-3.5 h-3.5 text-emerald-600" />
-                        ) : (
-                          <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
-                        )}
-                        <span>Image alt text defined ({formData.imageAlt ? 'OK' : 'Warning'})</span>
+
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                          Secondary Keywords
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.secondaryKeywords || ''}
+                          onChange={(e) =>
+                            setFormData((prev) => ({ ...prev, secondaryKeywords: e.target.value }))
+                          }
+                          placeholder="comma-separated keywords"
+                          className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500"
+                        />
                       </div>
-                      <div className="flex items-center gap-2 text-xs">
-                        {formData.content.includes('#') ? (
-                          <Check className="w-3.5 h-3.5 text-emerald-600" />
-                        ) : (
-                          <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
-                        )}
-                        <span>Subheadings structure (H2 / H3)</span>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                        Canonical URL
+                      </label>
+                      <input
+                        type="url"
+                        value={
+                          formData.canonicalUrl ||
+                          (formData.slug ? `https://www.officebazzar.com/blog/${formData.slug}` : '')
+                        }
+                        onChange={(e) => setFormData((prev) => ({ ...prev, canonicalUrl: e.target.value }))}
+                        className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs font-mono text-white focus:outline-none focus:border-blue-500"
+                      />
+                    </div>
+
+                    {/* Social Media Sharing (Open Graph) */}
+                    <div className="pt-3 border-t border-slate-800 space-y-3">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                        <Share2 className="w-4 h-4 text-blue-400" />
+                        <span>Social Sharing (Open Graph)</span>
+                      </h3>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[11px] font-medium text-slate-400 mb-1">
+                            OG Title
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.ogTitle || ''}
+                            onChange={(e) => setFormData((prev) => ({ ...prev, ogTitle: e.target.value }))}
+                            placeholder={formData.title || 'Social sharing title'}
+                            className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[11px] font-medium text-slate-400 mb-1">
+                            OG Image URL
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.ogImage || ''}
+                            onChange={(e) => setFormData((prev) => ({ ...prev, ogImage: e.target.value }))}
+                            placeholder={formData.featuredImage || '/images/categories/...'}
+                            className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs font-mono text-white focus:outline-none focus:border-blue-500"
+                          />
+                        </div>
                       </div>
+                    </div>
+
+                    {/* Robots Index / Noindex directive */}
+                    <div className="pt-3 border-t border-slate-800 flex items-center justify-between">
+                      <div>
+                        <p className="text-xs font-semibold text-white">Search Engine Indexing (Robots)</p>
+                        <p className="text-[11px] text-slate-400">
+                          {formData.indexRobots !== false
+                            ? 'Index, follow (Recommended for public articles)'
+                            : 'Noindex, nofollow (Hidden from Google search)'}
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            indexRobots: prev.indexRobots === false ? true : false,
+                          }))
+                        }
+                        className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors cursor-pointer ${
+                          formData.indexRobots !== false ? 'bg-blue-600' : 'bg-slate-700'
+                        }`}
+                      >
+                        <div
+                          className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${
+                            formData.indexRobots !== false ? 'translate-x-6' : 'translate-x-0'
+                          }`}
+                        />
+                      </button>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
-        )}
+              )}
+            </div>
+          )}
+        </main>
+      </div>
 
-        {/* Delete Confirmation Modal */}
-        {deleteModalSlug && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-xs p-4">
-            <div className="bg-white rounded-2xl max-w-sm w-full p-6 space-y-4 border border-slate-200 shadow-xl">
-              <div className="w-10 h-10 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center">
-                <Trash2 className="w-5 h-5" />
+      {/* ===================== PREVIEW MODAL ===================== */}
+      {previewModalPost && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs">
+          <div className="bg-white text-slate-900 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
+            <div className="p-4 bg-slate-100 border-b border-slate-200 flex items-center justify-between">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-600">
+                Article Preview
+              </span>
+              <button
+                onClick={() => setPreviewModalPost(null)}
+                className="p-1 rounded-lg text-slate-500 hover:text-slate-800"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="p-6 overflow-y-auto space-y-4">
+              <span className="text-xs font-semibold text-[#004b87] uppercase tracking-wider">
+                {previewModalPost.category}
+              </span>
+              <h1 className="text-2xl font-bold text-slate-900 leading-tight">
+                {previewModalPost.title}
+              </h1>
+              <p className="text-xs text-slate-500">
+                Published on {previewModalPost.publishedDate} by {previewModalPost.author}
+              </p>
+              <div className="p-4 bg-slate-50 border-l-4 border-[#004b87] rounded-r-xl text-xs text-slate-700 italic">
+                {previewModalPost.excerpt}
               </div>
-              <div>
-                <h3 className="text-base font-bold text-slate-900">Delete Blog Post?</h3>
-                <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                  Are you sure you want to permanently delete{' '}
-                  <strong className="text-slate-800 font-mono">/blog/{deleteModalSlug}</strong>? This action cannot be
-                  undone.
-                </p>
-              </div>
-              <div className="flex items-center justify-end gap-2 pt-2">
-                <button
-                  type="button"
-                  onClick={() => setDeleteModalSlug(null)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  onClick={handleDeleteConfirm}
-                  className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-semibold"
-                >
-                  Yes, Delete Post
-                </button>
+              <div className="whitespace-pre-wrap font-sans text-xs sm:text-sm leading-relaxed text-slate-800 pt-2 border-t border-slate-100">
+                {previewModalPost.content || '(No content body)'}
               </div>
             </div>
           </div>
-        )}
-      </main>
+        </div>
+      )}
+
+      {/* ===================== DELETE CONFIRMATION MODAL ===================== */}
+      {deleteModalSlug && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs">
+          <div className="bg-slate-900 text-slate-100 rounded-3xl max-w-md w-full p-6 border border-slate-800 shadow-2xl space-y-4">
+            <div className="flex items-center gap-3 text-rose-400">
+              <div className="w-10 h-10 rounded-2xl bg-rose-950/60 flex items-center justify-center">
+                <Trash2 className="w-5 h-5" />
+              </div>
+              <h3 className="text-sm font-bold text-white">Delete Article Confirmation</h3>
+            </div>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Are you sure you want to permanently delete the article with slug{' '}
+              <strong className="text-rose-400 font-mono">/{deleteModalSlug}</strong>? This action will remove the article from the repository.
+            </p>
+            <div className="flex items-center justify-end gap-3 pt-2">
+              <button
+                onClick={() => setDeleteModalSlug(null)}
+                className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteConfirm}
+                className="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold cursor-pointer"
+              >
+                Yes, Delete Permanently
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-

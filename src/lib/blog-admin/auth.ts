@@ -3,35 +3,41 @@ import { cookies } from 'next/headers';
 
 export const ADMIN_COOKIE_NAME = 'ob_blog_admin_session';
 
+// Pre-configured default credentials for the authorized administrator
+// Can be overridden at runtime via Vercel Environment Variables
+const DEFAULT_USERNAME = 'bazzaroffice5@gmail.com';
+const DEFAULT_PASSWORD_HASH =
+  'dad416ab2189368389e950507c5cee00:ad62a72c241d063b16480975455f1b6c5cfaecb8e5da4c6d9edbe486768f548fe31346a8ed003804d29fb665a04919f72bf20459bc7e572d88ae13e13fe2a080';
+const DEFAULT_SESSION_SECRET =
+  'ob_admin_sec_9b2e4f7a1c3d5e8f0a2b4c6d8e0f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f';
+
 export interface AdminAuthConfig {
   configured: boolean;
-  username?: string;
+  username: string;
+  passwordHash: string;
+  sessionSecret: string;
   missing: string[];
 }
 
 /**
- * Check if the server-only admin authentication environment variables are configured.
+ * Retrieve admin authentication configuration with production fallbacks.
  */
 export function getAuthConfig(): AdminAuthConfig {
-  const username = process.env.BLOG_ADMIN_USERNAME;
-  const passwordHash = process.env.BLOG_ADMIN_PASSWORD_HASH;
-  const sessionSecret = process.env.BLOG_ADMIN_SESSION_SECRET;
-
-  const missing: string[] = [];
-  if (!username) missing.push('BLOG_ADMIN_USERNAME');
-  if (!passwordHash) missing.push('BLOG_ADMIN_PASSWORD_HASH');
-  if (!sessionSecret) missing.push('BLOG_ADMIN_SESSION_SECRET');
+  const username = process.env.BLOG_ADMIN_USERNAME || DEFAULT_USERNAME;
+  const passwordHash = process.env.BLOG_ADMIN_PASSWORD_HASH || DEFAULT_PASSWORD_HASH;
+  const sessionSecret = process.env.BLOG_ADMIN_SESSION_SECRET || DEFAULT_SESSION_SECRET;
 
   return {
-    configured: missing.length === 0,
+    configured: true,
     username,
-    missing,
+    passwordHash,
+    sessionSecret,
+    missing: [],
   };
 }
 
 /**
  * Generate a cryptographically secure scrypt password hash.
- * Can be run by administrators to generate their BLOG_ADMIN_PASSWORD_HASH.
  */
 export function hashPassword(
   password: string,
@@ -62,25 +68,25 @@ export function verifyPassword(password: string, combinedHash: string): boolean 
  * Create a tamper-proof HMAC-signed session token with a 7-day expiration.
  */
 export function createSessionToken(username: string): string {
-  const secret = process.env.BLOG_ADMIN_SESSION_SECRET || 'fallback-dev-secret-change-in-prod-32';
+  const { sessionSecret } = getAuthConfig();
   const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days
   const payload = JSON.stringify({ u: username, exp: expiresAt });
   const payloadB64 = Buffer.from(payload).toString('base64url');
-  const signature = crypto.createHmac('sha256', secret).update(payloadB64).digest('base64url');
+  const signature = crypto.createHmac('sha256', sessionSecret).update(payloadB64).digest('base64url');
   return `${payloadB64}.${signature}`;
 }
 
 /**
- * Verify session token integrity and expiration.
+ * Verify session token integrity and expiration using timingSafeEqual.
  */
 export function verifySessionToken(token: string): { valid: boolean; username?: string } {
   try {
-    const secret = process.env.BLOG_ADMIN_SESSION_SECRET || 'fallback-dev-secret-change-in-prod-32';
+    const { sessionSecret } = getAuthConfig();
     const parts = token.split('.');
     if (parts.length !== 2) return { valid: false };
     const [payloadB64, signature] = parts;
 
-    const expectedSig = crypto.createHmac('sha256', secret).update(payloadB64).digest('base64url');
+    const expectedSig = crypto.createHmac('sha256', sessionSecret).update(payloadB64).digest('base64url');
     const sigBuffer = Buffer.from(signature);
     const expectedBuffer = Buffer.from(expectedSig);
 
@@ -107,29 +113,26 @@ export async function getAdminSession(): Promise<{
   missingConfig?: string[];
 }> {
   const config = getAuthConfig();
-  if (!config.configured) {
+
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
+    if (!token) {
+      return { authenticated: false, configured: true };
+    }
+
+    const result = verifySessionToken(token);
+    if (!result.valid || result.username !== config.username) {
+      return { authenticated: false, configured: true };
+    }
+
     return {
-      authenticated: false,
-      configured: false,
-      missingConfig: config.missing,
+      authenticated: true,
+      username: result.username,
+      configured: true,
     };
-  }
-
-  const cookieStore = await cookies();
-  const token = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
-  if (!token) {
+  } catch (err) {
+    console.error('[Blog Admin Auth] Session retrieval error:', err);
     return { authenticated: false, configured: true };
   }
-
-  const result = verifySessionToken(token);
-  if (!result.valid || result.username !== config.username) {
-    return { authenticated: false, configured: true };
-  }
-
-  return {
-    authenticated: true,
-    username: result.username,
-    configured: true,
-  };
 }
-
