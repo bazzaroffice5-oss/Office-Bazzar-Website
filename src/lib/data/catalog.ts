@@ -12265,9 +12265,9 @@ const RAW_PRODUCTS: any[] = [
     "requiresManualReview": false,
     "packSize": "Standard Pack",
     "images": [
-      "/assets/products/catalog_2026/OB-NOT-73.webp",
+      "/assets/products/catalog_2026/OB-NOT-73-alt-2.webp",
       "/assets/products/catalog_2026/OB-NOT-73-alt-1.webp",
-      "/assets/products/catalog_2026/OB-NOT-73-alt-2.webp"
+      "/assets/products/catalog_2026/OB-NOT-73.webp"
     ],
     "featured": false,
     "bestseller": false,
