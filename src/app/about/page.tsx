@@ -40,7 +40,7 @@ export default function AboutPage() {
     <main className="min-h-screen bg-white">
       <JsonLd data={breadcrumbSchema} id="breadcrumb-schema-about" />
       {/* Breadcrumbs */}
-      <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-8">
         <nav className="flex items-center space-x-2 text-xs text-slate-500 font-medium">
           <Link href="/" className="hover:text-[#004b87] transition-colors">
             Home
@@ -51,7 +51,7 @@ export default function AboutPage() {
       </div>
 
       {/* Main Section */}
-      <section className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-8 sm:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left Column: Heading, Subtitle, Story */}
           <div className="lg:col-span-6 space-y-5">
@@ -146,7 +146,7 @@ export default function AboutPage() {
 
       {/* Mission & Vision Section */}
       <section className="w-full bg-slate-50/70 py-14 border-t border-b border-slate-100">
-        <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Mission */}
             <div className="bg-white p-7 rounded-2xl border border-slate-200/90 shadow-2xs space-y-3">
@@ -175,7 +175,7 @@ export default function AboutPage() {
 
       {/* Manufacturing, Customer Approach & Logistics */}
       <section className="w-full py-16 bg-white">
-        <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Manufacturing Card */}
             <div className="p-7 rounded-2xl border border-slate-200/90 bg-slate-50/50 space-y-3">
@@ -218,7 +218,7 @@ export default function AboutPage() {
 
       {/* Leadership Section */}
       <section className="w-full py-14 bg-slate-50/70 border-t border-slate-100">
-        <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
               Company Leadership
@@ -274,7 +274,7 @@ export default function AboutPage() {
 
       {/* Verified Corporate Clients Section */}
       <section className="w-full py-16 bg-white border-t border-slate-100">
-        <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold mb-2">
               <Award className="w-3.5 h-3.5 text-amber-500" />

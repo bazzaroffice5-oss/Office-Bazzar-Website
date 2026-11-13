@@ -100,7 +100,7 @@ export default function OurBrandsSection() {
       className="w-full py-12 sm:py-16 bg-white border-b border-slate-100 overflow-hidden"
       aria-label="Our Brands"
     >
-      <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/90 border border-slate-200/80 text-slate-700 text-xs font-semibold mb-3">
@@ -152,7 +152,7 @@ export default function OurBrandsSection() {
       </div>
 
       {/* Section Footer: Authentic Trademark Notice + RFQ Link */}
-      <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 mt-6 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 mt-6 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400">
         <div className="flex items-center gap-2">
           <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
           <span>All logos represent genuine registered trademarks of their respective brand owners.</span>

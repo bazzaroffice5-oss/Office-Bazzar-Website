@@ -67,7 +67,7 @@ export default function TrendingCategoriesSection() {
 
   return (
     <section className="relative w-full py-14 sm:py-18 bg-white overflow-hidden border-b border-slate-100">
-      <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         
         {/* Section Heading with Refined Corporate Hierarchy */}
         <div className="text-center mb-10 sm:mb-14">

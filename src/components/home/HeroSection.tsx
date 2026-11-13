@@ -60,7 +60,7 @@ export default function HeroSection() {
       />
 
       {/* Main Container */}
-      <div className="relative w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-10 items-center">
           
           {/* ================= LEFT COLUMN: COPY, HEADLINE & CTAS ================= */}

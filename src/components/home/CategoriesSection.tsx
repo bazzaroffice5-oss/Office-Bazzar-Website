@@ -14,22 +14,22 @@ export default function CategoriesSection({
 }) {
   const displayCategories = categories && categories.length > 0 ? categories : CATEGORIES;
   return (
-    <section className="w-full py-14 sm:py-18 bg-slate-50/70 border-b border-slate-100">
-      <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full py-12 sm:py-16 bg-slate-50/70 border-b border-slate-100">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
               Workplace Procurement Categories
             </h2>
-            <p className="text-sm text-slate-600 mt-1 max-w-xl font-normal">
+            <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl font-normal">
               From daily desk essentials to heavy-duty facility maintenance, source everything directly at pre-negotiated corporate rates.
             </p>
           </div>
 
           <Link
             href="/categories"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#004b87] hover:text-[#003866] transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#004b87] hover:text-[#003866] transition-colors"
           >
             <span>Explore All Categories</span>
             <ArrowRight className="w-4 h-4" />
@@ -37,15 +37,15 @@ export default function CategoriesSection({
         </div>
 
         {/* 4 Category Cards in 4-Column Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {displayCategories.map((cat) => (
             <Link
               key={cat.id}
               href={`/category/${cat.slug}`}
-              className="group relative flex flex-col bg-white rounded-2xl border border-slate-200/90 hover:border-slate-300 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004b87] focus-visible:ring-offset-2"
+              className="group relative flex flex-col bg-white rounded-xl sm:rounded-2xl border border-slate-200/90 hover:border-slate-300 overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004b87] focus-visible:ring-offset-2"
             >
               {/* Category Image Banner with Consistent Sizing and Smooth Hover */}
-              <div className="relative w-full h-44 sm:h-48 bg-slate-100 overflow-hidden flex items-center justify-center">
+              <div className="relative w-full h-36 sm:h-40 md:h-44 bg-slate-100 overflow-hidden flex items-center justify-center">
                 <Image
                   src={cat.imageUrl || '/images/categories/office-supplies-stationery.jpg'}
                   alt={`${cat.name} wholesale catalog`}
@@ -57,22 +57,22 @@ export default function CategoriesSection({
               </div>
 
               {/* Category Content Body */}
-              <div className="flex-1 p-5 flex flex-col justify-between">
+              <div className="flex-1 p-4 sm:p-4.5 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-base sm:text-lg font-semibold text-slate-900 group-hover:text-[#004b87] transition-colors tracking-tight">
+                  <h3 className="text-sm sm:text-base font-semibold text-slate-900 group-hover:text-[#004b87] transition-colors tracking-tight">
                     {cat.name}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-slate-500 mt-1.5 line-clamp-2 leading-relaxed font-normal">
+                  <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed font-normal">
                     {cat.description || 'Corporate bulk supply and GST invoicing available.'}
                   </p>
                 </div>
 
                 {/* View Products Navy Brand Button */}
-                <div className="mt-5 pt-3.5 border-t border-slate-100">
-                  <div className="w-full py-2.5 px-4 rounded-xl bg-[#004b87] group-hover:bg-[#003866] active:bg-[#002f57] border border-[#004b87] text-white flex items-center justify-center gap-2 text-sm font-semibold shadow-xs transition-colors duration-200">
+                <div className="mt-4 pt-3 border-t border-slate-100">
+                  <div className="w-full py-2 px-3 rounded-lg sm:rounded-xl bg-[#004b87] group-hover:bg-[#003866] active:bg-[#002f57] border border-[#004b87] text-white flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold shadow-2xs transition-colors duration-200">
                     <span>View Products</span>
-                    <ArrowRight className="w-4 h-4 text-white transition-transform duration-200 group-hover:translate-x-1" />
+                    <ArrowRight className="w-3.5 h-3.5 text-white transition-transform duration-200 group-hover:translate-x-1" />
                   </div>
                 </div>
               </div>

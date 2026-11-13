@@ -70,7 +70,7 @@ export default function Footer() {
   return (
     <footer id="footer" className="w-full bg-[#0a192f] text-slate-300 pt-12 sm:pt-14 pb-8 sm:pb-10 border-t border-slate-800">
       <h2 className="sr-only">Footer Navigation and Corporate Contact Information</h2>
-      <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Main 4-Column Grid with Consistent Top Alignment */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 pb-8 sm:pb-10 border-b border-slate-800 items-start">
           {/* Col 1: Brand & Office Details (lg: col-span-4) */}

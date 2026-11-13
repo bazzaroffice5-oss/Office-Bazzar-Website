@@ -30,7 +30,7 @@ export default function ContactPage() {
     <main className="min-h-screen bg-slate-50/60 py-8 sm:py-12">
       <JsonLd data={breadcrumbSchema} id="breadcrumb-schema-contact" />
       <JsonLd data={localBusinessSchema} id="local-business-schema-contact" />
-      <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-xs text-slate-500 mb-6 font-medium">
           <Link href="/" className="hover:text-[#004b87] transition-colors">

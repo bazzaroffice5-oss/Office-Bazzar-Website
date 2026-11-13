@@ -137,7 +137,7 @@ function CustomerAccountDashboardContent() {
 
   return (
     <main className="min-h-screen bg-slate-50/70 py-8 sm:py-10">
-      <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 space-y-6">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-xs text-slate-500 font-medium">
           <Link href="/" className="hover:text-[#004b87] transition-colors">

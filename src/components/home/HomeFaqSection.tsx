@@ -71,9 +71,9 @@ export default function HomeFaqSection({ defaultOpen = false }: HomeFaqSectionPr
     <section
       id="faq"
       aria-label="Frequently Asked Questions"
-      className="w-full py-14 sm:py-16 lg:py-20 bg-white border-b border-slate-100"
+      className="w-full py-12 sm:py-16 lg:py-18 bg-white border-b border-slate-100"
     >
-      <div className="w-full max-w-[800px] mx-auto px-4 sm:px-6">
+      <div className="w-full max-w-4xl lg:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Centered Heading */}
         <div className="text-center mb-8 sm:mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
