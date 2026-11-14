@@ -126,6 +126,7 @@ export async function POST(request: NextRequest) {
       const price = formData.get('price') ? parseFloat(formData.get('price') as string) : undefined;
       const publishStatus = (formData.get('publishStatus') as string) || 'published';
       const file = formData.get('imageFile') as File | null;
+      const imageUrlInput = formData.get('imageUrl') as string | null;
 
       if (!name || !sku) {
         return NextResponse.json(
@@ -137,23 +138,44 @@ export async function POST(request: NextRequest) {
       const cleanSku = sku.replace(/[^a-zA-Z0-9-_]/g, '_').toUpperCase();
       const imagesList: string[] = [];
 
+      // Handle Image URL input if provided
+      if (imageUrlInput && imageUrlInput.trim()) {
+        imagesList.push(imageUrlInput.trim());
+      }
+
       // Handle Image Upload if provided
       if (file && file.size > 0) {
         const extension = file.name.split('.').pop()?.toLowerCase() || 'webp';
         const targetFilename = `${cleanSku}.${extension}`;
 
-        const uploadDir = path.join(process.cwd(), 'public', 'assets', 'products', 'catalog_2026');
-        if (!fs.existsSync(uploadDir)) {
-          fs.mkdirSync(uploadDir, { recursive: true });
+        try {
+          const uploadDir = path.join(process.cwd(), 'public', 'assets', 'products', 'catalog_2026');
+          if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, { recursive: true });
+          }
+          const bytes = await file.arrayBuffer();
+          const buffer = Buffer.from(bytes);
+          const destination = path.join(uploadDir, targetFilename);
+          fs.writeFileSync(destination, buffer);
+        } catch (fsErr) {
+          console.warn('[Product Admin] Local upload write warning:', fsErr);
         }
 
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const destination = path.join(uploadDir, targetFilename);
-        fs.writeFileSync(destination, buffer);
-
-        imagePath = `/assets/products/catalog_2026/${targetFilename}`;
-        imagesList.push(imagePath);
+        // Generate reliable image data URI if under 300KB for permanent serverless availability
+        try {
+          const bytes = await file.arrayBuffer();
+          const buffer = Buffer.from(bytes);
+          if (buffer.length < 300 * 1024) {
+            const mimeType = file.type || `image/${extension === 'jpg' ? 'jpeg' : extension}`;
+            imagesList.unshift(`data:${mimeType};base64,${buffer.toString('base64')}`);
+          } else {
+            imagePath = `/assets/products/catalog_2026/${targetFilename}`;
+            imagesList.unshift(imagePath);
+          }
+        } catch {
+          imagePath = `/assets/products/catalog_2026/${targetFilename}`;
+          imagesList.unshift(imagePath);
+        }
       }
 
       const isActive = publishStatus === 'published';
@@ -206,6 +228,7 @@ export async function POST(request: NextRequest) {
       revalidatePath('/');
       revalidatePath('/products');
       revalidatePath('/categories');
+      revalidatePath('/shop');
       if (saved.categoryId) {
         revalidatePath(`/category/${saved.categoryId}`);
       }

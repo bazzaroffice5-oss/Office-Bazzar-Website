@@ -23,6 +23,7 @@ import {
   ChevronRight,
   SlidersHorizontal,
   FolderTree,
+  Eye,
 } from 'lucide-react';
 import { Product } from '@/types';
 
@@ -53,6 +54,7 @@ export default function ProductAdminDashboardClient({
   // Modals state
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [viewingProduct, setViewingProduct] = useState<Product | null>(null);
   const [deletingProduct, setDeletingProduct] = useState<Product | null>(null);
 
   // Form states for Add / Edit
@@ -68,6 +70,7 @@ export default function ProductAdminDashboardClient({
   const [formPrice, setFormPrice] = useState<string>('');
   const [formPublishStatus, setFormPublishStatus] = useState<'published' | 'draft' | 'unpublished'>('published');
   const [formImageFile, setFormImageFile] = useState<File | null>(null);
+  const [formImageUrl, setFormImageUrl] = useState('');
   const [formImagePreview, setFormImagePreview] = useState<string | null>(null);
 
   // Operational states
@@ -174,6 +177,7 @@ export default function ProductAdminDashboardClient({
     setFormPrice('');
     setFormPublishStatus('published');
     setFormImageFile(null);
+    setFormImageUrl('');
     setFormImagePreview(null);
     setIsAddModalOpen(true);
   };
@@ -193,7 +197,9 @@ export default function ProductAdminDashboardClient({
     setFormPrice(p.price ? String(p.price) : '');
     setFormPublishStatus(p.isActive !== false ? 'published' : 'unpublished');
     setFormImageFile(null);
-    setFormImagePreview(p.images && p.images[0] ? p.images[0] : null);
+    const existingImg = p.images && p.images[0] ? p.images[0] : '';
+    setFormImageUrl(existingImg);
+    setFormImagePreview(existingImg || null);
   };
 
   const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -230,6 +236,7 @@ export default function ProductAdminDashboardClient({
       formData.append('publishStatus', formPublishStatus);
       if (formPrice.trim()) formData.append('price', formPrice.trim());
       if (formImageFile) formData.append('imageFile', formImageFile);
+      if (formImageUrl.trim()) formData.append('imageUrl', formImageUrl.trim());
 
       const res = await fetch('/api/product-admin/products', {
         method: 'POST',
@@ -279,6 +286,7 @@ export default function ProductAdminDashboardClient({
       formData.append('publishStatus', formPublishStatus);
       if (formPrice.trim()) formData.append('price', formPrice.trim());
       if (formImageFile) formData.append('imageFile', formImageFile);
+      if (formImageUrl.trim()) formData.append('imageUrl', formImageUrl.trim());
 
       const res = await fetch(`/api/product-admin/products/${editingProduct.id}`, {
         method: 'PUT',
@@ -633,6 +641,15 @@ export default function ProductAdminDashboardClient({
                         <td className="py-3 px-4 text-right">
                           <div className="flex items-center justify-end gap-2">
                             <button
+                              onClick={() => setViewingProduct(p)}
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-[#004b87] border border-blue-200 text-xs font-semibold transition-colors cursor-pointer"
+                              title="View complete product details"
+                            >
+                              <Eye className="w-3.5 h-3.5 text-[#004b87]" />
+                              <span>View</span>
+                            </button>
+
+                            <button
                               onClick={() => openEditModal(p)}
                               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-semibold transition-colors cursor-pointer"
                               title="Edit product details"
@@ -922,46 +939,68 @@ export default function ProductAdminDashboardClient({
                 />
               </div>
 
-              {/* Image Upload Area with Live Preview */}
+              {/* Image Input Area with File Upload and URL Option */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Product Image (Upload from Computer)
+                  Product Image
                 </label>
-                <div className="border-2 border-dashed border-slate-200 hover:border-[#ea580c]/60 rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-4 transition-colors bg-slate-50">
-                  {formImagePreview ? (
-                    <div className="w-24 h-24 rounded-xl bg-white border border-slate-200 overflow-hidden relative shrink-0 p-1 flex items-center justify-center shadow-2xs">
-                      <Image
-                        src={formImagePreview}
-                        alt="Preview"
-                        width={96}
-                        height={96}
-                        className="object-contain w-full h-full"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-24 h-24 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 shrink-0">
-                      <UploadCloud className="w-8 h-8" />
-                    </div>
-                  )}
+                <div className="border border-slate-200 rounded-2xl p-4 bg-slate-50 space-y-3">
+                  <div className="flex flex-col sm:flex-row items-center gap-4">
+                    {formImagePreview ? (
+                      <div className="w-24 h-24 rounded-xl bg-[#AFC5DC] border border-slate-200 overflow-hidden relative shrink-0 p-1 flex items-center justify-center shadow-2xs">
+                        <Image
+                          src={formImagePreview}
+                          alt="Preview"
+                          width={96}
+                          height={96}
+                          className="object-contain w-full h-full"
+                          onError={() => setFormImagePreview('/assets/placeholder-product.svg')}
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-24 h-24 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 shrink-0">
+                        <UploadCloud className="w-8 h-8" />
+                      </div>
+                    )}
 
-                  <div className="flex-1 text-center sm:text-left">
+                    <div className="flex-1 text-center sm:text-left space-y-2">
+                      <div>
+                        <input
+                          type="file"
+                          id="productImageInput"
+                          accept="image/*"
+                          onChange={handleImageFileChange}
+                          className="hidden"
+                        />
+                        <label
+                          htmlFor="productImageInput"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-100 text-slate-800 rounded-xl text-xs font-semibold border border-slate-200 cursor-pointer transition-colors shadow-2xs"
+                        >
+                          <UploadCloud className="w-4 h-4 text-[#ea580c]" />
+                          <span>{formImagePreview ? 'Upload New Image File' : 'Select Image File'}</span>
+                        </label>
+                      </div>
+
+                      <div className="text-xs text-slate-500 font-medium">
+                        Or enter an external/existing Image URL directly below:
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Direct Image URL input */}
+                  <div>
                     <input
-                      type="file"
-                      id="productImageInput"
-                      accept="image/*"
-                      onChange={handleImageFileChange}
-                      className="hidden"
+                      type="text"
+                      value={formImageUrl}
+                      onChange={(e) => {
+                        setFormImageUrl(e.target.value);
+                        if (e.target.value.trim()) {
+                          setFormImagePreview(e.target.value.trim());
+                        }
+                      }}
+                      placeholder="e.g. /assets/products/catalog_2026/OB-PROD.webp or https://..."
+                      className="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c]"
                     />
-                    <label
-                      htmlFor="productImageInput"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-100 text-slate-800 rounded-xl text-xs font-semibold border border-slate-200 cursor-pointer transition-colors shadow-2xs"
-                    >
-                      <UploadCloud className="w-4 h-4 text-[#ea580c]" />
-                      <span>{formImagePreview ? 'Replace Image' : 'Select Product Image'}</span>
-                    </label>
-                    <p className="text-xs text-slate-500 mt-1.5 font-medium">
-                      Accepts WebP, PNG, JPEG. Automatically saved to persistent catalogue storage.
-                    </p>
                   </div>
                 </div>
               </div>
@@ -994,6 +1033,184 @@ export default function ProductAdminDashboardClient({
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* 6. Product View Modal (Separate View Mode) */}
+      {viewingProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/50 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-150">
+          <div className="w-full max-w-3xl bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-2xl relative my-8 max-h-[90vh] overflow-y-auto">
+            <button
+              onClick={() => setViewingProduct(null)}
+              className="absolute top-6 right-6 p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+              title="Close View Modal"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-200">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#004b87]">
+                <Eye className="w-5 h-5" />
+              </div>
+              <div className="flex-1 min-w-0 pr-8">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h2 className="text-lg font-bold text-slate-900">Product Specifications &amp; Overview</h2>
+                  <span className="font-mono text-xs font-bold text-[#ea580c] bg-orange-50 px-2.5 py-0.5 rounded-lg border border-orange-200">
+                    {viewingProduct.sku}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Detailed institutional catalogue specifications &amp; live synchronization status
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+              {/* Left Column: Large Image & Quick Actions */}
+              <div className="md:col-span-5 flex flex-col items-center">
+                <div className="w-full aspect-square max-w-[280px] rounded-2xl bg-[#AFC5DC] border border-slate-200/90 p-4 flex items-center justify-center relative shadow-inner overflow-hidden">
+                  <Image
+                    src={viewingProduct.images && viewingProduct.images[0] ? viewingProduct.images[0] : '/assets/placeholder-product.svg'}
+                    alt={viewingProduct.name}
+                    width={260}
+                    height={260}
+                    className="object-contain max-h-[240px] w-auto drop-shadow-md"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/assets/placeholder-product.svg';
+                    }}
+                  />
+                </div>
+
+                <div className="w-full mt-4 flex flex-col gap-2">
+                  <div className="flex items-center justify-between px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                    <span className="text-slate-500 font-medium">Publishing Status:</span>
+                    {viewingProduct.isActive !== false ? (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-[#057a3b] border border-emerald-200">
+                        Published (Active)
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                        Unpublished / Draft
+                      </span>
+                    )}
+                  </div>
+
+                  {viewingProduct.isActive !== false && (
+                    <Link
+                      href={`/product/${viewingProduct.slug}`}
+                      target="_blank"
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition-colors border border-slate-200 shadow-2xs"
+                    >
+                      <span>View on Live Storefront</span>
+                      <ExternalLink className="w-3.5 h-3.5 text-[#ea580c]" />
+                    </Link>
+                  )}
+                </div>
+              </div>
+
+              {/* Right Column: Key Details & Specifications */}
+              <div className="md:col-span-7 space-y-4">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 leading-snug">
+                    {viewingProduct.name}
+                  </h3>
+                  <div className="text-xs font-mono text-[#ea580c] font-bold mt-1">
+                    SKU: {viewingProduct.sku}
+                  </div>
+                </div>
+
+                {/* 10-Field Specification Grid */}
+                <div className="grid grid-cols-2 gap-3 text-xs bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                  <div>
+                    <span className="text-slate-500 font-medium block">Category</span>
+                    <span className="font-semibold text-slate-800">
+                      {viewingProduct.categoryName || 'Office Stationery'}
+                    </span>
+                  </div>
+
+                  <div>
+                    <span className="text-slate-500 font-medium block">Subcategory</span>
+                    <span className="font-semibold text-slate-800">
+                      {viewingProduct.subcategoryName || '—'}
+                    </span>
+                  </div>
+
+                  <div>
+                    <span className="text-slate-500 font-medium block">Brand</span>
+                    <span className="font-semibold text-slate-800">
+                      {viewingProduct.brandName || 'OfficeBazzar'}
+                    </span>
+                  </div>
+
+                  <div>
+                    <span className="text-slate-500 font-medium block">Pack Size / Unit</span>
+                    <span className="font-semibold text-slate-800">
+                      {viewingProduct.packSize || '1 Unit'}
+                    </span>
+                  </div>
+
+                  <div>
+                    <span className="text-slate-500 font-medium block">Commercial Terms</span>
+                    <span className="font-semibold text-slate-800">
+                      {viewingProduct.price ? `₹${viewingProduct.price}` : 'Quote on Request (RFQ)'}
+                    </span>
+                  </div>
+
+                  <div>
+                    <span className="text-slate-500 font-medium block">Catalogue Ref Page</span>
+                    <span className="font-semibold text-slate-800">
+                      {(viewingProduct.specifications as any)?.cataloguePage || '—'}
+                    </span>
+                  </div>
+
+                  <div className="col-span-2 pt-2 border-t border-slate-200/80">
+                    <span className="text-slate-500 font-medium block">Zoho CRM Record ID</span>
+                    <span className="font-mono text-xs font-bold text-slate-700 break-all">
+                      {(viewingProduct as any).zohoProductId || `Zoho Synced (${viewingProduct.sku})`}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Description Box */}
+                <div>
+                  <span className="text-xs font-bold text-slate-700 block mb-1.5">
+                    Product Description
+                  </span>
+                  <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed max-h-36 overflow-y-auto whitespace-pre-wrap">
+                    {viewingProduct.description || 'No description provided for this catalogue item.'}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
+              <span className="text-xs text-slate-400 font-medium">
+                Record ID: {viewingProduct.id}
+              </span>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setViewingProduct(null)}
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors cursor-pointer"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const prodToEdit = viewingProduct;
+                    setViewingProduct(null);
+                    openEditModal(prodToEdit);
+                  }}
+                  className="px-5 py-2 rounded-xl bg-[#ea580c] hover:bg-[#c2410c] text-white text-xs font-semibold shadow-sm transition-all cursor-pointer flex items-center gap-1.5"
+                >
+                  <Edit3 className="w-3.5 h-3.5" />
+                  <span>Edit this Product</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

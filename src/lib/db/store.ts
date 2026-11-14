@@ -32,7 +32,7 @@ interface GlobalStoreState {
   notificationLogsList: NotificationLog[];
 }
 
-function loadCustomProductsFromDisk(): Product[] {
+function loadCustomProductsFromDisk(): Array<Product & { isDeleted?: boolean }> {
   if (typeof window === 'undefined') {
     try {
       // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -57,7 +57,7 @@ function loadCustomProductsFromDisk(): Product[] {
   return [];
 }
 
-function persistCustomProductsToDisk(products: Product[]) {
+function persistCustomProductsToDisk(products: Array<Product & { isDeleted?: boolean }>) {
   if (typeof window === 'undefined') {
     try {
       // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -65,9 +65,7 @@ function persistCustomProductsToDisk(products: Product[]) {
       // eslint-disable-next-line @typescript-eslint/no-require-imports
       const path = require('path');
       const filePath = path.join(process.cwd(), 'src', 'lib', 'data', 'custom_products.json');
-      const initialIds = new Set(INITIAL_PRODUCTS.map((p) => p.id));
-      const customOnly = products.filter((p) => !initialIds.has(p.id));
-      fs.writeFileSync(filePath, JSON.stringify(customOnly, null, 2), 'utf-8');
+      fs.writeFileSync(filePath, JSON.stringify(products, null, 2), 'utf-8');
     } catch {
       // ignore
     }
@@ -116,9 +114,17 @@ const notificationLogsList: NotificationLog[] = storeState.notificationLogsList;
 function syncCustomProducts() {
   const disk = loadCustomProductsFromDisk();
   for (const dp of disk) {
-    const idx = storeState.productsList.findIndex((p) => p.id === dp.id);
+    if (dp.isDeleted) {
+      storeState.productsList = storeState.productsList.filter(
+        (p) => p.id !== dp.id && p.sku.toUpperCase() !== (dp.sku || '').toUpperCase()
+      );
+      continue;
+    }
+    const idx = storeState.productsList.findIndex(
+      (p) => p.id === dp.id || p.sku.toUpperCase() === (dp.sku || '').toUpperCase()
+    );
     if (idx !== -1) {
-      storeState.productsList[idx] = dp;
+      storeState.productsList[idx] = { ...storeState.productsList[idx], ...dp };
     } else {
       storeState.productsList.unshift(dp);
     }
@@ -134,8 +140,11 @@ export async function getProducts(filters?: FilterParams): Promise<{ products: P
   // Primary: Authoritative catalog sourced directly from Zoho CRM (with server-side edge caching)
   syncCustomProducts();
   const zohoProducts = await getProductsFromZoho();
-  let result = (zohoProducts && zohoProducts.length > 0 ? zohoProducts : storeState.productsList).filter(
-    (p) => p.isActive !== false
+  if (zohoProducts && zohoProducts.length > 0) {
+    storeState.productsList = zohoProducts;
+  }
+  let result = storeState.productsList.filter(
+    (p) => p.isActive !== false && !(p as any).isDeleted
   );
 
   if (filters?.query) {
@@ -336,7 +345,8 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
         p.sku.toLowerCase() === cleanSlug ||
         p.id.toLowerCase() === cleanSlug ||
         ((p as any).zohoProductId && (p as any).zohoProductId === cleanSlug)) &&
-      p.isActive !== false
+      p.isActive !== false &&
+      !(p as any).isDeleted
   );
   return product || null;
 });
@@ -346,14 +356,15 @@ export const getProductById = cache(async (id: string): Promise<Product | null> 
   const cleanId = id.trim();
   syncCustomProducts();
   const products = await getProductsFromZoho();
-  const pool = [...(products && products.length > 0 ? products : []), ...storeState.productsList];
+  const pool = products && products.length > 0 ? products : storeState.productsList;
 
   const product = pool.find(
     (p) =>
-      p.id === cleanId ||
-      p.sku.toLowerCase() === cleanId.toLowerCase() ||
-      p.slug.toLowerCase() === cleanId.toLowerCase() ||
-      ((p as any).zohoProductId && (p as any).zohoProductId === cleanId)
+      (p.id === cleanId ||
+        p.sku.toLowerCase() === cleanId.toLowerCase() ||
+        p.slug.toLowerCase() === cleanId.toLowerCase() ||
+        ((p as any).zohoProductId && (p as any).zohoProductId === cleanId)) &&
+      !(p as any).isDeleted
   );
   return product || null;
 });
@@ -621,7 +632,7 @@ export async function saveProduct(productData: Partial<Product>): Promise<Produc
   };
 
   const existingIdx = storeState.productsList.findIndex(
-    (p) => p.id === newProduct.id || p.sku === newProduct.sku
+    (p) => p.id === newProduct.id || p.sku.toUpperCase() === newProduct.sku.toUpperCase()
   );
   if (existingIdx !== -1) {
     storeState.productsList[existingIdx] = { ...storeState.productsList[existingIdx], ...newProduct };
@@ -629,30 +640,45 @@ export async function saveProduct(productData: Partial<Product>): Promise<Produc
     storeState.productsList.unshift(newProduct);
   }
   productsList = storeState.productsList;
-  persistCustomProductsToDisk(storeState.productsList);
+
+  // Persist to custom_products.json without discarding modifications
+  const custom = loadCustomProductsFromDisk();
+  const cIdx = custom.findIndex(
+    (c) => c.id === newProduct.id || (c.sku && c.sku.toUpperCase() === newProduct.sku.toUpperCase())
+  );
+  if (cIdx !== -1) {
+    custom[cIdx] = { ...custom[cIdx], ...newProduct, isDeleted: false };
+  } else {
+    custom.unshift({ ...newProduct, isDeleted: false });
+  }
+  persistCustomProductsToDisk(custom);
 
   return newProduct;
 }
 
 export async function deleteProduct(productId: string): Promise<boolean> {
+  const cleanId = productId.trim().toUpperCase();
   const initialLen = storeState.productsList.length;
-  // Mark inactive in storeState so public catalog filters it out immediately
-  const existingIdx = storeState.productsList.findIndex(
-    (p) => p.id === productId || p.sku === productId || p.slug === productId
+
+  // Mark tombstone in custom products on disk
+  const custom = loadCustomProductsFromDisk();
+  const cIdx = custom.findIndex(
+    (c) => c.id === productId || (c.sku && c.sku.toUpperCase() === cleanId) || c.slug.toLowerCase() === productId.toLowerCase()
   );
-  if (existingIdx !== -1) {
-    storeState.productsList[existingIdx] = {
-      ...storeState.productsList[existingIdx],
-      isActive: false,
-    };
+  if (cIdx !== -1) {
+    custom[cIdx] = { ...custom[cIdx], isActive: false, isDeleted: true };
+  } else {
+    custom.push({ id: productId, sku: cleanId, isActive: false, isDeleted: true } as any);
   }
-  // Also filter out completely if custom product
+  persistCustomProductsToDisk(custom);
+
+  // Remove from runtime storeState
   storeState.productsList = storeState.productsList.filter(
-    (p) => p.id !== productId && p.sku !== productId && p.slug !== productId
+    (p) => p.id !== productId && p.sku.toUpperCase() !== cleanId && p.slug.toLowerCase() !== productId.toLowerCase()
   );
   productsList = storeState.productsList;
-  persistCustomProductsToDisk(storeState.productsList);
-  return storeState.productsList.length < initialLen || existingIdx !== -1;
+
+  return storeState.productsList.length < initialLen || cIdx !== -1;
 }
 
 export async function createCategory(data: {

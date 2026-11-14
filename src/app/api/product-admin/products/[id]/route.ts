@@ -65,6 +65,7 @@ export async function PUT(
       const isActiveStr = formData.get('isActive') as string | null;
       const publishStatus = formData.get('publishStatus') as string | null;
       const file = formData.get('imageFile') as File | null;
+      const imageUrlInput = formData.get('imageUrl') as string | null;
 
       let determinedActive = existing.isActive;
       if (publishStatus) {
@@ -100,23 +101,42 @@ export async function PUT(
         };
       }
 
-      // Handle Image Replacement
+      // Handle Image Replacement via URL input
+      if (imageUrlInput && imageUrlInput.trim()) {
+        updates.images = [imageUrlInput.trim()];
+      }
+
+      // Handle Image Replacement via File Upload
       if (file && file.size > 0) {
         const cleanSku = (updates.sku || existing.sku).replace(/[^a-zA-Z0-9-_]/g, '_').toUpperCase();
         const extension = file.name.split('.').pop()?.toLowerCase() || 'webp';
         const targetFilename = `${cleanSku}.${extension}`;
 
-        const uploadDir = path.join(process.cwd(), 'public', 'assets', 'products', 'catalog_2026');
-        if (!fs.existsSync(uploadDir)) {
-          fs.mkdirSync(uploadDir, { recursive: true });
+        try {
+          const uploadDir = path.join(process.cwd(), 'public', 'assets', 'products', 'catalog_2026');
+          if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, { recursive: true });
+          }
+          const bytes = await file.arrayBuffer();
+          const buffer = Buffer.from(bytes);
+          const destination = path.join(uploadDir, targetFilename);
+          fs.writeFileSync(destination, buffer);
+        } catch (fsErr) {
+          console.warn('[Product Admin] Local upload write warning:', fsErr);
         }
 
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const destination = path.join(uploadDir, targetFilename);
-        fs.writeFileSync(destination, buffer);
-
-        updates.images = [`/assets/products/catalog_2026/${targetFilename}`];
+        try {
+          const bytes = await file.arrayBuffer();
+          const buffer = Buffer.from(bytes);
+          if (buffer.length < 300 * 1024) {
+            const mimeType = file.type || `image/${extension === 'jpg' ? 'jpeg' : extension}`;
+            updates.images = [`data:${mimeType};base64,${buffer.toString('base64')}`];
+          } else {
+            updates.images = [`/assets/products/catalog_2026/${targetFilename}`];
+          }
+        } catch {
+          updates.images = [`/assets/products/catalog_2026/${targetFilename}`];
+        }
       }
     } else {
       const body = await request.json();
@@ -148,6 +168,7 @@ export async function PUT(
       revalidatePath('/');
       revalidatePath('/products');
       revalidatePath('/categories');
+      revalidatePath('/shop');
       if (saved.categoryId) {
         revalidatePath(`/category/${saved.categoryId}`);
       }
