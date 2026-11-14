@@ -240,13 +240,18 @@ export async function POST(request: NextRequest) {
     try {
       revalidatePath('/');
       revalidatePath('/products');
+      revalidatePath('/products', 'page');
       revalidatePath('/categories');
       revalidatePath('/shop');
+      revalidatePath('/product/[slug]', 'page');
       if (saved.categoryId) {
         revalidatePath(`/category/${saved.categoryId}`);
       }
       if (saved.slug) {
         revalidatePath(`/product/${saved.slug}`);
+      }
+      if (saved.sku) {
+        revalidatePath(`/product/${saved.sku.toLowerCase()}`);
       }
     } catch (revalidateErr) {
       console.warn('[Product Admin] Revalidation notice:', revalidateErr);

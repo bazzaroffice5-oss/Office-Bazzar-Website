@@ -141,6 +141,12 @@ export async function PUT(
     } else {
       const body = await request.json();
       updates = body;
+      if ((body as any).commercialPrice !== undefined && (body as any).price === undefined) {
+        const parsedPrice = parseFloat(String((body as any).commercialPrice));
+        if (!isNaN(parsedPrice)) {
+          updates.price = parsedPrice;
+        }
+      }
       if ((body as any).publishStatus) {
         updates.isActive = (body as any).publishStatus === 'published';
       } else if ((body as any).isActive !== undefined) {
@@ -158,7 +164,7 @@ export async function PUT(
     const zohoTargetId = (existing as any).zohoProductId || existing.sku;
     let zohoSynced = false;
     if (zohoTargetId) {
-      const zohoResult = await updateZohoProduct(zohoTargetId, mergedProduct);
+      const zohoResult = await updateZohoProduct(zohoTargetId, mergedProduct, existing.sku);
       zohoSynced = zohoResult.success;
     }
 
@@ -172,13 +178,24 @@ export async function PUT(
     try {
       revalidatePath('/');
       revalidatePath('/products');
+      revalidatePath('/products', 'page');
       revalidatePath('/categories');
       revalidatePath('/shop');
+      revalidatePath('/product/[slug]', 'page');
       if (saved.categoryId) {
         revalidatePath(`/category/${saved.categoryId}`);
       }
       if (saved.slug) {
         revalidatePath(`/product/${saved.slug}`);
+      }
+      if (saved.sku) {
+        revalidatePath(`/product/${saved.sku.toLowerCase()}`);
+      }
+      if (existing?.slug && existing.slug !== saved.slug) {
+        revalidatePath(`/product/${existing.slug}`);
+      }
+      if (existing?.sku && existing.sku.toLowerCase() !== saved.sku.toLowerCase()) {
+        revalidatePath(`/product/${existing.sku.toLowerCase()}`);
       }
     } catch (revalidateErr) {
       console.warn('[Product Admin] Revalidation notice:', revalidateErr);
@@ -221,7 +238,7 @@ export async function DELETE(
     const zohoTargetId = (existing as any).zohoProductId || existing.sku;
     let zohoSynced = false;
     if (zohoTargetId) {
-      const zohoResult = await deleteZohoProduct(zohoTargetId);
+      const zohoResult = await deleteZohoProduct(zohoTargetId, existing.sku);
       zohoSynced = zohoResult.success;
     }
 
@@ -238,13 +255,18 @@ export async function DELETE(
     try {
       revalidatePath('/');
       revalidatePath('/products');
+      revalidatePath('/products', 'page');
       revalidatePath('/categories');
       revalidatePath('/shop');
+      revalidatePath('/product/[slug]', 'page');
       if (existing.categoryId) {
         revalidatePath(`/category/${existing.categoryId}`);
       }
       if (existing.slug) {
         revalidatePath(`/product/${existing.slug}`);
+      }
+      if (existing.sku) {
+        revalidatePath(`/product/${existing.sku.toLowerCase()}`);
       }
     } catch (revalidateErr) {
       console.warn('[Product Admin] Revalidation notice:', revalidateErr);

@@ -130,6 +130,16 @@ export function getZohoProductId(productIdOrSku: string): string | undefined {
 }
 
 /**
+ * Get the SKU for a given Zoho CRM record ID
+ */
+export function getZohoProductSku(zohoId: string): string | undefined {
+  for (const item of mappingBySku.values()) {
+    if (item.zohoId === zohoId) return item.sku;
+  }
+  return undefined;
+}
+
+/**
  * Get all product mappings (websiteId -> zohoId)
  */
 export function getAllZohoProductMappings(): Record<string, string> {
@@ -193,7 +203,22 @@ async function saveZohoProductNote(
 
   try {
     const existingNotes = await fetchZohoProductNotes();
-    const existing = existingNotes.get(cleanSku);
+    let existing = existingNotes.get(cleanSku);
+
+    if (!existing) {
+      for (const [skuKey, item] of existingNotes.entries()) {
+        if (
+          item.noteId === cleanSku ||
+          skuKey === cleanSku ||
+          (item.product as any)?.id?.toUpperCase() === cleanSku ||
+          (item.product as any)?.sku?.toUpperCase() === cleanSku ||
+          (item.product as any)?.slug?.toUpperCase() === cleanSku
+        ) {
+          existing = item;
+          break;
+        }
+      }
+    }
 
     if (existing) {
       const res = await zohoFetch<any>('/Notes', {
@@ -235,29 +260,44 @@ async function saveZohoProductNote(
 /**
  * Mark a product note as deleted or remove it in Zoho CRM
  */
-async function deleteZohoProductNote(sku: string): Promise<boolean> {
-  if (!sku || !(await isZohoConfigured())) return false;
-  const cleanSku = sku.trim().toUpperCase();
+async function deleteZohoProductNote(identifier: string): Promise<boolean> {
+  if (!identifier || !(await isZohoConfigured())) return false;
+  const clean = identifier.trim().toUpperCase();
   try {
     const existingNotes = await fetchZohoProductNotes();
-    const existing = existingNotes.get(cleanSku);
+    let existing = existingNotes.get(clean);
+
+    if (!existing) {
+      for (const [skuKey, item] of existingNotes.entries()) {
+        if (
+          item.noteId === identifier ||
+          skuKey === clean ||
+          (item.product as any)?.id?.toUpperCase() === clean ||
+          (item.product as any)?.sku?.toUpperCase() === clean ||
+          (item.product as any)?.slug?.toUpperCase() === clean
+        ) {
+          existing = item;
+          break;
+        }
+      }
+    }
+
     if (existing) {
-      const tombstoneContent = JSON.stringify({
-        sku: cleanSku,
-        isActive: false,
-        isDeleted: true,
-        updatedAt: new Date().toISOString(),
-      });
-      await zohoFetch<any>('/Notes', {
-        method: 'PUT',
-        body: JSON.stringify({
-          data: [{ id: existing.noteId, Note_Content: tombstoneContent }],
-        }),
-      });
       try {
         await zohoFetch<any>(`/Notes?ids=${existing.noteId}`, { method: 'DELETE' });
-      } catch {
-        // Tombstone already recorded in note content
+      } catch (delErr) {
+        const tombstoneContent = JSON.stringify({
+          sku: existing.product.sku || clean,
+          isActive: false,
+          isDeleted: true,
+          updatedAt: new Date().toISOString(),
+        });
+        await zohoFetch<any>('/Notes', {
+          method: 'PUT',
+          body: JSON.stringify({
+            data: [{ id: existing.noteId, Note_Content: tombstoneContent }],
+          }),
+        });
       }
       return true;
     }
@@ -514,7 +554,8 @@ export async function createZohoProduct(product: Partial<Product>): Promise<{
  */
 export async function updateZohoProduct(
   zohoIdOrSku: string,
-  product: Partial<Product>
+  product: Partial<Product>,
+  skuFallback?: string
 ): Promise<{
   success: boolean;
   zohoId?: string;
@@ -524,7 +565,7 @@ export async function updateZohoProduct(
     return { success: false, error: 'Zoho CRM is not configured.' };
   }
 
-  const cleanSku = (product.sku || zohoIdOrSku).trim().toUpperCase();
+  const cleanSku = (product.sku || skuFallback || zohoIdOrSku).trim().toUpperCase();
   let finalZohoId: string | undefined = undefined;
 
   // 1. Try official /Products module
@@ -580,7 +621,8 @@ export async function updateZohoProduct(
  * Removes/tombstones in Zoho CRM Notes and deactivates in Products module.
  */
 export async function deleteZohoProduct(
-  zohoIdOrSku: string
+  zohoIdOrSku: string,
+  skuFallback?: string
 ): Promise<{
   success: boolean;
   zohoId?: string;
@@ -590,7 +632,7 @@ export async function deleteZohoProduct(
     return { success: false, error: 'Zoho CRM is not configured.' };
   }
 
-  const cleanSku = zohoIdOrSku.trim().toUpperCase();
+  const cleanSku = (skuFallback || getZohoProductSku(zohoIdOrSku) || zohoIdOrSku).trim().toUpperCase();
 
   // 1. Try official /Products module
   try {
@@ -598,7 +640,7 @@ export async function deleteZohoProduct(
     try {
       await zohoFetch<any>(`/Products?ids=${zohoId}`, { method: 'DELETE' });
     } catch {
-      await updateZohoProduct(zohoId, { isActive: false });
+      await updateZohoProduct(zohoId, { isActive: false }, cleanSku);
     }
   } catch {
     // Handled by Notes layer below
@@ -607,6 +649,9 @@ export async function deleteZohoProduct(
   // 2. Always remove/tombstone in Zoho CRM Notes
   try {
     await deleteZohoProductNote(cleanSku);
+    if (zohoIdOrSku && zohoIdOrSku !== cleanSku) {
+      await deleteZohoProductNote(zohoIdOrSku);
+    }
   } catch (noteErr) {
     console.warn('[ZohoProducts] Note sync warning on delete:', noteErr);
   }

@@ -12,7 +12,7 @@ import {
   formatProductSeoDescription,
 } from '@/lib/seo/config';
 
-export const revalidate = 3600;
+export const revalidate = 60;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
