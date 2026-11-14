@@ -73,8 +73,8 @@ export default function ProductCard({
       onClick={handleCardClick}
       className={`group relative flex flex-col justify-between bg-white border border-[#E2EBE3] hover:border-[#3B82F6]/50 rounded-[22px] transition-all duration-300 ease-out shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05),0_2px_6px_-1px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_28px_-4px_rgba(0,0,0,0.1),0_4px_10px_-2px_rgba(0,0,0,0.05)] hover:-translate-y-1 h-full select-none cursor-pointer overflow-hidden ${className}`}
     >
-      {/* 1. White Product Image Display Area (Strict IMAGE 2 Reference: Clean White Stage, Centered Product, Object-Fit Contain) */}
-      <div className="relative w-full h-56 sm:h-64 bg-white flex items-center justify-center p-3 sm:p-4 overflow-hidden">
+      {/* 1. Product Image Display Area (Premium Muted Blue Stage #AFC5DC, Centered Product, Object-Fit Contain) */}
+      <div className="relative w-full h-56 sm:h-64 bg-[#AFC5DC] flex items-center justify-center p-3 sm:p-4 overflow-hidden">
         {/* Floating Add-to-Cart Action (Preserves Full Cart Functionality, Elegant Hover) */}
         <button
           type="button"
