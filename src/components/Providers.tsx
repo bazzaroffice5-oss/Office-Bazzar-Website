@@ -17,9 +17,9 @@ const BazzarAIChatbot = dynamic(() => import('@/components/chatbot/BazzarAIChatb
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isAdmin = pathname?.startsWith('/blog-admin-panel');
+  const isAdmin = pathname?.startsWith('/blog-admin-panel') || pathname?.startsWith('/product-admin-panel');
 
-  // Complete isolation for standalone blog admin:
+  // Complete isolation for standalone admin dashboards (blog & product catalog):
   // Do not load public e-commerce providers, floating cart drawer, pincode modal, or customer AI chatbot
   if (isAdmin) {
     return <>{children}</>;

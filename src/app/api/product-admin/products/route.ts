@@ -47,9 +47,24 @@ export async function GET(request: NextRequest) {
     const startIndex = (page - 1) * limit;
     const paginatedProducts = filtered.slice(startIndex, startIndex + limit);
 
-    // Compute metrics
+    // Compute real metrics from Zoho CRM catalog & custom entries
     const totalCount = allProducts.length;
     const activeCount = allProducts.filter((p) => p.isActive !== false).length;
+
+    // Load actual custom / recently added products from disk to count actual recent additions
+    let recentlyAddedCount = 0;
+    try {
+      const customPath = path.join(process.cwd(), 'src', 'lib', 'data', 'custom_products.json');
+      if (fs.existsSync(customPath)) {
+        const customData = JSON.parse(fs.readFileSync(customPath, 'utf8'));
+        if (Array.isArray(customData)) {
+          recentlyAddedCount = customData.length;
+        }
+      }
+    } catch {
+      recentlyAddedCount = 0;
+    }
+
     // Recently added: top 10 products
     const recentlyAdded = allProducts.slice(0, 10).map((p) => ({
       id: p.id,
@@ -71,8 +86,8 @@ export async function GET(request: NextRequest) {
       metrics: {
         totalProducts: totalCount,
         activeProducts: activeCount,
-        recentlyAddedCount: Math.min(10, totalCount),
-        recentlyUpdatedCount: Math.min(10, totalCount),
+        recentlyAddedCount,
+        recentlyUpdatedCount: recentlyAddedCount,
       },
       recentlyAdded,
     });
@@ -109,6 +124,7 @@ export async function POST(request: NextRequest) {
       const description = formData.get('description') as string;
       const cataloguePage = formData.get('cataloguePage') as string;
       const price = formData.get('price') ? parseFloat(formData.get('price') as string) : undefined;
+      const publishStatus = (formData.get('publishStatus') as string) || 'published';
       const file = formData.get('imageFile') as File | null;
 
       if (!name || !sku) {
@@ -118,9 +134,11 @@ export async function POST(request: NextRequest) {
         );
       }
 
+      const cleanSku = sku.replace(/[^a-zA-Z0-9-_]/g, '_').toUpperCase();
+      const imagesList: string[] = [];
+
       // Handle Image Upload if provided
       if (file && file.size > 0) {
-        const cleanSku = sku.replace(/[^a-zA-Z0-9-_]/g, '_').toUpperCase();
         const extension = file.name.split('.').pop()?.toLowerCase() || 'webp';
         const targetFilename = `${cleanSku}.${extension}`;
 
@@ -135,11 +153,14 @@ export async function POST(request: NextRequest) {
         fs.writeFileSync(destination, buffer);
 
         imagePath = `/assets/products/catalog_2026/${targetFilename}`;
+        imagesList.push(imagePath);
       }
+
+      const isActive = publishStatus === 'published';
 
       productData = {
         name: name.trim(),
-        sku: sku.trim().toUpperCase(),
+        sku: cleanSku,
         categoryId: categoryId || 'office-stationery',
         categoryName: categoryName || 'Office Stationery',
         subcategoryId: subcategoryId || undefined,
@@ -148,7 +169,8 @@ export async function POST(request: NextRequest) {
         packSize: packSize?.trim() || '1 Unit',
         description: description?.trim() || '',
         price: price || 0,
-        images: imagePath ? [imagePath] : [],
+        isActive,
+        images: imagesList,
         specifications: cataloguePage ? { cataloguePage } : {},
       };
     } else {

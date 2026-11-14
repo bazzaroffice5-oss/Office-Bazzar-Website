@@ -2,24 +2,27 @@
 
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   Package,
   CheckCircle2,
   Clock,
-  Sparkles,
   Search,
   Plus,
   Edit3,
+  Trash2,
   ExternalLink,
   LogOut,
   UploadCloud,
   X,
   AlertCircle,
+  AlertTriangle,
   RefreshCw,
   Loader2,
   ChevronLeft,
   ChevronRight,
   SlidersHorizontal,
+  FolderTree,
 } from 'lucide-react';
 import { Product } from '@/types';
 
@@ -43,12 +46,14 @@ export default function ProductAdminDashboardClient({
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedStatus, setSelectedStatus] = useState<'all' | 'published' | 'draft' | 'unpublished'>('all');
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 25;
 
   // Modals state
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [deletingProduct, setDeletingProduct] = useState<Product | null>(null);
 
   // Form states for Add / Edit
   const [formName, setFormName] = useState('');
@@ -61,33 +66,41 @@ export default function ProductAdminDashboardClient({
   const [formDescription, setFormDescription] = useState('');
   const [formCataloguePage, setFormCataloguePage] = useState('');
   const [formPrice, setFormPrice] = useState<string>('');
+  const [formPublishStatus, setFormPublishStatus] = useState<'published' | 'draft' | 'unpublished'>('published');
   const [formImageFile, setFormImageFile] = useState<File | null>(null);
   const [formImagePreview, setFormImagePreview] = useState<string | null>(null);
 
+  // Operational states
   const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [refreshing, setRefreshing] = useState(false);
 
+  // Track session additions and updates
+  const [sessionAddedCount, setSessionAddedCount] = useState(0);
+  const [sessionUpdatedCount, setSessionUpdatedCount] = useState(0);
+
   const showToast = (type: 'success' | 'error', text: string) => {
     setToastMessage({ type, text });
-    setTimeout(() => setToastMessage(null), 4500);
+    setTimeout(() => setToastMessage(null), 5000);
   };
 
-  // Metrics computation
+  // Real Dynamic Metrics (sourced directly from live Zoho catalog & current store)
   const metrics = useMemo(() => {
     const total = products.length;
     const active = products.filter((p) => p.isActive !== false).length;
     return {
       total,
       active,
-      recentlyAdded: Math.min(10, total),
-      recentlyUpdated: Math.min(10, total),
+      recentlyAdded: sessionAddedCount,
+      recentlyUpdated: sessionUpdatedCount,
     };
-  }, [products]);
+  }, [products, sessionAddedCount, sessionUpdatedCount]);
 
   // Filtered products list
   const filteredProducts = useMemo(() => {
     let result = products;
+
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
       result = result.filter(
@@ -95,9 +108,11 @@ export default function ProductAdminDashboardClient({
           p.name.toLowerCase().includes(q) ||
           p.sku.toLowerCase().includes(q) ||
           p.brandName?.toLowerCase().includes(q) ||
-          p.categoryName?.toLowerCase().includes(q)
+          p.categoryName?.toLowerCase().includes(q) ||
+          p.subcategoryName?.toLowerCase().includes(q)
       );
     }
+
     if (selectedCategory !== 'all') {
       result = result.filter(
         (p) =>
@@ -105,8 +120,17 @@ export default function ProductAdminDashboardClient({
           p.categoryName?.toLowerCase() === selectedCategory
       );
     }
+
+    if (selectedStatus !== 'all') {
+      if (selectedStatus === 'published') {
+        result = result.filter((p) => p.isActive !== false);
+      } else {
+        result = result.filter((p) => p.isActive === false);
+      }
+    }
+
     return result;
-  }, [products, searchQuery, selectedCategory]);
+  }, [products, searchQuery, selectedCategory, selectedStatus]);
 
   const totalPages = Math.ceil(filteredProducts.length / pageSize) || 1;
   const paginatedProducts = useMemo(() => {
@@ -124,12 +148,14 @@ export default function ProductAdminDashboardClient({
     try {
       const res = await fetch('/api/product-admin/products?limit=2000');
       const data = await res.json();
-      if (data.products) {
+      if (data.products && Array.isArray(data.products)) {
         setProducts(data.products);
-        showToast('success', 'Product catalog refreshed from Zoho CRM.');
+        showToast('success', `Product catalogue refreshed from Zoho CRM (${data.products.length} records).`);
+      } else {
+        showToast('error', 'Unable to refresh product records.');
       }
     } catch {
-      showToast('error', 'Failed to refresh product list.');
+      showToast('error', 'Network error connecting to Zoho CRM.');
     } finally {
       setRefreshing(false);
     }
@@ -146,6 +172,7 @@ export default function ProductAdminDashboardClient({
     setFormDescription('');
     setFormCataloguePage('');
     setFormPrice('');
+    setFormPublishStatus('published');
     setFormImageFile(null);
     setFormImagePreview(null);
     setIsAddModalOpen(true);
@@ -156,13 +183,15 @@ export default function ProductAdminDashboardClient({
     setFormName(p.name);
     setFormSku(p.sku);
     setFormCategoryId(p.categoryId || 'office-stationery');
-    setFormCategoryName(p.categoryName || 'Office Stationery');
+    const match = CATEGORIES.find((c) => c.id === p.categoryId);
+    setFormCategoryName(p.categoryName || (match ? match.name : 'Office Stationery'));
     setFormSubcategoryName(p.subcategoryName || '');
     setFormBrand(p.brandName || 'OfficeBazzar');
     setFormPackSize(p.packSize || '1 Unit');
     setFormDescription(p.description || '');
     setFormCataloguePage((p.specifications as any)?.cataloguePage || '');
     setFormPrice(p.price ? String(p.price) : '');
+    setFormPublishStatus(p.isActive !== false ? 'published' : 'unpublished');
     setFormImageFile(null);
     setFormImagePreview(p.images && p.images[0] ? p.images[0] : null);
   };
@@ -186,17 +215,20 @@ export default function ProductAdminDashboardClient({
     setSaving(true);
     try {
       const formData = new FormData();
-      formData.append('name', formName);
-      formData.append('sku', formSku);
+      formData.append('name', formName.trim());
+      formData.append('sku', formSku.trim().toUpperCase());
       formData.append('categoryId', formCategoryId);
       formData.append('categoryName', formCategoryName);
-      formData.append('subcategoryId', formSubcategoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-'));
-      formData.append('subcategoryName', formSubcategoryName);
-      formData.append('brandName', formBrand);
-      formData.append('packSize', formPackSize);
-      formData.append('description', formDescription);
-      formData.append('cataloguePage', formCataloguePage);
-      if (formPrice) formData.append('price', formPrice);
+      if (formSubcategoryName.trim()) {
+        formData.append('subcategoryId', formSubcategoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-'));
+        formData.append('subcategoryName', formSubcategoryName.trim());
+      }
+      formData.append('brandName', formBrand.trim());
+      formData.append('packSize', formPackSize.trim());
+      formData.append('description', formDescription.trim());
+      formData.append('cataloguePage', formCataloguePage.trim());
+      formData.append('publishStatus', formPublishStatus);
+      if (formPrice.trim()) formData.append('price', formPrice.trim());
       if (formImageFile) formData.append('imageFile', formImageFile);
 
       const res = await fetch('/api/product-admin/products', {
@@ -212,10 +244,11 @@ export default function ProductAdminDashboardClient({
       }
 
       setProducts((prev) => [data.product, ...prev]);
+      setSessionAddedCount((c) => c + 1);
       setIsAddModalOpen(false);
       showToast(
         'success',
-        `Product "${formName}" created in Zoho CRM and synced live to OfficeBazzar!`
+        `Product "${formName}" published to Zoho CRM and synchronized live!`
       );
     } catch {
       showToast('error', 'Network error creating product in Zoho CRM.');
@@ -231,17 +264,20 @@ export default function ProductAdminDashboardClient({
     setSaving(true);
     try {
       const formData = new FormData();
-      formData.append('name', formName);
-      formData.append('sku', formSku);
+      formData.append('name', formName.trim());
+      formData.append('sku', formSku.trim().toUpperCase());
       formData.append('categoryId', formCategoryId);
       formData.append('categoryName', formCategoryName);
-      formData.append('subcategoryId', formSubcategoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-'));
-      formData.append('subcategoryName', formSubcategoryName);
-      formData.append('brandName', formBrand);
-      formData.append('packSize', formPackSize);
-      formData.append('description', formDescription);
-      formData.append('cataloguePage', formCataloguePage);
-      if (formPrice) formData.append('price', formPrice);
+      if (formSubcategoryName.trim()) {
+        formData.append('subcategoryId', formSubcategoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-'));
+        formData.append('subcategoryName', formSubcategoryName.trim());
+      }
+      formData.append('brandName', formBrand.trim());
+      formData.append('packSize', formPackSize.trim());
+      formData.append('description', formDescription.trim());
+      formData.append('cataloguePage', formCataloguePage.trim());
+      formData.append('publishStatus', formPublishStatus);
+      if (formPrice.trim()) formData.append('price', formPrice.trim());
       if (formImageFile) formData.append('imageFile', formImageFile);
 
       const res = await fetch(`/api/product-admin/products/${editingProduct.id}`, {
@@ -259,10 +295,11 @@ export default function ProductAdminDashboardClient({
       setProducts((prev) =>
         prev.map((p) => (p.id === editingProduct.id ? data.product : p))
       );
+      setSessionUpdatedCount((c) => c + 1);
       setEditingProduct(null);
       showToast(
         'success',
-        `Product "${formName}" updated in Zoho CRM and synchronized live!`
+        `Product "${formName}" updated in Zoho CRM and synchronized live across OfficeBazzar!`
       );
     } catch {
       showToast('error', 'Network error updating product.');
@@ -271,54 +308,95 @@ export default function ProductAdminDashboardClient({
     }
   };
 
+  const handleDeleteProduct = async () => {
+    if (!deletingProduct) return;
+
+    setDeleting(true);
+    try {
+      const res = await fetch(`/api/product-admin/products/${deletingProduct.id}`, {
+        method: 'DELETE',
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        showToast('error', data.error || 'Failed to delete product.');
+        setDeleting(false);
+        return;
+      }
+
+      setProducts((prev) => prev.filter((p) => p.id !== deletingProduct.id && p.sku !== deletingProduct.sku));
+      setSessionUpdatedCount((c) => c + 1);
+      showToast(
+        'success',
+        `Product "${deletingProduct.name}" (${deletingProduct.sku}) deleted and synchronized with Zoho CRM.`
+      );
+      setDeletingProduct(null);
+    } catch {
+      showToast('error', 'Network error while attempting to delete product.');
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-[#0A0F1D] text-slate-100 flex flex-col">
-      {/* Top Navigation Bar */}
-      <header className="h-16 border-b border-slate-800 bg-slate-900/90 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-40">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-md shadow-blue-500/20">
-            <Package className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-white text-base tracking-tight">OfficeBazzar</span>
-              <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full">
-                Product Admin
-              </span>
-            </div>
-            <p className="text-xs text-slate-400 font-medium">Zoho CRM Direct Integration</p>
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col font-sans selection:bg-[#ea580c] selection:text-white">
+      {/* 1. Official OfficeBazzar Top Navigation Bar */}
+      <header className="h-[72px] border-b border-slate-200 bg-white sticky top-0 z-40 px-4 sm:px-6 lg:px-8 flex items-center justify-between shadow-xs">
+        <div className="flex items-center gap-4">
+          <Link href="/" className="flex items-center shrink-0" title="Back to Storefront">
+            <Image
+              src="/images/officebazzar-logo-transparent.webp"
+              alt="OfficeBazzar Logo"
+              width={160}
+              height={45}
+              className="w-[120px] sm:w-[136px] h-auto object-contain"
+              priority
+            />
+          </Link>
+
+          <div className="h-6 w-px bg-slate-200 hidden sm:block" />
+
+          <div className="flex items-center gap-2">
+            <span className="text-xs sm:text-sm font-bold text-slate-900 tracking-tight">
+              Product Admin Dashboard
+            </span>
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-[#057a3b] border border-emerald-200">
+              Zoho CRM Live Sync
+            </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           <button
             onClick={refreshProducts}
             disabled={refreshing}
-            className="p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer"
-            title="Refresh from Zoho CRM"
+            className="p-2 sm:px-3 sm:py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center gap-2 transition-colors cursor-pointer border border-slate-200"
+            title="Force refresh products from Zoho CRM"
           >
-            <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin text-blue-400' : ''}`} />
+            <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin text-[#ea580c]' : 'text-slate-600'}`} />
+            <span className="hidden md:inline">Sync Zoho CRM</span>
           </button>
 
           <a
             href="/products"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-slate-400 hover:text-blue-400 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60 transition-colors"
+            className="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-[#ea580c] bg-white px-3 py-2 rounded-xl border border-slate-200 hover:border-[#ea580c]/40 transition-colors shadow-2xs"
           >
-            <span>Live Catalog</span>
-            <ExternalLink className="w-3.5 h-3.5" />
+            <span>Live Storefront</span>
+            <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
           </a>
 
-          <div className="h-5 w-px bg-slate-800" />
+          <div className="h-5 w-px bg-slate-200 hidden sm:block" />
 
-          <div className="flex items-center gap-3">
-            <span className="text-xs text-slate-300 hidden md:inline truncate max-w-[180px]">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="text-xs text-slate-600 hidden lg:inline max-w-[200px] truncate font-medium">
               {adminEmail}
             </span>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-1.5 text-xs font-semibold bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-500/20 px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 text-xs font-semibold bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 px-3 py-2 rounded-xl transition-colors cursor-pointer"
+              title="Sign Out of Admin"
             >
               <LogOut className="w-3.5 h-3.5" />
               <span>Sign Out</span>
@@ -327,75 +405,93 @@ export default function ProductAdminDashboardClient({
         </div>
       </header>
 
-      {/* Main Dashboard Container */}
+      {/* Main Admin Dashboard Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
-        {/* Toast Notification */}
+        {/* Toast Notification (Top Right - clean & visible) */}
         {toastMessage && (
           <div
-            className={`fixed bottom-6 right-6 z-50 p-4 rounded-2xl shadow-2xl flex items-center gap-3 border backdrop-blur-xl animate-in fade-in slide-in-from-bottom-5 duration-200 ${
+            className={`fixed top-5 right-5 z-50 p-4 rounded-xl shadow-xl flex items-center gap-3 border backdrop-blur-md animate-in fade-in slide-in-from-top-4 duration-200 max-w-md ${
               toastMessage.type === 'success'
-                ? 'bg-emerald-950/90 text-emerald-200 border-emerald-500/30 shadow-emerald-950/50'
-                : 'bg-red-950/90 text-red-200 border-red-500/30 shadow-red-950/50'
+                ? 'bg-emerald-50 text-emerald-900 border-emerald-300'
+                : 'bg-rose-50 text-rose-900 border-rose-300'
             }`}
           >
             {toastMessage.type === 'success' ? (
-              <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+              <CheckCircle2 className="w-5 h-5 text-[#057a3b] shrink-0" />
             ) : (
-              <AlertCircle className="w-5 h-5 text-red-400 shrink-0" />
+              <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
             )}
-            <span className="text-sm font-medium">{toastMessage.text}</span>
+            <span className="text-xs sm:text-sm font-medium">{toastMessage.text}</span>
+            <button
+              onClick={() => setToastMessage(null)}
+              className="ml-auto text-slate-400 hover:text-slate-600"
+            >
+              <X className="w-4 h-4" />
+            </button>
           </div>
         )}
 
-        {/* 1. Overview Section Metrics */}
-        <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider">Total Products</span>
-              <Package className="w-4 h-4 text-blue-400" />
+        {/* 1. Dynamic Overview Section Metrics */}
+        <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          {/* Total Products */}
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-xs transition-shadow">
+            <div className="flex items-center justify-between text-slate-500 mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-600">Total Products</span>
+              <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                <Package className="w-4 h-4" />
+              </div>
             </div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               {metrics.total.toLocaleString()}
             </div>
-            <p className="text-xs text-slate-500 mt-1">Direct Zoho CRM Catalog</p>
+            <p className="text-xs text-slate-500 mt-1 font-medium">Authoritative Zoho CRM Catalog</p>
           </div>
 
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider">Active Products</span>
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          {/* Active / Published Products */}
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-xs transition-shadow">
+            <div className="flex items-center justify-between text-slate-500 mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-600">Active Products</span>
+              <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#057a3b] flex items-center justify-center">
+                <CheckCircle2 className="w-4 h-4" />
+              </div>
             </div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <div className="text-2xl sm:text-3xl font-extrabold text-[#057a3b] tracking-tight">
               {metrics.active.toLocaleString()}
             </div>
-            <p className="text-xs text-emerald-400/80 mt-1">Live on Website</p>
+            <p className="text-xs text-emerald-700/80 mt-1 font-medium">Published on Live Website</p>
           </div>
 
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider">Recently Added</span>
-              <Sparkles className="w-4 h-4 text-purple-400" />
+          {/* Recently Added */}
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-xs transition-shadow">
+            <div className="flex items-center justify-between text-slate-500 mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-600">Recently Added</span>
+              <div className="w-8 h-8 rounded-lg bg-orange-50 text-[#ea580c] flex items-center justify-center">
+                <Plus className="w-4 h-4" />
+              </div>
             </div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               {metrics.recentlyAdded}
             </div>
-            <p className="text-xs text-slate-500 mt-1">Latest catalog entries</p>
+            <p className="text-xs text-slate-500 mt-1 font-medium">New catalog additions</p>
           </div>
 
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider">Recently Updated</span>
-              <Clock className="w-4 h-4 text-amber-400" />
+          {/* Recently Updated */}
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-xs transition-shadow">
+            <div className="flex items-center justify-between text-slate-500 mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-600">Recently Updated</span>
+              <div className="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center">
+                <Clock className="w-4 h-4" />
+              </div>
             </div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               {metrics.recentlyUpdated}
             </div>
-            <p className="text-xs text-slate-500 mt-1">Synced to live store</p>
+            <p className="text-xs text-slate-500 mt-1 font-medium">Synchronized changes</p>
           </div>
         </section>
 
         {/* 2. Product Management Action Bar */}
-        <section className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+        <section className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 shadow-2xs">
           <div className="flex-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             {/* Search Box */}
             <div className="relative flex-1">
@@ -407,20 +503,20 @@ export default function ProductAdminDashboardClient({
                   setSearchQuery(e.target.value);
                   setCurrentPage(1);
                 }}
-                placeholder="Search products by Name or Product Code (SKU)..."
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-800/80 border border-slate-700/80 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                placeholder="Search by Product Name or Code (SKU)..."
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15 transition-all"
               />
             </div>
 
             {/* Category Filter */}
-            <div className="relative min-w-[200px]">
+            <div className="relative min-w-[180px]">
               <select
                 value={selectedCategory}
                 onChange={(e) => {
                   setSelectedCategory(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full py-2.5 pl-3.5 pr-8 bg-slate-800/80 border border-slate-700/80 rounded-xl text-sm text-white focus:outline-none focus:border-blue-500 cursor-pointer"
+                className="w-full py-2.5 pl-3.5 pr-8 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 font-medium focus:outline-none focus:border-[#ea580c] focus:bg-white cursor-pointer transition-colors"
               >
                 {CATEGORIES.map((cat) => (
                   <option key={cat.id} value={cat.id}>
@@ -429,12 +525,28 @@ export default function ProductAdminDashboardClient({
                 ))}
               </select>
             </div>
+
+            {/* Status Filter */}
+            <div className="relative min-w-[150px]">
+              <select
+                value={selectedStatus}
+                onChange={(e) => {
+                  setSelectedStatus(e.target.value as any);
+                  setCurrentPage(1);
+                }}
+                className="w-full py-2.5 pl-3.5 pr-8 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 font-medium focus:outline-none focus:border-[#ea580c] focus:bg-white cursor-pointer transition-colors"
+              >
+                <option value="all">All Status</option>
+                <option value="published">Published</option>
+                <option value="unpublished">Unpublished</option>
+              </select>
+            </div>
           </div>
 
-          {/* Add Product Button */}
+          {/* Add Product Button (Brand Orange) */}
           <button
             onClick={openAddModal}
-            className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold px-5 py-2.5 rounded-xl text-sm shadow-md shadow-blue-600/20 transition-all cursor-pointer shrink-0"
+            className="flex items-center justify-center gap-2 bg-[#ea580c] hover:bg-[#c2410c] active:bg-[#9a3412] text-white font-semibold px-5 py-2.5 rounded-xl text-sm shadow-sm transition-all cursor-pointer shrink-0"
           >
             <Plus className="w-4 h-4" />
             <span>Add New Product</span>
@@ -442,18 +554,21 @@ export default function ProductAdminDashboardClient({
         </section>
 
         {/* 3. Product Catalog Table */}
-        <section className="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-          <div className="p-4 border-b border-slate-800 flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm text-slate-400">
-              <SlidersHorizontal className="w-4 h-4" />
-              <span>Showing {filteredProducts.length} products</span>
+        <section className="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-2xs">
+          <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
+              <SlidersHorizontal className="w-4 h-4 text-[#ea580c]" />
+              <span>Showing {filteredProducts.length} matching products</span>
             </div>
+            <span className="text-xs text-slate-500 font-medium">
+              Page {currentPage} of {totalPages}
+            </span>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-sm">
               <thead>
-                <tr className="border-b border-slate-800 bg-slate-950/40 text-slate-400 text-xs font-semibold uppercase tracking-wider">
+                <tr className="border-b border-slate-200 bg-slate-50 text-slate-700 text-xs font-bold uppercase tracking-wider">
                   <th className="py-3 px-4 w-16">Preview</th>
                   <th className="py-3 px-4">Product Name &amp; Code</th>
                   <th className="py-3 px-4">Category</th>
@@ -463,20 +578,23 @@ export default function ProductAdminDashboardClient({
                   <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-slate-100">
                 {paginatedProducts.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="py-12 text-center text-slate-500">
-                      No products match your search or filter.
+                    <td colSpan={7} className="py-16 text-center text-slate-500">
+                      <FolderTree className="w-10 h-10 text-slate-300 mx-auto mb-3" />
+                      <p className="font-semibold text-slate-700">No products match your search or filter.</p>
+                      <p className="text-xs text-slate-400 mt-1">Try adjusting the search query or category filter above.</p>
                     </td>
                   </tr>
                 ) : (
                   paginatedProducts.map((p) => {
                     const imgUrl = (p.images && p.images[0]) || '/assets/placeholder-product.svg';
+                    const isPublished = p.isActive !== false;
                     return (
-                      <tr key={p.id} className="hover:bg-slate-800/40 transition-colors">
+                      <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
                         <td className="py-3 px-4">
-                          <div className="w-12 h-12 rounded-lg bg-slate-800 border border-slate-700/60 overflow-hidden relative flex items-center justify-center p-1">
+                          <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 overflow-hidden relative flex items-center justify-center p-1">
                             <Image
                               src={imgUrl}
                               alt={p.name}
@@ -490,36 +608,48 @@ export default function ProductAdminDashboardClient({
                           </div>
                         </td>
                         <td className="py-3 px-4">
-                          <div className="font-semibold text-white line-clamp-1">{p.name}</div>
-                          <div className="text-xs font-mono text-blue-400 mt-0.5">{p.sku}</div>
+                          <div className="font-semibold text-slate-900 line-clamp-1">{p.name}</div>
+                          <div className="text-xs font-mono text-[#ea580c] mt-0.5 font-bold">{p.sku}</div>
                         </td>
-                        <td className="py-3 px-4 text-slate-300">
-                          <div>{p.categoryName || 'Office Supplies'}</div>
+                        <td className="py-3 px-4 text-slate-700">
+                          <div className="font-medium">{p.categoryName || 'Office Supplies'}</div>
                           {p.subcategoryName && (
                             <div className="text-xs text-slate-500">{p.subcategoryName}</div>
                           )}
                         </td>
-                        <td className="py-3 px-4 text-slate-300">{p.brandName || 'OfficeBazzar'}</td>
-                        <td className="py-3 px-4 text-slate-400 text-xs">{p.packSize || '1 Unit'}</td>
+                        <td className="py-3 px-4 text-slate-700 font-medium">{p.brandName || 'OfficeBazzar'}</td>
+                        <td className="py-3 px-4 text-slate-500 text-xs font-medium">{p.packSize || '1 Unit'}</td>
                         <td className="py-3 px-4 text-center">
-                          {p.isActive !== false ? (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                              Active
+                          {isPublished ? (
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-[#057a3b] border border-emerald-200">
+                              Published
                             </span>
                           ) : (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-slate-800 text-slate-400 border border-slate-700">
-                              Inactive
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200">
+                              Unpublished
                             </span>
                           )}
                         </td>
                         <td className="py-3 px-4 text-right">
-                          <button
-                            onClick={() => openEditModal(p)}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600/10 text-blue-400 hover:bg-blue-600 hover:text-white border border-blue-500/20 text-xs font-semibold transition-colors cursor-pointer"
-                          >
-                            <Edit3 className="w-3.5 h-3.5" />
-                            <span>Edit</span>
-                          </button>
+                          <div className="flex items-center justify-end gap-2">
+                            <button
+                              onClick={() => openEditModal(p)}
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-semibold transition-colors cursor-pointer"
+                              title="Edit product details"
+                            >
+                              <Edit3 className="w-3.5 h-3.5 text-slate-600" />
+                              <span>Edit</span>
+                            </button>
+
+                            <button
+                              onClick={() => setDeletingProduct(p)}
+                              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-semibold transition-colors cursor-pointer"
+                              title="Delete product"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                              <span className="hidden sm:inline">Delete</span>
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     );
@@ -531,22 +661,27 @@ export default function ProductAdminDashboardClient({
 
           {/* Pagination Controls */}
           {totalPages > 1 && (
-            <div className="p-4 border-t border-slate-800 flex items-center justify-between">
-              <span className="text-xs text-slate-400">
-                Page {currentPage} of {totalPages}
+            <div className="p-4 border-t border-slate-200 flex items-center justify-between bg-slate-50/50">
+              <span className="text-xs text-slate-600 font-medium">
+                Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, filteredProducts.length)} of {filteredProducts.length} products
               </span>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
-                  className="p-1.5 rounded-lg bg-slate-800 text-slate-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                  className="p-2 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-2xs"
+                  aria-label="Previous Page"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
+                <span className="px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-800 shadow-2xs">
+                  {currentPage} / {totalPages}
+                </span>
                 <button
                   onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                   disabled={currentPage === totalPages}
-                  className="p-1.5 rounded-lg bg-slate-800 text-slate-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                  className="p-2 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-2xs"
+                  aria-label="Next Page"
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>
@@ -556,29 +691,77 @@ export default function ProductAdminDashboardClient({
         </section>
       </main>
 
-      {/* Add / Edit Product Modal */}
+      {/* 4. Delete Confirmation Modal */}
+      {deletingProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/50 backdrop-blur-sm animate-in fade-in duration-150">
+          <div className="w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 shadow-2xl relative">
+            <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 border border-rose-200 flex items-center justify-center mb-4">
+              <AlertTriangle className="w-6 h-6" />
+            </div>
+
+            <h3 className="text-lg font-bold text-slate-900">Delete Product Confirmation</h3>
+            <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+              Are you sure you want to delete this product? This will remove it from the active OfficeBazzar catalogue and synchronize the deactivation with Zoho CRM.
+            </p>
+
+            <div className="my-4 p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-1">
+              <div className="font-semibold text-slate-900">{deletingProduct.name}</div>
+              <div className="font-mono text-[#ea580c] font-bold">SKU: {deletingProduct.sku}</div>
+              <div className="text-slate-500">Category: {deletingProduct.categoryName || 'Office Supplies'}</div>
+            </div>
+
+            <div className="flex items-center justify-end gap-3 pt-2">
+              <button
+                type="button"
+                onClick={() => setDeletingProduct(null)}
+                disabled={deleting}
+                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleDeleteProduct}
+                disabled={deleting}
+                className="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white text-xs font-semibold shadow-sm transition-all cursor-pointer flex items-center gap-2 disabled:opacity-50"
+              >
+                {deleting ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>Deleting...</span>
+                  </>
+                ) : (
+                  <span>Confirm Delete</span>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 5. Add / Edit Product Modal */}
       {(isAddModalOpen || editingProduct) && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md overflow-y-auto">
-          <div className="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl relative my-8 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/50 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-150">
+          <div className="w-full max-w-2xl bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-2xl relative my-8 max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => {
                 setIsAddModalOpen(false);
                 setEditingProduct(null);
               }}
-              className="absolute top-6 right-6 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+              className="absolute top-6 right-6 p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+              <div className="w-10 h-10 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center text-[#ea580c]">
                 {editingProduct ? <Edit3 className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
               </div>
               <div>
-                <h2 className="text-lg font-bold text-white">
+                <h2 className="text-lg font-bold text-slate-900">
                   {editingProduct ? 'Edit Existing Product' : 'Add New Product to Zoho CRM'}
                 </h2>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-500">
                   {editingProduct
                     ? `Updating SKU: ${editingProduct.sku}`
                     : 'Direct synchronization with live catalogue and Zoho CRM Products module'}
@@ -592,7 +775,7 @@ export default function ProductAdminDashboardClient({
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
                     Product Name *
                   </label>
                   <input
@@ -601,12 +784,12 @@ export default function ProductAdminDashboardClient({
                     value={formName}
                     onChange={(e) => setFormName(e.target.value)}
                     placeholder="e.g. Kangaro Heavy Duty Punch DP-800"
-                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
                     Product Code / SKU *
                   </label>
                   <input
@@ -615,14 +798,14 @@ export default function ProductAdminDashboardClient({
                     value={formSku}
                     onChange={(e) => setFormSku(e.target.value.toUpperCase())}
                     placeholder="e.g. OB-STA-1050"
-                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 font-mono font-bold placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
                     Category *
                   </label>
                   <select
@@ -632,7 +815,7 @@ export default function ProductAdminDashboardClient({
                       const match = CATEGORIES.find((c) => c.id === e.target.value);
                       setFormCategoryName(match ? match.name : 'Office Supplies');
                     }}
-                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-blue-500"
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 font-medium focus:outline-none focus:border-[#ea580c] focus:bg-white cursor-pointer"
                   >
                     <option value="office-stationery">Office Stationery</option>
                     <option value="housekeeping-hygiene">Housekeeping & Hygiene</option>
@@ -642,7 +825,7 @@ export default function ProductAdminDashboardClient({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
                     Subcategory (Optional)
                   </label>
                   <input
@@ -650,25 +833,25 @@ export default function ProductAdminDashboardClient({
                     value={formSubcategoryName}
                     onChange={(e) => setFormSubcategoryName(e.target.value)}
                     placeholder="e.g. Files & Folders, Cleaning Equipment"
-                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1">Brand</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Brand</label>
                   <input
                     type="text"
                     value={formBrand}
                     onChange={(e) => setFormBrand(e.target.value)}
                     placeholder="e.g. Kangaro, JK, Diversey"
-                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
                     Unit in Business (Pack Size)
                   </label>
                   <input
@@ -676,12 +859,12 @@ export default function ProductAdminDashboardClient({
                     value={formPackSize}
                     onChange={(e) => setFormPackSize(e.target.value)}
                     placeholder="e.g. 1 Unit, Box of 10, Ream of 500"
-                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
                     Catalogue Reference Page
                   </label>
                   <input
@@ -689,32 +872,64 @@ export default function ProductAdminDashboardClient({
                     value={formCataloguePage}
                     onChange={(e) => setFormCataloguePage(e.target.value)}
                     placeholder="e.g. Page 14"
-                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15"
+                  />
+                </div>
+              </div>
+
+              {/* Status Selector */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Publishing Status *
+                  </label>
+                  <select
+                    value={formPublishStatus}
+                    onChange={(e) => setFormPublishStatus(e.target.value as any)}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 font-medium focus:outline-none focus:border-[#ea580c] focus:bg-white cursor-pointer"
+                  >
+                    <option value="published">Published (Visible in Storefront &amp; Zoho)</option>
+                    <option value="draft">Draft (Saved in Admin only)</option>
+                    <option value="unpublished">Unpublished (Hidden from Storefront)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Price (INR) — Optional
+                  </label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={formPrice}
+                    onChange={(e) => setFormPrice(e.target.value)}
+                    placeholder="Leave 0 for Quote On Request (RFQ)"
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1">
                   Product Description
                 </label>
                 <textarea
                   rows={3}
                   value={formDescription}
                   onChange={(e) => setFormDescription(e.target.value)}
-                  placeholder="Comprehensive institutional specifications, usage details, and procurement terms..."
-                  className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+                  placeholder="Institutional specifications, usage details, and procurement terms..."
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15"
                 />
               </div>
 
               {/* Image Upload Area with Live Preview */}
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1">
                   Product Image (Upload from Computer)
                 </label>
-                <div className="border-2 border-dashed border-slate-700 hover:border-blue-500/60 rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-4 transition-colors bg-slate-800/40">
+                <div className="border-2 border-dashed border-slate-200 hover:border-[#ea580c]/60 rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-4 transition-colors bg-slate-50">
                   {formImagePreview ? (
-                    <div className="w-24 h-24 rounded-xl bg-slate-800 border border-slate-700 overflow-hidden relative shrink-0 p-1 flex items-center justify-center">
+                    <div className="w-24 h-24 rounded-xl bg-white border border-slate-200 overflow-hidden relative shrink-0 p-1 flex items-center justify-center shadow-2xs">
                       <Image
                         src={formImagePreview}
                         alt="Preview"
@@ -724,7 +939,7 @@ export default function ProductAdminDashboardClient({
                       />
                     </div>
                   ) : (
-                    <div className="w-24 h-24 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-500 shrink-0">
+                    <div className="w-24 h-24 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 shrink-0">
                       <UploadCloud className="w-8 h-8" />
                     </div>
                   )}
@@ -739,12 +954,12 @@ export default function ProductAdminDashboardClient({
                     />
                     <label
                       htmlFor="productImageInput"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-semibold border border-slate-600 cursor-pointer transition-colors"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-100 text-slate-800 rounded-xl text-xs font-semibold border border-slate-200 cursor-pointer transition-colors shadow-2xs"
                     >
-                      <UploadCloud className="w-4 h-4 text-blue-400" />
+                      <UploadCloud className="w-4 h-4 text-[#ea580c]" />
                       <span>{formImagePreview ? 'Replace Image' : 'Select Product Image'}</span>
                     </label>
-                    <p className="text-xs text-slate-500 mt-1.5">
+                    <p className="text-xs text-slate-500 mt-1.5 font-medium">
                       Accepts WebP, PNG, JPEG. Automatically saved to persistent catalogue storage.
                     </p>
                   </div>
@@ -752,21 +967,21 @@ export default function ProductAdminDashboardClient({
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-4 border-t border-slate-800 flex items-center justify-end gap-3">
+              <div className="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => {
                     setIsAddModalOpen(false);
                     setEditingProduct(null);
                   }}
-                  className="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition-colors cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-lg shadow-blue-600/30 flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50"
+                  className="px-6 py-2.5 rounded-xl bg-[#ea580c] hover:bg-[#c2410c] active:bg-[#9a3412] text-white text-xs font-semibold shadow-sm flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50"
                 >
                   {saving ? (
                     <>
@@ -774,7 +989,7 @@ export default function ProductAdminDashboardClient({
                       <span>Saving to Zoho CRM...</span>
                     </>
                   ) : (
-                    <span>{editingProduct ? 'Save Changes' : 'Save Product'}</span>
+                    <span>{editingProduct ? 'Save Changes' : 'Publish Product'}</span>
                   )}
                 </button>
               </div>

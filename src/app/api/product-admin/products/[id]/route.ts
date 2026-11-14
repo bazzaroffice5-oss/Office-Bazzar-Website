@@ -3,8 +3,8 @@ import path from 'path';
 import fs from 'fs';
 import { revalidatePath } from 'next/cache';
 import { getProductAdminSession } from '@/lib/product-admin/auth';
-import { getProductsFromZoho, updateZohoProduct, invalidateZohoProductCache } from '@/lib/zoho/products';
-import { saveProduct } from '@/lib/db/store';
+import { getProductsFromZoho, updateZohoProduct, deleteZohoProduct, invalidateZohoProductCache } from '@/lib/zoho/products';
+import { saveProduct, deleteProduct } from '@/lib/db/store';
 import { Product } from '@/types';
 
 export const dynamic = 'force-dynamic';
@@ -69,7 +69,15 @@ export async function PUT(
       const cataloguePage = formData.get('cataloguePage') as string | null;
       const priceStr = formData.get('price') as string | null;
       const isActiveStr = formData.get('isActive') as string | null;
+      const publishStatus = formData.get('publishStatus') as string | null;
       const file = formData.get('imageFile') as File | null;
+
+      let determinedActive = existing.isActive;
+      if (publishStatus) {
+        determinedActive = publishStatus === 'published';
+      } else if (isActiveStr !== null) {
+        determinedActive = isActiveStr === 'true';
+      }
 
       updates = {
         name: name ? name.trim() : existing.name,
@@ -81,7 +89,7 @@ export async function PUT(
         brandName: brandName ? brandName.trim() : existing.brandName,
         packSize: packSize ? packSize.trim() : existing.packSize,
         description: description !== null ? description.trim() : existing.description,
-        isActive: isActiveStr !== null ? isActiveStr === 'true' : existing.isActive,
+        isActive: determinedActive,
       };
 
       if (priceStr !== null) {
@@ -166,6 +174,76 @@ export async function PUT(
     console.error('[Product Admin API] PUT error:', error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to update product.' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await getProductAdminSession();
+  if (!session.authenticated) {
+    return NextResponse.json({ error: 'Unauthorized. Admin session required.' }, { status: 401 });
+  }
+
+  const { id } = await params;
+
+  try {
+    const allProducts = await getProductsFromZoho();
+    const existing = allProducts.find(
+      (p) => p.id === id || p.sku === id || p.slug === id || (p as any).zohoProductId === id
+    );
+
+    if (!existing) {
+      return NextResponse.json({ error: 'Product record not found.' }, { status: 404 });
+    }
+
+    // 1. Delete / deactivate in Zoho CRM
+    const zohoTargetId = (existing as any).zohoProductId || existing.sku;
+    let zohoSynced = false;
+    if (zohoTargetId) {
+      const zohoResult = await deleteZohoProduct(zohoTargetId);
+      zohoSynced = zohoResult.success;
+    }
+
+    // 2. Remove from active store & disk persistence
+    await deleteProduct(existing.id);
+    if (existing.sku && existing.sku !== existing.id) {
+      await deleteProduct(existing.sku);
+    }
+
+    // 3. Clear edge caches
+    invalidateZohoProductCache();
+
+    // 4. Invalidate Next.js cache across all relevant routes
+    try {
+      revalidatePath('/');
+      revalidatePath('/products');
+      revalidatePath('/categories');
+      revalidatePath('/shop');
+      if (existing.categoryId) {
+        revalidatePath(`/category/${existing.categoryId}`);
+      }
+      if (existing.slug) {
+        revalidatePath(`/product/${existing.slug}`);
+      }
+    } catch (revalidateErr) {
+      console.warn('[Product Admin] Revalidation notice:', revalidateErr);
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: `Product "${existing.name}" (${existing.sku}) successfully deleted and synchronized with Zoho CRM.`,
+      deletedId: existing.id,
+      deletedSku: existing.sku,
+      zohoSynced,
+    });
+  } catch (error) {
+    console.error('[Product Admin API] DELETE error:', error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Failed to delete product.' },
       { status: 500 }
     );
   }

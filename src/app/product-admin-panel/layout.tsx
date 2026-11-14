@@ -21,7 +21,7 @@ export default function ProductAdminPanelLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#0F172A] text-slate-100 antialiased font-sans selection:bg-[#2563EB] selection:text-white">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 antialiased font-sans selection:bg-[#ea580c] selection:text-white">
       {children}
     </div>
   );

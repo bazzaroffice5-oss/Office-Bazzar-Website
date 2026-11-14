@@ -634,10 +634,23 @@ export async function saveProduct(productData: Partial<Product>): Promise<Produc
 
 export async function deleteProduct(productId: string): Promise<boolean> {
   const initialLen = storeState.productsList.length;
-  storeState.productsList = storeState.productsList.filter((p) => p.id !== productId);
+  // Mark inactive in storeState so public catalog filters it out immediately
+  const existingIdx = storeState.productsList.findIndex(
+    (p) => p.id === productId || p.sku === productId || p.slug === productId
+  );
+  if (existingIdx !== -1) {
+    storeState.productsList[existingIdx] = {
+      ...storeState.productsList[existingIdx],
+      isActive: false,
+    };
+  }
+  // Also filter out completely if custom product
+  storeState.productsList = storeState.productsList.filter(
+    (p) => p.id !== productId && p.sku !== productId && p.slug !== productId
+  );
   productsList = storeState.productsList;
   persistCustomProductsToDisk(storeState.productsList);
-  return storeState.productsList.length < initialLen;
+  return storeState.productsList.length < initialLen || existingIdx !== -1;
 }
 
 export async function createCategory(data: {

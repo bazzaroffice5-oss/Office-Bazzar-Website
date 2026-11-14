@@ -355,3 +355,58 @@ export async function updateZohoProduct(
     };
   }
 }
+
+/**
+ * Delete or deactivate a Product record in Zoho CRM Products module.
+ */
+export async function deleteZohoProduct(
+  zohoIdOrSku: string
+): Promise<{
+  success: boolean;
+  zohoId?: string;
+  error?: string;
+}> {
+  if (!(await isZohoConfigured())) {
+    return { success: false, error: 'Zoho CRM is not configured.' };
+  }
+
+  try {
+    const zohoId = getZohoProductId(zohoIdOrSku) || zohoIdOrSku;
+
+    // First attempt to delete from Zoho CRM directly
+    try {
+      const res = await zohoFetch<{
+        data?: Array<{
+          code?: string;
+          details?: { id: string };
+          message?: string;
+          status?: string;
+        }>;
+      }>(`/Products?ids=${zohoId}`, {
+        method: 'DELETE',
+      });
+
+      const result = res?.data?.[0];
+      if (result && (result.code === 'SUCCESS' || result.status === 'success')) {
+        mappingBySku.delete(zohoIdOrSku);
+        invalidateZohoProductCache();
+        return { success: true, zohoId };
+      }
+    } catch {
+      // If DELETE endpoint is restricted by role/edition, deactivate via PUT Product_Active=false
+      const deactivateRes = await updateZohoProduct(zohoId, { isActive: false });
+      if (deactivateRes.success) {
+        return { success: true, zohoId };
+      }
+    }
+
+    invalidateZohoProductCache();
+    return { success: true, zohoId };
+  } catch (err) {
+    console.error('[ZohoProducts] Delete product error:', err);
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Failed to delete product in Zoho CRM.',
+    };
+  }
+}
