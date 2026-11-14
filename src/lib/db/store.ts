@@ -12,7 +12,7 @@ import {
   QuotationStatus,
   NotificationLog,
 } from '@/types';
-import { CATEGORIES, BRANDS, INITIAL_PRODUCTS, COUPONS, resolveMainCategory } from '@/lib/data/catalog';
+import { CATEGORIES, BRANDS, INITIAL_PRODUCTS, COUPONS, resolveMainCategory, NINE_SUBCATEGORIES, CATEGORY_MAP, isProductInSubcategory } from '@/lib/data/catalog';
 import { getProductsFromZoho } from '@/lib/zoho/products';
 import {
   getAllQuotationsFromZoho,
@@ -146,6 +146,7 @@ export async function getProducts(filters?: FilterParams): Promise<{ products: P
         p.sku.toLowerCase().includes(q) ||
         p.brandName.toLowerCase().includes(q) ||
         p.categoryName.toLowerCase().includes(q) ||
+        p.subcategoryName?.toLowerCase().includes(q) ||
         p.tags?.some((t) => t.toLowerCase().includes(q)) ||
         p.description.toLowerCase().includes(q)
     );
@@ -154,30 +155,37 @@ export async function getProducts(filters?: FilterParams): Promise<{ products: P
   if (filters?.category) {
     const resolvedCat = resolveMainCategory(filters.category);
     if (resolvedCat) {
-      result = result.filter(
-        (p) => p.categoryId === resolvedCat.id || p.categoryName.toLowerCase() === resolvedCat.name.toLowerCase()
-      );
+      result = result.filter((p) => {
+        if (p.categoryId === resolvedCat.id || p.categoryId === resolvedCat.slug) return true;
+        if (p.categoryName?.toLowerCase() === resolvedCat.name.toLowerCase()) return true;
+        const mapped = CATEGORY_MAP[p.subcategoryId || ''] || CATEGORY_MAP[p.categoryId || ''];
+        if (mapped && (mapped.mainId === resolvedCat.id || mapped.mainSlug === resolvedCat.slug)) {
+          return true;
+        }
+        return false;
+      });
     } else {
+      const catLower = filters.category.toLowerCase();
       result = result.filter(
         (p) =>
-          p.categoryId === filters.category ||
-          p.categoryName.toLowerCase().includes(filters.category!.toLowerCase()) ||
-          p.subcategoryId === filters.category
+          p.categoryId?.toLowerCase() === catLower ||
+          p.categoryName.toLowerCase().includes(catLower) ||
+          p.subcategoryId?.toLowerCase() === catLower
       );
     }
   }
 
   if (filters?.subcategory) {
-    result = result.filter(
-      (p) =>
-        p.subcategoryId === filters.subcategory ||
-        p.subcategoryName?.toLowerCase().includes(filters.subcategory!.toLowerCase())
-    );
+    result = result.filter((p) => isProductInSubcategory(p, filters.subcategory!));
   }
 
   if (filters?.brand) {
+    const bSlug = filters.brand.toLowerCase();
     result = result.filter(
-      (p) => p.brandId === filters.brand || p.brandName.toLowerCase() === filters.brand!.toLowerCase()
+      (p) =>
+        p.brandId?.toLowerCase() === bSlug ||
+        p.brandName?.toLowerCase() === bSlug ||
+        p.brandName?.toLowerCase().replace(/\s+/g, '-') === bSlug
     );
   }
 
@@ -193,36 +201,124 @@ export async function getProducts(filters?: FilterParams): Promise<{ products: P
     result = result.filter((p) => (p.stockQuantity ?? 0) > 0);
   }
 
-  // Sorting
+  // Sorting with deterministic SKU tie-breaker to ensure stable pagination
   if (filters?.sortBy) {
     switch (filters.sortBy) {
       case 'price_asc':
-        result.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
+      case 'price-low':
+        result.sort((a, b) => {
+          const diff = (a.price ?? 0) - (b.price ?? 0);
+          if (diff !== 0) return diff;
+          return a.sku.localeCompare(b.sku);
+        });
         break;
       case 'price_desc':
-        result.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
+      case 'price-high':
+        result.sort((a, b) => {
+          const diff = (b.price ?? 0) - (a.price ?? 0);
+          if (diff !== 0) return diff;
+          return a.sku.localeCompare(b.sku);
+        });
         break;
       case 'rating':
-        result.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+        result.sort((a, b) => {
+          const diff = (b.rating ?? 0) - (a.rating ?? 0);
+          if (diff !== 0) return diff;
+          return a.sku.localeCompare(b.sku);
+        });
+        break;
+      case 'name':
+        result.sort((a, b) => {
+          const diff = a.name.localeCompare(b.name);
+          if (diff !== 0) return diff;
+          return a.sku.localeCompare(b.sku);
+        });
         break;
       case 'newest':
-        result.sort((a, b) => b.id.localeCompare(a.id));
+        result.sort((a, b) => {
+          const diff = b.id.localeCompare(a.id);
+          if (diff !== 0) return diff;
+          return a.sku.localeCompare(b.sku);
+        });
         break;
       case 'relevance':
       default:
-        result.sort((a, b) => (b.bestseller ? 1 : 0) - (a.bestseller ? 1 : 0));
+        result.sort((a, b) => {
+          if (a.bestseller && !b.bestseller) return -1;
+          if (!a.bestseller && b.bestseller) return 1;
+          if (a.featured && !b.featured) return -1;
+          if (!a.featured && b.featured) return 1;
+          const ratingDiff = (b.rating ?? 0) - (a.rating ?? 0);
+          if (ratingDiff !== 0) return ratingDiff;
+          return a.sku.localeCompare(b.sku);
+        });
         break;
     }
   }
 
   const total = result.length;
-  const page = filters?.page || 1;
+  const page = Math.max(1, filters?.page || 1);
   const limit = filters?.limit ?? 5000;
   const startIndex = (page - 1) * limit;
   const paginated = result.slice(startIndex, startIndex + limit);
 
   return { products: paginated, total };
 }
+
+export interface CatalogFilterMetadata {
+  categoryCounts: Record<string, number>;
+  subcategoryCounts: Record<string, number>;
+  brandCounts: Record<string, number>;
+  availableBrands: { id: string; name: string }[];
+  totalActiveProducts: number;
+}
+
+export const getCatalogFilterMetadata = cache(async (): Promise<CatalogFilterMetadata> => {
+  syncCustomProducts();
+  const zohoProducts = await getProductsFromZoho();
+  const pool = (zohoProducts && zohoProducts.length > 0 ? zohoProducts : storeState.productsList).filter(
+    (p) => p.isActive !== false
+  );
+
+  const brandMap = new Map<string, { id: string; name: string }>();
+  BRANDS.forEach((b) => {
+    brandMap.set(b.id, { id: b.id, name: b.name });
+  });
+
+  const categoryCounts: Record<string, number> = {};
+  const brandCounts: Record<string, number> = {};
+
+  pool.forEach((p) => {
+    if (p.categoryId) {
+      categoryCounts[p.categoryId] = (categoryCounts[p.categoryId] || 0) + 1;
+    }
+    const bId = p.brandId || p.brandName?.toLowerCase().replace(/\s+/g, '-');
+    if (bId) {
+      brandCounts[bId] = (brandCounts[bId] || 0) + 1;
+    }
+    if (p.brandName) {
+      const id = p.brandId || p.brandName.toLowerCase().replace(/\s+/g, '-');
+      if (!brandMap.has(id)) {
+        brandMap.set(id, { id, name: p.brandName });
+      }
+    }
+  });
+
+  const subcategoryCounts: Record<string, number> = {};
+  NINE_SUBCATEGORIES.forEach((s) => {
+    subcategoryCounts[s.slug] = pool.filter((p) => isProductInSubcategory(p, s.slug)).length;
+  });
+
+  const availableBrands = Array.from(brandMap.values()).sort((a, b) => a.name.localeCompare(b.name));
+
+  return {
+    categoryCounts,
+    subcategoryCounts,
+    brandCounts,
+    availableBrands,
+    totalActiveProducts: pool.length,
+  };
+});
 
 export async function getAdminProducts(): Promise<Product[]> {
   const products = await getProductsFromZoho();

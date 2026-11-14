@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useSearchParams, usePathname } from 'next/navigation';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import {
   ChevronRight,
   ArrowLeft,
@@ -13,11 +13,15 @@ import {
 import ProductCard from '@/components/product/ProductCard';
 import WindowPagination from '@/components/ui/WindowPagination';
 import { Product, Category, Subcategory } from '@/types';
-import { CATEGORY_MAP, isProductInSubcategory } from '@/lib/data/catalog';
 
 interface CategoryLandingClientProps {
   category: Category;
-  allProducts: Product[];
+  initialProducts?: Product[];
+  totalProducts?: number;
+  currentPage?: number;
+  totalPages?: number;
+  subcategoryCounts?: Record<string, number>;
+  categoryProductCount?: number;
   initialView?: string;
   initialSub?: string;
   baseRoute?: string;
@@ -25,47 +29,23 @@ interface CategoryLandingClientProps {
 
 export default function CategoryLandingClient({
   category,
-  allProducts,
+  initialProducts = [],
+  totalProducts = 0,
+  currentPage = 1,
+  totalPages = 1,
+  subcategoryCounts = {},
+  categoryProductCount = 0,
   initialView,
   initialSub,
   baseRoute = '/category',
 }: CategoryLandingClientProps) {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
   // Read current view & sub from URL search params with fallback to initial props
   const viewParam = searchParams.get('view') || initialView || '';
   const subParam = searchParams.get('sub') || initialSub || '';
-  const pageParam = parseInt(searchParams.get('page') || '1', 10);
-
-  const [currentPage, setCurrentPage] = useState<number>(!isNaN(pageParam) && pageParam > 0 ? pageParam : 1);
-  const itemsPerPage = 48;
-
-  // Filter products belonging to this main category
-  const categoryProducts = useMemo(() => {
-    return allProducts.filter((p) => {
-      if (!p.isActive) return false;
-      if (p.categoryId === category.id || p.categoryId === category.slug) return true;
-      if (p.categoryName?.toLowerCase() === category.name.toLowerCase()) return true;
-      const mapped = CATEGORY_MAP[p.subcategoryId || ''] || CATEGORY_MAP[p.categoryId || ''];
-      if (mapped && (mapped.mainId === category.id || mapped.mainSlug === category.slug)) {
-        return true;
-      }
-      return false;
-    });
-  }, [allProducts, category]);
-
-  // Compute product counts for each subcategory across catalog
-  const subcategoryCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    category.subcategories?.forEach((sub) => {
-      const inSub = allProducts.filter((p) => isProductInSubcategory(p, sub.slug));
-      const resolved = inSub.length > 0 ? inSub.length : (sub.itemCount || 0);
-      counts[sub.slug] = resolved;
-      counts[sub.id] = resolved;
-    });
-    return counts;
-  }, [category, allProducts]);
 
   // Determine if product listing mode is active
   const isViewingAll = viewParam === 'all' || viewParam === 'products';
@@ -77,28 +57,6 @@ export default function CategoryLandingClient({
   }, [category, subParam]);
 
   const isProductListingOpen = Boolean(isViewingAll || activeSubcategory);
-
-  // Products filtered for the active product listing
-  const displayedProducts = useMemo(() => {
-    if (!isProductListingOpen) return [];
-    if (isViewingAll || !activeSubcategory) {
-      return categoryProducts;
-    }
-    return allProducts.filter((p) => isProductInSubcategory(p, activeSubcategory.slug));
-  }, [categoryProducts, allProducts, isProductListingOpen, isViewingAll, activeSubcategory]);
-
-  const totalItems = displayedProducts.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedProducts = displayedProducts.slice(
-    startIndex,
-    startIndex + itemsPerPage
-  );
-
-  // Reset page when filter changes
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [viewParam, subParam]);
 
   // Navigation helpers
   const resolvedBaseRoute =
@@ -121,7 +79,8 @@ export default function CategoryLandingClient({
         name: 'All Products',
         href: '/products',
         imageUrl: category.imageUrl || '/images/categories/office-supplies-stationery.jpg',
-        description: 'Browse our complete workplace catalogue across all 9 categories with direct wholesale pricing and GST input credit.',
+        description:
+          'Browse our complete workplace catalogue across all 9 categories with direct wholesale pricing and GST input credit.',
       },
       ...(category.subcategories || []).map((sub) => ({
         id: sub.id,
@@ -161,7 +120,7 @@ export default function CategoryLandingClient({
           )}
         </div>
 
-        {/* 10 Category Cards in Responsive Grid: Desktop 4 cols, Medium screens 3 cols, Tablets 2 cols, Mobile 1 col */}
+        {/* Category Cards in Responsive Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
           {cards.map((card, index) => (
             <Link
@@ -207,10 +166,31 @@ export default function CategoryLandingClient({
   // VIEW 2: PRODUCT LISTING PAGE
   // Opens ONLY after user selects "All Products" or a Subcategory
   // ==========================================
-  const activeTitle = isViewingAll ? `All ${category.name} Products` : (activeSubcategory ? `${activeSubcategory.name} — ${category.name}` : category.name);
+  const activeTitle = isViewingAll
+    ? `All ${category.name} Products`
+    : activeSubcategory
+    ? `${activeSubcategory.name} — ${category.name}`
+    : category.name;
   const activeSubtitle = isViewingAll
-    ? `Displaying all ${displayedProducts.length} products across ${category.subcategories?.length || 0} subcategories in ${category.name}`
-    : `Displaying all ${displayedProducts.length} products in ${activeSubcategory?.name}`;
+    ? `Displaying all ${totalProducts} products across ${category.subcategories?.length || 0} subcategories in ${category.name}`
+    : `Displaying all ${totalProducts} products in ${activeSubcategory?.name}`;
+
+  const getPageUrl = (p: number) => {
+    const params = new URLSearchParams();
+    if (viewParam) params.set('view', viewParam);
+    if (subParam) params.set('sub', subParam);
+    if (p > 1) params.set('page', p.toString());
+    const q = params.toString();
+    return `${categoryBaseUrl}${q ? `?${q}` : ''}`;
+  };
+
+  const handlePageChange = (p: number) => {
+    const targetUrl = getPageUrl(p);
+    router.push(targetUrl);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 100, behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
@@ -258,7 +238,7 @@ export default function CategoryLandingClient({
 
           {/* Product count badge */}
           <span className="text-xs sm:text-sm font-medium text-[#526174] bg-white px-3 py-1 rounded-full border border-[#E2EBE3]">
-            <strong className="text-[#163A5F] font-semibold">{totalItems}</strong> products
+            <strong className="text-[#163A5F] font-semibold">{totalProducts}</strong> products
           </span>
         </div>
       </div>
@@ -279,7 +259,7 @@ export default function CategoryLandingClient({
               isViewingAll ? 'bg-white/20 text-white' : 'bg-[#EFF6F0] text-[#526174]'
             }`}
           >
-            {categoryProducts.length}
+            {categoryProductCount}
           </span>
         </Link>
 
@@ -312,18 +292,18 @@ export default function CategoryLandingClient({
 
       {/* Responsive Product Cards Grid */}
       <h2 className="sr-only">{activeTitle} Catalogue</h2>
-      {paginatedProducts.length === 0 ? (
+      {initialProducts.length === 0 ? (
         <div className="w-full bg-white rounded-2xl border border-[#E2EBE3] p-8 sm:p-12 text-center space-y-4 my-8">
           <div className="w-14 h-14 rounded-full bg-[#EFF6F0] text-[#163A5F] mx-auto flex items-center justify-center">
             <Package className="w-7 h-7 text-[#526174]" />
           </div>
           <h2 className="text-xl font-bold text-[#111827]">
-            {categoryProducts.length === 0 ? 'Corporate Catalogue Available on RFQ' : 'No products found in this subcategory'}
+            {totalProducts === 0 ? 'Corporate Catalogue Available on RFQ' : 'No products found on this page'}
           </h2>
           <p className="text-sm text-[#526174] max-w-lg mx-auto">
-            {categoryProducts.length === 0
+            {totalProducts === 0
               ? `${category.name} supplies are available under our Annual Rate Contract (ARC) and bulk B2B procurement agreements. Submit an RFQ with your requirement specs.`
-              : `There are currently no catalog items matching this filter. You can request custom quotes or view all items in ${category.name}.`}
+              : `There are currently no catalog items matching this filter page. You can request custom quotes or view all items in ${category.name}.`}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <Link
@@ -342,7 +322,7 @@ export default function CategoryLandingClient({
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
-          {paginatedProducts.map((product) => (
+          {initialProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
@@ -352,25 +332,8 @@ export default function CategoryLandingClient({
       <WindowPagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={(p) => {
-          setCurrentPage(p);
-          if (typeof window !== 'undefined') {
-            const params = new URLSearchParams(window.location.search);
-            if (p > 1) params.set('page', p.toString());
-            else params.delete('page');
-            const q = params.toString();
-            window.history.pushState({}, '', `${categoryBaseUrl}${q ? `?${q}` : ''}`);
-            window.scrollTo({ top: 100, behavior: 'smooth' });
-          }
-        }}
-        getPageUrl={(p) => {
-          const params = new URLSearchParams();
-          if (viewParam) params.set('view', viewParam);
-          if (subParam) params.set('sub', subParam);
-          if (p > 1) params.set('page', p.toString());
-          const q = params.toString();
-          return `${categoryBaseUrl}${q ? `?${q}` : ''}`;
-        }}
+        onPageChange={handlePageChange}
+        getPageUrl={getPageUrl}
         className="mt-12 pb-8"
       />
     </div>

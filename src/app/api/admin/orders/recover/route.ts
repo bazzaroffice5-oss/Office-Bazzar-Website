@@ -49,9 +49,10 @@ export async function GET(req: Request) {
       records,
       drainResult,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : 'Failed to inspect downtime outbox.';
     return NextResponse.json(
-      { error: error?.message || 'Failed to inspect downtime outbox.' },
+      { error: msg },
       { status: 500 }
     );
   }
@@ -72,9 +73,10 @@ export async function POST(req: Request) {
       message: 'Zoho CRM downtime outbox drain executed.',
       drainResult,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : 'Failed to drain downtime outbox.';
     return NextResponse.json(
-      { error: error?.message || 'Failed to drain downtime outbox.' },
+      { error: msg },
       { status: 500 }
     );
   }

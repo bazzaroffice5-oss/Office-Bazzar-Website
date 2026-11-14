@@ -206,7 +206,7 @@ export interface FilterParams {
   minPrice?: number;
   maxPrice?: number;
   inStockOnly?: boolean;
-  sortBy?: 'relevance' | 'price_asc' | 'price_desc' | 'rating' | 'newest';
+  sortBy?: 'relevance' | 'price_asc' | 'price_desc' | 'price-low' | 'price-high' | 'rating' | 'newest' | 'name';
   page?: number;
   limit?: number;
 }

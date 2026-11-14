@@ -12,13 +12,11 @@
 import { getAllOrders, updateOrderStatus } from '@/lib/db/store';
 import { razorpayInstance, isRazorpayConfigured } from '@/lib/payments/razorpay';
 import {
-  findZohoSalesOrderId,
   updateZohoSalesOrderStatus,
   syncOrderToZohoSalesOrder,
   reconcileDuplicateSalesOrdersSafely,
   normalizeOrderReference,
 } from '@/lib/zoho/orders';
-import { Order } from '@/types';
 
 export interface ReconciliationResult {
   timestamp: string;

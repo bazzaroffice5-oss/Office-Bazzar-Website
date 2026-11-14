@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
     // 4. Attach secure HttpOnly session cookie
     setSessionCookie(res, sessionUser);
     return res;
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('[Verify OTP API Error]:', err);
     return NextResponse.json(
       { success: false, error: 'An unexpected error occurred during verification.' },

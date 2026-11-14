@@ -1,6 +1,6 @@
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../../keystatic.config';
-import { BLOG_POSTS, BlogPost } from '@/lib/data/blog';
+import { BLOG_POSTS } from '@/lib/data/blog';
 
 // Initialize server-side Keystatic reader reading directly from repo content
 const reader = createReader(process.cwd(), keystaticConfig);

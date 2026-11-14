@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
 
     setOtpTicketCookie(res, result.ticket);
     return res;
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('[Send OTP API Error]:', err);
     return NextResponse.json(
       { success: false, error: 'An unexpected error occurred. Please try again.' },

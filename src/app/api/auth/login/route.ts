@@ -112,7 +112,7 @@ export async function POST(req: NextRequest) {
     });
     setOtpTicketCookie(res, otpResult.ticket);
     return res;
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('[Login API Error]:', err);
     return NextResponse.json(
       { success: false, error: 'An unexpected authentication error occurred.' },

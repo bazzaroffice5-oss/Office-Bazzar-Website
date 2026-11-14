@@ -9,13 +9,11 @@ import {
   Plus,
   Image as ImageIcon,
   Settings,
-  FolderTree,
   Tag as TagIcon,
   Trash2,
   Clock,
   Eye,
   Edit3,
-  Copy,
   ExternalLink,
   Search,
   CheckCircle2,
@@ -38,13 +36,10 @@ import {
   Table as TableIcon,
   Save,
   RefreshCw,
-  Monitor,
-  Smartphone,
   CheckCircle,
   HelpCircle,
   Grid,
   ListFilter,
-  ShieldCheck,
   Calendar,
 } from 'lucide-react';
 import { AdminBlogPost, MediaItem } from '@/lib/blog-admin/storage';
@@ -87,7 +82,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
 
   // Media Library state
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
-  const [mediaLoading, setMediaLoading] = useState(false);
+  const [_mediaLoading, setMediaLoading] = useState(false);
   const [mediaSearch, setMediaSearch] = useState('');
   const [mediaViewMode, setMediaViewMode] = useState<'grid' | 'list'>('grid');
   const [mediaPickerOpen, setMediaPickerOpen] = useState(false);
