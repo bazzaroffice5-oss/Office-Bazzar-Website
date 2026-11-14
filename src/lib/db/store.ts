@@ -334,7 +334,7 @@ export async function getAdminProducts(): Promise<Product[]> {
   return products && products.length > 0 ? products : [...storeState.productsList];
 }
 
-export const getProductBySlug = cache(async (slug: string): Promise<Product | null> => {
+export async function getProductBySlug(slug: string): Promise<Product | null> {
   const cleanSlug = decodeURIComponent(slug).toLowerCase().trim();
   let products = await getProductsFromZoho();
   let pool = products && products.length > 0 ? products : storeState.productsList;
@@ -365,9 +365,9 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
   }
 
   return product || null;
-});
+}
 
-export const getProductById = cache(async (id: string): Promise<Product | null> => {
+export async function getProductById(id: string): Promise<Product | null> {
   if (!id || typeof id !== 'string') return null;
   const cleanId = id.trim();
   syncCustomProducts();
@@ -398,7 +398,7 @@ export const getProductById = cache(async (id: string): Promise<Product | null> 
   }
 
   return product || null;
-});
+}
 
 export async function getCategories(): Promise<Category[]> {
   return CATEGORIES;

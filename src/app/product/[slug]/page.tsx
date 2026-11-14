@@ -12,15 +12,7 @@ import {
   formatProductSeoDescription,
 } from '@/lib/seo/config';
 
-export const revalidate = 60;
-export const dynamicParams = true;
-
-export async function generateStaticParams() {
-  const { products } = await getProducts();
-  return products.map((p) => ({
-    slug: p.slug,
-  }));
-}
+export const dynamic = 'force-dynamic';
 
 const DUPLICATE_PRODUCT_REDIRECTS: Record<string, string> = {
   'tissue-paper-napkin-1': '/product/tissue-paper-napkin',

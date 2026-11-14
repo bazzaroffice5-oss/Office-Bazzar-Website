@@ -41,7 +41,7 @@ const ZOHO_ACCOUNT_PARENT_ID = '1476900000000575002'; // Office Bazzar Account
 let cachedProducts: Product[] | null = null;
 let lastCacheSync = 0;
 let inflightSyncPromise: Promise<Product[]> | null = null;
-const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes TTL
+const CACHE_TTL_MS = 15 * 1000; // 15 seconds near-realtime cache for multi-container serverless
 
 // Fast SKU & ID lookup maps
 const mappingByWebsiteId = new Map<string, ZohoProductMappingItem>();
