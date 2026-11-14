@@ -141,6 +141,11 @@ export async function PUT(
     } else {
       const body = await request.json();
       updates = body;
+      if ((body as any).publishStatus) {
+        updates.isActive = (body as any).publishStatus === 'published';
+      } else if ((body as any).isActive !== undefined) {
+        updates.isActive = Boolean((body as any).isActive);
+      }
     }
 
     const mergedProduct: Product = {

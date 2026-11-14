@@ -115,12 +115,13 @@ export default async function ProductPage({
     getBrands(),
   ]);
 
+  const brandNameClean = (product.brandName || 'OfficeBazzar').toLowerCase();
   const brand =
     brands.find(
       (b) =>
-        b.id === product.brandId ||
-        b.slug.toLowerCase() === product.brandName.toLowerCase().replace(/\s+/g, '-') ||
-        b.name.toLowerCase() === product.brandName.toLowerCase()
+        (product.brandId && b.id === product.brandId) ||
+        (brandNameClean && b.slug.toLowerCase() === brandNameClean.replace(/\s+/g, '-')) ||
+        (brandNameClean && b.name.toLowerCase() === brandNameClean)
     ) || null;
 
   // Authentic Schema.org Product & Breadcrumb Structured Data
