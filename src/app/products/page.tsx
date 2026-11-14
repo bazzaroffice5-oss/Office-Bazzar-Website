@@ -1,13 +1,14 @@
 import React from 'react';
 import ProductListingClient from '@/components/product/ProductListingClient';
-import { getProducts, getCategories, getBrands } from '@/lib/db/store';
+import { getProducts, getCategories, getBrands, getCatalogFilterMetadata } from '@/lib/db/store';
+import { FilterParams } from '@/types';
 import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG, formatSeoTitle } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: Promise<{ query?: string; category?: string; brand?: string; sub?: string; page?: string }>;
+  searchParams: Promise<{ query?: string; category?: string; brand?: string; sub?: string; page?: string; sort?: string }>;
 }) {
   const resolved = await searchParams;
   const parsedPage = resolved?.page ? parseInt(resolved.page, 10) : 1;
@@ -77,35 +78,60 @@ const APPROVED_CATEGORIES = [
 export default async function ProductsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ query?: string; category?: string; brand?: string; sub?: string; page?: string }>;
+  searchParams: Promise<{ query?: string; category?: string; brand?: string; sub?: string; page?: string; sort?: string }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  const { products } = await getProducts({ limit: 5000 });
-  const allCategories = await getCategories();
+  const parsedPage = resolvedSearchParams?.page ? parseInt(resolvedSearchParams.page, 10) : 1;
+  const currentPage = !isNaN(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+  const limit = 24;
+
+  const [filterMetadata, { products: paginatedProducts, total: totalProducts }, allCategories, brands] =
+    await Promise.all([
+      getCatalogFilterMetadata(),
+      getProducts({
+        query: resolvedSearchParams?.query,
+        category: resolvedSearchParams?.category,
+        subcategory: resolvedSearchParams?.sub,
+        brand: resolvedSearchParams?.brand,
+        sortBy: resolvedSearchParams?.sort as FilterParams['sortBy'],
+        page: currentPage,
+        limit,
+      }),
+      getCategories(),
+      getBrands(),
+    ]);
+
   const categories = APPROVED_CATEGORIES.map((slug) =>
     allCategories.find((c) => c.slug === slug)
   ).filter((c): c is NonNullable<typeof c> => Boolean(c));
-  const brands = await getBrands();
+
+  const totalPages = Math.max(1, Math.ceil(totalProducts / limit));
 
   const breadcrumbJsonLd = getBreadcrumbJsonLd([
     { name: 'Home', url: '/' },
     { name: 'All Products', url: '/products' },
   ]);
 
-  const parsedPage = resolvedSearchParams?.page ? parseInt(resolvedSearchParams.page, 10) : 1;
-
   return (
     <main className="min-h-screen bg-[#F5FAF6]">
       <JsonLd data={breadcrumbJsonLd} />
       <ProductListingClient
-        initialProducts={products}
+        initialProducts={paginatedProducts}
+        totalProducts={totalProducts}
+        currentPage={currentPage}
+        totalPages={totalPages}
         categories={categories}
         brands={brands}
-        initialQuery={resolvedSearchParams?.query}
-        initialCategorySlug={resolvedSearchParams?.category}
-        initialSubcategorySlug={resolvedSearchParams?.sub}
-        initialBrandSlug={resolvedSearchParams?.brand}
-        initialPage={!isNaN(parsedPage) && parsedPage > 0 ? parsedPage : 1}
+        availableBrands={filterMetadata.availableBrands}
+        categoryCounts={filterMetadata.categoryCounts}
+        subcategoryCounts={filterMetadata.subcategoryCounts}
+        brandCounts={filterMetadata.brandCounts}
+        totalActiveProducts={filterMetadata.totalActiveProducts}
+        initialQuery={resolvedSearchParams?.query || ''}
+        initialCategorySlug={resolvedSearchParams?.category || ''}
+        initialSubcategorySlug={resolvedSearchParams?.sub || ''}
+        initialBrandSlug={resolvedSearchParams?.brand || ''}
+        initialSort={resolvedSearchParams?.sort as 'relevance' | 'price-low' | 'price-high' | 'rating' | 'name' || 'relevance'}
       />
     </main>
   );

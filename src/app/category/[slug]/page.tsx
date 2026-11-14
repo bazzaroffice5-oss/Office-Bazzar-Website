@@ -1,7 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import CategoryLandingClient from '@/components/category/CategoryLandingClient';
-import { getProducts, getCategoryBySlug } from '@/lib/db/store';
+import { getProducts, getCategoryBySlug, getCatalogFilterMetadata } from '@/lib/db/store';
 import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG, formatSeoTitle } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
@@ -21,7 +21,7 @@ export async function generateMetadata({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ sub?: string; view?: string }>;
+  searchParams?: Promise<{ sub?: string; view?: string; page?: string }>;
 }) {
   const { slug } = await params;
   const resolvedSearchParams = searchParams ? await searchParams : undefined;
@@ -91,7 +91,7 @@ export default async function CategoryPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ sub?: string; view?: string }>;
+  searchParams?: Promise<{ sub?: string; view?: string; page?: string }>;
 }) {
   const { slug } = await params;
   const resolvedSearchParams = searchParams ? await searchParams : undefined;
@@ -101,13 +101,39 @@ export default async function CategoryPage({
     notFound();
   }
 
-  // Fetch all products across database
-  const { products: allProducts } = await getProducts();
-
   const matchedSub = category.subcategories?.find(
     (s) => s.slug === slug || s.id === slug
   );
   const effectiveSub = resolvedSearchParams?.sub || matchedSub?.slug;
+  const isProductListingOpen = Boolean(
+    resolvedSearchParams?.view === 'all' ||
+    resolvedSearchParams?.view === 'products' ||
+    effectiveSub
+  );
+
+  const parsedPage = resolvedSearchParams?.page ? parseInt(resolvedSearchParams.page, 10) : 1;
+  const currentPage = !isNaN(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+  const limit = 24;
+
+  // Fetch filter metadata (subcategory counts) and paginated products if listing view is open
+  const [filterMetadata, productsData] = await Promise.all([
+    getCatalogFilterMetadata(),
+    isProductListingOpen
+      ? getProducts({
+          category: category.slug,
+          subcategory: effectiveSub,
+          page: currentPage,
+          limit,
+        })
+      : Promise.resolve({ products: [], total: 0 }),
+  ]);
+
+  const totalProducts = productsData.total;
+  const totalPages = Math.max(1, Math.ceil(totalProducts / limit));
+  const categoryProductCount =
+    filterMetadata.categoryCounts[category.id] ||
+    filterMetadata.categoryCounts[category.slug] ||
+    0;
 
   const breadcrumbItems = [
     { name: 'Home', url: '/' },
@@ -138,7 +164,12 @@ export default async function CategoryPage({
       <JsonLd data={breadcrumbJsonLd} />
       <CategoryLandingClient
         category={category}
-        allProducts={allProducts}
+        initialProducts={productsData.products}
+        totalProducts={totalProducts}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        subcategoryCounts={filterMetadata.subcategoryCounts}
+        categoryProductCount={categoryProductCount}
         initialView={resolvedSearchParams?.view}
         initialSub={effectiveSub}
         baseRoute="/category"

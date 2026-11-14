@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useTransition } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   ChevronRight,
   Search,
@@ -9,56 +10,69 @@ import {
   RotateCcw,
   Package,
   ArrowRight,
+  Loader2,
 } from 'lucide-react';
 import ProductCard from './ProductCard';
 import WindowPagination from '@/components/ui/WindowPagination';
 import { Product, Category, Brand } from '@/types';
-import { NINE_SUBCATEGORIES, isProductInSubcategory } from '@/lib/data/catalog';
+import { NINE_SUBCATEGORIES } from '@/lib/data/catalog';
+
+type SortOption = 'relevance' | 'price-low' | 'price-high' | 'rating' | 'name';
 
 interface ProductListingClientProps {
   initialProducts: Product[];
+  totalProducts: number;
+  currentPage: number;
+  totalPages: number;
   categories?: Category[];
-  currentCategory?: Category | null;
   brands?: Brand[];
+  availableBrands?: { id: string; name: string }[];
+  categoryCounts?: Record<string, number>;
+  subcategoryCounts?: Record<string, number>;
+  brandCounts?: Record<string, number>;
+  totalActiveProducts?: number;
   initialCategorySlug?: string;
   initialSubcategorySlug?: string;
   initialBrandSlug?: string;
   initialQuery?: string;
-  initialPage?: number;
-  showAllCategoriesHeader?: boolean;
+  initialSort?: SortOption;
 }
-
-type SortOption = 'relevance' | 'price-low' | 'price-high' | 'rating' | 'name';
 
 export default function ProductListingClient({
   initialProducts,
+  totalProducts,
+  currentPage,
+  totalPages,
   categories = [],
-  brands = [],
+  availableBrands = [],
+  categoryCounts = {},
+  subcategoryCounts = {},
+  brandCounts = {},
+  totalActiveProducts = 0,
   initialCategorySlug = '',
   initialSubcategorySlug = '',
   initialBrandSlug = '',
   initialQuery = '',
-  initialPage = 1,
+  initialSort = 'relevance',
 }: ProductListingClientProps) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
   // State for search and filters
   const [searchQuery, setSearchQuery] = useState<string>(initialQuery);
   const [selectedFilter, setSelectedFilter] = useState<string>(
-    initialSubcategorySlug ? `sub:${initialSubcategorySlug}` : (initialCategorySlug ? `cat:${initialCategorySlug}` : 'all')
+    initialSubcategorySlug
+      ? `sub:${initialSubcategorySlug}`
+      : initialCategorySlug
+      ? `cat:${initialCategorySlug}`
+      : 'all'
   );
   const [selectedBrand, setSelectedBrand] = useState<string>(initialBrandSlug);
-  const [sortBy, setSortBy] = useState<SortOption>('relevance');
-  const [currentPage, setCurrentPage] = useState<number>(initialPage || 1);
-  const itemsPerPage = 24;
+  const [sortBy, setSortBy] = useState<SortOption>(initialSort || 'relevance');
 
-  // Sync state if initial props change
+  // Sync state if initial props change on navigation
   useEffect(() => {
-    if (initialPage !== undefined && !isNaN(initialPage) && initialPage > 0) {
-      setCurrentPage(initialPage);
-    }
-  }, [initialPage]);
-
-  useEffect(() => {
-    if (initialQuery !== undefined) setSearchQuery(initialQuery);
+    setSearchQuery(initialQuery);
   }, [initialQuery]);
 
   useEffect(() => {
@@ -66,38 +80,41 @@ export default function ProductListingClient({
       setSelectedFilter(`sub:${initialSubcategorySlug}`);
     } else if (initialCategorySlug) {
       setSelectedFilter(`cat:${initialCategorySlug}`);
+    } else {
+      setSelectedFilter('all');
     }
   }, [initialCategorySlug, initialSubcategorySlug]);
 
   useEffect(() => {
-    if (initialBrandSlug !== undefined) setSelectedBrand(initialBrandSlug);
+    setSelectedBrand(initialBrandSlug || '');
   }, [initialBrandSlug]);
 
-  // Handle browser back/forward buttons (popstate)
   useEffect(() => {
-    const handlePopState = () => {
-      if (typeof window !== 'undefined') {
-        const params = new URLSearchParams(window.location.search);
-        const q = params.get('query') || '';
-        const cat = params.get('category') || '';
-        const sub = params.get('sub') || '';
-        const brand = params.get('brand') || '';
-        const pageParam = parseInt(params.get('page') || '1', 10);
-        setSearchQuery(q);
-        if (sub) {
-          setSelectedFilter(`sub:${sub}`);
-        } else if (cat) {
-          setSelectedFilter(`cat:${cat}`);
-        } else {
-          setSelectedFilter('all');
-        }
-        setSelectedBrand(brand);
-        setCurrentPage(!isNaN(pageParam) && pageParam > 0 ? pageParam : 1);
-      }
-    };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
+    setSortBy(initialSort || 'relevance');
+  }, [initialSort]);
+
+  // Navigate using URL parameters to trigger server-side pagination & filtering
+  const navigateWithParams = (
+    newQuery: string,
+    newFilter: string,
+    newBrand: string,
+    newSort: SortOption,
+    newPage: number = 1
+  ) => {
+    const params = new URLSearchParams();
+    if (newQuery.trim()) params.set('query', newQuery.trim());
+    if (newFilter.startsWith('cat:')) params.set('category', newFilter.replace('cat:', ''));
+    if (newFilter.startsWith('sub:')) params.set('sub', newFilter.replace('sub:', ''));
+    if (newBrand) params.set('brand', newBrand);
+    if (newSort !== 'relevance') params.set('sort', newSort);
+    if (newPage > 1) params.set('page', newPage.toString());
+
+    const queryStr = params.toString();
+    const newUrl = queryStr ? `/products?${queryStr}` : '/products';
+    startTransition(() => {
+      router.push(newUrl);
+    });
+  };
 
   // Generate SEO crawlable page URL for pagination links
   const getPageUrl = (page: number) => {
@@ -106,48 +123,39 @@ export default function ProductListingClient({
     if (selectedFilter.startsWith('cat:')) params.set('category', selectedFilter.replace('cat:', ''));
     if (selectedFilter.startsWith('sub:')) params.set('sub', selectedFilter.replace('sub:', ''));
     if (selectedBrand) params.set('brand', selectedBrand);
+    if (sortBy !== 'relevance') params.set('sort', sortBy);
     if (page > 1) params.set('page', page.toString());
     const queryStr = params.toString();
     return queryStr ? `/products?${queryStr}` : '/products';
   };
 
-  // Update browser URL query params without reloading
-  const updateUrl = (q: string, filter: string, brand: string, pageNum: number = 1) => {
-    if (typeof window === 'undefined') return;
-    const params = new URLSearchParams();
-    if (q.trim()) params.set('query', q.trim());
-    if (filter.startsWith('cat:')) params.set('category', filter.replace('cat:', ''));
-    if (filter.startsWith('sub:')) params.set('sub', filter.replace('sub:', ''));
-    if (brand) params.set('brand', brand);
-    if (pageNum > 1) params.set('page', pageNum.toString());
-
-    const queryStr = params.toString();
-    const newUrl = queryStr ? `/products?${queryStr}` : '/products';
-    window.history.pushState({}, '', newUrl);
-  };
+  // Debounce live search
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchQuery !== initialQuery) {
+        navigateWithParams(searchQuery, selectedFilter, selectedBrand, sortBy, 1);
+      }
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [searchQuery]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSearchChange = (val: string) => {
     setSearchQuery(val);
-    setCurrentPage(1);
-    updateUrl(val, selectedFilter, selectedBrand, 1);
   };
 
   const handleFilterChange = (val: string) => {
     setSelectedFilter(val);
-    setCurrentPage(1);
-    updateUrl(searchQuery, val, selectedBrand, 1);
+    navigateWithParams(searchQuery, val, selectedBrand, sortBy, 1);
   };
 
   const handleBrandChange = (val: string) => {
     setSelectedBrand(val);
-    setCurrentPage(1);
-    updateUrl(searchQuery, selectedFilter, val, 1);
+    navigateWithParams(searchQuery, selectedFilter, val, sortBy, 1);
   };
 
   const handleSortChange = (val: SortOption) => {
     setSortBy(val);
-    setCurrentPage(1);
-    updateUrl(searchQuery, selectedFilter, selectedBrand, 1);
+    navigateWithParams(searchQuery, selectedFilter, selectedBrand, val, 1);
   };
 
   const handleClearAll = () => {
@@ -155,182 +163,13 @@ export default function ProductListingClient({
     setSelectedFilter('all');
     setSelectedBrand('');
     setSortBy('relevance');
-    setCurrentPage(1);
-    if (typeof window !== 'undefined') {
-      window.history.pushState({}, '', '/products');
-    }
+    startTransition(() => {
+      router.push('/products');
+    });
   };
 
-  // Active products list
-  const activeProducts = useMemo(() => {
-    return initialProducts.filter((p) => p.isActive !== false);
-  }, [initialProducts]);
-
-  // Compute unique brands available in the active catalog or passed brands
-  const availableBrands = useMemo(() => {
-    const brandMap = new Map<string, { id: string; name: string }>();
-    brands.forEach((b) => {
-      brandMap.set(b.id, { id: b.id, name: b.name });
-    });
-    activeProducts.forEach((p) => {
-      if (p.brandName) {
-        const id = p.brandId || p.brandName.toLowerCase().replace(/\s+/g, '-');
-        if (!brandMap.has(id)) {
-          brandMap.set(id, { id, name: p.brandName });
-        }
-      }
-    });
-    return Array.from(brandMap.values()).sort((a, b) => a.name.localeCompare(b.name));
-  }, [brands, activeProducts]);
-
-  // Dynamic category and subcategory counts
-  const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    activeProducts.forEach((p) => {
-      if (p.categoryId) {
-        counts[p.categoryId] = (counts[p.categoryId] || 0) + 1;
-      }
-    });
-    return counts;
-  }, [activeProducts]);
-
-  const subcategoryCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    NINE_SUBCATEGORIES.forEach((s) => {
-      counts[s.slug] = activeProducts.filter((p) => isProductInSubcategory(p, s.slug)).length;
-    });
-    return counts;
-  }, [activeProducts]);
-
-  const brandCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    activeProducts.forEach((p) => {
-      const id = p.brandId || p.brandName?.toLowerCase().replace(/\s+/g, '-');
-      if (id) {
-        counts[id] = (counts[id] || 0) + 1;
-      }
-    });
-    return counts;
-  }, [activeProducts]);
-
-  // Filtered products calculation
-  const filteredProducts = useMemo(() => {
-    let result = [...activeProducts];
-
-    // 1. Text Search
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase().trim();
-      result = result.filter(
-        (p) =>
-          p.name.toLowerCase().includes(q) ||
-          p.sku.toLowerCase().includes(q) ||
-          p.brandName?.toLowerCase().includes(q) ||
-          p.categoryName?.toLowerCase().includes(q) ||
-          p.subcategoryName?.toLowerCase().includes(q) ||
-          p.description?.toLowerCase().includes(q) ||
-          p.tags?.some((t) => t.toLowerCase().includes(q))
-      );
-    }
-
-    // 2. Category / Subcategory Filter
-    if (selectedFilter && selectedFilter !== 'all') {
-      if (selectedFilter.startsWith('cat:')) {
-        const catSlug = selectedFilter.replace('cat:', '');
-        result = result.filter(
-          (p) =>
-            p.categoryId === catSlug ||
-            p.categoryName.toLowerCase().includes(catSlug.replace(/-/g, ' '))
-        );
-      } else if (selectedFilter.startsWith('sub:')) {
-        const subSlug = selectedFilter.replace('sub:', '');
-        result = result.filter((p) => isProductInSubcategory(p, subSlug));
-      }
-    }
-
-    // 3. Brand Filter
-    if (selectedBrand) {
-      const bSlug = selectedBrand.toLowerCase();
-      result = result.filter(
-        (p) =>
-          p.brandId?.toLowerCase() === bSlug ||
-          p.brandName?.toLowerCase() === bSlug ||
-          p.brandName?.toLowerCase().replace(/\s+/g, '-') === bSlug
-      );
-    }
-
-    // 4. Sorting with deterministic SKU tie-breaker to ensure stable pagination
-    switch (sortBy) {
-      case 'price-low':
-        result.sort((a, b) => {
-          const diff = (a.price ?? 0) - (b.price ?? 0);
-          if (diff !== 0) return diff;
-          return a.sku.localeCompare(b.sku);
-        });
-        break;
-      case 'price-high':
-        result.sort((a, b) => {
-          const diff = (b.price ?? 0) - (a.price ?? 0);
-          if (diff !== 0) return diff;
-          return a.sku.localeCompare(b.sku);
-        });
-        break;
-      case 'rating':
-        result.sort((a, b) => {
-          const diff = (b.rating ?? 0) - (a.rating ?? 0);
-          if (diff !== 0) return diff;
-          return a.sku.localeCompare(b.sku);
-        });
-        break;
-      case 'name':
-        result.sort((a, b) => {
-          const diff = a.name.localeCompare(b.name);
-          if (diff !== 0) return diff;
-          return a.sku.localeCompare(b.sku);
-        });
-        break;
-      case 'relevance':
-      default:
-        result.sort((a, b) => {
-          if (a.bestseller && !b.bestseller) return -1;
-          if (!a.bestseller && b.bestseller) return 1;
-          if (a.featured && !b.featured) return -1;
-          if (!a.featured && b.featured) return 1;
-          const ratingDiff = (b.rating ?? 0) - (a.rating ?? 0);
-          if (ratingDiff !== 0) return ratingDiff;
-          return a.sku.localeCompare(b.sku);
-        });
-        break;
-    }
-
-    return result;
-  }, [activeProducts, searchQuery, selectedFilter, selectedBrand, sortBy]);
-
-  // Pagination calculation
-  const totalItems = filteredProducts.length;
-  const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
-  // Safely clamp currentPage between 1 and totalPages
-  const safeCurrentPage = Math.min(Math.max(1, currentPage), totalPages);
-  const startIndex = (safeCurrentPage - 1) * itemsPerPage;
-  const paginatedProducts = filteredProducts.slice(
-    startIndex,
-    startIndex + itemsPerPage
-  );
-
-  // Sync state if currentPage is out of bounds
-  useEffect(() => {
-    if (currentPage > totalPages) {
-      setCurrentPage(totalPages);
-      updateUrl(searchQuery, selectedFilter, selectedBrand, totalPages);
-    } else if (currentPage < 1) {
-      setCurrentPage(1);
-      updateUrl(searchQuery, selectedFilter, selectedBrand, 1);
-    }
-  }, [currentPage, totalPages, searchQuery, selectedFilter, selectedBrand]);
-
   const handlePageChange = (page: number) => {
-    const validPage = Math.min(Math.max(1, page), totalPages);
-    setCurrentPage(validPage);
-    updateUrl(searchQuery, selectedFilter, selectedBrand, validPage);
+    navigateWithParams(searchQuery, selectedFilter, selectedBrand, sortBy, page);
     if (typeof window !== 'undefined') {
       const el = document.getElementById('products-grid-top');
       if (el) {
@@ -362,6 +201,11 @@ export default function ProductListingClient({
     }
     return '';
   }, [selectedFilter, categories]);
+
+  const itemsPerPage = 24;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = Math.min(startIndex + itemsPerPage, totalProducts);
+  const totalCatalogCount = totalActiveProducts || totalProducts;
 
   return (
     <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
@@ -413,9 +257,19 @@ export default function ProductListingClient({
           {/* Product Count Display */}
           <div className="flex items-center gap-2 self-start md:self-auto shrink-0">
             <span className="text-xs sm:text-sm font-medium text-[#526174] bg-white px-3.5 py-1.5 rounded-full border border-[#E2EBE3] shadow-2xs flex items-center gap-1.5">
-              <Package className="w-4 h-4 text-[#163A5F]" />
+              {isPending ? (
+                <Loader2 className="w-4 h-4 text-[#163A5F] animate-spin" />
+              ) : (
+                <Package className="w-4 h-4 text-[#163A5F]" />
+              )}
               <span>
-                Showing <strong className="text-[#163A5F] font-bold">{totalItems}</strong> of {activeProducts.length} products
+                {totalProducts > 0 ? (
+                  <>
+                    Showing <strong className="text-[#163A5F] font-bold">{startIndex + 1}-{endIndex}</strong> of {totalProducts} products
+                  </>
+                ) : (
+                  <>0 products found</>
+                )}
               </span>
             </span>
           </div>
@@ -443,7 +297,10 @@ export default function ProductListingClient({
             {searchQuery && (
               <button
                 type="button"
-                onClick={() => handleSearchChange('')}
+                onClick={() => {
+                  setSearchQuery('');
+                  navigateWithParams('', selectedFilter, selectedBrand, sortBy, 1);
+                }}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-[#526174]/60 hover:text-[#111827] p-0.5 cursor-pointer"
                 title="Clear search"
               >
@@ -462,7 +319,7 @@ export default function ProductListingClient({
                 aria-label="Filter by category"
                 className="w-full sm:w-auto min-w-[170px] py-2.5 pl-3.5 pr-8 bg-white border border-[#E2EBE3] rounded-xl text-xs sm:text-sm font-medium text-[#111827] focus:bg-white focus:outline-none focus:border-[#163A5F] focus:ring-2 focus:ring-[#163A5F]/20 hover:bg-[#EDF5EF] transition-all cursor-pointer"
               >
-                <option value="all">All Categories ({activeProducts.length})</option>
+                <option value="all">All Categories ({totalCatalogCount})</option>
                 <optgroup label="Main Categories">
                   {categories.map((c) => (
                     <option key={`cat-${c.id}`} value={`cat:${c.slug}`}>
@@ -488,7 +345,7 @@ export default function ProductListingClient({
                 aria-label="Filter by brand"
                 className="w-full sm:w-auto min-w-[140px] py-2.5 pl-3.5 pr-8 bg-white border border-[#E2EBE3] rounded-xl text-xs sm:text-sm font-medium text-[#111827] focus:bg-white focus:outline-none focus:border-[#163A5F] focus:ring-2 focus:ring-[#163A5F]/20 hover:bg-[#EDF5EF] transition-all cursor-pointer"
               >
-                <option value="">All Brands ({activeProducts.length})</option>
+                <option value="">All Brands ({totalCatalogCount})</option>
                 {availableBrands.map((b) => (
                   <option key={b.id} value={b.id}>
                     {b.name} ({brandCounts[b.id] || 0})
@@ -531,7 +388,7 @@ export default function ProductListingClient({
 
       {/* Product Cards Grid: Desktop 4 cols, Medium screens 3 cols, Tablets 2 cols, Mobile 1 col */}
       <h2 className="sr-only">Product Catalogue Grid</h2>
-      {paginatedProducts.length === 0 ? (
+      {initialProducts.length === 0 ? (
         <div className="w-full bg-white rounded-2xl border border-[#E2EBE3] p-12 sm:p-16 text-center space-y-4 my-6">
           <div className="w-14 h-14 rounded-full bg-[#EFF6F0] text-[#163A5F] mx-auto flex items-center justify-center">
             <Package className="w-7 h-7 text-[#526174]" />
@@ -552,8 +409,12 @@ export default function ProductListingClient({
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 w-full">
-          {paginatedProducts.map((product, index) => (
+        <div
+          className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 w-full transition-opacity duration-200 ${
+            isPending ? 'opacity-50 pointer-events-none' : 'opacity-100'
+          }`}
+        >
+          {initialProducts.map((product, index) => (
             <ProductCard
               key={product.id}
               product={product}
@@ -565,7 +426,7 @@ export default function ProductListingClient({
 
       {/* Window-Based Pagination Controls (Max 6 pages at a time) */}
       <WindowPagination
-        currentPage={safeCurrentPage}
+        currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={handlePageChange}
         getPageUrl={getPageUrl}
