@@ -344,13 +344,15 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
 export const getProductById = cache(async (id: string): Promise<Product | null> => {
   if (!id || typeof id !== 'string') return null;
   const cleanId = id.trim();
+  syncCustomProducts();
   const products = await getProductsFromZoho();
-  const pool = products && products.length > 0 ? products : storeState.productsList;
+  const pool = [...(products && products.length > 0 ? products : []), ...storeState.productsList];
 
   const product = pool.find(
     (p) =>
       p.id === cleanId ||
       p.sku.toLowerCase() === cleanId.toLowerCase() ||
+      p.slug.toLowerCase() === cleanId.toLowerCase() ||
       ((p as any).zohoProductId && (p as any).zohoProductId === cleanId)
   );
   return product || null;

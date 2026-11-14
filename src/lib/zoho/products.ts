@@ -56,16 +56,42 @@ try {
   // Mapping will be populated on first sync
 }
 
+function loadCustomProductsFromDisk(): Product[] {
+  if (typeof window === 'undefined') {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const fs = require('fs');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const path = require('path');
+      const filePath = path.join(process.cwd(), 'src', 'lib', 'data', 'custom_products.json');
+      if (fs.existsSync(filePath)) {
+        const raw = fs.readFileSync(filePath, 'utf-8');
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch {
+      // ignore
+    }
+  }
+  return [];
+}
+
 function buildInitialCatalog(): Product[] {
   const productsMap = new Map<string, Product>();
+  const custom = loadCustomProductsFromDisk();
+  for (const cp of custom) {
+    productsMap.set(cp.sku, cp);
+  }
   for (const p of INITIAL_PRODUCTS) {
-    const zohoInfo = mappingByWebsiteId.get(p.id) || mappingBySku.get(p.sku);
-    const isDup = DUPLICATE_INACTIVE_SLUGS.has(p.slug);
-    productsMap.set(p.sku, {
-      ...p,
-      isActive: isDup ? false : p.isActive,
-      zohoProductId: zohoInfo?.zohoId,
-    } as Product & { zohoProductId?: string });
+    if (!productsMap.has(p.sku)) {
+      const zohoInfo = mappingByWebsiteId.get(p.id) || mappingBySku.get(p.sku);
+      const isDup = DUPLICATE_INACTIVE_SLUGS.has(p.slug);
+      productsMap.set(p.sku, {
+        ...p,
+        isActive: isDup ? false : p.isActive,
+        zohoProductId: zohoInfo?.zohoId,
+      } as Product & { zohoProductId?: string });
+    }
   }
   return Array.from(productsMap.values());
 }
@@ -100,14 +126,20 @@ export function getAllZohoProductMappings(): Record<string, string> {
 async function syncProductsFromZohoInternal(): Promise<Product[]> {
   const now = Date.now();
   const productsMap = new Map<string, Product>();
+  const custom = loadCustomProductsFromDisk();
+  for (const cp of custom) {
+    productsMap.set(cp.sku, cp);
+  }
   for (const p of INITIAL_PRODUCTS) {
-    const zohoInfo = mappingByWebsiteId.get(p.id) || mappingBySku.get(p.sku);
-    const isDup = DUPLICATE_INACTIVE_SLUGS.has(p.slug);
-    productsMap.set(p.sku, {
-      ...p,
-      isActive: isDup ? false : p.isActive,
-      zohoProductId: zohoInfo?.zohoId,
-    } as Product & { zohoProductId?: string });
+    if (!productsMap.has(p.sku)) {
+      const zohoInfo = mappingByWebsiteId.get(p.id) || mappingBySku.get(p.sku);
+      const isDup = DUPLICATE_INACTIVE_SLUGS.has(p.slug);
+      productsMap.set(p.sku, {
+        ...p,
+        isActive: isDup ? false : p.isActive,
+        zohoProductId: zohoInfo?.zohoId,
+      } as Product & { zohoProductId?: string });
+    }
   }
 
   if (await isZohoConfigured()) {

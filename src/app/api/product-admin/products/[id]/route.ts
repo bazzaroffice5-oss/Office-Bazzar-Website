@@ -4,7 +4,7 @@ import fs from 'fs';
 import { revalidatePath } from 'next/cache';
 import { getProductAdminSession } from '@/lib/product-admin/auth';
 import { getProductsFromZoho, updateZohoProduct, deleteZohoProduct, invalidateZohoProductCache } from '@/lib/zoho/products';
-import { saveProduct, deleteProduct } from '@/lib/db/store';
+import { saveProduct, deleteProduct, getProductById } from '@/lib/db/store';
 import { Product } from '@/types';
 
 export const dynamic = 'force-dynamic';
@@ -19,10 +19,7 @@ export async function GET(
   }
 
   const { id } = await params;
-  const allProducts = await getProductsFromZoho();
-  const product = allProducts.find(
-    (p) => p.id === id || p.sku === id || p.slug === id || (p as any).zohoProductId === id
-  );
+  const product = await getProductById(id);
 
   if (!product) {
     return NextResponse.json({ error: 'Product not found.' }, { status: 404 });
@@ -43,10 +40,7 @@ export async function PUT(
   const { id } = await params;
 
   try {
-    const allProducts = await getProductsFromZoho();
-    const existing = allProducts.find(
-      (p) => p.id === id || p.sku === id || p.slug === id || (p as any).zohoProductId === id
-    );
+    const existing = await getProductById(id);
 
     if (!existing) {
       return NextResponse.json({ error: 'Product record not found.' }, { status: 404 });
@@ -191,10 +185,7 @@ export async function DELETE(
   const { id } = await params;
 
   try {
-    const allProducts = await getProductsFromZoho();
-    const existing = allProducts.find(
-      (p) => p.id === id || p.sku === id || p.slug === id || (p as any).zohoProductId === id
-    );
+    const existing = await getProductById(id);
 
     if (!existing) {
       return NextResponse.json({ error: 'Product record not found.' }, { status: 404 });
