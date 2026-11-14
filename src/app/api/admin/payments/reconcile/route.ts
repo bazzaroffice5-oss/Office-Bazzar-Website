@@ -48,9 +48,10 @@ export async function GET(req: Request) {
       message: 'Razorpay payment reconciliation completed.',
       result,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : 'Payment reconciliation failed.';
     return NextResponse.json(
-      { error: error?.message || 'Payment reconciliation failed.' },
+      { error: msg },
       { status: 500 }
     );
   }

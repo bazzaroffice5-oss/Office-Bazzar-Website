@@ -133,7 +133,7 @@ export async function reserveStock(
  */
 export async function commitStockReservation(
   reservationId: string,
-  orderNumber?: string
+  _orderNumber?: string
 ): Promise<{ success: boolean; error?: string }> {
   const success = await atomicCommitInventory(reservationId);
   return { success };

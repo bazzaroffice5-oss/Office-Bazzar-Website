@@ -1,0 +1,90 @@
+{
+  "robotsTxt": {
+    "sitemapDeclaration": {
+      "status": "PASSED",
+      "details": "robots.txt exists, returns 200, and declares sitemap.xml"
+    },
+    "privatePathsDisallowed": {
+      "status": "PASSED",
+      "details": "Private administrative and checkout routes are properly disallowed"
+    },
+    "googlebotRules": {
+      "status": "PASSED",
+      "details": "Googlebot is explicitly allowed full access to crawlable public routes"
+    }
+  },
+  "sitemapXml": {
+    "availabilityAndSize": {
+      "status": "PASSED",
+      "details": "sitemap.xml returns 200 with 1974 total entries"
+    },
+    "noRedirectsInSitemap": {
+      "status": "PASSED",
+      "details": "Redirected SKU OB-TIS-1096 (tissue-paper-napkin-1) is excluded from sitemap"
+    },
+    "canonicalTissueIncluded": {
+      "status": "PASSED",
+      "details": "Canonical partner /product/tissue-paper-napkin is included"
+    }
+  },
+  "canonicalTags": {
+    "canonical_/": {
+      "status": "PASSED",
+      "details": "Canonical matches valid target: https://officebazzar.com"
+    },
+    "canonical_/products": {
+      "status": "PASSED",
+      "details": "Canonical matches valid target: https://officebazzar.com/products"
+    },
+    "canonical_/category/housekeeping-hygiene": {
+      "status": "PASSED",
+      "details": "Canonical matches valid target: https://officebazzar.com/category/housekeeping-hygiene"
+    },
+    "canonical_/product/ob-060-cloth-washing-brush": {
+      "status": "PASSED",
+      "details": "Canonical matches valid target: https://officebazzar.com/product/ob-060-cloth-washing-brush"
+    }
+  },
+  "pagination": {
+    "paginationCanonical": {
+      "status": "PASSED",
+      "details": "Paginated route /products?page=2 points canonical cleanly to self per Google guidelines"
+    }
+  },
+  "redirectsAndErrors": {
+    "duplicateProductRedirect": {
+      "status": "PASSED",
+      "details": "tissue-paper-napkin-1 properly redirects with 308 to /product/tissue-paper-napkin"
+    },
+    "inactiveProduct404": {
+      "status": "PASSED",
+      "details": "Inactive SKU OB-STA-1009 properly returns 404 Not Found"
+    },
+    "legacyCategoryRedirect": {
+      "status": "PASSED",
+      "details": "Legacy category redirects with 308 to /category/office-stationery"
+    }
+  },
+  "structuredData": {
+    "allSchemasPresent": {
+      "status": "PASSED",
+      "details": "Valid JSON-LD schemas found: Product, BreadcrumbList, Organization, WebSite"
+    }
+  },
+  "googlebotAccess": {
+    "googlebotAllowed": {
+      "status": "PASSED",
+      "details": "Googlebot receives 200 OK with full server-rendered HTML"
+    }
+  },
+  "mobileRendering": {
+    "metaViewport": {
+      "status": "PASSED",
+      "details": "Valid responsive viewport configured: width=device-width, initial-scale=1, maximum-scale=5"
+    }
+  },
+  "summary": {
+    "passed": 17,
+    "failed": 0
+  }
+}

@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
 
     setSessionCookie(res, sessionUser);
     return res;
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('[Register API Error]:', err);
     return NextResponse.json(
       { success: false, error: 'An unexpected error occurred during registration.' },

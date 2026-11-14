@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       addresses: profile?.addresses || [address],
       message: 'Address saved to Zoho CRM successfully.',
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('[Save Address API Error]:', err);
     return NextResponse.json(
       { success: false, error: 'Failed to save address.' },

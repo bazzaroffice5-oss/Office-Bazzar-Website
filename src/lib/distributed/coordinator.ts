@@ -639,7 +639,7 @@ export async function atomicReserveInventory(
     const state = readSharedState();
 
     // 1. Prune expired reservations
-    for (const [id, resv] of Object.entries(state.reservations)) {
+    for (const resv of Object.values(state.reservations)) {
       if (resv.status === 'reserved' && resv.expiresAt <= now) {
         resv.status = 'expired';
       }

@@ -55,7 +55,7 @@ export async function GET(req: NextRequest) {
       user: customerUser,
       addresses,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('[Session API Error]:', err);
     return NextResponse.json(
       { authenticated: false, user: null, addresses: [], error: 'Failed to retrieve session' },
@@ -95,7 +95,7 @@ export async function PUT(req: NextRequest) {
       success: true,
       message: 'Profile updated successfully in Zoho CRM',
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('[Session Update API Error]:', err);
     return NextResponse.json(
       { success: false, error: 'Failed to update profile' },

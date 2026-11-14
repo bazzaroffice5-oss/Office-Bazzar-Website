@@ -9,7 +9,6 @@ import {
   BookOpen,
   Search,
   Filter,
-  CheckCircle2,
   ChevronRight,
   ChevronLeft,
 } from 'lucide-react';

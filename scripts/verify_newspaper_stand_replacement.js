@@ -102,3 +102,4 @@ runVerification().catch(err => {
   console.error('Fatal error in verification:', err);
   process.exit(1);
 });
+
