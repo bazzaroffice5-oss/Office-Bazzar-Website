@@ -397,23 +397,24 @@ export async function getVaultCachedAccessToken(): Promise<{
   if (inMemoryAccessToken && now < inMemoryAccessTokenExpiresAt - 300 * 1000) {
     return { accessToken: inMemoryAccessToken, expiresAt: inMemoryAccessTokenExpiresAt };
   }
-
-  const vault = await readEncryptedVaultPayload();
-  if (vault?.accessToken && vault?.expiresAt && now < vault.expiresAt - 300 * 1000) {
-    return { accessToken: vault.accessToken, expiresAt: vault.expiresAt };
-  }
-
   return null;
 }
 
 /**
  * Retrieve the latest Zoho refresh token across all serverless containers:
- * 1. Recent in-memory cache (within 60s TTL)
- * 2. AES-256-GCM Encrypted Persistent Vault (`ob_oauth_vault` in Zoho CRM Settings Variables)
- * 3. Fallback to `process.env.ZOHO_REFRESH_TOKEN`
+ * 1. Environment variable `process.env.ZOHO_REFRESH_TOKEN` (primary, fast, zero network overhead)
+ * 2. In-memory cache
+ * 3. Fallback to encrypted vault if env variable is absent
  */
 export async function getPersistedZohoRefreshToken(): Promise<string | null> {
   const now = Date.now();
+
+  const envToken = process.env.ZOHO_REFRESH_TOKEN?.trim();
+  if (envToken && !envToken.includes('your-') && !envToken.includes('placeholder')) {
+    inMemoryRefreshToken = envToken;
+    lastVaultReadAt = now;
+    return inMemoryRefreshToken;
+  }
 
   if (inMemoryRefreshToken && now - lastVaultReadAt < MEMORY_CACHE_TTL_MS) {
     return inMemoryRefreshToken;
@@ -422,13 +423,6 @@ export async function getPersistedZohoRefreshToken(): Promise<string | null> {
   const vaultPayload = await readEncryptedVaultPayload();
   if (vaultPayload?.refreshToken) {
     return vaultPayload.refreshToken;
-  }
-
-  const envToken = process.env.ZOHO_REFRESH_TOKEN?.trim();
-  if (envToken && !envToken.includes('your-') && !envToken.includes('placeholder')) {
-    inMemoryRefreshToken = envToken;
-    lastVaultReadAt = now;
-    return inMemoryRefreshToken;
   }
 
   return null;
