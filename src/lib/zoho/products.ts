@@ -218,3 +218,140 @@ export function invalidateZohoProductCache(): void {
   lastCacheSync = 0;
   inflightSyncPromise = null;
 }
+
+/**
+ * Create a new Product record in Zoho CRM Products module.
+ */
+export async function createZohoProduct(product: Partial<Product>): Promise<{
+  success: boolean;
+  zohoId?: string;
+  error?: string;
+}> {
+  if (!(await isZohoConfigured())) {
+    return { success: false, error: 'Zoho CRM is not configured.' };
+  }
+
+  try {
+    const zohoRecord: Record<string, unknown> = {
+      Product_Name: product.name,
+      Product_Code: product.sku,
+      Description: product.description || '',
+      Product_Active: product.isActive !== false,
+      Unit_Price: product.price || 0,
+      Qty_in_Stock: product.stockQuantity || 0,
+    };
+
+    if (product.categoryName) {
+      zohoRecord['Product_Category'] = product.categoryName;
+    }
+    if (product.brandName) {
+      zohoRecord['Manufacturer'] = product.brandName;
+    }
+    if (product.packSize) {
+      zohoRecord['Usage_Unit'] = product.packSize;
+    }
+
+    const res = await zohoFetch<{
+      data?: Array<{
+        code?: string;
+        details?: { id: string };
+        message?: string;
+        status?: string;
+      }>;
+    }>('/Products', {
+      method: 'POST',
+      body: JSON.stringify({ data: [zohoRecord] }),
+    });
+
+    const result = res?.data?.[0];
+    if (result && (result.code === 'SUCCESS' || result.status === 'success')) {
+      const zohoId = result.details?.id;
+      if (zohoId && product.sku) {
+        mappingBySku.set(product.sku, {
+          zohoId,
+          sku: product.sku,
+          websiteId: product.id || `prod-${product.sku}`,
+          name: product.name || '',
+          price: product.price || 0,
+          action: 'created',
+        });
+      }
+      invalidateZohoProductCache();
+      return { success: true, zohoId };
+    }
+
+    return {
+      success: false,
+      error: result?.message || 'Failed to create product in Zoho CRM.',
+    };
+  } catch (err) {
+    console.error('[ZohoProducts] Create product error:', err);
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Zoho CRM API error.',
+    };
+  }
+}
+
+/**
+ * Update an existing Product record in Zoho CRM Products module.
+ */
+export async function updateZohoProduct(
+  zohoIdOrSku: string,
+  product: Partial<Product>
+): Promise<{
+  success: boolean;
+  zohoId?: string;
+  error?: string;
+}> {
+  if (!(await isZohoConfigured())) {
+    return { success: false, error: 'Zoho CRM is not configured.' };
+  }
+
+  try {
+    const zohoId = getZohoProductId(zohoIdOrSku) || zohoIdOrSku;
+
+    const zohoRecord: Record<string, unknown> = {
+      id: zohoId,
+    };
+
+    if (product.name) zohoRecord['Product_Name'] = product.name;
+    if (product.sku) zohoRecord['Product_Code'] = product.sku;
+    if (product.description !== undefined) zohoRecord['Description'] = product.description;
+    if (product.isActive !== undefined) zohoRecord['Product_Active'] = product.isActive;
+    if (product.price !== undefined) zohoRecord['Unit_Price'] = product.price;
+    if (product.stockQuantity !== undefined) zohoRecord['Qty_in_Stock'] = product.stockQuantity;
+    if (product.categoryName) zohoRecord['Product_Category'] = product.categoryName;
+    if (product.brandName) zohoRecord['Manufacturer'] = product.brandName;
+    if (product.packSize) zohoRecord['Usage_Unit'] = product.packSize;
+
+    const res = await zohoFetch<{
+      data?: Array<{
+        code?: string;
+        details?: { id: string };
+        message?: string;
+        status?: string;
+      }>;
+    }>('/Products', {
+      method: 'PUT',
+      body: JSON.stringify({ data: [zohoRecord] }),
+    });
+
+    const result = res?.data?.[0];
+    if (result && (result.code === 'SUCCESS' || result.status === 'success')) {
+      invalidateZohoProductCache();
+      return { success: true, zohoId };
+    }
+
+    return {
+      success: false,
+      error: result?.message || 'Failed to update product in Zoho CRM.',
+    };
+  } catch (err) {
+    console.error('[ZohoProducts] Update product error:', err);
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Zoho CRM API error.',
+    };
+  }
+}

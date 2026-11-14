@@ -7,10 +7,10 @@ import Footer from '@/components/layout/Footer';
 
 /**
  * PublicLayoutShell handles strict layout isolation between the public website
- * and the standalone Blog Admin Panel at /blog-admin-panel.
+ * and the standalone Admin Panels at /blog-admin-panel and /product-admin-panel.
  *
- * When accessing /blog-admin-panel, public header, navigation, and footer
- * are completely omitted, rendering only the standalone CMS application.
+ * When accessing /blog-admin-panel or /product-admin-panel, public header, navigation, and footer
+ * are completely omitted, rendering only the standalone management applications.
  */
 export default function PublicLayoutShell({
   children,
@@ -18,7 +18,7 @@ export default function PublicLayoutShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isAdmin = pathname?.startsWith('/blog-admin-panel');
+  const isAdmin = pathname?.startsWith('/blog-admin-panel') || pathname?.startsWith('/product-admin-panel');
 
   if (isAdmin) {
     return <main className="w-full min-h-screen">{children}</main>;

@@ -1,0 +1,211 @@
+import { NextRequest, NextResponse } from 'next/server';
+import path from 'path';
+import fs from 'fs';
+import { revalidatePath } from 'next/cache';
+import { getProductAdminSession } from '@/lib/product-admin/auth';
+import { getProductsFromZoho, createZohoProduct, invalidateZohoProductCache } from '@/lib/zoho/products';
+import { saveProduct } from '@/lib/db/store';
+import { Product } from '@/types';
+
+export const dynamic = 'force-dynamic';
+
+export async function GET(request: NextRequest) {
+  const session = await getProductAdminSession();
+  if (!session.authenticated) {
+    return NextResponse.json({ error: 'Unauthorized. Admin session required.' }, { status: 401 });
+  }
+
+  try {
+    const { searchParams } = new URL(request.url);
+    const query = searchParams.get('query')?.toLowerCase().trim() || '';
+    const category = searchParams.get('category')?.toLowerCase().trim() || '';
+    const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10));
+    const limit = Math.max(1, Math.min(100, parseInt(searchParams.get('limit') || '50', 10)));
+
+    const allProducts = await getProductsFromZoho(true);
+
+    let filtered = allProducts;
+    if (query) {
+      filtered = filtered.filter(
+        (p) =>
+          p.name.toLowerCase().includes(query) ||
+          p.sku.toLowerCase().includes(query) ||
+          p.brandName?.toLowerCase().includes(query) ||
+          p.categoryName?.toLowerCase().includes(query)
+      );
+    }
+
+    if (category && category !== 'all') {
+      filtered = filtered.filter(
+        (p) =>
+          p.categoryId?.toLowerCase() === category ||
+          p.categoryName?.toLowerCase() === category
+      );
+    }
+
+    const total = filtered.length;
+    const startIndex = (page - 1) * limit;
+    const paginatedProducts = filtered.slice(startIndex, startIndex + limit);
+
+    // Compute metrics
+    const totalCount = allProducts.length;
+    const activeCount = allProducts.filter((p) => p.isActive !== false).length;
+    // Recently added: top 10 products
+    const recentlyAdded = allProducts.slice(0, 10).map((p) => ({
+      id: p.id,
+      name: p.name,
+      sku: p.sku,
+      categoryName: p.categoryName,
+      price: p.price,
+    }));
+
+    return NextResponse.json({
+      success: true,
+      products: paginatedProducts,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+      },
+      metrics: {
+        totalProducts: totalCount,
+        activeProducts: activeCount,
+        recentlyAddedCount: Math.min(10, totalCount),
+        recentlyUpdatedCount: Math.min(10, totalCount),
+      },
+      recentlyAdded,
+    });
+  } catch (error) {
+    console.error('[Product Admin API] GET error:', error);
+    return NextResponse.json(
+      { error: 'Failed to retrieve products from Zoho CRM.' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(request: NextRequest) {
+  const session = await getProductAdminSession();
+  if (!session.authenticated) {
+    return NextResponse.json({ error: 'Unauthorized. Admin session required.' }, { status: 401 });
+  }
+
+  try {
+    const contentType = request.headers.get('content-type') || '';
+    let productData: Partial<Product> = {};
+    let imagePath: string | undefined = undefined;
+
+    if (contentType.includes('multipart/form-data')) {
+      const formData = await request.formData();
+      const name = formData.get('name') as string;
+      const sku = formData.get('sku') as string;
+      const categoryId = formData.get('categoryId') as string;
+      const categoryName = formData.get('categoryName') as string;
+      const subcategoryId = formData.get('subcategoryId') as string;
+      const subcategoryName = formData.get('subcategoryName') as string;
+      const brandName = formData.get('brandName') as string;
+      const packSize = formData.get('packSize') as string;
+      const description = formData.get('description') as string;
+      const cataloguePage = formData.get('cataloguePage') as string;
+      const price = formData.get('price') ? parseFloat(formData.get('price') as string) : undefined;
+      const file = formData.get('imageFile') as File | null;
+
+      if (!name || !sku) {
+        return NextResponse.json(
+          { error: 'Product Name and Product Code (SKU) are mandatory.' },
+          { status: 400 }
+        );
+      }
+
+      // Handle Image Upload if provided
+      if (file && file.size > 0) {
+        const cleanSku = sku.replace(/[^a-zA-Z0-9-_]/g, '_').toUpperCase();
+        const extension = file.name.split('.').pop()?.toLowerCase() || 'webp';
+        const targetFilename = `${cleanSku}.${extension}`;
+
+        const uploadDir = path.join(process.cwd(), 'public', 'assets', 'products', 'catalog_2026');
+        if (!fs.existsSync(uploadDir)) {
+          fs.mkdirSync(uploadDir, { recursive: true });
+        }
+
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        const destination = path.join(uploadDir, targetFilename);
+        fs.writeFileSync(destination, buffer);
+
+        imagePath = `/assets/products/catalog_2026/${targetFilename}`;
+      }
+
+      productData = {
+        name: name.trim(),
+        sku: sku.trim().toUpperCase(),
+        categoryId: categoryId || 'office-stationery',
+        categoryName: categoryName || 'Office Stationery',
+        subcategoryId: subcategoryId || undefined,
+        subcategoryName: subcategoryName || undefined,
+        brandName: brandName?.trim() || 'OfficeBazzar',
+        packSize: packSize?.trim() || '1 Unit',
+        description: description?.trim() || '',
+        price: price || 0,
+        images: imagePath ? [imagePath] : [],
+        specifications: cataloguePage ? { cataloguePage } : {},
+      };
+    } else {
+      const body = await request.json();
+      productData = body;
+    }
+
+    if (!productData.name || !productData.sku) {
+      return NextResponse.json(
+        { error: 'Product Name and Product Code (SKU) are required.' },
+        { status: 400 }
+      );
+    }
+
+    // 1. Create product record in Zoho CRM
+    let zohoId: string | undefined = undefined;
+    const zohoResult = await createZohoProduct(productData);
+    if (zohoResult.success && zohoResult.zohoId) {
+      zohoId = zohoResult.zohoId;
+    }
+
+    // 2. Persist in website catalogue store and custom products file
+    const saved = await saveProduct({
+      ...productData,
+      zohoProductId: zohoId,
+    } as any);
+
+    // 3. Clear edge product cache
+    invalidateZohoProductCache();
+
+    // 4. Live Next.js Cache Invalidation
+    try {
+      revalidatePath('/');
+      revalidatePath('/products');
+      revalidatePath('/categories');
+      if (saved.categoryId) {
+        revalidatePath(`/category/${saved.categoryId}`);
+      }
+      if (saved.slug) {
+        revalidatePath(`/product/${saved.slug}`);
+      }
+    } catch (revalidateErr) {
+      console.warn('[Product Admin] Revalidation notice:', revalidateErr);
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: 'Product successfully created and synchronized with Zoho CRM and the live website.',
+      product: saved,
+      zohoSynced: Boolean(zohoId),
+      zohoId,
+    });
+  } catch (error) {
+    console.error('[Product Admin API] POST error:', error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Failed to save product.' },
+      { status: 500 }
+    );
+  }
+}

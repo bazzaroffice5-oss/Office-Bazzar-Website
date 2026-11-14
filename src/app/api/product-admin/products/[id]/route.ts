@@ -1,0 +1,172 @@
+import { NextRequest, NextResponse } from 'next/server';
+import path from 'path';
+import fs from 'fs';
+import { revalidatePath } from 'next/cache';
+import { getProductAdminSession } from '@/lib/product-admin/auth';
+import { getProductsFromZoho, updateZohoProduct, invalidateZohoProductCache } from '@/lib/zoho/products';
+import { saveProduct } from '@/lib/db/store';
+import { Product } from '@/types';
+
+export const dynamic = 'force-dynamic';
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await getProductAdminSession();
+  if (!session.authenticated) {
+    return NextResponse.json({ error: 'Unauthorized. Admin session required.' }, { status: 401 });
+  }
+
+  const { id } = await params;
+  const allProducts = await getProductsFromZoho();
+  const product = allProducts.find(
+    (p) => p.id === id || p.sku === id || p.slug === id || (p as any).zohoProductId === id
+  );
+
+  if (!product) {
+    return NextResponse.json({ error: 'Product not found.' }, { status: 404 });
+  }
+
+  return NextResponse.json({ success: true, product });
+}
+
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await getProductAdminSession();
+  if (!session.authenticated) {
+    return NextResponse.json({ error: 'Unauthorized. Admin session required.' }, { status: 401 });
+  }
+
+  const { id } = await params;
+
+  try {
+    const allProducts = await getProductsFromZoho();
+    const existing = allProducts.find(
+      (p) => p.id === id || p.sku === id || p.slug === id || (p as any).zohoProductId === id
+    );
+
+    if (!existing) {
+      return NextResponse.json({ error: 'Product record not found.' }, { status: 404 });
+    }
+
+    const contentType = request.headers.get('content-type') || '';
+    let updates: Partial<Product> = {};
+
+    if (contentType.includes('multipart/form-data')) {
+      const formData = await request.formData();
+      const name = formData.get('name') as string | null;
+      const sku = formData.get('sku') as string | null;
+      const categoryId = formData.get('categoryId') as string | null;
+      const categoryName = formData.get('categoryName') as string | null;
+      const subcategoryId = formData.get('subcategoryId') as string | null;
+      const subcategoryName = formData.get('subcategoryName') as string | null;
+      const brandName = formData.get('brandName') as string | null;
+      const packSize = formData.get('packSize') as string | null;
+      const description = formData.get('description') as string | null;
+      const cataloguePage = formData.get('cataloguePage') as string | null;
+      const priceStr = formData.get('price') as string | null;
+      const isActiveStr = formData.get('isActive') as string | null;
+      const file = formData.get('imageFile') as File | null;
+
+      updates = {
+        name: name ? name.trim() : existing.name,
+        sku: sku ? sku.trim().toUpperCase() : existing.sku,
+        categoryId: categoryId || existing.categoryId,
+        categoryName: categoryName || existing.categoryName,
+        subcategoryId: subcategoryId !== null ? subcategoryId : existing.subcategoryId,
+        subcategoryName: subcategoryName !== null ? subcategoryName : existing.subcategoryName,
+        brandName: brandName ? brandName.trim() : existing.brandName,
+        packSize: packSize ? packSize.trim() : existing.packSize,
+        description: description !== null ? description.trim() : existing.description,
+        isActive: isActiveStr !== null ? isActiveStr === 'true' : existing.isActive,
+      };
+
+      if (priceStr !== null) {
+        const parsedPrice = parseFloat(priceStr);
+        if (!isNaN(parsedPrice)) {
+          updates.price = parsedPrice;
+        }
+      }
+
+      if (cataloguePage !== null) {
+        updates.specifications = {
+          ...(existing.specifications || {}),
+          cataloguePage,
+        };
+      }
+
+      // Handle Image Replacement
+      if (file && file.size > 0) {
+        const cleanSku = (updates.sku || existing.sku).replace(/[^a-zA-Z0-9-_]/g, '_').toUpperCase();
+        const extension = file.name.split('.').pop()?.toLowerCase() || 'webp';
+        const targetFilename = `${cleanSku}.${extension}`;
+
+        const uploadDir = path.join(process.cwd(), 'public', 'assets', 'products', 'catalog_2026');
+        if (!fs.existsSync(uploadDir)) {
+          fs.mkdirSync(uploadDir, { recursive: true });
+        }
+
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        const destination = path.join(uploadDir, targetFilename);
+        fs.writeFileSync(destination, buffer);
+
+        updates.images = [`/assets/products/catalog_2026/${targetFilename}`];
+      }
+    } else {
+      const body = await request.json();
+      updates = body;
+    }
+
+    const mergedProduct: Product = {
+      ...existing,
+      ...updates,
+      id: existing.id,
+    };
+
+    // 1. Update in Zoho CRM
+    const zohoTargetId = (existing as any).zohoProductId || existing.sku;
+    let zohoSynced = false;
+    if (zohoTargetId) {
+      const zohoResult = await updateZohoProduct(zohoTargetId, mergedProduct);
+      zohoSynced = zohoResult.success;
+    }
+
+    // 2. Persist in website catalogue store
+    const saved = await saveProduct(mergedProduct);
+
+    // 3. Clear edge cache
+    invalidateZohoProductCache();
+
+    // 4. Live Next.js Cache Invalidation
+    try {
+      revalidatePath('/');
+      revalidatePath('/products');
+      revalidatePath('/categories');
+      if (saved.categoryId) {
+        revalidatePath(`/category/${saved.categoryId}`);
+      }
+      if (saved.slug) {
+        revalidatePath(`/product/${saved.slug}`);
+      }
+    } catch (revalidateErr) {
+      console.warn('[Product Admin] Revalidation notice:', revalidateErr);
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: 'Product updated successfully across Zoho CRM and live website.',
+      product: saved,
+      zohoSynced,
+    });
+  } catch (error) {
+    console.error('[Product Admin API] PUT error:', error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Failed to update product.' },
+      { status: 500 }
+    );
+  }
+}
