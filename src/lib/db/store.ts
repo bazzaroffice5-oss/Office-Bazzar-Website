@@ -336,10 +336,10 @@ export async function getAdminProducts(): Promise<Product[]> {
 
 export const getProductBySlug = cache(async (slug: string): Promise<Product | null> => {
   const cleanSlug = decodeURIComponent(slug).toLowerCase().trim();
-  const products = await getProductsFromZoho();
-  const pool = products && products.length > 0 ? products : storeState.productsList;
+  let products = await getProductsFromZoho();
+  let pool = products && products.length > 0 ? products : storeState.productsList;
 
-  const product = pool.find(
+  let product = pool.find(
     (p) =>
       (p.slug.toLowerCase() === cleanSlug ||
         p.sku.toLowerCase() === cleanSlug ||
@@ -348,6 +348,22 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
       p.isActive !== false &&
       !(p as any).isDeleted
   );
+
+  // If not found in memory cache, force-sync from Zoho CRM to catch newly created/updated products
+  if (!product) {
+    products = await getProductsFromZoho(true);
+    pool = products && products.length > 0 ? products : storeState.productsList;
+    product = pool.find(
+      (p) =>
+        (p.slug.toLowerCase() === cleanSlug ||
+          p.sku.toLowerCase() === cleanSlug ||
+          p.id.toLowerCase() === cleanSlug ||
+          ((p as any).zohoProductId && (p as any).zohoProductId === cleanSlug)) &&
+        p.isActive !== false &&
+        !(p as any).isDeleted
+    );
+  }
+
   return product || null;
 });
 
@@ -355,17 +371,32 @@ export const getProductById = cache(async (id: string): Promise<Product | null> 
   if (!id || typeof id !== 'string') return null;
   const cleanId = id.trim();
   syncCustomProducts();
-  const products = await getProductsFromZoho();
-  const pool = products && products.length > 0 ? products : storeState.productsList;
+  let products = await getProductsFromZoho();
+  let pool = products && products.length > 0 ? products : storeState.productsList;
 
-  const product = pool.find(
+  let product = pool.find(
     (p) =>
-      (p.id === cleanId ||
+      (p.id.toLowerCase() === cleanId.toLowerCase() ||
         p.sku.toLowerCase() === cleanId.toLowerCase() ||
         p.slug.toLowerCase() === cleanId.toLowerCase() ||
         ((p as any).zohoProductId && (p as any).zohoProductId === cleanId)) &&
       !(p as any).isDeleted
   );
+
+  // If not found in initial cache, force-sync directly from Zoho CRM
+  if (!product) {
+    products = await getProductsFromZoho(true);
+    pool = products && products.length > 0 ? products : storeState.productsList;
+    product = pool.find(
+      (p) =>
+        (p.id.toLowerCase() === cleanId.toLowerCase() ||
+          p.sku.toLowerCase() === cleanId.toLowerCase() ||
+          p.slug.toLowerCase() === cleanId.toLowerCase() ||
+          ((p as any).zohoProductId && (p as any).zohoProductId === cleanId)) &&
+        !(p as any).isDeleted
+    );
+  }
+
   return product || null;
 });
 

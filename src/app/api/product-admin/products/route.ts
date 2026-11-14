@@ -207,6 +207,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const cleanSku = productData.sku.replace(/[^a-zA-Z0-9-_]/g, '_').toUpperCase();
+    const cleanId = productData.id || `prod-${cleanSku.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+    const cleanSlug = productData.slug || productData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+    const cleanActive = productData.isActive !== undefined ? productData.isActive : (productData as any).publishStatus !== 'unpublished';
+
+    productData = {
+      ...productData,
+      id: cleanId,
+      sku: cleanSku,
+      slug: cleanSlug,
+      isActive: cleanActive,
+    };
+
     // 1. Create product record in Zoho CRM
     let zohoId: string | undefined = undefined;
     const zohoResult = await createZohoProduct(productData);
