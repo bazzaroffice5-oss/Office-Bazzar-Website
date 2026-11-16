@@ -150,8 +150,8 @@ export async function saveProductImage({
   const baseName = (sku || filename.replace(/\.[^/.]+$/, ''))
     .replace(/[^a-zA-Z0-9-_]/g, '_')
     .toUpperCase();
-  // 8-character content-hash ensures a unique, immutable URL on every upload & replacement
-  const contentHash = crypto.createHash('md5').update(buffer).digest('hex').slice(0, 8);
+  // Cryptographic SHA-256 content-hash ensures a collision-free, immutable URL on every upload & replacement
+  const contentHash = crypto.createHash('sha256').update(buffer).digest('hex').slice(0, 16);
   const cleanFilename = `${baseName}_${contentHash}.${cleanExt === 'jpg' ? 'jpeg' : cleanExt}`;
   const determinedMime = mimeType || getMimeType(cleanFilename, buffer);
   const now = new Date().toISOString();

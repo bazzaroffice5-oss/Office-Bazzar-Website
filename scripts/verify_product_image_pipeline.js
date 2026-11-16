@@ -168,8 +168,8 @@ async function runTests() {
   const bufferV1 = Buffer.from('image-content-v1-bytes');
   const bufferV2 = Buffer.from('image-content-v2-bytes-replacement');
 
-  const hashV1 = crypto.createHash('md5').update(bufferV1).digest('hex').slice(0, 8);
-  const hashV2 = crypto.createHash('md5').update(bufferV2).digest('hex').slice(0, 8);
+  const hashV1 = crypto.createHash('sha256').update(bufferV1).digest('hex').slice(0, 16);
+  const hashV2 = crypto.createHash('sha256').update(bufferV2).digest('hex').slice(0, 16);
 
   const sku = 'TEST-REPLACEMENT-SKU';
   const filenameV1 = `${sku}_${hashV1}.webp`;

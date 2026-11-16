@@ -19,7 +19,7 @@ export async function GET(
       return NextResponse.redirect(new URL('/assets/placeholder-product.svg', request.url));
     }
 
-    const etag = `"${crypto.createHash('md5').update(image.buffer).digest('hex')}"`;
+    const etag = `"${crypto.createHash('sha256').update(image.buffer).digest('hex').slice(0, 24)}"`;
     const clientEtag = request.headers.get('if-none-match');
 
     if (clientEtag === etag) {
