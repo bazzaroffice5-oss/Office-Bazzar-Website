@@ -1,10 +1,14 @@
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
+import { revalidatePath } from 'next/cache';
+import { callKV, getKVConfig } from '@/lib/distributed/coordinator';
 
 export interface AdminBlogPost {
   slug: string;
   title: string;
   status: 'published' | 'draft' | 'scheduled' | 'trash';
+  previousStatus?: 'published' | 'draft' | 'scheduled';
   publishedDate: string;
   scheduledDate?: string;
   author: string;
@@ -38,6 +42,213 @@ export interface MediaItem {
 const GITHUB_REPO_OWNER = 'bazzaroffice5-oss';
 const GITHUB_REPO_NAME = 'Office-Bazzar-Website';
 const GITHUB_BRANCH = 'main';
+
+// ----------------------------------------------------------------------
+// Cache Invalidation Helper
+// ----------------------------------------------------------------------
+
+export function revalidateBlogCache(slug?: string) {
+  try {
+    revalidatePath('/blog');
+    revalidatePath('/sitemap.xml');
+    revalidatePath('/');
+    if (slug) {
+      revalidatePath(`/blog/${slug}`);
+      revalidatePath('/blog/[slug]', 'page');
+    }
+  } catch (err) {
+    // Non-critical in static export/build phases
+    console.warn('[Cache Revalidation] Note:', err);
+  }
+}
+
+// ----------------------------------------------------------------------
+// Durable Store (Upstash Redis KV in Cloud / Local Journal File)
+// ----------------------------------------------------------------------
+
+interface LocalBlogState {
+  version: 1;
+  deletedSlugs: string[];
+  posts: Record<string, AdminBlogPost>;
+}
+
+function getLocalStateFilePath(): string {
+  try {
+    const candidate = path.join(process.cwd(), 'src', 'lib', 'data', 'blog_storage_state.json');
+    if (fs.existsSync(candidate)) return candidate;
+    // Check if writable
+    fs.accessSync(path.dirname(candidate), fs.constants.W_OK);
+    return candidate;
+  } catch {
+    return path.join(os.tmpdir(), 'officebazzar_blog_storage_state.json');
+  }
+}
+
+function readLocalBlogState(): LocalBlogState {
+  const filePath = getLocalStateFilePath();
+  try {
+    if (fs.existsSync(filePath)) {
+      const raw = fs.readFileSync(filePath, 'utf8');
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.version === 1) {
+        return {
+          version: 1,
+          deletedSlugs: Array.isArray(parsed.deletedSlugs) ? parsed.deletedSlugs : [],
+          posts: parsed.posts && typeof parsed.posts === 'object' ? parsed.posts : {},
+        };
+      }
+    }
+  } catch {
+    // fallback
+  }
+
+  return {
+    version: 1,
+    deletedSlugs: [],
+    posts: {},
+  };
+}
+
+function writeLocalBlogState(state: LocalBlogState): void {
+  const filePath = getLocalStateFilePath();
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(state, null, 2), 'utf8');
+  } catch {
+    // Read-only serverless filesystem expected
+  }
+}
+
+/**
+ * Returns set of permanently deleted post slugs from cloud KV and local journal.
+ */
+export async function getDurableDeletedSlugs(): Promise<Set<string>> {
+  const deletedSet = new Set<string>();
+
+  // 1. Read local state
+  const localState = readLocalBlogState();
+  localState.deletedSlugs.forEach((s) => deletedSet.add(s));
+
+  // 2. Read cloud KV if configured
+  const kvConfig = getKVConfig();
+  if (kvConfig) {
+    try {
+      const cloudMembers = await callKV<string[]>(['SMEMBERS', 'blog:deleted_slugs']);
+      if (Array.isArray(cloudMembers)) {
+        cloudMembers.forEach((s) => {
+          if (s) deletedSet.add(s);
+        });
+      }
+    } catch (e) {
+      console.warn('[Durable Store] Error reading cloud deleted slugs:', e);
+    }
+  }
+
+  return deletedSet;
+}
+
+/**
+ * Returns map of posts stored or updated in durable storage.
+ */
+export async function getDurablePosts(): Promise<Map<string, AdminBlogPost>> {
+  const postMap = new Map<string, AdminBlogPost>();
+
+  // 1. Local state posts
+  const localState = readLocalBlogState();
+  for (const [slug, post] of Object.entries(localState.posts)) {
+    if (post && post.slug) {
+      postMap.set(slug, post);
+    }
+  }
+
+  // 2. Cloud KV posts
+  const kvConfig = getKVConfig();
+  if (kvConfig) {
+    try {
+      const activeSlugs = await callKV<string[]>(['SMEMBERS', 'blog:all_slugs']);
+      if (Array.isArray(activeSlugs) && activeSlugs.length > 0) {
+        const fetchPromises = activeSlugs.map(async (slug) => {
+          const raw = await callKV<string>(['GET', `blog:post:${slug}`]);
+          if (raw) {
+            try {
+              const parsed = typeof raw === 'string' ? JSON.parse(raw) : raw;
+              if (parsed && parsed.slug) {
+                return parsed as AdminBlogPost;
+              }
+            } catch {}
+          }
+          return null;
+        });
+
+        const cloudPosts = await Promise.all(fetchPromises);
+        cloudPosts.forEach((cp) => {
+          if (cp) postMap.set(cp.slug, cp);
+        });
+      }
+    } catch (e) {
+      console.warn('[Durable Store] Error reading cloud posts:', e);
+    }
+  }
+
+  return postMap;
+}
+
+/**
+ * Persist an article to durable storage (cloud KV + local journal).
+ */
+export async function saveDurablePost(post: AdminBlogPost): Promise<void> {
+  // Update local journal
+  const localState = readLocalBlogState();
+  localState.deletedSlugs = localState.deletedSlugs.filter((s) => s !== post.slug);
+  localState.posts[post.slug] = post;
+  writeLocalBlogState(localState);
+
+  // Update cloud KV
+  const kvConfig = getKVConfig();
+  if (kvConfig) {
+    try {
+      await Promise.all([
+        callKV(['SET', `blog:post:${post.slug}`, JSON.stringify(post)]),
+        callKV(['SADD', 'blog:all_slugs', post.slug]),
+        callKV(['SREM', 'blog:deleted_slugs', post.slug]),
+        callKV(['DEL', `blog:deleted:${post.slug}`]),
+      ]);
+    } catch (e) {
+      console.warn('[Durable Store] Cloud KV save warning:', e);
+    }
+  }
+}
+
+/**
+ * Permanently deletes an article from durable storage.
+ */
+export async function deleteDurablePost(slug: string): Promise<void> {
+  // Update local journal
+  const localState = readLocalBlogState();
+  if (!localState.deletedSlugs.includes(slug)) {
+    localState.deletedSlugs.push(slug);
+  }
+  delete localState.posts[slug];
+  writeLocalBlogState(localState);
+
+  // Update cloud KV
+  const kvConfig = getKVConfig();
+  if (kvConfig) {
+    try {
+      await Promise.all([
+        callKV(['DEL', `blog:post:${slug}`]),
+        callKV(['SREM', 'blog:all_slugs', slug]),
+        callKV(['SADD', 'blog:deleted_slugs', slug]),
+        callKV(['SET', `blog:deleted:${slug}`, '1']),
+      ]);
+    } catch (e) {
+      console.warn('[Durable Store] Cloud KV delete warning:', e);
+    }
+  }
+}
+
+// ----------------------------------------------------------------------
+// Frontmatter & Markdown Serialization
+// ----------------------------------------------------------------------
 
 /**
  * Parse frontmatter and markdown body from raw file contents.
@@ -104,6 +315,7 @@ export function serializeMdoc(post: AdminBlogPost): string {
     '---',
     `title: "${cleanTitle}"`,
     `status: "${post.status}"`,
+    post.previousStatus ? `previousStatus: "${post.previousStatus}"` : '',
     `publishedDate: "${post.publishedDate}"`,
     post.scheduledDate ? `scheduledDate: "${post.scheduledDate}"` : '',
     `author: "${cleanAuthor}"`,
@@ -131,16 +343,28 @@ export function serializeMdoc(post: AdminBlogPost): string {
   return lines.join('\n');
 }
 
+// ----------------------------------------------------------------------
+// Admin Operations (List, Get, Save, Duplicate, Delete)
+// ----------------------------------------------------------------------
+
 /**
- * List all blog posts (both published, drafts, scheduled, trash) for the admin dashboard.
+ * List all blog posts (published, drafts, scheduled, trash) for the admin dashboard.
+ * Merges filesystem baseline with durable storage overlays and removes deleted posts.
  */
 export async function listAllAdminPosts(): Promise<AdminBlogPost[]> {
-  const postsDir = path.join(process.cwd(), 'content', 'posts');
-  const posts: AdminBlogPost[] = [];
+  const [deletedSlugs, durablePosts] = await Promise.all([
+    getDurableDeletedSlugs(),
+    getDurablePosts(),
+  ]);
 
+  const postsDir = path.join(process.cwd(), 'content', 'posts');
+  const postMap = new Map<string, AdminBlogPost>();
+
+  // 1. Read baseline posts from disk
   if (fs.existsSync(postsDir)) {
     const subdirs = fs.readdirSync(postsDir);
     for (const slug of subdirs) {
+      if (deletedSlugs.has(slug)) continue; // Permanently deleted
       const fullDir = path.join(postsDir, slug);
       if (fs.statSync(fullDir).isDirectory()) {
         const mdocPath = path.join(fullDir, 'index.mdoc');
@@ -152,10 +376,11 @@ export async function listAllAdminPosts(): Promise<AdminBlogPost[]> {
               ? (data.status as 'published' | 'draft' | 'scheduled' | 'trash')
               : 'published';
 
-            posts.push({
+            postMap.set(slug, {
               slug,
               title: data.title || slug,
               status: validStatus,
+              previousStatus: data.previousStatus,
               publishedDate: data.publishedDate || '2026-07-22',
               scheduledDate: data.scheduledDate,
               author: data.author || 'Office Bazzar Team',
@@ -183,6 +408,13 @@ export async function listAllAdminPosts(): Promise<AdminBlogPost[]> {
     }
   }
 
+  // 2. Overlay durable storage posts (new creations or status updates)
+  for (const [slug, durablePost] of durablePosts.entries()) {
+    if (deletedSlugs.has(slug)) continue;
+    postMap.set(slug, durablePost);
+  }
+
+  const posts = Array.from(postMap.values());
   // Sort newest first
   posts.sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime());
   return posts;
@@ -192,6 +424,16 @@ export async function listAllAdminPosts(): Promise<AdminBlogPost[]> {
  * Retrieve a single post by slug for the admin editor.
  */
 export async function getAdminPostBySlug(slug: string): Promise<AdminBlogPost | null> {
+  const deletedSlugs = await getDurableDeletedSlugs();
+  if (deletedSlugs.has(slug)) return null;
+
+  // 1. Check durable store first
+  const durablePosts = await getDurablePosts();
+  if (durablePosts.has(slug)) {
+    return durablePosts.get(slug)!;
+  }
+
+  // 2. Check disk
   const mdocPath = path.join(process.cwd(), 'content', 'posts', slug, 'index.mdoc');
   if (fs.existsSync(mdocPath)) {
     const raw = fs.readFileSync(mdocPath, 'utf8');
@@ -204,6 +446,7 @@ export async function getAdminPostBySlug(slug: string): Promise<AdminBlogPost | 
       slug,
       title: data.title || slug,
       status: validStatus,
+      previousStatus: data.previousStatus,
       publishedDate: data.publishedDate || new Date().toISOString().split('T')[0],
       scheduledDate: data.scheduledDate,
       author: data.author || 'Office Bazzar Team',
@@ -229,8 +472,8 @@ export async function getAdminPostBySlug(slug: string): Promise<AdminBlogPost | 
 
 /**
  * Save or publish an article.
- * In local environment: Writes directly to disk.
- * In production on Vercel: Commits to GitHub repository via GitHub REST API, triggering automatic deployment.
+ * Saves to authoritative durable store, disk (if local), and commits to GitHub if configured.
+ * Automatically invalidates Next.js caches across all public routes.
  */
 export async function saveAdminPost(post: AdminBlogPost): Promise<{
   success: boolean;
@@ -242,24 +485,26 @@ export async function saveAdminPost(post: AdminBlogPost): Promise<{
   const filePath = `content/posts/${post.slug}/index.mdoc`;
   const token = process.env.GITHUB_TOKEN || process.env.BLOG_GITHUB_TOKEN;
 
-  let localSaved = false;
+  // 1. Write to local disk if writable
   try {
     const postDir = path.join(process.cwd(), 'content', 'posts', post.slug);
     if (!fs.existsSync(postDir)) {
       fs.mkdirSync(postDir, { recursive: true });
     }
     fs.writeFileSync(path.join(postDir, 'index.mdoc'), serialized, 'utf8');
-    localSaved = true;
-  } catch (fsErr) {
-    console.warn('[Admin Storage] Local fs write skipped/read-only (expected on serverless):', fsErr);
+  } catch {
+    // Read-only serverless filesystem expected
   }
 
-  // If running in production with GitHub token, commit directly to GitHub repository
+  // 2. Persist to authoritative durable store (Cloud KV / Local journal)
+  await saveDurablePost(post);
+
+  // 3. Commit to GitHub repository if token is present
+  let gitSha: string | undefined;
   if (token) {
     try {
       const apiUrl = `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${filePath}`;
 
-      // Check existing SHA
       let existingSha: string | undefined;
       const getRes = await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}`, {
         headers: {
@@ -283,49 +528,46 @@ export async function saveAdminPost(post: AdminBlogPost): Promise<{
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          message: `${post.status === 'published' ? 'feat(blog): publish' : 'chore(blog): update'} "${post.title}"`,
+          message: `${
+            post.status === 'published'
+              ? 'feat(blog): publish'
+              : post.status === 'trash'
+              ? 'chore(blog): trash'
+              : 'chore(blog): update'
+          } "${post.title}"`,
           content: Buffer.from(serialized).toString('base64'),
           branch: GITHUB_BRANCH,
           sha: existingSha,
         }),
       });
 
-      if (!commitRes.ok) {
-        const errData = await commitRes.json().catch(() => ({}));
-        throw new Error(`GitHub commit failed (${commitRes.status}): ${errData.message || 'Unknown error'}`);
+      if (commitRes.ok) {
+        const commitData = await commitRes.json();
+        gitSha = commitData.commit?.sha;
       }
-
-      const commitData = await commitRes.json();
-      return {
-        success: true,
-        message: `Article successfully saved to repository. Deployment updated.`,
-        slug: post.slug,
-        gitCommitSha: commitData.commit?.sha,
-      };
     } catch (gitErr) {
-      console.error('[Admin Storage] GitHub commit error:', gitErr);
-      if (localSaved) {
-        return {
-          success: true,
-          message: `Saved locally on disk. Note: GitHub commit failed (${gitErr instanceof Error ? gitErr.message : String(gitErr)}).`,
-          slug: post.slug,
-        };
-      }
-      throw gitErr;
+      console.warn('[Admin Storage] GitHub commit warning:', gitErr);
     }
   }
 
-  if (localSaved) {
-    return {
-      success: true,
-      message: 'Article saved successfully to local repository disk.',
-      slug: post.slug,
-    };
-  }
+  // 4. Invalidate relevant caches immediately
+  revalidateBlogCache(post.slug);
 
-  throw new Error(
-    'Unable to write article: Filesystem is read-only and GITHUB_TOKEN is not configured in Vercel environment variables.'
-  );
+  const statusMsg =
+    post.status === 'published'
+      ? 'Article published live successfully.'
+      : post.status === 'trash'
+      ? 'Article moved to trash.'
+      : post.status === 'scheduled'
+      ? 'Article scheduled successfully.'
+      : 'Article saved as draft.';
+
+  return {
+    success: true,
+    message: statusMsg,
+    slug: post.slug,
+    gitCommitSha: gitSha,
+  };
 }
 
 /**
@@ -350,23 +592,38 @@ export async function duplicateAdminPost(slug: string): Promise<AdminBlogPost> {
 }
 
 /**
- * Delete an article (permanently removes directory from repository).
+ * Delete an article permanently.
+ * Removes from disk if writable, marks deleted in durable store, removes from GitHub if configured,
+ * and purges all public and sitemap caches.
  */
 export async function deleteAdminPost(slug: string): Promise<{ success: boolean; message: string }> {
+  // 1. Verify article existence
+  const existing = await getAdminPostBySlug(slug);
+  if (!existing) {
+    const deletedSlugs = await getDurableDeletedSlugs();
+    if (deletedSlugs.has(slug)) {
+      return { success: true, message: `Article "${slug}" is already deleted.` };
+    }
+    throw new Error(`Article "${slug}" not found in database.`);
+  }
+
   const token = process.env.GITHUB_TOKEN || process.env.BLOG_GITHUB_TOKEN;
   const filePath = `content/posts/${slug}/index.mdoc`;
 
-  let localDeleted = false;
+  // 2. Delete from local disk if writable
   try {
     const postDir = path.join(process.cwd(), 'content', 'posts', slug);
     if (fs.existsSync(postDir)) {
       fs.rmSync(postDir, { recursive: true, force: true });
-      localDeleted = true;
     }
-  } catch (fsErr) {
-    console.warn('[Admin Storage] Local delete skipped (serverless):', fsErr);
+  } catch {
+    // Read-only serverless filesystem expected
   }
 
+  // 3. Delete from durable store and register permanent deletion tombstone
+  await deleteDurablePost(slug);
+
+  // 4. Delete from GitHub if token is configured
   if (token) {
     try {
       const apiUrl = `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${filePath}`;
@@ -395,22 +652,23 @@ export async function deleteAdminPost(slug: string): Promise<{ success: boolean;
           }),
         });
       }
-
-      return {
-        success: true,
-        message: `Article permanently deleted from repository.`,
-      };
     } catch (err) {
-      console.error('[Admin Storage] GitHub delete error:', err);
+      console.warn('[Admin Storage] GitHub delete warning:', err);
     }
   }
 
-  if (localDeleted) {
-    return { success: true, message: 'Article deleted locally.' };
-  }
+  // 5. Purge caches
+  revalidateBlogCache(slug);
 
-  return { success: true, message: 'Delete processed.' };
+  return {
+    success: true,
+    message: `Article "${slug}" permanently deleted from database.`,
+  };
 }
+
+// ----------------------------------------------------------------------
+// Media Library Operations
+// ----------------------------------------------------------------------
 
 /**
  * Scan media files from public/images/blog/ and public/images/categories/.

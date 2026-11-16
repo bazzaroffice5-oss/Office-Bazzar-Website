@@ -130,6 +130,21 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
   const [quickDraftContent, setQuickDraftContent] = useState('');
   const [quickDraftSaving, setQuickDraftSaving] = useState(false);
 
+  // Real-time authoritative refresh of all posts from server database
+  const fetchPosts = async () => {
+    try {
+      const res = await fetch('/api/blog-admin/posts', { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data.posts)) {
+          setPosts(data.posts);
+        }
+      }
+    } catch (e) {
+      console.error('Failed to refresh posts:', e);
+    }
+  };
+
   // Load Media Library
   const loadMedia = async () => {
     setMediaLoading(true);
@@ -156,14 +171,38 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
     const scheduled = posts.filter((p) => p.status === 'scheduled').length;
     const drafts = posts.filter((p) => p.status === 'draft').length;
     const trash = posts.filter((p) => p.status === 'trash').length;
+    const total = published + scheduled + drafts + trash;
     return {
       all: posts.filter((p) => p.status !== 'trash').length,
       published,
       scheduled,
       drafts,
       trash,
-      total: posts.length,
+      total,
     };
+  }, [posts]);
+
+  // Derived real category and tag metrics from actual non-trashed articles
+  const categoriesCount = useMemo(() => {
+    const unique = new Set(
+      posts
+        .filter((p) => p.status !== 'trash')
+        .map((p) => p.category?.trim())
+        .filter(Boolean)
+    );
+    return unique.size;
+  }, [posts]);
+
+  const tagsCount = useMemo(() => {
+    const unique = new Set<string>();
+    posts
+      .filter((p) => p.status !== 'trash')
+      .forEach((p) => {
+        (p.tags || []).forEach((t) => {
+          if (t && t.trim()) unique.add(t.trim());
+        });
+      });
+    return unique.size;
   }, [posts]);
 
   // Filtered posts for Table View
@@ -267,7 +306,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
       });
       if (res.ok) {
         const data = await res.json();
-        setPosts((prev) => [data.post, ...prev]);
+        await fetchPosts();
         setSaveMessage({ type: 'success', text: `Post duplicated: ${data.post.title}` });
       }
     } catch (e) {
@@ -275,52 +314,72 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
     }
   };
 
-  // Move to Trash action
+  // Move to Trash action (preserves previousStatus for faithful restore)
   const handleMoveToTrash = async (post: AdminBlogPost) => {
-    const updated = { ...post, status: 'trash' as const };
+    const updated: AdminBlogPost = {
+      ...post,
+      previousStatus: post.status !== 'trash' ? post.status : 'published',
+      status: 'trash',
+    };
     try {
-      await fetch('/api/blog-admin/posts', {
+      const res = await fetch('/api/blog-admin/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updated),
       });
-      setPosts((prev) => prev.map((p) => (p.slug === post.slug ? updated : p)));
-    } catch (e) {
-      console.error(e);
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to move to trash.');
+      }
+      await fetchPosts();
+    } catch (e: unknown) {
+      alert(e instanceof Error ? e.message : 'Failed to move to trash.');
     }
   };
 
-  // Restore from Trash action
+  // Restore from Trash action (restores original status)
   const handleRestoreFromTrash = async (post: AdminBlogPost) => {
-    const updated = { ...post, status: 'draft' as const };
+    const targetStatus = post.previousStatus || 'published';
+    const updated: AdminBlogPost = {
+      ...post,
+      status: targetStatus,
+    };
+    delete updated.previousStatus;
     try {
-      await fetch('/api/blog-admin/posts', {
+      const res = await fetch('/api/blog-admin/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updated),
       });
-      setPosts((prev) => prev.map((p) => (p.slug === post.slug ? updated : p)));
-    } catch (e) {
-      console.error(e);
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to restore post.');
+      }
+      await fetchPosts();
+    } catch (e: unknown) {
+      alert(e instanceof Error ? e.message : 'Failed to restore post.');
     }
   };
 
-  // Delete Confirm
+  // Delete Confirm (Strict verification of server response)
   const handleDeleteConfirm = async () => {
     if (!deleteModalSlug) return;
+    const slugToDelete = deleteModalSlug;
     try {
-      const res = await fetch(`/api/blog-admin/posts/${deleteModalSlug}`, {
+      const res = await fetch(`/api/blog-admin/posts/${slugToDelete}`, {
         method: 'DELETE',
       });
-      if (res.ok) {
-        setPosts((prev) => prev.filter((p) => p.slug !== deleteModalSlug));
-        setDeleteModalSlug(null);
-        if (currentView === 'editor' && editingSlug === deleteModalSlug) {
-          setCurrentView('posts');
-        }
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || data.message || 'Delete operation failed on server.');
       }
-    } catch (err) {
-      console.error('Delete error:', err);
+      setDeleteModalSlug(null);
+      await fetchPosts();
+      if (currentView === 'editor' && editingSlug === slugToDelete) {
+        setCurrentView('posts');
+      }
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : 'Delete operation failed on server.');
     }
   };
 
@@ -427,6 +486,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
 
       setFormData(postPayload);
       setEditingSlug(postPayload.slug);
+      await fetchPosts();
     } catch (err) {
       setSaveMessage({
         type: 'error',
@@ -470,7 +530,7 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
         body: JSON.stringify(newPost),
       });
       if (res.ok) {
-        setPosts((prev) => [newPost, ...prev]);
+        await fetchPosts();
         setQuickDraftTitle('');
         setQuickDraftContent('');
       }
@@ -913,42 +973,60 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                 </div>
               </div>
 
-              {/* Real Content Metrics: 4 Factual Cards */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+              {/* Real Content Metrics: 6 Factual Database Cards */}
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
+                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
                   <div className="flex items-center justify-between text-slate-500">
-                    <span className="text-xs font-semibold uppercase tracking-wider">Total Posts</span>
+                    <span className="text-[11px] font-semibold uppercase tracking-wider">Total Blogs</span>
                     <FileText className="w-4 h-4 text-[#004b87]" />
                   </div>
-                  <p className="text-2xl font-bold text-slate-900 mt-2">{counts.all}</p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Stored in repository</p>
+                  <p className="text-2xl font-bold text-slate-900 mt-2">{counts.total}</p>
+                  <p className="text-[10px] text-slate-400 mt-0.5">Database records</p>
                 </div>
 
-                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
                   <div className="flex items-center justify-between text-slate-500">
-                    <span className="text-xs font-semibold uppercase tracking-wider">Published</span>
+                    <span className="text-[11px] font-semibold uppercase tracking-wider">Published</span>
                     <CheckCircle2 className="w-4 h-4 text-[#16a34a]" />
                   </div>
                   <p className="text-2xl font-bold text-[#16a34a] mt-2">{counts.published}</p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Live on /blog</p>
+                  <p className="text-[10px] text-slate-400 mt-0.5">Live on /blog</p>
                 </div>
 
-                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
                   <div className="flex items-center justify-between text-slate-500">
-                    <span className="text-xs font-semibold uppercase tracking-wider">Drafts</span>
+                    <span className="text-[11px] font-semibold uppercase tracking-wider">Drafts</span>
                     <Clock className="w-4 h-4 text-amber-500" />
                   </div>
                   <p className="text-2xl font-bold text-amber-600 mt-2">{counts.drafts}</p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Unpublished working drafts</p>
+                  <p className="text-[10px] text-slate-400 mt-0.5">Unpublished drafts</p>
                 </div>
 
-                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
                   <div className="flex items-center justify-between text-slate-500">
-                    <span className="text-xs font-semibold uppercase tracking-wider">Scheduled</span>
+                    <span className="text-[11px] font-semibold uppercase tracking-wider">Scheduled</span>
                     <Calendar className="w-4 h-4 text-blue-500" />
                   </div>
                   <p className="text-2xl font-bold text-blue-600 mt-2">{counts.scheduled}</p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Queued for future release</p>
+                  <p className="text-[10px] text-slate-400 mt-0.5">Queued release</p>
+                </div>
+
+                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
+                  <div className="flex items-center justify-between text-slate-500">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider">Trash</span>
+                    <Trash2 className="w-4 h-4 text-rose-500" />
+                  </div>
+                  <p className="text-2xl font-bold text-rose-600 mt-2">{counts.trash}</p>
+                  <p className="text-[10px] text-slate-400 mt-0.5">Soft-deleted</p>
+                </div>
+
+                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
+                  <div className="flex items-center justify-between text-slate-500">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider">Taxonomy</span>
+                    <TagIcon className="w-4 h-4 text-purple-500" />
+                  </div>
+                  <p className="text-xl font-bold text-slate-800 mt-2">{categoriesCount} <span className="text-xs text-slate-400 font-normal">cats</span> / {tagsCount} <span className="text-xs text-slate-400 font-normal">tags</span></p>
+                  <p className="text-[10px] text-slate-400 mt-0.5">Active categories & tags</p>
                 </div>
               </div>
 

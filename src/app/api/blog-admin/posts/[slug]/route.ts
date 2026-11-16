@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAdminSession } from '@/lib/blog-admin/auth';
-import { getAdminPostBySlug, deleteAdminPost } from '@/lib/blog-admin/storage';
+import { getAdminPostBySlug, deleteAdminPost, revalidateBlogCache } from '@/lib/blog-admin/storage';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET(
   request: NextRequest,
@@ -32,6 +34,7 @@ export async function DELETE(
   const { slug } = await params;
   try {
     const result = await deleteAdminPost(slug);
+    revalidateBlogCache(slug);
     return NextResponse.json(result);
   } catch (error) {
     return NextResponse.json(

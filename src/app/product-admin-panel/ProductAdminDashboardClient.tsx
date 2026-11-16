@@ -27,8 +27,13 @@ import {
 } from 'lucide-react';
 import { Product } from '@/types';
 
+export interface AdminProduct extends Product {
+  isDeleted?: boolean;
+  zohoProductId?: string;
+}
+
 interface ProductAdminDashboardClientProps {
-  initialProducts: Product[];
+  initialProducts: AdminProduct[];
   adminEmail: string;
 }
 
@@ -122,7 +127,7 @@ export default function ProductAdminDashboardClient({
   initialProducts,
   adminEmail,
 }: ProductAdminDashboardClientProps) {
-  const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [products, setProducts] = useState<AdminProduct[]>(initialProducts);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState<'all' | 'published' | 'draft' | 'unpublished'>('all');
@@ -131,9 +136,9 @@ export default function ProductAdminDashboardClient({
 
   // Modals state
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  const [viewingProduct, setViewingProduct] = useState<Product | null>(null);
-  const [deletingProduct, setDeletingProduct] = useState<Product | null>(null);
+  const [editingProduct, setEditingProduct] = useState<AdminProduct | null>(null);
+  const [viewingProduct, setViewingProduct] = useState<AdminProduct | null>(null);
+  const [deletingProduct, setDeletingProduct] = useState<AdminProduct | null>(null);
 
   // Form states for Add / Edit
   const [formName, setFormName] = useState('');
@@ -177,6 +182,20 @@ export default function ProductAdminDashboardClient({
       recentlyUpdated: sessionUpdatedCount,
     };
   }, [products, sessionAddedCount, sessionUpdatedCount]);
+
+  // Derived subcategory selection for modal dropdown
+  const selectedSubcategoryValue = useMemo(() => {
+    if (!formSubcategoryName.trim()) return '';
+    const available = SUBCATEGORIES_BY_CATEGORY[formCategoryId] || [];
+    const query = formSubcategoryName.trim().toLowerCase();
+    const matched = available.find(
+      (sub) => sub.name.toLowerCase() === query || sub.id.toLowerCase() === query
+    );
+    if (matched) {
+      return matched.name;
+    }
+    return '__custom__';
+  }, [formCategoryId, formSubcategoryName]);
 
   // Filtered products list
   const filteredProducts = useMemo(() => {
@@ -271,7 +290,7 @@ export default function ProductAdminDashboardClient({
     setFormBrand(p.brandName || 'OfficeBazzar');
     setFormPackSize(p.packSize || '1 Unit');
     setFormDescription(p.description || '');
-    setFormCataloguePage((p.specifications as any)?.cataloguePage || '');
+    setFormCataloguePage(p.specifications?.cataloguePage ? String(p.specifications.cataloguePage) : '');
     setFormPrice(p.price !== undefined && p.price !== null ? String(p.price) : '');
     setFormPublishStatus(p.isActive !== false ? 'published' : 'unpublished');
     setFormImageFile(null);
@@ -617,7 +636,7 @@ export default function ProductAdminDashboardClient({
               <select
                 value={selectedStatus}
                 onChange={(e) => {
-                  setSelectedStatus(e.target.value as any);
+                  setSelectedStatus(e.target.value as 'all' | 'published' | 'draft' | 'unpublished');
                   setCurrentPage(1);
                 }}
                 className="w-full py-2.5 pl-3.5 pr-8 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 font-medium focus:outline-none focus:border-[#ea580c] focus:bg-white cursor-pointer transition-colors"
@@ -952,15 +971,7 @@ export default function ProductAdminDashboardClient({
                   </label>
                   <div className="space-y-1.5">
                     <select
-                      value={
-                        SUBCATEGORIES_BY_CATEGORY[formCategoryId]?.some(
-                          (s) => s.name.toLowerCase() === formSubcategoryName.toLowerCase() || s.id === formSubcategoryName.toLowerCase()
-                        )
-                          ? SUBCATEGORIES_BY_CATEGORY[formCategoryId]?.find(
-                              (s) => s.name.toLowerCase() === formSubcategoryName.toLowerCase() || s.id === formSubcategoryName.toLowerCase()
-                            )?.name || formSubcategoryName
-                          : formSubcategoryName ? '__custom__' : ''
-                      }
+                      value={selectedSubcategoryValue}
                       onChange={(e) => {
                         if (e.target.value === '__custom__') {
                           // Keep existing custom string
@@ -1036,7 +1047,7 @@ export default function ProductAdminDashboardClient({
                   </label>
                   <select
                     value={formPublishStatus}
-                    onChange={(e) => setFormPublishStatus(e.target.value as any)}
+                    onChange={(e) => setFormPublishStatus(e.target.value as 'published' | 'draft' | 'unpublished')}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 font-medium focus:outline-none focus:border-[#ea580c] focus:bg-white cursor-pointer"
                   >
                     <option value="published">Published (Visible in Storefront &amp; Zoho)</option>
@@ -1294,14 +1305,14 @@ export default function ProductAdminDashboardClient({
                   <div>
                     <span className="text-slate-500 font-medium block">Catalogue Ref Page</span>
                     <span className="font-semibold text-slate-800">
-                      {(viewingProduct.specifications as any)?.cataloguePage || '—'}
+                      {viewingProduct.specifications?.cataloguePage || '—'}
                     </span>
                   </div>
 
                   <div className="col-span-2 pt-2 border-t border-slate-200/80">
                     <span className="text-slate-500 font-medium block">Zoho CRM Record ID</span>
                     <span className="font-mono text-xs font-bold text-slate-700 break-all">
-                      {(viewingProduct as any).zohoProductId || `Zoho Synced (${viewingProduct.sku})`}
+                      {viewingProduct.zohoProductId || `Zoho Synced (${viewingProduct.sku})`}
                     </span>
                   </div>
                 </div>

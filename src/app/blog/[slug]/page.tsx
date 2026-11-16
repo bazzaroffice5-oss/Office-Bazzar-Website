@@ -43,7 +43,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
 
-  if (!post || post.status === 'draft') {
+  if (!post || post.status !== 'published') {
     return {
       title: 'Article Not Found | OfficeBazzar',
       robots: { index: false, follow: false },
@@ -142,7 +142,7 @@ export default async function BlogDetailPage({
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
 
-  if (!post || post.status === 'draft') {
+  if (!post || post.status !== 'published') {
     notFound();
   }
 

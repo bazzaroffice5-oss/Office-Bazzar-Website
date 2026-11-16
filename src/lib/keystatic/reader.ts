@@ -1,6 +1,10 @@
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../../keystatic.config';
 import { BLOG_POSTS } from '@/lib/data/blog';
+import {
+  getDurableDeletedSlugs,
+  getDurablePosts,
+} from '@/lib/blog-admin/storage';
 
 // Initialize server-side Keystatic reader reading directly from repo content
 const reader = createReader(process.cwd(), keystaticConfig);
@@ -9,7 +13,7 @@ export interface KeystaticBlogPost {
   id: string;
   slug: string;
   title: string;
-  status: 'published' | 'draft';
+  status: 'published' | 'draft' | 'scheduled' | 'trash';
   excerpt: string;
   category: string;
   categories: string[];
@@ -49,7 +53,11 @@ function formatDisplayDate(dateStr: string): string {
   return dateStr;
 }
 
-function estimateReadingTimeFromNodes(nodes: any[]): string {
+function estimateReadingTimeFromNodes(nodes: any): string {
+  if (typeof nodes === 'string') {
+    const words = nodes.trim().split(/\s+/).filter(Boolean).length;
+    return `${Math.max(1, Math.ceil(words / 200))} min read`;
+  }
   if (!Array.isArray(nodes)) return '4 min read';
   let text = '';
   function extractText(node: any) {
@@ -64,9 +72,24 @@ function estimateReadingTimeFromNodes(nodes: any[]): string {
   return `${mins} min read`;
 }
 
+function normalizeContentToAst(content: any): any[] {
+  if (Array.isArray(content)) return content;
+  if (typeof content === 'string') {
+    return content
+      .split(/\n\s*\n/)
+      .map((p) => p.trim())
+      .filter(Boolean)
+      .map((para) => ({
+        type: 'paragraph',
+        children: [{ text: para }],
+      }));
+  }
+  return [];
+}
+
 /**
  * Fetch all published blog posts with pagination, category filter, and search.
- * Strictly excludes draft articles in production so they are never public or indexed.
+ * Strictly excludes draft, trashed, scheduled, and deleted articles so they are never public or indexed.
  */
 export async function getBlogPosts(options: {
   page?: number;
@@ -81,6 +104,11 @@ export async function getBlogPosts(options: {
 }> {
   const { page = 1, perPage = 12, categorySlug, search, includeDrafts = false } = options;
 
+  const [deletedSlugs, durablePosts] = await Promise.all([
+    getDurableDeletedSlugs(),
+    getDurablePosts(),
+  ]);
+
   let rawPosts: Array<{ slug: string; entry: any }> = [];
 
   try {
@@ -89,69 +117,127 @@ export async function getBlogPosts(options: {
     console.warn('[Keystatic Reader] Error reading from disk:', error);
   }
 
-  // Filter drafts, scheduled future posts, and trash items unless explicitly requested (e.g. preview mode)
-  if (!includeDrafts) {
-    const now = Date.now();
-    rawPosts = rawPosts.filter((p) => {
-      if (p.entry.status !== 'published') return false;
-      if (p.entry.publishedDate) {
-        const pubTime = new Date(p.entry.publishedDate).getTime();
-        if (!isNaN(pubTime) && pubTime > now) return false;
+  // Filter out any permanently deleted posts
+  rawPosts = rawPosts.filter((p) => !deletedSlugs.has(p.slug));
+
+  const postMap = new Map<string, KeystaticBlogPost>();
+
+  // 1. Process Keystatic repository posts
+  for (const { slug, entry } of rawPosts) {
+    const durable = durablePosts.get(slug);
+    const effectiveStatus = (durable ? durable.status : entry.status || 'published') as
+      | 'published'
+      | 'draft'
+      | 'scheduled'
+      | 'trash';
+    const effectivePublishedDate = durable ? durable.publishedDate : entry.publishedDate;
+
+    // Filter drafts, future scheduled posts, and trash items unless explicitly requested
+    if (!includeDrafts) {
+      if (effectiveStatus !== 'published') continue;
+      if (effectivePublishedDate) {
+        const pubTime = new Date(effectivePublishedDate).getTime();
+        if (!isNaN(pubTime) && pubTime > Date.now()) continue;
       }
-      return true;
+    }
+
+    const rawContent = durable ? durable.content : await entry.content();
+    const content = normalizeContentToAst(rawContent);
+    const isoDate = effectivePublishedDate
+      ? new Date(effectivePublishedDate).toISOString()
+      : new Date().toISOString();
+
+    const title = durable?.title || entry.title || 'Untitled Post';
+    const excerpt = durable?.excerpt || entry.excerpt || '';
+    const canonical = durable?.canonicalUrl || entry.canonicalUrl || `${PRIMARY_CANONICAL_HOST}/blog/${slug}`;
+    const imageUrl = durable?.featuredImage || entry.featuredImage || '/images/categories/office-supplies-stationery.jpg';
+    const category = durable?.category || entry.category || 'Housekeeping & Hygiene';
+    const tags = durable?.tags || (Array.isArray(entry.tags) ? entry.tags.filter(Boolean) : []);
+
+    postMap.set(slug, {
+      id: `keystatic-${slug}`,
+      slug,
+      title,
+      status: effectiveStatus,
+      excerpt,
+      category,
+      categories: [category],
+      tags,
+      readTime: estimateReadingTimeFromNodes(rawContent),
+      publishedDate: formatDisplayDate(effectivePublishedDate),
+      publishedIsoDate: isoDate,
+      modifiedIsoDate: isoDate,
+      author: durable?.author || entry.author || 'Office Bazzar Team',
+      imageUrl,
+      imageAlt: durable?.imageAlt || entry.imageAlt || title,
+      content,
+      seo: {
+        title: durable?.seoTitle || entry.seoTitle || `${title} | OfficeBazzar`,
+        description: durable?.seoDescription || entry.seoDescription || excerpt,
+        canonical,
+        ogTitle: durable?.ogTitle || entry.seoTitle || title,
+        ogDescription: durable?.ogDescription || entry.seoDescription || excerpt,
+        ogImage: durable?.ogImage || imageUrl,
+        focusKeyword: durable?.focusKeyword || entry.focusKeyword,
+      },
     });
   }
 
-  // Format into unified blog post interface
-  let posts: KeystaticBlogPost[] = await Promise.all(
-    rawPosts.map(async ({ slug, entry }) => {
-      const content = await entry.content();
-      const isoDate = entry.publishedDate
-        ? new Date(entry.publishedDate).toISOString()
-        : new Date().toISOString();
+  // 2. Include any newly created posts in durable storage that aren't on disk
+  for (const [slug, durable] of durablePosts.entries()) {
+    if (deletedSlugs.has(slug)) continue;
+    if (postMap.has(slug)) continue;
 
-      const title = entry.title || 'Untitled Post';
-      const excerpt = entry.excerpt || '';
-      const canonical =
-        entry.canonicalUrl || `${PRIMARY_CANONICAL_HOST}/blog/${slug}`;
-      const imageUrl = entry.featuredImage || '/images/categories/office-supplies-stationery.jpg';
+    if (!includeDrafts) {
+      if (durable.status !== 'published') continue;
+      if (durable.publishedDate) {
+        const pubTime = new Date(durable.publishedDate).getTime();
+        if (!isNaN(pubTime) && pubTime > Date.now()) continue;
+      }
+    }
 
-      return {
-        id: `keystatic-${slug}`,
-        slug,
-        title,
-        status: entry.status || 'published',
-        excerpt,
-        category: entry.category || 'Housekeeping & Hygiene',
-        categories: [entry.category || 'Housekeeping & Hygiene'],
-        tags: Array.isArray(entry.tags) ? entry.tags.filter(Boolean) : [],
-        readTime: estimateReadingTimeFromNodes(content),
-        publishedDate: formatDisplayDate(entry.publishedDate),
-        publishedIsoDate: isoDate,
-        modifiedIsoDate: isoDate,
-        author: entry.author || 'Office Bazzar Team',
-        imageUrl,
-        imageAlt: entry.imageAlt || title,
-        content,
-        seo: {
-          title: entry.seoTitle || `${title} | OfficeBazzar`,
-          description: entry.seoDescription || excerpt,
-          canonical,
-          ogTitle: entry.seoTitle || title,
-          ogDescription: entry.seoDescription || excerpt,
-          ogImage: imageUrl,
-          focusKeyword: entry.focusKeyword,
-        },
-      };
-    })
-  );
+    const isoDate = durable.publishedDate ? new Date(durable.publishedDate).toISOString() : new Date().toISOString();
+    const canonical = durable.canonicalUrl || `${PRIMARY_CANONICAL_HOST}/blog/${slug}`;
+    const imageUrl = durable.featuredImage || '/images/categories/office-supplies-stationery.jpg';
+    const content = normalizeContentToAst(durable.content);
 
-  // Fallback to static blog data if content directory was empty
-  if (posts.length === 0) {
-    posts = BLOG_POSTS.map((p) => {
+    postMap.set(slug, {
+      id: `durable-${slug}`,
+      slug,
+      title: durable.title,
+      status: durable.status,
+      excerpt: durable.excerpt,
+      category: durable.category,
+      categories: [durable.category],
+      tags: durable.tags || [],
+      readTime: estimateReadingTimeFromNodes(durable.content),
+      publishedDate: formatDisplayDate(durable.publishedDate),
+      publishedIsoDate: isoDate,
+      modifiedIsoDate: isoDate,
+      author: durable.author || 'Office Bazzar Team',
+      imageUrl,
+      imageAlt: durable.imageAlt || durable.title,
+      content,
+      seo: {
+        title: durable.seoTitle || `${durable.title} | OfficeBazzar`,
+        description: durable.seoDescription || durable.excerpt,
+        canonical,
+        ogTitle: durable.ogTitle || durable.title,
+        ogDescription: durable.ogDescription || durable.excerpt,
+        ogImage: durable.ogImage || imageUrl,
+        focusKeyword: durable.focusKeyword,
+      },
+    });
+  }
+
+  // 3. Fallback to static blog data only if rawPosts AND durablePosts were completely empty
+  // and no deletions occurred.
+  if (postMap.size === 0 && deletedSlugs.size === 0 && durablePosts.size === 0 && rawPosts.length === 0) {
+    for (const p of BLOG_POSTS) {
+      if (deletedSlugs.has(p.slug)) continue;
       const d = new Date(p.publishedDate);
       const iso = !isNaN(d.getTime()) ? d.toISOString() : new Date().toISOString();
-      return {
+      postMap.set(p.slug, {
         id: p.id,
         slug: p.slug,
         title: p.title,
@@ -179,9 +265,11 @@ export async function getBlogPosts(options: {
           ogDescription: p.excerpt,
           ogImage: p.imageUrl,
         },
-      };
-    });
+      });
+    }
   }
+
+  let posts: KeystaticBlogPost[] = Array.from(postMap.values());
 
   // Filter by category
   if (categorySlug) {
@@ -221,6 +309,7 @@ export async function getBlogPosts(options: {
 
 /**
  * Fetch a single blog post by its slug.
+ * Strictly excludes trashed, draft, or deleted articles for public requests.
  */
 export async function getBlogPostBySlug(
   slug: string,
@@ -228,41 +317,90 @@ export async function getBlogPostBySlug(
 ): Promise<KeystaticBlogPost | null> {
   if (!slug) return null;
 
+  // 1. If slug is permanently deleted, NEVER return it!
+  const deletedSlugs = await getDurableDeletedSlugs();
+  if (deletedSlugs.has(slug)) {
+    return null;
+  }
+
+  // 2. Check durable storage
+  const durablePosts = await getDurablePosts();
+  const durable = durablePosts.get(slug);
+
+  if (durable) {
+    if (!includeDrafts) {
+      if (durable.status !== 'published') return null;
+      if (durable.publishedDate) {
+        const pubTime = new Date(durable.publishedDate).getTime();
+        if (!isNaN(pubTime) && pubTime > Date.now()) return null;
+      }
+    }
+
+    const isoDate = durable.publishedDate ? new Date(durable.publishedDate).toISOString() : new Date().toISOString();
+    const canonical = durable.canonicalUrl || `${PRIMARY_CANONICAL_HOST}/blog/${slug}`;
+    const imageUrl = durable.featuredImage || '/images/categories/office-supplies-stationery.jpg';
+    const content = normalizeContentToAst(durable.content);
+
+    return {
+      id: `durable-${slug}`,
+      slug,
+      title: durable.title,
+      status: durable.status,
+      excerpt: durable.excerpt,
+      category: durable.category,
+      categories: [durable.category],
+      tags: durable.tags || [],
+      readTime: estimateReadingTimeFromNodes(durable.content),
+      publishedDate: formatDisplayDate(durable.publishedDate),
+      publishedIsoDate: isoDate,
+      modifiedIsoDate: isoDate,
+      author: durable.author || 'Office Bazzar Team',
+      imageUrl,
+      imageAlt: durable.imageAlt || durable.title,
+      content,
+      seo: {
+        title: durable.seoTitle || `${durable.title} | OfficeBazzar`,
+        description: durable.seoDescription || durable.excerpt,
+        canonical,
+        ogTitle: durable.ogTitle || durable.title,
+        ogDescription: durable.ogDescription || durable.excerpt,
+        ogImage: durable.ogImage || imageUrl,
+        focusKeyword: durable.focusKeyword,
+      },
+    };
+  }
+
+  // 3. Check Keystatic reader
   try {
     const entry = await reader.collections.posts.read(slug);
     if (entry) {
+      const status = (entry.status || 'published') as 'published' | 'draft' | 'scheduled' | 'trash';
       if (!includeDrafts) {
-        if (entry.status !== 'published') {
-          return null; // Exclude non-published
-        }
+        if (status !== 'published') return null;
         if (entry.publishedDate) {
           const pubTime = new Date(entry.publishedDate).getTime();
-          if (!isNaN(pubTime) && pubTime > Date.now()) {
-            return null; // Scheduled in the future
-          }
+          if (!isNaN(pubTime) && pubTime > Date.now()) return null;
         }
       }
-      const content = await entry.content();
-      const isoDate = entry.publishedDate
-        ? new Date(entry.publishedDate).toISOString()
-        : new Date().toISOString();
 
+      const rawContent = await entry.content();
+      const content = normalizeContentToAst(rawContent);
+      const isoDate = entry.publishedDate ? new Date(entry.publishedDate).toISOString() : new Date().toISOString();
       const title = entry.title || 'Untitled Post';
       const excerpt = entry.excerpt || '';
-      const canonical =
-        entry.canonicalUrl || `${PRIMARY_CANONICAL_HOST}/blog/${slug}`;
+      const canonical = entry.canonicalUrl || `${PRIMARY_CANONICAL_HOST}/blog/${slug}`;
       const imageUrl = entry.featuredImage || '/images/categories/office-supplies-stationery.jpg';
 
       return {
         id: `keystatic-${slug}`,
         slug,
         title,
-        status: entry.status || 'published',
+        status,
         excerpt,
         category: entry.category || 'Housekeeping & Hygiene',
         categories: [entry.category || 'Housekeeping & Hygiene'],
         tags: Array.isArray(entry.tags) ? entry.tags.filter(Boolean) : [],
-        readTime: estimateReadingTimeFromNodes(content),
+        readTime: estimateReadingTimeFromNodes(rawContent),
         publishedDate: formatDisplayDate(entry.publishedDate),
         publishedIsoDate: isoDate,
         modifiedIsoDate: isoDate,
@@ -285,9 +423,9 @@ export async function getBlogPostBySlug(
     console.warn(`[Keystatic Reader] Error fetching post by slug "${slug}":`, err);
   }
 
-  // Fallback to static post definition
+  // 4. Fallback to static post definition ONLY if NOT deleted and NOT in durable store
   const staticMatch = BLOG_POSTS.find((p) => p.slug === slug);
-  if (staticMatch) {
+  if (staticMatch && !deletedSlugs.has(slug)) {
     const d = new Date(staticMatch.publishedDate);
     const iso = !isNaN(d.getTime()) ? d.toISOString() : new Date().toISOString();
     return {
@@ -326,23 +464,11 @@ export async function getBlogPostBySlug(
 
 /**
  * Retrieve all published blog slugs for static generation and sitemap.
+ * Strictly excludes trashed, draft, or deleted articles.
  */
 export async function getAllBlogSlugs(): Promise<string[]> {
-  const slugs = new Set<string>();
-
-  try {
-    const rawPosts = await reader.collections.posts.all();
-    rawPosts.forEach((p) => {
-      if (p.entry.status === 'published' && p.slug) {
-        slugs.add(p.slug);
-      }
-    });
-  } catch {}
-
-  // Fallback slugs
-  BLOG_POSTS.forEach((p) => slugs.add(p.slug));
-
-  return Array.from(slugs);
+  const { posts } = await getBlogPosts({ perPage: 1000, includeDrafts: false });
+  return posts.map((p) => p.slug);
 }
 
 /**
@@ -351,36 +477,20 @@ export async function getAllBlogSlugs(): Promise<string[]> {
 export async function getAllBlogCategories(): Promise<
   Array<{ name: string; slug: string; count: number }>
 > {
+  const { posts } = await getBlogPosts({ perPage: 1000, includeDrafts: false });
   const catMap = new Map<string, { name: string; slug: string; count: number }>();
 
-  try {
-    const rawPosts = await reader.collections.posts.all();
-    rawPosts.forEach((p) => {
-      if (p.entry.status === 'published' && p.entry.category) {
-        const catName = p.entry.category;
-        const slug = catName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-        const existing = catMap.get(slug);
-        if (existing) {
-          existing.count += 1;
-        } else {
-          catMap.set(slug, { name: catName, slug, count: 1 });
-        }
-      }
-    });
-  } catch {}
-
-  if (catMap.size === 0) {
-    BLOG_POSTS.forEach((p) => {
-      const slug = p.category.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-      const existing = catMap.get(slug);
-      if (existing) {
-        existing.count += 1;
-      } else {
-        catMap.set(slug, { name: p.category, slug, count: 1 });
-      }
-    });
+  for (const post of posts) {
+    if (!post.category) continue;
+    const catName = post.category;
+    const slug = catName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    const existing = catMap.get(slug);
+    if (existing) {
+      existing.count += 1;
+    } else {
+      catMap.set(slug, { name: catName, slug, count: 1 });
+    }
   }
 
   return Array.from(catMap.values());
 }
-

@@ -59,8 +59,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
   // 4. Published Blog Posts (Canonical: /blog/${slug})
-  const { posts: blogPosts } = await getBlogPosts({ perPage: 100 });
-  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+  const { posts: blogPosts } = await getBlogPosts({ perPage: 1000, includeDrafts: false });
+  const blogRoutes: MetadataRoute.Sitemap = blogPosts
+    .filter((post) => post.status === 'published')
+    .map((post) => ({
     url: getCanonicalUrl(`/blog/${post.slug}`),
     lastModified: new Date(post.modifiedIsoDate || post.publishedIsoDate),
     changeFrequency: 'weekly' as const,

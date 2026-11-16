@@ -183,8 +183,10 @@ export function getKVConfig(): KVConfig | null {
 // ----------------------------------------------------------------------
 // HTTP REST Client for Cloud KV (Vercel KV / Upstash Redis)
 // ----------------------------------------------------------------------
+// Low-Level Distributed KV Command Executor
+// ----------------------------------------------------------------------
 
-async function callKV<T = any>(command: (string | number)[]): Promise<T | null> {
+export async function callKV<T = any>(command: (string | number)[]): Promise<T | null> {
   const config = getKVConfig();
   if (!config) return null;
 

@@ -11,6 +11,7 @@ import HomeFaqSection from '@/components/home/HomeFaqSection';
 import { SITE_CONFIG, getLocalBusinessJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 import { getCategories } from '@/lib/db/store';
+import { getBlogPosts } from '@/lib/keystatic/reader';
 
 const HOMEPAGE_TITLE = 'Office Bazzar | Office Supplies & Corporate Procurement India';
 const HOMEPAGE_DESCRIPTION =
@@ -50,7 +51,10 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const categories = await getCategories();
+  const [categories, { posts: latestBlogPosts }] = await Promise.all([
+    getCategories(),
+    getBlogPosts({ perPage: 3, includeDrafts: false }),
+  ]);
 
   return (
     <main className="min-h-screen bg-white">
@@ -74,7 +78,7 @@ export default async function HomePage() {
       <AboutSummarySection />
 
       {/* 7. Genuine Workplace Insights & Blog Articles */}
-      <HomeBlogSection />
+      <HomeBlogSection posts={latestBlogPosts} />
 
       {/* 8. Frequently Asked Questions (FAQ Accordion) */}
       <HomeFaqSection defaultOpen={false} />

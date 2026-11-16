@@ -6,10 +6,25 @@ import Image from 'next/image';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import { BLOG_POSTS } from '@/lib/data/blog';
 
-export default function HomeBlogSection() {
-  const posts = [...BLOG_POSTS]
-    .sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime())
-    .slice(0, 3);
+interface HomeBlogSectionProps {
+  posts?: Array<{
+    id: string;
+    slug: string;
+    title: string;
+    category: string;
+    excerpt: string;
+    publishedDate: string;
+    readTime: string;
+    imageUrl: string;
+  }>;
+}
+
+export default function HomeBlogSection({ posts: incomingPosts }: HomeBlogSectionProps = {}) {
+  const posts = incomingPosts && incomingPosts.length > 0
+    ? incomingPosts.slice(0, 3)
+    : [...BLOG_POSTS]
+        .sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime())
+        .slice(0, 3);
 
   return (
     <section className="w-full py-12 sm:py-16 bg-white border-b border-slate-100">

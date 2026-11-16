@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAdminSession } from '@/lib/blog-admin/auth';
-import { listAllAdminPosts, saveAdminPost } from '@/lib/blog-admin/storage';
+import { listAllAdminPosts, saveAdminPost, revalidateBlogCache } from '@/lib/blog-admin/storage';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   const session = await getAdminSession();
@@ -44,6 +46,7 @@ export async function POST(request: NextRequest) {
     }
 
     const result = await saveAdminPost(postData);
+    revalidateBlogCache(cleanSlug);
     return NextResponse.json(result);
   } catch (error) {
     console.error('[Blog Admin Save Error]:', error);
