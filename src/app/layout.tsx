@@ -103,7 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const websiteSchema = getWebSiteJsonLd();
 
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`} data-scroll-behavior="smooth">
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body
         className="min-h-full flex flex-col font-sans bg-white text-slate-900 selection:bg-emerald-500 selection:text-white"
       >

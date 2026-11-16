@@ -29,6 +29,47 @@ export default function AllCategoriesClient({
     baseRoute ||
     (pathname?.startsWith('/shop/categories') ? '/shop/categories' : '/category');
 
+  // Track and restore scroll position for All Categories view
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    let timer: NodeJS.Timeout | null = null;
+    const handleScroll = () => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        try {
+          const key = `ob_scroll_${window.location.pathname}${window.location.search}`;
+          sessionStorage.setItem(key, String(window.scrollY));
+        } catch {}
+      }, 100);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (timer) clearTimeout(timer);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const key = `ob_scroll_${window.location.pathname}${window.location.search}`;
+      const saved = sessionStorage.getItem(key);
+      if (saved) {
+        const y = parseInt(saved, 10);
+        if (!isNaN(y) && y > 0) {
+          requestAnimationFrame(() => {
+            window.scrollTo({ top: y, behavior: 'instant' });
+          });
+          const t1 = setTimeout(() => {
+            window.scrollTo({ top: y, behavior: 'instant' });
+          }, 60);
+          return () => clearTimeout(t1);
+        }
+      }
+    } catch {}
+  }, []);
+
   return (
     <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
       {/* Breadcrumb Navigation: Home → All Categories */}

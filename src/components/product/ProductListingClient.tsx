@@ -93,6 +93,54 @@ export default function ProductListingClient({
     setSortBy(initialSort || 'relevance');
   }, [initialSort]);
 
+  // Track scroll position continuously for the current exact listing route (debounced)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    let timer: NodeJS.Timeout | null = null;
+    const handleScroll = () => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        try {
+          const key = `ob_scroll_${window.location.pathname}${window.location.search}`;
+          sessionStorage.setItem(key, String(window.scrollY));
+        } catch {}
+      }, 100);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (timer) clearTimeout(timer);
+    };
+  }, [currentPage, searchQuery, selectedFilter, selectedBrand, sortBy]);
+
+  // Restore scroll position when navigating back or returning to this listing
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const key = `ob_scroll_${window.location.pathname}${window.location.search}`;
+      const saved = sessionStorage.getItem(key);
+      if (saved) {
+        const y = parseInt(saved, 10);
+        if (!isNaN(y) && y > 0) {
+          requestAnimationFrame(() => {
+            window.scrollTo({ top: y, behavior: 'instant' });
+          });
+          const t1 = setTimeout(() => {
+            window.scrollTo({ top: y, behavior: 'instant' });
+          }, 60);
+          const t2 = setTimeout(() => {
+            window.scrollTo({ top: y, behavior: 'instant' });
+          }, 220);
+          return () => {
+            clearTimeout(t1);
+            clearTimeout(t2);
+          };
+        }
+      }
+    } catch {}
+  }, [currentPage]);
+
   // Navigate using URL parameters to trigger server-side pagination & filtering
   const navigateWithParams = (
     newQuery: string,
@@ -173,9 +221,9 @@ export default function ProductListingClient({
     if (typeof window !== 'undefined') {
       const el = document.getElementById('products-grid-top');
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        el.scrollIntoView({ behavior: 'auto', block: 'start' });
       } else {
-        window.scrollTo({ top: 120, behavior: 'smooth' });
+        window.scrollTo({ top: 120, behavior: 'instant' });
       }
     }
   };

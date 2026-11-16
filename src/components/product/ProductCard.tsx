@@ -27,13 +27,29 @@ export default function ProductCard({
 
   const productUrl = `/product/${product.slug || product.id}`;
 
+  const handleMouseEnter = () => {
+    // Proactively prefetch the product detail page on hover for instant navigation
+    router.prefetch(productUrl);
+  };
+
   const handleCardClick = (e: React.MouseEvent) => {
     // Prevent navigation if the user clicked on or inside a button (e.g. cart button)
     const target = e.target as HTMLElement;
     if (target.closest('button') || target.closest('[data-cart-button]')) {
       return;
     }
-    router.push(productUrl);
+
+    // Preserve exact scroll position of current listing page before navigating to product detail
+    if (typeof window !== 'undefined') {
+      try {
+        const scrollKey = `ob_scroll_${window.location.pathname}${window.location.search}`;
+        sessionStorage.setItem(scrollKey, String(window.scrollY));
+      } catch {}
+    }
+
+    if (!target.closest('a')) {
+      router.push(productUrl);
+    }
   };
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -69,6 +85,7 @@ export default function ProductCard({
   return (
     <div
       onClick={handleCardClick}
+      onMouseEnter={handleMouseEnter}
       className={`group relative flex flex-col justify-between bg-white border border-[#E2EBE3] hover:border-[#3B82F6]/50 rounded-[22px] transition-all duration-300 ease-out shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05),0_2px_6px_-1px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_28px_-4px_rgba(0,0,0,0.1),0_4px_10px_-2px_rgba(0,0,0,0.05)] hover:-translate-y-1 h-full select-none cursor-pointer overflow-hidden ${className}`}
     >
       {/* 1. Product Image Display Area (Premium Muted Blue Stage #AFC5DC, Centered Product, Object-Fit Contain) */}

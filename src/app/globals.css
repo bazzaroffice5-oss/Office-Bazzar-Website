@@ -48,9 +48,7 @@
   --color-product-hover-bg: var(--product-hover-bg);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* html scroll-behavior is left to browser native so that history back/forward scroll restoration is instant and reliable */
 
 html,
 body {

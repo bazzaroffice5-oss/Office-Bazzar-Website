@@ -68,6 +68,54 @@ export default function CategoryLandingClient({
 
   const categoryBaseUrl = `${resolvedBaseRoute}/${category.slug}`;
 
+  // Track scroll position continuously for this category route (debounced)
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    let timer: NodeJS.Timeout | null = null;
+    const handleScroll = () => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        try {
+          const key = `ob_scroll_${window.location.pathname}${window.location.search}`;
+          sessionStorage.setItem(key, String(window.scrollY));
+        } catch {}
+      }, 100);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (timer) clearTimeout(timer);
+    };
+  }, [currentPage, subParam, viewParam]);
+
+  // Restore scroll position when returning to this category route
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const key = `ob_scroll_${window.location.pathname}${window.location.search}`;
+      const saved = sessionStorage.getItem(key);
+      if (saved) {
+        const y = parseInt(saved, 10);
+        if (!isNaN(y) && y > 0) {
+          requestAnimationFrame(() => {
+            window.scrollTo({ top: y, behavior: 'instant' });
+          });
+          const t1 = setTimeout(() => {
+            window.scrollTo({ top: y, behavior: 'instant' });
+          }, 60);
+          const t2 = setTimeout(() => {
+            window.scrollTo({ top: y, behavior: 'instant' });
+          }, 220);
+          return () => {
+            clearTimeout(t1);
+            clearTimeout(t2);
+          };
+        }
+      }
+    } catch {}
+  }, [currentPage, subParam, viewParam]);
+
   // ==========================================
   // VIEW 1: CATEGORY-SPECIFIC LANDING PAGE
   // Subcategory Grid matching reference design
@@ -188,7 +236,7 @@ export default function CategoryLandingClient({
     const targetUrl = getPageUrl(p);
     router.push(targetUrl);
     if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 100, behavior: 'smooth' });
+      window.scrollTo({ top: 100, behavior: 'instant' });
     }
   };
 
