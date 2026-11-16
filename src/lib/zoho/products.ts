@@ -561,8 +561,11 @@ export async function getProductsFromZoho(forceRefresh = false): Promise<Product
  * Invalidate the product cache to force fresh retrieval from Zoho CRM on next request
  */
 export function invalidateZohoProductCache(): void {
-  cachedProducts = buildInitialCatalog();
-rebuildFastIndexes(cachedProducts);
+  // Preserve active in-memory products and fast indexes so customer browsing and revalidation never see empty/stale catalog
+  if (!cachedProducts || cachedProducts.length === 0) {
+    cachedProducts = buildInitialCatalog();
+    rebuildFastIndexes(cachedProducts);
+  }
   lastCacheSync = 0;
   inflightSyncPromise = null;
 }
@@ -642,7 +645,6 @@ export async function createZohoProduct(product: Partial<Product>): Promise<{
     ...product,
     zohoProductId: finalZohoId,
   } as Product);
-  invalidateZohoProductCache();
   return { success: true, zohoId: finalZohoId };
 }
 
@@ -720,7 +722,6 @@ export async function updateZohoProduct(
     sku: cleanSku,
     zohoProductId: finalZohoId || zohoIdOrSku,
   } as Product);
-  invalidateZohoProductCache();
   return { success: true, zohoId: finalZohoId || zohoIdOrSku };
 }
 
@@ -769,6 +770,5 @@ export async function deleteZohoProduct(
   if (zohoIdOrSku && zohoIdOrSku !== cleanSku) {
     removeProductFromLiveCache(zohoIdOrSku);
   }
-  invalidateZohoProductCache();
   return { success: true, zohoId: cleanSku };
 }

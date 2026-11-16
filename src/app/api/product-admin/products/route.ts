@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { revalidatePath } from 'next/cache';
 import { getProductAdminSession } from '@/lib/product-admin/auth';
-import { getProductsFromZoho, createZohoProduct, invalidateZohoProductCache } from '@/lib/zoho/products';
+import { getProductsFromZoho, createZohoProduct, updateProductInLiveCache } from '@/lib/zoho/products';
 import { saveProduct } from '@/lib/db/store';
 import { saveProductImage } from '@/lib/products/image-store';
 import { Product } from '@/types';
@@ -23,7 +23,8 @@ export async function GET(request: NextRequest) {
     const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10));
     const limit = Math.max(1, Math.min(100, parseInt(searchParams.get('limit') || '50', 10)));
 
-    const allProducts = await getProductsFromZoho(true);
+    const isForceRefresh = searchParams.get('refresh') === 'true';
+    const allProducts = await getProductsFromZoho(isForceRefresh);
 
     let filtered = allProducts;
     if (query) {
@@ -223,22 +224,13 @@ export async function POST(request: NextRequest) {
       zohoProductId: zohoId,
     } as any);
 
-    // 3. Clear edge product cache
-    invalidateZohoProductCache();
+    // 3. Immediately update the live in-memory cache with the new product
+    updateProductInLiveCache(saved);
 
-    // 4. Live Next.js Cache Invalidation
+    // 4. Targeted Live Next.js Cache Invalidation
     try {
       revalidatePath('/');
       revalidatePath('/products');
-      revalidatePath('/products', 'page');
-      revalidatePath('/categories');
-      revalidatePath('/shop');
-      revalidatePath('/product/[slug]', 'page');
-      revalidatePath('/category/[slug]', 'page');
-      revalidatePath('/category/office-stationery');
-      revalidatePath('/category/housekeeping-hygiene');
-      revalidatePath('/category/packaging-supplies');
-      revalidatePath('/category/printers-technology');
       if (saved.categoryId) {
         revalidatePath(`/category/${saved.categoryId}`);
       }

@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { revalidatePath } from 'next/cache';
 import { getProductAdminSession } from '@/lib/product-admin/auth';
-import { getProductsFromZoho, updateZohoProduct, deleteZohoProduct, invalidateZohoProductCache } from '@/lib/zoho/products';
+import { getProductsFromZoho, updateZohoProduct, deleteZohoProduct, updateProductInLiveCache, removeProductFromLiveCache } from '@/lib/zoho/products';
 import { saveProduct, deleteProduct, getProductById } from '@/lib/db/store';
 import { saveProductImage } from '@/lib/products/image-store';
 import { Product } from '@/types';
@@ -154,22 +154,13 @@ export async function PUT(
     // 2. Persist in website catalogue store
     const saved = await saveProduct(mergedProduct);
 
-    // 3. Clear edge cache
-    invalidateZohoProductCache();
+    // 3. Immediately update the live in-memory cache with the saved product and new image
+    updateProductInLiveCache(saved);
 
-    // 4. Live Next.js Cache Invalidation
+    // 4. Targeted Live Next.js Cache Invalidation
     try {
       revalidatePath('/');
       revalidatePath('/products');
-      revalidatePath('/products', 'page');
-      revalidatePath('/categories');
-      revalidatePath('/shop');
-      revalidatePath('/product/[slug]', 'page');
-      revalidatePath('/category/[slug]', 'page');
-      revalidatePath('/category/office-stationery');
-      revalidatePath('/category/housekeeping-hygiene');
-      revalidatePath('/category/packaging-supplies');
-      revalidatePath('/category/printers-technology');
       if (saved.categoryId) {
         revalidatePath(`/category/${saved.categoryId}`);
       }
@@ -242,22 +233,16 @@ export async function DELETE(
       await deleteProduct(existing.sku);
     }
 
-    // 3. Clear edge caches
-    invalidateZohoProductCache();
+    // 3. Immediately update live in-memory cache
+    removeProductFromLiveCache(existing.id);
+    if (existing.sku) {
+      removeProductFromLiveCache(existing.sku);
+    }
 
-    // 4. Invalidate Next.js cache across all relevant routes
+    // 4. Targeted Live Next.js Cache Invalidation
     try {
       revalidatePath('/');
       revalidatePath('/products');
-      revalidatePath('/products', 'page');
-      revalidatePath('/categories');
-      revalidatePath('/shop');
-      revalidatePath('/product/[slug]', 'page');
-      revalidatePath('/category/[slug]', 'page');
-      revalidatePath('/category/office-stationery');
-      revalidatePath('/category/housekeeping-hygiene');
-      revalidatePath('/category/packaging-supplies');
-      revalidatePath('/category/printers-technology');
       if (existing.categoryId) {
         revalidatePath(`/category/${existing.categoryId}`);
       }
