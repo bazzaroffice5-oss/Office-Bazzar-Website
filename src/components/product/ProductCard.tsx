@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { ShoppingCart, Check } from 'lucide-react';
 import { Product } from '@/types';
 import { useCart } from '@/context/CartContext';
-import { getVersionedImageUrl } from '@/lib/utils/image';
+import { getVersionedImageUrl, resolveProductImageUrl, FALLBACK_PRODUCT_IMAGE } from '@/lib/utils/image';
 
 interface ProductCardProps {
   product: Product;
@@ -52,19 +52,17 @@ export default function ProductCard({
     }, 1500);
   };
 
-  // Safe image fallback with dynamic error recovery (strictly new supplier catalog only)
+  // Resilient image resolution: accepts API routes, cloud storage, external URLs, and local assets
   const rawImage =
     (product.images && product.images[0]) ||
     ((product as unknown as { image?: string }).image);
-  const isValidNewImage =
-    typeof rawImage === 'string' &&
-    (rawImage.startsWith('/assets/products/catalog_2026/') ||
-      rawImage.startsWith('/assets/supplier-library/') ||
-      rawImage.startsWith('/assets/product/'));
-  const initialImage = isValidNewImage
-    ? getVersionedImageUrl(rawImage)
-    : getVersionedImageUrl('/assets/placeholder-product.svg');
+  const initialImage = resolveProductImageUrl(rawImage);
   const [imgSrc, setImgSrc] = useState<string>(initialImage);
+
+  // Synchronize state if product props update dynamically
+  React.useEffect(() => {
+    setImgSrc(resolveProductImageUrl(rawImage));
+  }, [rawImage]);
 
   const brandDisplayName = product.brandName || 'OfficeBazzar';
 
@@ -111,7 +109,11 @@ export default function ProductCard({
               priority={priority}
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               className="object-contain object-center"
-              onError={() => setImgSrc(getVersionedImageUrl('/assets/placeholder-product.svg'))}
+              onError={() => {
+                if (imgSrc !== getVersionedImageUrl(FALLBACK_PRODUCT_IMAGE)) {
+                  setImgSrc(getVersionedImageUrl(FALLBACK_PRODUCT_IMAGE));
+                }
+              }}
             />
           </div>
         </Link>

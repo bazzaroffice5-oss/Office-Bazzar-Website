@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { getProductAdminSession } from '@/lib/product-admin/auth';
 import { getProductsFromZoho, createZohoProduct, invalidateZohoProductCache } from '@/lib/zoho/products';
 import { saveProduct } from '@/lib/db/store';
+import { saveProductImage } from '@/lib/products/image-store';
 import { Product } from '@/types';
 
 export const dynamic = 'force-dynamic';
@@ -145,36 +146,18 @@ export async function POST(request: NextRequest) {
 
       // Handle Image Upload if provided
       if (file && file.size > 0) {
-        const extension = file.name.split('.').pop()?.toLowerCase() || 'webp';
-        const targetFilename = `${cleanSku}.${extension}`;
-
-        try {
-          const uploadDir = path.join(process.cwd(), 'public', 'assets', 'products', 'catalog_2026');
-          if (!fs.existsSync(uploadDir)) {
-            fs.mkdirSync(uploadDir, { recursive: true });
-          }
-          const bytes = await file.arrayBuffer();
-          const buffer = Buffer.from(bytes);
-          const destination = path.join(uploadDir, targetFilename);
-          fs.writeFileSync(destination, buffer);
-        } catch (fsErr) {
-          console.warn('[Product Admin] Local upload write warning:', fsErr);
-        }
-
-        // Generate reliable image data URI if under 300KB for permanent serverless availability
         try {
           const bytes = await file.arrayBuffer();
           const buffer = Buffer.from(bytes);
-          if (buffer.length < 300 * 1024) {
-            const mimeType = file.type || `image/${extension === 'jpg' ? 'jpeg' : extension}`;
-            imagesList.unshift(`data:${mimeType};base64,${buffer.toString('base64')}`);
-          } else {
-            imagePath = `/assets/products/catalog_2026/${targetFilename}`;
-            imagesList.unshift(imagePath);
-          }
-        } catch {
-          imagePath = `/assets/products/catalog_2026/${targetFilename}`;
-          imagesList.unshift(imagePath);
+          const stored = await saveProductImage({
+            filename: file.name,
+            buffer,
+            mimeType: file.type,
+            sku: cleanSku,
+          });
+          imagesList.unshift(stored.publicUrl);
+        } catch (uploadErr) {
+          console.error('[Product Admin] Image upload persistence error:', uploadErr);
         }
       }
 

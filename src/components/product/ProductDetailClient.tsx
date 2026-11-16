@@ -8,7 +8,7 @@ import { Brand, Product } from '@/types';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { getBrandLogoUrl } from '@/lib/utils/brandLogos';
-import { getVersionedImageUrl } from '@/lib/utils/image';
+import { getVersionedImageUrl, resolveProductImages, FALLBACK_PRODUCT_IMAGE } from '@/lib/utils/image';
 import ProductCard from './ProductCard';
 
 interface ProductDetailClientProps {
@@ -17,8 +17,7 @@ interface ProductDetailClientProps {
   brand?: Brand | null;
 }
 
-const FALLBACK_IMAGE =
-  '/assets/placeholder-product.svg';
+const FALLBACK_IMAGE = FALLBACK_PRODUCT_IMAGE;
 
 export default function ProductDetailClient({
   product,
@@ -29,13 +28,15 @@ export default function ProductDetailClient({
   const { isInWishlist, toggleWishlist } = useWishlist();
   const [addedFeedback, setAddedFeedback] = useState(false);
 
-  // Active image selector (strictly new supplier catalog only)
-  const validImages = (product.images && product.images.length > 0 ? product.images : []).filter(
-    (img) => typeof img === 'string' && (img.startsWith('/assets/products/catalog_2026/') || img.startsWith('/assets/supplier-library/') || img.startsWith('/assets/product/'))
-  );
-  const rawImages = validImages.length > 0 ? validImages : [FALLBACK_IMAGE];
-  const productImages = rawImages.map((img) => getVersionedImageUrl(img));
+  // Active image selector: supports durable API URLs, cloud storage, external URLs, and local catalog assets
+  const productImages = resolveProductImages(product.images);
   const [activeImage, setActiveImage] = useState<string>(productImages[0]);
+
+  // Synchronize when product images prop updates dynamically
+  React.useEffect(() => {
+    const nextImages = resolveProductImages(product.images);
+    setActiveImage(nextImages[0]);
+  }, [product.images]);
 
   const inWishlist = isInWishlist(product.id);
   const cartItem = items.find((i) => i.product.id === product.id);

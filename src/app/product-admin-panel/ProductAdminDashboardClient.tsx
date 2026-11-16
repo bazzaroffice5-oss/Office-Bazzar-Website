@@ -26,6 +26,7 @@ import {
   Eye,
 } from 'lucide-react';
 import { Product } from '@/types';
+import { resolveProductImageUrl, FALLBACK_PRODUCT_IMAGE } from '@/lib/utils/image';
 
 export interface AdminProduct extends Product {
   isDeleted?: boolean;
@@ -515,11 +516,10 @@ export default function ProductAdminDashboardClient({
         {/* Toast Notification (Top Right - clean & visible) */}
         {toastMessage && (
           <div
-            className={`fixed top-5 right-5 z-50 p-4 rounded-xl shadow-xl flex items-center gap-3 border backdrop-blur-md animate-in fade-in slide-in-from-top-4 duration-200 max-w-md ${
-              toastMessage.type === 'success'
-                ? 'bg-emerald-50 text-emerald-900 border-emerald-300'
-                : 'bg-rose-50 text-rose-900 border-rose-300'
-            }`}
+            className={`fixed top-5 right-5 z-50 p-4 rounded-xl shadow-xl flex items-center gap-3 border backdrop-blur-md animate-in fade-in slide-in-from-top-4 duration-200 max-w-md ${toastMessage.type === 'success'
+              ? 'bg-emerald-50 text-emerald-900 border-emerald-300'
+              : 'bg-rose-50 text-rose-900 border-rose-300'
+              }`}
           >
             {toastMessage.type === 'success' ? (
               <CheckCircle2 className="w-5 h-5 text-[#057a3b] shrink-0" />
@@ -694,7 +694,7 @@ export default function ProductAdminDashboardClient({
                   </tr>
                 ) : (
                   paginatedProducts.map((p) => {
-                    const imgUrl = (p.images && p.images[0]) || '/assets/placeholder-product.svg';
+                    const imgUrl = resolveProductImageUrl(p.images?.[0]);
                     const isPublished = p.isActive !== false;
                     return (
                       <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
@@ -1216,7 +1216,7 @@ export default function ProductAdminDashboardClient({
               <div className="md:col-span-5 flex flex-col items-center">
                 <div className="w-full aspect-square max-w-[280px] rounded-2xl bg-[#AFC5DC] border border-slate-200/90 p-4 flex items-center justify-center relative shadow-inner overflow-hidden">
                   <Image
-                    src={viewingProduct.images && viewingProduct.images[0] ? viewingProduct.images[0] : '/assets/placeholder-product.svg'}
+                    src={resolveProductImageUrl(viewingProduct.images?.[0])}
                     alt={viewingProduct.name}
                     width={260}
                     height={260}

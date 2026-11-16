@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { getProductAdminSession } from '@/lib/product-admin/auth';
 import { getProductsFromZoho, updateZohoProduct, deleteZohoProduct, invalidateZohoProductCache } from '@/lib/zoho/products';
 import { saveProduct, deleteProduct, getProductById } from '@/lib/db/store';
+import { saveProductImage } from '@/lib/products/image-store';
 import { Product } from '@/types';
 
 export const dynamic = 'force-dynamic';
@@ -108,34 +109,19 @@ export async function PUT(
 
       // Handle Image Replacement via File Upload
       if (file && file.size > 0) {
-        const cleanSku = (updates.sku || existing.sku).replace(/[^a-zA-Z0-9-_]/g, '_').toUpperCase();
-        const extension = file.name.split('.').pop()?.toLowerCase() || 'webp';
-        const targetFilename = `${cleanSku}.${extension}`;
-
         try {
-          const uploadDir = path.join(process.cwd(), 'public', 'assets', 'products', 'catalog_2026');
-          if (!fs.existsSync(uploadDir)) {
-            fs.mkdirSync(uploadDir, { recursive: true });
-          }
+          const cleanSku = (updates.sku || existing.sku).replace(/[^a-zA-Z0-9-_]/g, '_').toUpperCase();
           const bytes = await file.arrayBuffer();
           const buffer = Buffer.from(bytes);
-          const destination = path.join(uploadDir, targetFilename);
-          fs.writeFileSync(destination, buffer);
-        } catch (fsErr) {
-          console.warn('[Product Admin] Local upload write warning:', fsErr);
-        }
-
-        try {
-          const bytes = await file.arrayBuffer();
-          const buffer = Buffer.from(bytes);
-          if (buffer.length < 300 * 1024) {
-            const mimeType = file.type || `image/${extension === 'jpg' ? 'jpeg' : extension}`;
-            updates.images = [`data:${mimeType};base64,${buffer.toString('base64')}`];
-          } else {
-            updates.images = [`/assets/products/catalog_2026/${targetFilename}`];
-          }
-        } catch {
-          updates.images = [`/assets/products/catalog_2026/${targetFilename}`];
+          const stored = await saveProductImage({
+            filename: file.name,
+            buffer,
+            mimeType: file.type,
+            sku: cleanSku,
+          });
+          updates.images = [stored.publicUrl];
+        } catch (uploadErr) {
+          console.error('[Product Admin] Image replacement persistence error:', uploadErr);
         }
       }
     } else {

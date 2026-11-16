@@ -15,7 +15,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
-import { getVersionedImageUrl } from '@/lib/utils/image';
+import { getVersionedImageUrl, resolveProductImageUrl } from '@/lib/utils/image';
 
 const FALLBACK_IMAGE =
   '/assets/placeholder-product.svg';
@@ -85,9 +85,7 @@ export default function QuoteCartPage() {
             <div className="flex flex-wrap justify-center gap-4 sm:gap-5 mx-auto">
               {items.map((item) => {
                 const product = item.product;
-                const rawImg = product.images?.[0];
-                const cleanImg = (typeof rawImg === 'string' && (rawImg.startsWith('/assets/products/catalog_2026/') || rawImg.startsWith('/assets/supplier-library/') || rawImg.startsWith('/assets/product/'))) ? rawImg : FALLBACK_IMAGE;
-                const displayImage = getVersionedImageUrl(cleanImg);
+                const displayImage = resolveProductImageUrl(product.images?.[0]);
                 const productUrl = `/product/${product.slug || product.id}`;
                 const hasPrice = (product.price ?? 0) > 0;
                 const itemSubtotal = hasPrice ? (product.price ?? 0) * item.quantity : null;
