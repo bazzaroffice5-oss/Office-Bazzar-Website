@@ -192,10 +192,16 @@ export async function PUT(
       console.warn('[Product Admin] Revalidation notice:', revalidateErr);
     }
 
+    const productResponse = {
+      ...saved,
+      status: saved.isActive ? 'active' : 'draft',
+      publishStatus: saved.isActive ? 'published' : 'draft',
+    };
+
     return NextResponse.json({
       success: true,
       message: 'Product updated successfully across Zoho CRM and live website.',
-      product: saved,
+      product: productResponse,
       zohoSynced,
     });
   } catch (error) {

@@ -245,10 +245,16 @@ export async function POST(request: NextRequest) {
       console.warn('[Product Admin] Revalidation notice:', revalidateErr);
     }
 
+    const productResponse = {
+      ...saved,
+      status: saved.isActive ? 'active' : 'draft',
+      publishStatus: saved.isActive ? 'published' : 'draft',
+    };
+
     return NextResponse.json({
       success: true,
       message: 'Product successfully created and synchronized with Zoho CRM and the live website.',
-      product: saved,
+      product: productResponse,
       zohoSynced: Boolean(zohoId),
       zohoId,
     });
