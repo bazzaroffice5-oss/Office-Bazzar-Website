@@ -89,14 +89,20 @@ async function runTests() {
 
   // Write through storage logic
   const journalPath = path.join(process.cwd(), 'src', 'lib', 'data', 'uploaded_product_images.json');
-  let journal = {};
+  let journal = { images: {}, aliases: {} };
   try {
     if (fs.existsSync(journalPath)) {
-      journal = JSON.parse(fs.readFileSync(journalPath, 'utf8'));
+      const parsed = JSON.parse(fs.readFileSync(journalPath, 'utf8'));
+      if (parsed && typeof parsed === 'object') {
+        journal = {
+          images: parsed.images || {},
+          aliases: parsed.aliases || {},
+        };
+      }
     }
   } catch {}
 
-  journal[testFilename] = {
+  journal.images[testFilename] = {
     mimeType: 'image/png',
     base64: samplePngBuffer.toString('base64'),
     size: samplePngBuffer.length,
@@ -106,8 +112,8 @@ async function runTests() {
 
   assert(fs.existsSync(journalPath), 'uploaded_product_images.json exists and is writable');
   const readBackJournal = JSON.parse(fs.readFileSync(journalPath, 'utf8'));
-  assert(Boolean(readBackJournal[testFilename]), 'Test image record successfully written to durable journal');
-  assert(readBackJournal[testFilename].size === samplePngBuffer.length, 'Image byte size matches exactly');
+  assert(Boolean(readBackJournal.images && readBackJournal.images[testFilename]), 'Test image record successfully written to durable journal');
+  assert(readBackJournal.images[testFilename].size === samplePngBuffer.length, 'Image byte size matches exactly');
 
   // TEST 3: Verification of Public Serving Route Code Structure
   console.log('\n--- TEST 3: Image Serving Route Code Audit ---');
@@ -157,6 +163,46 @@ async function runTests() {
     'Product Admin Table resolves custom product images with resolveProductImageUrl'
   );
 
+  // TEST 6: Content-Hash Based Image Replacement & Cache Invalidation
+  console.log('\n--- TEST 6: Content-Hash Based Image Replacement & Cache Invalidation ---');
+  const bufferV1 = Buffer.from('image-content-v1-bytes');
+  const bufferV2 = Buffer.from('image-content-v2-bytes-replacement');
+
+  const hashV1 = crypto.createHash('md5').update(bufferV1).digest('hex').slice(0, 8);
+  const hashV2 = crypto.createHash('md5').update(bufferV2).digest('hex').slice(0, 8);
+
+  const sku = 'TEST-REPLACEMENT-SKU';
+  const filenameV1 = `${sku}_${hashV1}.webp`;
+  const filenameV2 = `${sku}_${hashV2}.webp`;
+
+  assert(hashV1 !== hashV2, 'Distinct image byte contents generate distinct content hashes');
+  assert(filenameV1 !== filenameV2, 'Replacement image produces a distinct unique filename');
+
+  const urlV1 = `/api/products/images/${filenameV1}`;
+  const urlV2 = `/api/products/images/${filenameV2}`;
+
+  assert(urlV1 !== urlV2, 'Replacement generates a brand new unique URL, bypassing CDN/browser stale cache');
+  assert(urlV1.includes(hashV1), 'V1 URL contains V1 content hash');
+  assert(urlV2.includes(hashV2), 'V2 URL contains V2 content hash');
+
+  // Verify journal alias mapping for backward compatibility
+  journal.images[filenameV1] = { mimeType: 'image/webp', base64: bufferV1.toString('base64'), size: bufferV1.length, updatedAt: new Date().toISOString() };
+  journal.images[filenameV2] = { mimeType: 'image/webp', base64: bufferV2.toString('base64'), size: bufferV2.length, updatedAt: new Date().toISOString() };
+  journal.aliases[sku] = filenameV2;
+  fs.writeFileSync(journalPath, JSON.stringify(journal, null, 2), 'utf8');
+
+  const readBackJournalAfterReplace = JSON.parse(fs.readFileSync(journalPath, 'utf8'));
+  assert(readBackJournalAfterReplace.aliases && readBackJournalAfterReplace.aliases[sku] === filenameV2, 'Alias points to the latest replaced image version');
+  assert(Boolean(readBackJournalAfterReplace.images && readBackJournalAfterReplace.images[filenameV1]), 'Old image remains accessible at its immutable URL');
+  assert(Boolean(readBackJournalAfterReplace.images && readBackJournalAfterReplace.images[filenameV2]), 'New image is stored at its new immutable URL');
+
+  // Clean up test entries
+  delete readBackJournalAfterReplace.images[filenameV1];
+  delete readBackJournalAfterReplace.images[filenameV2];
+  delete readBackJournalAfterReplace.aliases[sku];
+  delete readBackJournalAfterReplace.images[testFilename];
+  fs.writeFileSync(journalPath, JSON.stringify(readBackJournalAfterReplace, null, 2), 'utf8');
+
   // TEST 5: Existing Catalogue Products Preserved
   console.log('\n--- TEST 5: Baseline Catalogue Products Integrity ---');
   const catalogContent = fs.readFileSync('src/lib/data/catalog.ts', 'utf8');
@@ -172,8 +218,10 @@ async function runTests() {
   );
 
   // Cleanup test entry from journal
-  delete readBackJournal[testFilename];
-  fs.writeFileSync(journalPath, JSON.stringify(readBackJournal, null, 2), 'utf8');
+  if (readBackJournal.images) {
+    delete readBackJournal.images[testFilename];
+    fs.writeFileSync(journalPath, JSON.stringify(readBackJournal, null, 2), 'utf8');
+  }
 
   console.log('\n===============================================================');
   console.log(`ACCEPTANCE TEST RESULTS: ${passed} PASSED, ${failed} FAILED`);

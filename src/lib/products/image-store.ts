@@ -99,21 +99,31 @@ function getLocalJournalPath(): string {
   }
 }
 
-function readLocalJournal(): Record<string, { mimeType: string; base64: string; size: number; updatedAt: string }> {
+export interface ProductImageJournalData {
+  images: Record<string, { mimeType: string; base64: string; size: number; updatedAt: string }>;
+  aliases: Record<string, string>;
+}
+
+function readLocalJournal(): ProductImageJournalData {
   try {
     const p = getLocalJournalPath();
     if (fs.existsSync(p)) {
       const raw = fs.readFileSync(p, 'utf8');
       const parsed = JSON.parse(raw);
-      if (parsed && typeof parsed === 'object') return parsed;
+      if (parsed && typeof parsed === 'object') {
+        return {
+          images: parsed.images && typeof parsed.images === 'object' ? parsed.images : {},
+          aliases: parsed.aliases && typeof parsed.aliases === 'object' ? parsed.aliases : {},
+        };
+      }
     }
   } catch {
     // ignore
   }
-  return {};
+  return { images: {}, aliases: {} };
 }
 
-function writeLocalJournal(data: Record<string, { mimeType: string; base64: string; size: number; updatedAt: string }>) {
+function writeLocalJournal(data: ProductImageJournalData) {
   try {
     const p = getLocalJournalPath();
     fs.writeFileSync(p, JSON.stringify(data, null, 2), 'utf8');
@@ -140,7 +150,9 @@ export async function saveProductImage({
   const baseName = (sku || filename.replace(/\.[^/.]+$/, ''))
     .replace(/[^a-zA-Z0-9-_]/g, '_')
     .toUpperCase();
-  const cleanFilename = `${baseName}.${cleanExt === 'jpg' ? 'jpeg' : cleanExt}`;
+  // 8-character content-hash ensures a unique, immutable URL on every upload & replacement
+  const contentHash = crypto.createHash('md5').update(buffer).digest('hex').slice(0, 8);
+  const cleanFilename = `${baseName}_${contentHash}.${cleanExt === 'jpg' ? 'jpeg' : cleanExt}`;
   const determinedMime = mimeType || getMimeType(cleanFilename, buffer);
   const now = new Date().toISOString();
 
@@ -190,12 +202,13 @@ export async function saveProductImage({
   // 4. Local journal backup
   try {
     const journal = readLocalJournal();
-    journal[cleanFilename] = {
+    journal.images[cleanFilename] = {
       mimeType: determinedMime,
       base64: buffer.toString('base64'),
       size: buffer.length,
       updatedAt: now,
     };
+    journal.aliases[baseName] = cleanFilename;
     writeLocalJournal(journal);
   } catch (jErr) {
     console.warn('[ImageStore] Journal backup notice:', jErr);
@@ -268,11 +281,27 @@ export async function getProductImage(
   // Layer 4: Local journal backup
   try {
     const journal = readLocalJournal();
-    const entry = journal[cleanFilename];
+    const entry = journal.images[cleanFilename];
     if (entry && entry.base64) {
       const buffer = Buffer.from(entry.base64, 'base64');
       const mimeType = entry.mimeType || getMimeType(cleanFilename, buffer);
       return { buffer, mimeType };
+    }
+  } catch {
+    // continue
+  }
+
+  // Layer 5: Backward compatibility alias lookup (resolves unhashed or legacy SKU requests)
+  try {
+    const baseWithoutExt = cleanFilename.replace(/\.[^/.]+$/, '').toUpperCase();
+    const aliasInKv = await callKV<string>(['GET', `prod_img_sku:${baseWithoutExt}`]);
+    if (aliasInKv && typeof aliasInKv === 'string' && aliasInKv !== cleanFilename) {
+      return getProductImage(aliasInKv);
+    }
+    const journal = readLocalJournal();
+    const aliasInJournal = journal.aliases[baseWithoutExt];
+    if (aliasInJournal && typeof aliasInJournal === 'string' && aliasInJournal !== cleanFilename) {
+      return getProductImage(aliasInJournal);
     }
   } catch {
     // continue
