@@ -21,7 +21,13 @@ import {
 } from '@/lib/zoho/quotes';
 import { syncOrderToZohoSalesOrder, updateZohoSalesOrderStatus } from '@/lib/zoho/orders';
 import { syncBulkRfqToZohoLead } from '@/lib/zoho/crm';
-import { saveCustomProductDurable, loadDurableCustomProducts, getCustomProductBySlugDurable } from '@/lib/products/custom-store';
+import {
+  saveCustomProductDurable,
+  loadDurableCustomProducts,
+  getCustomProductBySlugDurable,
+  getCustomProductByIdDurable,
+  isProductDeletedDurable,
+} from '@/lib/products/custom-store';
 
 // Shared store state attached to globalThis to prevent process/worker boundary divergence in Next.js
 interface GlobalStoreState {
@@ -155,11 +161,11 @@ async function syncCustomProducts(force = false) {
 
 export async function getProducts(filters?: FilterParams): Promise<{ products: Product[]; total: number }> {
   // Primary: Authoritative catalog sourced directly from Zoho CRM (with server-side edge caching)
-  await syncCustomProducts();
   const zohoProducts = await getProductsFromZoho();
   if (zohoProducts && zohoProducts.length > 0) {
     storeState.productsList = zohoProducts;
   }
+  await syncCustomProducts();
   let result = storeState.productsList.filter(
     (p) => p.isActive !== false && !(p as any).isDeleted
   );
@@ -300,9 +306,12 @@ export interface CatalogFilterMetadata {
 }
 
 export const getCatalogFilterMetadata = cache(async (): Promise<CatalogFilterMetadata> => {
-  await syncCustomProducts();
   const zohoProducts = await getProductsFromZoho();
-  const pool = (zohoProducts && zohoProducts.length > 0 ? zohoProducts : storeState.productsList).filter(
+  if (zohoProducts && zohoProducts.length > 0) {
+    storeState.productsList = zohoProducts;
+  }
+  await syncCustomProducts();
+  const pool = storeState.productsList.filter(
     (p) => p.isActive !== false && !(p as any).isDeleted
   );
 
@@ -355,20 +364,25 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
   if (!slug) return null;
   const cleanSlug = decodeURIComponent(slug).toLowerCase().trim();
 
-  // 1. Instant O(1) in-memory index
-  const cached = getCachedProductBySlug(cleanSlug);
-  if (cached && cached.isActive !== false && !(cached as any).isDeleted) {
-    return cached;
-  }
-
-  // 2. Targeted durable custom product lookup
+  // 1. Authoritative durable custom product lookup (~15ms directly from KV)
   try {
     const durableMatch = await getCustomProductBySlugDurable(cleanSlug);
-    if (durableMatch && durableMatch.isActive !== false && !durableMatch.isDeleted) {
+    if (durableMatch) {
+      if (durableMatch.isActive === false || durableMatch.isDeleted) return null;
       return durableMatch;
     }
   } catch {
-    // continue to catalog pool
+    // continue to cached index
+  }
+
+  // 2. Instant O(1) in-memory index
+  const cached = getCachedProductBySlug(cleanSlug);
+  if (cached && cached.isActive !== false && !(cached as any).isDeleted) {
+    if (cached.sku) {
+      const isDeleted = await isProductDeletedDurable(cached.sku);
+      if (isDeleted) return null;
+    }
+    return cached;
   }
 
   // 3. Fallback to cached Zoho CRM catalog pool
@@ -385,6 +399,11 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
       !(p as any).isDeleted
   );
 
+  if (product && product.sku) {
+    const isDeleted = await isProductDeletedDurable(product.sku);
+    if (isDeleted) return null;
+  }
+
   return product || null;
 });
 
@@ -392,13 +411,28 @@ export const getProductById = cache(async (id: string): Promise<Product | null> 
   if (!id || typeof id !== 'string') return null;
   const cleanId = id.trim();
 
-  // 1. Instant O(1) in-memory index
+  // 1. Authoritative durable custom product lookup
+  try {
+    const durableMatch = await getCustomProductByIdDurable(cleanId);
+    if (durableMatch) {
+      if (durableMatch.isActive === false || durableMatch.isDeleted) return null;
+      return durableMatch;
+    }
+  } catch {
+    // continue
+  }
+
+  // 2. Instant O(1) in-memory index
   const cached = getCachedProductById(cleanId);
   if (cached && !(cached as any).isDeleted) {
+    if (cached.sku) {
+      const isDeleted = await isProductDeletedDurable(cached.sku);
+      if (isDeleted) return null;
+    }
     return cached;
   }
 
-  // 2. Fallback to cached Zoho CRM catalog pool
+  // 3. Fallback to cached Zoho CRM catalog pool
   const products = await getProductsFromZoho(false);
   const pool = products && products.length > 0 ? products : storeState.productsList;
 
@@ -410,6 +444,11 @@ export const getProductById = cache(async (id: string): Promise<Product | null> 
         ((p as any).zohoProductId && (p as any).zohoProductId === cleanId)) &&
       !(p as any).isDeleted
   );
+
+  if (product && product.sku) {
+    const isDeleted = await isProductDeletedDurable(product.sku);
+    if (isDeleted) return null;
+  }
 
   return product || null;
 });
@@ -728,8 +767,14 @@ export async function deleteProduct(productId: string): Promise<boolean> {
   }
   persistCustomProductsToDisk(custom);
 
+  const existing = storeState.productsList.find(
+    (p) => p.id === productId || (p.sku && p.sku.toUpperCase() === cleanId) || p.slug.toLowerCase() === productId.toLowerCase()
+  );
+  const skuToTombstone = existing?.sku || cleanId;
+  const slugToTombstone = existing?.slug || productId.toLowerCase();
+
   try {
-    await saveCustomProductDurable({ id: productId, sku: cleanId, isActive: false, isDeleted: true } as any);
+    await saveCustomProductDurable({ id: productId, sku: skuToTombstone, slug: slugToTombstone, isActive: false, isDeleted: true } as any);
   } catch (dErr) {
     console.warn('[Store] Durable custom product tombstone notice:', dErr);
   }

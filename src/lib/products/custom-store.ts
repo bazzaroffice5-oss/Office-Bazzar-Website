@@ -139,12 +139,19 @@ export async function saveCustomProductDurable(product: DurableProduct): Promise
   try {
     if (product.isDeleted) {
       await callKV(['DEL', `custom_prod:${cleanSku}`]);
+      await callKV(['DEL', `custom_prod_slug:${cleanSlug}`]);
+      if (product.id) {
+        await callKV(['DEL', `custom_prod_id:${product.id.toLowerCase()}`]);
+      }
       await callKV(['SREM', 'custom_prod_skus', cleanSku]);
       await callKV(['SADD', 'custom_prod_deleted_skus', cleanSku]);
     } else {
       await callKV(['SET', `custom_prod:${cleanSku}`, JSON.stringify(product)]);
       await callKV(['SADD', 'custom_prod_skus', cleanSku]);
       await callKV(['SET', `custom_prod_slug:${cleanSlug}`, cleanSku]);
+      if (product.id) {
+        await callKV(['SET', `custom_prod_id:${product.id.toLowerCase()}`, cleanSku]);
+      }
       await callKV(['SREM', 'custom_prod_deleted_skus', cleanSku]);
     }
   } catch (kvErr) {
@@ -248,18 +255,12 @@ export async function loadDurableCustomProducts(force = false): Promise<DurableP
 
 /**
  * Direct targeted lookup by slug without loading the entire custom catalog
+ * Real-time authoritative for product page instant updates and image replacements.
  */
 export async function getCustomProductBySlugDurable(slug: string): Promise<DurableProduct | null> {
   const clean = slug.toLowerCase().trim();
-  // 1. Check in-memory cache first
-  if (cachedDurableProducts) {
-    const found = cachedDurableProducts.find(
-      (p) => p.slug.toLowerCase() === clean && !p.isDeleted
-    );
-    if (found) return found;
-  }
 
-  // 2. Direct single KV lookup
+  // 1. Direct single KV lookup (authoritative real-time, ~15ms)
   try {
     const sku = await callKV<string>(['GET', `custom_prod_slug:${clean}`]);
     if (sku && typeof sku === 'string') {
@@ -273,7 +274,72 @@ export async function getCustomProductBySlugDurable(slug: string): Promise<Durab
     // fallback
   }
 
-  // 3. Fallback to loaded products
+  // 2. Fast in-memory cache check
+  if (cachedDurableProducts) {
+    const found = cachedDurableProducts.find(
+      (p) => p.slug.toLowerCase() === clean && !p.isDeleted
+    );
+    if (found) return found;
+  }
+
+  // 3. Fallback to full load
   const all = await loadDurableCustomProducts();
   return all.find((p) => p.slug.toLowerCase() === clean && !p.isDeleted) || null;
+}
+
+/**
+ * Direct targeted lookup by ID or SKU without loading the entire custom catalog
+ */
+export async function getCustomProductByIdDurable(idOrSku: string): Promise<DurableProduct | null> {
+  const clean = idOrSku.toLowerCase().trim();
+  const cleanUpper = idOrSku.toUpperCase().trim();
+
+  // 1. Direct single KV lookup (authoritative real-time, ~15ms)
+  try {
+    let sku = await callKV<string>(['GET', `custom_prod_id:${clean}`]);
+    if (!sku) {
+      sku = cleanUpper;
+    }
+    if (sku && typeof sku === 'string') {
+      const raw = await callKV<string>(['GET', `custom_prod:${sku.toUpperCase()}`]);
+      if (raw && typeof raw === 'string') {
+        const parsed = JSON.parse(raw);
+        if (parsed && !parsed.isDeleted) return parsed;
+      }
+    }
+  } catch {
+    // fallback
+  }
+
+  // 2. Fast in-memory cache check
+  if (cachedDurableProducts) {
+    const found = cachedDurableProducts.find(
+      (p) =>
+        (p.id.toLowerCase() === clean || (p.sku && p.sku.toUpperCase() === cleanUpper)) &&
+        !p.isDeleted
+    );
+    if (found) return found;
+  }
+
+  // 3. Fallback to full load
+  const all = await loadDurableCustomProducts();
+  return (
+    all.find(
+      (p) =>
+        (p.id.toLowerCase() === clean || (p.sku && p.sku.toUpperCase() === cleanUpper)) &&
+        !p.isDeleted
+    ) || null
+  );
+}
+
+/**
+ * Check if a product SKU is marked as deleted in Cloud KV
+ */
+export async function isProductDeletedDurable(sku: string): Promise<boolean> {
+  try {
+    const isMember = await callKV<number>(['SISMEMBER', 'custom_prod_deleted_skus', sku.toUpperCase()]);
+    return isMember === 1;
+  } catch {
+    return false;
+  }
 }
