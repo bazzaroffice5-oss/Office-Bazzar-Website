@@ -244,6 +244,11 @@ export async function POST(request: NextRequest) {
       revalidatePath('/categories');
       revalidatePath('/shop');
       revalidatePath('/product/[slug]', 'page');
+      revalidatePath('/category/[slug]', 'page');
+      revalidatePath('/category/office-stationery');
+      revalidatePath('/category/housekeeping-hygiene');
+      revalidatePath('/category/packaging-supplies');
+      revalidatePath('/category/printers-technology');
       if (saved.categoryId) {
         revalidatePath(`/category/${saved.categoryId}`);
       }

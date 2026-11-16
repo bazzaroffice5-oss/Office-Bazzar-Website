@@ -227,6 +227,7 @@ async function saveZohoProductNote(
           data: [
             {
               id: existing.noteId,
+              Note_Title: noteTitle,
               Note_Content: noteContent,
             },
           ],
@@ -607,6 +608,11 @@ export async function updateZohoProduct(
     const noteId = await saveZohoProductNote({ ...product, sku: cleanSku });
     if (!finalZohoId) {
       finalZohoId = noteId;
+    }
+
+    // If SKU was modified, clean up the obsolete old note to prevent duplicate records
+    if (skuFallback && skuFallback.trim().toUpperCase() !== cleanSku) {
+      await deleteZohoProductNote(skuFallback.trim().toUpperCase());
     }
   } catch (noteErr) {
     console.warn('[ZohoProducts] Note sync warning on update:', noteErr);

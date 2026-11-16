@@ -920,6 +920,10 @@ export function isProductInSubcategory(p: Product, subSlug: string): boolean {
 
   if (p.subcategoryId?.toLowerCase() === slug) return true;
   if (p.subcategoryName?.toLowerCase() === slug) return true;
+  const normSub = p.subcategoryName ? p.subcategoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') : '';
+  if (normSub && (normSub === slug || slug.includes(normSub) || normSub.includes(slug))) return true;
+  const normSubId = p.subcategoryId ? p.subcategoryId.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') : '';
+  if (normSubId && (normSubId === slug || slug.includes(normSubId) || normSubId.includes(slug))) return true;
 
   const mapped = CATEGORY_MAP[p.subcategoryId || ''] || CATEGORY_MAP[p.categoryId || ''];
   if (mapped?.subSlug === slug || mapped?.subName?.toLowerCase() === slug) {

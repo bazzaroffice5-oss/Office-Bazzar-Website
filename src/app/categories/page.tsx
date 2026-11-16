@@ -10,6 +10,8 @@ import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG, formatSeoTitle } fro
 import JsonLd from '@/components/seo/JsonLd';
 import { Subcategory } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 export const ALL_PRODUCTS_CARD: Subcategory = {
   id: 'all-products',
   name: 'All Products',

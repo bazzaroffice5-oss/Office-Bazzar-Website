@@ -40,6 +40,84 @@ const CATEGORIES = [
   { id: 'printers-technology', name: 'Printers & Technology' },
 ];
 
+const SUBCATEGORIES_BY_CATEGORY: Record<string, { id: string; name: string }[]> = {
+  'office-stationery': [
+    { id: 'writing-instruments', name: 'Writing Instruments' },
+    { id: 'paper-notebooks', name: 'Paper & Notebooks' },
+    { id: 'files-office-organization', name: 'Files & Office Organization' },
+    { id: 'desk-accessories-tools', name: 'Desk Organization & Tools' },
+    { id: 'boards-visual-display', name: 'Boards & Visual Display' },
+    { id: 'office-pantry-essentials', name: 'Office Pantry Essentials' },
+    { id: 'safety-maintenance', name: 'Safety & Facility Maintenance' },
+  ],
+  'housekeeping-hygiene': [
+    { id: 'cleaning-chemicals', name: 'Cleaning Chemicals & Detergents' },
+    { id: 'washroom-dispensers', name: 'Washroom Hygiene & Dispensers' },
+    { id: 'tissue-papers-rolls', name: 'Tissue Papers & Rolls' },
+    { id: 'dustbins-waste-handling', name: 'Dustbins & Waste Handling' },
+    { id: 'mops-floor-wipers', name: 'Mops & Floor Wipers' },
+    { id: 'cloths-scrubbers-brushes', name: 'Cleaning Cloths, Scrubbers & Brushes' },
+    { id: 'cleaning-equipment-trolleys', name: 'Cleaning Equipment & Trolleys' },
+    { id: 'air-fresheners-care', name: 'Air Fresheners & Washroom Care' },
+  ],
+  'printers-technology': [
+    { id: 'laser-toner-cartridges', name: 'Laser Toner Cartridges' },
+    { id: 'ink-cartridges-supplies', name: 'Ink Cartridges & Print Supplies' },
+    { id: 'paper-shredders', name: 'Paper Shredding Machines' },
+    { id: 'currency-counting-machines', name: 'Currency Counting Machines' },
+    { id: 'it-peripherals-machines', name: 'IT Peripherals & Office Machines' },
+  ],
+  'packaging-supplies': [
+    { id: 'bopp-packaging-tapes', name: 'BOPP Packaging Tapes' },
+    { id: 'protective-packaging-cushioning', name: 'Protective Packaging & Cushioning' },
+    { id: 'box-strapping-banding', name: 'Box Strapping & Banding Rolls' },
+    { id: 'floor-marking-safety-tapes', name: 'Floor Marking & Safety Tapes' },
+    { id: 'adhesives-packaging-tools', name: 'Adhesives & Packaging Tools' },
+  ],
+};
+
+function resolveAdminCategory(slugOrId?: string): { id: string; name: string } {
+  if (!slugOrId) return { id: 'office-stationery', name: 'Office Stationery' };
+  const s = slugOrId.toLowerCase().trim();
+  if (
+    s.includes('housekeep') ||
+    s.includes('hygiene') ||
+    s.includes('clean') ||
+    s.includes('taski') ||
+    s.includes('bin') ||
+    s.includes('tissue') ||
+    s.includes('mop') ||
+    s.includes('wiper') ||
+    s.includes('cloth') ||
+    s.includes('dispenser')
+  ) {
+    return { id: 'housekeeping-hygiene', name: 'Housekeeping & Hygiene' };
+  }
+  if (
+    s.includes('printer') ||
+    s.includes('tech') ||
+    s.includes('toner') ||
+    s.includes('cartridge') ||
+    s.includes('consumable') ||
+    s.includes('shredder') ||
+    s.includes('currency') ||
+    s.includes('ink')
+  ) {
+    return { id: 'printers-technology', name: 'Printers & Technology' };
+  }
+  if (
+    s.includes('packag') ||
+    s.includes('dispatch') ||
+    s.includes('tape') ||
+    s.includes('bubble') ||
+    s.includes('strapping') ||
+    s.includes('box')
+  ) {
+    return { id: 'packaging-supplies', name: 'Packaging Supplies' };
+  }
+  return { id: 'office-stationery', name: 'Office Stationery' };
+}
+
 export default function ProductAdminDashboardClient({
   initialProducts,
   adminEmail,
@@ -184,17 +262,17 @@ export default function ProductAdminDashboardClient({
 
   const openEditModal = (p: Product) => {
     setEditingProduct(p);
-    setFormName(p.name);
-    setFormSku(p.sku);
-    setFormCategoryId(p.categoryId || 'office-stationery');
-    const match = CATEGORIES.find((c) => c.id === p.categoryId);
-    setFormCategoryName(p.categoryName || (match ? match.name : 'Office Stationery'));
+    setFormName(p.name || '');
+    setFormSku(p.sku || '');
+    const resolved = resolveAdminCategory(p.categoryId || p.categoryName);
+    setFormCategoryId(resolved.id);
+    setFormCategoryName(resolved.name);
     setFormSubcategoryName(p.subcategoryName || '');
     setFormBrand(p.brandName || 'OfficeBazzar');
     setFormPackSize(p.packSize || '1 Unit');
     setFormDescription(p.description || '');
     setFormCataloguePage((p.specifications as any)?.cataloguePage || '');
-    setFormPrice(p.price ? String(p.price) : '');
+    setFormPrice(p.price !== undefined && p.price !== null ? String(p.price) : '');
     setFormPublishStatus(p.isActive !== false ? 'published' : 'unpublished');
     setFormImageFile(null);
     const existingImg = p.images && p.images[0] ? p.images[0] : '';
@@ -640,6 +718,17 @@ export default function ProductAdminDashboardClient({
                         </td>
                         <td className="py-3 px-4 text-right">
                           <div className="flex items-center justify-end gap-2">
+                            <a
+                              href={`/product/${p.slug || p.sku.toLowerCase()}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#057a3b] border border-emerald-200 text-xs font-semibold transition-colors cursor-pointer"
+                              title="View on live website"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5" />
+                              <span>Live</span>
+                            </a>
+
                             <button
                               onClick={() => setViewingProduct(p)}
                               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-[#004b87] border border-blue-200 text-xs font-semibold transition-colors cursor-pointer"
@@ -770,20 +859,35 @@ export default function ProductAdminDashboardClient({
               <X className="w-5 h-5" />
             </button>
 
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center text-[#ea580c]">
-                {editingProduct ? <Edit3 className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center text-[#ea580c]">
+                  {editingProduct ? <Edit3 className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                </div>
+                <div>
+                  <h2 className="text-lg font-bold text-slate-900">
+                    {editingProduct ? 'Edit Existing Product' : 'Add New Product to Zoho CRM'}
+                  </h2>
+                  <p className="text-xs text-slate-500">
+                    {editingProduct
+                      ? `Updating SKU: ${editingProduct.sku}`
+                      : 'Direct synchronization with live catalogue and Zoho CRM Products module'}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h2 className="text-lg font-bold text-slate-900">
-                  {editingProduct ? 'Edit Existing Product' : 'Add New Product to Zoho CRM'}
-                </h2>
-                <p className="text-xs text-slate-500">
-                  {editingProduct
-                    ? `Updating SKU: ${editingProduct.sku}`
-                    : 'Direct synchronization with live catalogue and Zoho CRM Products module'}
-                </p>
-              </div>
+
+              {editingProduct && (
+                <a
+                  href={`/product/${editingProduct.slug || editingProduct.sku.toLowerCase()}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#057a3b] border border-emerald-200 text-xs font-bold transition-all mr-8"
+                  title="View this product live on OfficeBazzar storefront"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>View on Website</span>
+                </a>
+              )}
             </div>
 
             <form
@@ -828,8 +932,9 @@ export default function ProductAdminDashboardClient({
                   <select
                     value={formCategoryId}
                     onChange={(e) => {
-                      setFormCategoryId(e.target.value);
-                      const match = CATEGORIES.find((c) => c.id === e.target.value);
+                      const newCatId = e.target.value;
+                      setFormCategoryId(newCatId);
+                      const match = CATEGORIES.find((c) => c.id === newCatId);
                       setFormCategoryName(match ? match.name : 'Office Supplies');
                     }}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 font-medium focus:outline-none focus:border-[#ea580c] focus:bg-white cursor-pointer"
@@ -843,15 +948,44 @@ export default function ProductAdminDashboardClient({
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Subcategory (Optional)
+                    Subcategory
                   </label>
-                  <input
-                    type="text"
-                    value={formSubcategoryName}
-                    onChange={(e) => setFormSubcategoryName(e.target.value)}
-                    placeholder="e.g. Files & Folders, Cleaning Equipment"
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15"
-                  />
+                  <div className="space-y-1.5">
+                    <select
+                      value={
+                        SUBCATEGORIES_BY_CATEGORY[formCategoryId]?.some(
+                          (s) => s.name.toLowerCase() === formSubcategoryName.toLowerCase() || s.id === formSubcategoryName.toLowerCase()
+                        )
+                          ? SUBCATEGORIES_BY_CATEGORY[formCategoryId]?.find(
+                              (s) => s.name.toLowerCase() === formSubcategoryName.toLowerCase() || s.id === formSubcategoryName.toLowerCase()
+                            )?.name || formSubcategoryName
+                          : formSubcategoryName ? '__custom__' : ''
+                      }
+                      onChange={(e) => {
+                        if (e.target.value === '__custom__') {
+                          // Keep existing custom string
+                        } else {
+                          setFormSubcategoryName(e.target.value);
+                        }
+                      }}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 font-medium focus:outline-none focus:border-[#ea580c] focus:bg-white cursor-pointer"
+                    >
+                      <option value="">-- Select Standard Subcategory --</option>
+                      {SUBCATEGORIES_BY_CATEGORY[formCategoryId]?.map((sub) => (
+                        <option key={sub.id} value={sub.name}>
+                          {sub.name}
+                        </option>
+                      ))}
+                      <option value="__custom__">Custom / Enter Manually Below...</option>
+                    </select>
+                    <input
+                      type="text"
+                      value={formSubcategoryName}
+                      onChange={(e) => setFormSubcategoryName(e.target.value)}
+                      placeholder="e.g. Files & Folders, Writing Instruments..."
+                      className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15"
+                    />
+                  </div>
                 </div>
               </div>
 

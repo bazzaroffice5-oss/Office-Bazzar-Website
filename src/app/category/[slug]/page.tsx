@@ -5,16 +5,7 @@ import { getProducts, getCategoryBySlug, getCatalogFilterMetadata } from '@/lib/
 import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG, formatSeoTitle } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
-export const revalidate = 3600;
-
-export async function generateStaticParams() {
-  return [
-    { slug: 'office-stationery' },
-    { slug: 'housekeeping-hygiene' },
-    { slug: 'printers-technology' },
-    { slug: 'packaging-supplies' },
-  ];
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({
   params,
