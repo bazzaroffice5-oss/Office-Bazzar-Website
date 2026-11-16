@@ -112,9 +112,16 @@ const quotationsList: Quotation[] = storeState.quotationsList;
 const quotationIdempotencyStore = new Map<string, Quotation>();
 const notificationLogsList: NotificationLog[] = storeState.notificationLogsList;
 
-function syncCustomProducts() {
+async function syncCustomProducts() {
   const disk = loadCustomProductsFromDisk();
-  for (const dp of disk) {
+  let durable: any[] = [];
+  try {
+    durable = await loadDurableCustomProducts();
+  } catch {
+    durable = [];
+  }
+  const combined = [...disk, ...durable];
+  for (const dp of combined) {
     if (dp.isDeleted) {
       storeState.productsList = storeState.productsList.filter(
         (p) => p.id !== dp.id && p.sku.toUpperCase() !== (dp.sku || '').toUpperCase()
@@ -139,7 +146,7 @@ function syncCustomProducts() {
 
 export async function getProducts(filters?: FilterParams): Promise<{ products: Product[]; total: number }> {
   // Primary: Authoritative catalog sourced directly from Zoho CRM (with server-side edge caching)
-  syncCustomProducts();
+  await syncCustomProducts();
   const zohoProducts = await getProductsFromZoho();
   if (zohoProducts && zohoProducts.length > 0) {
     storeState.productsList = zohoProducts;
@@ -284,7 +291,7 @@ export interface CatalogFilterMetadata {
 }
 
 export const getCatalogFilterMetadata = cache(async (): Promise<CatalogFilterMetadata> => {
-  syncCustomProducts();
+  await syncCustomProducts();
   const zohoProducts = await getProductsFromZoho();
   const pool = (zohoProducts && zohoProducts.length > 0 ? zohoProducts : storeState.productsList).filter(
     (p) => p.isActive !== false
