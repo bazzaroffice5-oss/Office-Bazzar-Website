@@ -13,6 +13,7 @@ import { Product } from '@/types';
 import { INITIAL_PRODUCTS } from '@/lib/data/catalog';
 import { zohoFetch, isZohoConfigured } from './client';
 import zohoMappingData from '@/lib/data/zoho_product_mapping.json';
+import { loadDurableCustomProducts } from '@/lib/products/custom-store';
 
 export interface ZohoProductRecord {
   id: string;
@@ -371,6 +372,26 @@ async function syncProductsFromZohoInternal(): Promise<Product[]> {
       }
     } catch (noteErr) {
       console.warn('[ZohoProducts] Notice checking Zoho product notes:', noteErr);
+    }
+
+    // 2b. Overlay durable Cloud KV custom products
+    try {
+      const durableCustom = await loadDurableCustomProducts();
+      for (const cp of durableCustom) {
+        if (cp.isDeleted) {
+          if (cp.sku) productsMap.delete(cp.sku.toUpperCase());
+          continue;
+        }
+        const cleanSku = (cp.sku || cp.id).toUpperCase();
+        const existing = productsMap.get(cleanSku);
+        if (existing) {
+          productsMap.set(cleanSku, { ...existing, ...cp });
+        } else {
+          productsMap.set(cleanSku, cp);
+        }
+      }
+    } catch (dErr) {
+      console.warn('[ZohoProducts] Notice checking durable custom products:', dErr);
     }
 
     // 3. Optional: Overlay official /Products module if enabled in organization

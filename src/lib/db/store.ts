@@ -21,6 +21,7 @@ import {
 } from '@/lib/zoho/quotes';
 import { syncOrderToZohoSalesOrder, updateZohoSalesOrderStatus } from '@/lib/zoho/orders';
 import { syncBulkRfqToZohoLead } from '@/lib/zoho/crm';
+import { saveCustomProductDurable, loadDurableCustomProducts } from '@/lib/products/custom-store';
 
 // Shared store state attached to globalThis to prevent process/worker boundary divergence in Next.js
 interface GlobalStoreState {
@@ -339,7 +340,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
   const products = await getProductsFromZoho(true);
   const pool = products && products.length > 0 ? products : storeState.productsList;
 
-  const product = pool.find(
+  let product = pool.find(
     (p) =>
       (p.slug.toLowerCase() === cleanSlug ||
         p.sku.toLowerCase() === cleanSlug ||
@@ -348,6 +349,18 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
       p.isActive !== false &&
       !(p as any).isDeleted
   );
+
+  if (!product) {
+    const durableCustom = await loadDurableCustomProducts();
+    product = durableCustom.find(
+      (p) =>
+        (p.slug.toLowerCase() === cleanSlug ||
+          p.sku.toLowerCase() === cleanSlug ||
+          p.id.toLowerCase() === cleanSlug) &&
+        p.isActive !== false &&
+        !p.isDeleted
+    );
+  }
 
   return product || null;
 }
@@ -358,7 +371,7 @@ export async function getProductById(id: string): Promise<Product | null> {
   const products = await getProductsFromZoho(true);
   const pool = products && products.length > 0 ? products : storeState.productsList;
 
-  const product = pool.find(
+  let product = pool.find(
     (p) =>
       (p.id.toLowerCase() === cleanId.toLowerCase() ||
         p.sku.toLowerCase() === cleanId.toLowerCase() ||
@@ -366,6 +379,17 @@ export async function getProductById(id: string): Promise<Product | null> {
         ((p as any).zohoProductId && (p as any).zohoProductId === cleanId)) &&
       !(p as any).isDeleted
   );
+
+  if (!product) {
+    const durableCustom = await loadDurableCustomProducts();
+    product = durableCustom.find(
+      (p) =>
+        (p.id.toLowerCase() === cleanId.toLowerCase() ||
+          p.sku.toLowerCase() === cleanId.toLowerCase() ||
+          p.slug.toLowerCase() === cleanId.toLowerCase()) &&
+        !p.isDeleted
+    );
+  }
 
   return product || null;
 }
@@ -654,6 +678,13 @@ export async function saveProduct(productData: Partial<Product>): Promise<Produc
   }
   persistCustomProductsToDisk(custom);
 
+  // Persist to multi-container Durable Cloud KV store
+  try {
+    await saveCustomProductDurable(newProduct);
+  } catch (dErr) {
+    console.warn('[Store] Durable custom product save notice:', dErr);
+  }
+
   return newProduct;
 }
 
@@ -661,7 +692,7 @@ export async function deleteProduct(productId: string): Promise<boolean> {
   const cleanId = productId.trim().toUpperCase();
   const initialLen = storeState.productsList.length;
 
-  // Mark tombstone in custom products on disk
+  // Mark tombstone in custom products on disk and Cloud KV
   const custom = loadCustomProductsFromDisk();
   const cIdx = custom.findIndex(
     (c) => c.id === productId || (c.sku && c.sku.toUpperCase() === cleanId) || c.slug.toLowerCase() === productId.toLowerCase()
@@ -669,9 +700,15 @@ export async function deleteProduct(productId: string): Promise<boolean> {
   if (cIdx !== -1) {
     custom[cIdx] = { ...custom[cIdx], isActive: false, isDeleted: true };
   } else {
-    custom.push({ id: productId, sku: cleanId, isActive: false, isDeleted: true } as any);
+    custom.unshift({ id: productId, sku: cleanId, isActive: false, isDeleted: true } as any);
   }
   persistCustomProductsToDisk(custom);
+
+  try {
+    await saveCustomProductDurable({ id: productId, sku: cleanId, isActive: false, isDeleted: true } as any);
+  } catch (dErr) {
+    console.warn('[Store] Durable custom product tombstone notice:', dErr);
+  }
 
   // Remove from runtime storeState
   storeState.productsList = storeState.productsList.filter(
