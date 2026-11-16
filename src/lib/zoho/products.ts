@@ -41,7 +41,7 @@ const ZOHO_ACCOUNT_PARENT_ID = '1476900000000575002'; // Office Bazzar Account
 let cachedProducts: Product[] | null = null;
 let lastCacheSync = 0;
 let inflightSyncPromise: Promise<Product[]> | null = null;
-const CACHE_TTL_MS = 15 * 1000; // 15 seconds near-realtime cache for multi-container serverless
+const CACHE_TTL_MS = 5 * 1000; // 5 seconds near-realtime cache for multi-container serverless
 
 // Fast SKU & ID lookup maps
 const mappingByWebsiteId = new Map<string, ZohoProductMappingItem>();
@@ -445,15 +445,6 @@ async function syncProductsFromZohoInternal(): Promise<Product[]> {
 export async function getProductsFromZoho(forceRefresh = false): Promise<Product[]> {
   const now = Date.now();
   if (!forceRefresh && cachedProducts && now - lastCacheSync < CACHE_TTL_MS) {
-    return cachedProducts;
-  }
-
-  if (!forceRefresh && cachedProducts) {
-    if (!inflightSyncPromise) {
-      inflightSyncPromise = syncProductsFromZohoInternal().finally(() => {
-        inflightSyncPromise = null;
-      });
-    }
     return cachedProducts;
   }
 
