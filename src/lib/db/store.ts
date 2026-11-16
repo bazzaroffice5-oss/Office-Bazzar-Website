@@ -294,7 +294,7 @@ export const getCatalogFilterMetadata = cache(async (): Promise<CatalogFilterMet
   await syncCustomProducts();
   const zohoProducts = await getProductsFromZoho();
   const pool = (zohoProducts && zohoProducts.length > 0 ? zohoProducts : storeState.productsList).filter(
-    (p) => p.isActive !== false
+    (p) => p.isActive !== false && !(p as any).isDeleted
   );
 
   const brandMap = new Map<string, { id: string; name: string }>();

@@ -238,7 +238,7 @@ export default function ProductDetailClient({
           {/* Technical Specifications (if available) */}
           {product.specifications && Object.keys(product.specifications).length > 0 && (
             (() => {
-              const IGNORED_KEYS = new Set(['source', 'catalogueCode', 'brand', 'category', 'subcategory', 'inventoryStatus', '0', '1', '2', '3', '4', '5']);
+              const IGNORED_KEYS = new Set(['source', 'catalogueCode', 'cataloguePage', 'catalogueReferencePage', 'brand', 'category', 'subcategory', 'inventoryStatus', '0', '1', '2', '3', '4', '5']);
               const validEntries = Object.entries(product.specifications).filter(
                 ([k, v]) => !IGNORED_KEYS.has(k) && typeof v === 'string' && v.trim().length > 0 && isNaN(Number(k))
               );
@@ -246,7 +246,6 @@ export default function ProductDetailClient({
 
               const formatKey = (k: string) => {
                 if (k === 'specs') return 'Technical Specifications';
-                if (k === 'cataloguePage') return 'Catalogue Reference Page';
                 if (k === 'stockVerification') return 'Verification Status';
                 return k.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase());
               };

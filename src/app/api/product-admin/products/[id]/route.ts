@@ -61,7 +61,6 @@ export async function PUT(
       const brandName = formData.get('brandName') as string | null;
       const packSize = formData.get('packSize') as string | null;
       const description = formData.get('description') as string | null;
-      const cataloguePage = formData.get('cataloguePage') as string | null;
       const priceStr = formData.get('price') as string | null;
       const isActiveStr = formData.get('isActive') as string | null;
       const publishStatus = formData.get('publishStatus') as string | null;
@@ -95,12 +94,10 @@ export async function PUT(
         }
       }
 
-      if (cataloguePage !== null) {
-        updates.specifications = {
-          ...(existing.specifications || {}),
-          cataloguePage,
-        };
+      if (publishStatus) {
+        updates.publishStatus = publishStatus as 'published' | 'draft' | 'unpublished';
       }
+      updates.updatedAt = new Date().toISOString();
 
       // Handle Image Replacement via URL input
       if (imageUrlInput && imageUrlInput.trim()) {

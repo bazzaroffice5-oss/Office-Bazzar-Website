@@ -48,23 +48,22 @@ export async function GET(request: NextRequest) {
     const startIndex = (page - 1) * limit;
     const paginatedProducts = filtered.slice(startIndex, startIndex + limit);
 
-    // Compute real metrics from Zoho CRM catalog & custom entries
+    // Compute real metrics directly from Zoho CRM catalog records (zero hardcoded counts)
     const totalCount = allProducts.length;
-    const activeCount = allProducts.filter((p) => p.isActive !== false).length;
+    const publishedCount = allProducts.filter((p) => p.isActive === true && (p as any).publishStatus !== 'draft' && (p as any).publishStatus !== 'unpublished').length;
+    const draftCount = allProducts.filter((p) => (p as any).publishStatus === 'draft').length;
+    const unpublishedCount = allProducts.filter((p) => (p as any).publishStatus === 'unpublished' || (p.isActive === false && (p as any).publishStatus !== 'draft')).length;
 
-    // Load actual custom / recently added products from disk to count actual recent additions
-    let recentlyAddedCount = 0;
-    try {
-      const customPath = path.join(process.cwd(), 'src', 'lib', 'data', 'custom_products.json');
-      if (fs.existsSync(customPath)) {
-        const customData = JSON.parse(fs.readFileSync(customPath, 'utf8'));
-        if (Array.isArray(customData)) {
-          recentlyAddedCount = customData.length;
-        }
-      }
-    } catch {
-      recentlyAddedCount = 0;
-    }
+    const now = Date.now();
+    const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000;
+    const recentlyAddedCount = allProducts.filter((p) => {
+      const t = p.createdAt || (p as any).createdTime;
+      return t ? new Date(t).getTime() > thirtyDaysAgo : false;
+    }).length;
+    const recentlyUpdatedCount = allProducts.filter((p) => {
+      const t = p.updatedAt || (p as any).modifiedTime;
+      return t ? new Date(t).getTime() > thirtyDaysAgo : false;
+    }).length;
 
     // Recently added: top 10 products
     const recentlyAdded = allProducts.slice(0, 10).map((p) => ({
@@ -86,9 +85,15 @@ export async function GET(request: NextRequest) {
       },
       metrics: {
         totalProducts: totalCount,
-        activeProducts: activeCount,
+        publishedProducts: publishedCount,
+        draftProducts: draftCount,
+        unpublishedProducts: unpublishedCount,
+        recentlyAddedProducts: recentlyAddedCount,
+        recentlyUpdatedProducts: recentlyUpdatedCount,
+        // Backwards compatibility aliases
+        activeProducts: publishedCount,
         recentlyAddedCount,
-        recentlyUpdatedCount: recentlyAddedCount,
+        recentlyUpdatedCount,
       },
       recentlyAdded,
     });
@@ -123,7 +128,6 @@ export async function POST(request: NextRequest) {
       const brandName = formData.get('brandName') as string;
       const packSize = formData.get('packSize') as string;
       const description = formData.get('description') as string;
-      const cataloguePage = formData.get('cataloguePage') as string;
       const price = formData.get('price') ? parseFloat(formData.get('price') as string) : undefined;
       const publishStatus = (formData.get('publishStatus') as string) || 'published';
       const file = formData.get('imageFile') as File | null;
@@ -175,8 +179,11 @@ export async function POST(request: NextRequest) {
         description: description?.trim() || '',
         price: price || 0,
         isActive,
+        publishStatus: publishStatus as 'published' | 'draft' | 'unpublished',
         images: imagesList,
-        specifications: cataloguePage ? { cataloguePage } : {},
+        specifications: {},
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       };
     } else {
       const body = await request.json();

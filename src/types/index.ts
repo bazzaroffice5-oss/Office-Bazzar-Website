@@ -62,8 +62,13 @@ export interface Product {
   rating?: number | null;
   reviewCount: number;
   isActive: boolean;
+  publishStatus?: 'published' | 'draft' | 'unpublished';
   isPriceVerified?: boolean;
   requiresManualReview?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  createdTime?: string;
+  modifiedTime?: string;
   metaTitle?: string;
   metaDescription?: string;
   tags?: string[];

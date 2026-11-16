@@ -24,6 +24,8 @@ import {
   SlidersHorizontal,
   FolderTree,
   Eye,
+  EyeOff,
+  FileText,
 } from 'lucide-react';
 import { Product } from '@/types';
 import { resolveProductImageUrl, FALLBACK_PRODUCT_IMAGE } from '@/lib/utils/image';
@@ -150,7 +152,6 @@ export default function ProductAdminDashboardClient({
   const [formBrand, setFormBrand] = useState('OfficeBazzar');
   const [formPackSize, setFormPackSize] = useState('1 Unit');
   const [formDescription, setFormDescription] = useState('');
-  const [formCataloguePage, setFormCataloguePage] = useState('');
   const [formPrice, setFormPrice] = useState<string>('');
   const [formPublishStatus, setFormPublishStatus] = useState<'published' | 'draft' | 'unpublished'>('published');
   const [formImageFile, setFormImageFile] = useState<File | null>(null);
@@ -162,27 +163,46 @@ export default function ProductAdminDashboardClient({
   const [deleting, setDeleting] = useState(false);
   const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [refreshing, setRefreshing] = useState(false);
-
-  // Track session additions and updates
-  const [sessionAddedCount, setSessionAddedCount] = useState(0);
-  const [sessionUpdatedCount, setSessionUpdatedCount] = useState(0);
+  const [zohoApiError, setZohoApiError] = useState<string | null>(null);
 
   const showToast = (type: 'success' | 'error', text: string) => {
     setToastMessage({ type, text });
     setTimeout(() => setToastMessage(null), 5000);
   };
 
-  // Real Dynamic Metrics (sourced directly from live Zoho catalog & current store)
+  // Real Dynamic Metrics (sourced directly from actual Zoho CRM catalog records & fields)
   const metrics = useMemo(() => {
     const total = products.length;
-    const active = products.filter((p) => p.isActive !== false).length;
+    const published = products.filter(
+      (p) => p.isActive === true && p.publishStatus !== 'draft' && p.publishStatus !== 'unpublished'
+    ).length;
+    const draft = products.filter((p) => p.publishStatus === 'draft').length;
+    const unpublished = products.filter(
+      (p) => p.publishStatus === 'unpublished' || (p.isActive === false && p.publishStatus !== 'draft')
+    ).length;
+
+    const now = Date.now();
+    const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000;
+    const recentlyAdded = products.filter((p) => {
+      const t = p.createdAt || (p as any).createdTime;
+      return t ? new Date(t).getTime() > thirtyDaysAgo : false;
+    }).length;
+    const recentlyUpdated = products.filter((p) => {
+      const t = p.updatedAt || (p as any).modifiedTime;
+      return t ? new Date(t).getTime() > thirtyDaysAgo : false;
+    }).length;
+
     return {
       total,
-      active,
-      recentlyAdded: sessionAddedCount,
-      recentlyUpdated: sessionUpdatedCount,
+      published,
+      draft,
+      unpublished,
+      recentlyAdded,
+      recentlyUpdated,
+      // Alias for backwards compatibility
+      active: published,
     };
-  }, [products, sessionAddedCount, sessionUpdatedCount]);
+  }, [products]);
 
   // Derived subcategory selection for modal dropdown
   const selectedSubcategoryValue = useMemo(() => {
@@ -246,19 +266,60 @@ export default function ProductAdminDashboardClient({
 
   const refreshProducts = async () => {
     setRefreshing(true);
+    setZohoApiError(null);
     try {
       const res = await fetch('/api/product-admin/products?limit=2000');
       const data = await res.json();
-      if (data.products && Array.isArray(data.products)) {
+      if (res.ok && data.products && Array.isArray(data.products)) {
         setProducts(data.products);
         showToast('success', `Product catalogue refreshed from Zoho CRM (${data.products.length} records).`);
       } else {
-        showToast('error', 'Unable to refresh product records.');
+        const errMsg = data.error || data.details || 'Unable to refresh product records from Zoho CRM.';
+        setZohoApiError(errMsg);
+        showToast('error', errMsg);
       }
     } catch {
-      showToast('error', 'Network error connecting to Zoho CRM.');
+      const netErr = 'Network error connecting to Zoho CRM.';
+      setZohoApiError(netErr);
+      showToast('error', netErr);
     } finally {
       setRefreshing(false);
+    }
+  };
+
+  const handleTogglePublish = async (p: AdminProduct, targetStatus: 'published' | 'unpublished') => {
+    try {
+      const formData = new FormData();
+      formData.append('name', p.name);
+      formData.append('sku', p.sku);
+      formData.append('publishStatus', targetStatus);
+
+      const res = await fetch(`/api/product-admin/products/${p.id}`, {
+        method: 'PUT',
+        body: formData,
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        showToast('error', data.error || `Failed to update status in Zoho CRM.`);
+        return;
+      }
+
+      setProducts((prev) =>
+        prev.map((item) =>
+          item.id === p.id || item.sku === p.sku
+            ? { ...item, isActive: targetStatus === 'published', publishStatus: targetStatus }
+            : item
+        )
+      );
+
+      showToast(
+        'success',
+        targetStatus === 'published'
+          ? `Product "${p.name}" published live to storefront and Zoho CRM!`
+          : `Product "${p.name}" unpublished and hidden from live storefront.`
+      );
+    } catch {
+      showToast('error', 'Network error updating product status in Zoho CRM.');
     }
   };
 
@@ -271,7 +332,6 @@ export default function ProductAdminDashboardClient({
     setFormBrand('OfficeBazzar');
     setFormPackSize('1 Unit');
     setFormDescription('');
-    setFormCataloguePage('');
     setFormPrice('');
     setFormPublishStatus('published');
     setFormImageFile(null);
@@ -291,7 +351,6 @@ export default function ProductAdminDashboardClient({
     setFormBrand(p.brandName || 'OfficeBazzar');
     setFormPackSize(p.packSize || '1 Unit');
     setFormDescription(p.description || '');
-    setFormCataloguePage(p.specifications?.cataloguePage ? String(p.specifications.cataloguePage) : '');
     setFormPrice(p.price !== undefined && p.price !== null ? String(p.price) : '');
     setFormPublishStatus(p.isActive !== false ? 'published' : 'unpublished');
     setFormImageFile(null);
@@ -330,7 +389,6 @@ export default function ProductAdminDashboardClient({
       formData.append('brandName', formBrand.trim());
       formData.append('packSize', formPackSize.trim());
       formData.append('description', formDescription.trim());
-      formData.append('cataloguePage', formCataloguePage.trim());
       formData.append('publishStatus', formPublishStatus);
       if (formPrice.trim()) formData.append('price', formPrice.trim());
       if (formImageFile) formData.append('imageFile', formImageFile);
@@ -349,7 +407,6 @@ export default function ProductAdminDashboardClient({
       }
 
       setProducts((prev) => [data.product, ...prev]);
-      setSessionAddedCount((c) => c + 1);
       setIsAddModalOpen(false);
       showToast(
         'success',
@@ -380,7 +437,6 @@ export default function ProductAdminDashboardClient({
       formData.append('brandName', formBrand.trim());
       formData.append('packSize', formPackSize.trim());
       formData.append('description', formDescription.trim());
-      formData.append('cataloguePage', formCataloguePage.trim());
       formData.append('publishStatus', formPublishStatus);
       if (formPrice.trim()) formData.append('price', formPrice.trim());
       if (formImageFile) formData.append('imageFile', formImageFile);
@@ -401,7 +457,6 @@ export default function ProductAdminDashboardClient({
       setProducts((prev) =>
         prev.map((p) => (p.id === editingProduct.id ? data.product : p))
       );
-      setSessionUpdatedCount((c) => c + 1);
       setEditingProduct(null);
       showToast(
         'success',
@@ -431,7 +486,6 @@ export default function ProductAdminDashboardClient({
       }
 
       setProducts((prev) => prev.filter((p) => p.id !== deletingProduct.id && p.sku !== deletingProduct.sku));
-      setSessionUpdatedCount((c) => c + 1);
       showToast(
         'success',
         `Product "${deletingProduct.name}" (${deletingProduct.sku}) deleted and synchronized with Zoho CRM.`
@@ -536,62 +590,112 @@ export default function ProductAdminDashboardClient({
           </div>
         )}
 
-        {/* 1. Dynamic Overview Section Metrics */}
-        <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        {/* Zoho CRM API Error Banner */}
+        {zohoApiError && (
+          <div className="bg-rose-50 border border-rose-200 rounded-2xl p-4 flex items-center justify-between gap-3 text-rose-900 shadow-xs">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-rose-100 flex items-center justify-center shrink-0">
+                <AlertTriangle className="w-5 h-5 text-rose-600" />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-rose-950 uppercase tracking-wider">Zoho CRM Real-Time API Notice</p>
+                <p className="text-xs text-rose-800 mt-0.5">{zohoApiError}</p>
+              </div>
+            </div>
+            <button
+              onClick={refreshProducts}
+              disabled={refreshing}
+              className="px-3 py-1.5 rounded-xl bg-white border border-rose-300 hover:bg-rose-100/50 text-rose-800 text-xs font-bold transition-colors cursor-pointer shrink-0"
+            >
+              Retry Sync
+            </button>
+          </div>
+        )}
+
+        {/* 1. Dynamic Overview Section Metrics - 6 Real Zoho CRM Metric Cards */}
+        <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
           {/* Total Products */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-xs transition-shadow">
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-xs transition-shadow">
             <div className="flex items-center justify-between text-slate-500 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-600">Total Products</span>
-              <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                <Package className="w-4 h-4" />
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600">Total Products</span>
+              <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                <Package className="w-3.5 h-3.5" />
               </div>
             </div>
             <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               {metrics.total.toLocaleString()}
             </div>
-            <p className="text-xs text-slate-500 mt-1 font-medium">Authoritative Zoho CRM Catalog</p>
+            <p className="text-[11px] text-slate-500 mt-1 font-medium">Zoho CRM Catalog</p>
           </div>
 
-          {/* Active / Published Products */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-xs transition-shadow">
+          {/* Published Products */}
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-xs transition-shadow">
             <div className="flex items-center justify-between text-slate-500 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-600">Active Products</span>
-              <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#057a3b] flex items-center justify-center">
-                <CheckCircle2 className="w-4 h-4" />
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600">Published</span>
+              <div className="w-7 h-7 rounded-lg bg-emerald-50 text-[#057a3b] flex items-center justify-center">
+                <CheckCircle2 className="w-3.5 h-3.5" />
               </div>
             </div>
             <div className="text-2xl sm:text-3xl font-extrabold text-[#057a3b] tracking-tight">
-              {metrics.active.toLocaleString()}
+              {metrics.published.toLocaleString()}
             </div>
-            <p className="text-xs text-emerald-700/80 mt-1 font-medium">Published on Live Website</p>
+            <p className="text-[11px] text-emerald-700/80 mt-1 font-medium">Live on Storefront</p>
+          </div>
+
+          {/* Draft Products */}
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-xs transition-shadow">
+            <div className="flex items-center justify-between text-slate-500 mb-2">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600">Drafts</span>
+              <div className="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+                <FileText className="w-3.5 h-3.5" />
+              </div>
+            </div>
+            <div className="text-2xl sm:text-3xl font-extrabold text-amber-700 tracking-tight">
+              {metrics.draft.toLocaleString()}
+            </div>
+            <p className="text-[11px] text-amber-700/80 mt-1 font-medium">In Review / Unlisted</p>
+          </div>
+
+          {/* Unpublished Products */}
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-xs transition-shadow">
+            <div className="flex items-center justify-between text-slate-500 mb-2">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600">Unpublished</span>
+              <div className="w-7 h-7 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+                <EyeOff className="w-3.5 h-3.5" />
+              </div>
+            </div>
+            <div className="text-2xl sm:text-3xl font-extrabold text-rose-700 tracking-tight">
+              {metrics.unpublished.toLocaleString()}
+            </div>
+            <p className="text-[11px] text-rose-700/80 mt-1 font-medium">Hidden from Public</p>
           </div>
 
           {/* Recently Added */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-xs transition-shadow">
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-xs transition-shadow">
             <div className="flex items-center justify-between text-slate-500 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-600">Recently Added</span>
-              <div className="w-8 h-8 rounded-lg bg-orange-50 text-[#ea580c] flex items-center justify-center">
-                <Plus className="w-4 h-4" />
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600">Recently Added</span>
+              <div className="w-7 h-7 rounded-lg bg-orange-50 text-[#ea580c] flex items-center justify-center">
+                <Plus className="w-3.5 h-3.5" />
               </div>
             </div>
             <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              {metrics.recentlyAdded}
+              {metrics.recentlyAdded.toLocaleString()}
             </div>
-            <p className="text-xs text-slate-500 mt-1 font-medium">New catalog additions</p>
+            <p className="text-[11px] text-slate-500 mt-1 font-medium">Last 30 days</p>
           </div>
 
           {/* Recently Updated */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-xs transition-shadow">
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-xs transition-shadow">
             <div className="flex items-center justify-between text-slate-500 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-600">Recently Updated</span>
-              <div className="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center">
-                <Clock className="w-4 h-4" />
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600">Recently Updated</span>
+              <div className="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                <Clock className="w-3.5 h-3.5" />
               </div>
             </div>
             <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              {metrics.recentlyUpdated}
+              {metrics.recentlyUpdated.toLocaleString()}
             </div>
-            <p className="text-xs text-slate-500 mt-1 font-medium">Synchronized changes</p>
+            <p className="text-[11px] text-slate-500 mt-1 font-medium">Last 30 days</p>
           </div>
         </section>
 
@@ -765,6 +869,27 @@ export default function ProductAdminDashboardClient({
                               <Edit3 className="w-3.5 h-3.5 text-slate-600" />
                               <span>Edit</span>
                             </button>
+
+                            {/* Live Publish / Unpublish Toggle */}
+                            {isPublished ? (
+                              <button
+                                onClick={() => handleTogglePublish(p, 'unpublished')}
+                                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-semibold transition-colors cursor-pointer"
+                                title="Unpublish from live website"
+                              >
+                                <EyeOff className="w-3.5 h-3.5" />
+                                <span className="hidden sm:inline">Unpublish</span>
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => handleTogglePublish(p, 'published')}
+                                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#057a3b] border border-emerald-200 text-xs font-semibold transition-colors cursor-pointer"
+                                title="Publish live to website"
+                              >
+                                <CheckCircle2 className="w-3.5 h-3.5" />
+                                <span className="hidden sm:inline">Publish</span>
+                              </button>
+                            )}
 
                             <button
                               onClick={() => setDeletingProduct(p)}
@@ -1000,7 +1125,7 @@ export default function ProductAdminDashboardClient({
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">Brand</label>
                   <input
@@ -1021,19 +1146,6 @@ export default function ProductAdminDashboardClient({
                     value={formPackSize}
                     onChange={(e) => setFormPackSize(e.target.value)}
                     placeholder="e.g. 1 Unit, Box of 10, Ream of 500"
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Catalogue Reference Page
-                  </label>
-                  <input
-                    type="text"
-                    value={formCataloguePage}
-                    onChange={(e) => setFormCataloguePage(e.target.value)}
-                    placeholder="e.g. Page 14"
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15"
                   />
                 </div>
@@ -1299,13 +1411,6 @@ export default function ProductAdminDashboardClient({
                     <span className="text-slate-500 font-medium block">Commercial Terms</span>
                     <span className="font-semibold text-slate-800">
                       {viewingProduct.price ? `₹${viewingProduct.price}` : 'Quote on Request (RFQ)'}
-                    </span>
-                  </div>
-
-                  <div>
-                    <span className="text-slate-500 font-medium block">Catalogue Ref Page</span>
-                    <span className="font-semibold text-slate-800">
-                      {viewingProduct.specifications?.cataloguePage || '—'}
                     </span>
                   </div>
 
