@@ -42,7 +42,85 @@ const ZOHO_ACCOUNT_PARENT_ID = '1476900000000575002'; // Office Bazzar Account
 let cachedProducts: Product[] | null = null;
 let lastCacheSync = 0;
 let inflightSyncPromise: Promise<Product[]> | null = null;
-const CACHE_TTL_MS = 5 * 1000; // 5 seconds near-realtime cache for multi-container serverless
+const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes cache TTL for high-speed edge delivery without rate limiting
+
+// Fast O(1) Slug, ID, and SKU lookup maps
+const productBySlugMap = new Map<string, Product>();
+const productByIdMap = new Map<string, Product>();
+const productBySkuMap = new Map<string, Product>();
+
+function rebuildFastIndexes(products: Product[]): void {
+  productBySlugMap.clear();
+  productByIdMap.clear();
+  productBySkuMap.clear();
+
+  for (const p of products) {
+    if (p.slug) productBySlugMap.set(p.slug.toLowerCase(), p);
+    if (p.id) productByIdMap.set(p.id.toLowerCase(), p);
+    if (p.sku) productBySkuMap.set(p.sku.toUpperCase(), p);
+    if ((p as any).zohoProductId) {
+      productByIdMap.set(String((p as any).zohoProductId).toLowerCase(), p);
+    }
+  }
+}
+
+export function getCachedProductBySlug(slug: string): Product | null {
+  if (!slug) return null;
+  return productBySlugMap.get(slug.toLowerCase().trim()) || null;
+}
+
+export function getCachedProductById(id: string): Product | null {
+  if (!id) return null;
+  const clean = id.toLowerCase().trim();
+  return productByIdMap.get(clean) || productBySkuMap.get(clean.toUpperCase()) || null;
+}
+
+export function updateProductInLiveCache(product: Product): void {
+  if (!product) return;
+  const cleanSku = (product.sku || '').toUpperCase();
+  const cleanId = (product.id || '').toLowerCase();
+  const cleanSlug = (product.slug || '').toLowerCase();
+
+  if (cachedProducts) {
+    const idx = cachedProducts.findIndex(
+      (p) =>
+        (p.id && p.id.toLowerCase() === cleanId) ||
+        (p.sku && p.sku.toUpperCase() === cleanSku)
+    );
+    if (idx !== -1) {
+      cachedProducts[idx] = { ...cachedProducts[idx], ...product };
+    } else {
+      cachedProducts.unshift(product);
+    }
+  }
+
+  if (cleanSlug) productBySlugMap.set(cleanSlug, product);
+  if (cleanId) productByIdMap.set(cleanId, product);
+  if (cleanSku) productBySkuMap.set(cleanSku, product);
+  if ((product as any).zohoProductId) {
+    productByIdMap.set(String((product as any).zohoProductId).toLowerCase(), product);
+  }
+}
+
+export function removeProductFromLiveCache(idOrSku: string): void {
+  if (!idOrSku) return;
+  const clean = idOrSku.trim();
+  const cleanLower = clean.toLowerCase();
+  const cleanUpper = clean.toUpperCase();
+
+  if (cachedProducts) {
+    cachedProducts = cachedProducts.filter(
+      (p) =>
+        p.id.toLowerCase() !== cleanLower &&
+        p.sku.toUpperCase() !== cleanUpper &&
+        p.slug.toLowerCase() !== cleanLower
+    );
+  }
+
+  productBySlugMap.delete(cleanLower);
+  productByIdMap.delete(cleanLower);
+  productBySkuMap.delete(cleanUpper);
+}
 
 // Fast SKU & ID lookup maps
 const mappingByWebsiteId = new Map<string, ZohoProductMappingItem>();
@@ -122,6 +200,7 @@ function buildInitialCatalog(): Product[] {
 }
 
 cachedProducts = buildInitialCatalog();
+rebuildFastIndexes(cachedProducts);
 
 /**
  * Get the Zoho CRM Product ID for a given website product ID or SKU
@@ -459,6 +538,7 @@ async function syncProductsFromZohoInternal(): Promise<Product[]> {
   }
 
   cachedProducts = Array.from(productsMap.values());
+  rebuildFastIndexes(cachedProducts);
   lastCacheSync = now;
   return cachedProducts;
 }
@@ -482,6 +562,7 @@ export async function getProductsFromZoho(forceRefresh = false): Promise<Product
  */
 export function invalidateZohoProductCache(): void {
   cachedProducts = buildInitialCatalog();
+rebuildFastIndexes(cachedProducts);
   lastCacheSync = 0;
   inflightSyncPromise = null;
 }
@@ -557,6 +638,10 @@ export async function createZohoProduct(product: Partial<Product>): Promise<{
     });
   }
 
+  updateProductInLiveCache({
+    ...product,
+    zohoProductId: finalZohoId,
+  } as Product);
   invalidateZohoProductCache();
   return { success: true, zohoId: finalZohoId };
 }
@@ -630,6 +715,11 @@ export async function updateZohoProduct(
     console.warn('[ZohoProducts] Note sync warning on update:', noteErr);
   }
 
+  updateProductInLiveCache({
+    ...product,
+    sku: cleanSku,
+    zohoProductId: finalZohoId || zohoIdOrSku,
+  } as Product);
   invalidateZohoProductCache();
   return { success: true, zohoId: finalZohoId || zohoIdOrSku };
 }
@@ -675,6 +765,10 @@ export async function deleteZohoProduct(
   }
 
   mappingBySku.delete(cleanSku);
+  removeProductFromLiveCache(cleanSku);
+  if (zohoIdOrSku && zohoIdOrSku !== cleanSku) {
+    removeProductFromLiveCache(zohoIdOrSku);
+  }
   invalidateZohoProductCache();
   return { success: true, zohoId: cleanSku };
 }

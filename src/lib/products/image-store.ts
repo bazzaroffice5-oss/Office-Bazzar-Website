@@ -15,7 +15,7 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import crypto from 'crypto';
-import { callKV } from '@/lib/distributed/coordinator';
+import { callKV } from '@/lib/distributed/kv-client';
 
 export interface StoredProductImage {
   filename: string;

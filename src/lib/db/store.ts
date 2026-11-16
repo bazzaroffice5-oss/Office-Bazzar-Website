@@ -13,7 +13,7 @@ import {
   NotificationLog,
 } from '@/types';
 import { CATEGORIES, BRANDS, INITIAL_PRODUCTS, COUPONS, resolveMainCategory, NINE_SUBCATEGORIES, CATEGORY_MAP, isProductInSubcategory } from '@/lib/data/catalog';
-import { getProductsFromZoho } from '@/lib/zoho/products';
+import { getProductsFromZoho, getCachedProductBySlug, getCachedProductById } from '@/lib/zoho/products';
 import {
   getAllQuotationsFromZoho,
   getQuoteByReferenceFromZoho,
@@ -21,7 +21,7 @@ import {
 } from '@/lib/zoho/quotes';
 import { syncOrderToZohoSalesOrder, updateZohoSalesOrderStatus } from '@/lib/zoho/orders';
 import { syncBulkRfqToZohoLead } from '@/lib/zoho/crm';
-import { saveCustomProductDurable, loadDurableCustomProducts } from '@/lib/products/custom-store';
+import { saveCustomProductDurable, loadDurableCustomProducts, getCustomProductBySlugDurable } from '@/lib/products/custom-store';
 
 // Shared store state attached to globalThis to prevent process/worker boundary divergence in Next.js
 interface GlobalStoreState {
@@ -112,7 +112,16 @@ const quotationsList: Quotation[] = storeState.quotationsList;
 const quotationIdempotencyStore = new Map<string, Quotation>();
 const notificationLogsList: NotificationLog[] = storeState.notificationLogsList;
 
-async function syncCustomProducts() {
+let lastSyncCustomTime = 0;
+const SYNC_CUSTOM_THROTTLE_MS = 30 * 1000;
+
+async function syncCustomProducts(force = false) {
+  const now = Date.now();
+  if (!force && now - lastSyncCustomTime < SYNC_CUSTOM_THROTTLE_MS && storeState.productsList.length > 0) {
+    return;
+  }
+  lastSyncCustomTime = now;
+
   const disk = loadCustomProductsFromDisk();
   let durable: any[] = [];
   try {
@@ -342,12 +351,31 @@ export async function getAdminProducts(): Promise<Product[]> {
   return products && products.length > 0 ? products : [...storeState.productsList];
 }
 
-export async function getProductBySlug(slug: string): Promise<Product | null> {
+export const getProductBySlug = cache(async (slug: string): Promise<Product | null> => {
+  if (!slug) return null;
   const cleanSlug = decodeURIComponent(slug).toLowerCase().trim();
-  const products = await getProductsFromZoho(true);
+
+  // 1. Instant O(1) in-memory index
+  const cached = getCachedProductBySlug(cleanSlug);
+  if (cached && cached.isActive !== false && !(cached as any).isDeleted) {
+    return cached;
+  }
+
+  // 2. Targeted durable custom product lookup
+  try {
+    const durableMatch = await getCustomProductBySlugDurable(cleanSlug);
+    if (durableMatch && durableMatch.isActive !== false && !durableMatch.isDeleted) {
+      return durableMatch;
+    }
+  } catch {
+    // continue to catalog pool
+  }
+
+  // 3. Fallback to cached Zoho CRM catalog pool
+  const products = await getProductsFromZoho(false);
   const pool = products && products.length > 0 ? products : storeState.productsList;
 
-  let product = pool.find(
+  const product = pool.find(
     (p) =>
       (p.slug.toLowerCase() === cleanSlug ||
         p.sku.toLowerCase() === cleanSlug ||
@@ -357,28 +385,24 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
       !(p as any).isDeleted
   );
 
-  if (!product) {
-    const durableCustom = await loadDurableCustomProducts();
-    product = durableCustom.find(
-      (p) =>
-        (p.slug.toLowerCase() === cleanSlug ||
-          p.sku.toLowerCase() === cleanSlug ||
-          p.id.toLowerCase() === cleanSlug) &&
-        p.isActive !== false &&
-        !p.isDeleted
-    );
-  }
-
   return product || null;
-}
+});
 
-export async function getProductById(id: string): Promise<Product | null> {
+export const getProductById = cache(async (id: string): Promise<Product | null> => {
   if (!id || typeof id !== 'string') return null;
   const cleanId = id.trim();
-  const products = await getProductsFromZoho(true);
+
+  // 1. Instant O(1) in-memory index
+  const cached = getCachedProductById(cleanId);
+  if (cached && !(cached as any).isDeleted) {
+    return cached;
+  }
+
+  // 2. Fallback to cached Zoho CRM catalog pool
+  const products = await getProductsFromZoho(false);
   const pool = products && products.length > 0 ? products : storeState.productsList;
 
-  let product = pool.find(
+  const product = pool.find(
     (p) =>
       (p.id.toLowerCase() === cleanId.toLowerCase() ||
         p.sku.toLowerCase() === cleanId.toLowerCase() ||
@@ -387,19 +411,8 @@ export async function getProductById(id: string): Promise<Product | null> {
       !(p as any).isDeleted
   );
 
-  if (!product) {
-    const durableCustom = await loadDurableCustomProducts();
-    product = durableCustom.find(
-      (p) =>
-        (p.id.toLowerCase() === cleanId.toLowerCase() ||
-          p.sku.toLowerCase() === cleanId.toLowerCase() ||
-          p.slug.toLowerCase() === cleanId.toLowerCase()) &&
-        !p.isDeleted
-    );
-  }
-
   return product || null;
-}
+});
 
 export async function getCategories(): Promise<Category[]> {
   return CATEGORIES;
@@ -433,10 +446,14 @@ export async function getBestsellers(limit = 8): Promise<Product[]> {
   return bestsellers.length > 0 ? bestsellers.slice(0, limit) : products.slice(0, limit);
 }
 
-export async function getRelatedProducts(productId: string, limit = 4): Promise<Product[]> {
-  const current = await getProductById(productId);
-  const { products: allCatalog } = await getProducts();
-  const pool = (allCatalog.length > 0 ? allCatalog : productsList).filter((p) => p.isActive !== false);
+export const getRelatedProducts = cache(async (productId: string, limit = 4): Promise<Product[]> => {
+  const [current, zohoProducts] = await Promise.all([
+    getProductById(productId),
+    getProductsFromZoho(false),
+  ]);
+  const pool = (zohoProducts && zohoProducts.length > 0 ? zohoProducts : storeState.productsList).filter(
+    (p) => p.isActive !== false && !(p as any).isDeleted
+  );
 
   if (!current) return pool.slice(0, limit);
 
@@ -461,7 +478,7 @@ export async function getRelatedProducts(productId: string, limit = 4): Promise<
   );
 
   return [...combined, ...remaining].slice(0, limit);
-}
+});
 
 // ----------------------------------------------------------------------
 // COUPON VERIFICATION

@@ -84,6 +84,18 @@ function writeDiskProducts(products: DurableProduct[]) {
   }
 }
 
+let cachedDurableProducts: DurableProduct[] | null = null;
+let durableCacheExpiresAt = 0;
+const DURABLE_CACHE_TTL_MS = 60 * 1000; // 60 seconds container-level cache
+
+/**
+ * Invalidate in-memory cache when new durable product is saved or deleted
+ */
+export function invalidateDurableCustomProductCache(): void {
+  cachedDurableProducts = null;
+  durableCacheExpiresAt = 0;
+}
+
 /**
  * Persists a product to durable storage across all tiers.
  */
@@ -91,6 +103,9 @@ export async function saveCustomProductDurable(product: DurableProduct): Promise
   if (typeof window !== 'undefined' || !product.sku) return;
   const cleanSku = product.sku.trim().toUpperCase();
   const cleanSlug = (product.slug || cleanSku.toLowerCase()).trim();
+
+  // Invalidate in-memory cache immediately
+  invalidateDurableCustomProductCache();
 
   // 1. Ephemeral lambda disk
   try {
@@ -139,9 +154,15 @@ export async function saveCustomProductDurable(product: DurableProduct): Promise
 
 /**
  * Loads all durable custom products, merging disk, container cache, and Cloud KV.
+ * Utilizes high-performance MGET single-batch queries and 60-second in-memory caching.
  */
-export async function loadDurableCustomProducts(): Promise<DurableProduct[]> {
+export async function loadDurableCustomProducts(force = false): Promise<DurableProduct[]> {
   if (typeof window !== 'undefined') return [];
+  const now = Date.now();
+  if (!force && cachedDurableProducts && now < durableCacheExpiresAt) {
+    return cachedDurableProducts;
+  }
+
   const mergedMap = new Map<string, DurableProduct>();
   const deletedSkus = new Set<string>();
 
@@ -172,7 +193,7 @@ export async function loadDurableCustomProducts(): Promise<DurableProduct[]> {
     }
   }
 
-  // Tier 3: Durable Cloud KV (authoritative)
+  // Tier 3: Durable Cloud KV (authoritative) via single-batch MGET query
   try {
     const deletedInKv = await callKV<string[]>(['SMEMBERS', 'custom_prod_deleted_skus']);
     if (Array.isArray(deletedInKv)) {
@@ -184,18 +205,28 @@ export async function loadDurableCustomProducts(): Promise<DurableProduct[]> {
 
     const cloudSkus = await callKV<string[]>(['SMEMBERS', 'custom_prod_skus']);
     if (Array.isArray(cloudSkus) && cloudSkus.length > 0) {
-      for (const rawSku of cloudSkus) {
-        const cleanSku = rawSku.toUpperCase();
-        if (deletedSkus.has(cleanSku)) continue;
-        const rawJson = await callKV<string>(['GET', `custom_prod:${cleanSku}`]);
-        if (rawJson && typeof rawJson === 'string') {
-          try {
-            const parsed = JSON.parse(rawJson);
-            if (parsed && parsed.sku) {
-              mergedMap.set(cleanSku, parsed);
+      const validSkus = cloudSkus
+        .map((s) => s.toUpperCase())
+        .filter((sku) => !deletedSkus.has(sku));
+
+      if (validSkus.length > 0) {
+        // High-performance single-batch MGET
+        const keys = validSkus.map((sku) => `custom_prod:${sku}`);
+        const rawResults = await callKV<(string | null)[]>(['MGET', ...keys]);
+
+        if (Array.isArray(rawResults)) {
+          for (let i = 0; i < rawResults.length; i++) {
+            const raw = rawResults[i];
+            if (raw && typeof raw === 'string') {
+              try {
+                const parsed = JSON.parse(raw);
+                if (parsed && parsed.sku) {
+                  mergedMap.set(parsed.sku.toUpperCase(), parsed);
+                }
+              } catch {
+                // ignore malformed entry
+              }
             }
-          } catch {
-            // ignore
           }
         }
       }
@@ -209,5 +240,40 @@ export async function loadDurableCustomProducts(): Promise<DurableProduct[]> {
     mergedMap.delete(del);
   }
 
-  return Array.from(mergedMap.values());
+  const result = Array.from(mergedMap.values());
+  cachedDurableProducts = result;
+  durableCacheExpiresAt = now + DURABLE_CACHE_TTL_MS;
+  return result;
+}
+
+/**
+ * Direct targeted lookup by slug without loading the entire custom catalog
+ */
+export async function getCustomProductBySlugDurable(slug: string): Promise<DurableProduct | null> {
+  const clean = slug.toLowerCase().trim();
+  // 1. Check in-memory cache first
+  if (cachedDurableProducts) {
+    const found = cachedDurableProducts.find(
+      (p) => p.slug.toLowerCase() === clean && !p.isDeleted
+    );
+    if (found) return found;
+  }
+
+  // 2. Direct single KV lookup
+  try {
+    const sku = await callKV<string>(['GET', `custom_prod_slug:${clean}`]);
+    if (sku && typeof sku === 'string') {
+      const raw = await callKV<string>(['GET', `custom_prod:${sku.toUpperCase()}`]);
+      if (raw && typeof raw === 'string') {
+        const parsed = JSON.parse(raw);
+        if (parsed && !parsed.isDeleted) return parsed;
+      }
+    }
+  } catch {
+    // fallback
+  }
+
+  // 3. Fallback to loaded products
+  const all = await loadDurableCustomProducts();
+  return all.find((p) => p.slug.toLowerCase() === clean && !p.isDeleted) || null;
 }
