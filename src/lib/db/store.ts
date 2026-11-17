@@ -384,7 +384,7 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
   try {
     const durableMatch = await getCustomProductBySlugDurable(cleanSlug);
     if (durableMatch) {
-      if (durableMatch.isActive === false || durableMatch.isDeleted) return null;
+      if (durableMatch.isDeleted) return null;
       return durableMatch;
     }
   } catch {
