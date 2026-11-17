@@ -15,7 +15,7 @@
     "@keystatic/core": "^0.6.9",
     "framer-motion": "^14.5.0",
     "lucide-react": "^1.57.0",
-    "next": "16.4.1",
+    "next": "16.4.6",
     "razorpay": "^2.9.8",
     "react": "19.3.0",
     "react-dom": "19.3.0"
@@ -27,7 +27,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.4.1",
+    "eslint-config-next": "16.4.6",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
