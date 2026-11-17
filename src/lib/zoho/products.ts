@@ -233,12 +233,21 @@ export function getAllZohoProductMappings(): Record<string, string> {
   return map;
 }
 
+let cachedNotesMap: Map<string, { noteId: string; product: Partial<Product> & { isDeleted?: boolean } }> | null = null;
+let lastNotesFetchTime = 0;
+const NOTES_CACHE_TTL_MS = 3 * 60 * 1000;
+
 /**
  * Retrieve all product sync notes attached to the Office Bazzar Account in Zoho CRM
  */
-async function fetchZohoProductNotes(): Promise<
+async function fetchZohoProductNotes(force = false): Promise<
   Map<string, { noteId: string; product: Partial<Product> & { isDeleted?: boolean } }>
 > {
+  const now = Date.now();
+  if (!force && cachedNotesMap && now - lastNotesFetchTime < NOTES_CACHE_TTL_MS) {
+    return cachedNotesMap;
+  }
+
   const notesMap = new Map<string, { noteId: string; product: Partial<Product> & { isDeleted?: boolean } }>();
   if (!(await isZohoConfigured())) return notesMap;
 
@@ -260,6 +269,8 @@ async function fetchZohoProductNotes(): Promise<
         }
       }
     }
+    cachedNotesMap = notesMap;
+    lastNotesFetchTime = now;
   } catch (err) {
     // 204 No Content is normal when no notes exist yet
   }
@@ -313,7 +324,9 @@ async function saveZohoProductNote(
           ],
         }),
       });
-      return res?.data?.[0]?.details?.id || existing.noteId;
+      const noteId = res?.data?.[0]?.details?.id || existing.noteId;
+      existingNotes.set(cleanSku, { noteId, product });
+      return noteId;
     } else {
       const res = await zohoFetch<any>('/Notes', {
         method: 'POST',
@@ -330,7 +343,11 @@ async function saveZohoProductNote(
           ],
         }),
       });
-      return res?.data?.[0]?.details?.id;
+      const noteId = res?.data?.[0]?.details?.id;
+      if (noteId) {
+        existingNotes.set(cleanSku, { noteId, product });
+      }
+      return noteId;
     }
   } catch (err) {
     console.warn('[ZohoProducts] Note save warning:', err);
@@ -585,48 +602,50 @@ export async function createZohoProduct(product: Partial<Product>): Promise<{
 
   let finalZohoId: string | undefined = undefined;
 
-  // 1. Try official /Products module
-  try {
-    const zohoRecord: Record<string, unknown> = {
-      Product_Name: product.name,
-      Product_Code: product.sku,
-      Description: product.description || '',
-      Product_Active: product.isActive !== false,
-      Unit_Price: product.price || 0,
-      Qty_in_Stock: product.stockQuantity || 0,
-    };
-    if (product.categoryName) zohoRecord['Product_Category'] = product.categoryName;
-    if (product.brandName) zohoRecord['Manufacturer'] = product.brandName;
-    if (product.packSize) zohoRecord['Usage_Unit'] = product.packSize;
+  // Run official /Products module and Notes persistence concurrently
+  const [productsRes, notesRes] = await Promise.allSettled([
+    (async () => {
+      const zohoRecord: Record<string, unknown> = {
+        Product_Name: product.name,
+        Product_Code: product.sku,
+        Description: product.description || '',
+        Product_Active: product.isActive !== false,
+        Unit_Price: product.price || 0,
+        Qty_in_Stock: product.stockQuantity || 0,
+      };
+      if (product.categoryName) zohoRecord['Product_Category'] = product.categoryName;
+      if (product.brandName) zohoRecord['Manufacturer'] = product.brandName;
+      if (product.packSize) zohoRecord['Usage_Unit'] = product.packSize;
 
-    const res = await zohoFetch<{
-      data?: Array<{
-        code?: string;
-        details?: { id: string };
-        message?: string;
-        status?: string;
-      }>;
-    }>('/Products', {
-      method: 'POST',
-      body: JSON.stringify({ data: [zohoRecord] }),
-    });
+      const res = await zohoFetch<{
+        data?: Array<{
+          code?: string;
+          details?: { id: string };
+          message?: string;
+          status?: string;
+        }>;
+      }>('/Products', {
+        method: 'POST',
+        body: JSON.stringify({ data: [zohoRecord] }),
+      });
 
-    const result = res?.data?.[0];
-    if (result && (result.code === 'SUCCESS' || result.status === 'success')) {
-      finalZohoId = result.details?.id;
-    }
-  } catch {
-    // Handled by Notes fallback below
+      const result = res?.data?.[0];
+      if (result && (result.code === 'SUCCESS' || result.status === 'success')) {
+        return result.details?.id;
+      }
+      return undefined;
+    })(),
+
+    (async () => {
+      return await saveZohoProductNote(product);
+    })(),
+  ]);
+
+  if (productsRes.status === 'fulfilled' && productsRes.value) {
+    finalZohoId = productsRes.value;
   }
-
-  // 2. Always persist to Zoho CRM Notes for multi-container reliability
-  try {
-    const noteId = await saveZohoProductNote(product);
-    if (!finalZohoId) {
-      finalZohoId = noteId;
-    }
-  } catch (noteErr) {
-    console.warn('[ZohoProducts] Note sync warning on create:', noteErr);
+  if (!finalZohoId && notesRes.status === 'fulfilled' && notesRes.value) {
+    finalZohoId = notesRes.value;
   }
 
   if (finalZohoId && product.sku) {
@@ -668,53 +687,54 @@ export async function updateZohoProduct(
   const cleanSku = (product.sku || skuFallback || zohoIdOrSku).trim().toUpperCase();
   let finalZohoId: string | undefined = undefined;
 
-  // 1. Try official /Products module
-  try {
-    const zohoId = getZohoProductId(zohoIdOrSku) || zohoIdOrSku;
-    const zohoRecord: Record<string, unknown> = { id: zohoId };
-    if (product.name) zohoRecord['Product_Name'] = product.name;
-    if (product.sku) zohoRecord['Product_Code'] = product.sku;
-    if (product.description !== undefined) zohoRecord['Description'] = product.description;
-    if (product.isActive !== undefined) zohoRecord['Product_Active'] = product.isActive;
-    if (product.price !== undefined) zohoRecord['Unit_Price'] = product.price;
-    if (product.stockQuantity !== undefined) zohoRecord['Qty_in_Stock'] = product.stockQuantity;
-    if (product.categoryName) zohoRecord['Product_Category'] = product.categoryName;
-    if (product.brandName) zohoRecord['Manufacturer'] = product.brandName;
-    if (product.packSize) zohoRecord['Usage_Unit'] = product.packSize;
+  // Run official /Products module and Notes persistence concurrently
+  const [productsRes, notesRes] = await Promise.allSettled([
+    (async () => {
+      const zohoId = getZohoProductId(zohoIdOrSku) || zohoIdOrSku;
+      const zohoRecord: Record<string, unknown> = { id: zohoId };
+      if (product.name) zohoRecord['Product_Name'] = product.name;
+      if (product.sku) zohoRecord['Product_Code'] = product.sku;
+      if (product.description !== undefined) zohoRecord['Description'] = product.description;
+      if (product.isActive !== undefined) zohoRecord['Product_Active'] = product.isActive;
+      if (product.price !== undefined) zohoRecord['Unit_Price'] = product.price;
+      if (product.stockQuantity !== undefined) zohoRecord['Qty_in_Stock'] = product.stockQuantity;
+      if (product.categoryName) zohoRecord['Product_Category'] = product.categoryName;
+      if (product.brandName) zohoRecord['Manufacturer'] = product.brandName;
+      if (product.packSize) zohoRecord['Usage_Unit'] = product.packSize;
 
-    const res = await zohoFetch<{
-      data?: Array<{
-        code?: string;
-        details?: { id: string };
-        message?: string;
-        status?: string;
-      }>;
-    }>('/Products', {
-      method: 'PUT',
-      body: JSON.stringify({ data: [zohoRecord] }),
-    });
+      const res = await zohoFetch<{
+        data?: Array<{
+          code?: string;
+          details?: { id: string };
+          message?: string;
+          status?: string;
+        }>;
+      }>('/Products', {
+        method: 'PUT',
+        body: JSON.stringify({ data: [zohoRecord] }),
+      });
 
-    const result = res?.data?.[0];
-    if (result && (result.code === 'SUCCESS' || result.status === 'success')) {
-      finalZohoId = result.details?.id;
-    }
-  } catch {
-    // Handled by Notes fallback below
+      const result = res?.data?.[0];
+      if (result && (result.code === 'SUCCESS' || result.status === 'success')) {
+        return result.details?.id;
+      }
+      return undefined;
+    })(),
+
+    (async () => {
+      const noteId = await saveZohoProductNote({ ...product, sku: cleanSku });
+      if (skuFallback && skuFallback.trim().toUpperCase() !== cleanSku) {
+        await deleteZohoProductNote(skuFallback.trim().toUpperCase());
+      }
+      return noteId;
+    })(),
+  ]);
+
+  if (productsRes.status === 'fulfilled' && productsRes.value) {
+    finalZohoId = productsRes.value;
   }
-
-  // 2. Always persist updates to Zoho CRM Notes
-  try {
-    const noteId = await saveZohoProductNote({ ...product, sku: cleanSku });
-    if (!finalZohoId) {
-      finalZohoId = noteId;
-    }
-
-    // If SKU was modified, clean up the obsolete old note to prevent duplicate records
-    if (skuFallback && skuFallback.trim().toUpperCase() !== cleanSku) {
-      await deleteZohoProductNote(skuFallback.trim().toUpperCase());
-    }
-  } catch (noteErr) {
-    console.warn('[ZohoProducts] Note sync warning on update:', noteErr);
+  if (!finalZohoId && notesRes.status === 'fulfilled' && notesRes.value) {
+    finalZohoId = notesRes.value;
   }
 
   updateProductInLiveCache({

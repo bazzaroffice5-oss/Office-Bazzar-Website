@@ -180,21 +180,21 @@ export async function saveProductImage({
   // 3. Durable Cloud KV (Upstash Redis REST)
   try {
     const base64Data = buffer.toString('base64');
-    await callKV(['SET', `prod_img_data:${cleanFilename}`, base64Data]);
-    await callKV([
-      'SET',
-      `prod_img_meta:${cleanFilename}`,
-      JSON.stringify({
-        filename: cleanFilename,
-        mimeType: determinedMime,
-        size: buffer.length,
-        sku: baseName,
-        updatedAt: now,
-      }),
+    await Promise.all([
+      callKV(['SET', `prod_img_data:${cleanFilename}`, base64Data]),
+      callKV([
+        'SET',
+        `prod_img_meta:${cleanFilename}`,
+        JSON.stringify({
+          filename: cleanFilename,
+          mimeType: determinedMime,
+          size: buffer.length,
+          sku: baseName,
+          updatedAt: now,
+        }),
+      ]),
+      sku ? callKV(['SET', `prod_img_sku:${baseName}`, cleanFilename]) : Promise.resolve(null),
     ]);
-    if (sku) {
-      await callKV(['SET', `prod_img_sku:${baseName}`, cleanFilename]);
-    }
   } catch (kvErr) {
     console.warn('[ImageStore] Cloud KV write notice:', kvErr);
   }

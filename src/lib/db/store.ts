@@ -27,6 +27,7 @@ import {
   getCustomProductBySlugDurable,
   getCustomProductByIdDurable,
   isProductDeletedDurable,
+  getCustomVersionDurable,
 } from '@/lib/products/custom-store';
 
 // Shared store state attached to globalThis to prevent process/worker boundary divergence in Next.js
@@ -119,7 +120,8 @@ const quotationIdempotencyStore = new Map<string, Quotation>();
 const notificationLogsList: NotificationLog[] = storeState.notificationLogsList;
 
 let lastSyncCustomTime = 0;
-const SYNC_CUSTOM_THROTTLE_MS = 30 * 1000;
+let lastKnownCustomVersion = '';
+const SYNC_CUSTOM_THROTTLE_MS = 5 * 1000;
 
 async function syncCustomProducts(force = false) {
   const now = Date.now();
@@ -128,10 +130,24 @@ async function syncCustomProducts(force = false) {
   }
   lastSyncCustomTime = now;
 
+  let remoteVersion = '';
+  try {
+    remoteVersion = await getCustomVersionDurable();
+  } catch {
+    // ignore
+  }
+
+  if (!force && remoteVersion && remoteVersion === lastKnownCustomVersion && storeState.productsList.length > 0) {
+    return;
+  }
+  if (remoteVersion) {
+    lastKnownCustomVersion = remoteVersion;
+  }
+
   const disk = loadCustomProductsFromDisk();
   let durable: any[] = [];
   try {
-    durable = await loadDurableCustomProducts();
+    durable = await loadDurableCustomProducts(true);
   } catch {
     durable = [];
   }
@@ -747,6 +763,7 @@ export async function saveProduct(productData: Partial<Product>): Promise<Produc
   } catch (dErr) {
     console.warn('[Store] Durable custom product save notice:', dErr);
   }
+  lastSyncCustomTime = 0;
 
   return newProduct;
 }
@@ -778,6 +795,7 @@ export async function deleteProduct(productId: string): Promise<boolean> {
   } catch (dErr) {
     console.warn('[Store] Durable custom product tombstone notice:', dErr);
   }
+  lastSyncCustomTime = 0;
 
   // Remove from runtime storeState
   storeState.productsList = storeState.productsList.filter(

@@ -143,16 +143,15 @@ export async function PUT(
       id: existing.id,
     };
 
-    // 1. Update in Zoho CRM
+    // 1 & 2: Update in Zoho CRM and persist in website catalogue store concurrently
     const zohoTargetId = (existing as any).zohoProductId || existing.sku;
-    let zohoSynced = false;
-    if (zohoTargetId) {
-      const zohoResult = await updateZohoProduct(zohoTargetId, mergedProduct, existing.sku);
-      zohoSynced = zohoResult.success;
-    }
+    const zohoPromise = zohoTargetId
+      ? updateZohoProduct(zohoTargetId, mergedProduct, existing.sku)
+      : Promise.resolve({ success: false, zohoId: undefined });
+    const storePromise = saveProduct(mergedProduct);
 
-    // 2. Persist in website catalogue store
-    const saved = await saveProduct(mergedProduct);
+    const [zohoResult, saved] = await Promise.all([zohoPromise, storePromise]);
+    const zohoSynced = zohoResult.success;
 
     // 3. Immediately update the live in-memory cache with the saved product and new image
     updateProductInLiveCache(saved);
@@ -219,19 +218,21 @@ export async function DELETE(
       return NextResponse.json({ error: 'Product record not found.' }, { status: 404 });
     }
 
-    // 1. Delete / deactivate in Zoho CRM
+    // 1 & 2. Delete / deactivate in Zoho CRM and store in parallel
     const zohoTargetId = (existing as any).zohoProductId || existing.sku;
-    let zohoSynced = false;
-    if (zohoTargetId) {
-      const zohoResult = await deleteZohoProduct(zohoTargetId, existing.sku);
-      zohoSynced = zohoResult.success;
-    }
+    const zohoPromise = zohoTargetId
+      ? deleteZohoProduct(zohoTargetId, existing.sku)
+      : Promise.resolve({ success: false });
 
-    // 2. Remove from active store & disk persistence
-    await deleteProduct(existing.id);
-    if (existing.sku && existing.sku !== existing.id) {
-      await deleteProduct(existing.sku);
-    }
+    const deletePromise = (async () => {
+      await deleteProduct(existing.id);
+      if (existing.sku && existing.sku !== existing.id) {
+        await deleteProduct(existing.sku);
+      }
+    })();
+
+    const [zohoResult] = await Promise.all([zohoPromise, deletePromise]);
+    const zohoSynced = zohoResult.success;
 
     // 3. Immediately update live in-memory cache
     removeProductFromLiveCache(existing.id);

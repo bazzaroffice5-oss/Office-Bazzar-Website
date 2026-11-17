@@ -137,22 +137,25 @@ export async function saveCustomProductDurable(product: DurableProduct): Promise
 
   // 3. Durable Cloud KV (Upstash Redis REST)
   try {
+    const version = String(Date.now());
     if (product.isDeleted) {
-      await callKV(['DEL', `custom_prod:${cleanSku}`]);
-      await callKV(['DEL', `custom_prod_slug:${cleanSlug}`]);
-      if (product.id) {
-        await callKV(['DEL', `custom_prod_id:${product.id.toLowerCase()}`]);
-      }
-      await callKV(['SREM', 'custom_prod_skus', cleanSku]);
-      await callKV(['SADD', 'custom_prod_deleted_skus', cleanSku]);
+      await Promise.all([
+        callKV(['DEL', `custom_prod:${cleanSku}`]),
+        callKV(['DEL', `custom_prod_slug:${cleanSlug}`]),
+        product.id ? callKV(['DEL', `custom_prod_id:${product.id.toLowerCase()}`]) : Promise.resolve(null),
+        callKV(['SREM', 'custom_prod_skus', cleanSku]),
+        callKV(['SADD', 'custom_prod_deleted_skus', cleanSku]),
+        callKV(['SET', 'custom_prod_version', version]),
+      ]);
     } else {
-      await callKV(['SET', `custom_prod:${cleanSku}`, JSON.stringify(product)]);
-      await callKV(['SADD', 'custom_prod_skus', cleanSku]);
-      await callKV(['SET', `custom_prod_slug:${cleanSlug}`, cleanSku]);
-      if (product.id) {
-        await callKV(['SET', `custom_prod_id:${product.id.toLowerCase()}`, cleanSku]);
-      }
-      await callKV(['SREM', 'custom_prod_deleted_skus', cleanSku]);
+      await Promise.all([
+        callKV(['SET', `custom_prod:${cleanSku}`, JSON.stringify(product)]),
+        callKV(['SADD', 'custom_prod_skus', cleanSku]),
+        callKV(['SET', `custom_prod_slug:${cleanSlug}`, cleanSku]),
+        product.id ? callKV(['SET', `custom_prod_id:${product.id.toLowerCase()}`]) : Promise.resolve(null),
+        callKV(['SREM', 'custom_prod_deleted_skus', cleanSku]),
+        callKV(['SET', 'custom_prod_version', version]),
+      ]);
     }
   } catch (kvErr) {
     console.warn('[CustomStore] Cloud KV write notice:', kvErr);
@@ -341,5 +344,17 @@ export async function isProductDeletedDurable(sku: string): Promise<boolean> {
     return isMember === 1;
   } catch {
     return false;
+  }
+}
+
+/**
+ * Get current durable catalog version to coordinate cross-lambda synchronization
+ */
+export async function getCustomVersionDurable(): Promise<string> {
+  try {
+    const v = await callKV<string>(['GET', 'custom_prod_version']);
+    return typeof v === 'string' ? v : '';
+  } catch {
+    return '';
   }
 }
