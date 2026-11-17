@@ -384,7 +384,7 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
   try {
     const durableMatch = await getCustomProductBySlugDurable(cleanSlug);
     if (durableMatch) {
-      if (durableMatch.isDeleted) return null;
+      if (durableMatch.isActive === false || durableMatch.isDeleted) return null;
       return durableMatch;
     }
   } catch {
@@ -431,7 +431,7 @@ export const getProductById = cache(async (id: string): Promise<Product | null> 
   try {
     const durableMatch = await getCustomProductByIdDurable(cleanId);
     if (durableMatch) {
-      if (durableMatch.isActive === false || durableMatch.isDeleted) return null;
+      if (durableMatch.isDeleted) return null;
       return durableMatch;
     }
   } catch {
