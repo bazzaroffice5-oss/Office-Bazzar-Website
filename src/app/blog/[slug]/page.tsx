@@ -26,7 +26,7 @@ import {
   KeystaticBlogPost,
 } from '@/lib/keystatic/reader';
 
-export const revalidate = 60; // ISR cache
+export const revalidate = false; // On-demand ISR cache only (invalidated via revalidateBlogCache)
 
 export async function generateStaticParams() {
   const slugs = await getAllBlogSlugs();
