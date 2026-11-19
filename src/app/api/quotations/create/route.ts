@@ -318,6 +318,9 @@ export async function POST(req: Request) {
     }
 
     const { salesEmail, marketingEmail } = getNotificationRecipients();
+    const customerNotify = notificationResults.find(
+      (r) => r.channel === 'email_quote' || r.recipient.toLowerCase() === savedQuotation.email.toLowerCase()
+    );
     const admin1Notify = notificationResults.find(
       (r) => r.channel === 'email_sales' || r.recipient.toLowerCase() === salesEmail.toLowerCase()
     );
@@ -367,6 +370,13 @@ export async function POST(req: Request) {
         zohoAccountId: zohoSyncResult?.accountId,
         zohoStatus: 'synced',
         syncMode: crmMode,
+        customerEmail: {
+          recipient: savedQuotation.email,
+          status: customerNotify?.status || 'sent',
+          provider: customerNotify?.provider,
+          messageId: customerNotify?.messageId,
+          error: customerNotify?.errorMessage,
+        },
         admin1Email: {
           recipient: salesEmail,
           status: admin1Notify?.status || 'sent',

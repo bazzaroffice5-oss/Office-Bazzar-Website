@@ -321,6 +321,268 @@ export interface QuotationNotificationContext {
 }
 
 /**
+ * Format plain-text confirmation email message for the requesting customer
+ */
+export function buildCustomerQuotationEmailText(quotation: Quotation): string {
+  const siteUrl = BUSINESS_CONFIG.websiteUrl;
+  const itemsText = quotation.items
+    .map((item, idx) => {
+      const originalQty = item.originalQuantity ?? item.quantity;
+      return `${idx + 1}. [${item.sku}] ${item.productName}
+   Quantity: ${originalQty} ${item.packSize || 'Units'} | Indicative Unit: ₹${item.indicativeUnitPrice.toLocaleString('en-IN')} | Indicative Total: ₹${item.indicativeTotalPrice.toLocaleString('en-IN')}`;
+    })
+    .join('\n\n');
+
+  return `OFFICEBAZZAR — QUOTATION REQUEST CONFIRMATION
+==================================================
+Dear ${quotation.customerName},
+
+Thank you for choosing Office Bazzar. We have received your Request for Quotation (RFQ).
+Our commercial desk is reviewing your requirements to provide customized wholesale and volume-tier pricing.
+
+Quotation Reference : ${quotation.quotationNumber}
+Submission Time     : ${new Date(quotation.createdAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST
+Company Name        : ${quotation.companyName || 'Not Specified'}
+Delivery Location   : ${quotation.deliveryLocation ? `${quotation.deliveryLocation} - ` : ''}PIN ${quotation.pincode}
+
+REQUESTED PRODUCTS:
+--------------------------------------------------
+${itemsText}
+
+INDICATIVE PRICING ESTIMATE:
+--------------------------------------------------
+Subtotal (Excl. Tax) : ₹${quotation.indicativeSubtotal.toLocaleString('en-IN')}
+Estimated 18% GST    : ₹${quotation.indicativeGstAmount.toLocaleString('en-IN')}
+Indicative Total     : ₹${quotation.indicativeTotal.toLocaleString('en-IN')}
+
+NEXT STEPS:
+Our B2B sales team is preparing your official tax quotation with applicable volume discounts. A dedicated sales manager will contact you within 2 business hours.
+
+Need urgent assistance?
+Phone: +91 7200800040 / +91 7825886622
+Email: sales4@officebazzar.com
+Officebazzar E-Store Private Limited, Royapettah, Chennai - 600014
+Website: ${siteUrl}`;
+}
+
+/**
+ * Format rich HTML confirmation email message for the requesting customer
+ */
+export function buildCustomerQuotationEmailHtml(quotation: Quotation): string {
+  const itemsRows = quotation.items
+    .map((item) => {
+      const originalQty = item.originalQuantity ?? item.quantity;
+      return `
+    <tr style="border-bottom: 1px solid #f3f4f6;">
+      <td style="padding: 10px; font-size: 13px; color: #111827;">
+        <strong>${item.productName}</strong>
+        <div style="font-size: 11px; color: #6b7280; font-family: monospace;">SKU: ${item.sku} &bull; Pack: ${item.packSize || 'Standard Pack'}</div>
+      </td>
+      <td style="padding: 10px; text-align: center; font-size: 13px; color: #111827; font-weight: 600;">${originalQty}</td>
+      <td style="padding: 10px; text-align: right; font-size: 13px; color: #4b5563;">₹${item.indicativeUnitPrice.toLocaleString('en-IN')}</td>
+      <td style="padding: 10px; text-align: right; font-size: 13px; color: #111827; font-weight: 600;">₹${item.indicativeTotalPrice.toLocaleString('en-IN')}</td>
+    </tr>`;
+    })
+    .join('');
+
+  return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Quotation Request Confirmed — ${quotation.quotationNumber}</title>
+</head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 24px;">
+  <div style="max-width: 640px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
+    
+    <!-- Header -->
+    <div style="background-color: #004b87; padding: 24px; color: #ffffff;">
+      <h1 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.5px;">Office Bazzar</h1>
+      <p style="margin: 6px 0 0 0; font-size: 14px; opacity: 0.9;">B2B Corporate Wholesale &bull; Request for Quotation</p>
+    </div>
+
+    <!-- Confirmation Banner -->
+    <div style="background-color: #f0fdf4; border-bottom: 1px solid #dcfce7; padding: 18px 24px;">
+      <div>
+        <span style="font-size: 12px; color: #166534; font-weight: 700; text-transform: uppercase;">Quotation Request Confirmed</span>
+        <div style="font-size: 20px; font-weight: 800; color: #15803d; font-family: monospace; margin-top: 2px;">
+          ${quotation.quotationNumber}
+        </div>
+        <p style="margin: 6px 0 0 0; font-size: 13px; color: #374151;">
+          Dear <strong>${quotation.customerName}</strong>, thank you for your enquiry. We have received your quotation request and assigned it to our commercial sales desk.
+        </p>
+      </div>
+    </div>
+
+    <div style="padding: 24px;">
+      <!-- Details Table -->
+      <h3 style="margin-top: 0; font-size: 13px; text-transform: uppercase; color: #64748b; letter-spacing: 0.5px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;">
+        Submission Summary
+      </h3>
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
+        <tr>
+          <td style="padding: 6px 0; color: #64748b; width: 35%;">Company Name:</td>
+          <td style="padding: 6px 0; color: #0f172a; font-weight: 600;">${quotation.companyName || 'Not Specified'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #64748b;">Registered Email:</td>
+          <td style="padding: 6px 0; color: #0f172a;">${quotation.email}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #64748b;">Contact Phone:</td>
+          <td style="padding: 6px 0; color: #0f172a;">${quotation.phone}</td>
+        </tr>
+        ${quotation.gstin ? `<tr>
+          <td style="padding: 6px 0; color: #64748b;">GSTIN:</td>
+          <td style="padding: 6px 0; color: #0f172a; font-weight: 600;">${quotation.gstin}</td>
+        </tr>` : ''}
+        <tr>
+          <td style="padding: 6px 0; color: #64748b;">Delivery Location:</td>
+          <td style="padding: 6px 0; color: #0f172a;">${quotation.deliveryLocation ? `${quotation.deliveryLocation} - ` : ''}PIN: ${quotation.pincode}</td>
+        </tr>
+      </table>
+
+      <!-- Line Items -->
+      <h3 style="font-size: 13px; text-transform: uppercase; color: #64748b; letter-spacing: 0.5px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; margin-top: 24px;">
+        Requested Products (${quotation.items.length} Items)
+      </h3>
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+        <thead>
+          <tr style="background-color: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+            <th style="padding: 8px 10px; text-align: left; font-size: 12px; color: #64748b;">Product</th>
+            <th style="padding: 8px 10px; text-align: center; font-size: 12px; color: #64748b;">Qty</th>
+            <th style="padding: 8px 10px; text-align: right; font-size: 12px; color: #64748b;">Unit (₹)</th>
+            <th style="padding: 8px 10px; text-align: right; font-size: 12px; color: #64748b;">Total (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${itemsRows}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" style="padding: 8px 10px; text-align: right; font-size: 13px; color: #64748b;">Indicative Subtotal:</td>
+            <td style="padding: 8px 10px; text-align: right; font-size: 13px; color: #0f172a; font-weight: 600;">₹${quotation.indicativeSubtotal.toLocaleString('en-IN')}</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="padding: 4px 10px; text-align: right; font-size: 13px; color: #64748b;">Estimated 18% GST:</td>
+            <td style="padding: 4px 10px; text-align: right; font-size: 13px; color: #0f172a; font-weight: 600;">₹${quotation.indicativeGstAmount.toLocaleString('en-IN')}</td>
+          </tr>
+          <tr style="border-top: 1px solid #e2e8f0;">
+            <td colspan="3" style="padding: 10px; text-align: right; font-size: 14px; color: #0f172a; font-weight: 700;">Indicative Total:</td>
+            <td style="padding: 10px; text-align: right; font-size: 15px; color: #004b87; font-weight: 800;">₹${quotation.indicativeTotal.toLocaleString('en-IN')}</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <!-- Next Steps Callout -->
+      <div style="background-color: #f1f5f9; border-radius: 8px; padding: 16px; margin: 24px 0;">
+        <h4 style="margin: 0 0 6px 0; font-size: 13px; color: #0f172a; font-weight: 700;">What happens next?</h4>
+        <p style="margin: 0; font-size: 12px; color: #475569; line-height: 1.5;">
+          Our dedicated commercial sales desk is reviewing your items for wholesale volume-tier discounts. A dedicated sales manager will contact you with an official tax quotation within 2 business hours.
+        </p>
+      </div>
+
+      <!-- Support Footer -->
+      <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; font-size: 11px; color: #94a3b8; text-align: center; line-height: 1.6;">
+        Officebazzar E-Store Private Limited &bull; Royapettah, Chennai - 600014<br />
+        Sales Desk: <a href="mailto:sales4@officebazzar.com" style="color: #004b87;">sales4@officebazzar.com</a> &bull; Phone: +91 7200800040 / +91 7825886622<br />
+        Website: <a href="https://officebazzar.com" style="color: #004b87;">https://officebazzar.com</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+/**
+ * Send quotation acknowledgement email to the requesting customer via Zoho CRM Send Mail API
+ * Logs outgoing message directly in the customer's Lead timeline in Zoho CRM
+ */
+export async function sendCustomerQuotationEmail(
+  quotation: Quotation,
+  crmContext?: { zohoLeadId?: string; zohoQuoteId?: string; zohoContactId?: string }
+): Promise<NotificationResult> {
+  const customerEmail = quotation.email.trim().toLowerCase();
+  const dedupKey = `cust_${quotation.idempotencyKey || quotation.quotationNumber || quotation.id}`;
+
+  if (sentQuoteRecipientKeys.has(dedupKey)) {
+    return {
+      channel: 'email_quote',
+      recipient: customerEmail,
+      status: 'sent',
+      provider: 'zoho_crm_send_mail',
+      messageId: 'already_sent_dedup',
+    };
+  }
+
+  try {
+    const existingLogs = await getNotificationLogs(quotation.id);
+    const alreadySent = existingLogs.some(
+      (l) => l.recipient.trim().toLowerCase() === customerEmail && l.status === 'sent'
+    );
+    if (alreadySent) {
+      sentQuoteRecipientKeys.add(dedupKey);
+      return {
+        channel: 'email_quote',
+        recipient: customerEmail,
+        status: 'sent',
+        provider: 'zoho_crm_send_mail',
+        messageId: 'already_sent_persistent_dedup',
+      };
+    }
+  } catch {
+    // Continue if log check fails
+  }
+
+  const subject = `Quotation Request Confirmed — ${quotation.quotationNumber} | Office Bazzar`;
+  const html = buildCustomerQuotationEmailHtml(quotation);
+  const text = buildCustomerQuotationEmailText(quotation);
+  const { salesEmail } = getNotificationRecipients();
+
+  const zohoResult: ZohoEmailDispatchResult = await sendZohoEmail({
+    toEmail: customerEmail,
+    toName: quotation.customerName || quotation.companyName,
+    replyTo: salesEmail,
+    subject,
+    html,
+    text,
+    leadId: crmContext?.zohoLeadId || quotation.zohoLeadId,
+    quoteId: crmContext?.zohoQuoteId || quotation.zohoQuoteId,
+    contactId: crmContext?.zohoContactId || quotation.zohoContactId,
+    attachInventoryPdf: false,
+  });
+
+  if (zohoResult.success) {
+    sentQuoteRecipientKeys.add(dedupKey);
+  }
+
+  await createNotificationLog({
+    quotationId: quotation.id,
+    quotationNumber: quotation.quotationNumber,
+    channel: 'email_quote',
+    recipient: customerEmail,
+    status: zohoResult.success ? 'sent' : 'failed',
+    errorMessage: zohoResult.error,
+    metadata: {
+      role: 'CUSTOMER_ACKNOWLEDGEMENT',
+      provider: zohoResult.provider,
+      messageId: zohoResult.messageId,
+      zohoLeadId: crmContext?.zohoLeadId || quotation.zohoLeadId,
+      missingScopes: zohoResult.missingScopes,
+    },
+  });
+
+  return {
+    channel: 'email_quote',
+    recipient: customerEmail,
+    status: zohoResult.success ? 'sent' : 'failed',
+    provider: zohoResult.provider,
+    messageId: zohoResult.messageId,
+    errorMessage: zohoResult.error,
+    missingScopes: zohoResult.missingScopes,
+  };
+}
+
+/**
  * Send official quote notification to a single Admin recipient via Zoho Mail / Zoho CRM Send Mail API
  * Strictly omits any PDF or inventory template attachments (ZERO attachments on initial notification)
  */
@@ -473,23 +735,51 @@ export async function dispatchQuotationNotifications(
     return [];
   }
 
-  // Dispatch to BOTH Admin recipients (sales4@officebazzar.com AND marketing@officebazzar.com)
-  const [admin1Res, admin2Res] = await Promise.all([
+  // Dispatch Customer Confirmation Email AND Both Admin Alert Emails concurrently
+  const [customerRes, admin1Res, admin2Res] = await Promise.all([
+    sendCustomerQuotationEmail(quotation, crmContext).catch((err) => ({
+      channel: 'email_quote' as const,
+      recipient: quotation.email,
+      status: 'failed' as const,
+      provider: 'zoho_crm_send_mail',
+      errorMessage: err instanceof Error ? err.message : String(err),
+    })),
     sendAdminQuotationEmail(
       quotation,
       salesEmail,
       marketingEmail,
       'ADMIN 1 (Sales)',
       crmContext
-    ),
+    ).catch((err): AdminRecipientStatus => ({
+      recipient: salesEmail,
+      role: 'ADMIN 1 (Sales)',
+      success: false,
+      status: 'failed',
+      provider: 'zoho_crm_send_mail',
+      messageId: undefined,
+      missingScopes: undefined,
+      error: err instanceof Error ? err.message : String(err),
+    })),
     sendAdminQuotationEmail(
       quotation,
       marketingEmail,
       salesEmail,
       'ADMIN 2 (Marketing)',
       crmContext
-    ),
+    ).catch((err): AdminRecipientStatus => ({
+      recipient: marketingEmail,
+      role: 'ADMIN 2 (Marketing)',
+      success: false,
+      status: 'failed',
+      provider: 'zoho_crm_send_mail',
+      messageId: undefined,
+      missingScopes: undefined,
+      error: err instanceof Error ? err.message : String(err),
+    })),
   ]);
+
+  // Customer Confirmation Email Result
+  results.push(customerRes);
 
   // Record Admin 1 Notification Log
   await createNotificationLog({
