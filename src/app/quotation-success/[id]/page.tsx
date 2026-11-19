@@ -183,9 +183,7 @@ export default function QuotationSuccessPage({
                       <th className="py-2.5">Product Description</th>
                       <th className="py-2.5 text-center">SKU</th>
                       <th className="py-2.5 text-center">Pack Size</th>
-                      <th className="py-2.5 text-center">Quantity</th>
-                      <th className="py-2.5 text-right">Indicative Unit</th>
-                      <th className="py-2.5 text-right">Indicative Total</th>
+                      <th className="py-2.5 text-right sm:text-center">Quantity</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
@@ -200,41 +198,19 @@ export default function QuotationSuccessPage({
                         <td className="py-3 text-center text-slate-600">
                           {it.packSize || 'Standard'}
                         </td>
-                        <td className="py-3 text-center font-bold text-slate-900">
+                        <td className="py-3 text-right sm:text-center font-bold text-slate-900">
                           {it.quantity}
-                        </td>
-                        <td className="py-3 text-right text-slate-600 font-medium">
-                          ₹{it.indicativeUnitPrice.toLocaleString('en-IN')}
-                        </td>
-                        <td className="py-3 text-right font-bold text-slate-900">
-                          ₹{it.indicativeTotalPrice.toLocaleString('en-IN')}
                         </td>
                       </tr>
                     ))}
                   </tbody>
-                  <tfoot>
-                    <tr className="border-t border-slate-200 text-slate-600">
-                      <td colSpan={5} className="pt-4 text-right">Indicative Subtotal (Excl. Tax):</td>
-                      <td className="pt-4 text-right font-bold text-slate-900">
-                        ₹{quotation.indicativeSubtotal.toLocaleString('en-IN')}
-                      </td>
-                    </tr>
-                    <tr className="text-slate-600">
-                      <td colSpan={5} className="py-1 text-right">Estimated GST (18%):</td>
-                      <td className="py-1 text-right font-bold text-slate-900">
-                        ₹{quotation.indicativeGstAmount.toLocaleString('en-IN')}
-                      </td>
-                    </tr>
-                    <tr className="border-t border-slate-200 text-sm">
-                      <td colSpan={5} className="pt-3 text-right font-semibold text-slate-900">
-                        Indicative Quotation Total:
-                      </td>
-                      <td className="pt-3 text-right font-bold text-[#d9232d] text-base">
-                        ₹{quotation.indicativeTotal.toLocaleString('en-IN')}
-                      </td>
-                    </tr>
-                  </tfoot>
                 </table>
+              </div>
+
+              {/* Commercial Procurement Note */}
+              <div className="mt-4 p-3.5 bg-slate-50/80 border border-slate-200/80 rounded-xl text-xs text-slate-600 flex items-start gap-2.5">
+                <span className="font-semibold text-slate-800 shrink-0">Commercial Note:</span>
+                <span>Official volume-tier pricing and formal GST tax invoice breakdown will be provided by our sales desk in your official commercial quotation.</span>
               </div>
 
               {quotation.additionalRequirements && (

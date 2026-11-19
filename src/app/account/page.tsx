@@ -372,10 +372,14 @@ function CustomerAccountDashboardContent() {
                         <div className="flex items-center gap-4">
                           <div className="text-right">
                             <div className="text-[10px] text-slate-400 uppercase">
-                              {rfq.quotedAmount ? 'Confirmed Total' : 'Indicative Total'}
+                              {rfq.quotedAmount ? 'Confirmed Total' : 'Status'}
                             </div>
                             <div className="text-sm font-bold text-slate-900">
-                              ₹{(rfq.quotedAmount || rfq.indicativeTotal).toLocaleString('en-IN')}
+                              {rfq.quotedAmount ? (
+                                `₹${rfq.quotedAmount.toLocaleString('en-IN')}`
+                              ) : (
+                                <span className="text-xs font-semibold text-[#004b87]">Under Review</span>
+                              )}
                             </div>
                           </div>
                           <Link

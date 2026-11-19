@@ -277,16 +277,27 @@ export default function CustomerQuotationsPage() {
 
                     <div className="flex items-center justify-between sm:justify-end space-x-6">
                       <div className="text-left sm:text-right">
-                        <span className="text-[10px] text-slate-400 uppercase block font-medium">
-                          {quote.quotedAmount ? 'Final Quoted Amount' : 'Indicative Total'}
-                        </span>
-                        <span className="text-sm sm:text-base font-bold text-slate-900">
-                          ₹{(quote.quotedAmount || quote.indicativeTotal).toLocaleString('en-IN')}
-                        </span>
-                        {quote.quotedAmount && (
-                          <span className="block text-[9px] text-emerald-600 font-bold">
-                            ✓ Confirmed by Sales
-                          </span>
+                        {quote.quotedAmount ? (
+                          <>
+                            <span className="text-[10px] text-slate-400 uppercase block font-medium">
+                              Final Quoted Amount
+                            </span>
+                            <span className="text-sm sm:text-base font-bold text-slate-900">
+                              ₹{quote.quotedAmount.toLocaleString('en-IN')}
+                            </span>
+                            <span className="block text-[9px] text-emerald-600 font-bold">
+                              ✓ Confirmed by Sales
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-[10px] text-slate-400 uppercase block font-medium">
+                              Quotation Status
+                            </span>
+                            <span className="text-xs sm:text-sm font-semibold text-[#004b87]">
+                              Under Sales Review
+                            </span>
+                          </>
                         )}
                       </div>
 
@@ -313,7 +324,9 @@ export default function CustomerQuotationsPage() {
                                 <th className="py-2 text-center">SKU</th>
                                 <th className="py-2 text-center">Pack</th>
                                 <th className="py-2 text-center">Qty</th>
-                                <th className="py-2 text-right">Indicative Total</th>
+                                {Boolean(quote.quotedAmount) && (
+                                  <th className="py-2 text-right">Quoted Total</th>
+                                )}
                               </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100">
@@ -323,9 +336,11 @@ export default function CustomerQuotationsPage() {
                                   <td className="py-2.5 text-center font-mono text-slate-500">{item.sku}</td>
                                   <td className="py-2.5 text-center text-slate-600">{item.packSize || 'Standard'}</td>
                                   <td className="py-2.5 text-center font-bold text-slate-900">{item.quantity}</td>
-                                  <td className="py-2.5 text-right font-bold text-slate-900">
-                                    ₹{item.indicativeTotalPrice.toLocaleString('en-IN')}
-                                  </td>
+                                  {Boolean(quote.quotedAmount) && (
+                                    <td className="py-2.5 text-right font-bold text-slate-900">
+                                      ₹{item.indicativeTotalPrice.toLocaleString('en-IN')}
+                                    </td>
+                                  )}
                                 </tr>
                               ))}
                             </tbody>

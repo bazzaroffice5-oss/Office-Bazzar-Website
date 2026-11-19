@@ -572,7 +572,6 @@ export default function RequestQuoteClient() {
             {/* Product List */}
             <div className="divide-y divide-slate-100">
               {items.map((item) => {
-                const lineTotal = (item.product.price || 0) * item.quantity;
                 return (
                   <div key={item.id} className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex items-center gap-3.5 min-w-0">
@@ -596,13 +595,10 @@ export default function RequestQuoteClient() {
                           <span>•</span>
                           <span>Pack: {item.product.packSize || 'Standard Pack'}</span>
                         </div>
-                        <div className="text-xs font-semibold text-slate-700 mt-1">
-                          ₹{item.product.price?.toLocaleString('en-IN') || '0.00'} / unit
-                        </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between sm:justify-end gap-6 shrink-0">
+                    <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 shrink-0">
                       {/* Quantity Controls */}
                       <div className="flex items-center border border-slate-200 rounded-lg bg-slate-50 p-0.5">
                         <button
@@ -633,14 +629,6 @@ export default function RequestQuoteClient() {
                         </button>
                       </div>
 
-                      {/* Line Total */}
-                      <div className="text-right min-w-[90px]">
-                        <div className="text-xs font-bold text-slate-900">
-                          ₹{lineTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-                        </div>
-                        <div className="text-[10px] text-slate-400">excl. GST</div>
-                      </div>
-
                       {/* Remove Button */}
                       <button
                         type="button"
@@ -654,20 +642,6 @@ export default function RequestQuoteClient() {
                   </div>
                 );
               })}
-            </div>
-
-            {/* Financial Summary Box */}
-            <div className="bg-slate-50 rounded-xl p-4 border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="text-xs text-slate-600 space-y-0.5">
-                <div>Standard B2B Input Tax Credit (ITC) applicable with formal GST invoicing.</div>
-                <div className="text-slate-500">Official GST breakdown generated upon final review.</div>
-              </div>
-              <div className="text-right">
-                <div className="text-xs text-slate-500">Estimated Indicative Subtotal</div>
-                <div className="text-base sm:text-lg font-bold text-slate-900">
-                  ₹{subtotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-                </div>
-              </div>
             </div>
 
             {/* Step 1 Actions */}
@@ -1119,40 +1093,19 @@ export default function RequestQuoteClient() {
                       </div>
 
                       <div className="text-right shrink-0">
-                        <div className="font-bold text-slate-900">
-                          ₹{((item.product.price || 0) * item.quantity).toLocaleString('en-IN', {
-                            minimumFractionDigits: 2,
-                          })}
-                        </div>
-                        <div className="text-[10px] text-slate-400">
-                          @ ₹{item.product.price?.toLocaleString('en-IN') || '0.00'}
-                        </div>
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-700">
+                          Qty: {item.quantity}
+                        </span>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Section C: Financial Totals */}
-              <div className="bg-slate-50 rounded-xl p-4 border border-slate-200/80 space-y-2 text-xs">
-                <div className="flex justify-between text-slate-600">
-                  <span>Indicative Subtotal:</span>
-                  <span className="font-semibold text-slate-900">
-                    ₹{subtotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-                  </span>
-                </div>
-                <div className="flex justify-between text-slate-600">
-                  <span>Estimated GST (18% ITC Eligible):</span>
-                  <span className="font-semibold text-slate-900">
-                    ₹{gstAmount.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-                  </span>
-                </div>
-                <div className="flex justify-between text-slate-900 border-t border-slate-200 pt-2 text-sm font-bold">
-                  <span>Estimated Grand Total:</span>
-                  <span className="text-[#004b87]">
-                    ₹{grandTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-                  </span>
-                </div>
+              {/* Commercial Procurement Note */}
+              <div className="bg-slate-50/80 rounded-xl p-3.5 border border-slate-200/80 text-xs text-slate-600 flex items-start gap-2.5">
+                <span className="font-semibold text-slate-800 shrink-0">Commercial Note:</span>
+                <span>Official volume-tier pricing and formal GST tax invoice breakdown will be provided by our procurement sales desk upon quotation review.</span>
               </div>
 
               {/* Section D: Attached Photos & Notes */}
