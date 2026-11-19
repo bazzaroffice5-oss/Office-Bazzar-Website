@@ -5,7 +5,7 @@ import { getProducts, getCategoryBySlug, getCatalogFilterMetadata } from '@/lib/
 import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG, formatSeoTitle } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Hybrid ISR: 1 hour stale fallback with instant on-demand revalidation
 
 export async function generateMetadata({
   params,

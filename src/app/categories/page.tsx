@@ -10,7 +10,7 @@ import { getCanonicalUrl, getBreadcrumbJsonLd, SITE_CONFIG, formatSeoTitle } fro
 import JsonLd from '@/components/seo/JsonLd';
 import { Subcategory } from '@/types';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 86400; // Hybrid ISR: 24 hour fallback with instant on-demand revalidation
 
 export const ALL_PRODUCTS_CARD: Subcategory = {
   id: 'all-products',

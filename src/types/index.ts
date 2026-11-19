@@ -285,11 +285,24 @@ export interface QuotationItem {
   packSize?: string;
 }
 
+export type QuotationSyncStatus =
+  | 'PENDING'
+  | 'PROCESSING'
+  | 'SYNCED'
+  | 'RETRY_PENDING'
+  | 'FAILED'
+  | 'NEEDS_ADMIN_ACTION';
+
 export interface Quotation {
   id: string;
   zohoQuoteId?: string;
+  zohoLeadId?: string;
   zohoContactId?: string;
   zohoAccountId?: string;
+  syncMode?: 'native_quote' | 'hybrid_lead' | 'queued_recovery';
+  syncStatus?: QuotationSyncStatus;
+  syncError?: string;
+  lastSyncedAt?: string;
   quotationNumber: string; // Sequential identifier e.g. OB-RFQ-2026-00001
   idempotencyKey?: string;
   customerId?: string;

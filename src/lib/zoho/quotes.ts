@@ -20,13 +20,16 @@ import {
   QuotationAuditEntry,
 } from '@/types';
 import { zohoFetch, isZohoConfigured } from './client';
-import { syncCustomerToZohoContact, getCustomerProfileFromZoho } from './contacts';
+import { syncCustomerToZohoContact, getCustomerProfileFromZoho, parseContactName } from './contacts';
 import productMapping from '../data/zoho_product_mapping.json';
 
 export interface ZohoQuoteSyncResult {
   success: boolean;
   action: 'created' | 'skipped' | 'updated' | 'failed';
+  syncMode?: 'native_quote' | 'hybrid_lead' | 'queued_recovery';
+  syncStatus?: 'PENDING' | 'PROCESSING' | 'SYNCED' | 'RETRY_PENDING' | 'FAILED' | 'NEEDS_ADMIN_ACTION';
   quoteId?: string;
+  leadId?: string;
   quoteNumber?: string;
   contactId?: string;
   accountId?: string;
@@ -371,52 +374,52 @@ async function appendZohoQuoteAuditNote(
 }
 
 /**
- * Check if a Quote with this reference already exists in Zoho CRM (Duplicate Prevention)
+ * Check if a Quote or Lead with this reference already exists in Zoho CRM (Duplicate Prevention)
  */
 export async function findExistingQuoteByReference(
   quotationNumber: string
-): Promise<{ id: string; quoteNumber?: string; subject: string; contactId?: string; accountId?: string } | null> {
+): Promise<{ id: string; quoteNumber?: string; subject: string; contactId?: string; accountId?: string; isLead?: boolean } | null> {
   const cleanRef = quotationNumber.trim();
   if (!cleanRef) return null;
 
+  // 1. Search in Leads by Designation (Primary RFQ identifier)
   try {
-    const recentRes = await zohoFetch<any>(
-      '/Quotes?fields=id,Subject,Quote_Number,Contact_Name,Account_Name,Created_Time&per_page=50'
+    const leadRes = await zohoFetch<any>(
+      `/Leads/search?criteria=(Designation:equals:${encodeURIComponent(cleanRef)})&fields=id,Designation,Email,Company`
     );
-    if (Array.isArray(recentRes?.data)) {
-      const match = recentRes.data.find(
-        (q: any) => q.Subject && q.Subject.startsWith(cleanRef)
-      );
-      if (match?.id) {
-        return {
-          id: match.id,
-          quoteNumber: match.Quote_Number,
-          subject: match.Subject,
-          contactId: match.Contact_Name?.id,
-          accountId: match.Account_Name?.id,
-        };
-      }
-    }
-  } catch {
-    // Continue to criteria search
-  }
-
-  try {
-    const res = await zohoFetch<any>(
-      `/Quotes/search?criteria=(Subject:starts_with:${encodeURIComponent(cleanRef)})&fields=id,Subject,Quote_Number,Contact_Name,Account_Name,Created_Time`
-    );
-    const existing = res?.data?.[0];
-    if (existing?.id) {
+    const existingLead = leadRes?.data?.[0];
+    if (existingLead?.id) {
       return {
-        id: existing.id,
-        quoteNumber: existing.Quote_Number,
-        subject: existing.Subject,
-        contactId: existing.Contact_Name?.id,
-        accountId: existing.Account_Name?.id,
+        id: existingLead.id,
+        quoteNumber: cleanRef,
+        subject: `${cleanRef} - ${existingLead.Company || ''}`,
+        isLead: true,
       };
     }
   } catch {
-    // 204 or empty search returns null
+    // 204 or search miss
+  }
+
+  // 2. Only if Native Quotes module is explicitly enabled
+  if (process.env.ZOHO_CRM_QUOTES_ENABLED === 'true') {
+    try {
+      const res = await zohoFetch<any>(
+        `/Quotes/search?criteria=(Subject:starts_with:${encodeURIComponent(cleanRef)})&fields=id,Subject,Quote_Number,Contact_Name,Account_Name,Created_Time`
+      );
+      const existing = res?.data?.[0];
+      if (existing?.id) {
+        return {
+          id: existing.id,
+          quoteNumber: existing.Quote_Number,
+          subject: existing.Subject,
+          contactId: existing.Contact_Name?.id,
+          accountId: existing.Account_Name?.id,
+          isLead: false,
+        };
+      }
+    } catch {
+      // 204 or empty search returns null
+    }
   }
 
   return null;
@@ -535,8 +538,298 @@ function buildInitialStructuredMeta(quotation: Quotation, validTill: string): Zo
   };
 }
 
+let quotesModuleKnownUnavailableUntil = 0;
+const MODULE_PROBE_COOLDOWN_MS = 60 * 60 * 1000; // 1 hour cooldown before reprobing /Quotes
+
+export function isQuotesCircuitBreakerOpen(): boolean {
+  if (
+    process.env.ZOHO_CRM_QUOTES_ENABLED === 'false' ||
+    process.env.ZOHO_QUOTES_MODULE_DISABLED === 'true'
+  ) {
+    return true;
+  }
+  if (Date.now() < quotesModuleKnownUnavailableUntil) {
+    return true;
+  }
+  if (typeof window === 'undefined') {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const fs = require('fs');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const path = require('path');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const os = require('os');
+      const breakerPath = path.join(os.tmpdir(), 'zoho_quotes_circuit_breaker.json');
+      if (fs.existsSync(/*turbopackIgnore: true*/ breakerPath)) {
+        const raw = fs.readFileSync(/*turbopackIgnore: true*/ breakerPath, 'utf8');
+        const parsed = JSON.parse(raw);
+        if (typeof parsed?.unavailableUntil === 'number' && Date.now() < parsed.unavailableUntil) {
+          quotesModuleKnownUnavailableUntil = parsed.unavailableUntil;
+          return true;
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }
+  return false;
+}
+
+export function tripQuotesCircuitBreaker(): void {
+  quotesModuleKnownUnavailableUntil = Date.now() + MODULE_PROBE_COOLDOWN_MS;
+  if (typeof window === 'undefined') {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const fs = require('fs');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const path = require('path');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const os = require('os');
+      const breakerPath = path.join(os.tmpdir(), 'zoho_quotes_circuit_breaker.json');
+      fs.writeFileSync(
+        /*turbopackIgnore: true*/ breakerPath,
+        JSON.stringify({ unavailableUntil: quotesModuleKnownUnavailableUntil, trippedAt: new Date().toISOString() }),
+        'utf8'
+      );
+    } catch {
+      // ignore
+    }
+  }
+}
+
+function isZohoModulePermissionOrNotFoundError(err: any): boolean {
+  const code = err?.details?.code || err?.code || '';
+  const message = String(err?.details?.message || err?.message || '').toLowerCase();
+  const status = Number(err?.status || err?.details?.status || 0);
+
+  if (code === 'NO_PERMISSION' || code === 'INVALID_MODULE' || code === 'MANDATORY_NOT_FOUND') {
+    return true;
+  }
+  if (
+    message.includes('permission denied to access the module') ||
+    message.includes('the module name specified is invalid') ||
+    message.includes('module not found') ||
+    message.includes('not supported for this edition')
+  ) {
+    return true;
+  }
+  if ((status === 400 || status === 403) && message.includes('module')) {
+    return true;
+  }
+
+  return false;
+}
+
+async function appendZohoLeadAuditNote(
+  leadId: string,
+  title: string,
+  content: string
+): Promise<void> {
+  try {
+    await zohoFetch(`/Leads/${leadId}/Notes`, {
+      method: 'POST',
+      body: JSON.stringify({
+        data: [
+          {
+            Note_Title: title,
+            Note_Content: content,
+          },
+        ],
+      }),
+    });
+  } catch (err: any) {
+    console.warn(`[ZohoQuotes] Failed to append Note to Lead ${leadId}:`, err?.message);
+  }
+}
+
+async function appendZohoAccountAuditNote(
+  accountId: string,
+  title: string,
+  content: string
+): Promise<void> {
+  try {
+    await zohoFetch(`/Accounts/${accountId}/Notes`, {
+      method: 'POST',
+      body: JSON.stringify({
+        data: [
+          {
+            Note_Title: title,
+            Note_Content: content,
+          },
+        ],
+      }),
+    });
+  } catch (err: any) {
+    console.warn(`[ZohoQuotes] Failed to append Note to Account ${accountId}:`, err?.message);
+  }
+}
+
+export async function syncQuotationToZohoLead(
+  quotation: Quotation,
+  context: {
+    contactId?: string;
+    accountId?: string;
+    originalError?: string;
+  } = {}
+): Promise<ZohoQuoteSyncResult> {
+  const cleanRef = quotation.quotationNumber.trim();
+  const cleanEmail = quotation.email.trim().toLowerCase();
+  const { firstName, lastName } = parseContactName(quotation.customerName);
+
+  console.log(
+    `[ZohoCRM] Executing Authoritative RFQ Lead Synchronization for ${cleanRef} (${quotation.companyName || quotation.customerName})...`
+  );
+
+  const descriptionLines: string[] = [
+    `=== WEBSITE INSTITUTIONAL RFQ [${cleanRef}] ===`,
+    `Reference Number: ${cleanRef}`,
+    `Submitted At: ${quotation.createdAt || new Date().toISOString()}`,
+    `Assigned Lead Owner: ${quotation.assignedTo || 'Unassigned'}`,
+    `Company Name: ${quotation.companyName}`,
+    `Contact Person: ${quotation.customerName}`,
+    `Email: ${cleanEmail}`,
+    `Phone: ${quotation.phone}`,
+    quotation.gstin ? `GSTIN: ${quotation.gstin}` : '',
+    `Delivery Address: ${quotation.deliveryLocation ? `${quotation.deliveryLocation}, ` : ''}PIN: ${quotation.pincode}`,
+    quotation.additionalRequirements ? `Customer Remarks: ${quotation.additionalRequirements}` : '',
+    context.contactId ? `Linked Zoho Contact ID: ${context.contactId}` : '',
+    context.accountId ? `Linked Zoho Account ID: ${context.accountId}` : '',
+    ``,
+    `--- Requested Products (${quotation.items.length} items) ---`,
+    ...quotation.items.map(
+      (it, i) =>
+        `${i + 1}. [${it.sku || 'N/A'}] ${it.productName} (${it.packSize || 'Standard'}) — Qty: ${it.quantity} | Unit Price: ₹${it.indicativeUnitPrice.toFixed(2)} | Total: ₹${it.indicativeTotalPrice.toFixed(2)}`
+    ),
+    ``,
+    `Indicative Subtotal: ₹${quotation.indicativeSubtotal.toFixed(2)}`,
+    `Indicative GST (${quotation.gstPercent || 18}%): ₹${quotation.indicativeGstAmount.toFixed(2)}`,
+    `Indicative Grand Total: ₹${quotation.indicativeTotal.toFixed(2)}`,
+    `================================================`,
+  ];
+
+  const leadPayload = {
+    data: [
+      {
+        First_Name: firstName || undefined,
+        Last_Name: lastName,
+        Company: quotation.companyName || 'Institutional Customer',
+        Designation: cleanRef,
+        Email: cleanEmail,
+        Phone: quotation.phone,
+        Lead_Source: 'Website Institutional RFQ',
+        Description: descriptionLines.filter(Boolean).join('\n'),
+        City: quotation.deliveryLocation || 'Chennai',
+        Zip_Code: quotation.pincode,
+        Annual_Revenue: quotation.grandTotal || quotation.indicativeTotal,
+      },
+    ],
+    duplicate_check_fields: ['Email'],
+    trigger: ['approval', 'workflow', 'blueprint'],
+  };
+
+  try {
+    const res = await zohoFetch<any>('/Leads/upsert', {
+      method: 'POST',
+      body: JSON.stringify(leadPayload),
+    });
+
+    const item = res?.data?.[0];
+    const leadId = item?.details?.id;
+    const action = item?.action === 'insert' ? 'created' : 'updated';
+
+    if (leadId && (item.code === 'SUCCESS' || item.status === 'success')) {
+      console.log(`[ZohoCRM] Successfully synced RFQ [${cleanRef}] to Zoho Lead ID: ${leadId} (${action})`);
+
+      // 1. Attach dedicated immutable Zoho CRM Note to the Lead
+      const noteTitle = `Website Institutional RFQ [${cleanRef}]`;
+      const validTill = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+      const meta = buildInitialStructuredMeta(quotation, validTill);
+
+      const noteContent = [
+        `RFQ Reference Number: ${cleanRef}`,
+        `Submitted At: ${quotation.createdAt || new Date().toISOString()}`,
+        `Assigned Owner: ${quotation.assignedTo || 'Unassigned'}`,
+        `Company: ${quotation.companyName}`,
+        `Contact Person: ${quotation.customerName}`,
+        `Email: ${cleanEmail} | Phone: ${quotation.phone}`,
+        quotation.gstin ? `GSTIN: ${quotation.gstin}` : '',
+        `Delivery Location: ${quotation.deliveryLocation || 'Chennai'} - PIN ${quotation.pincode}`,
+        quotation.additionalRequirements ? `Customer Notes: ${quotation.additionalRequirements}` : '',
+        context.contactId ? `Linked Contact ID: ${context.contactId}` : '',
+        context.accountId ? `Linked Account ID: ${context.accountId}` : '',
+        ``,
+        `Line Items:`,
+        ...quotation.items.map(
+          (it, i) =>
+            `${i + 1}. [${it.sku || 'N/A'}] ${it.productName} (${it.packSize || 'Standard'}) — Requested Qty: ${it.quantity} @ ₹${it.indicativeUnitPrice.toFixed(2)} = ₹${it.indicativeTotalPrice.toFixed(2)}`
+        ),
+        ``,
+        `Indicative Total: ₹${quotation.indicativeTotal.toFixed(2)} (Subtotal: ₹${quotation.indicativeSubtotal.toFixed(2)}, GST: ₹${quotation.indicativeGstAmount.toFixed(2)})`,
+        ``,
+        META_START_TAG,
+        JSON.stringify(meta),
+        META_END_TAG,
+      ].filter(Boolean).join('\n');
+
+      await appendZohoLeadAuditNote(leadId, noteTitle, noteContent);
+
+      // 2. Attach customer photos if provided
+      if (quotation.photoUrls && quotation.photoUrls.length > 0) {
+        for (let i = 0; i < quotation.photoUrls.length; i++) {
+          const url = quotation.photoUrls[i];
+          const isDataUri = url.startsWith('data:');
+          const photoTitle = `${cleanRef} — Customer Photo #${i + 1}`;
+          const photoContent = isDataUri && url.length < 60000
+            ? `Customer attached photo #${i + 1} (WebP Data URI):\n\n${url}`
+            : `Customer attached photo #${i + 1}:\n${url}`;
+          await appendZohoLeadAuditNote(leadId, photoTitle, photoContent);
+        }
+      }
+
+      // 3. Also append audit note to Account if created
+      if (context.accountId) {
+        await appendZohoAccountAuditNote(context.accountId, noteTitle, noteContent);
+      }
+
+      return {
+        success: true,
+        action,
+        syncMode: 'hybrid_lead',
+        syncStatus: 'SYNCED',
+        leadId,
+        contactId: context.contactId,
+        accountId: context.accountId,
+        quoteNumber: cleanRef,
+      };
+    }
+
+    const errorMsg = item?.message || JSON.stringify(res);
+    console.error(`[ZohoCRM] Authoritative Lead sync failed for ${cleanRef}:`, errorMsg);
+    return {
+      success: false,
+      action: 'failed',
+      syncMode: 'hybrid_lead',
+      syncStatus: 'FAILED',
+      error: `Zoho Lead creation failed: ${errorMsg}`,
+      details: res,
+    };
+  } catch (leadErr: any) {
+    const errorMsg = leadErr?.details?.message || leadErr?.message || String(leadErr);
+    console.error(`[ZohoCRM] Exception during Lead sync for ${cleanRef}:`, errorMsg);
+    return {
+      success: false,
+      action: 'failed',
+      syncMode: 'hybrid_lead',
+      syncStatus: 'FAILED',
+      error: errorMsg,
+    };
+  }
+}
+
+export const syncQuotationToZohoLeadFallback = syncQuotationToZohoLead;
+
 /**
- * Create or synchronize a formal Quotation in Zoho CRM Quotes module
+ * Create or synchronize an authoritative Quotation in Zoho CRM
  */
 export async function syncQuotationToZohoQuote(
   quotation: Quotation
@@ -545,6 +838,7 @@ export async function syncQuotationToZohoQuote(
     return {
       success: false,
       action: 'skipped',
+      syncStatus: 'NEEDS_ADMIN_ACTION',
       error: 'Zoho CRM credentials missing: ZOHO_CLIENT_ID, ZOHO_CLIENT_SECRET, or ZOHO_REFRESH_TOKEN is not configured.',
     };
   }
@@ -552,15 +846,21 @@ export async function syncQuotationToZohoQuote(
   const cleanRef = quotation.quotationNumber.trim();
   const cleanEmail = quotation.email.trim().toLowerCase();
 
+  let contactId: string | undefined = undefined;
+  let accountId: string | undefined = undefined;
+
   try {
-    // 1. Duplicate Prevention: Check if Quote already exists
+    // 1. Duplicate Prevention: Check if Quote or Lead already exists
     const existingQuote = await findExistingQuoteByReference(cleanRef);
     if (existingQuote) {
       console.log(`[ZohoQuotes] Duplicate prevented: Quote with reference [${cleanRef}] already exists as Zoho ID ${existingQuote.id}`);
       return {
         success: true,
         action: 'skipped',
-        quoteId: existingQuote.id,
+        syncMode: existingQuote.isLead ? 'hybrid_lead' : 'native_quote',
+        syncStatus: 'SYNCED',
+        quoteId: existingQuote.isLead ? undefined : existingQuote.id,
+        leadId: existingQuote.isLead ? existingQuote.id : undefined,
         quoteNumber: existingQuote.quoteNumber,
         contactId: existingQuote.contactId,
         accountId: existingQuote.accountId,
@@ -568,29 +868,37 @@ export async function syncQuotationToZohoQuote(
     }
 
     // 2. Synchronize Customer & Company to Zoho Contacts & Accounts
-    const contactSync = await syncCustomerToZohoContact({
-      name: quotation.customerName,
-      email: cleanEmail,
-      phone: quotation.phone,
-      companyName: quotation.companyName,
-      gstin: quotation.gstin,
-      websiteCustomerId: quotation.customerId || `ob_cust_${Buffer.from(cleanEmail).toString('hex').slice(0, 12)}`,
-      billingAddress: {
-        fullName: quotation.customerName,
+    try {
+      const contactSync = await syncCustomerToZohoContact({
+        name: quotation.customerName,
+        email: cleanEmail,
         phone: quotation.phone,
         companyName: quotation.companyName,
         gstin: quotation.gstin,
-        addressLine1: quotation.deliveryLocation || 'Office / Factory',
-        city: 'Chennai',
-        state: 'Tamil Nadu',
-        pincode: quotation.pincode || '600001',
-      },
-    });
+        websiteCustomerId: quotation.customerId || `ob_cust_${Buffer.from(cleanEmail).toString('hex').slice(0, 12)}`,
+        billingAddress: {
+          fullName: quotation.customerName,
+          phone: quotation.phone,
+          companyName: quotation.companyName,
+          gstin: quotation.gstin,
+          addressLine1: quotation.deliveryLocation || 'Office / Factory',
+          city: 'Chennai',
+          state: 'Tamil Nadu',
+          pincode: quotation.pincode || '600001',
+        },
+      });
+      contactId = contactSync.contactId;
+      accountId = contactSync.accountId;
+    } catch (contactErr: any) {
+      console.warn(`[ZohoQuotes] Non-blocking warning: Contact sync skipped:`, contactErr?.message);
+    }
 
-    const contactId = contactSync.contactId;
-    const accountId = contactSync.accountId;
+    // 3. Primary Supported CRM Route: Synchronize directly to Zoho Leads + Structured Note
+    if (process.env.ZOHO_CRM_QUOTES_ENABLED !== 'true') {
+      return await syncQuotationToZohoLead(quotation, { contactId, accountId });
+    }
 
-    // 3. Map line items to Zoho Product catalog IDs
+    // 4. Map line items to Zoho Product catalog IDs
     const quotedItems: Record<string, any>[] = [];
     const defaultZohoProdId = Object.values(typedProductMapping).find((e) => e.zohoId)?.zohoId;
 
@@ -618,7 +926,7 @@ export async function syncQuotationToZohoQuote(
       };
     }
 
-    // 4. Construct Quote payload with immutable Original RFQ snapshot in structured metadata
+    // 5. Construct Quote payload with immutable Original RFQ snapshot in structured metadata
     const subject = `${cleanRef} - ${quotation.companyName || quotation.customerName}`;
     const validTill = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
     const meta = buildInitialStructuredMeta(quotation, validTill);
@@ -679,7 +987,6 @@ export async function syncQuotationToZohoQuote(
           const url = quotation.photoUrls[i];
           const isDataUri = url.startsWith('data:');
           const noteTitle = `${cleanRef} — Customer Photo #${i + 1}`;
-          // Ensure note content never exceeds Zoho CRM Notes limit of 65,535 chars
           const noteContent = isDataUri && url.length < 60000
             ? `Customer attached photo #${i + 1} (WebP Data URI):\n\n${url}`
             : `Customer attached photo #${i + 1}:\n${url}`;
@@ -690,10 +997,16 @@ export async function syncQuotationToZohoQuote(
       return {
         success: true,
         action: 'created',
+        syncMode: 'native_quote',
         quoteId,
         contactId,
         accountId,
       };
+    }
+
+    if (item && isZohoModulePermissionOrNotFoundError(item)) {
+      tripQuotesCircuitBreaker();
+      return await syncQuotationToZohoLeadFallback(quotation, { contactId, accountId, originalError: item.message });
     }
 
     const errorMsg = item?.message || JSON.stringify(res);
@@ -706,6 +1019,12 @@ export async function syncQuotationToZohoQuote(
     };
   } catch (err: any) {
     const errorMsg = err?.details?.message || err?.message || String(err);
+    if (isZohoModulePermissionOrNotFoundError(err)) {
+      console.warn(`[ZohoQuotes] Quotes module unavailable (${errorMsg}). Executing Hybrid Lead Synchronization for ${cleanRef}...`);
+      tripQuotesCircuitBreaker();
+      return await syncQuotationToZohoLeadFallback(quotation, { contactId, accountId, originalError: errorMsg });
+    }
+
     console.error(`[ZohoQuotes] Unexpected error syncing Quote ${cleanRef}:`, errorMsg);
     return {
       success: false,
@@ -924,12 +1243,153 @@ export function mapZohoQuoteToQuotation(quoteRecord: any, defaultEmail?: string)
   };
 }
 
+export function mapStructuredMetaToQuotation(
+  recordId: string,
+  meta: ZohoQuoteStructuredMeta,
+  rawRecord?: any
+): Quotation {
+  const orig = meta.originalRfq;
+  const edit = meta.editableQuote;
+
+  return {
+    id: recordId,
+    quotationNumber: meta.quotationNumber,
+    customerName: orig.customerName,
+    companyName: orig.companyName,
+    email: orig.email,
+    phone: orig.phone,
+    gstin: orig.gstin,
+    deliveryLocation: orig.deliveryLocation,
+    pincode: orig.pincode,
+    preferredContactMethod: orig.preferredContactMethod,
+    additionalRequirements: orig.additionalRequirements,
+    photoUrls: orig.photoUrls,
+    items: edit.items,
+    originalItems: orig.items,
+    indicativeSubtotal: orig.indicativeSubtotal,
+    indicativeGstAmount: orig.indicativeGstAmount,
+    indicativeTotal: orig.indicativeTotal,
+    subtotal: edit.subtotal,
+    discountPercent: edit.discountPercent,
+    discountAmount: edit.discountAmount,
+    gstPercent: edit.gstPercent,
+    gstAmount: edit.gstAmount,
+    deliveryCharges: edit.deliveryCharges,
+    additionalCharges: edit.additionalCharges,
+    grandTotal: edit.grandTotal,
+    validUntil: edit.validUntil,
+    paymentTerms: edit.paymentTerms,
+    termsAndConditions: edit.termsAndConditions,
+    status: edit.status || 'new',
+    version: edit.version || 1,
+    assignedTo: edit.assignedTo || rawRecord?.Owner?.name,
+    assignedEmail: edit.assignedEmail,
+    assignedAt: edit.assignedAt,
+    assignedSequence: edit.assignedSequence,
+    internalNotes: edit.internalNotes,
+    quotationDocumentUrl: edit.quotationDocumentUrl,
+    auditHistory: meta.auditHistory,
+    zohoLeadId: recordId,
+    syncMode: 'hybrid_lead',
+    createdAt: orig.submittedAt || rawRecord?.Created_Time || new Date().toISOString(),
+    updatedAt: rawRecord?.Modified_Time,
+  };
+}
+
+export function mapZohoLeadToQuotation(leadRecord: any, notes?: any[]): Quotation {
+  const cleanRef = String(leadRecord.Designation || '').trim() ||
+    String(leadRecord.Description || '').match(/^(OB-[A-Z0-9-]+)/)?.[1] ||
+    String(leadRecord.Description || '').match(/Reference Number:\s*(OB-[A-Z0-9-]+)/i)?.[1] ||
+    leadRecord.id;
+
+  const legacy = parseLegacyDescriptionFields(leadRecord.Description);
+
+  const cleanCustomerName = [leadRecord.First_Name, leadRecord.Last_Name].filter(Boolean).join(' ') ||
+    legacy.customerName ||
+    'Institutional Customer';
+
+  const subtotal = Number(leadRecord.Annual_Revenue) || 0;
+  const gstAmount = round2((subtotal * 18) / 118);
+  const taxableSubtotal = round2(subtotal - gstAmount);
+
+  return {
+    id: leadRecord.id,
+    quotationNumber: cleanRef,
+    customerName: cleanCustomerName,
+    companyName: leadRecord.Company || legacy.companyName || 'Corporate Client',
+    email: leadRecord.Email || legacy.email || '',
+    phone: leadRecord.Phone || legacy.phone || '',
+    gstin: legacy.gstin,
+    deliveryLocation: leadRecord.City || legacy.deliveryLocation,
+    pincode: leadRecord.Zip_Code || legacy.pincode || '600001',
+    preferredContactMethod: legacy.preferredContactMethod || 'email',
+    additionalRequirements: legacy.additionalRequirements,
+    items: [],
+    indicativeSubtotal: taxableSubtotal,
+    indicativeGstAmount: gstAmount,
+    indicativeTotal: subtotal,
+    subtotal: taxableSubtotal,
+    discountPercent: 0,
+    discountAmount: 0,
+    gstPercent: 18,
+    gstAmount,
+    deliveryCharges: 0,
+    additionalCharges: 0,
+    grandTotal: subtotal,
+    status: 'new',
+    version: 1,
+    assignedTo: leadRecord.Owner?.name,
+    zohoLeadId: leadRecord.id,
+    syncMode: 'hybrid_lead',
+    createdAt: legacy.submittedAt || leadRecord.Created_Time || new Date().toISOString(),
+    updatedAt: leadRecord.Modified_Time,
+  };
+}
+
 /**
- * Retrieve all quotations from Zoho CRM Quotes module for the Admin Dashboard
+ * Retrieve all quotations from Zoho CRM for the Admin Dashboard
  */
 export async function getAllQuotationsFromZoho(): Promise<Quotation[]> {
   if (!(await isZohoConfigured())) {
     return [];
+  }
+
+  // If Quotes module circuit breaker is open, directly retrieve institutional RFQs from Leads module
+  if (isQuotesCircuitBreakerOpen()) {
+    try {
+      const listRes = await zohoFetch<any>(
+        '/Leads/search?criteria=(Lead_Source:equals:Website%20Institutional%20RFQ)&fields=id,First_Name,Last_Name,Company,Designation,Email,Phone,City,Zip_Code,Annual_Revenue,Description,Created_Time,Modified_Time&per_page=50'
+      );
+      const leads: any[] = Array.isArray(listRes?.data) ? listRes.data : [];
+      if (leads.length === 0) return [];
+
+      const quotes = await Promise.all(
+        leads.map(async (lead) => {
+          try {
+            const notesRes = await zohoFetch<any>(
+              `/Leads/${lead.id}/Notes?fields=id,Note_Title,Note_Content`
+            );
+            const notes = Array.isArray(notesRes?.data) ? notesRes.data : [];
+            const metaNote = notes.find((n: any) => n.Note_Content?.includes(META_START_TAG));
+            if (metaNote) {
+              const meta = extractStructuredMeta(metaNote.Note_Content);
+              if (meta) {
+                return mapStructuredMetaToQuotation(lead.id, meta, lead);
+              }
+            }
+            return mapZohoLeadToQuotation(lead, notes);
+          } catch {
+            return mapZohoLeadToQuotation(lead, []);
+          }
+        })
+      );
+
+      quotes.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      return quotes;
+    } catch (err: any) {
+      console.warn('[ZohoCRM] Error retrieving RFQs from Zoho Leads:', err?.message);
+      return [];
+    }
   }
 
   try {
@@ -1280,6 +1740,64 @@ export async function saveAdminQuotationInZoho(
     const newDescription = buildZohoQuoteDescriptionWithMeta(updatedMeta);
     const zohoAdjustment = round2(gstAmount + deliveryCharges + additionalCharges);
 
+    const leadId = existingQuotation.zohoLeadId || zohoQuoteId;
+    if (existingQuotation.syncMode === 'hybrid_lead' || process.env.ZOHO_CRM_QUOTES_ENABLED !== 'true') {
+      try {
+        const leadUpdatePayload = {
+          data: [
+            {
+              id: leadId,
+              Annual_Revenue: grandTotal,
+              Description: newDescription,
+            },
+          ],
+        };
+        await zohoFetch<any>('/Leads', {
+          method: 'PUT',
+          body: JSON.stringify(leadUpdatePayload),
+        });
+
+        await appendZohoLeadAuditNote(
+          leadId,
+          `${existingQuotation.quotationNumber} — v${nextVersion} (${auditAction.toUpperCase()})`,
+          `${auditSummary}\nTimestamp: ${nowIso}\nActor: ${input.actor}\n\nLine Items:\n` +
+            updatedItems
+              .map(
+                (it, i) =>
+                  `${i + 1}. [${it.sku}] ${it.productName} | Orig Qty: ${it.originalQuantity} | Quoted Qty: ${it.quantity} | Unit Price: ₹${it.indicativeUnitPrice} | Line Subtotal: ₹${it.lineSubtotal}`
+              )
+              .join('\n') +
+            `\n\n${META_START_TAG}\n${JSON.stringify(updatedMeta)}\n${META_END_TAG}`
+        );
+
+        const refreshed = await getQuoteByReferenceFromZoho(existingQuotation.quotationNumber);
+        return {
+          success: true,
+          quotation: refreshed || {
+            ...existingQuotation,
+            status: nextStatus,
+            items: updatedItems,
+            subtotal,
+            discountPercent,
+            discountAmount,
+            gstPercent: overallGstPercent,
+            gstAmount,
+            deliveryCharges,
+            additionalCharges,
+            grandTotal,
+            version: nextVersion,
+            updatedAt: nowIso,
+          },
+        };
+      } catch (leadUpdateErr: any) {
+        console.error(`[ZohoQuotes] Error updating RFQ Lead [${leadId}]:`, leadUpdateErr?.message);
+        return {
+          success: false,
+          error: leadUpdateErr?.message || 'Failed to update RFQ Lead in Zoho CRM.',
+        };
+      }
+    }
+
     const updatePayload = {
       data: [
         {
@@ -1354,6 +1872,44 @@ export async function getCustomerQuotationsFromZoho(
   const cleanParam = emailOrCustomerId.trim().toLowerCase();
   if (!cleanParam || !(await isZohoConfigured())) {
     return [];
+  }
+
+  // 1. Leads module search when Quotes is disabled (Standard/Starter CRM edition)
+  if (process.env.ZOHO_CRM_QUOTES_ENABLED !== 'true') {
+    try {
+      const searchRes = await zohoFetch<any>(
+        `/Leads/search?criteria=(Email:equals:${encodeURIComponent(cleanParam)})&fields=id,First_Name,Last_Name,Company,Designation,Email,Phone,City,Zip_Code,Annual_Revenue,Description,Created_Time,Modified_Time`
+      );
+      const leads: any[] = Array.isArray(searchRes?.data) ? searchRes.data : [];
+      if (leads.length === 0) return [];
+
+      const quotes = await Promise.all(
+        leads.map(async (lead) => {
+          try {
+            const notesRes = await zohoFetch<any>(
+              `/Leads/${lead.id}/Notes?fields=id,Note_Title,Note_Content`
+            );
+            const notes = Array.isArray(notesRes?.data) ? notesRes.data : [];
+            const metaNote = notes.find((n: any) => n.Note_Content?.includes(META_START_TAG));
+            if (metaNote) {
+              const meta = extractStructuredMeta(metaNote.Note_Content);
+              if (meta) {
+                return mapStructuredMetaToQuotation(lead.id, meta, lead);
+              }
+            }
+            return mapZohoLeadToQuotation(lead, notes);
+          } catch {
+            return mapZohoLeadToQuotation(lead, []);
+          }
+        })
+      );
+
+      quotes.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      return quotes;
+    } catch (err: any) {
+      console.warn(`[ZohoQuotes] Error reading customer quotations from Leads:`, err?.message);
+      return [];
+    }
   }
 
   try {
@@ -1450,6 +2006,59 @@ export async function getQuoteByReferenceFromZoho(
     return null;
   }
 
+  // 1. Look up in Zoho Leads (Default primary destination for Standard/Starter editions)
+  if (process.env.ZOHO_CRM_QUOTES_ENABLED !== 'true') {
+    try {
+      let leadRecord: any = null;
+      if (/^\d+$/.test(cleanParam)) {
+        try {
+          const directLead = await zohoFetch<any>(`/Leads/${cleanParam}`);
+          leadRecord = directLead?.data?.[0];
+        } catch {
+          // not found by direct ID
+        }
+      }
+      if (!leadRecord) {
+        try {
+          const searchByRef = await zohoFetch<any>(
+            `/Leads/search?criteria=(Designation:equals:${encodeURIComponent(cleanParam)})&fields=id,First_Name,Last_Name,Company,Designation,Email,Phone,City,Zip_Code,Annual_Revenue,Description,Created_Time,Modified_Time`
+          );
+          leadRecord = searchByRef?.data?.[0];
+        } catch {
+          // not found
+        }
+      }
+      if (!leadRecord) {
+        try {
+          const searchLead = await zohoFetch<any>(
+            `/Leads/search?word=${encodeURIComponent(cleanParam)}&fields=id,First_Name,Last_Name,Company,Designation,Email,Phone,City,Zip_Code,Annual_Revenue,Description,Created_Time,Modified_Time`
+          );
+          leadRecord = searchLead?.data?.[0];
+        } catch {
+          // not found
+        }
+      }
+
+      if (leadRecord) {
+        const notesRes = await zohoFetch<any>(
+          `/Leads/${leadRecord.id}/Notes?fields=id,Note_Title,Note_Content`
+        );
+        const notes: any[] = Array.isArray(notesRes?.data) ? notesRes.data : [];
+        const metaNote = notes.find((n: any) => n.Note_Content?.includes(META_START_TAG));
+        if (metaNote) {
+          const meta = extractStructuredMeta(metaNote.Note_Content);
+          if (meta) {
+            return mapStructuredMetaToQuotation(leadRecord.id, meta, leadRecord);
+          }
+        }
+        return mapZohoLeadToQuotation(leadRecord, notes);
+      }
+    } catch (leadErr: any) {
+      console.warn(`[ZohoQuotes] Error looking up lead for quote reference [${cleanParam}]:`, leadErr?.message);
+    }
+    return null;
+  }
+
   try {
     let quoteRecord: any = null;
 
@@ -1498,6 +2107,46 @@ export async function getQuoteByReferenceFromZoho(
         }
       } catch {
         // Not found
+      }
+    }
+
+    // 4. Look up in Zoho Leads (when Quotes module is unavailable)
+    if (!quoteRecord) {
+      try {
+        let leadRecord: any = null;
+        if (/^\d+$/.test(cleanParam)) {
+          const directLead = await zohoFetch<any>(`/Leads/${cleanParam}`);
+          leadRecord = directLead?.data?.[0];
+        }
+        if (!leadRecord) {
+          const searchLead = await zohoFetch<any>(
+            `/Leads/search?word=${encodeURIComponent(cleanParam)}&fields=id,First_Name,Last_Name,Company,Designation,Email,Phone,City,Zip_Code,Annual_Revenue,Description,Created_Time,Modified_Time`
+          );
+          leadRecord = searchLead?.data?.[0];
+        }
+        if (!leadRecord) {
+          const searchByRef = await zohoFetch<any>(
+            `/Leads/search?criteria=(Designation:equals:${encodeURIComponent(cleanParam)})&fields=id,First_Name,Last_Name,Company,Designation,Email,Phone,City,Zip_Code,Annual_Revenue,Description,Created_Time,Modified_Time`
+          );
+          leadRecord = searchByRef?.data?.[0];
+        }
+
+        if (leadRecord) {
+          const notesRes = await zohoFetch<any>(
+            `/Leads/${leadRecord.id}/Notes?fields=id,Note_Title,Note_Content`
+          );
+          const notes: any[] = Array.isArray(notesRes?.data) ? notesRes.data : [];
+          const metaNote = notes.find((n: any) => n.Note_Content?.includes(META_START_TAG));
+          if (metaNote) {
+            const meta = extractStructuredMeta(metaNote.Note_Content);
+            if (meta) {
+              return mapStructuredMetaToQuotation(leadRecord.id, meta, leadRecord);
+            }
+          }
+          return mapZohoLeadToQuotation(leadRecord, notes);
+        }
+      } catch (leadErr: any) {
+        console.warn(`[ZohoQuotes] Error looking up lead for quote reference [${cleanParam}]:`, leadErr?.message);
       }
     }
 

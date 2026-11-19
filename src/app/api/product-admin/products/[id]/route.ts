@@ -160,8 +160,12 @@ export async function PUT(
     try {
       revalidatePath('/');
       revalidatePath('/products');
+      revalidatePath('/categories');
       if (saved.categoryId) {
         revalidatePath(`/category/${saved.categoryId}`);
+      }
+      if (existing?.categoryId && existing.categoryId !== saved.categoryId) {
+        revalidatePath(`/category/${existing.categoryId}`);
       }
       if (saved.slug) {
         revalidatePath(`/product/${saved.slug}`);
@@ -244,6 +248,7 @@ export async function DELETE(
     try {
       revalidatePath('/');
       revalidatePath('/products');
+      revalidatePath('/categories');
       if (existing.categoryId) {
         revalidatePath(`/category/${existing.categoryId}`);
       }

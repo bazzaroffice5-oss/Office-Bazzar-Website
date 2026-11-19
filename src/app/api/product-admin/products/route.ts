@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
-import fs from 'fs';
 import { revalidatePath } from 'next/cache';
 import { getProductAdminSession } from '@/lib/product-admin/auth';
 import { getProductsFromZoho, createZohoProduct, updateProductInLiveCache } from '@/lib/zoho/products';
@@ -116,7 +114,6 @@ export async function POST(request: NextRequest) {
   try {
     const contentType = request.headers.get('content-type') || '';
     let productData: Partial<Product> = {};
-    let imagePath: string | undefined = undefined;
 
     if (contentType.includes('multipart/form-data')) {
       const formData = await request.formData();
@@ -231,6 +228,7 @@ export async function POST(request: NextRequest) {
     try {
       revalidatePath('/');
       revalidatePath('/products');
+      revalidatePath('/categories');
       if (saved.categoryId) {
         revalidatePath(`/category/${saved.categoryId}`);
       }

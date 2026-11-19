@@ -64,7 +64,7 @@ export interface CustomerSyncResult {
 /**
  * Split full name into First_Name and mandatory Last_Name
  */
-function parseContactName(fullName: string): { firstName: string; lastName: string } {
+export function parseContactName(fullName: string): { firstName: string; lastName: string } {
   const clean = fullName.trim().replace(/\s+/g, ' ');
   if (!clean) {
     return { firstName: '', lastName: 'Valued Customer' };

@@ -25,6 +25,7 @@
 *.pem
 /scratch/
 *.log
+.vscode/
 
 # debug
 npm-debug.log*
@@ -48,6 +49,7 @@ yarn-error.log*
 .distributed_coordination_*
 .inventory_reservations.*
 .razorpay_webhook_dedup.json
+/backups/
 .zoho_orders_downtime_outbox.json
 
 # vercel

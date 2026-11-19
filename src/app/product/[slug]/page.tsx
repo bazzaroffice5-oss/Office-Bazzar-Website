@@ -1,7 +1,7 @@
 import React from 'react';
 import { notFound, permanentRedirect } from 'next/navigation';
 import ProductDetailClient from '@/components/product/ProductDetailClient';
-import { getProductBySlug, getRelatedProducts, getBrands, getProducts } from '@/lib/db/store';
+import { getProductBySlug, getRelatedProducts, getBrands } from '@/lib/db/store';
 import { getVersionedImageUrl } from '@/lib/utils/image';
 import {
   getProductJsonLd,
@@ -12,7 +12,7 @@ import {
   formatProductSeoDescription,
 } from '@/lib/seo/config';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Hybrid ISR: 1 hour stale fallback with instant on-demand revalidation
 
 const DUPLICATE_PRODUCT_REDIRECTS: Record<string, string> = {
   'tissue-paper-napkin-1': '/product/tissue-paper-napkin',

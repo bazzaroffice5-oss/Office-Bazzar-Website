@@ -9,6 +9,7 @@ import {
   FilterParams,
   OrderStatus,
   Quotation,
+  QuotationItem,
   QuotationStatus,
   NotificationLog,
 } from '@/types';
@@ -113,10 +114,15 @@ const ordersList: Order[] = storeState.ordersList;
 const bulkRFQsList: BulkRFQ[] = storeState.bulkRFQsList;
 const idempotencyStore = new Map<string, Order>();
 
-// Quotation & Notification In-Memory Fallback State
+// Quotation & Notification In-Memory & Durable State
 let quotationCounter = storeState.quotationCounter;
 const quotationsList: Quotation[] = storeState.quotationsList;
 const quotationIdempotencyStore = new Map<string, Quotation>();
+for (const q of quotationsList) {
+  if (q.idempotencyKey) {
+    quotationIdempotencyStore.set(q.idempotencyKey, q);
+  }
+}
 const notificationLogsList: NotificationLog[] = storeState.notificationLogsList;
 
 let lastSyncCustomTime = 0;
@@ -906,19 +912,40 @@ function generateFallbackQuotationNumber(): string {
   const y = String(now.getFullYear()).slice(-2);
   const m = String(now.getMonth() + 1).padStart(2, '0');
   const d = String(now.getDate()).padStart(2, '0');
-  const seq = String(quotationCounter++).padStart(4, '0');
-  return `OB-RFQ-${y}${m}${d}-${seq}`;
+  const prefix = `OB-RFQ-${y}${m}${d}-`;
+
+  // Find highest existing sequence for today across all stored quotations to ensure uniqueness
+  let maxSeq = 0;
+  for (const q of quotationsList) {
+    if (q.quotationNumber && q.quotationNumber.startsWith(prefix)) {
+      const part = q.quotationNumber.slice(prefix.length);
+      const num = parseInt(part, 10);
+      if (!isNaN(num) && num > maxSeq) {
+        maxSeq = num;
+      }
+    }
+  }
+
+  const nextSeq = Math.max(quotationCounter++, maxSeq + 1);
+  return `${prefix}${String(nextSeq).padStart(4, '0')}`;
 }
 
 export async function createQuotation(
   quoteData: Omit<Quotation, 'id' | 'quotationNumber' | 'createdAt'> & { quotationNumber?: string }
 ): Promise<Quotation> {
-  // 1. Idempotency check to prevent duplicate submissions
-  if (quoteData.idempotencyKey && quotationIdempotencyStore.has(quoteData.idempotencyKey)) {
-    return quotationIdempotencyStore.get(quoteData.idempotencyKey)!;
+  // 1. Idempotency check to prevent duplicate submissions across process boundaries
+  if (quoteData.idempotencyKey) {
+    if (quotationIdempotencyStore.has(quoteData.idempotencyKey)) {
+      return quotationIdempotencyStore.get(quoteData.idempotencyKey)!;
+    }
+    const existing = quotationsList.find((q) => q.idempotencyKey === quoteData.idempotencyKey);
+    if (existing) {
+      quotationIdempotencyStore.set(quoteData.idempotencyKey, existing);
+      return existing;
+    }
   }
 
-  // 2. Construct Quotation object for authoritative Zoho CRM registration
+  // 2. Construct Quotation object with authoritative server pricing
   const quotationNumber = quoteData.quotationNumber?.trim() || generateFallbackQuotationNumber();
   const mappedItems = quoteData.items.map((item, idx) => ({
     ...item,
@@ -971,33 +998,51 @@ export async function createQuotation(
 }
 
 export async function getQuotationById(id: string): Promise<Quotation | null> {
-  // 1. Primary authoritative lookup in Zoho CRM
-  const zohoQuote = await getQuoteByReferenceFromZoho(id);
-  if (zohoQuote) {
-    const idx = quotationsList.findIndex(
-      (q) => q.id === zohoQuote.id || q.quotationNumber === zohoQuote.quotationNumber
-    );
-    if (idx !== -1) {
-      quotationsList[idx] = zohoQuote;
-    } else {
-      quotationsList.unshift(zohoQuote);
-    }
-    return zohoQuote;
+  // 1. Fast lookup in memory cache first
+  const localQuote = quotationsList.find((q) => q.id === id || q.quotationNumber === id);
+  if (localQuote) {
+    return localQuote;
   }
 
-  // 2. Fallback to runtime list
-  const quote = quotationsList.find((q) => q.id === id || q.quotationNumber === id);
-  return quote || null;
+  // 2. Authoritative lookup in Zoho CRM
+  try {
+    const zohoQuote = await getQuoteByReferenceFromZoho(id);
+    if (zohoQuote) {
+      const idx = quotationsList.findIndex(
+        (q) => q.id === zohoQuote.id || q.quotationNumber === zohoQuote.quotationNumber
+      );
+      if (idx !== -1) {
+        quotationsList[idx] = zohoQuote;
+      } else {
+        quotationsList.unshift(zohoQuote);
+      }
+      return zohoQuote;
+    }
+  } catch {
+    // Non-blocking fallback
+  }
+
+  return null;
 }
 
 export async function getQuotationByNumber(quotationNumber: string): Promise<Quotation | null> {
   const cleanNumber = quotationNumber.trim().toUpperCase();
-  const zohoQuote = await getQuoteByReferenceFromZoho(cleanNumber);
-  if (zohoQuote) {
-    return zohoQuote;
+  const localQuote = quotationsList.find((q) => q.quotationNumber.trim().toUpperCase() === cleanNumber);
+  if (localQuote) {
+    return localQuote;
   }
-  const quote = quotationsList.find((q) => q.quotationNumber.trim().toUpperCase() === cleanNumber);
-  return quote || null;
+
+  // Authoritative lookup in Zoho CRM
+  try {
+    const zohoQuote = await getQuoteByReferenceFromZoho(cleanNumber);
+    if (zohoQuote) {
+      return zohoQuote;
+    }
+  } catch {
+    // Non-blocking fallback
+  }
+
+  return null;
 }
 
 export async function getQuotationsByCustomer(customerIdOrEmail: string): Promise<Quotation[]> {

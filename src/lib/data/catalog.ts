@@ -1689,7 +1689,9 @@ const RAW_PRODUCTS: any[] = [
     "stockQuantity": 100,
     "minOrderQuantity": 1,
     "packSize": "Standard Pack",
-    "images": [],
+    "images": [
+      "/assets/products/catalog_2026/OB-HOU-1018.webp"
+    ],
     "featured": true,
     "bestseller": false,
     "rating": 4.8,
@@ -22611,7 +22613,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-victor-household-gloves-and-ob-hou-2155",
-    "name": "Victor Household Gloves And",
+    "name": "Victor Household Gloves",
     "slug": "victor-household-gloves-and-ob-hou-2155",
     "sku": "OB-HOU-2155",
     "categoryId": "housekeeping-hygiene",
@@ -26191,7 +26193,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-soap-dispenser-variety-in-ob-hou-2243",
-    "name": "Soap Dispenser Variety In",
+    "name": "Soap Dispenser",
     "slug": "soap-dispenser-variety-in-ob-hou-2243",
     "sku": "OB-HOU-2243",
     "categoryId": "housekeeping-hygiene",
@@ -27443,7 +27445,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-wall-mount-liquid-soap-dispenser-and-ob-hou-2274",
-    "name": "Wall Mount Liquid Soap Dispenser And",
+    "name": "Wall Mount Liquid Soap Dispenser",
     "slug": "wall-mount-liquid-soap-dispenser-and-ob-hou-2274",
     "sku": "OB-HOU-2274",
     "categoryId": "housekeeping-hygiene",
@@ -27604,7 +27606,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-aristo-plastic-garbage-bin-with-handle-and-lid-and-ob-hou-2278",
-    "name": "Aristo Plastic Garbage Bin With Handle And Lid And",
+    "name": "Aristo Plastic Garbage Bin With Handle And Lid",
     "slug": "aristo-plastic-garbage-bin-with-handle-and-lid-and-ob-hou-2278",
     "sku": "OB-HOU-2278",
     "categoryId": "housekeeping-hygiene",
@@ -27967,7 +27969,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-aristo-waste-bin-dome-lid-double-stand-and-ob-hou-2287",
-    "name": "Aristo Waste Bin Dome Lid Double Stand And",
+    "name": "Aristo Waste Bin Dome Lid Double Stand",
     "slug": "aristo-waste-bin-dome-lid-double-stand-and-ob-hou-2287",
     "sku": "OB-HOU-2287",
     "categoryId": "housekeeping-hygiene",
@@ -29624,7 +29626,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-jago-heavy-duty-pedal-dustbin-and-ob-hou-2328",
-    "name": "Jago Heavy Duty Pedal Dustbin And",
+    "name": "Jago Heavy Duty Pedal Dustbin",
     "slug": "jago-heavy-duty-pedal-dustbin-and-ob-hou-2328",
     "sku": "OB-HOU-2328",
     "categoryId": "housekeeping-hygiene",
@@ -29831,7 +29833,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-jago-heavy-duty-plastic-waste-basket-dustbin-set-of-ob-hou-2333",
-    "name": "Jago Heavy Duty Plastic Waste Basket Dustbin Set Of",
+    "name": "Jago Heavy Duty Plastic Waste Basket Dustbin",
     "slug": "jago-heavy-duty-plastic-waste-basket-dustbin-set-of-ob-hou-2333",
     "sku": "OB-HOU-2333",
     "categoryId": "housekeeping-hygiene",
@@ -29955,7 +29957,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-jago-plastic-waste-basket-dustbin-of-ob-hou-2336",
-    "name": "Jago Plastic Waste Basket Dustbin Of",
+    "name": "Jago Plastic Waste Basket Dustbin",
     "slug": "jago-plastic-waste-basket-dustbin-of-ob-hou-2336",
     "sku": "OB-HOU-2336",
     "categoryId": "housekeeping-hygiene",
@@ -30442,7 +30444,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-lazzo-biohazard-pedal-dustbin-and-ob-hou-2348",
-    "name": "Lazzo Biohazard Pedal Dustbin And",
+    "name": "Lazzo Biohazard Pedal Dustbin",
     "slug": "lazzo-biohazard-pedal-dustbin-and-ob-hou-2348",
     "sku": "OB-HOU-2348",
     "categoryId": "housekeeping-hygiene",
@@ -30885,7 +30887,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-lazzo-vento-swing-dustbin-ltr-and-ob-hou-2359",
-    "name": "Lazzo Vento Swing Dustbin Ltr And",
+    "name": "Lazzo Vento Swing Dustbin",
     "slug": "lazzo-vento-swing-dustbin-ltr-and-ob-hou-2359",
     "sku": "OB-HOU-2359",
     "categoryId": "housekeeping-hygiene",
@@ -31085,7 +31087,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-plastic-fluted-waste-basket-and-ob-hou-2364",
-    "name": "Plastic Fluted Waste Basket And",
+    "name": "Plastic Fluted Waste Basket",
     "slug": "plastic-fluted-waste-basket-and-ob-hou-2364",
     "sku": "OB-HOU-2364",
     "categoryId": "housekeeping-hygiene",
@@ -32815,7 +32817,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-meeku-biodegradable-garbage-bags-packaging-boxes-of-ob-hou-2407",
-    "name": "Meeku Biodegradable Garbage Bags Packaging Boxes Of",
+    "name": "Meeku Biodegradable Garbage Bags Packaging Boxes",
     "slug": "meeku-biodegradable-garbage-bags-packaging-boxes-of-ob-hou-2407",
     "sku": "OB-HOU-2407",
     "categoryId": "housekeeping-hygiene",
@@ -32935,7 +32937,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-plastobag-garbage-bags-sizes-boxes-with-roll-on-ob-hou-2410",
-    "name": "Plastobag Garbage Bags Sizes Boxes With Roll On",
+    "name": "Plastobag Garbage Bags Sizes Boxes",
     "slug": "plastobag-garbage-bags-sizes-boxes-with-roll-on-ob-hou-2410",
     "sku": "OB-HOU-2410",
     "categoryId": "housekeeping-hygiene",
@@ -33826,7 +33828,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-joy-45-reusable-household-rubber-gloves-and-ob-hou-2432",
-    "name": "Joy 45 Reusable Household Rubber Gloves And",
+    "name": "Joy 45 Reusable Household Rubber Gloves",
     "slug": "joy-45-reusable-household-rubber-gloves-and-ob-hou-2432",
     "sku": "OB-HOU-2432",
     "categoryId": "housekeeping-hygiene",
@@ -34911,7 +34913,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-all-out-ultra-mosquito-liquid-vaporiser-machine-and-refill-45-ml-box-and-ob-hou-2459",
-    "name": "All Out Ultra Mosquito Liquid Vaporiser Machine And Refill 45 Ml Box And",
+    "name": "All Out Ultra Mosquito Liquid Vaporiser Machine And Refill 45 Ml Box",
     "slug": "all-out-ultra-mosquito-liquid-vaporiser-machine-and-refill-45-ml-box-and-ob-hou-2459",
     "sku": "OB-HOU-2459",
     "categoryId": "housekeeping-hygiene",
@@ -35356,7 +35358,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-kiwi-dranex-drain-cleaner-heavy-duty-300-g-packs-box-and-ob-hou-2470",
-    "name": "Kiwi Dranex Drain Cleaner Heavy Duty 300 G Packs Box And",
+    "name": "Kiwi Dranex Drain Cleaner Heavy Duty 300 G Packs Box",
     "slug": "kiwi-dranex-drain-cleaner-heavy-duty-300-g-packs-box-and-ob-hou-2470",
     "sku": "OB-HOU-2470",
     "categoryId": "housekeeping-hygiene",
@@ -35436,7 +35438,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-kwick-drain-cleaner-heavy-duty-600-g-box-and-ob-hou-2472",
-    "name": "Kwick Drain Cleaner Heavy Duty 600 G Box And",
+    "name": "Kwick Drain Cleaner Heavy Duty 600 G Box",
     "slug": "kwick-drain-cleaner-heavy-duty-600-g-box-and-ob-hou-2472",
     "sku": "OB-HOU-2472",
     "categoryId": "housekeeping-hygiene",
@@ -35516,7 +35518,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-lazzo-insect-killer-machine-uv-light-off-and-on-ob-hou-2474",
-    "name": "Lazzo Insect Killer Machine Uv Light Off And On",
+    "name": "Lazzo Insect Killer Machine Uv Light Off",
     "slug": "lazzo-insect-killer-machine-uv-light-off-and-on-ob-hou-2474",
     "sku": "OB-HOU-2474",
     "categoryId": "housekeeping-hygiene",
@@ -35638,7 +35640,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-lazzo-insect-killer-machine-uv-light-on-ob-hou-2477",
-    "name": "Lazzo Insect Killer Machine Uv Light On",
+    "name": "Lazzo Insect Killer Machine Uv Light",
     "slug": "lazzo-insect-killer-machine-uv-light-on-ob-hou-2477",
     "sku": "OB-HOU-2477",
     "categoryId": "housekeeping-hygiene",
@@ -35678,7 +35680,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-lazzo-premium-insect-killer-machine-uv-light-on-ob-hou-2478",
-    "name": "Lazzo Premium Insect Killer Machine Uv Light On",
+    "name": "Lazzo Premium Insect Killer Machine Uv Light",
     "slug": "lazzo-premium-insect-killer-machine-uv-light-on-ob-hou-2478",
     "sku": "OB-HOU-2478",
     "categoryId": "housekeeping-hygiene",
@@ -37693,7 +37695,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-multipurpose-janitor-cart-cleaning-trolleys-with-double-bucket-mop-wringers-of-ob-hou-2528",
-    "name": "Multipurpose Janitor Cart Cleaning Trolleys With Double Bucket Mop Wringers Of",
+    "name": "Multipurpose Janitor Cart Cleaning Trolleys With Double Bucket Mop Wringers",
     "slug": "multipurpose-janitor-cart-cleaning-trolleys-with-double-bucket-mop-wringers-of-ob-hou-2528",
     "sku": "OB-HOU-2528",
     "categoryId": "housekeeping-hygiene",
@@ -37734,7 +37736,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-plastic-cleaning-caddy-baskets-and-ob-hou-2529",
-    "name": "Plastic Cleaning Caddy Baskets And",
+    "name": "Plastic Cleaning Caddy Baskets",
     "slug": "plastic-cleaning-caddy-baskets-and-ob-hou-2529",
     "sku": "OB-HOU-2529",
     "categoryId": "housekeeping-hygiene",
@@ -37819,7 +37821,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-plastic-cleaning-caddy-baskets-assorted-colors-set-of-ob-hou-2531",
-    "name": "Plastic Cleaning Caddy Baskets Assorted Colors Set Of",
+    "name": "Plastic Cleaning Caddy Baskets Assorted Colors",
     "slug": "plastic-cleaning-caddy-baskets-assorted-colors-set-of-ob-hou-2531",
     "sku": "OB-HOU-2531",
     "categoryId": "housekeeping-hygiene",
@@ -39477,7 +39479,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-disposable-ply-surgical-face-mask-pack-of-50-with-ob-sta-2016",
-    "name": "Disposable Ply Surgical Face Mask Pack Of 50 With",
+    "name": "Disposable Ply Surgical Face Mask Pack Of 50",
     "slug": "disposable-ply-surgical-face-mask-pack-of-50-with-ob-sta-2016",
     "sku": "OB-STA-2016",
     "categoryId": "office-stationery",
@@ -40401,7 +40403,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-protective-direct-splash-face-shield-250-micron-elastic-band-pack-of-ob-sta-2039",
-    "name": "Protective Direct Splash Face Shield 250 Micron Elastic Band Pack Of",
+    "name": "Protective Direct Splash Face Shield 250 Micron Elastic Band Pack",
     "slug": "protective-direct-splash-face-shield-250-micron-elastic-band-pack-of-ob-sta-2039",
     "sku": "OB-STA-2039",
     "categoryId": "office-stationery",
@@ -41123,7 +41125,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-pvc-cushion-coil-door-mat-plain-rectangular-of-ob-sta-2057",
-    "name": "Pvc Cushion Coil Door Mat Plain Rectangular Of",
+    "name": "Pvc Cushion Coil Door Mat Plain Rectangular",
     "slug": "pvc-cushion-coil-door-mat-plain-rectangular-of-ob-sta-2057",
     "sku": "OB-STA-2057",
     "categoryId": "office-stationery",
@@ -41163,7 +41165,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-pvc-cushion-coil-mat-color-sample-swatches-of-ob-sta-2058",
-    "name": "Pvc Cushion Coil Mat Color Sample Swatches Of",
+    "name": "Pvc Cushion Coil Mat",
     "slug": "pvc-cushion-coil-mat-color-sample-swatches-of-ob-sta-2058",
     "sku": "OB-STA-2058",
     "categoryId": "office-stationery",
@@ -41323,7 +41325,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-pvc-s-mesh-drainage-anti-slip-mat-color-swatches-of-ob-sta-2062",
-    "name": "Pvc S Mesh Drainage Anti Slip Mat Color Swatches Of",
+    "name": "Pvc S Mesh Drainage Anti Slip Mat",
     "slug": "pvc-s-mesh-drainage-anti-slip-mat-color-swatches-of-ob-sta-2062",
     "sku": "OB-STA-2062",
     "categoryId": "office-stationery",
@@ -41443,7 +41445,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-super-absorbent-diatomite-bath-mat-oval-assorted-printed-designs-of-ob-sta-2065",
-    "name": "Super Absorbent Diatomite Bath Mat Oval Assorted Printed Designs Of",
+    "name": "Super Absorbent Diatomite Bath Mat Oval Assorted Printed Designs",
     "slug": "super-absorbent-diatomite-bath-mat-oval-assorted-printed-designs-of-ob-sta-2065",
     "sku": "OB-STA-2065",
     "categoryId": "office-stationery",
@@ -46264,7 +46266,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-lazzo-multicolour-shoe-polish-1000ml-bottles-and-ob-hou-2676",
-    "name": "Lazzo Multicolour Shoe Polish 1000ml Bottles And",
+    "name": "Lazzo Multicolour Shoe Polish 1000ml Bottles",
     "slug": "lazzo-multicolour-shoe-polish-1000ml-bottles-and-ob-hou-2676",
     "sku": "OB-HOU-2676",
     "categoryId": "housekeeping-hygiene",
@@ -46385,7 +46387,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-lazzo-super-cleaning-concentrates-l1-to-l9-range-litre-cans-grid-of-ob-hou-2679",
-    "name": "Lazzo Super Cleaning Concentrates L1 To L9 Range Litre Cans Grid Of",
+    "name": "Lazzo Super Cleaning Concentrates L1 To L9 Range Litre Cans",
     "slug": "lazzo-super-cleaning-concentrates-l1-to-l9-range-litre-cans-grid-of-ob-hou-2679",
     "sku": "OB-HOU-2679",
     "categoryId": "housekeeping-hygiene",
@@ -48914,7 +48916,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-clean-mart-kleen-cellulose-sponge-wipe-pack-of-ob-pac-2002",
-    "name": "Clean Mart Kleen Cellulose Sponge Wipe Pack Of",
+    "name": "Clean Mart Kleen Cellulose Sponge Wipe Pack",
     "slug": "clean-mart-kleen-cellulose-sponge-wipe-pack-of-ob-pac-2002",
     "sku": "OB-PAC-2002",
     "categoryId": "packaging-supplies",
@@ -49605,7 +49607,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-lazzo-super-sponge-wipes-highly-absorbent-pack-of-ob-pac-2006",
-    "name": "Lazzo Super Sponge Wipes Highly Absorbent Pack Of",
+    "name": "Lazzo Super Sponge Wipes Highly Absorbent Pack",
     "slug": "lazzo-super-sponge-wipes-highly-absorbent-pack-of-ob-pac-2006",
     "sku": "OB-PAC-2006",
     "categoryId": "packaging-supplies",
@@ -50088,7 +50090,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-plastic-threaded-end-caps-of-ob-hou-2756",
-    "name": "Plastic Threaded End Caps Of",
+    "name": "Plastic Threaded End Caps",
     "slug": "plastic-threaded-end-caps-of-ob-hou-2756",
     "sku": "OB-HOU-2756",
     "categoryId": "housekeeping-hygiene",
@@ -51139,7 +51141,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-wet-mop-set-and-clip-clamp-in-ob-hou-2780",
-    "name": "Wet Mop Set And Clip Clamp In",
+    "name": "Wet Mop Set And Clip Clamp",
     "slug": "wet-mop-set-and-clip-clamp-in-ob-hou-2780",
     "sku": "OB-HOU-2780",
     "categoryId": "housekeeping-hygiene",
@@ -51260,7 +51262,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-cotton-wet-mop-clip-refill-and-ob-hou-2783",
-    "name": "Cotton Wet Mop Clip Refill And",
+    "name": "Cotton Wet Mop Clip Refill",
     "slug": "cotton-wet-mop-clip-refill-and-ob-hou-2783",
     "sku": "OB-HOU-2783",
     "categoryId": "housekeeping-hygiene",
@@ -53633,7 +53635,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-sln-clip-mop-cotton-refill-with-clamp-set-packaged-and-ob-hou-2842",
-    "name": "Sln Clip Mop Cotton Refill With Clamp Set Packaged And",
+    "name": "Sln Clip Mop Cotton Refill",
     "slug": "sln-clip-mop-cotton-refill-with-clamp-set-packaged-and-ob-hou-2842",
     "sku": "OB-HOU-2842",
     "categoryId": "housekeeping-hygiene",
@@ -54193,7 +54195,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-handheld-carton-tape-dispenser-guns-and-ob-pac-2019",
-    "name": "Handheld Carton Tape Dispenser Guns And",
+    "name": "Handheld Carton Tape Dispenser Guns",
     "slug": "handheld-carton-tape-dispenser-guns-and-ob-pac-2019",
     "sku": "OB-PAC-2019",
     "categoryId": "packaging-supplies",
@@ -54353,7 +54355,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-manual-box-strapping-tensioner-tool-and-ob-pac-2023",
-    "name": "Manual Box Strapping Tensioner Tool And",
+    "name": "Manual Box Strapping Tensioner Tool",
     "slug": "manual-box-strapping-tensioner-tool-and-ob-pac-2023",
     "sku": "OB-PAC-2023",
     "categoryId": "packaging-supplies",
@@ -54433,7 +54435,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-pp-box-strapping-band-rolls-standing-and-on-ob-pac-2025",
-    "name": "Pp Box Strapping Band Rolls Standing And On",
+    "name": "Pp Box Strapping Band",
     "slug": "pp-box-strapping-band-rolls-standing-and-on-ob-pac-2025",
     "sku": "OB-PAC-2025",
     "categoryId": "packaging-supplies",
@@ -65388,7 +65390,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-lazzo-nylon-rubber-band-inch-500gm-pack-of-ob-sta-2126",
-    "name": "Lazzo Nylon Rubber Band Inch 500gm Pack Of",
+    "name": "Lazzo Nylon Rubber Band Inch 500gm Pack",
     "slug": "lazzo-nylon-rubber-band-inch-500gm-pack-of-ob-sta-2126",
     "sku": "OB-STA-2126",
     "categoryId": "office-stationery",
@@ -65708,7 +65710,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-greenlime-super-m-fold-towels-01410057-carton-with-pack-and-ob-hou-3079",
-    "name": "Greenlime Super M Fold Towels 01410057 Carton With Pack And",
+    "name": "Greenlime Super M Fold Towels 01410057",
     "slug": "greenlime-super-m-fold-towels-01410057-carton-with-pack-and-ob-hou-3079",
     "sku": "OB-HOU-3079",
     "categoryId": "housekeeping-hygiene",
@@ -65788,7 +65790,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-hi-soft-tissue-multifold-hand-towel-pack-and-ob-hou-3081",
-    "name": "Hi Soft Tissue Multifold Hand Towel Pack And",
+    "name": "Hi Soft Tissue Multifold Hand Towel Pack",
     "slug": "hi-soft-tissue-multifold-hand-towel-pack-and-ob-hou-3081",
     "sku": "OB-HOU-3081",
     "categoryId": "housekeeping-hygiene",
@@ -66028,7 +66030,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-kimberly-clark-scott-multi-fold-towels-01222a-150-sheets-pack-and-ob-hou-3087",
-    "name": "Kimberly Clark Scott Multi Fold Towels 01222a 150 Sheets Pack And",
+    "name": "Kimberly Clark Scott Multi Fold Towels 01222a 150 Sheets Pack",
     "slug": "kimberly-clark-scott-multi-fold-towels-01222a-150-sheets-pack-and-ob-hou-3087",
     "sku": "OB-HOU-3087",
     "categoryId": "housekeeping-hygiene",
@@ -66268,7 +66270,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-lazzo-soft-multifold-hand-towels-100-percent-natural-cellulose-pack-and-ob-hou-3093",
-    "name": "Lazzo Soft Multifold Hand Towels 100 Percent Natural Cellulose Pack And",
+    "name": "Lazzo Soft Multifold Hand Towels 100 Percent Natural Cellulose Pack",
     "slug": "lazzo-soft-multifold-hand-towels-100-percent-natural-cellulose-pack-and-ob-hou-3093",
     "sku": "OB-HOU-3093",
     "categoryId": "housekeeping-hygiene",
@@ -66589,7 +66591,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-royal-natural-max-multi-fold-towel-pack-and-ob-hou-3101",
-    "name": "Royal Natural Max Multi Fold Towel Pack And",
+    "name": "Royal Natural Max Multi Fold Towel Pack",
     "slug": "royal-natural-max-multi-fold-towel-pack-and-ob-hou-3101",
     "sku": "OB-HOU-3101",
     "categoryId": "housekeeping-hygiene",
@@ -66669,7 +66671,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-royal-natural-sparkle-napkin-soft-hygienic-packs-and-ob-hou-3103",
-    "name": "Royal Natural Sparkle Napkin Soft Hygienic Packs And",
+    "name": "Royal Natural Sparkle Napkin",
     "slug": "royal-natural-sparkle-napkin-soft-hygienic-packs-and-ob-hou-3103",
     "sku": "OB-HOU-3103",
     "categoryId": "housekeeping-hygiene",
@@ -67349,7 +67351,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-scott-essential-multi-fold-towels-41500-200-sheets-pack-and-ob-hou-3120",
-    "name": "Scott Essential Multi Fold Towels 41500 200 Sheets Pack And",
+    "name": "Scott Essential Multi Fold Towels 41500",
     "slug": "scott-essential-multi-fold-towels-41500-200-sheets-pack-and-ob-hou-3120",
     "sku": "OB-HOU-3120",
     "categoryId": "housekeeping-hygiene",
@@ -67389,7 +67391,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-scott-essential-multi-fold-towels-32152-150-sheets-packs-and-ob-hou-3121",
-    "name": "Scott Essential Multi Fold Towels 32152 150 Sheets Packs And",
+    "name": "Scott Essential Multi Fold Towels 32152",
     "slug": "scott-essential-multi-fold-towels-32152-150-sheets-packs-and-ob-hou-3121",
     "sku": "OB-HOU-3121",
     "categoryId": "housekeeping-hygiene",
@@ -67789,7 +67791,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-v-touch-paper-napkins-28x30cm-100-serviettes-pack-and-ob-hou-3131",
-    "name": "V Touch Paper Napkins 28x30cm 100 Serviettes Pack And",
+    "name": "V Touch Paper Napkins 28x30cm",
     "slug": "v-touch-paper-napkins-28x30cm-100-serviettes-pack-and-ob-hou-3131",
     "sku": "OB-HOU-3131",
     "categoryId": "housekeeping-hygiene",
@@ -72514,7 +72516,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-floor-wiper-threaded-socket-heads-and-ob-hou-3228",
-    "name": "Floor Wiper Threaded Socket Heads And",
+    "name": "Floor Wiper Threaded Socket Heads",
     "slug": "floor-wiper-threaded-socket-heads-and-ob-hou-3228",
     "sku": "OB-HOU-3228",
     "categoryId": "housekeeping-hygiene",
@@ -75563,7 +75565,7 @@ const RAW_PRODUCTS: any[] = [
   },
   {
     "id": "prod-ob-hou-3555-good-knight-gold-flash-liquid-vapouriser-machine-and-refill-45-ml-box-front-and",
-    "name": "Good Knight Gold Flash Liquid Vapouriser Machine And Refill 45 Ml Box Front And",
+    "name": "Good Knight Gold Flash Liquid Vapouriser Machine And Refill 45 Ml Box",
     "slug": "good-knight-gold-flash-liquid-vapouriser-machine-and-refill-45-ml-box-front-and-ob-hou-3555",
     "sku": "OB-HOU-3555",
     "categoryId": "housekeeping-hygiene",

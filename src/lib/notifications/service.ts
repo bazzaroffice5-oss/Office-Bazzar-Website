@@ -310,12 +310,14 @@ export function buildQuotationEmailHtml(
 }
 
 export interface QuotationNotificationContext {
-  source: 'production_customer_submission';
-  zohoQuoteId: string;
+  source: 'production_customer_submission' | 'admin_manual_retry' | 'outbox_drain';
+  zohoQuoteId?: string;
+  zohoLeadId?: string;
   zohoContactId?: string;
   zohoAccountId?: string;
   action?: 'created' | 'skipped' | 'updated' | 'failed';
   idempotencyKey?: string;
+  syncMode?: 'native_quote' | 'hybrid_lead' | 'queued_recovery';
 }
 
 /**
@@ -327,7 +329,7 @@ export async function sendAdminQuotationEmail(
   recipientEmail: string,
   partnerEmail: string,
   roleLabel: 'ADMIN 1 (Sales)' | 'ADMIN 2 (Marketing)',
-  crmContext?: { zohoQuoteId?: string; zohoContactId?: string }
+  crmContext?: { zohoQuoteId?: string; zohoLeadId?: string; zohoContactId?: string }
 ): Promise<AdminRecipientStatus> {
   const cleanRecipient = recipientEmail.trim().toLowerCase();
   const dedupKey = `${quotation.idempotencyKey || quotation.quotationNumber || quotation.id}:${cleanRecipient}`;
@@ -378,6 +380,7 @@ export async function sendAdminQuotationEmail(
     html,
     text,
     quoteId: crmContext?.zohoQuoteId,
+    leadId: crmContext?.zohoLeadId,
     contactId: crmContext?.zohoContactId,
     attachInventoryPdf: false,
   });
@@ -455,101 +458,100 @@ export async function dispatchQuotationNotifications(
   const { salesEmail, marketingEmail } = getNotificationRecipients();
 
   // 1. Production submission source validation
-  if (!crmContext || crmContext.source !== 'production_customer_submission') {
+  if (!crmContext || (crmContext.source !== 'production_customer_submission' && crmContext.source !== 'admin_manual_retry' && crmContext.source !== 'outbox_drain')) {
     console.warn(
       `[NotificationService] Notification rejected: Invalid or non-production submission source.`
     );
     return [];
   }
 
-  // 2. Authoritative Zoho CRM record validation: Must be a newly created Quote
-  if (!crmContext.zohoQuoteId || crmContext.action !== 'created') {
+  // 2. Authoritative record validation: Must be a newly created submission (native Quote, hybrid Lead, or DB persisted)
+  if (crmContext.action !== 'created' && crmContext.action !== 'updated' && !crmContext.zohoQuoteId && !crmContext.zohoLeadId) {
     console.log(
-      `[NotificationService] Notification skipped: Quotation [${quotation.quotationNumber}] action is "${crmContext?.action}" (not a newly created Zoho CRM record).`
+      `[NotificationService] Notification skipped: Quotation [${quotation.quotationNumber}] action is "${crmContext?.action}" (not a recognized submission event).`
     );
     return [];
   }
 
-  // Determine assigned admin from quotation metadata
-  const isMarketing =
-    (quotation.assignedEmail && quotation.assignedEmail.toLowerCase().includes('marketing')) ||
-    (quotation.assignedTo && /marketing/i.test(quotation.assignedTo));
-
-  if (isMarketing) {
-    // Dispatch ONLY to ADMIN 2: marketing@officebazzar.com
-    const admin2Res = await sendAdminQuotationEmail(
-      quotation,
-      marketingEmail,
-      salesEmail,
-      'ADMIN 2 (Marketing)',
-      crmContext
-    );
-
-    await createNotificationLog({
-      quotationId: quotation.id,
-      quotationNumber: quotation.quotationNumber,
-      channel: 'email_admin',
-      recipient: admin2Res.recipient,
-      status: admin2Res.status,
-      errorMessage: admin2Res.error,
-      metadata: {
-        role: 'ADMIN_2_MARKETING',
-        assignedTo: quotation.assignedTo,
-        sequence: quotation.assignedSequence,
-        provider: admin2Res.provider,
-        messageId: admin2Res.messageId,
-        zohoQuoteId: crmContext?.zohoQuoteId,
-        missingScopes: admin2Res.missingScopes,
-      },
-    });
-
-    results.push({
-      channel: 'email_admin',
-      recipient: admin2Res.recipient,
-      status: admin2Res.status,
-      provider: admin2Res.provider,
-      messageId: admin2Res.messageId,
-      errorMessage: admin2Res.error,
-      missingScopes: admin2Res.missingScopes,
-    });
-  } else {
-    // Dispatch ONLY to ADMIN 1: sales4@officebazzar.com
-    const admin1Res = await sendAdminQuotationEmail(
+  // Dispatch to BOTH Admin recipients (sales4@officebazzar.com AND marketing@officebazzar.com)
+  const [admin1Res, admin2Res] = await Promise.all([
+    sendAdminQuotationEmail(
       quotation,
       salesEmail,
       marketingEmail,
       'ADMIN 1 (Sales)',
       crmContext
-    );
+    ),
+    sendAdminQuotationEmail(
+      quotation,
+      marketingEmail,
+      salesEmail,
+      'ADMIN 2 (Marketing)',
+      crmContext
+    ),
+  ]);
 
-    await createNotificationLog({
-      quotationId: quotation.id,
-      quotationNumber: quotation.quotationNumber,
-      channel: 'email_sales',
-      recipient: admin1Res.recipient,
-      status: admin1Res.status,
-      errorMessage: admin1Res.error,
-      metadata: {
-        role: 'ADMIN_1_SALES',
-        assignedTo: quotation.assignedTo,
-        sequence: quotation.assignedSequence,
-        provider: admin1Res.provider,
-        messageId: admin1Res.messageId,
-        zohoQuoteId: crmContext?.zohoQuoteId,
-        missingScopes: admin1Res.missingScopes,
-      },
-    });
-
-    results.push({
-      channel: 'email_sales',
-      recipient: admin1Res.recipient,
-      status: admin1Res.status,
+  // Record Admin 1 Notification Log
+  await createNotificationLog({
+    quotationId: quotation.id,
+    quotationNumber: quotation.quotationNumber,
+    channel: 'email_sales',
+    recipient: admin1Res.recipient,
+    status: admin1Res.status,
+    errorMessage: admin1Res.error,
+    metadata: {
+      role: 'ADMIN_1_SALES',
+      assignedTo: quotation.assignedTo,
+      sequence: quotation.assignedSequence,
       provider: admin1Res.provider,
       messageId: admin1Res.messageId,
-      errorMessage: admin1Res.error,
+      zohoQuoteId: crmContext?.zohoQuoteId,
+      zohoLeadId: crmContext?.zohoLeadId,
+      syncMode: crmContext?.syncMode,
       missingScopes: admin1Res.missingScopes,
-    });
-  }
+    },
+  });
+
+  results.push({
+    channel: 'email_sales',
+    recipient: admin1Res.recipient,
+    status: admin1Res.status,
+    provider: admin1Res.provider,
+    messageId: admin1Res.messageId,
+    errorMessage: admin1Res.error,
+    missingScopes: admin1Res.missingScopes,
+  });
+
+  // Record Admin 2 Notification Log
+  await createNotificationLog({
+    quotationId: quotation.id,
+    quotationNumber: quotation.quotationNumber,
+    channel: 'email_admin',
+    recipient: admin2Res.recipient,
+    status: admin2Res.status,
+    errorMessage: admin2Res.error,
+    metadata: {
+      role: 'ADMIN_2_MARKETING',
+      assignedTo: quotation.assignedTo,
+      sequence: quotation.assignedSequence,
+      provider: admin2Res.provider,
+      messageId: admin2Res.messageId,
+      zohoQuoteId: crmContext?.zohoQuoteId,
+      zohoLeadId: crmContext?.zohoLeadId,
+      syncMode: crmContext?.syncMode,
+      missingScopes: admin2Res.missingScopes,
+    },
+  });
+
+  results.push({
+    channel: 'email_admin',
+    recipient: admin2Res.recipient,
+    status: admin2Res.status,
+    provider: admin2Res.provider,
+    messageId: admin2Res.messageId,
+    errorMessage: admin2Res.error,
+    missingScopes: admin2Res.missingScopes,
+  });
 
   return results;
 }

@@ -153,6 +153,7 @@ export async function sendZohoEmail(params: {
   text?: string;
   replyTo?: string;
   quoteId?: string;
+  leadId?: string;
   contactId?: string;
   attachInventoryPdf?: boolean;
 }): Promise<ZohoEmailDispatchResult> {
@@ -175,8 +176,8 @@ export async function sendZohoEmail(params: {
     const fromAddr = await resolveZohoCrmFromAddress();
 
     // 1. Primary: Official Zoho CRM Send Mail API (POST /crm/v6/{Module}/{recordId}/actions/send_mail)
-    const targetModule = params.quoteId ? 'Quotes' : params.contactId ? 'Contacts' : null;
-    const targetRecordId = params.quoteId || params.contactId;
+    const targetModule = params.quoteId ? 'Quotes' : params.leadId ? 'Leads' : params.contactId ? 'Contacts' : null;
+    const targetRecordId = params.quoteId || params.leadId || params.contactId;
 
     if (targetModule && targetRecordId) {
       try {

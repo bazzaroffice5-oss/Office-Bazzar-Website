@@ -468,8 +468,11 @@ export class ZohoCircuitBreakerError extends Error {
 class ConcurrencySemaphore {
   private active = 0;
   private queue: Array<() => void> = [];
+  private readonly maxConcurrent: number;
 
-  constructor(private readonly maxConcurrent: number = 8) {}
+  constructor(maxConcurrent: number = 8) {
+    this.maxConcurrent = maxConcurrent;
+  }
 
   async acquire(): Promise<() => void> {
     if (this.active < this.maxConcurrent) {

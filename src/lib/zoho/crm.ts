@@ -17,6 +17,8 @@ export interface ZohoSyncResult {
   contactId?: string;
   accountId?: string;
   action?: 'created' | 'updated' | 'skipped' | 'failed';
+  syncMode?: 'native_quote' | 'hybrid_lead' | 'queued_recovery';
+  syncStatus?: 'PENDING' | 'PROCESSING' | 'SYNCED' | 'RETRY_PENDING' | 'FAILED' | 'NEEDS_ADMIN_ACTION';
   error?: string;
   reason?: string;
   details?: unknown;
@@ -241,7 +243,10 @@ export async function syncQuotationToZoho(
   return {
     success: quoteRes.success,
     action: quoteRes.action,
+    syncMode: quoteRes.syncMode,
+    syncStatus: quoteRes.syncStatus,
     quoteId: quoteRes.quoteId,
+    leadId: quoteRes.leadId,
     quoteNumber: quoteRes.quoteNumber,
     contactId: quoteRes.contactId,
     accountId: quoteRes.accountId,

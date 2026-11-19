@@ -170,6 +170,8 @@ export default function ProductAdminDashboardClient({
     setTimeout(() => setToastMessage(null), 5000);
   };
 
+  const [currentTime] = useState(() => Date.now());
+
   // Real Dynamic Metrics (sourced directly from actual Zoho CRM catalog records & fields)
   const metrics = useMemo(() => {
     const total = products.length;
@@ -181,8 +183,7 @@ export default function ProductAdminDashboardClient({
       (p) => p.publishStatus === 'unpublished' || (p.isActive === false && p.publishStatus !== 'draft')
     ).length;
 
-    const now = Date.now();
-    const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000;
+    const thirtyDaysAgo = currentTime - 30 * 24 * 60 * 60 * 1000;
     const recentlyAdded = products.filter((p) => {
       const t = p.createdAt || (p as any).createdTime;
       return t ? new Date(t).getTime() > thirtyDaysAgo : false;
@@ -202,7 +203,7 @@ export default function ProductAdminDashboardClient({
       // Alias for backwards compatibility
       active: published,
     };
-  }, [products]);
+  }, [products, currentTime]);
 
   // Derived subcategory selection for modal dropdown
   const selectedSubcategoryValue = useMemo(() => {

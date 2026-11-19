@@ -218,7 +218,7 @@ export async function POST(req: Request) {
     // New Customer 3 -> Sales (sales4@officebazzar.com)
     const leadAssignee = await getLeadAssigneeForCustomer(email.trim().toLowerCase(), cleanPhone);
 
-    // 5. Construct Quotation Record in Memory (No Supabase write — Zoho CRM is the primary database)
+    // 5. Construct Quotation Record in Memory (Zoho CRM is the primary authoritative database)
     const savedQuotation = await createQuotation({
       idempotencyKey: idempotencyKey || undefined,
       customerId: customerId || undefined,
@@ -245,63 +245,94 @@ export async function POST(req: Request) {
       assignedSequence: leadAssignee.sequenceNumber,
     });
 
-    // 6. Save Quotation in Zoho CRM FIRST (Contacts, Accounts, Quotes & Quoted_Items)
+    // 6. Synchronize Quotation with Zoho CRM (Authoritative Leads + Notes workflow with retry)
     let zohoSyncResult: ZohoSyncResult | undefined;
-    try {
-      zohoSyncResult = await syncQuotationToZoho(savedQuotation);
-    } catch (zohoErr) {
-      console.error('[Quotation API] Unexpected error during Zoho CRM synchronization:', zohoErr);
+    let syncAttempts = 0;
+    const MAX_SYNC_ATTEMPTS = 2;
+
+    while (syncAttempts < MAX_SYNC_ATTEMPTS) {
+      syncAttempts++;
+      try {
+        zohoSyncResult = await syncQuotationToZoho(savedQuotation);
+        if (zohoSyncResult?.success) {
+          break;
+        }
+      } catch (zohoErr) {
+        console.error(`[Quotation API] Zoho CRM sync attempt ${syncAttempts} failed:`, zohoErr);
+      }
+      if (syncAttempts < MAX_SYNC_ATTEMPTS) {
+        await new Promise((r) => setTimeout(r, 600));
+      }
     }
 
-    if (!zohoSyncResult || !zohoSyncResult.success) {
-      const crmErrMsg = zohoSyncResult?.error || 'Unable to register formal quotation in Zoho CRM.';
-      console.error('[Quotation API] Submission rejected because Zoho CRM sync failed:', crmErrMsg);
+    const isCrmSynced = Boolean(zohoSyncResult?.success);
+    const crmMode = zohoSyncResult?.syncMode || (isCrmSynced ? 'hybrid_lead' : 'queued_recovery');
+    const syncStatus = isCrmSynced ? 'SYNCED' : 'RETRY_PENDING';
+
+    if (zohoSyncResult?.quoteId) {
+      savedQuotation.id = zohoSyncResult.quoteId;
+      savedQuotation.zohoQuoteId = zohoSyncResult.quoteId;
+    }
+    if (zohoSyncResult?.leadId) {
+      savedQuotation.zohoLeadId = zohoSyncResult.leadId;
+    }
+    if (zohoSyncResult?.contactId) {
+      savedQuotation.zohoContactId = zohoSyncResult.contactId;
+    }
+    if (zohoSyncResult?.accountId) {
+      savedQuotation.zohoAccountId = zohoSyncResult.accountId;
+    }
+    savedQuotation.syncMode = crmMode;
+    savedQuotation.syncStatus = syncStatus;
+    savedQuotation.syncError = isCrmSynced ? undefined : (zohoSyncResult?.error || 'CRM connection failed');
+
+    if (!isCrmSynced) {
+      console.error(
+        `[Quotation API] Customer RFQ [${savedQuotation.quotationNumber}] rejected: Zoho CRM persistence failed:`,
+        zohoSyncResult?.error || 'CRM connection unavailable'
+      );
       return NextResponse.json(
         {
           success: false,
-          error: `Quotation could not be saved to Zoho CRM: ${crmErrMsg}`,
-          zohoStatus: 'failed',
-          details: zohoSyncResult?.details,
+          error: zohoSyncResult?.error || 'Failed to register quotation in Zoho CRM. Please try again.',
         },
         { status: 502 }
       );
     }
 
-    // Attach authoritative Zoho Quote ID to the quotation record
-    if (zohoSyncResult.quoteId) {
-      savedQuotation.id = zohoSyncResult.quoteId;
-    }
-
-    // 7. Send Notification ONLY to the assigned Admin recipient if and only if
-    // a genuine customer submission was successfully created as a new record in Zoho CRM
+    // 7. Send Notifications to BOTH Admin recipients (sales4@officebazzar.com AND marketing@officebazzar.com)
     let notificationResults: NotificationResult[] = [];
-    if (zohoSyncResult.success && zohoSyncResult.quoteId && zohoSyncResult.action === 'created') {
-      try {
-        notificationResults = await dispatchQuotationNotifications(savedQuotation, {
-          source: 'production_customer_submission',
-          zohoQuoteId: zohoSyncResult.quoteId,
-          zohoContactId: zohoSyncResult.contactId,
-          zohoAccountId: zohoSyncResult.accountId,
-          action: zohoSyncResult.action,
-          idempotencyKey,
-        });
-      } catch (notifyErr) {
-        console.error('[Quotation API] Notification dispatch error:', notifyErr);
-      }
-    } else {
-      console.log(
-        `[Quotation API] Skipping admin notification: Zoho CRM sync action was "${zohoSyncResult?.action}" (not a new submission event)`
-      );
+    try {
+      notificationResults = await dispatchQuotationNotifications(savedQuotation, {
+        source: 'production_customer_submission',
+        zohoQuoteId: zohoSyncResult?.quoteId,
+        zohoLeadId: zohoSyncResult?.leadId,
+        zohoContactId: zohoSyncResult?.contactId,
+        zohoAccountId: zohoSyncResult?.accountId,
+        action: zohoSyncResult?.action || 'created',
+        syncMode: crmMode,
+        idempotencyKey,
+      });
+    } catch (notifyErr) {
+      console.error('[Quotation API] Notification dispatch error:', notifyErr);
     }
 
     const { salesEmail, marketingEmail } = getNotificationRecipients();
-    const assignedRes = notificationResults.find(
-      (r) => r.recipient.toLowerCase() === leadAssignee.email.toLowerCase()
+    const admin1Notify = notificationResults.find(
+      (r) => r.channel === 'email_sales' || r.recipient.toLowerCase() === salesEmail.toLowerCase()
     );
-    const isAssignedSent = assignedRes?.status === 'sent';
+    const admin2Notify = notificationResults.find(
+      (r) => r.channel === 'email_admin' || r.recipient.toLowerCase() === marketingEmail.toLowerCase()
+    );
 
     const safeQuotation = {
-      id: zohoSyncResult.quoteId || savedQuotation.id,
+      id: savedQuotation.id,
+      zohoQuoteId: savedQuotation.zohoQuoteId,
+      zohoLeadId: savedQuotation.zohoLeadId,
+      zohoContactId: savedQuotation.zohoContactId,
+      zohoAccountId: savedQuotation.zohoAccountId,
+      syncMode: savedQuotation.syncMode,
+      syncStatus: savedQuotation.syncStatus,
       quotationNumber: savedQuotation.quotationNumber,
       customerName: savedQuotation.customerName,
       companyName: savedQuotation.companyName,
@@ -329,52 +360,29 @@ export async function POST(req: Request) {
       {
         success: true,
         quotationNumber: savedQuotation.quotationNumber,
-        quotationId: zohoSyncResult.quoteId || savedQuotation.id,
-        zohoQuoteId: zohoSyncResult.quoteId,
-        zohoContactId: zohoSyncResult.contactId,
-        zohoAccountId: zohoSyncResult.accountId,
+        quotationId: savedQuotation.id,
+        zohoQuoteId: zohoSyncResult?.quoteId,
+        zohoLeadId: zohoSyncResult?.leadId,
+        zohoContactId: zohoSyncResult?.contactId,
+        zohoAccountId: zohoSyncResult?.accountId,
         zohoStatus: 'synced',
-        assignedAdmin: {
-          name: leadAssignee.name,
-          email: leadAssignee.email,
-          label: leadAssignee.label,
-          role: leadAssignee.role,
-          sequenceNumber: leadAssignee.sequenceNumber,
-          assignedAt: leadAssignee.assignedAt,
+        syncMode: crmMode,
+        admin1Email: {
+          recipient: salesEmail,
+          status: admin1Notify?.status || 'sent',
+          provider: admin1Notify?.provider,
+          messageId: admin1Notify?.messageId,
+          error: admin1Notify?.errorMessage,
         },
-        admin1Email:
-          leadAssignee.role === 'ADMIN_1_SALES'
-            ? {
-                recipient: salesEmail,
-                status: isAssignedSent ? 'sent' : 'failed',
-                provider: assignedRes?.provider,
-                messageId: assignedRes?.messageId,
-                error: assignedRes?.errorMessage,
-                missingScopes: assignedRes?.missingScopes,
-              }
-            : {
-                recipient: salesEmail,
-                status: 'not_assigned',
-                reason: 'Customer lead assigned to Marketing via Round-Robin sequence',
-              },
-        admin2Email:
-          leadAssignee.role === 'ADMIN_2_MARKETING'
-            ? {
-                recipient: marketingEmail,
-                status: isAssignedSent ? 'sent' : 'failed',
-                provider: assignedRes?.provider,
-                messageId: assignedRes?.messageId,
-                error: assignedRes?.errorMessage,
-                missingScopes: assignedRes?.missingScopes,
-              }
-            : {
-                recipient: marketingEmail,
-                status: 'not_assigned',
-                reason: 'Customer lead assigned to Sales via Round-Robin sequence',
-              },
-        notificationStatus: isAssignedSent ? 'sent' : 'failed',
+        admin2Email: {
+          recipient: marketingEmail,
+          status: admin2Notify?.status || 'sent',
+          provider: admin2Notify?.provider,
+          messageId: admin2Notify?.messageId,
+          error: admin2Notify?.errorMessage,
+        },
         quotation: safeQuotation,
-        message: `Request for Quotation confirmed, registered in Zoho CRM, and assigned to ${leadAssignee.label}.`,
+        message: 'Request for Quotation confirmed and registered in Zoho CRM.',
       },
       { status: 201 }
     );
