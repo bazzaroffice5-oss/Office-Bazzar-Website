@@ -11,10 +11,11 @@ import { sendZohoEmail, ZohoEmailDispatchResult } from '@/lib/zoho/email';
 export interface NotificationResult {
   channel: NotificationLog['channel'];
   recipient: string;
-  status: 'sent' | 'failed';
+  status: 'sent' | 'failed' | 'skipped';
   provider?: string;
   messageId?: string;
   errorMessage?: string;
+  reason?: string;
   missingScopes?: string[];
 }
 
@@ -22,10 +23,11 @@ export interface AdminRecipientStatus {
   recipient: string;
   role: 'ADMIN 1 (Sales)' | 'ADMIN 2 (Marketing)';
   success: boolean;
-  status: 'sent' | 'failed';
+  status: 'sent' | 'failed' | 'skipped';
   provider?: string;
   messageId?: string;
   error?: string;
+  reason?: string;
   missingScopes?: string[];
 }
 
@@ -735,8 +737,27 @@ export async function dispatchQuotationNotifications(
     return [];
   }
 
-  // Dispatch Customer Confirmation Email AND Both Admin Alert Emails concurrently
-  const [customerRes, admin1Res, admin2Res] = await Promise.all([
+  // 3. Determine alternating admin lead routing
+  // Deterministic Alternating Assignment:
+  // - Odd sequence / Sales assignee -> Sales (sales4@officebazzar.com) ONLY
+  // - Even sequence / Marketing assignee -> Marketing (marketing@officebazzar.com) ONLY
+  let isMarketing = false;
+  if (quotation.assignedEmail) {
+    isMarketing = quotation.assignedEmail.toLowerCase().includes('marketing');
+  } else if (quotation.assignedTo) {
+    isMarketing = /marketing/i.test(quotation.assignedTo);
+  } else if (typeof quotation.assignedSequence === 'number') {
+    isMarketing = quotation.assignedSequence % 2 === 0;
+  } else {
+    const seqMatch = (quotation.quotationNumber || '').match(/(\d+)$/);
+    if (seqMatch) {
+      const seqNum = parseInt(seqMatch[1], 10);
+      isMarketing = !isNaN(seqNum) && seqNum % 2 === 0;
+    }
+  }
+
+  // Dispatch Customer Confirmation Email AND the designated Admin Alert Email concurrently
+  const [customerRes, adminRes] = await Promise.all([
     sendCustomerQuotationEmail(quotation, crmContext).catch((err) => ({
       channel: 'email_quote' as const,
       recipient: quotation.email,
@@ -744,104 +765,124 @@ export async function dispatchQuotationNotifications(
       provider: 'zoho_crm_send_mail',
       errorMessage: err instanceof Error ? err.message : String(err),
     })),
-    sendAdminQuotationEmail(
-      quotation,
-      salesEmail,
-      marketingEmail,
-      'ADMIN 1 (Sales)',
-      crmContext
-    ).catch((err): AdminRecipientStatus => ({
-      recipient: salesEmail,
-      role: 'ADMIN 1 (Sales)',
-      success: false,
-      status: 'failed',
-      provider: 'zoho_crm_send_mail',
-      messageId: undefined,
-      missingScopes: undefined,
-      error: err instanceof Error ? err.message : String(err),
-    })),
-    sendAdminQuotationEmail(
-      quotation,
-      marketingEmail,
-      salesEmail,
-      'ADMIN 2 (Marketing)',
-      crmContext
-    ).catch((err): AdminRecipientStatus => ({
-      recipient: marketingEmail,
-      role: 'ADMIN 2 (Marketing)',
-      success: false,
-      status: 'failed',
-      provider: 'zoho_crm_send_mail',
-      messageId: undefined,
-      missingScopes: undefined,
-      error: err instanceof Error ? err.message : String(err),
-    })),
+    isMarketing
+      ? sendAdminQuotationEmail(
+          quotation,
+          marketingEmail,
+          salesEmail,
+          'ADMIN 2 (Marketing)',
+          crmContext
+        ).catch((err): AdminRecipientStatus => ({
+          recipient: marketingEmail,
+          role: 'ADMIN 2 (Marketing)',
+          success: false,
+          status: 'failed',
+          provider: 'zoho_crm_send_mail',
+          messageId: undefined,
+          missingScopes: undefined,
+          error: err instanceof Error ? err.message : String(err),
+        }))
+      : sendAdminQuotationEmail(
+          quotation,
+          salesEmail,
+          marketingEmail,
+          'ADMIN 1 (Sales)',
+          crmContext
+        ).catch((err): AdminRecipientStatus => ({
+          recipient: salesEmail,
+          role: 'ADMIN 1 (Sales)',
+          success: false,
+          status: 'failed',
+          provider: 'zoho_crm_send_mail',
+          messageId: undefined,
+          missingScopes: undefined,
+          error: err instanceof Error ? err.message : String(err),
+        })),
   ]);
 
-  // Customer Confirmation Email Result
+  // 1. Customer Confirmation Email Result
   results.push(customerRes);
 
-  // Record Admin 1 Notification Log
-  await createNotificationLog({
-    quotationId: quotation.id,
-    quotationNumber: quotation.quotationNumber,
-    channel: 'email_sales',
-    recipient: admin1Res.recipient,
-    status: admin1Res.status,
-    errorMessage: admin1Res.error,
-    metadata: {
-      role: 'ADMIN_1_SALES',
-      assignedTo: quotation.assignedTo,
-      sequence: quotation.assignedSequence,
-      provider: admin1Res.provider,
-      messageId: admin1Res.messageId,
-      zohoQuoteId: crmContext?.zohoQuoteId,
-      zohoLeadId: crmContext?.zohoLeadId,
-      syncMode: crmContext?.syncMode,
-      missingScopes: admin1Res.missingScopes,
-    },
-  });
+  // 2. Admin Alert Results: ONE is sent, the other is explicitly skipped with reason 'alternating_route'
+  if (isMarketing) {
+    // Admin 1 (Sales) was skipped due to alternating round-robin route
+    results.push({
+      channel: 'email_sales',
+      recipient: salesEmail,
+      status: 'skipped',
+      reason: 'alternating_route',
+    });
 
-  results.push({
-    channel: 'email_sales',
-    recipient: admin1Res.recipient,
-    status: admin1Res.status,
-    provider: admin1Res.provider,
-    messageId: admin1Res.messageId,
-    errorMessage: admin1Res.error,
-    missingScopes: admin1Res.missingScopes,
-  });
+    // Record Admin 2 (Marketing) in Notification Logs
+    await createNotificationLog({
+      quotationId: quotation.id,
+      quotationNumber: quotation.quotationNumber,
+      channel: 'email_admin',
+      recipient: adminRes.recipient,
+      status: adminRes.status === 'sent' ? 'sent' : 'failed',
+      errorMessage: adminRes.error,
+      metadata: {
+        role: 'ADMIN_2_MARKETING',
+        assignedTo: quotation.assignedTo,
+        sequence: quotation.assignedSequence,
+        provider: adminRes.provider,
+        messageId: adminRes.messageId,
+        zohoQuoteId: crmContext?.zohoQuoteId,
+        zohoLeadId: crmContext?.zohoLeadId,
+        syncMode: crmContext?.syncMode,
+        missingScopes: adminRes.missingScopes,
+      },
+    });
 
-  // Record Admin 2 Notification Log
-  await createNotificationLog({
-    quotationId: quotation.id,
-    quotationNumber: quotation.quotationNumber,
-    channel: 'email_admin',
-    recipient: admin2Res.recipient,
-    status: admin2Res.status,
-    errorMessage: admin2Res.error,
-    metadata: {
-      role: 'ADMIN_2_MARKETING',
-      assignedTo: quotation.assignedTo,
-      sequence: quotation.assignedSequence,
-      provider: admin2Res.provider,
-      messageId: admin2Res.messageId,
-      zohoQuoteId: crmContext?.zohoQuoteId,
-      zohoLeadId: crmContext?.zohoLeadId,
-      syncMode: crmContext?.syncMode,
-      missingScopes: admin2Res.missingScopes,
-    },
-  });
+    results.push({
+      channel: 'email_admin',
+      recipient: adminRes.recipient,
+      status: adminRes.status,
+      provider: adminRes.provider,
+      messageId: adminRes.messageId,
+      errorMessage: adminRes.error,
+      missingScopes: adminRes.missingScopes,
+    });
+  } else {
+    // Record Admin 1 (Sales) in Notification Logs
+    await createNotificationLog({
+      quotationId: quotation.id,
+      quotationNumber: quotation.quotationNumber,
+      channel: 'email_sales',
+      recipient: adminRes.recipient,
+      status: adminRes.status === 'sent' ? 'sent' : 'failed',
+      errorMessage: adminRes.error,
+      metadata: {
+        role: 'ADMIN_1_SALES',
+        assignedTo: quotation.assignedTo,
+        sequence: quotation.assignedSequence,
+        provider: adminRes.provider,
+        messageId: adminRes.messageId,
+        zohoQuoteId: crmContext?.zohoQuoteId,
+        zohoLeadId: crmContext?.zohoLeadId,
+        syncMode: crmContext?.syncMode,
+        missingScopes: adminRes.missingScopes,
+      },
+    });
 
-  results.push({
-    channel: 'email_admin',
-    recipient: admin2Res.recipient,
-    status: admin2Res.status,
-    provider: admin2Res.provider,
-    messageId: admin2Res.messageId,
-    errorMessage: admin2Res.error,
-    missingScopes: admin2Res.missingScopes,
-  });
+    results.push({
+      channel: 'email_sales',
+      recipient: adminRes.recipient,
+      status: adminRes.status,
+      provider: adminRes.provider,
+      messageId: adminRes.messageId,
+      errorMessage: adminRes.error,
+      missingScopes: adminRes.missingScopes,
+    });
+
+    // Admin 2 (Marketing) was skipped due to alternating round-robin route
+    results.push({
+      channel: 'email_admin',
+      recipient: marketingEmail,
+      status: 'skipped',
+      reason: 'alternating_route',
+    });
+  }
 
   return results;
 }
@@ -884,7 +925,7 @@ export async function retryNotification(logId: string): Promise<{ success: boole
   );
 
   await updateNotificationLog(log.id, {
-    status: retryRes.status,
+    status: retryRes.status === 'sent' ? 'sent' : 'failed',
     attempts: (log.attempts || 1) + 1,
     lastAttemptAt: new Date().toISOString(),
     errorMessage: retryRes.error || undefined,
