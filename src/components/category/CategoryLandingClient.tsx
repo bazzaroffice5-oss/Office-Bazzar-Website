@@ -27,6 +27,22 @@ interface CategoryLandingClientProps {
   baseRoute?: string;
 }
 
+const getCategoryAllProductsDescription = (cat: Category) => {
+  const count = cat.subcategories?.length || 8;
+  switch (cat.slug) {
+    case 'housekeeping-hygiene':
+      return `Browse our complete Housekeeping & Hygiene catalogue across all ${count} specialized washroom, cleaning chemical, and facility hygiene sub-categories.`;
+    case 'office-stationery':
+      return `Browse our complete Office Stationery catalogue across all ${count} desk organization, paper, and workplace writing supply sub-categories.`;
+    case 'printers-technology':
+      return `Browse our complete Printers & Technology catalogue across all ${count} laser toners, machine peripherals, and computer consumable sub-categories.`;
+    case 'packaging-supplies':
+      return `Browse our complete Packaging Supplies catalogue across all ${count} protective cushioning, strapping, and heavy-duty carton tape sub-categories.`;
+    default:
+      return `Browse all ${cat.name} products across all ${count} sub-categories with direct wholesale pricing and GST input credit.`;
+  }
+};
+
 export default function CategoryLandingClient({
   category,
   initialProducts = [],
@@ -125,10 +141,9 @@ export default function CategoryLandingClient({
       {
         id: 'all-products',
         name: 'All Products',
-        href: '/products',
+        href: `${categoryBaseUrl}?view=all`,
         imageUrl: category.imageUrl || '/images/categories/office-supplies-stationery.jpg',
-        description:
-          'Browse our complete workplace catalogue across all 9 categories with direct wholesale pricing and GST input credit.',
+        description: getCategoryAllProductsDescription(category),
       },
       ...(category.subcategories || []).map((sub) => ({
         id: sub.id,

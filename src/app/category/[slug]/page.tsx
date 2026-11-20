@@ -34,12 +34,18 @@ export async function generateMetadata({
     (s) => s.slug === effectiveSub || s.id === effectiveSub
   );
 
+  const isViewAll = resolvedSearchParams?.view === 'all' || resolvedSearchParams?.view === 'products';
+
   const rawTitle = activeSub
     ? `${activeSub.name} - ${category.name}`
+    : isViewAll
+    ? `All ${category.name} Products - Corporate Procurement`
     : `${category.name} - Corporate Procurement`;
-  const metaTitle = activeSub ? formatSeoTitle(rawTitle) : rawTitle;
+  const metaTitle = activeSub || isViewAll ? formatSeoTitle(rawTitle) : rawTitle;
   const metaDescription = activeSub?.description
     ? activeSub.description
+    : isViewAll
+    ? `Browse all ${category.name} wholesale products with direct pricing and GST tax invoicing across India.`
     : `${category.description} Request bulk B2B quotes and GST tax invoicing across India.`;
 
   // Always canonicalize ?sub= filter views to the primary category URL present in sitemap.xml
