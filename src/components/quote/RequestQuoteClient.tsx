@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import {
   CheckCircle2,
   AlertCircle,
@@ -13,7 +14,6 @@ import {
   UploadCloud,
   X,
   Plus,
-  Minus,
   Building2,
   User,
   Mail,
@@ -21,7 +21,6 @@ import {
   MapPin,
   FileText,
   ShieldCheck,
-  Check,
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
@@ -42,12 +41,10 @@ const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
 const MAX_PHOTOS = 10;
 
 export default function RequestQuoteClient() {
+  const router = useRouter();
   const { items, updateQuantity, removeFromCart, clearCart } = useCart();
   const { user } = useAuth();
   const { location } = useLocation();
-
-  // Multi-step wizard state: 1 = Business Details & Products, 2 = Review & Submit
-  const [currentStep, setCurrentStep] = useState<1 | 2>(1);
 
   // Form states (preserved in component memory across step navigation)
   const [companyName, setCompanyName] = useState(user?.companyName || '');
@@ -181,8 +178,8 @@ export default function RequestQuoteClient() {
     setPhotoError(null);
   };
 
-  // Step 2 Validation: pure client-side verification with ZERO network requests
-  const validateStep2 = (): boolean => {
+  // Form Validation: pure client-side verification with ZERO network requests
+  const validateForm = (): boolean => {
     const errors: Record<string, string> = {};
 
     if (!companyName.trim() || companyName.trim().length < 2) {
@@ -221,7 +218,8 @@ export default function RequestQuoteClient() {
     return Object.keys(errors).length === 0;
   };
 
-  const handleProceedToReview = (e: React.FormEvent) => {
+  // Direct RFQ Submission to /api/quotations/create (or /api/contact) and redirect to /quotation-success/[id]
+  const handleSubmitQuote = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg(null);
 
@@ -232,26 +230,7 @@ export default function RequestQuoteClient() {
       return;
     }
 
-    if (validateStep2()) {
-      setCurrentStep(2);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  // Step 2: Final Submission (Executed ONLY after explicit customer confirmation)
-  const handleFinalSubmit = async () => {
-    setErrorMsg(null);
-
-    if (items.length === 0 && !additionalNotes.trim() && photos.length === 0) {
-      setErrorMsg(
-        'Please add products to your quotation, attach a requirement list or photo, or specify your requirements in the notes.'
-      );
-      setCurrentStep(1);
-      return;
-    }
-
-    if (!validateStep2()) {
-      setCurrentStep(1);
+    if (!validateForm()) {
       return;
     }
 
@@ -327,11 +306,18 @@ export default function RequestQuoteClient() {
           throw new Error(data.error || 'Failed to register quotation in Zoho CRM. Please try again.');
         }
 
-        setSubmittedQuotation({
-          id: data.quotation?.id || data.quotationId || data.id,
-          quotationNumber: data.quotation?.quotationNumber || data.quotationNumber,
-        });
+        const quoteRef = data.quotation?.quotationNumber || data.quotation?.id || data.quotationId || data.id;
         clearCart();
+
+        if (quoteRef) {
+          router.push(`/quotation-success/${encodeURIComponent(quoteRef)}`);
+          return;
+        }
+
+        setSubmittedQuotation({
+          id: 'OB-RFQ-CONFIRMED',
+          quotationNumber: 'OB-RFQ-CONFIRMED',
+        });
       } else {
         // 2B. Direct RFQ submission when customer submits custom requirement sheet/notes without cart items
         const contactRes = await fetch('/api/contact', {
@@ -468,67 +454,6 @@ export default function RequestQuoteClient() {
           <span className="text-slate-900 font-semibold">Request a Quote</span>
         </nav>
 
-        {/* 2-Step Interactive Wizard Header */}
-        <div className="mb-6 sm:mb-8 max-w-sm mx-auto">
-          <div className="flex items-center justify-between">
-            {/* Step 1: Business Details */}
-            <button
-              type="button"
-              onClick={() => setCurrentStep(1)}
-              className="flex items-center gap-2 cursor-pointer group focus:outline-none"
-            >
-              <div
-                className={`w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center transition-all ${
-                  currentStep === 1
-                    ? 'bg-[#16a34a] text-white ring-4 ring-emerald-100'
-                    : 'bg-[#16a34a] text-white'
-                }`}
-              >
-                {currentStep > 1 ? <Check className="w-4 h-4" /> : '1'}
-              </div>
-              <span
-                className={`text-xs font-semibold ${
-                  currentStep === 1 ? 'text-slate-900' : 'text-slate-500 group-hover:text-slate-700'
-                }`}
-              >
-                Business Details
-              </span>
-            </button>
-
-            <div
-              className={`flex-1 h-0.5 mx-3 transition-colors ${
-                currentStep === 2 ? 'bg-[#16a34a]' : 'bg-slate-200'
-              }`}
-            />
-
-            {/* Step 2: Review & Submit */}
-            <button
-              type="button"
-              onClick={() => {
-                if (validateStep2()) setCurrentStep(2);
-              }}
-              className="flex items-center gap-2 cursor-pointer group focus:outline-none"
-            >
-              <div
-                className={`w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center transition-all ${
-                  currentStep === 2
-                    ? 'bg-[#004b87] text-white ring-4 ring-blue-100'
-                    : 'bg-slate-200 text-slate-600'
-                }`}
-              >
-                2
-              </div>
-              <span
-                className={`text-xs font-semibold ${
-                  currentStep === 2 ? 'text-slate-900' : 'text-slate-400 group-hover:text-slate-600'
-                }`}
-              >
-                Review &amp; Submit
-              </span>
-            </button>
-          </div>
-        </div>
-
         {/* Global Error Banner */}
         {errorMsg && (
           <div className="mb-5 max-w-3xl mx-auto p-3.5 bg-rose-50 border border-rose-200 rounded-xl text-rose-800 text-xs font-medium flex items-start gap-2.5 shadow-xs">
@@ -540,23 +465,20 @@ export default function RequestQuoteClient() {
           </div>
         )}
 
-        {/* ========================================================================= */}
-        {/* STEP 1: BUSINESS DETAILS & SELECTED PRODUCTS SIDE-BY-SIDE                 */}
-        {/* ========================================================================= */}
-        {currentStep === 1 && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-            {/* Left Column: Business Details Form */}
-            <div className="lg:col-span-7">
-              <form onSubmit={handleProceedToReview} className="space-y-6">
-                <div className="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-6">
-                  <div className="pb-4 border-b border-slate-100">
-                    <h1 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
-                      Step 1: Enter Business &amp; Delivery Details
-                    </h1>
-                    <p className="text-xs text-slate-500 mt-0.5">
-                      Provide your corporate details for formal quotation generation and accurate fulfillment logistics.
-                    </p>
-                  </div>
+        {/* Business Details & Selected Products */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          {/* Left Column: Business Details Form */}
+          <div className="lg:col-span-7">
+            <form onSubmit={handleSubmitQuote} className="space-y-6">
+              <div className="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-6">
+                <div className="pb-4 border-b border-slate-100">
+                  <h1 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+                    Enter Business &amp; Delivery Details
+                  </h1>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Provide your corporate details for formal quotation generation and accurate fulfillment logistics.
+                  </p>
+                </div>
 
               {/* Business Form Fields */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -846,10 +768,20 @@ export default function RequestQuoteClient() {
 
                     <button
                       type="submit"
-                      className="px-6 py-2.5 bg-[#16a34a] hover:bg-[#15803d] text-white font-bold text-xs sm:text-sm rounded-lg transition-all shadow-sm flex items-center gap-2 cursor-pointer"
+                      disabled={isSubmitting}
+                      className="px-6 py-2.5 bg-[#16a34a] hover:bg-[#15803d] disabled:opacity-60 text-white font-bold text-xs sm:text-sm rounded-lg transition-all shadow-sm flex items-center gap-2 cursor-pointer"
                     >
-                      <span>Proceed to Review &amp; Submit</span>
-                      <ArrowRight className="w-4 h-4" />
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          <span>{submittingStatusText}</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Submit Quote</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </>
+                      )}
                     </button>
                   </div>
                 </div>
@@ -875,7 +807,7 @@ export default function RequestQuoteClient() {
 
                 {items.length > 0 ? (
                   <>
-                    {/* Products List: Clean with image, name, SKU, pack size, quantity stepper, and remove button */}
+                    {/* Products List: Clean with image, name, SKU, pack size, manual quantity input, and remove button */}
                     <div className="divide-y divide-slate-100 max-h-[380px] overflow-y-auto pr-1">
                       {items.map((item) => (
                         <div key={item.id} className="py-3 flex items-center justify-between gap-3 text-xs">
@@ -902,34 +834,32 @@ export default function RequestQuoteClient() {
                           </div>
 
                           <div className="flex items-center gap-2 shrink-0">
-                            {/* Quantity Controls */}
-                            <div className="flex items-center border border-slate-200 rounded-md bg-slate-50 p-0.5">
-                              <button
-                                type="button"
-                                onClick={() => updateQuantity(item.product.id, Math.max(1, item.quantity - 1))}
-                                disabled={item.quantity <= 1}
-                                aria-label={`Decrease quantity of ${item.product.name}`}
-                                className={`w-6 h-6 rounded flex items-center justify-center transition-colors ${
-                                  item.quantity <= 1
-                                    ? 'text-slate-300 cursor-not-allowed'
-                                    : 'text-slate-700 hover:text-slate-900 hover:bg-white active:bg-slate-200'
-                                }`}
-                              >
-                                <Minus className="w-3 h-3" />
-                              </button>
-
-                              <span className="w-7 text-center font-bold text-xs text-slate-900">
-                                {item.quantity}
-                              </span>
-
-                              <button
-                                type="button"
-                                onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                                aria-label={`Increase quantity of ${item.product.name}`}
-                                className="w-6 h-6 rounded flex items-center justify-center text-slate-700 hover:text-slate-900 hover:bg-white active:bg-slate-200 transition-colors"
-                              >
-                                <Plus className="w-3 h-3" />
-                              </button>
+                            {/* Manual Quantity Input */}
+                            <div className="flex items-center gap-1.5">
+                              <label htmlFor={`qty-${item.product.id}`} className="text-[11px] text-slate-500 font-medium">
+                                Qty:
+                              </label>
+                              <input
+                                id={`qty-${item.product.id}`}
+                                type="number"
+                                min={1}
+                                value={item.quantity}
+                                onFocus={(e) => e.target.select()}
+                                onChange={(e) => {
+                                  const val = parseInt(e.target.value, 10);
+                                  if (!isNaN(val) && val >= 1) {
+                                    updateQuantity(item.product.id, val);
+                                  }
+                                }}
+                                onBlur={(e) => {
+                                  const val = parseInt(e.target.value, 10);
+                                  if (isNaN(val) || val < 1) {
+                                    updateQuantity(item.product.id, 1);
+                                  }
+                                }}
+                                aria-label={`Quantity for ${item.product.name}`}
+                                className="w-16 px-2 py-1 bg-slate-50 border border-slate-200 rounded-md text-xs font-bold text-slate-900 text-center focus:outline-none focus:border-[#004b87] focus:bg-white transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                              />
                             </div>
 
                             {/* Remove Button */}
@@ -1001,217 +931,6 @@ export default function RequestQuoteClient() {
               </div>
             </div>
           </div>
-        )}
-
-        {/* ========================================================================= */}
-        {/* STEP 2: REVIEW & FINAL SUBMIT (Authoritative Zoho CRM save triggers here)  */}
-        {/* ========================================================================= */}
-        {currentStep === 2 && (
-          <div className="space-y-6">
-            <div className="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-6">
-              <div className="pb-4 border-b border-slate-100">
-                <h1 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
-                  Step 2: Review &amp; Confirm Quotation Request
-                </h1>
-                <p className="text-xs text-slate-500 mt-0.5">
-                  Verify your procurement list and business details before final submission to Zoho CRM.
-                </p>
-              </div>
-
-              {/* Section A: Business Summary */}
-              <div className="bg-slate-50 rounded-xl p-4 border border-slate-200/80 space-y-3">
-                <div className="flex items-center justify-between border-b border-slate-200 pb-2">
-                  <span className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                    <Building2 className="w-4 h-4 text-[#004b87]" />
-                    <span>Business &amp; Contact Information</span>
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setCurrentStep(1)}
-                    className="text-xs font-semibold text-[#004b87] hover:underline cursor-pointer"
-                  >
-                    Edit Details
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div>
-                    <span className="text-slate-400 block text-[11px]">Company / Organization:</span>
-                    <span className="font-semibold text-slate-900">{companyName}</span>
-                  </div>
-                  <div>
-                    <span className="text-slate-400 block text-[11px]">Contact Person:</span>
-                    <span className="font-semibold text-slate-900">{contactPerson}</span>
-                  </div>
-                  <div>
-                    <span className="text-slate-400 block text-[11px]">Business Email:</span>
-                    <span className="font-semibold text-slate-900">{email}</span>
-                  </div>
-                  <div>
-                    <span className="text-slate-400 block text-[11px]">Contact Phone:</span>
-                    <span className="font-semibold text-slate-900">{phone}</span>
-                  </div>
-                  <div>
-                    <span className="text-slate-400 block text-[11px]">Delivery PIN Code:</span>
-                    <span className="font-semibold text-slate-900">{pincode}</span>
-                  </div>
-                  {gstin && (
-                    <div>
-                      <span className="text-slate-400 block text-[11px]">GSTIN:</span>
-                      <span className="font-semibold text-slate-900 font-mono">{gstin}</span>
-                    </div>
-                  )}
-                  {deliveryLocation && (
-                    <div className="sm:col-span-2">
-                      <span className="text-slate-400 block text-[11px]">Delivery Address:</span>
-                      <span className="font-semibold text-slate-900">{deliveryLocation}</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Section B: Line Items Summary */}
-              <div className="space-y-3">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                  <span className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                    <Package className="w-4 h-4 text-[#004b87]" />
-                    <span>
-                      {items.length > 0
-                        ? `Requested Product Items (${items.length})`
-                        : 'Custom Requirement Inquiry'}
-                    </span>
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setCurrentStep(1)}
-                    className="text-xs font-semibold text-[#004b87] hover:underline cursor-pointer"
-                  >
-                    Modify Items
-                  </button>
-                </div>
-
-                {items.length > 0 ? (
-                  <div className="divide-y divide-slate-100 max-h-80 overflow-y-auto pr-1">
-                    {items.map((item) => (
-                      <div key={item.id} className="py-2.5 flex items-center justify-between gap-3 text-xs">
-                        <div className="flex items-center gap-3 min-w-0">
-                          <div className="relative w-10 h-10 rounded bg-white border border-slate-200 overflow-hidden shrink-0 flex items-center justify-center p-0.5">
-                            <Image
-                              src={getVersionedImageUrl(
-                                item.product.images?.[0] || '/assets/placeholder-product.svg'
-                              )}
-                              alt={item.product.name}
-                              fill
-                              className="object-contain"
-                              sizes="40px"
-                            />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="font-semibold text-slate-900 truncate">{item.product.name}</div>
-                            <div className="text-[10px] text-slate-400">
-                              SKU: {item.product.sku} • Qty: {item.quantity} {item.product.packSize || 'Units'}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="text-right shrink-0">
-                          <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-700">
-                            Qty: {item.quantity}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="p-3.5 bg-slate-50 rounded-lg border border-slate-200/80 text-xs text-slate-600">
-                    <span className="font-semibold text-slate-800 block mb-0.5">Custom Requirement List:</span>
-                    <p>
-                      No catalog products were pre-selected. Your quotation enquiry will be processed using your special instructions and any attached sample files.
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              {/* Commercial Procurement Note */}
-              <div className="bg-slate-50/80 rounded-xl p-3.5 border border-slate-200/80 text-xs text-slate-600 flex items-start gap-2.5">
-                <span className="font-semibold text-slate-800 shrink-0">Commercial Note:</span>
-                <span>Official volume-tier pricing and formal GST tax invoice breakdown will be provided by our procurement sales desk upon quotation review.</span>
-              </div>
-
-              {/* Section D: Attached Photos & Notes */}
-              {(photos.length > 0 || additionalNotes) && (
-                <div className="bg-slate-50/70 rounded-xl p-3.5 border border-slate-200/60 space-y-2 text-xs">
-                  {photos.length > 0 && (
-                    <div>
-                      <span className="text-slate-500 font-semibold block text-[11px] mb-1">
-                        Attached Photos ({photos.length}):
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        {photos.map((p) => (
-                          <span
-                            key={p.id}
-                            className="bg-white border border-slate-200 px-2 py-0.5 rounded text-[10px] text-slate-700"
-                          >
-                            {p.name}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  {additionalNotes && (
-                    <div className="pt-1">
-                      <span className="text-slate-500 font-semibold block text-[11px]">Special Instructions:</span>
-                      <p className="text-slate-700 text-xs italic mt-0.5">{additionalNotes}</p>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Submission SLA Assurance */}
-              <div className="flex items-center gap-2 p-3 bg-emerald-50/60 border border-emerald-100 rounded-lg text-emerald-800 text-xs font-medium">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>
-                  Official B2B quotation with volume discounts will be registered directly in Zoho CRM and assigned to your dedicated account manager.
-                </span>
-              </div>
-
-              {/* Step 2 Action Buttons */}
-              <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-4">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setCurrentStep(1);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  disabled={isSubmitting}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-slate-700 font-semibold text-xs rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
-                >
-                  <ArrowLeft className="w-3.5 h-3.5" />
-                  <span>Edit Business Details</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={handleFinalSubmit}
-                  disabled={isSubmitting}
-                  className="px-6 py-3 bg-[#057a3b] hover:bg-[#046330] disabled:opacity-60 text-white font-bold text-xs sm:text-sm rounded-lg transition-all shadow-md active:scale-[0.98] flex items-center gap-2 cursor-pointer"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      <span>{submittingStatusText}</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Confirm &amp; Submit RFQ</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </main>
   );
