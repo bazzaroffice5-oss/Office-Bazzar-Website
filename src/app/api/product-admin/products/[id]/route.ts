@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { revalidatePath } from 'next/cache';
 import { getProductAdminSession } from '@/lib/product-admin/auth';
-import { getProductsFromZoho, updateZohoProduct, deleteZohoProduct, updateProductInLiveCache, removeProductFromLiveCache } from '@/lib/zoho/products';
+import { getProductsFromZoho, updateZohoProduct, deleteZohoProduct, updateProductInLiveCache, removeProductFromLiveCache, invalidateZohoProductCache } from '@/lib/zoho/products';
 import { saveProduct, deleteProduct, getProductById } from '@/lib/db/store';
 import { saveProductImage } from '@/lib/products/image-store';
 import { Product } from '@/types';
@@ -145,20 +145,26 @@ export async function PUT(
 
     // 1 & 2: Update in Zoho CRM and persist in website catalogue store concurrently
     const zohoTargetId = (existing as any).zohoProductId || existing.sku;
-    const zohoPromise = zohoTargetId
+    const zohoPromise: Promise<{ success: boolean; zohoId?: string; error?: string }> = zohoTargetId
       ? updateZohoProduct(zohoTargetId, mergedProduct, existing.sku)
-      : Promise.resolve({ success: false, zohoId: undefined });
+      : Promise.resolve({ success: false, zohoId: undefined, error: 'No Zoho ID or SKU provided' });
     const storePromise = saveProduct(mergedProduct);
 
     const [zohoResult, saved] = await Promise.all([zohoPromise, storePromise]);
     const zohoSynced = zohoResult.success;
 
-    // 3. Immediately update the live in-memory cache with the saved product and new image
-    updateProductInLiveCache(saved);
+    // 3. Immediately update the live in-memory cache and bust stale sync timestamps
+    updateProductInLiveCache(saved, {
+      id: existing.id,
+      sku: existing.sku,
+      slug: existing.slug,
+    });
+    invalidateZohoProductCache();
 
     // 4. Targeted Live Next.js Cache Invalidation
     try {
-      revalidatePath('/');
+      revalidatePath('/', 'layout');
+      revalidatePath('/product-admin-panel');
       revalidatePath('/products');
       revalidatePath('/categories');
       if (saved.categoryId) {
@@ -194,6 +200,7 @@ export async function PUT(
       message: 'Product updated successfully across Zoho CRM and live website.',
       product: productResponse,
       zohoSynced,
+      zohoError: zohoResult.error,
     });
   } catch (error) {
     console.error('[Product Admin API] PUT error:', error);
@@ -224,9 +231,9 @@ export async function DELETE(
 
     // 1 & 2. Delete / deactivate in Zoho CRM and store in parallel
     const zohoTargetId = (existing as any).zohoProductId || existing.sku;
-    const zohoPromise = zohoTargetId
+    const zohoPromise: Promise<{ success: boolean; zohoId?: string; error?: string }> = zohoTargetId
       ? deleteZohoProduct(zohoTargetId, existing.sku)
-      : Promise.resolve({ success: false });
+      : Promise.resolve({ success: false, error: 'No Zoho ID or SKU provided' });
 
     const deletePromise = (async () => {
       await deleteProduct(existing.id);
@@ -238,15 +245,17 @@ export async function DELETE(
     const [zohoResult] = await Promise.all([zohoPromise, deletePromise]);
     const zohoSynced = zohoResult.success;
 
-    // 3. Immediately update live in-memory cache
+    // 3. Immediately update live in-memory cache and bust stale sync timestamps
     removeProductFromLiveCache(existing.id);
     if (existing.sku) {
       removeProductFromLiveCache(existing.sku);
     }
+    invalidateZohoProductCache();
 
     // 4. Targeted Live Next.js Cache Invalidation
     try {
-      revalidatePath('/');
+      revalidatePath('/', 'layout');
+      revalidatePath('/product-admin-panel');
       revalidatePath('/products');
       revalidatePath('/categories');
       if (existing.categoryId) {
@@ -268,6 +277,7 @@ export async function DELETE(
       deletedId: existing.id,
       deletedSku: existing.sku,
       zohoSynced,
+      zohoError: zohoResult.error,
     });
   } catch (error) {
     console.error('[Product Admin API] DELETE error:', error);

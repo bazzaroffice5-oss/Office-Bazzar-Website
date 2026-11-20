@@ -409,10 +409,17 @@ export default function ProductAdminDashboardClient({
 
       setProducts((prev) => [data.product, ...prev]);
       setIsAddModalOpen(false);
-      showToast(
-        'success',
-        `Product "${formName}" published to Zoho CRM and synchronized live!`
-      );
+      if (data.zohoSynced === false) {
+        showToast(
+          'error',
+          `Product "${formName}" saved to website store, but Zoho CRM synchronization failed (${data.zohoError || 'Check Zoho CRM connection'}).`
+        );
+      } else {
+        showToast(
+          'success',
+          `Product "${formName}" published to Zoho CRM and synchronized live!`
+        );
+      }
     } catch {
       showToast('error', 'Network error creating product in Zoho CRM.');
     } finally {
@@ -456,13 +463,20 @@ export default function ProductAdminDashboardClient({
       }
 
       setProducts((prev) =>
-        prev.map((p) => (p.id === editingProduct.id ? data.product : p))
+        prev.map((p) => (p.id === editingProduct.id || p.sku === editingProduct.sku ? data.product : p))
       );
       setEditingProduct(null);
-      showToast(
-        'success',
-        `Product "${formName}" updated in Zoho CRM and synchronized live across OfficeBazzar!`
-      );
+      if (data.zohoSynced === false) {
+        showToast(
+          'error',
+          `Product "${formName}" updated in website store, but Zoho CRM synchronization could not complete (${data.zohoError || 'Check Zoho CRM connection'}).`
+        );
+      } else {
+        showToast(
+          'success',
+          `Product "${formName}" published live across website and synchronized to Zoho CRM!`
+        );
+      }
     } catch {
       showToast('error', 'Network error updating product.');
     } finally {
@@ -1283,10 +1297,10 @@ export default function ProductAdminDashboardClient({
                   {saving ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Saving to Zoho CRM...</span>
+                      <span>{editingProduct ? 'Publishing Changes...' : 'Publishing Product...'}</span>
                     </>
                   ) : (
-                    <span>{editingProduct ? 'Save Changes' : 'Publish Product'}</span>
+                    <span>{editingProduct ? 'Publish Changes' : 'Publish Product'}</span>
                   )}
                 </button>
               </div>

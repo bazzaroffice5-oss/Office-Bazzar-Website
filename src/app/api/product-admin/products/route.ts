@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { getProductAdminSession } from '@/lib/product-admin/auth';
-import { getProductsFromZoho, createZohoProduct, updateProductInLiveCache } from '@/lib/zoho/products';
+import { getProductsFromZoho, createZohoProduct, updateProductInLiveCache, invalidateZohoProductCache } from '@/lib/zoho/products';
 import { saveProduct } from '@/lib/db/store';
 import { saveProductImage } from '@/lib/products/image-store';
 import { Product } from '@/types';
@@ -221,12 +221,14 @@ export async function POST(request: NextRequest) {
       zohoProductId: zohoId,
     } as any);
 
-    // 3. Immediately update the live in-memory cache with the new product
+    // 3. Immediately update the live in-memory cache with the new product and bust stale timestamps
     updateProductInLiveCache(saved);
+    invalidateZohoProductCache();
 
     // 4. Targeted Live Next.js Cache Invalidation
     try {
-      revalidatePath('/');
+      revalidatePath('/', 'layout');
+      revalidatePath('/product-admin-panel');
       revalidatePath('/products');
       revalidatePath('/categories');
       if (saved.categoryId) {
@@ -254,6 +256,7 @@ export async function POST(request: NextRequest) {
       product: productResponse,
       zohoSynced: Boolean(zohoId),
       zohoId,
+      zohoError: zohoResult.error,
     });
   } catch (error) {
     console.error('[Product Admin API] POST error:', error);

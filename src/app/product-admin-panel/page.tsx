@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function ProductAdminPanelPage() {
   const session = await getProductAdminSession();
@@ -21,7 +22,7 @@ export default async function ProductAdminPanelPage() {
   }
 
   // Load products directly from Zoho CRM / store
-  const products = await getProductsFromZoho();
+  const products = await getProductsFromZoho(true);
 
   return (
     <ProductAdminDashboardClient

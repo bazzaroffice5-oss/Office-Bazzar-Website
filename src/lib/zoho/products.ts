@@ -75,17 +75,41 @@ export function getCachedProductById(id: string): Product | null {
   return productByIdMap.get(clean) || productBySkuMap.get(clean.toUpperCase()) || null;
 }
 
-export function updateProductInLiveCache(product: Product): void {
+export function updateProductInLiveCache(
+  product: Product,
+  previousIdentifiers?: { id?: string; sku?: string; slug?: string }
+): void {
   if (!product) return;
-  const cleanSku = (product.sku || '').toUpperCase();
-  const cleanId = (product.id || '').toLowerCase();
-  const cleanSlug = (product.slug || '').toLowerCase();
+  const cleanSku = (product.sku || '').toUpperCase().trim();
+  const cleanId = (product.id || '').toLowerCase().trim();
+  const cleanSlug = (product.slug || '').toLowerCase().trim();
+
+  // Clean up stale previous identifiers if renamed/changed
+  if (previousIdentifiers) {
+    if (previousIdentifiers.slug && previousIdentifiers.slug.toLowerCase().trim() !== cleanSlug) {
+      productBySlugMap.delete(previousIdentifiers.slug.toLowerCase().trim());
+    }
+    if (previousIdentifiers.sku && previousIdentifiers.sku.toUpperCase().trim() !== cleanSku) {
+      productBySkuMap.delete(previousIdentifiers.sku.toUpperCase().trim());
+    }
+    if (previousIdentifiers.id && previousIdentifiers.id.toLowerCase().trim() !== cleanId) {
+      productByIdMap.delete(previousIdentifiers.id.toLowerCase().trim());
+    }
+  }
 
   if (cachedProducts) {
+    const prevId = previousIdentifiers?.id?.toLowerCase().trim();
+    const prevSku = previousIdentifiers?.sku?.toUpperCase().trim();
+    const prevSlug = previousIdentifiers?.slug?.toLowerCase().trim();
+
     const idx = cachedProducts.findIndex(
       (p) =>
-        (p.id && p.id.toLowerCase() === cleanId) ||
-        (p.sku && p.sku.toUpperCase() === cleanSku)
+        (cleanId && p.id && p.id.toLowerCase() === cleanId) ||
+        (cleanSku && p.sku && p.sku.toUpperCase() === cleanSku) ||
+        (cleanSlug && p.slug && p.slug.toLowerCase() === cleanSlug) ||
+        (prevId && p.id && p.id.toLowerCase() === prevId) ||
+        (prevSku && p.sku && p.sku.toUpperCase() === prevSku) ||
+        (prevSlug && p.slug && p.slug.toLowerCase() === prevSlug)
     );
     if (idx !== -1) {
       cachedProducts[idx] = { ...cachedProducts[idx], ...product };
@@ -252,21 +276,36 @@ async function fetchZohoProductNotes(force = false): Promise<
   if (!(await isZohoConfigured())) return notesMap;
 
   try {
-    const res = await zohoFetch<any>(
-      `/Accounts/${ZOHO_ACCOUNT_PARENT_ID}/Notes?fields=id,Note_Title,Note_Content&per_page=200`,
-      { method: 'GET' }
-    );
-    if (res && res.data && Array.isArray(res.data)) {
-      for (const note of res.data) {
-        if (note.Note_Title && typeof note.Note_Title === 'string' && note.Note_Title.startsWith('OB_PROD_')) {
-          const sku = note.Note_Title.replace(/^OB_PROD_/, '').trim().toUpperCase();
-          try {
-            const parsed = JSON.parse(note.Note_Content);
-            notesMap.set(sku, { noteId: note.id, product: parsed });
-          } catch {
-            // ignore malformed note
+    let hasMore = true;
+    let pageToken: string | undefined = undefined;
+    let page = 1;
+
+    while (hasMore) {
+      let endpoint = `/Accounts/${ZOHO_ACCOUNT_PARENT_ID}/Notes?fields=id,Note_Title,Note_Content&per_page=200`;
+      if (pageToken) {
+        endpoint += `&page_token=${pageToken}`;
+      } else if (page > 1) {
+        endpoint += `&page=${page}`;
+      }
+
+      const res = await zohoFetch<any>(endpoint, { method: 'GET' });
+      if (res && res.data && Array.isArray(res.data) && res.data.length > 0) {
+        for (const note of res.data) {
+          if (note.Note_Title && typeof note.Note_Title === 'string' && note.Note_Title.startsWith('OB_PROD_')) {
+            const sku = note.Note_Title.replace(/^OB_PROD_/, '').trim().toUpperCase();
+            try {
+              const parsed = JSON.parse(note.Note_Content);
+              notesMap.set(sku, { noteId: note.id, product: parsed });
+            } catch {
+              // ignore malformed note
+            }
           }
         }
+        hasMore = res?.info?.more_records === true;
+        pageToken = res?.info?.next_page_token;
+        page++;
+      } else {
+        hasMore = false;
       }
     }
     cachedNotesMap = notesMap;
@@ -347,6 +386,8 @@ async function saveZohoProductNote(
       if (noteId) {
         existingNotes.set(cleanSku, { noteId, product });
       }
+      cachedNotesMap = null;
+      lastNotesFetchTime = 0;
       return noteId;
     }
   } catch (err) {
@@ -578,13 +619,17 @@ export async function getProductsFromZoho(forceRefresh = false): Promise<Product
  * Invalidate the product cache to force fresh retrieval from Zoho CRM on next request
  */
 export function invalidateZohoProductCache(): void {
+  // Reset timestamps and promises so next retrieval fetches freshly synced data
+  lastCacheSync = 0;
+  inflightSyncPromise = null;
+  cachedNotesMap = null;
+  lastNotesFetchTime = 0;
+
   // Preserve active in-memory products and fast indexes so customer browsing and revalidation never see empty/stale catalog
   if (!cachedProducts || cachedProducts.length === 0) {
     cachedProducts = buildInitialCatalog();
     rebuildFastIndexes(cachedProducts);
   }
-  lastCacheSync = 0;
-  inflightSyncPromise = null;
 }
 
 /**
@@ -664,7 +709,8 @@ export async function createZohoProduct(product: Partial<Product>): Promise<{
     ...product,
     zohoProductId: finalZohoId,
   } as Product);
-  return { success: true, zohoId: finalZohoId };
+  invalidateZohoProductCache();
+  return { success: Boolean(finalZohoId), zohoId: finalZohoId };
 }
 
 /**
@@ -737,12 +783,16 @@ export async function updateZohoProduct(
     finalZohoId = notesRes.value;
   }
 
-  updateProductInLiveCache({
-    ...product,
-    sku: cleanSku,
-    zohoProductId: finalZohoId || zohoIdOrSku,
-  } as Product);
-  return { success: true, zohoId: finalZohoId || zohoIdOrSku };
+  updateProductInLiveCache(
+    {
+      ...product,
+      sku: cleanSku,
+      zohoProductId: finalZohoId || zohoIdOrSku,
+    } as Product,
+    skuFallback ? { sku: skuFallback } : undefined
+  );
+  invalidateZohoProductCache();
+  return { success: Boolean(finalZohoId), zohoId: finalZohoId || zohoIdOrSku };
 }
 
 /**
@@ -790,5 +840,6 @@ export async function deleteZohoProduct(
   if (zohoIdOrSku && zohoIdOrSku !== cleanSku) {
     removeProductFromLiveCache(zohoIdOrSku);
   }
+  invalidateZohoProductCache();
   return { success: true, zohoId: cleanSku };
 }
