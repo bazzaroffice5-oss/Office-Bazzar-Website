@@ -90,27 +90,6 @@ export default function ProductCard({
     >
       {/* 1. Product Image Display Area (Premium Muted Blue Stage #AFC5DC, Centered Product, Object-Fit Contain) */}
       <div className="relative w-full h-56 sm:h-64 bg-[#AFC5DC] flex items-center justify-center p-3 sm:p-4 overflow-hidden">
-        {/* Floating Add-to-Cart Action (Preserves Full Cart Functionality, Elegant Hover) */}
-        <button
-          type="button"
-          data-cart-button="true"
-          onClick={handleAddToCart}
-          disabled={isAdding}
-          aria-label={showAddedConfirmation ? 'Added to Quote Cart' : 'Add to Quote Cart'}
-          title="Add to Quote Cart"
-          className={`absolute top-3 right-3 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center transition-all duration-200 shadow-2xs border ${
-            showAddedConfirmation
-              ? 'bg-emerald-600 border-emerald-600 text-white opacity-100 scale-105'
-              : 'bg-white/95 backdrop-blur-xs border-[#E2EBE3] text-[#526174] hover:text-white hover:bg-[#2563EB] hover:border-[#2563EB] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 cursor-pointer active:scale-95'
-          }`}
-        >
-          {showAddedConfirmation ? (
-            <Check className="w-4 h-4 text-white" />
-          ) : (
-            <ShoppingCart className="w-4 h-4" />
-          )}
-        </button>
-
         {/* Clean Centered Image Stage */}
         <Link
           href={productUrl}
@@ -150,14 +129,35 @@ export default function ProductCard({
         {/* Sky-Blue Decorative Underline Below Product Name */}
         <div className="w-10 sm:w-12 h-1 bg-[#4A9DF8] rounded-full mx-auto mt-2 transition-all duration-300 group-hover:w-16 group-hover:bg-[#2563EB]" />
 
-        {/* Brand Name on Left & Standard Pack on Right (Exact Match with IMAGE 2) */}
-        <div className="w-full flex items-center justify-between mt-4 pt-2.5 border-t border-slate-100">
-          <span
-            className="text-[11px] sm:text-xs font-semibold text-[#0B2545] truncate max-w-[130px] text-left"
-            title={brandDisplayName}
-          >
-            {brandDisplayName}
-          </span>
+        {/* Brand Name & Cart Icon Button on Left, Standard Pack on Right */}
+        <div className="w-full flex items-center justify-between gap-2 mt-4 pt-2.5 border-t border-slate-100">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span
+              className="text-[11px] sm:text-xs font-semibold text-[#0B2545] truncate max-w-[105px] sm:max-w-[125px] text-left"
+              title={brandDisplayName}
+            >
+              {brandDisplayName}
+            </span>
+            <button
+              type="button"
+              data-cart-button="true"
+              onClick={handleAddToCart}
+              disabled={isAdding}
+              aria-label={showAddedConfirmation ? 'Added to Quote Cart' : 'Add to Quote Cart'}
+              title="Add to Quote Cart"
+              className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-200 border shrink-0 ${
+                showAddedConfirmation
+                  ? 'bg-emerald-600 border-emerald-600 text-white scale-105'
+                  : 'bg-slate-50 hover:bg-[#2563EB] border-slate-200 hover:border-[#2563EB] text-[#526174] hover:text-white cursor-pointer active:scale-95 shadow-2xs'
+              }`}
+            >
+              {showAddedConfirmation ? (
+                <Check className="w-3.5 h-3.5 text-white" />
+              ) : (
+                <ShoppingCart className="w-3.5 h-3.5" />
+              )}
+            </button>
+          </div>
           <span className="text-[10px] sm:text-[11px] font-normal text-slate-400 shrink-0 text-right">
             Standard Pack
           </span>
