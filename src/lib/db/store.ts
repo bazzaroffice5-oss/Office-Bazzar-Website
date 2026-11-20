@@ -14,7 +14,7 @@ import {
   NotificationLog,
 } from '@/types';
 import { CATEGORIES, BRANDS, INITIAL_PRODUCTS, COUPONS, resolveMainCategory, NINE_SUBCATEGORIES, CATEGORY_MAP, isProductInSubcategory } from '@/lib/data/catalog';
-import { getProductsFromZoho, getCachedProductBySlug, getCachedProductById } from '@/lib/zoho/products';
+import { getProductsFromZoho, getCachedProductBySlug, getCachedProductById, isZohoCacheSynced } from '@/lib/zoho/products';
 import {
   getAllQuotationsFromZoho,
   getQuoteByReferenceFromZoho,
@@ -377,8 +377,18 @@ export const getCatalogFilterMetadata = cache(async (): Promise<CatalogFilterMet
   };
 });
 
+async function ensureCatalogSynced(force = false): Promise<Product[]> {
+  if (force || !isZohoCacheSynced()) {
+    const products = await getProductsFromZoho(force);
+    if (products && products.length > 0) {
+      storeState.productsList = products;
+    }
+  }
+  return storeState.productsList;
+}
+
 export async function getAdminProducts(): Promise<Product[]> {
-  const products = await getProductsFromZoho();
+  const products = await getProductsFromZoho(true);
   return products && products.length > 0 ? products : [...storeState.productsList];
 }
 
@@ -397,7 +407,10 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
     // continue to cached index
   }
 
-  // 2. Instant O(1) in-memory index
+  // 2. Ensure catalog has been synchronized with Zoho CRM Notes
+  await ensureCatalogSynced(false);
+
+  // 3. Instant O(1) in-memory index
   const cached = getCachedProductBySlug(cleanSlug);
   if (cached && cached.isActive !== false && !(cached as any).isDeleted) {
     if (cached.sku) {
@@ -407,9 +420,8 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
     return cached;
   }
 
-  // 3. Fallback to cached Zoho CRM catalog pool
-  const products = await getProductsFromZoho(false);
-  const pool = products && products.length > 0 ? products : storeState.productsList;
+  // 4. Fallback to active catalog pool
+  const pool = storeState.productsList;
 
   const product = pool.find(
     (p) =>
@@ -444,7 +456,10 @@ export const getProductById = cache(async (id: string): Promise<Product | null> 
     // continue
   }
 
-  // 2. Instant O(1) in-memory index
+  // 2. Ensure catalog has been synchronized with Zoho CRM Notes
+  await ensureCatalogSynced(false);
+
+  // 3. Instant O(1) in-memory index
   const cached = getCachedProductById(cleanId);
   if (cached && !(cached as any).isDeleted) {
     if (cached.sku) {
@@ -454,9 +469,8 @@ export const getProductById = cache(async (id: string): Promise<Product | null> 
     return cached;
   }
 
-  // 3. Fallback to cached Zoho CRM catalog pool
-  const products = await getProductsFromZoho(false);
-  const pool = products && products.length > 0 ? products : storeState.productsList;
+  // 4. Fallback to active catalog pool
+  const pool = storeState.productsList;
 
   const product = pool.find(
     (p) =>
@@ -739,7 +753,8 @@ export async function saveProduct(productData: Partial<Product>): Promise<Produc
     isPriceVerified: Boolean(productData.isPriceVerified),
     requiresManualReview: Boolean(productData.requiresManualReview ?? true),
     isActive: productData.isActive !== false,
-  };
+    zohoProductId: (productData as any).zohoProductId || undefined,
+  } as Product;
 
   const existingIdx = storeState.productsList.findIndex(
     (p) => p.id === newProduct.id || p.sku.toUpperCase() === newProduct.sku.toUpperCase()

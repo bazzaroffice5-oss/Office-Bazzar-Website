@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -131,6 +131,12 @@ export default function ProductAdminDashboardClient({
   adminEmail,
 }: ProductAdminDashboardClientProps) {
   const [products, setProducts] = useState<AdminProduct[]>(initialProducts);
+
+  useEffect(() => {
+    if (initialProducts && Array.isArray(initialProducts)) {
+      setProducts(initialProducts);
+    }
+  }, [initialProducts]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState<'all' | 'published' | 'draft' | 'unpublished'>('all');
@@ -269,7 +275,7 @@ export default function ProductAdminDashboardClient({
     setRefreshing(true);
     setZohoApiError(null);
     try {
-      const res = await fetch('/api/product-admin/products?limit=2000&refresh=true');
+      const res = await fetch('/api/product-admin/products?limit=2500&refresh=true');
       const data = await res.json();
       if (res.ok && data.products && Array.isArray(data.products)) {
         setProducts(data.products);

@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     const query = searchParams.get('query')?.toLowerCase().trim() || '';
     const category = searchParams.get('category')?.toLowerCase().trim() || '';
     const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10));
-    const limit = Math.max(1, Math.min(100, parseInt(searchParams.get('limit') || '50', 10)));
+    const limit = Math.max(1, Math.min(2500, parseInt(searchParams.get('limit') || '50', 10)));
 
     const isForceRefresh = searchParams.get('refresh') === 'true';
     const allProducts = await getProductsFromZoho(isForceRefresh);
@@ -211,9 +211,17 @@ export async function POST(request: NextRequest) {
     // 1. Create product record in Zoho CRM
     let zohoId: string | undefined = undefined;
     const zohoResult = await createZohoProduct(productData);
-    if (zohoResult.success && zohoResult.zohoId) {
-      zohoId = zohoResult.zohoId;
+    if (!zohoResult.success || !zohoResult.zohoId) {
+      console.error('[Product Admin API] Zoho create failure:', zohoResult.error);
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Zoho CRM persistence failed: ${zohoResult.error || 'Unable to create product note in Zoho Account.'}`,
+        },
+        { status: 500 }
+      );
     }
+    zohoId = zohoResult.zohoId;
 
     // 2. Persist in website catalogue store and custom products file
     const saved = await saveProduct({

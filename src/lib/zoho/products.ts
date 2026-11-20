@@ -41,8 +41,13 @@ const DUPLICATE_INACTIVE_SLUGS = new Set<string>(['kangaro-staplers-hd-10d', 'ka
 const ZOHO_ACCOUNT_PARENT_ID = '1476900000000575002'; // Office Bazzar Account
 let cachedProducts: Product[] | null = null;
 let lastCacheSync = 0;
+let hasSyncedInitialCatalog = false;
 let inflightSyncPromise: Promise<Product[]> | null = null;
-const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes cache TTL for high-speed edge delivery without rate limiting
+const CACHE_TTL_MS = 60 * 1000; // 1-minute server-side cache for high responsiveness
+
+export function isZohoCacheSynced(): boolean {
+  return hasSyncedInitialCatalog && Date.now() - lastCacheSync < CACHE_TTL_MS;
+}
 
 // Fast O(1) Slug, ID, and SKU lookup maps
 const productBySlugMap = new Map<string, Product>();
@@ -311,7 +316,7 @@ async function fetchZohoProductNotes(force = false): Promise<
     cachedNotesMap = notesMap;
     lastNotesFetchTime = now;
   } catch (err) {
-    // 204 No Content is normal when no notes exist yet
+    console.warn('[ZohoProducts] fetchZohoProductNotes notice:', err);
   }
   return notesMap;
 }
@@ -321,8 +326,13 @@ async function fetchZohoProductNotes(force = false): Promise<
  */
 async function saveZohoProductNote(
   product: Partial<Product> & { isDeleted?: boolean }
-): Promise<string | undefined> {
-  if (!product.sku || !(await isZohoConfigured())) return undefined;
+): Promise<string> {
+  if (!product.sku) {
+    throw new Error('Product SKU is required to persist to Zoho CRM.');
+  }
+  if (!(await isZohoConfigured())) {
+    throw new Error('Zoho CRM is not configured.');
+  }
   const cleanSku = product.sku.trim().toUpperCase();
   const noteTitle = `OB_PROD_${cleanSku}`;
   const noteContent = JSON.stringify({
@@ -331,69 +341,75 @@ async function saveZohoProductNote(
     updatedAt: new Date().toISOString(),
   });
 
-  try {
-    const existingNotes = await fetchZohoProductNotes();
-    let existing = existingNotes.get(cleanSku);
+  const existingNotes = await fetchZohoProductNotes(true);
+  let existing = existingNotes.get(cleanSku);
 
-    if (!existing) {
-      for (const [skuKey, item] of existingNotes.entries()) {
-        if (
-          item.noteId === cleanSku ||
-          skuKey === cleanSku ||
-          (item.product as any)?.id?.toUpperCase() === cleanSku ||
-          (item.product as any)?.sku?.toUpperCase() === cleanSku ||
-          (item.product as any)?.slug?.toUpperCase() === cleanSku
-        ) {
-          existing = item;
-          break;
-        }
+  if (!existing) {
+    for (const [skuKey, item] of existingNotes.entries()) {
+      if (
+        item.noteId === cleanSku ||
+        skuKey === cleanSku ||
+        (item.product as any)?.id?.toUpperCase() === cleanSku ||
+        (item.product as any)?.sku?.toUpperCase() === cleanSku ||
+        (item.product as any)?.slug?.toUpperCase() === cleanSku
+      ) {
+        existing = item;
+        break;
       }
     }
-
-    if (existing) {
-      const res = await zohoFetch<any>('/Notes', {
-        method: 'PUT',
-        body: JSON.stringify({
-          data: [
-            {
-              id: existing.noteId,
-              Note_Title: noteTitle,
-              Note_Content: noteContent,
-            },
-          ],
-        }),
-      });
-      const noteId = res?.data?.[0]?.details?.id || existing.noteId;
-      existingNotes.set(cleanSku, { noteId, product });
-      return noteId;
-    } else {
-      const res = await zohoFetch<any>('/Notes', {
-        method: 'POST',
-        body: JSON.stringify({
-          data: [
-            {
-              Note_Title: noteTitle,
-              Note_Content: noteContent,
-              Parent_Id: {
-                id: ZOHO_ACCOUNT_PARENT_ID,
-                module: { api_name: 'Accounts' },
-              },
-            },
-          ],
-        }),
-      });
-      const noteId = res?.data?.[0]?.details?.id;
-      if (noteId) {
-        existingNotes.set(cleanSku, { noteId, product });
-      }
-      cachedNotesMap = null;
-      lastNotesFetchTime = 0;
-      return noteId;
-    }
-  } catch (err) {
-    console.warn('[ZohoProducts] Note save warning:', err);
-    return undefined;
   }
+
+  let noteId: string | undefined = undefined;
+
+  if (existing) {
+    const res = await zohoFetch<any>('/Notes', {
+      method: 'PUT',
+      body: JSON.stringify({
+        data: [
+          {
+            id: existing.noteId,
+            Note_Title: noteTitle,
+            Note_Content: noteContent,
+          },
+        ],
+      }),
+    });
+    const item = res?.data?.[0];
+    if (item?.status === 'error' || item?.code === 'ERROR') {
+      throw new Error(item.message || 'Zoho CRM error updating product note');
+    }
+    noteId = item?.details?.id || existing.noteId;
+  } else {
+    const res = await zohoFetch<any>('/Notes', {
+      method: 'POST',
+      body: JSON.stringify({
+        data: [
+          {
+            Note_Title: noteTitle,
+            Note_Content: noteContent,
+            Parent_Id: {
+              id: ZOHO_ACCOUNT_PARENT_ID,
+              module: { api_name: 'Accounts' },
+            },
+          },
+        ],
+      }),
+    });
+    const item = res?.data?.[0];
+    if (item?.status === 'error' || item?.code === 'ERROR') {
+      throw new Error(item.message || 'Zoho CRM error creating product note');
+    }
+    noteId = item?.details?.id;
+  }
+
+  if (!noteId) {
+    throw new Error('Zoho CRM did not return a valid Note ID.');
+  }
+
+  // Invalidate notes cache so subsequent calls retrieve the updated content
+  cachedNotesMap = null;
+  lastNotesFetchTime = 0;
+  return noteId;
 }
 
 /**
@@ -403,7 +419,7 @@ async function deleteZohoProductNote(identifier: string): Promise<boolean> {
   if (!identifier || !(await isZohoConfigured())) return false;
   const clean = identifier.trim().toUpperCase();
   try {
-    const existingNotes = await fetchZohoProductNotes();
+    const existingNotes = await fetchZohoProductNotes(true);
     let existing = existingNotes.get(clean);
 
     if (!existing) {
@@ -424,7 +440,7 @@ async function deleteZohoProductNote(identifier: string): Promise<boolean> {
     if (existing) {
       try {
         await zohoFetch<any>(`/Notes?ids=${existing.noteId}`, { method: 'DELETE' });
-      } catch (delErr) {
+      } catch {
         const tombstoneContent = JSON.stringify({
           sku: existing.product.sku || clean,
           isActive: false,
@@ -438,6 +454,8 @@ async function deleteZohoProductNote(identifier: string): Promise<boolean> {
           }),
         });
       }
+      cachedNotesMap = null;
+      lastNotesFetchTime = 0;
       return true;
     }
   } catch (err) {
@@ -450,7 +468,7 @@ async function deleteZohoProductNote(identifier: string): Promise<boolean> {
  * Fetch all products directly from Zoho CRM.
  * Merges baseline catalog with Zoho CRM Notes, live Products records, and custom products file.
  */
-async function syncProductsFromZohoInternal(): Promise<Product[]> {
+async function syncProductsFromZohoInternal(forceRefresh = false): Promise<Product[]> {
   const now = Date.now();
   const productsMap = new Map<string, Product>();
 
@@ -463,7 +481,7 @@ async function syncProductsFromZohoInternal(): Promise<Product[]> {
   // 2. Overlay live product notes from Zoho CRM Account
   if (await isZohoConfigured()) {
     try {
-      const zohoNotes = await fetchZohoProductNotes();
+      const zohoNotes = await fetchZohoProductNotes(forceRefresh);
       for (const [sku, item] of zohoNotes.entries()) {
         const cleanSku = sku.toUpperCase();
         if (item.product.isDeleted) {
@@ -501,9 +519,9 @@ async function syncProductsFromZohoInternal(): Promise<Product[]> {
         mappingBySku.set(cleanSku, {
           zohoId: item.noteId,
           sku: cleanSku,
-          websiteId: item.product.id || `prod-${cleanSku.toLowerCase()}`,
-          name: item.product.name || cleanSku,
-          price: item.product.price || 0,
+          websiteId: item.product.id || existing?.id || `prod-${cleanSku.toLowerCase()}`,
+          name: item.product.name || existing?.name || cleanSku,
+          price: item.product.price !== undefined && item.product.price !== null ? item.product.price : (existing?.price || 0),
           action: 'synced_note',
         });
       }
@@ -597,18 +615,19 @@ async function syncProductsFromZohoInternal(): Promise<Product[]> {
 
   cachedProducts = Array.from(productsMap.values());
   rebuildFastIndexes(cachedProducts);
+  hasSyncedInitialCatalog = true;
   lastCacheSync = now;
   return cachedProducts;
 }
 
 export async function getProductsFromZoho(forceRefresh = false): Promise<Product[]> {
   const now = Date.now();
-  if (!forceRefresh && cachedProducts && now - lastCacheSync < CACHE_TTL_MS) {
+  if (!forceRefresh && cachedProducts && hasSyncedInitialCatalog && now - lastCacheSync < CACHE_TTL_MS) {
     return cachedProducts;
   }
 
   if (!inflightSyncPromise || forceRefresh) {
-    inflightSyncPromise = syncProductsFromZohoInternal().finally(() => {
+    inflightSyncPromise = syncProductsFromZohoInternal(forceRefresh).finally(() => {
       inflightSyncPromise = null;
     });
   }
@@ -624,6 +643,7 @@ export function invalidateZohoProductCache(): void {
   inflightSyncPromise = null;
   cachedNotesMap = null;
   lastNotesFetchTime = 0;
+  hasSyncedInitialCatalog = false;
 
   // Preserve active in-memory products and fast indexes so customer browsing and revalidation never see empty/stale catalog
   if (!cachedProducts || cachedProducts.length === 0) {
@@ -646,6 +666,7 @@ export async function createZohoProduct(product: Partial<Product>): Promise<{
   }
 
   let finalZohoId: string | undefined = undefined;
+  let zohoError: string | undefined = undefined;
 
   // Run official /Products module and Notes persistence concurrently
   const [productsRes, notesRes] = await Promise.allSettled([
@@ -689,28 +710,36 @@ export async function createZohoProduct(product: Partial<Product>): Promise<{
   if (productsRes.status === 'fulfilled' && productsRes.value) {
     finalZohoId = productsRes.value;
   }
-  if (!finalZohoId && notesRes.status === 'fulfilled' && notesRes.value) {
-    finalZohoId = notesRes.value;
+  if (notesRes.status === 'fulfilled' && notesRes.value) {
+    finalZohoId = finalZohoId || notesRes.value;
+  } else if (notesRes.status === 'rejected') {
+    zohoError = notesRes.reason instanceof Error ? notesRes.reason.message : String(notesRes.reason);
   }
 
-  if (finalZohoId && product.sku) {
+  const success = Boolean(finalZohoId);
+
+  if (success && product.sku) {
     const cleanSku = product.sku.trim().toUpperCase();
     mappingBySku.set(cleanSku, {
-      zohoId: finalZohoId,
+      zohoId: finalZohoId!,
       sku: cleanSku,
       websiteId: product.id || `prod-${cleanSku.toLowerCase()}`,
       name: product.name || '',
       price: product.price || 0,
       action: 'created',
     });
+    updateProductInLiveCache({
+      ...product,
+      zohoProductId: finalZohoId,
+    } as Product);
+    invalidateZohoProductCache();
   }
 
-  updateProductInLiveCache({
-    ...product,
-    zohoProductId: finalZohoId,
-  } as Product);
-  invalidateZohoProductCache();
-  return { success: Boolean(finalZohoId), zohoId: finalZohoId };
+  return {
+    success,
+    zohoId: finalZohoId,
+    error: success ? undefined : (zohoError || 'Failed to create product note in Zoho CRM.'),
+  };
 }
 
 /**
@@ -732,6 +761,7 @@ export async function updateZohoProduct(
 
   const cleanSku = (product.sku || skuFallback || zohoIdOrSku).trim().toUpperCase();
   let finalZohoId: string | undefined = undefined;
+  let zohoError: string | undefined = undefined;
 
   // Run official /Products module and Notes persistence concurrently
   const [productsRes, notesRes] = await Promise.allSettled([
@@ -779,20 +809,31 @@ export async function updateZohoProduct(
   if (productsRes.status === 'fulfilled' && productsRes.value) {
     finalZohoId = productsRes.value;
   }
-  if (!finalZohoId && notesRes.status === 'fulfilled' && notesRes.value) {
-    finalZohoId = notesRes.value;
+  if (notesRes.status === 'fulfilled' && notesRes.value) {
+    finalZohoId = finalZohoId || notesRes.value;
+  } else if (notesRes.status === 'rejected') {
+    zohoError = notesRes.reason instanceof Error ? notesRes.reason.message : String(notesRes.reason);
   }
 
-  updateProductInLiveCache(
-    {
-      ...product,
-      sku: cleanSku,
-      zohoProductId: finalZohoId || zohoIdOrSku,
-    } as Product,
-    skuFallback ? { sku: skuFallback } : undefined
-  );
-  invalidateZohoProductCache();
-  return { success: Boolean(finalZohoId), zohoId: finalZohoId || zohoIdOrSku };
+  const success = Boolean(finalZohoId);
+
+  if (success) {
+    updateProductInLiveCache(
+      {
+        ...product,
+        sku: cleanSku,
+        zohoProductId: finalZohoId || zohoIdOrSku,
+      } as Product,
+      skuFallback ? { sku: skuFallback } : undefined
+    );
+    invalidateZohoProductCache();
+  }
+
+  return {
+    success,
+    zohoId: finalZohoId || zohoIdOrSku,
+    error: success ? undefined : (zohoError || 'Failed to save product in Zoho CRM Notes.'),
+  };
 }
 
 /**

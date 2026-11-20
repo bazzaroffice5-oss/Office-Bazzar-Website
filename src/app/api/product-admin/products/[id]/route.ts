@@ -153,6 +153,17 @@ export async function PUT(
     const [zohoResult, saved] = await Promise.all([zohoPromise, storePromise]);
     const zohoSynced = zohoResult.success;
 
+    if (!zohoSynced) {
+      console.error('[Product Admin API] Zoho sync failure:', zohoResult.error);
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Zoho CRM persistence failed: ${zohoResult.error || 'Unable to persist product note to Zoho Account.'}`,
+        },
+        { status: 500 }
+      );
+    }
+
     // 3. Immediately update the live in-memory cache and bust stale sync timestamps
     updateProductInLiveCache(saved, {
       id: existing.id,
