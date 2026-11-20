@@ -68,13 +68,13 @@ export default function Footer() {
     return () => observer.disconnect();
   }, [shouldLoadMap]);
   return (
-    <footer id="footer" className="w-full bg-[#0a192f] text-slate-300 pt-12 sm:pt-14 pb-8 sm:pb-10 border-t border-slate-800">
+    <footer id="footer" className="w-full bg-[#0a192f] text-slate-300 pt-8 sm:pt-10 pb-5 sm:pb-6 border-t border-slate-800">
       <h2 className="sr-only">Footer Navigation and Corporate Contact Information</h2>
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Main 4-Column Grid with Consistent Top Alignment */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 pb-8 sm:pb-10 border-b border-slate-800 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 pb-6 sm:pb-7 border-b border-slate-800 items-start">
           {/* Col 1: Brand & Office Details (lg: col-span-4) */}
-          <div className="md:col-span-6 lg:col-span-4 space-y-3.5">
+          <div className="md:col-span-6 lg:col-span-4 space-y-2.5">
             {/* Top Anchor Header matching other columns */}
             <div className="h-7 flex items-center">
               <Link href="/" className="inline-block">
@@ -88,7 +88,7 @@ export default function Footer() {
               </Link>
             </div>
 
-            <p className="text-xs sm:text-sm text-slate-400 max-w-sm leading-relaxed">
+            <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
               OfficeBazzar E-Store Private Limited is a corporate procurement partner for stationery, housekeeping chemicals, waste management bins, and printer consumables.
             </p>
 
@@ -108,7 +108,7 @@ export default function Footer() {
               ))}
             </div>
 
-            <div className="space-y-1.5 text-xs text-slate-400 pt-0.5">
+            <div className="space-y-1 text-xs text-slate-400 pt-0.5">
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-white font-semibold">Central Logistics Hub:</span>
                 <a
@@ -130,7 +130,7 @@ export default function Footer() {
               </div>
 
               {/* Branches Section */}
-              <div className="pt-1.5 space-y-1">
+              <div className="pt-1 space-y-0.5">
                 <div className="text-xs font-semibold text-white">
                   Branches
                 </div>
@@ -148,11 +148,11 @@ export default function Footer() {
           </div>
 
           {/* Col 2: Navigation Links (lg: col-span-2) */}
-          <div className="md:col-span-3 lg:col-span-2 space-y-3.5">
+          <div className="md:col-span-3 lg:col-span-2 space-y-2.5">
             <h3 className="text-xs font-semibold text-white h-7 flex items-center">
               Company
             </h3>
-            <ul className="space-y-2.5 text-xs">
+            <ul className="space-y-1.5 text-xs">
               <li>
                 <Link href="/about" className="hover:text-emerald-400 transition-colors">
                   About Us
@@ -187,11 +187,11 @@ export default function Footer() {
           </div>
 
           {/* Col 3: Workplace Catalogue (lg: col-span-3) */}
-          <div className="md:col-span-3 lg:col-span-3 space-y-3.5">
+          <div className="md:col-span-3 lg:col-span-3 space-y-2.5">
             <h3 className="text-xs font-semibold text-white h-7 flex items-center">
               Workplace Supplies
             </h3>
-            <ul className="space-y-2.5 text-xs">
+            <ul className="space-y-1.5 text-xs">
               <li>
                 <Link href="/categories" className="hover:text-emerald-400 transition-colors">
                   All Categories
@@ -226,14 +226,14 @@ export default function Footer() {
           </div>
 
           {/* Col 4: Direct Enquiries & Location Map (lg: col-span-3) */}
-          <div className="md:col-span-12 lg:col-span-3 space-y-3.5">
+          <div className="md:col-span-12 lg:col-span-3 space-y-2.5">
             <h3 className="text-xs font-semibold text-white h-7 flex items-center">
               Direct Enquiries
             </h3>
 
-            <div className="md:grid md:grid-cols-2 md:gap-6 lg:block lg:space-y-3.5">
+            <div className="md:grid md:grid-cols-2 md:gap-6 lg:block lg:space-y-2.5">
               {/* Contact numbers & Request Quote */}
-              <div className="space-y-2.5 text-xs">
+              <div className="space-y-2 text-xs">
                 <div className="flex items-center gap-2">
                   <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                   <a href="tel:+917200800040" className="hover:text-emerald-400 transition-colors">
@@ -258,7 +258,7 @@ export default function Footer() {
               </div>
 
               {/* Visit Our Location Map Section */}
-              <div className="mt-3.5 md:mt-0 lg:mt-3.5 pt-3.5 md:pt-0 lg:pt-3.5 border-t md:border-t-0 lg:border-t border-slate-800 space-y-2">
+              <div className="mt-2.5 md:mt-0 lg:mt-2.5 pt-2.5 md:pt-0 lg:pt-2.5 border-t md:border-t-0 lg:border-t border-slate-800 space-y-1.5">
                 <h4 className="text-xs font-semibold text-white flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-[#ea580c] shrink-0" />
                   <span>Visit Our Location</span>
@@ -267,7 +267,7 @@ export default function Footer() {
                 {/* Interactive Google Map Embed - Exact Width Matching */}
                 <div
                   ref={mapContainerRef}
-                  className="relative w-full h-32 sm:h-36 rounded-xl overflow-hidden border border-slate-700/80 bg-slate-900 shadow-inner group"
+                  className="relative w-full h-24 sm:h-28 rounded-lg overflow-hidden border border-slate-700/80 bg-slate-900 shadow-inner group"
                 >
                   {shouldLoadMap ? (
                     <iframe
@@ -282,9 +282,9 @@ export default function Footer() {
                   ) : (
                     <div
                       onClick={() => setShouldLoadMap(true)}
-                      className="w-full h-full flex flex-col items-center justify-center text-slate-400 p-3 text-center cursor-pointer hover:bg-slate-800/80 transition-colors"
+                      className="w-full h-full flex flex-col items-center justify-center text-slate-400 p-2 text-center cursor-pointer hover:bg-slate-800/80 transition-colors"
                     >
-                      <MapPin className="w-5 h-5 text-[#ea580c] mb-1 animate-pulse" />
+                      <MapPin className="w-4 h-4 text-[#ea580c] mb-0.5 animate-pulse" />
                       <span className="text-[11px] font-medium text-slate-300">Officebazzar Tower, Royapettah</span>
                       <span className="text-[10px] text-slate-500">Click or scroll to view live map</span>
                     </div>
@@ -304,7 +304,7 @@ export default function Footer() {
                   href={GOOGLE_MAPS_DIRECTIONS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 bg-slate-800 hover:bg-[#ea580c] text-slate-200 hover:text-white border border-slate-700 hover:border-[#ea580c] rounded-lg text-xs font-semibold transition-all shadow-2xs group"
+                  className="inline-flex items-center justify-center gap-1.5 w-full py-1.5 px-3 bg-slate-800 hover:bg-[#ea580c] text-slate-200 hover:text-white border border-slate-700 hover:border-[#ea580c] rounded-lg text-xs font-semibold transition-all shadow-2xs group"
                 >
                   <Navigation className="w-3.5 h-3.5 text-[#ea580c] group-hover:text-white transition-colors" />
                   <span>Get Directions</span>
@@ -316,7 +316,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Legal / Copyright Bar */}
-        <div className="pt-6 sm:pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div className="pt-4 sm:pt-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
           <div className="text-center sm:text-left">
             © 2026 OfficeBazzar E-Store Private Limited. All rights reserved.
           </div>

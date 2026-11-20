@@ -233,7 +233,7 @@ export default function Header() {
 
           {/* "Get a Quote" Button */}
           <Link
-            href="/request-quote"
+            href="/products"
             className="hidden sm:inline-flex items-center justify-center bg-[#057a3b] hover:bg-[#046330] active:scale-[0.98] text-white text-xs sm:text-sm font-semibold px-5 py-2 sm:px-6 sm:py-2.5 rounded-full transition-all shadow-xs cursor-pointer whitespace-nowrap leading-none"
           >
             Get a Quote
@@ -367,7 +367,7 @@ export default function Header() {
             {/* Mobile Quote Button */}
             <div className="pt-2">
               <Link
-                href="/request-quote"
+                href="/products"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="w-full flex items-center justify-center bg-[#057a3b] hover:bg-[#046330] active:scale-[0.98] text-white font-semibold py-2.5 rounded-full text-sm transition-colors shadow-xs"
               >

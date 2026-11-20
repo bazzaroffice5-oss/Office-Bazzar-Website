@@ -120,15 +120,6 @@ export default function HeroSection() {
                 <span>Explore Products</span>
                 <span className="text-lg leading-none transition-transform duration-200 group-hover:translate-x-1">→</span>
               </Link>
-
-              {/* Secondary Button: Request a Quote */}
-              <Link
-                href="/request-quote"
-                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 text-sm sm:text-base font-semibold rounded-full transition-all shadow-2xs hover:shadow-xs hover:-translate-y-0.5 cursor-pointer"
-              >
-                <FileText className="w-4 h-4 text-[#057a3b]" />
-                <span>Request a Quote</span>
-              </Link>
             </motion.div>
           </div>
 
