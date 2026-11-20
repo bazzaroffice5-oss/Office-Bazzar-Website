@@ -15,7 +15,7 @@ export default function ProcurementBenefitsSection() {
     {
       icon: Receipt,
       title: '100% GST Input Tax Credit',
-      desc: 'Get authentic tax invoices with valid HSN/SAC codes and corporate GSTIN for seamless tax compliance.',
+      desc: 'Get authentic tax invoices with valid HSN/SAC codes and corporate GSTIN for direct Input Tax Credit (ITC) claiming.',
     },
     {
       icon: FileCheck2,

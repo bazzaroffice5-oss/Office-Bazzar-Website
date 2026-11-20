@@ -7,7 +7,6 @@ import {
   X,
   Minus,
   Send,
-  Sparkles,
   ArrowRight,
   ExternalLink,
   RotateCcw,
@@ -31,35 +30,14 @@ interface Message {
 }
 
 const INITIAL_WELCOME_TEXT =
-  "Hi! Welcome to OfficeBazzar 👋\nI'm Bazzar AI. I can help you find office supplies, explore products and request bulk quotations. How can I help you today?";
+  "Welcome to the OfficeBazzar Procurement Desk 👋\n\nWe assist corporate purchase managers, facility teams, and institutions across India with bulk wholesale pricing, 100% GST invoices, and delivery schedules.\n\nHow can we help your office today?";
 
 const DEFAULT_SUGGESTIONS = [
-  'Find Products',
-  'Bulk Order Enquiry',
-  'Get a Quotation',
-  'Contact Support',
+  'Request Bulk Quotation',
+  'Housekeeping & Hygiene Products',
+  'Copier Paper & Office Stationery',
+  'Contact Royapettah Sales Desk',
 ];
-
-/**
- * Helper to clamp robot coordinates strictly within the visible viewport bounds
- */
-function clampPosition(
-  x: number,
-  y: number,
-  width: number = 80,
-  height: number = 96,
-  margin: number = 12
-) {
-  if (typeof window === 'undefined') return { x, y };
-  const minX = margin;
-  const maxX = Math.max(margin, window.innerWidth - width - margin);
-  const minY = margin;
-  const maxY = Math.max(margin, window.innerHeight - height - margin);
-  return {
-    x: Math.min(Math.max(x, minX), maxX),
-    y: Math.min(Math.max(y, minY), maxY),
-  };
-}
 
 function createMessageId(prefix: string): string {
   return `${prefix}-${Date.now()}`;
@@ -86,19 +64,6 @@ export default function BazzarAIChatbot() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Draggable robot position and animation states
-  const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isWaving, setIsWaving] = useState(false);
-  const robotRef = useRef<HTMLDivElement>(null);
-  const dragStartRef = useRef<{
-    pointerId: number;
-    startX: number;
-    startY: number;
-    initialX: number;
-    initialY: number;
-  } | null>(null);
-  const hasMovedRef = useRef<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'msg-welcome',
@@ -156,149 +121,6 @@ export default function BazzarAIChatbot() {
 
   const handleMinimize = () => {
     setIsOpen(false);
-  };
-
-  // Restore and clamp position from localStorage
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const getRobotSize = () => {
-      const isMobile = window.innerWidth < 640;
-      return {
-        w: isMobile ? 64 : 80,
-        h: isMobile ? 80 : 96,
-      };
-    };
-
-    const size = getRobotSize();
-    const defaultX = Math.max(12, window.innerWidth - size.w - 24);
-    const defaultY = Math.max(12, window.innerHeight - size.h - 24);
-
-    try {
-      const saved = localStorage.getItem('bazzar_ai_position');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (typeof parsed?.x === 'number' && typeof parsed?.y === 'number') {
-          setPosition(clampPosition(parsed.x, parsed.y, size.w, size.h));
-        } else {
-          setPosition({ x: defaultX, y: defaultY });
-        }
-      } else {
-        setPosition({ x: defaultX, y: defaultY });
-      }
-    } catch {
-      setPosition({ x: defaultX, y: defaultY });
-    }
-
-    // Viewport resize listener: ensure robot remains within visible screen bounds
-    const handleResize = () => {
-      const currentSize = getRobotSize();
-      setPosition((prev) => {
-        if (!prev) return null;
-        return clampPosition(prev.x, prev.y, currentSize.w, currentSize.h);
-      });
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Periodic subtle attention animation every 25 seconds when idle
-  useEffect(() => {
-    if (isOpen) return;
-    const interval = setInterval(() => {
-      setIsWaving(true);
-      const timer = setTimeout(() => setIsWaving(false), 1400);
-      return () => clearTimeout(timer);
-    }, 25000);
-    return () => clearInterval(interval);
-  }, [isOpen]);
-
-  // Unified Mouse & Touch Dragging via Pointer Events
-  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.button !== 0 && e.pointerType === 'mouse') return;
-
-    // Prevent default touch scrolling when dragging the robot
-    e.preventDefault();
-
-    const isMobile = window.innerWidth < 640;
-    const w = isMobile ? 64 : 80;
-    const h = isMobile ? 80 : 96;
-
-    const startX = e.clientX;
-    const startY = e.clientY;
-
-    const initialPos = position || {
-      x: Math.max(12, window.innerWidth - w - 24),
-      y: Math.max(12, window.innerHeight - h - 24),
-    };
-
-    hasMovedRef.current = false;
-    dragStartRef.current = {
-      pointerId: e.pointerId,
-      startX,
-      startY,
-      initialX: initialPos.x,
-      initialY: initialPos.y,
-    };
-
-    setIsDragging(true);
-
-    const onPointerMove = (moveEvent: PointerEvent) => {
-      if (!dragStartRef.current || moveEvent.pointerId !== dragStartRef.current.pointerId) return;
-
-      const deltaX = moveEvent.clientX - dragStartRef.current.startX;
-      const deltaY = moveEvent.clientY - dragStartRef.current.startY;
-
-      // Distance threshold of 6px to separate drag from click
-      if (!hasMovedRef.current && (Math.abs(deltaX) > 6 || Math.abs(deltaY) > 6)) {
-        hasMovedRef.current = true;
-      }
-
-      const rawX = dragStartRef.current.initialX + deltaX;
-      const rawY = dragStartRef.current.initialY + deltaY;
-
-      const clamped = clampPosition(rawX, rawY, w, h);
-      setPosition(clamped);
-    };
-
-    const onPointerUp = (upEvent: PointerEvent) => {
-      if (!dragStartRef.current || upEvent.pointerId !== dragStartRef.current.pointerId) return;
-
-      window.removeEventListener('pointermove', onPointerMove);
-      window.removeEventListener('pointerup', onPointerUp);
-      window.removeEventListener('pointercancel', onPointerUp);
-
-      const moved = hasMovedRef.current;
-      dragStartRef.current = null;
-      setIsDragging(false);
-
-      if (moved) {
-        // Persist final position in localStorage
-        setPosition((curr) => {
-          if (curr) {
-            try {
-              localStorage.setItem('bazzar_ai_position', JSON.stringify(curr));
-            } catch {}
-          }
-          return curr;
-        });
-      } else {
-        // Simple tap / click without drag -> Open chatbot
-        handleOpen();
-      }
-    };
-
-    window.addEventListener('pointermove', onPointerMove, { passive: false });
-    window.addEventListener('pointerup', onPointerUp);
-    window.addEventListener('pointercancel', onPointerUp);
-  };
-
-  const handleKeyDownLauncher = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleOpen();
-    }
   };
 
   const handleResetConversation = () => {
@@ -396,54 +218,36 @@ export default function BazzarAIChatbot() {
 
   return (
     <>
-      {/* 1. FLOATING LAUNCHER (Fully draggable across viewport, saved in localStorage, smooth animations) */}
+      {/* 1. FLOATING LAUNCHER: Grounded Corporate Procurement Desk & Quick Enquiry Button */}
       {!isOpen && (
-        <div
-          ref={robotRef}
-          onPointerDown={handlePointerDown}
-          onKeyDown={handleKeyDownLauncher}
-          role="button"
-          tabIndex={0}
-          aria-label="Open Bazzar AI Chatbot (Click to open, drag to reposition)"
+        <button
+          type="button"
+          onClick={handleOpen}
+          aria-label="Open Procurement Desk & Quick Enquiry"
           aria-expanded={isOpen}
-          style={
-            position
-              ? {
-                  position: 'fixed',
-                  left: `${position.x}px`,
-                  top: `${position.y}px`,
-                  touchAction: 'none',
-                }
-              : {
-                  position: 'fixed',
-                  right: '24px',
-                  bottom: '24px',
-                  touchAction: 'none',
-                }
-          }
-          className={`z-50 select-none group w-16 h-20 sm:w-20 sm:h-24 outline-hidden focus:outline-hidden flex items-center justify-center animate-bazzar-entrance ${
-            isDragging
-              ? 'cursor-grabbing scale-105'
-              : isWaving
-              ? 'cursor-grab animate-bazzar-attention'
-              : 'cursor-grab animate-bazzar-float hover:scale-105'
-          } transition-transform duration-150`}
+          className="fixed z-50 bottom-5 right-5 sm:bottom-6 sm:right-6 select-none group bg-[#0B2545] hover:bg-[#163A5F] active:scale-95 text-white shadow-xl hover:shadow-2xl border border-slate-700/50 rounded-full px-4 sm:px-5 py-3 transition-all duration-200 flex items-center gap-3 cursor-pointer"
         >
-          <Image
-            src="/assets/bazzar-ai-avatar.png?v=transparent"
-            alt="Bazzar AI 3D Robot Assistant"
-            width={90}
-            height={100}
-            loading="lazy"
-            unoptimized
-            draggable={false}
-            className={`w-full h-full object-contain select-none pointer-events-none transition-all duration-200 ${
-              isDragging
-                ? 'drop-shadow-[0_20px_35px_rgba(0,0,0,0.5)]'
-                : 'drop-shadow-[0_12px_24px_rgba(0,0,0,0.3)] group-hover:drop-shadow-[0_16px_32px_rgba(0,0,0,0.4)]'
-            }`}
-          />
-        </div>
+          {/* Support Headset / Chat Icon with pulsing live green dot */}
+          <div className="relative w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 flex items-center justify-center shrink-0">
+            <MessageSquare className="w-4 h-4" />
+            <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+            </span>
+          </div>
+
+          <div className="text-left">
+            <div className="text-xs sm:text-[13px] font-bold text-white leading-tight flex items-center gap-1.5">
+              <span>Quick Enquiry</span>
+              <span className="hidden sm:inline-block text-[10px] font-semibold px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                Online
+              </span>
+            </div>
+            <div className="text-[10px] sm:text-[11px] text-slate-300 font-normal leading-tight mt-0.5">
+              Chennai Procurement Desk
+            </div>
+          </div>
+        </button>
       )}
 
       {/* 2. CHATBOT OPEN INTERFACE */}
@@ -451,38 +255,28 @@ export default function BazzarAIChatbot() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Bazzar AI Chat Assistant"
+          aria-label="OfficeBazzar Procurement Desk"
           className="fixed z-50 bottom-2 right-2 left-2 sm:left-auto sm:bottom-6 sm:right-6 w-auto sm:w-[420px] h-[88vh] sm:h-[620px] max-h-[700px] bg-slate-50 rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200"
         >
-          {/* A. HEADER */}
-          <div className="bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-950 text-white p-3.5 sm:p-4 border-b border-blue-800/60 shadow-xs flex items-center justify-between shrink-0">
+          {/* A. HEADER: Grounded Corporate Header */}
+          <div className="bg-[#0B2545] text-white p-3.5 sm:p-4 border-b border-slate-700/60 shadow-xs flex items-center justify-between shrink-0">
             <div className="flex items-center space-x-3 min-w-0">
-              {/* 3D Robot Header Avatar (Clean transparent background) */}
-              <div className="relative w-10 h-10 bg-transparent shrink-0 flex items-center justify-center">
-                <Image
-                  src="/assets/bazzar-ai-avatar.png?v=transparent"
-                  alt="Bazzar AI"
-                  width={40}
-                  height={40}
-                  loading="lazy"
-                  unoptimized
-                  className="w-full h-full object-contain select-none"
-                />
+              <div className="w-9 h-9 rounded-xl bg-emerald-600/20 border border-emerald-400/30 text-emerald-300 shrink-0 flex items-center justify-center font-bold text-xs tracking-wider">
+                OB
               </div>
 
-              {/* Title & Tagline */}
+              {/* Title & Location/Hours */}
               <div className="min-w-0">
-                <div className="flex items-center space-x-1.5">
-                  <h3 className="font-extrabold text-sm sm:text-base tracking-tight truncate text-white">
-                    Bazzar AI
+                <div className="flex items-center space-x-2">
+                  <h3 className="font-bold text-sm sm:text-base tracking-tight truncate text-white">
+                    Procurement Desk
                   </h3>
-                  <span className="inline-flex items-center px-1.5 py-0.2 text-[9px] font-bold uppercase tracking-wider bg-sky-500/20 text-sky-200 rounded border border-sky-400/30">
-                    <Sparkles className="w-2.5 h-2.5 mr-0.5 text-sky-300" />
-                    Assistant
+                  <span className="inline-flex items-center px-1.5 py-0.2 text-[9px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 rounded border border-emerald-400/30">
+                    Live
                   </span>
                 </div>
-                <p className="text-[11px] text-sky-200/90 truncate font-medium">
-                  Your Smart Office Supplies Assistant
+                <p className="text-[11px] text-slate-300 truncate font-normal">
+                  Royapettah, Chennai • Mon–Sat 9:00 AM–6:30 PM
                 </p>
               </div>
             </div>
@@ -492,7 +286,7 @@ export default function BazzarAIChatbot() {
               <button
                 type="button"
                 onClick={handleResetConversation}
-                className="p-1.5 text-sky-200 hover:text-white hover:bg-blue-800/60 rounded-lg transition-colors"
+                className="p-1.5 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
                 title="Restart Conversation"
                 aria-label="Restart Conversation"
               >
@@ -501,7 +295,7 @@ export default function BazzarAIChatbot() {
               <button
                 type="button"
                 onClick={handleMinimize}
-                className="p-1.5 text-sky-200 hover:text-white hover:bg-blue-800/60 rounded-lg transition-colors"
+                className="p-1.5 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
                 title="Minimize Chat"
                 aria-label="Minimize Chat"
               >
@@ -510,7 +304,7 @@ export default function BazzarAIChatbot() {
               <button
                 type="button"
                 onClick={handleClose}
-                className="p-1.5 text-sky-200 hover:text-white hover:bg-rose-600 rounded-lg transition-colors"
+                className="p-1.5 text-slate-300 hover:text-white hover:bg-rose-600 rounded-lg transition-colors cursor-pointer"
                 title="Close Chat"
                 aria-label="Close Chat"
               >
@@ -522,7 +316,7 @@ export default function BazzarAIChatbot() {
           {/* B. CHAT BODY */}
           {/* Messages Container (Smooth scroll with hidden native scrollbar) */}
           <div
-            className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-none bazzar-chat-messages p-3.5 sm:p-4 space-y-3.5 text-xs bg-gradient-to-b from-slate-50 via-slate-50 to-blue-50/30"
+            className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-none bazzar-chat-messages p-3.5 sm:p-4 space-y-3.5 text-xs bg-slate-50"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
@@ -535,17 +329,10 @@ export default function BazzarAIChatbot() {
                       msg.sender === 'user' ? 'justify-end' : 'justify-start'
                     }`}
                   >
-                    {/* Assistant Avatar Thumbnail (Clean transparent background) */}
+                    {/* Assistant Monogram Avatar */}
                     {msg.sender === 'assistant' && (
-                      <div className="w-8 h-8 bg-transparent shrink-0 mt-0.5 flex items-center justify-center">
-                        <Image
-                          src="/assets/bazzar-ai-avatar.png?v=transparent"
-                          alt="Bazzar AI"
-                          width={32}
-                          height={32}
-                          unoptimized
-                          className="w-full h-full object-contain"
-                        />
+                      <div className="w-7 h-7 rounded-lg bg-[#0B2545] text-emerald-300 border border-slate-700/60 shrink-0 mt-0.5 flex items-center justify-center text-[10px] font-bold">
+                        OB
                       </div>
                     )}
 
@@ -644,15 +431,8 @@ export default function BazzarAIChatbot() {
                 {/* Assistant Typing Indicator */}
                 {isTyping && (
                   <div className="flex items-center space-x-2 text-slate-400 animate-in fade-in">
-                    <div className="w-7 h-7 bg-transparent shrink-0 flex items-center justify-center">
-                      <Image
-                        src="/assets/bazzar-ai-avatar.png?v=transparent"
-                        alt="Bazzar AI"
-                        width={28}
-                        height={28}
-                        unoptimized
-                        className="w-full h-full object-contain"
-                      />
+                    <div className="w-6 h-6 rounded-md bg-[#0B2545] text-emerald-300 border border-slate-700/60 shrink-0 flex items-center justify-center text-[9px] font-bold">
+                      OB
                     </div>
                     <div className="bg-white border border-slate-200 rounded-2xl px-3.5 py-2 flex items-center space-x-1 shadow-2xs">
                       <div className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-bounce" />

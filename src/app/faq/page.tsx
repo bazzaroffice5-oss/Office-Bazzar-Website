@@ -9,7 +9,7 @@ const faqs: FAQItem[] = [
     category: 'gst',
     question: 'How do I claim 18% GST Input Tax Credit (ITC) on my orders?',
     answer:
-      'Simply enter your company name and 15-digit Corporate GSTIN (e.g. 33AAAAA0000A1Z5) during checkout or in your Account Profile. Every shipment comes accompanied by a digitally signed Tax Invoice detailing HSN/SAC codes, taxable amounts, and CGST/SGST/IGST breakdown so your accounting department can seamlessly claim Input Tax Credit on the GST portal.',
+      'Simply enter your company name and 15-digit Corporate GSTIN (e.g. 33AAAAA0000A1Z5) during checkout or in your Account Profile. Every shipment comes accompanied by a digitally signed Tax Invoice detailing HSN/SAC codes, taxable amounts, and CGST/SGST/IGST breakdown so your accounting department can claim Input Tax Credit on the GST portal without reconciliation delays.',
   },
   {
     category: 'gst',
@@ -57,7 +57,7 @@ const faqs: FAQItem[] = [
     category: 'products',
     question: 'What if a product arrives damaged or defective?',
     answer:
-      'We provide a hassle-free 7-day institutional return policy for transit-damaged, mechanically defective, or incorrect units. Notify our support desk with a photo of the item, and we will arrange a zero-cost courier reverse pickup and prompt replacement or refund.',
+      'We provide a direct 7-day institutional return policy for transit-damaged, mechanically defective, or incorrect units. Notify our support desk with a photo of the item, and we will arrange a zero-cost courier reverse pickup and prompt replacement or refund.',
   },
 ];
 

@@ -102,7 +102,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.16, ease: 'easeOut' }}
               className="text-sm sm:text-base lg:text-[17px] text-slate-600 max-w-[480px] leading-relaxed mb-7 sm:mb-8 font-normal"
             >
-              Discover office stationery, printing essentials, housekeeping products and workplace supplies for your business.
+              Direct wholesale supply for office stationery, housekeeping chemicals, printer consumables, and workplace essentials — with 100% GST input tax credit and prompt Chennai fleet delivery.
             </motion.p>
 
             {/* Action Buttons */}
@@ -380,55 +380,55 @@ export default function HeroSection() {
               </div>
               <div className="min-w-0">
                 <div className="text-xs sm:text-[13.5px] font-semibold text-slate-900 leading-tight">
-                  Wide Product Range
+                  Direct Bulk Pricing
                 </div>
                 <div className="text-[11px] sm:text-xs text-slate-500 leading-tight mt-0.5 font-normal">
-                  Multiple categories
+                  Tiered wholesale slabs
                 </div>
               </div>
             </div>
 
-            {/* 2. Trusted by Businesses */}
+            {/* 2. 100% GST ITC Invoicing */}
             <div className="flex items-center gap-3.5">
               <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-blue-50 border border-blue-100/80 flex items-center justify-center text-[#2563eb] shrink-0">
                 <FileText className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div className="min-w-0">
                 <div className="text-xs sm:text-[13.5px] font-semibold text-slate-900 leading-tight">
-                  Trusted by Businesses
+                  100% GST ITC Invoicing
                 </div>
                 <div className="text-[11px] sm:text-xs text-slate-500 leading-tight mt-0.5 font-normal">
-                  Across India
+                  Full HSN/SAC compliance
                 </div>
               </div>
             </div>
 
-            {/* 3. Dedicated Support */}
+            {/* 3. Dedicated Account Desk */}
             <div className="flex items-center gap-3.5">
               <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-emerald-50 border border-emerald-100/80 flex items-center justify-center text-[#057a3b] shrink-0">
                 <Headphones className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div className="min-w-0">
                 <div className="text-xs sm:text-[13.5px] font-semibold text-slate-900 leading-tight">
-                  Dedicated Support
+                  Dedicated Account Desk
                 </div>
                 <div className="text-[11px] sm:text-xs text-slate-500 leading-tight mt-0.5 font-normal">
-                  For Business Enquiries
+                  Phone &amp; WhatsApp support
                 </div>
               </div>
             </div>
 
-            {/* 4. Easy Quotation Process */}
+            {/* 4. Royapettah Dispatch Hub */}
             <div className="flex items-center gap-3.5">
               <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-blue-50 border border-blue-100/80 flex items-center justify-center text-[#2563eb] shrink-0">
                 <Box className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div className="min-w-0">
                 <div className="text-xs sm:text-[13.5px] font-semibold text-slate-900 leading-tight">
-                  Easy Quotation Process
+                  Royapettah Dispatch Hub
                 </div>
                 <div className="text-[11px] sm:text-xs text-slate-500 leading-tight mt-0.5 font-normal">
-                  For Bulk Orders
+                  Same-day Chennai fleet delivery
                 </div>
               </div>
             </div>

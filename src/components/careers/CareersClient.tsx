@@ -91,7 +91,7 @@ export default function CareersClient() {
               Life and Careers at Office Bazzar
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
-              We empower our teams to build long-term relationships with Fortune 500 enterprises, educational institutions, and healthcare systems across India.
+              Our teams partner directly with enterprise procurement heads, hospitals, banking institutions, and schools across South India and pan-India.
             </p>
           </div>
 
@@ -113,7 +113,7 @@ export default function CareersClient() {
             <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-2.5">
               <h4 className="text-sm font-bold text-slate-900">E-Commerce &amp; Digital Solutions</h4>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Drive product catalog intelligence, Zoho CRM integration, digital quotation consoles, and automated invoice delivery systems powering seamless B2B transactions.
+                Manage product catalog systems, Zoho CRM quotation pipelines, and direct invoice delivery workflows for B2B procurement clients.
               </p>
             </div>
           </div>

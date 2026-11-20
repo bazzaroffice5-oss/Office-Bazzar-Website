@@ -41,7 +41,7 @@ export const MEGA_MENU_DATA: Record<string, MegaMenuCategory> = {
     tagline: 'Comprehensive Everyday Desk Stationery, Filing & Paper Products for Enterprises',
     highlightCard: {
       title: 'Corporate Stationery Supply AMC',
-      description: 'Streamline procurement across all office branches with centralized billing, GST input credit, and volume pricing.',
+      description: 'Consolidate procurement across all office branches with centralized billing, 100% GST input tax credit, and direct wholesale pricing.',
       badge: 'Enterprise Choice',
       ctaText: 'Request Stationery RFQ',
       ctaHref: '/bulk-orders?category=stationery',

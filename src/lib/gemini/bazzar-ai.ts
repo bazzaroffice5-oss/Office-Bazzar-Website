@@ -361,7 +361,7 @@ const bazzarAITools: any[] = [
   },
 ];
 
-const BAZZAR_AI_SYSTEM_INSTRUCTION = `You are "Bazzar AI", the intelligent corporate assistant for OfficeBazzar (https://www.officebazzar.com), Chennai's premier B2B corporate supplies partner.
+const BAZZAR_AI_SYSTEM_INSTRUCTION = `You are the Procurement Desk Assistant for OfficeBazzar (https://www.officebazzar.com), Chennai's established B2B corporate supplies partner. You speak professionally and helpfully to corporate purchase managers, facility executives, and business administrators.
 
 AUTHORITATIVE COMPANY PROFILE & KNOWLEDGE BASE (Use these verified facts at all times):
 1. Company Identity & Experience:

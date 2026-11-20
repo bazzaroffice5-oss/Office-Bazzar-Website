@@ -12,45 +12,45 @@ interface FAQ {
 const FAQS: FAQ[] = [
   {
     id: 'faq-1',
-    question: 'What products does Office Bazzar supply?',
+    question: 'What products does OfficeBazzar supply for businesses?',
     answer:
-      'Office Bazzar supplies workplace essentials, including office stationery, housekeeping and hygiene products, printers and technology supplies, packaging materials, and other business essentials.',
+      'OfficeBazzar is a complete B2B workplace supplier. We manufacture Hi-Clean commercial cleaning formulations in-house, and supply corporate office stationery, JK Copier paper, Diversey Taski hygiene products, laser printer toners, and packaging materials to corporate offices, IT parks, hospitals, and educational institutions across South India.',
   },
   {
     id: 'faq-2',
-    question: 'Do you provide bulk purchasing for businesses?',
+    question: 'Do you offer tiered wholesale pricing for corporate bulk orders?',
     answer:
-      'Yes. Businesses can enquire about bulk quantities and request a quotation based on their product requirements. Availability and pricing are confirmed during the quotation process.',
+      'Yes. We provide tiered wholesale slabs and Annual Rate Contracts (ARC) tailored for purchase managers and facility teams. Every bulk order is billed with 100% compliant GST input tax credit (ITC) invoices detailing exact HSN/SAC codes.',
   },
   {
     id: 'faq-3',
-    question: 'How can I request a quotation?',
+    question: 'How do I request a formal quotation?',
     answer:
-      'Browse the available products, add the required items to your quote cart, and submit a quote request with your business contact details. The team can then review your requirements.',
+      'Select your required items and quantities in the Quote Cart, then click "Submit Quote". Our Royapettah sales desk will verify inventory availability and email an official GST quotation with HSN breakdown within 2 to 4 business hours.',
   },
   {
     id: 'faq-4',
-    question: 'Which locations do you serve?',
+    question: 'Which locations do you deliver to?',
     answer:
-      'Office Bazzar operates from its Central Logistics Hub in Royapettah, Chennai. Confirm the actual delivery service areas with the business before displaying specific delivery coverage or guarantees.',
+      'We operate our central warehouse hub at Officebazzar Tower in Royapettah, Chennai, with daily dedicated fleet delivery across the Chennai metro (OMR, Guindy, Ambattur, Sriperumbudur). We also provide scheduled institutional dispatches to Bangalore, Hyderabad, Mumbai, and pan-India locations.',
   },
   {
     id: 'faq-5',
-    question: 'Can I request multiple products in one quotation?',
+    question: 'Can I consolidate stationery, housekeeping, and IT consumables into one quote?',
     answer:
-      'Yes. Add the required products and quantities to your quote cart and submit them together in a single quotation request, provided the existing website supports this workflow.',
+      'Yes. You can combine office stationery, housekeeping chemicals, printer cartridges, and packaging supplies into a single quote request. We consolidate billing and dispatch under one formal B2B invoice.',
   },
   {
     id: 'faq-6',
-    question: 'How can I contact Office Bazzar?',
+    question: 'How can purchase managers reach the sales desk directly?',
     answer:
-      'You can contact the team at +91 72008 00040 or sales4@officebazzar.com for product enquiries and quotation assistance.',
+      'You can contact our corporate procurement desk directly at +91 72008 00040 (Phone / WhatsApp) or email sales4@officebazzar.com. For vendor empanelment and escalations, write to dm@officebazzar.com.',
   },
   {
     id: 'faq-7',
-    question: 'Do you supply products for different workplace requirements?',
+    question: 'Do you offer 30-day corporate credit terms?',
     answer:
-      'Yes. Businesses can explore the available product categories to find stationery, housekeeping, technology, and packaging supplies suited to their workplace needs.',
+      'Yes. Established corporate institutions, hospitals, and educational campuses can enroll in our 15-day or 30-day institutional credit facility upon standard KYC and GSTIN verification.',
   },
 ];
 

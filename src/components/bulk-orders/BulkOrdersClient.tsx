@@ -74,7 +74,7 @@ export default function BulkOrdersClient() {
               },
               {
                 title: '100% Verified GSTITC Invoices',
-                desc: 'Digital invoices with full HSN code classification and state-specific tax breakdown for seamless Input Tax Credit.',
+                desc: 'Digital invoices with full HSN code classification and state-specific tax breakdown for Input Tax Credit (ITC) claiming.',
                 icon: ShieldCheck,
               },
               {
