@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120" role="img" aria-label="Empee Hotels">
+  <!-- Crown -->
+  <g transform="translate(20, 10)">
+    <!-- Crown base -->
+    <rect x="10" y="52" width="60" height="10" rx="2" fill="#8B1A1A"/>
+    <!-- Crown points -->
+    <polygon points="10,52 10,30 25,42 40,20 55,42 70,30 70,52" fill="#8B1A1A"/>
+    <!-- Crown jewels -->
+    <circle cx="40" cy="26" r="4" fill="#D4AF37"/>
+    <circle cx="17" cy="40" r="3" fill="#D4AF37"/>
+    <circle cx="63" cy="40" r="3" fill="#D4AF37"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="150" y="62" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="28" fill="#8B1A1A" letter-spacing="2">EMPEE</text>
+  <text x="150" y="88" text-anchor="middle" font-family="Georgia, serif" font-weight="400" font-size="16" fill="#8B1A1A" letter-spacing="4">HOTELS</text>
+  <line x1="90" y1="96" x2="210" y2="96" stroke="#D4AF37" stroke-width="1.5"/>
+</svg>

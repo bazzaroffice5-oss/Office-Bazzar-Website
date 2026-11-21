@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" role="img" aria-label="The Park Hotels">
+  <!-- The Park Hotels: Apeejay Surrendra Group luxury brand -->
+  <!-- Elegant "P" in oval frame -->
+  <ellipse cx="50" cy="60" rx="40" ry="48" fill="none" stroke="#C9A84C" stroke-width="2.5"/>
+  <ellipse cx="50" cy="60" rx="34" ry="42" fill="none" stroke="#C9A84C" stroke-width="1"/>
+  <text x="50" y="76" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="52" fill="#1A1A1A">P</text>
+  <!-- Wordmark area -->
+  <text x="108" y="45" font-family="Georgia, serif" font-style="italic" font-size="13" fill="#888" letter-spacing="3">THE</text>
+  <text x="108" y="72" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="28" fill="#1A1A1A" letter-spacing="2">PARK</text>
+  <text x="108" y="92" font-family="Georgia, serif" font-size="12" fill="#C9A84C" letter-spacing="4">HOTELS</text>
+</svg>

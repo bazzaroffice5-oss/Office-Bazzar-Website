@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120" role="img" aria-label="ITC Limited">
+  <!-- ITC Limited official wordmark: serif I·T·C with dot separators -->
+  <defs>
+    <style>
+      .itc-letter { font-family: 'Times New Roman', Times, serif; font-size: 72px; font-weight: 700; fill: #1B3A6B; letter-spacing: 2px; }
+      .itc-dot { fill: #E8A020; }
+      .itc-tag { font-family: Arial, sans-serif; font-size: 11px; fill: #1B3A6B; letter-spacing: 3px; }
+    </style>
+  </defs>
+  <!-- Main ITC letters -->
+  <text x="150" y="82" text-anchor="middle" class="itc-letter">ITC</text>
+  <!-- Dots between letters (brand style) -->
+  <circle cx="124" cy="66" r="4.5" class="itc-dot"/>
+  <circle cx="176" cy="66" r="4.5" class="itc-dot"/>
+  <!-- Tagline -->
+  <text x="150" y="108" text-anchor="middle" class="itc-tag">LIMITED</text>
+</svg>

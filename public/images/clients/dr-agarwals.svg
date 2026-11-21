@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" role="img" aria-label="Dr. Agarwal's Eye Hospital">
+  <!-- Eye care icon -->
+  <g transform="translate(10,20)">
+    <!-- Outer eye shape -->
+    <path d="M4 40 Q40 5 76 40 Q40 75 4 40Z" fill="none" stroke="#006B8F" stroke-width="3.5" stroke-linejoin="round"/>
+    <!-- Iris -->
+    <circle cx="40" cy="40" r="16" fill="#006B8F"/>
+    <!-- Pupil -->
+    <circle cx="40" cy="40" r="8" fill="white"/>
+    <!-- Pupil center -->
+    <circle cx="40" cy="40" r="4" fill="#006B8F"/>
+    <!-- Highlight -->
+    <circle cx="44" cy="36" r="2.5" fill="white"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="108" y="44" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="18" fill="#006B8F">DR. AGARWAL&apos;S</text>
+  <text x="108" y="68" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="16" fill="#333">EYE HOSPITAL</text>
+  <text x="108" y="88" font-family="Arial, sans-serif" font-size="10.5" fill="#888" letter-spacing="1">WORLD-CLASS EYE CARE</text>
+</svg>

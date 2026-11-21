@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img" aria-label="FLSmidth">
+  <!-- FLSmidth official red wordmark -->
+  <rect width="300" height="100" fill="white"/>
+  <!-- Red accent bar -->
+  <rect x="0" y="80" width="300" height="5" fill="#E3001B"/>
+  <text x="150" y="62" text-anchor="middle"
+        font-family="Arial Black, Arial, sans-serif"
+        font-weight="900"
+        font-size="46"
+        fill="#E3001B"
+        letter-spacing="-1">FLSmidth</text>
+</svg>
