@@ -130,12 +130,22 @@ export async function POST(request: NextRequest) {
       const publishStatus = (formData.get('publishStatus') as string) || 'published';
       const file = formData.get('imageFile') as File | null;
       const imageUrlInput = formData.get('imageUrl') as string | null;
+      const specificationsStr = formData.get('specifications') as string | null;
 
       if (!name || !sku) {
         return NextResponse.json(
           { error: 'Product Name and Product Code (SKU) are mandatory.' },
           { status: 400 }
         );
+      }
+
+      let parsedSpecs: Record<string, string> = {};
+      if (specificationsStr) {
+        try {
+          parsedSpecs = JSON.parse(specificationsStr);
+        } catch {
+          // ignore invalid specifications JSON
+        }
       }
 
       const cleanSku = sku.replace(/[^a-zA-Z0-9-_]/g, '_').toUpperCase();
@@ -179,7 +189,7 @@ export async function POST(request: NextRequest) {
         isActive,
         publishStatus: publishStatus as 'published' | 'draft' | 'unpublished',
         images: imagesList,
-        specifications: {},
+        specifications: parsedSpecs,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };

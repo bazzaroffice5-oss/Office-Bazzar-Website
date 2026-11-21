@@ -682,6 +682,7 @@ async function executeZohoRequest<T = unknown>(
         try {
           response = await fetch(fullUrl, {
             ...options,
+            cache: (options.cache as any) || 'no-store',
             signal: options.signal || controller.signal,
             headers: {
               Authorization: `Zoho-oauthtoken ${token}`,

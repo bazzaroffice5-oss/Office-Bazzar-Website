@@ -64,12 +64,22 @@ export async function PUT(
       const publishStatus = formData.get('publishStatus') as string | null;
       const file = formData.get('imageFile') as File | null;
       const imageUrlInput = formData.get('imageUrl') as string | null;
+      const specificationsStr = formData.get('specifications') as string | null;
 
       let determinedActive = existing.isActive;
       if (publishStatus) {
         determinedActive = publishStatus === 'published';
       } else if (isActiveStr !== null) {
         determinedActive = isActiveStr === 'true';
+      }
+
+      let parsedSpecs: Record<string, string> | undefined = undefined;
+      if (specificationsStr) {
+        try {
+          parsedSpecs = JSON.parse(specificationsStr);
+        } catch {
+          // ignore invalid specifications JSON
+        }
       }
 
       updates = {
@@ -83,6 +93,7 @@ export async function PUT(
         packSize: packSize ? packSize.trim() : existing.packSize,
         description: description !== null ? description.trim() : existing.description,
         isActive: determinedActive,
+        specifications: parsedSpecs || existing.specifications,
       };
 
       if (priceStr !== null) {
