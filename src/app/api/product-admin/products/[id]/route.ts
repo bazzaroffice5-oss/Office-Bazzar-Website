@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { getProductAdminSession } from '@/lib/product-admin/auth';
-import { updateZohoProduct, deleteZohoProduct, updateProductInLiveCache, removeProductFromLiveCache, invalidateZohoProductCache } from '@/lib/zoho/products';
-import { saveProduct, deleteProduct, getProductById } from '@/lib/db/store';
+import { updateZohoProduct, deleteZohoProduct, updateProductInLiveCache, removeProductFromLiveCache, invalidateZohoProductCache, getProductsFromZoho } from '@/lib/zoho/products';
+import { saveProduct, deleteProduct, getProductById, getProductBySlug } from '@/lib/db/store';
 import { saveProductImage } from '@/lib/products/image-store';
+import { INITIAL_PRODUCTS } from '@/lib/data/catalog';
 import { Product } from '@/types';
 
 export const dynamic = 'force-dynamic';
@@ -234,6 +235,63 @@ export async function PUT(
   }
 }
 
+async function resolveProductForDeletion(rawId: string): Promise<Product> {
+  const cleanId = decodeURIComponent(rawId).trim();
+  const cleanUpper = cleanId.toUpperCase();
+  const cleanLower = cleanId.toLowerCase();
+
+  // 1. Try standard getProductById
+  try {
+    const p = await getProductById(cleanId);
+    if (p) return p;
+  } catch {}
+
+  // 2. Try standard getProductBySlug
+  try {
+    const p = await getProductBySlug(cleanId);
+    if (p) return p;
+  } catch {}
+
+  // 3. Search getProductsFromZoho (authoritative notes & active catalog)
+  try {
+    const zohoList = await getProductsFromZoho(true);
+    const found = zohoList.find(
+      (p) =>
+        (p.id && p.id.toLowerCase() === cleanLower) ||
+        (p.sku && p.sku.toUpperCase() === cleanUpper) ||
+        (p.slug && p.slug.toLowerCase() === cleanLower)
+    );
+    if (found) return found;
+  } catch {}
+
+  // 4. Search INITIAL_PRODUCTS static baseline
+  const baseline = INITIAL_PRODUCTS.find(
+    (p) =>
+      (p.id && p.id.toLowerCase() === cleanLower) ||
+      (p.sku && p.sku.toUpperCase() === cleanUpper) ||
+      (p.slug && p.slug.toLowerCase() === cleanLower)
+  );
+  if (baseline) return baseline;
+
+  // 5. Fallback descriptor: synthesize product object so deletion never 404s
+  return {
+    id: cleanId,
+    sku: cleanUpper,
+    slug: cleanLower,
+    name: cleanId,
+    categoryId: '',
+    categoryName: '',
+    brandId: '',
+    brandName: '',
+    description: '',
+    price: null,
+    stockQuantity: 0,
+    packSize: '1 Unit',
+    images: [],
+    isActive: false,
+  } as unknown as Product;
+}
+
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -246,11 +304,15 @@ export async function DELETE(
   const { id } = await params;
 
   try {
-    const existing = await getProductById(id);
+    const existing = await resolveProductForDeletion(id);
 
-    if (!existing) {
-      return NextResponse.json({ error: 'Product record not found.' }, { status: 404 });
-    }
+    // Collect all identifiers to guarantee complete elimination across id, sku, and slug
+    const allIdentifiers = Array.from(
+      new Set(
+        [existing.id, existing.sku, existing.slug, id, decodeURIComponent(id)]
+          .filter((x): x is string => !!x && typeof x === 'string' && x.trim().length > 0)
+      )
+    );
 
     // 1 & 2. Delete / deactivate in Zoho CRM and store in parallel
     const zohoTargetId = (existing as any).zohoProductId || existing.sku;
@@ -259,9 +321,8 @@ export async function DELETE(
       : Promise.resolve({ success: false, error: 'No Zoho ID or SKU provided' });
 
     const deletePromise = (async () => {
-      await deleteProduct(existing.id);
-      if (existing.sku && existing.sku !== existing.id) {
-        await deleteProduct(existing.sku);
+      for (const ident of allIdentifiers) {
+        await deleteProduct(ident);
       }
     })();
 
@@ -279,9 +340,8 @@ export async function DELETE(
     }
 
     // 3. Immediately update live in-memory cache and bust stale sync timestamps
-    removeProductFromLiveCache(existing.id);
-    if (existing.sku) {
-      removeProductFromLiveCache(existing.sku);
+    for (const ident of allIdentifiers) {
+      removeProductFromLiveCache(ident);
     }
     invalidateZohoProductCache();
 

@@ -502,8 +502,11 @@ export default function ProductAdminDashboardClient({
 
     setDeleting(true);
     try {
-      const res = await fetch(`/api/product-admin/products/${deletingProduct.id}`, {
+      const res = await fetch(`/api/product-admin/products/${encodeURIComponent(deletingProduct.id)}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
       const data = await res.json();

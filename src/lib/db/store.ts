@@ -566,12 +566,18 @@ export async function getBestsellers(limit = 8): Promise<Product[]> {
 }
 
 export const getRelatedProducts = cache(async (productId: string, limit = 4): Promise<Product[]> => {
-  const [current, zohoProducts] = await Promise.all([
+  const [current, zohoProducts, deletedSkus] = await Promise.all([
     getProductById(productId),
     getProductsFromZoho(false),
+    getZohoDeletedSkus(),
   ]);
   const pool = (zohoProducts && zohoProducts.length > 0 ? zohoProducts : storeState.productsList).filter(
-    (p) => p.isActive !== false && !(p as any).isDeleted
+    (p) =>
+      p.isActive !== false &&
+      !(p as any).isDeleted &&
+      !deletedSkus.has(p.sku.toUpperCase()) &&
+      (!p.id || !deletedSkus.has(p.id.toUpperCase())) &&
+      (!p.slug || !deletedSkus.has(p.slug.toUpperCase()))
   );
 
   if (!current) return pool.slice(0, limit);
@@ -847,29 +853,38 @@ export async function saveProduct(productData: Partial<Product>): Promise<Produc
 }
 
 export async function deleteProduct(productId: string): Promise<boolean> {
-  const cleanId = productId.trim().toUpperCase();
+  const cleanId = productId.trim();
+  const cleanUpper = cleanId.toUpperCase();
+  const cleanLower = cleanId.toLowerCase();
   const initialLen = storeState.productsList.length;
 
   const existing = storeState.productsList.find(
-    (p) => p.id === productId || (p.sku && p.sku.toUpperCase() === cleanId) || p.slug.toLowerCase() === productId.toLowerCase()
+    (p) =>
+      p.id.toLowerCase() === cleanLower ||
+      (p.sku && p.sku.toUpperCase() === cleanUpper) ||
+      p.slug.toLowerCase() === cleanLower
   );
-  const skuToTombstone = (existing?.sku || cleanId).toUpperCase();
-  const slugToTombstone = existing?.slug || productId.toLowerCase();
+  const skuToTombstone = (existing?.sku || cleanUpper).toUpperCase();
+  const slugToTombstone = (existing?.slug || cleanLower).toLowerCase();
+  const idToTombstone = existing?.id || cleanId;
 
   // Mark tombstone in custom products on disk and Cloud KV
   const custom = loadCustomProductsFromDisk();
   const cIdx = custom.findIndex(
-    (c) => c.id === productId || (c.sku && c.sku.toUpperCase() === cleanId) || (c.sku && c.sku.toUpperCase() === skuToTombstone) || c.slug.toLowerCase() === productId.toLowerCase()
+    (c) =>
+      (c.id && c.id.toLowerCase() === idToTombstone.toLowerCase()) ||
+      (c.sku && c.sku.toUpperCase() === skuToTombstone) ||
+      (c.slug && c.slug.toLowerCase() === slugToTombstone)
   );
   if (cIdx !== -1) {
     custom[cIdx] = { ...custom[cIdx], isActive: false, isDeleted: true };
   } else {
-    custom.unshift({ id: productId, sku: skuToTombstone, slug: slugToTombstone, isActive: false, isDeleted: true } as any);
+    custom.unshift({ id: idToTombstone, sku: skuToTombstone, slug: slugToTombstone, isActive: false, isDeleted: true } as any);
   }
   persistCustomProductsToDisk(custom);
 
   try {
-    await saveCustomProductDurable({ id: productId, sku: skuToTombstone, slug: slugToTombstone, isActive: false, isDeleted: true } as any);
+    await saveCustomProductDurable({ id: idToTombstone, sku: skuToTombstone, slug: slugToTombstone, isActive: false, isDeleted: true } as any);
   } catch (dErr) {
     console.warn('[Store] Durable custom product tombstone notice:', dErr);
   }
@@ -877,7 +892,7 @@ export async function deleteProduct(productId: string): Promise<boolean> {
 
   // Record in Zoho tombstone registry note OB_DELETED_SKUS
   try {
-    await recordZohoDeletedSku(skuToTombstone, productId, slugToTombstone);
+    await recordZohoDeletedSku(skuToTombstone, idToTombstone, slugToTombstone);
   } catch (zErr) {
     console.warn('[Store] Record Zoho deleted SKU notice:', zErr);
   }
@@ -885,10 +900,9 @@ export async function deleteProduct(productId: string): Promise<boolean> {
   // Remove from runtime storeState
   storeState.productsList = storeState.productsList.filter(
     (p) =>
-      p.id !== productId &&
-      p.sku.toUpperCase() !== cleanId &&
+      p.id.toLowerCase() !== idToTombstone.toLowerCase() &&
       p.sku.toUpperCase() !== skuToTombstone &&
-      p.slug.toLowerCase() !== productId.toLowerCase()
+      p.slug.toLowerCase() !== slugToTombstone
   );
   productsList = storeState.productsList;
 

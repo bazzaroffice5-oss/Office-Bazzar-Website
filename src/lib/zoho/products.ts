@@ -95,9 +95,11 @@ export async function recordZohoDeletedSku(...identifiers: (string | undefined |
 
     const payload = JSON.stringify(Array.from(inMemoryDeletedSkus));
 
+    let res: any;
     if (deletedSkusNoteId) {
-      await zohoFetch<any>('/Notes', {
+      res = await zohoFetch<any>('/Notes', {
         method: 'PUT',
+        cache: 'no-store',
         body: JSON.stringify({
           data: [{
             id: deletedSkusNoteId,
@@ -106,27 +108,48 @@ export async function recordZohoDeletedSku(...identifiers: (string | undefined |
         }),
       });
     } else {
-      const res = await zohoFetch<any>('/Notes', {
+      res = await zohoFetch<any>(`/Accounts/${ZOHO_ACCOUNT_PARENT_ID}/Notes`, {
         method: 'POST',
+        cache: 'no-store',
         body: JSON.stringify({
           data: [{
             Note_Title: 'OB_DELETED_SKUS',
             Note_Content: payload,
-            Parent_Id: {
-              id: ZOHO_ACCOUNT_PARENT_ID,
-              module: 'Accounts',
-            },
-            se_module: 'Accounts',
           }],
         }),
       });
+
+      const firstItem = res?.data?.[0];
+      if (!firstItem || firstItem.status === 'error' || firstItem.code === 'ERROR') {
+        res = await zohoFetch<any>('/Notes', {
+          method: 'POST',
+          cache: 'no-store',
+          body: JSON.stringify({
+            data: [{
+              Note_Title: 'OB_DELETED_SKUS',
+              Note_Content: payload,
+              Parent_Id: {
+                id: ZOHO_ACCOUNT_PARENT_ID,
+                module: { api_name: 'Accounts' },
+              },
+            }],
+          }),
+        });
+      }
+
       const createdId = res?.data?.[0]?.details?.id;
       if (createdId) {
         deletedSkusNoteId = String(createdId);
       }
     }
+
+    const statusItem = res?.data?.[0];
+    if (statusItem?.status === 'error' || statusItem?.code === 'ERROR') {
+      throw new Error(statusItem.message || 'Zoho CRM rejected OB_DELETED_SKUS tombstone update');
+    }
   } catch (err) {
-    console.warn('[ZohoProducts] Notice recording deleted SKUs to Zoho CRM:', err);
+    console.error('[ZohoProducts] Error recording deleted SKUs to Zoho CRM:', err);
+    throw err;
   }
 }
 

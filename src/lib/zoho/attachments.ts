@@ -31,6 +31,7 @@ export async function uploadZohoAttachment(
         Authorization: `Zoho-oauthtoken ${token}`,
       },
       body: formData,
+      cache: 'no-store',
     });
 
     if (!res.ok) {
@@ -97,6 +98,7 @@ export async function deleteZohoAttachment(
       headers: {
         Authorization: `Zoho-oauthtoken ${token}`,
       },
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -109,6 +111,7 @@ export async function deleteZohoAttachment(
       headers: {
         Authorization: `Zoho-oauthtoken ${token}`,
       },
+      cache: 'no-store',
     });
     return altRes.ok;
   } catch (err) {
