@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
+import TrustedClientsSection from '@/components/home/TrustedClientsSection';
 
 export const metadata: Metadata = constructMetadata({
   title: 'About Us - Corporate Office & Facility Supplier',
@@ -272,47 +273,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Verified Corporate Clients Section */}
-      <section className="w-full py-16 bg-white border-t border-slate-100">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold mb-2">
-              <Award className="w-3.5 h-3.5 text-amber-500" />
-              Verified Industry Experience
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-              Trusted by Leading Organizations
-            </h2>
-            <p className="text-sm text-slate-600 mt-1 font-normal">
-              Office Bazzar is proud to fulfill the workplace procurement needs of some of the most respected corporate, hospitality, medical, and banking institutions.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 max-w-5xl mx-auto">
-            {[
-              'ITC',
-              'Sundaram Motors',
-              'Sundaram Clayton',
-              'FLSmidth',
-              'Brakes India Limited',
-              'Empee Hotels',
-              'The Park',
-              'Hatsun Agro Products',
-              'State Bank of India',
-              'Dr. Agarwal Hospital',
-              'Arun Excello',
-              'Government & Educational Institutes',
-            ].map((client) => (
-              <div
-                key={client}
-                className="p-4 bg-slate-50 rounded-xl border border-slate-200/80 flex items-center justify-center text-center text-xs font-bold text-slate-800 shadow-2xs hover:bg-white hover:border-[#004b87] hover:shadow-xs transition-all"
-              >
-                <span>{client}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Verified Corporate Clients Section — logo grid */}
+      <TrustedClientsSection />
     </main>
   );
 }
