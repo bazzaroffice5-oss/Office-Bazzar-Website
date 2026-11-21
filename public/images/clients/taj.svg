@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
+  <rect width="200" height="80" fill="#fff"/>
+  <text x="100" y="38" font-family="Georgia,Times New Roman,serif" font-size="30" font-weight="bold" fill="#8B6914" text-anchor="middle" letter-spacing="4">TAJ</text>
+  <line x1="30" y1="45" x2="170" y2="45" stroke="#8B6914" stroke-width="1"/>
+  <text x="100" y="58" font-family="Georgia,serif" font-size="8" fill="#555" text-anchor="middle" letter-spacing="2">HOTELS &amp; RESORTS</text>
+</svg>

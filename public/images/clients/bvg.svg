@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
+  <rect width="200" height="80" fill="#fff"/>
+  <rect x="8" y="15" width="184" height="50" rx="4" fill="#0066CC"/>
+  <text x="65" y="51" font-family="Arial Black,sans-serif" font-size="30" font-weight="900" fill="#fff" text-anchor="middle">BVG</text>
+  <text x="145" y="38" font-family="Arial,sans-serif" font-size="8" fill="#fff" text-anchor="middle">INDIA</text>
+  <text x="145" y="50" font-family="Arial,sans-serif" font-size="7" fill="#fff" text-anchor="middle">LIMITED</text>
+</svg>

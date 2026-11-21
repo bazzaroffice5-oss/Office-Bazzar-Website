@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
+  <rect width="200" height="80" fill="#fff"/>
+  <circle cx="40" cy="40" r="28" fill="#003087"/>
+  <circle cx="40" cy="40" r="22" fill="#fff"/>
+  <circle cx="40" cy="40" r="16" fill="#003087"/>
+  <circle cx="40" cy="40" r="8" fill="#fff"/>
+  <text x="115" y="34" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#003087" text-anchor="middle">ASHOK</text>
+  <text x="115" y="52" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#003087" text-anchor="middle">LEYLAND</text>
+</svg>

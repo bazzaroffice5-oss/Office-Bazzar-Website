@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
+  <rect width="200" height="80" fill="#fff"/>
+  <rect x="8" y="8" width="184" height="64" rx="4" fill="#722F37"/>
+  <text x="100" y="34" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#FFD700" text-anchor="middle">PANIMALAR</text>
+  <text x="100" y="48" font-family="Arial,sans-serif" font-size="8" fill="#fff" text-anchor="middle">MEDICAL COLLEGE</text>
+  <text x="100" y="61" font-family="Arial,sans-serif" font-size="7" fill="#fff" text-anchor="middle">HOSPITAL &amp; RESEARCH INSTITUTE</text>
+</svg>
