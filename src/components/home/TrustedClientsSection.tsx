@@ -27,7 +27,7 @@ const TRUSTED_CLIENTS: ClientEntry[] = [
   },
   {
     id: 'cat',
-    name: 'CAT',
+    name: 'Caterpillar (CAT)',
     sector: 'Heavy Equipment',
     logo: '/images/clients/cat.svg',
     fallbackDomain: 'cat.com',
@@ -49,7 +49,7 @@ const TRUSTED_CLIENTS: ClientEntry[] = [
   {
     id: 'zoho',
     name: 'Zoho',
-    sector: 'Technology',
+    sector: 'SaaS / Technology',
     logo: '/images/clients/zoho.svg',
     fallbackDomain: 'zoho.com',
   },
@@ -77,7 +77,7 @@ const TRUSTED_CLIENTS: ClientEntry[] = [
   {
     id: 'indianoil',
     name: 'IndianOil',
-    sector: 'Oil & Gas',
+    sector: 'Energy & Petroleum',
     logo: '/images/clients/indianoil.svg',
     fallbackDomain: 'iocl.com',
   },
@@ -97,8 +97,8 @@ const TRUSTED_CLIENTS: ClientEntry[] = [
   },
   {
     id: 'sun-tv',
-    name: 'Sun TV',
-    sector: 'Media & Entertainment',
+    name: 'Sun TV Network',
+    sector: 'Media & Broadcasting',
     logo: '/images/clients/sun-tv.svg',
     fallbackDomain: 'suntv.in',
   },
@@ -112,7 +112,7 @@ const TRUSTED_CLIENTS: ClientEntry[] = [
   {
     id: 'avt',
     name: 'AVT Group',
-    sector: 'Conglomerate',
+    sector: 'Tea & Commodities',
     logo: '/images/clients/avt.svg',
     fallbackDomain: 'avtgroup.in',
   },
@@ -157,35 +157,35 @@ function ClientCard({ client }: { client: ClientEntry }) {
 
   const handleError = () => {
     if (!imgFailed) {
-      // First failure: try Google S2 favicon (128px, real brand icon)
+      // First failure: try Google S2 favicon (128px, usually a real brand icon)
       setImgSrc(
         `https://www.google.com/s2/favicons?domain=${client.fallbackDomain}&sz=128`
       );
       setImgFailed(true);
     }
-    // Second failure: leave as-is; brand name label below always renders
+    // Second failure: leave as-is; brand name below still identifies the client
   };
 
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`group relative flex flex-col items-center justify-between gap-3 p-4 rounded-xl border transition-all duration-200 cursor-default select-none min-h-[112px] ${
+      className={`group relative flex flex-col items-center justify-between gap-3 p-4 rounded-xl border transition-all duration-200 cursor-default select-none min-h-[112px] bg-white ${
         hovered
-          ? 'bg-white border-[#004b87] shadow-md shadow-[#004b87]/10 -translate-y-0.5'
-          : 'bg-white border-slate-200/80 shadow-sm'
+          ? 'border-[#004b87] shadow-md shadow-[#004b87]/10 -translate-y-0.5'
+          : 'border-slate-200/80 shadow-sm'
       }`}
       title={`${client.name} — ${client.sector}`}
       aria-label={client.name}
     >
-      {/* Logo area — clean white background, no colored box */}
-      <div className="flex-1 w-full flex items-center justify-center">
+      {/* Logo area — clean white background, object-contain, no colored box */}
+      <div className="flex-1 w-full flex items-center justify-center overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={imgSrc}
           alt={`${client.name} logo`}
           onError={handleError}
-          className="h-11 w-auto max-w-[140px] object-contain mx-auto"
+          className="h-11 w-auto max-w-[136px] object-contain mx-auto"
           loading="lazy"
         />
       </div>
@@ -229,11 +229,11 @@ export default function TrustedClientsSection() {
           <div className="w-12 h-1 bg-gradient-to-r from-[#004b87] to-[#16a34a] rounded-full mx-auto mt-3 mb-3" />
           <p className="text-sm text-slate-600 font-normal leading-relaxed">
             Office Bazzar is proud to fulfill the workplace procurement needs of some of the most
-            respected corporate, hospitality, medical, and educational institutions across India.
+            respected corporate, hospitality, educational, and industrial institutions across India.
           </p>
         </div>
 
-        {/* Grid — 18 cards */}
+        {/* Grid — 18 cards, 2 → 3 → 4 → 6 columns */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 max-w-5xl mx-auto">
           {TRUSTED_CLIENTS.map((client) => (
             <ClientCard key={client.id} client={client} />

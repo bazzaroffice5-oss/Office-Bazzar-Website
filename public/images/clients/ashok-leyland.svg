@@ -1,9 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
-  <rect width="200" height="80" fill="#fff"/>
-  <circle cx="40" cy="40" r="28" fill="#003087"/>
-  <circle cx="40" cy="40" r="22" fill="#fff"/>
-  <circle cx="40" cy="40" r="16" fill="#003087"/>
-  <circle cx="40" cy="40" r="8" fill="#fff"/>
-  <text x="115" y="34" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#003087" text-anchor="middle">ASHOK</text>
-  <text x="115" y="52" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#003087" text-anchor="middle">LEYLAND</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img" aria-label="Ashok Leyland">
+  <!-- Ashok Leyland: blue wordmark, no colored box background -->
+  <text x="100" y="30" font-family="'Arial Black','Helvetica Neue',sans-serif" font-size="17" font-weight="900" fill="#003087" text-anchor="middle" letter-spacing="1">ASHOK</text>
+  <text x="100" y="52" font-family="'Arial Black','Helvetica Neue',sans-serif" font-size="17" font-weight="900" fill="#003087" text-anchor="middle" letter-spacing="1">LEYLAND</text>
+  <line x1="30" y1="58" x2="170" y2="58" stroke="#E31837" stroke-width="2"/>
+  <text x="100" y="71" font-family="Arial,sans-serif" font-size="7.5" fill="#555" text-anchor="middle" letter-spacing="1">HINDUJA GROUP</text>
 </svg>

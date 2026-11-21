@@ -1,7 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
-  <rect width="200" height="80" fill="#fff"/>
-  <text x="85" y="52" font-family="Arial,sans-serif" font-size="38" font-weight="bold" fill="#E42527" text-anchor="middle">zoho</text>
-  <circle cx="148" cy="38" r="10" fill="#E42527" opacity="0.15"/>
-  <circle cx="148" cy="38" r="6" fill="#E42527" opacity="0.3"/>
-  <circle cx="148" cy="38" r="3" fill="#E42527"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 80" role="img" aria-label="Zoho">
+  <!-- Zoho: official red wordmark on white -->
+  <text x="80" y="52" font-family="Arial,'Helvetica Neue',sans-serif" font-size="40" font-weight="bold" fill="#E42527" text-anchor="middle">zoho</text>
+  <!-- Zoho logo dot accent -->
+  <circle cx="156" cy="34" r="8" fill="#E42527" opacity="0.18"/>
+  <circle cx="156" cy="34" r="4.5" fill="#E42527" opacity="0.5"/>
+  <circle cx="156" cy="34" r="2" fill="#E42527"/>
 </svg>

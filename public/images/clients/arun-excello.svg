@@ -1,18 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120" role="img" aria-label="Arun Excello">
-  <!-- Real estate / construction motif: rising A with building -->
-  <!-- Letter A as building shape -->
-  <g transform="translate(10,10)">
-    <!-- Building silhouette forming an A -->
-    <polygon points="45,5 15,90 30,90 45,52 60,90 75,90" fill="#C0392B" stroke="none"/>
-    <!-- Windows on building -->
-    <rect x="30" y="62" width="8" height="8" fill="white"/>
-    <rect x="52" y="62" width="8" height="8" fill="white"/>
-    <rect x="38" y="30" width="14" height="10" fill="white" opacity="0.6"/>
-    <!-- Foundation line -->
-    <rect x="12" y="90" width="66" height="4" fill="#922B21"/>
-  </g>
-  <!-- Wordmark -->
-  <text x="108" y="50" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="22" fill="#C0392B">ARUN</text>
-  <text x="108" y="78" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="22" fill="#922B21">EXCELLO</text>
-  <text x="108" y="97" font-family="Arial, sans-serif" font-size="10" fill="#888" letter-spacing="2">HOMES &amp; PROPERTIES</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img" aria-label="Arun Excello">
+  <!-- Arun Excello: red wordmark, white background -->
+  <text x="100" y="34" font-family="'Arial Black','Helvetica Neue',sans-serif" font-size="18" font-weight="900" fill="#C0392B" text-anchor="middle" letter-spacing="1">ARUN</text>
+  <text x="100" y="58" font-family="'Arial Black','Helvetica Neue',sans-serif" font-size="18" font-weight="900" fill="#922B21" text-anchor="middle" letter-spacing="1">EXCELLO</text>
+  <line x1="30" y1="62" x2="170" y2="62" stroke="#C0392B" stroke-width="1.5"/>
+  <text x="100" y="73" font-family="Arial,sans-serif" font-size="7" fill="#888" text-anchor="middle" letter-spacing="1.5">HOMES &amp; PROPERTIES</text>
 </svg>

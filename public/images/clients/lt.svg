@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
-  <rect width="200" height="80" fill="#fff"/>
-  <rect x="10" y="15" width="180" height="50" rx="4" fill="#003087"/>
-  <text x="100" y="49" font-family="Arial Black,sans-serif" font-size="28" font-weight="900" fill="#fff" text-anchor="middle">L&amp;T</text>
-  <text x="100" y="62" font-family="Arial,sans-serif" font-size="6.5" fill="#8ab4e8" text-anchor="middle" letter-spacing="1">LARSEN &amp; TOUBRO</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img" aria-label="Larsen and Toubro">
+  <!-- L&T official: white wordmark on dark blue pill -->
+  <rect x="12" y="16" width="100" height="48" rx="6" fill="#003087"/>
+  <text x="62" y="50" font-family="'Arial Black','Helvetica Neue',sans-serif" font-size="28" font-weight="900" fill="#fff" text-anchor="middle">L&amp;T</text>
+  <text x="155" y="38" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#003087" text-anchor="middle">LARSEN &amp;</text>
+  <text x="155" y="52" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#003087" text-anchor="middle">TOUBRO</text>
 </svg>

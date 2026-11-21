@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
-  <rect width="200" height="80" fill="#FFCD11"/>
-  <text x="100" y="52" font-family="Arial Black,sans-serif" font-size="42" font-weight="900" fill="#000000" text-anchor="middle">CAT</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 80" role="img" aria-label="Caterpillar">
+  <!-- CAT official: black bold wordmark on yellow pill -->
+  <rect x="10" y="18" width="140" height="44" rx="4" fill="#FFCD11"/>
+  <text x="80" y="52" font-family="'Arial Black','Helvetica Neue',sans-serif" font-size="36" font-weight="900" fill="#000" text-anchor="middle">CAT</text>
 </svg>
