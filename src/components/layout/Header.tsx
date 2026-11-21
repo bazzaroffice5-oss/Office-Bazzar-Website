@@ -92,8 +92,8 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-2xs h-[68px] transition-all">
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 h-full flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm transition-all">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 h-[68px] flex items-center justify-between gap-4">
         {/* Left: Official OfficeBazzar Logo */}
         <div className="flex items-center shrink-0">
           <Link
@@ -208,7 +208,10 @@ export default function Header() {
           {/* Mobile Search Toggle Button */}
           <button
             type="button"
-            onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
+            onClick={() => {
+              setIsMobileSearchOpen(!isMobileSearchOpen);
+              setIsMobileMenuOpen(false);
+            }}
             className="flex items-center justify-center w-9 h-9 text-slate-700 hover:text-[#004b87] hover:bg-slate-100 rounded-full md:hidden transition-colors cursor-pointer"
             aria-label="Toggle search bar"
             title="Search products"
@@ -242,7 +245,10 @@ export default function Header() {
           {/* Mobile Menu Hamburger */}
           <button
             type="button"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => {
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+              setIsMobileSearchOpen(false);
+            }}
             className="flex items-center justify-center w-9 h-9 p-1.5 text-slate-700 hover:text-slate-900 lg:hidden rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
             aria-label="Toggle navigation menu"
           >
@@ -253,7 +259,7 @@ export default function Header() {
 
       {/* Mobile Expandable Search Bar */}
       {isMobileSearchOpen && (
-        <div className="md:hidden border-t border-slate-100 bg-white/98 px-4 py-2.5 animate-in slide-in-from-top-1 duration-150 shadow-xs">
+        <div className="md:hidden border-t border-gray-100 bg-white/98 px-4 py-2.5 animate-in slide-in-from-top-1 duration-150 shadow-xs">
           <form
             action="/products"
             method="GET"
