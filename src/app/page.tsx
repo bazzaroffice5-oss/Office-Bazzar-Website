@@ -5,7 +5,6 @@ import CategoriesSection from '@/components/home/CategoriesSection';
 import OurBrandsSection from '@/components/home/OurBrandsSection';
 import ProcessTimelineSection from '@/components/home/ProcessTimelineSection';
 import ProcurementBenefitsSection from '@/components/home/ProcurementBenefitsSection';
-import TrustedClientsSection from '@/components/home/TrustedClientsSection';
 import AboutSummarySection from '@/components/home/AboutSummarySection';
 import HomeBlogSection from '@/components/home/HomeBlogSection';
 import HomeFaqSection from '@/components/home/HomeFaqSection';
@@ -74,9 +73,6 @@ export default async function HomePage() {
 
       {/* 5. Enterprise Procurement Benefits */}
       <ProcurementBenefitsSection />
-
-      {/* 6. Trusted Clients — logo grid of 12 key corporate clients */}
-      <TrustedClientsSection />
 
       {/* 7. About OfficeBazzar Summary & Logistics Facility */}
       <AboutSummarySection />
