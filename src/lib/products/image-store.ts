@@ -16,6 +16,7 @@ import path from 'path';
 import os from 'os';
 import crypto from 'crypto';
 import { callKV } from '@/lib/distributed/kv-client';
+import { uploadZohoAttachment, downloadZohoAttachment } from '@/lib/zoho/attachments';
 
 export interface StoredProductImage {
   filename: string;
@@ -165,7 +166,46 @@ export async function saveProductImage({
     console.warn('[ImageStore] Tmp write notice:', tmpErr);
   }
 
-  // 2. Local public static directory (works in local dev and build phase)
+  // 2. Try Zoho CRM Account Attachment for permanent cross-container storage
+  let zohoAttId: string | null = null;
+  try {
+    zohoAttId = await uploadZohoAttachment(buffer, cleanFilename, determinedMime);
+  } catch (attErr) {
+    console.warn('[ImageStore] Zoho attachment notice:', attErr);
+  }
+
+  if (zohoAttId) {
+    const zohoFilename = `zoho_${zohoAttId}.${cleanExt === 'jpg' ? 'jpeg' : cleanExt}`;
+    try {
+      const tmpDir = getTmpImageDir();
+      fs.writeFileSync(path.join(tmpDir, zohoFilename), buffer);
+    } catch {
+      // ignore
+    }
+
+    const publicUrl = `/api/products/images/${zohoFilename}`;
+    return {
+      success: true,
+      publicUrl,
+      filename: zohoFilename,
+      mimeType: determinedMime,
+      size: buffer.length,
+    };
+  }
+
+  // 3. Compact Data URL fallback if image <= 25KB (fits safely in Zoho Note JSON without length issues)
+  if (buffer.length <= 25 * 1024) {
+    const dataUrl = `data:${determinedMime};base64,${buffer.toString('base64')}`;
+    return {
+      success: true,
+      publicUrl: dataUrl,
+      filename: cleanFilename,
+      mimeType: determinedMime,
+      size: buffer.length,
+    };
+  }
+
+  // 4. Local public static directory (works in local dev and build phase)
   try {
     const staticDir = path.join(process.cwd(), 'public', 'assets', 'products', 'catalog_2026');
     if (!fs.existsSync(staticDir)) {
@@ -232,6 +272,38 @@ export async function getProductImage(
 ): Promise<{ buffer: Buffer; mimeType: string } | null> {
   const cleanFilename = path.basename(filename).replace(/[^a-zA-Z0-9._-]/g, '');
   if (!cleanFilename) return null;
+
+  // Layer 0: Zoho CRM Account Attachment (cross-container persistent)
+  if (cleanFilename.startsWith('zoho_')) {
+    const attId = cleanFilename.replace(/^zoho_/, '').replace(/\.[^.]+$/, '');
+    // Check ephemeral container cache first
+    try {
+      const tmpFile = path.join(getTmpImageDir(), cleanFilename);
+      if (fs.existsSync(tmpFile)) {
+        const buffer = fs.readFileSync(tmpFile);
+        const mimeType = getMimeType(cleanFilename, buffer);
+        return { buffer, mimeType };
+      }
+    } catch {
+      // continue
+    }
+
+    // Fetch from Zoho CRM Attachments API
+    try {
+      const zohoFile = await downloadZohoAttachment(attId);
+      if (zohoFile) {
+        try {
+          const tmpFile = path.join(getTmpImageDir(), cleanFilename);
+          fs.writeFileSync(tmpFile, zohoFile.buffer);
+        } catch {
+          // ignore
+        }
+        return zohoFile;
+      }
+    } catch {
+      // continue to next layers
+    }
+  }
 
   // Layer 1: Ephemeral container disk cache (/tmp)
   try {

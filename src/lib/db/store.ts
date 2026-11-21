@@ -169,7 +169,13 @@ async function syncCustomProducts(force = false) {
       (p) => p.id === dp.id || p.sku.toUpperCase() === (dp.sku || '').toUpperCase()
     );
     if (idx !== -1) {
-      storeState.productsList[idx] = { ...storeState.productsList[idx], ...dp };
+      // Preserve live Zoho CRM Note data (including images & edits) so stale disk/tmp data never overwrites it
+      const current = storeState.productsList[idx];
+      storeState.productsList[idx] = {
+        ...dp,
+        ...current,
+        images: current.images && current.images.length > 0 ? current.images : (dp.images || []),
+      };
     } else {
       storeState.productsList.unshift(dp);
     }
@@ -396,21 +402,10 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
   if (!slug) return null;
   const cleanSlug = decodeURIComponent(slug).toLowerCase().trim();
 
-  // 1. Authoritative durable custom product lookup (~15ms directly from KV)
-  try {
-    const durableMatch = await getCustomProductBySlugDurable(cleanSlug);
-    if (durableMatch) {
-      if (durableMatch.isActive === false || durableMatch.isDeleted) return null;
-      return durableMatch;
-    }
-  } catch {
-    // continue to cached index
-  }
-
-  // 2. Ensure catalog has been synchronized with Zoho CRM Notes
+  // 1. Authoritative: Ensure catalog has been synchronized with Zoho CRM Notes first
   await ensureCatalogSynced(false);
 
-  // 3. Instant O(1) in-memory index
+  // 2. Instant O(1) in-memory index from authoritative Zoho CRM catalog
   const cached = getCachedProductBySlug(cleanSlug);
   if (cached && cached.isActive !== false && !(cached as any).isDeleted) {
     if (cached.sku) {
@@ -418,6 +413,17 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
       if (isDeleted) return null;
     }
     return cached;
+  }
+
+  // 3. Fallback: Durable custom product lookup (~15ms directly from KV)
+  try {
+    const durableMatch = await getCustomProductBySlugDurable(cleanSlug);
+    if (durableMatch) {
+      if (durableMatch.isActive === false || durableMatch.isDeleted) return null;
+      return durableMatch;
+    }
+  } catch {
+    // continue to active catalog pool
   }
 
   // 4. Fallback to active catalog pool
@@ -445,7 +451,20 @@ export const getProductById = cache(async (id: string): Promise<Product | null> 
   if (!id || typeof id !== 'string') return null;
   const cleanId = id.trim();
 
-  // 1. Authoritative durable custom product lookup
+  // 1. Authoritative: Ensure catalog has been synchronized with Zoho CRM Notes first
+  await ensureCatalogSynced(false);
+
+  // 2. Instant O(1) in-memory index from authoritative Zoho CRM catalog
+  const cached = getCachedProductById(cleanId);
+  if (cached && !(cached as any).isDeleted) {
+    if (cached.sku) {
+      const isDeleted = await isProductDeletedDurable(cached.sku);
+      if (isDeleted) return null;
+    }
+    return cached;
+  }
+
+  // 3. Fallback: Durable custom product lookup
   try {
     const durableMatch = await getCustomProductByIdDurable(cleanId);
     if (durableMatch) {
@@ -454,19 +473,6 @@ export const getProductById = cache(async (id: string): Promise<Product | null> 
     }
   } catch {
     // continue
-  }
-
-  // 2. Ensure catalog has been synchronized with Zoho CRM Notes
-  await ensureCatalogSynced(false);
-
-  // 3. Instant O(1) in-memory index
-  const cached = getCachedProductById(cleanId);
-  if (cached && !(cached as any).isDeleted) {
-    if (cached.sku) {
-      const isDeleted = await isProductDeletedDurable(cached.sku);
-      if (isDeleted) return null;
-    }
-    return cached;
   }
 
   // 4. Fallback to active catalog pool

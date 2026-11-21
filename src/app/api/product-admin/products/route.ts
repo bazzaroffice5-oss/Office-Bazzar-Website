@@ -151,12 +151,7 @@ export async function POST(request: NextRequest) {
       const cleanSku = sku.replace(/[^a-zA-Z0-9-_]/g, '_').toUpperCase();
       const imagesList: string[] = [];
 
-      // Handle Image URL input if provided
-      if (imageUrlInput && imageUrlInput.trim()) {
-        imagesList.push(imageUrlInput.trim());
-      }
-
-      // Handle Image Upload if provided
+      // Handle Image: File Upload takes priority, otherwise use direct URL input
       if (file && file.size > 0) {
         try {
           const bytes = await file.arrayBuffer();
@@ -167,10 +162,12 @@ export async function POST(request: NextRequest) {
             mimeType: file.type,
             sku: cleanSku,
           });
-          imagesList.unshift(stored.publicUrl);
+          imagesList.push(stored.publicUrl);
         } catch (uploadErr) {
           console.error('[Product Admin] Image upload persistence error:', uploadErr);
         }
+      } else if (imageUrlInput && imageUrlInput.trim()) {
+        imagesList.push(imageUrlInput.trim());
       }
 
       const isActive = publishStatus === 'published';

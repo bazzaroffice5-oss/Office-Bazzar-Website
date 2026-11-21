@@ -370,6 +370,7 @@ export default function ProductAdminDashboardClient({
     const file = e.target.files?.[0];
     if (file) {
       setFormImageFile(file);
+      setFormImageUrl(''); // Clear old URL state so newly selected file is authoritative
       const previewUrl = URL.createObjectURL(file);
       setFormImagePreview(previewUrl);
     }
@@ -398,8 +399,11 @@ export default function ProductAdminDashboardClient({
       formData.append('description', formDescription.trim());
       formData.append('publishStatus', formPublishStatus);
       if (formPrice.trim()) formData.append('price', formPrice.trim());
-      if (formImageFile) formData.append('imageFile', formImageFile);
-      if (formImageUrl.trim()) formData.append('imageUrl', formImageUrl.trim());
+      if (formImageFile) {
+        formData.append('imageFile', formImageFile);
+      } else if (formImageUrl.trim()) {
+        formData.append('imageUrl', formImageUrl.trim());
+      }
 
       const res = await fetch('/api/product-admin/products', {
         method: 'POST',
@@ -453,8 +457,11 @@ export default function ProductAdminDashboardClient({
       formData.append('description', formDescription.trim());
       formData.append('publishStatus', formPublishStatus);
       if (formPrice.trim()) formData.append('price', formPrice.trim());
-      if (formImageFile) formData.append('imageFile', formImageFile);
-      if (formImageUrl.trim()) formData.append('imageUrl', formImageUrl.trim());
+      if (formImageFile) {
+        formData.append('imageFile', formImageFile);
+      } else if (formImageUrl.trim()) {
+        formData.append('imageUrl', formImageUrl.trim());
+      }
 
       const res = await fetch(`/api/product-admin/products/${editingProduct.id}`, {
         method: 'PUT',
@@ -1271,6 +1278,7 @@ export default function ProductAdminDashboardClient({
                       type="text"
                       value={formImageUrl}
                       onChange={(e) => {
+                        setFormImageFile(null); // Clear file state if user explicitly enters an image URL
                         setFormImageUrl(e.target.value);
                         if (e.target.value.trim()) {
                           setFormImagePreview(e.target.value.trim());

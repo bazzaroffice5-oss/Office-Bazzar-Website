@@ -108,12 +108,9 @@ export async function PUT(
       }
       updates.updatedAt = new Date().toISOString();
 
-      // Handle Image Replacement via URL input
-      if (imageUrlInput && imageUrlInput.trim()) {
-        updates.images = [imageUrlInput.trim()];
-      }
-
-      // Handle Image Replacement via File Upload
+      // Handle Image Replacement:
+      // Priority 1: File Upload (new image chosen)
+      // Priority 2: Direct URL Input (URL provided or edited)
       if (file && file.size > 0) {
         try {
           const cleanSku = (updates.sku || existing.sku).replace(/[^a-zA-Z0-9-_]/g, '_').toUpperCase();
@@ -126,9 +123,15 @@ export async function PUT(
             sku: cleanSku,
           });
           updates.images = [stored.publicUrl];
+          (updates as any).image = stored.publicUrl;
+          (updates as any).imageUrl = stored.publicUrl;
         } catch (uploadErr) {
           console.error('[Product Admin] Image replacement persistence error:', uploadErr);
         }
+      } else if (imageUrlInput && imageUrlInput.trim()) {
+        updates.images = [imageUrlInput.trim()];
+        (updates as any).image = imageUrlInput.trim();
+        (updates as any).imageUrl = imageUrlInput.trim();
       }
     } else {
       const body = await request.json();

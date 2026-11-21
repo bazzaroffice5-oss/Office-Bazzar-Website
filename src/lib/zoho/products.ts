@@ -38,7 +38,7 @@ export interface ZohoProductMappingItem {
 
 // In-memory cache for high-speed edge retrieval
 const DUPLICATE_INACTIVE_SLUGS = new Set<string>(['kangaro-staplers-hd-10d', 'kangaro-staplers-hd-10d-1']);
-const ZOHO_ACCOUNT_PARENT_ID = '1476900000000575002'; // Office Bazzar Account
+export const ZOHO_ACCOUNT_PARENT_ID = '1476900000000575002'; // Office Bazzar Account
 let cachedProducts: Product[] | null = null;
 let lastCacheSync = 0;
 let hasSyncedInitialCatalog = false;
@@ -335,11 +335,33 @@ async function saveZohoProductNote(
   }
   const cleanSku = product.sku.trim().toUpperCase();
   const noteTitle = `OB_PROD_${cleanSku}`;
-  const noteContent = JSON.stringify({
+
+  const noteImages =
+    Array.isArray(product.images) && product.images.length > 0
+      ? product.images
+      : (product as any).imageUrl
+        ? [(product as any).imageUrl]
+        : (product as any).image
+          ? [(product as any).image]
+          : [];
+
+  const notePayload = {
     ...product,
     sku: cleanSku,
+    images: noteImages,
+    image: noteImages[0] || '',
+    imageUrl: noteImages[0] || '',
     updatedAt: new Date().toISOString(),
-  });
+  };
+
+  let noteContent = JSON.stringify(notePayload);
+  if (noteContent.length > 30000 && noteImages[0]?.startsWith('data:')) {
+    console.warn('[ZohoProducts] Note content exceeds 30k limit due to large data URI. Trimming image payload.');
+    notePayload.images = ['/assets/placeholder-product.svg'];
+    notePayload.image = '/assets/placeholder-product.svg';
+    notePayload.imageUrl = '/assets/placeholder-product.svg';
+    noteContent = JSON.stringify(notePayload);
+  }
 
   const existingNotes = await fetchZohoProductNotes(true);
   let existing = existingNotes.get(cleanSku);
@@ -482,8 +504,9 @@ async function syncProductsFromZohoInternal(forceRefresh = false): Promise<Produ
 
   // 2. Authoritative: Overlay live product notes from Zoho CRM Account
   if (await isZohoConfigured()) {
+    let zohoNotes = new Map<string, { noteId: string; product: Partial<Product> & { isDeleted?: boolean } }>();
     try {
-      const zohoNotes = await fetchZohoProductNotes(forceRefresh);
+      zohoNotes = await fetchZohoProductNotes(forceRefresh);
       for (const [sku, item] of zohoNotes.entries()) {
         const cleanSku = sku.toUpperCase();
         if (item.product.isDeleted) {
@@ -508,10 +531,26 @@ async function syncProductsFromZohoInternal(forceRefresh = false): Promise<Produ
         }
 
         const existing = productsMap.get(cleanSku);
+
+        // Resolve images authoritatively from the Zoho Note
+        const noteImages =
+          Array.isArray(item.product.images) && item.product.images.length > 0
+            ? item.product.images
+            : (item.product as any).imageUrl
+              ? [(item.product as any).imageUrl]
+              : (item.product as any).image
+                ? [(item.product as any).image]
+                : null;
+
+        const finalImages = noteImages || existing?.images || [];
+
         if (existing) {
           productsMap.set(cleanSku, {
             ...existing,
             ...item.product,
+            images: finalImages,
+            image: finalImages[0] || '',
+            imageUrl: finalImages[0] || '',
             zohoProductId: item.noteId,
           } as Product & { zohoProductId?: string });
         } else if (item.product.name) {
@@ -528,10 +567,12 @@ async function syncProductsFromZohoInternal(forceRefresh = false): Promise<Produ
             packSize: item.product.packSize || '1 Unit',
             price: item.product.price ?? 0,
             description: item.product.description || '',
-            images: item.product.images || [],
+            images: finalImages,
+            image: finalImages[0] || '',
+            imageUrl: finalImages[0] || '',
             isActive: item.product.isActive !== false,
             zohoProductId: item.noteId,
-          } as Product & { zohoProductId?: string });
+          } as unknown as Product & { zohoProductId?: string });
         }
 
         mappingBySku.set(cleanSku, {
@@ -547,7 +588,7 @@ async function syncProductsFromZohoInternal(forceRefresh = false): Promise<Produ
       console.warn('[ZohoProducts] Notice checking Zoho product notes:', noteErr);
     }
 
-    // 2b. Overlay durable Cloud KV custom products
+    // 2b. Overlay durable Cloud KV custom products ONLY for products NOT already in zohoNotes
     try {
       const durableCustom = await loadDurableCustomProducts();
       for (const cp of durableCustom) {
@@ -563,6 +604,8 @@ async function syncProductsFromZohoInternal(forceRefresh = false): Promise<Produ
           continue;
         }
         const cleanSku = (cp.sku || cp.id).toUpperCase();
+        // Skip if already authoritatively provided by Zoho CRM Note
+        if (zohoNotes.has(cleanSku)) continue;
         if (cp.id) {
           for (const [s, p] of productsMap.entries()) {
             if (s !== cleanSku && p.id && p.id.toLowerCase() === cp.id.toLowerCase()) {
