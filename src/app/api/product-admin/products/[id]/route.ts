@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
-import fs from 'fs';
 import { revalidatePath } from 'next/cache';
 import { getProductAdminSession } from '@/lib/product-admin/auth';
-import { getProductsFromZoho, updateZohoProduct, deleteZohoProduct, updateProductInLiveCache, removeProductFromLiveCache, invalidateZohoProductCache } from '@/lib/zoho/products';
+import { updateZohoProduct, deleteZohoProduct, updateProductInLiveCache, removeProductFromLiveCache, invalidateZohoProductCache } from '@/lib/zoho/products';
 import { saveProduct, deleteProduct, getProductById } from '@/lib/db/store';
 import { saveProductImage } from '@/lib/products/image-store';
 import { Product } from '@/types';

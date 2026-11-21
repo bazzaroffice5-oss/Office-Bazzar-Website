@@ -714,46 +714,59 @@ export async function updateOrderStatus(
 // ----------------------------------------------------------------------
 
 export async function saveProduct(productData: Partial<Product>): Promise<Product> {
+  // Find existing product in store to preserve fields not included in partial update
+  const existingInStore = storeState.productsList.find(
+    (p) =>
+      (productData.id && p.id === productData.id) ||
+      (productData.sku && p.sku.toUpperCase() === productData.sku.toUpperCase())
+  );
+
   const generatedSlug =
     productData.slug ||
+    existingInStore?.slug ||
     (productData.name
       ? productData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
       : `prod-${Date.now()}`);
 
   const generatedSku =
     productData.sku ||
+    existingInStore?.sku ||
     `OB-${Math.floor(100000 + Math.random() * 900000)}`;
 
+  // Build product by spreading existing values first so partial updates never erase untouched fields
   const newProduct: Product = {
-    id: productData.id || `prod-${Date.now()}`,
-    name: productData.name || 'Untitled Product',
+    id: productData.id || existingInStore?.id || `prod-${Date.now()}`,
+    name: productData.name || existingInStore?.name || 'Untitled Product',
     slug: generatedSlug,
     sku: generatedSku,
-    categoryId: productData.categoryId || '',
-    categoryName: productData.categoryName || 'Office Supplies',
-    subcategoryId: productData.subcategoryId,
-    subcategoryName: productData.subcategoryName,
-    brandId: productData.brandId || '',
-    brandName: productData.brandName || 'OfficeBazzar',
-    description: productData.description || '',
-    shortDescription: productData.shortDescription,
-    specifications: productData.specifications || {},
-    price: productData.price !== undefined ? productData.price : null,
-    mrp: productData.mrp !== undefined ? productData.mrp : null,
-    gstPercent: productData.gstPercent || 18,
-    hsnCode: productData.hsnCode,
-    stockQuantity: productData.stockQuantity || 0,
-    minOrderQuantity: productData.minOrderQuantity || 1,
-    packSize: productData.packSize || '1 Unit',
-    images: productData.images || [],
-    featured: Boolean(productData.featured),
-    bestseller: Boolean(productData.bestseller),
-    rating: productData.rating || null,
-    reviewCount: productData.reviewCount || 0,
-    isPriceVerified: Boolean(productData.isPriceVerified),
-    requiresManualReview: Boolean(productData.requiresManualReview ?? true),
-    isActive: productData.isActive !== false,
-    zohoProductId: (productData as any).zohoProductId || undefined,
+    categoryId: productData.categoryId || existingInStore?.categoryId || '',
+    categoryName: productData.categoryName || existingInStore?.categoryName || 'Office Supplies',
+    subcategoryId: productData.subcategoryId !== undefined ? productData.subcategoryId : existingInStore?.subcategoryId,
+    subcategoryName: productData.subcategoryName !== undefined ? productData.subcategoryName : existingInStore?.subcategoryName,
+    brandId: productData.brandId || existingInStore?.brandId || '',
+    brandName: productData.brandName || existingInStore?.brandName || 'OfficeBazzar',
+    description: productData.description !== undefined ? productData.description : (existingInStore?.description || ''),
+    shortDescription: productData.shortDescription !== undefined ? productData.shortDescription : existingInStore?.shortDescription,
+    specifications: productData.specifications || existingInStore?.specifications || {},
+    price: productData.price !== undefined ? productData.price : (existingInStore?.price !== undefined ? existingInStore.price : null),
+    mrp: productData.mrp !== undefined ? productData.mrp : (existingInStore?.mrp !== undefined ? existingInStore.mrp : null),
+    gstPercent: productData.gstPercent || existingInStore?.gstPercent || 18,
+    hsnCode: productData.hsnCode || existingInStore?.hsnCode,
+    stockQuantity: productData.stockQuantity !== undefined ? productData.stockQuantity : (existingInStore?.stockQuantity || 0),
+    minOrderQuantity: productData.minOrderQuantity || existingInStore?.minOrderQuantity || 1,
+    packSize: productData.packSize || existingInStore?.packSize || '1 Unit',
+    // Preserve existing images when no new image is provided
+    images: (productData.images !== undefined && productData.images !== null && productData.images.length > 0)
+      ? productData.images
+      : (existingInStore?.images || []),
+    featured: productData.featured !== undefined ? Boolean(productData.featured) : Boolean(existingInStore?.featured),
+    bestseller: productData.bestseller !== undefined ? Boolean(productData.bestseller) : Boolean(existingInStore?.bestseller),
+    rating: productData.rating !== undefined ? productData.rating : (existingInStore?.rating || null),
+    reviewCount: productData.reviewCount !== undefined ? productData.reviewCount : (existingInStore?.reviewCount || 0),
+    isPriceVerified: productData.isPriceVerified !== undefined ? Boolean(productData.isPriceVerified) : Boolean(existingInStore?.isPriceVerified),
+    requiresManualReview: productData.requiresManualReview !== undefined ? Boolean(productData.requiresManualReview) : Boolean(existingInStore?.requiresManualReview ?? true),
+    isActive: productData.isActive !== undefined ? productData.isActive !== false : (existingInStore?.isActive !== false),
+    zohoProductId: (productData as any).zohoProductId || (existingInStore as any)?.zohoProductId || undefined,
   } as Product;
 
   const existingIdx = storeState.productsList.findIndex(

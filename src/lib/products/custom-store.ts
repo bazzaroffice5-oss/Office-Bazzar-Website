@@ -152,7 +152,7 @@ export async function saveCustomProductDurable(product: DurableProduct): Promise
         callKV(['SET', `custom_prod:${cleanSku}`, JSON.stringify(product)]),
         callKV(['SADD', 'custom_prod_skus', cleanSku]),
         callKV(['SET', `custom_prod_slug:${cleanSlug}`, cleanSku]),
-        product.id ? callKV(['SET', `custom_prod_id:${product.id.toLowerCase()}`]) : Promise.resolve(null),
+        product.id ? callKV(['SET', `custom_prod_id:${product.id.toLowerCase()}`, cleanSku]) : Promise.resolve(null),
         callKV(['SREM', 'custom_prod_deleted_skus', cleanSku]),
         callKV(['SET', 'custom_prod_version', version]),
       ]);
