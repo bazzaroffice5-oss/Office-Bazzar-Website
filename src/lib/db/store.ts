@@ -14,7 +14,7 @@ import {
   NotificationLog,
 } from '@/types';
 import { CATEGORIES, BRANDS, INITIAL_PRODUCTS, COUPONS, resolveMainCategory, NINE_SUBCATEGORIES, CATEGORY_MAP, isProductInSubcategory } from '@/lib/data/catalog';
-import { getProductsFromZoho, getCachedProductBySlug, getCachedProductById, isZohoCacheSynced } from '@/lib/zoho/products';
+import { getProductsFromZoho, getCachedProductBySlug, getCachedProductById, isZohoCacheSynced, getZohoDeletedSkus, recordZohoDeletedSku, isSkuOrIdDeleted } from '@/lib/zoho/products';
 import {
   getAllQuotationsFromZoho,
   getQuoteByReferenceFromZoho,
@@ -194,8 +194,14 @@ export async function getProducts(filters?: FilterParams): Promise<{ products: P
     storeState.productsList = zohoProducts;
   }
   await syncCustomProducts();
+  const deletedSkus = await getZohoDeletedSkus();
   let result = storeState.productsList.filter(
-    (p) => p.isActive !== false && !(p as any).isDeleted
+    (p) =>
+      p.isActive !== false &&
+      !(p as any).isDeleted &&
+      !deletedSkus.has(p.sku.toUpperCase()) &&
+      (!p.id || !deletedSkus.has(p.id.toUpperCase())) &&
+      (!p.slug || !deletedSkus.has(p.slug.toUpperCase()))
   );
 
   if (filters?.query) {
@@ -339,8 +345,14 @@ export const getCatalogFilterMetadata = cache(async (): Promise<CatalogFilterMet
     storeState.productsList = zohoProducts;
   }
   await syncCustomProducts();
+  const deletedSkus = await getZohoDeletedSkus();
   const pool = storeState.productsList.filter(
-    (p) => p.isActive !== false && !(p as any).isDeleted
+    (p) =>
+      p.isActive !== false &&
+      !(p as any).isDeleted &&
+      !deletedSkus.has(p.sku.toUpperCase()) &&
+      (!p.id || !deletedSkus.has(p.id.toUpperCase())) &&
+      (!p.slug || !deletedSkus.has(p.slug.toUpperCase()))
   );
 
   const brandMap = new Map<string, { id: string; name: string }>();
@@ -395,12 +407,22 @@ async function ensureCatalogSynced(force = false): Promise<Product[]> {
 
 export async function getAdminProducts(): Promise<Product[]> {
   const products = await getProductsFromZoho(true);
-  return products && products.length > 0 ? products : [...storeState.productsList];
+  const pool = products && products.length > 0 ? products : [...storeState.productsList];
+  const deletedSkus = await getZohoDeletedSkus();
+  return pool.filter(
+    (p) =>
+      !(p as any).isDeleted &&
+      !deletedSkus.has(p.sku.toUpperCase()) &&
+      (!p.id || !deletedSkus.has(p.id.toUpperCase())) &&
+      (!p.slug || !deletedSkus.has(p.slug.toUpperCase()))
+  );
 }
 
 export const getProductBySlug = cache(async (slug: string): Promise<Product | null> => {
   if (!slug) return null;
   const cleanSlug = decodeURIComponent(slug).toLowerCase().trim();
+  const deletedSkus = await getZohoDeletedSkus();
+  if (deletedSkus.has(cleanSlug.toUpperCase())) return null;
 
   // 1. Authoritative: Ensure catalog has been synchronized with Zoho CRM Notes first
   await ensureCatalogSynced(false);
@@ -409,9 +431,11 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
   const cached = getCachedProductBySlug(cleanSlug);
   if (cached && cached.isActive !== false && !(cached as any).isDeleted) {
     if (cached.sku) {
+      if (deletedSkus.has(cached.sku.toUpperCase())) return null;
       const isDeleted = await isProductDeletedDurable(cached.sku);
       if (isDeleted) return null;
     }
+    if (cached.id && deletedSkus.has(cached.id.toUpperCase())) return null;
     return cached;
   }
 
@@ -420,6 +444,8 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
     const durableMatch = await getCustomProductBySlugDurable(cleanSlug);
     if (durableMatch) {
       if (durableMatch.isActive === false || durableMatch.isDeleted) return null;
+      if (deletedSkus.has(durableMatch.sku.toUpperCase())) return null;
+      if (durableMatch.id && deletedSkus.has(durableMatch.id.toUpperCase())) return null;
       return durableMatch;
     }
   } catch {
@@ -436,7 +462,10 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
         p.id.toLowerCase() === cleanSlug ||
         ((p as any).zohoProductId && (p as any).zohoProductId === cleanSlug)) &&
       p.isActive !== false &&
-      !(p as any).isDeleted
+      !(p as any).isDeleted &&
+      !deletedSkus.has(p.sku.toUpperCase()) &&
+      (!p.id || !deletedSkus.has(p.id.toUpperCase())) &&
+      (!p.slug || !deletedSkus.has(p.slug.toUpperCase()))
   );
 
   if (product && product.sku) {
@@ -450,6 +479,8 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
 export const getProductById = cache(async (id: string): Promise<Product | null> => {
   if (!id || typeof id !== 'string') return null;
   const cleanId = id.trim();
+  const deletedSkus = await getZohoDeletedSkus();
+  if (deletedSkus.has(cleanId.toUpperCase())) return null;
 
   // 1. Authoritative: Ensure catalog has been synchronized with Zoho CRM Notes first
   await ensureCatalogSynced(false);
@@ -458,9 +489,11 @@ export const getProductById = cache(async (id: string): Promise<Product | null> 
   const cached = getCachedProductById(cleanId);
   if (cached && !(cached as any).isDeleted) {
     if (cached.sku) {
+      if (deletedSkus.has(cached.sku.toUpperCase())) return null;
       const isDeleted = await isProductDeletedDurable(cached.sku);
       if (isDeleted) return null;
     }
+    if (cached.id && deletedSkus.has(cached.id.toUpperCase())) return null;
     return cached;
   }
 
@@ -469,6 +502,8 @@ export const getProductById = cache(async (id: string): Promise<Product | null> 
     const durableMatch = await getCustomProductByIdDurable(cleanId);
     if (durableMatch) {
       if (durableMatch.isDeleted) return null;
+      if (deletedSkus.has(durableMatch.sku.toUpperCase())) return null;
+      if (durableMatch.id && deletedSkus.has(durableMatch.id.toUpperCase())) return null;
       return durableMatch;
     }
   } catch {
@@ -484,7 +519,10 @@ export const getProductById = cache(async (id: string): Promise<Product | null> 
         p.sku.toLowerCase() === cleanId.toLowerCase() ||
         p.slug.toLowerCase() === cleanId.toLowerCase() ||
         ((p as any).zohoProductId && (p as any).zohoProductId === cleanId)) &&
-      !(p as any).isDeleted
+      !(p as any).isDeleted &&
+      !deletedSkus.has(p.sku.toUpperCase()) &&
+      (!p.id || !deletedSkus.has(p.id.toUpperCase())) &&
+      (!p.slug || !deletedSkus.has(p.slug.toUpperCase()))
   );
 
   if (product && product.sku) {
@@ -812,23 +850,23 @@ export async function deleteProduct(productId: string): Promise<boolean> {
   const cleanId = productId.trim().toUpperCase();
   const initialLen = storeState.productsList.length;
 
+  const existing = storeState.productsList.find(
+    (p) => p.id === productId || (p.sku && p.sku.toUpperCase() === cleanId) || p.slug.toLowerCase() === productId.toLowerCase()
+  );
+  const skuToTombstone = (existing?.sku || cleanId).toUpperCase();
+  const slugToTombstone = existing?.slug || productId.toLowerCase();
+
   // Mark tombstone in custom products on disk and Cloud KV
   const custom = loadCustomProductsFromDisk();
   const cIdx = custom.findIndex(
-    (c) => c.id === productId || (c.sku && c.sku.toUpperCase() === cleanId) || c.slug.toLowerCase() === productId.toLowerCase()
+    (c) => c.id === productId || (c.sku && c.sku.toUpperCase() === cleanId) || (c.sku && c.sku.toUpperCase() === skuToTombstone) || c.slug.toLowerCase() === productId.toLowerCase()
   );
   if (cIdx !== -1) {
     custom[cIdx] = { ...custom[cIdx], isActive: false, isDeleted: true };
   } else {
-    custom.unshift({ id: productId, sku: cleanId, isActive: false, isDeleted: true } as any);
+    custom.unshift({ id: productId, sku: skuToTombstone, slug: slugToTombstone, isActive: false, isDeleted: true } as any);
   }
   persistCustomProductsToDisk(custom);
-
-  const existing = storeState.productsList.find(
-    (p) => p.id === productId || (p.sku && p.sku.toUpperCase() === cleanId) || p.slug.toLowerCase() === productId.toLowerCase()
-  );
-  const skuToTombstone = existing?.sku || cleanId;
-  const slugToTombstone = existing?.slug || productId.toLowerCase();
 
   try {
     await saveCustomProductDurable({ id: productId, sku: skuToTombstone, slug: slugToTombstone, isActive: false, isDeleted: true } as any);
@@ -837,9 +875,20 @@ export async function deleteProduct(productId: string): Promise<boolean> {
   }
   lastSyncCustomTime = 0;
 
+  // Record in Zoho tombstone registry note OB_DELETED_SKUS
+  try {
+    await recordZohoDeletedSku(skuToTombstone, productId, slugToTombstone);
+  } catch (zErr) {
+    console.warn('[Store] Record Zoho deleted SKU notice:', zErr);
+  }
+
   // Remove from runtime storeState
   storeState.productsList = storeState.productsList.filter(
-    (p) => p.id !== productId && p.sku.toUpperCase() !== cleanId && p.slug.toLowerCase() !== productId.toLowerCase()
+    (p) =>
+      p.id !== productId &&
+      p.sku.toUpperCase() !== cleanId &&
+      p.sku.toUpperCase() !== skuToTombstone &&
+      p.slug.toLowerCase() !== productId.toLowerCase()
   );
   productsList = storeState.productsList;
 

@@ -13,7 +13,8 @@ import { Product } from '@/types';
 import { INITIAL_PRODUCTS } from '@/lib/data/catalog';
 import { zohoFetch, isZohoConfigured } from './client';
 import zohoMappingData from '@/lib/data/zoho_product_mapping.json';
-import { loadDurableCustomProducts } from '@/lib/products/custom-store';
+import { loadDurableCustomProducts, invalidateDurableCustomProductCache } from '@/lib/products/custom-store';
+import { deleteZohoAttachment } from './attachments';
 
 export interface ZohoProductRecord {
   id: string;
@@ -54,6 +55,81 @@ const productBySlugMap = new Map<string, Product>();
 const productByIdMap = new Map<string, Product>();
 const productBySkuMap = new Map<string, Product>();
 
+// Tombstone registry for permanently deleted products (persisted in Zoho CRM note OB_DELETED_SKUS)
+let deletedSkusNoteId: string | null = null;
+const inMemoryDeletedSkus = new Set<string>();
+let lastDeletedSkusSync = 0;
+
+export function isSkuOrIdDeleted(identifier?: string | null): boolean {
+  if (!identifier) return false;
+  const clean = identifier.trim().toUpperCase();
+  return inMemoryDeletedSkus.has(clean);
+}
+
+export async function getZohoDeletedSkus(force = false): Promise<Set<string>> {
+  const now = Date.now();
+  if (!force && lastDeletedSkusSync > 0 && now - lastDeletedSkusSync < NOTES_CACHE_TTL_MS) {
+    return inMemoryDeletedSkus;
+  }
+  // Ensure notes are fetched so inMemoryDeletedSkus is populated from OB_DELETED_SKUS
+  await fetchZohoProductNotes(force);
+  lastDeletedSkusSync = now;
+  return inMemoryDeletedSkus;
+}
+
+export async function recordZohoDeletedSku(...identifiers: (string | undefined | null)[]): Promise<void> {
+  const valid = identifiers.filter((x): x is string => !!x && typeof x === 'string' && x.trim().length > 0);
+  if (valid.length === 0) return;
+  for (const v of valid) {
+    inMemoryDeletedSkus.add(v.trim().toUpperCase());
+  }
+  lastDeletedSkusSync = Date.now();
+  invalidateZohoProductCache();
+
+  if (!(await isZohoConfigured())) return;
+
+  try {
+    if (!deletedSkusNoteId) {
+      await fetchZohoProductNotes(true);
+    }
+
+    const payload = JSON.stringify(Array.from(inMemoryDeletedSkus));
+
+    if (deletedSkusNoteId) {
+      await zohoFetch<any>('/Notes', {
+        method: 'PUT',
+        body: JSON.stringify({
+          data: [{
+            id: deletedSkusNoteId,
+            Note_Content: payload,
+          }],
+        }),
+      });
+    } else {
+      const res = await zohoFetch<any>('/Notes', {
+        method: 'POST',
+        body: JSON.stringify({
+          data: [{
+            Note_Title: 'OB_DELETED_SKUS',
+            Note_Content: payload,
+            Parent_Id: {
+              id: ZOHO_ACCOUNT_PARENT_ID,
+              module: 'Accounts',
+            },
+            se_module: 'Accounts',
+          }],
+        }),
+      });
+      const createdId = res?.data?.[0]?.details?.id;
+      if (createdId) {
+        deletedSkusNoteId = String(createdId);
+      }
+    }
+  } catch (err) {
+    console.warn('[ZohoProducts] Notice recording deleted SKUs to Zoho CRM:', err);
+  }
+}
+
 function rebuildFastIndexes(products: Product[]): void {
   productBySlugMap.clear();
   productByIdMap.clear();
@@ -71,13 +147,20 @@ function rebuildFastIndexes(products: Product[]): void {
 
 export function getCachedProductBySlug(slug: string): Product | null {
   if (!slug) return null;
-  return productBySlugMap.get(slug.toLowerCase().trim()) || null;
+  const clean = slug.toLowerCase().trim();
+  if (isSkuOrIdDeleted(clean)) return null;
+  const p = productBySlugMap.get(clean) || null;
+  if (p && (isSkuOrIdDeleted(p.sku) || (p.id && isSkuOrIdDeleted(p.id)))) return null;
+  return p;
 }
 
 export function getCachedProductById(id: string): Product | null {
   if (!id) return null;
   const clean = id.toLowerCase().trim();
-  return productByIdMap.get(clean) || productBySkuMap.get(clean.toUpperCase()) || null;
+  if (isSkuOrIdDeleted(clean)) return null;
+  const p = productByIdMap.get(clean) || productBySkuMap.get(clean.toUpperCase()) || null;
+  if (p && (isSkuOrIdDeleted(p.sku) || (p.id && isSkuOrIdDeleted(p.id)))) return null;
+  return p;
 }
 
 export function updateProductInLiveCache(
@@ -190,19 +273,22 @@ function loadCustomProductsFromDisk(): Array<Product & { isDeleted?: boolean }> 
 
 function buildInitialCatalog(): Product[] {
   const productsMap = new Map<string, Product>();
-  const deletedSkus = new Set<string>();
+  const deletedSkus = new Set<string>(inMemoryDeletedSkus);
   const custom = loadCustomProductsFromDisk();
 
   for (const cp of custom) {
     if (cp.isDeleted) {
       if (cp.sku) deletedSkus.add(cp.sku.toUpperCase());
-      if (cp.id) deletedSkus.add(cp.id);
+      if (cp.id) deletedSkus.add(cp.id.toUpperCase());
+      if (cp.slug) deletedSkus.add(cp.slug.toUpperCase());
     }
   }
 
   for (const p of INITIAL_PRODUCTS) {
     const cleanSku = p.sku.toUpperCase();
-    if (deletedSkus.has(cleanSku) || deletedSkus.has(p.id)) {
+    const cleanId = p.id ? p.id.toUpperCase() : '';
+    const cleanSlug = p.slug ? p.slug.toUpperCase() : '';
+    if (deletedSkus.has(cleanSku) || (cleanId && deletedSkus.has(cleanId)) || (cleanSlug && deletedSkus.has(cleanSlug))) {
       continue;
     }
     const zohoInfo = mappingByWebsiteId.get(p.id) || mappingBySku.get(p.sku);
@@ -217,6 +303,11 @@ function buildInitialCatalog(): Product[] {
   for (const cp of custom) {
     if (cp.isDeleted) continue;
     const cleanSku = (cp.sku || cp.id).toUpperCase();
+    const cleanId = cp.id ? cp.id.toUpperCase() : '';
+    const cleanSlug = cp.slug ? cp.slug.toUpperCase() : '';
+    if (deletedSkus.has(cleanSku) || (cleanId && deletedSkus.has(cleanId)) || (cleanSlug && deletedSkus.has(cleanSlug))) {
+      continue;
+    }
     const existing = productsMap.get(cleanSku);
     if (existing) {
       productsMap.set(cleanSku, { ...existing, ...cp });
@@ -296,13 +387,29 @@ async function fetchZohoProductNotes(force = false): Promise<
       const res = await zohoFetch<any>(endpoint, { method: 'GET', cache: 'no-store' });
       if (res && res.data && Array.isArray(res.data) && res.data.length > 0) {
         for (const note of res.data) {
-          if (note.Note_Title && typeof note.Note_Title === 'string' && note.Note_Title.startsWith('OB_PROD_')) {
-            const sku = note.Note_Title.replace(/^OB_PROD_/, '').trim().toUpperCase();
-            try {
-              const parsed = JSON.parse(note.Note_Content);
-              notesMap.set(sku, { noteId: note.id, product: parsed });
-            } catch {
-              // ignore malformed note
+          if (note.Note_Title && typeof note.Note_Title === 'string') {
+            if (note.Note_Title.startsWith('OB_PROD_')) {
+              const sku = note.Note_Title.replace(/^OB_PROD_/, '').trim().toUpperCase();
+              try {
+                const parsed = JSON.parse(note.Note_Content);
+                notesMap.set(sku, { noteId: note.id, product: parsed });
+              } catch {
+                // ignore malformed note
+              }
+            } else if (note.Note_Title === 'OB_DELETED_SKUS') {
+              deletedSkusNoteId = String(note.id);
+              try {
+                const parsed = JSON.parse(note.Note_Content);
+                if (Array.isArray(parsed)) {
+                  for (const item of parsed) {
+                    if (typeof item === 'string' && item.trim()) {
+                      inMemoryDeletedSkus.add(item.trim().toUpperCase());
+                    }
+                  }
+                }
+              } catch {
+                // ignore malformed note
+              }
             }
           }
         }
@@ -495,11 +602,18 @@ async function deleteZohoProductNote(identifier: string): Promise<boolean> {
 async function syncProductsFromZohoInternal(forceRefresh = false): Promise<Product[]> {
   const now = Date.now();
   const productsMap = new Map<string, Product>();
+  const deletedSkus = await getZohoDeletedSkus(forceRefresh);
 
-  // 1. Baseline catalog from catalog.ts
+  // 1. Baseline catalog from catalog.ts (excluding deletedSkus)
   const initialBase = buildInitialCatalog();
   for (const p of initialBase) {
-    productsMap.set(p.sku.toUpperCase(), p);
+    const cleanSku = p.sku.toUpperCase();
+    const cleanId = p.id ? p.id.toUpperCase() : '';
+    const cleanSlug = p.slug ? p.slug.toUpperCase() : '';
+    if (deletedSkus.has(cleanSku) || (cleanId && deletedSkus.has(cleanId)) || (cleanSlug && deletedSkus.has(cleanSlug))) {
+      continue;
+    }
+    productsMap.set(cleanSku, p);
   }
 
   // 2. Authoritative: Overlay live product notes from Zoho CRM Account
@@ -509,7 +623,10 @@ async function syncProductsFromZohoInternal(forceRefresh = false): Promise<Produ
       zohoNotes = await fetchZohoProductNotes(forceRefresh);
       for (const [sku, item] of zohoNotes.entries()) {
         const cleanSku = sku.toUpperCase();
-        if (item.product.isDeleted) {
+        const itemId = item.product.id ? item.product.id.toUpperCase() : '';
+        const itemSlug = item.product.slug ? item.product.slug.toUpperCase() : '';
+
+        if (deletedSkus.has(cleanSku) || (itemId && deletedSkus.has(itemId)) || (itemSlug && deletedSkus.has(itemSlug)) || item.product.isDeleted) {
           productsMap.delete(cleanSku);
           if (item.product.id) {
             for (const [s, p] of productsMap.entries()) {
@@ -592,7 +709,11 @@ async function syncProductsFromZohoInternal(forceRefresh = false): Promise<Produ
     try {
       const durableCustom = await loadDurableCustomProducts();
       for (const cp of durableCustom) {
-        if (cp.isDeleted) {
+        const cleanSku = (cp.sku || cp.id).toUpperCase();
+        const cpId = cp.id ? cp.id.toUpperCase() : '';
+        const cpSlug = cp.slug ? cp.slug.toUpperCase() : '';
+
+        if (deletedSkus.has(cleanSku) || (cpId && deletedSkus.has(cpId)) || (cpSlug && deletedSkus.has(cpSlug)) || cp.isDeleted) {
           if (cp.sku) productsMap.delete(cp.sku.toUpperCase());
           if (cp.id) {
             for (const [s, p] of productsMap.entries()) {
@@ -603,7 +724,6 @@ async function syncProductsFromZohoInternal(forceRefresh = false): Promise<Produ
           }
           continue;
         }
-        const cleanSku = (cp.sku || cp.id).toUpperCase();
         // Skip if already authoritatively provided by Zoho CRM Note
         if (zohoNotes.has(cleanSku)) continue;
         if (cp.id) {
@@ -622,6 +742,16 @@ async function syncProductsFromZohoInternal(forceRefresh = false): Promise<Produ
       }
     } catch (dErr) {
       console.warn('[ZohoProducts] Notice checking durable custom products:', dErr);
+    }
+  }
+
+  // Final filter pass to guarantee no deleted SKU, ID, or slug survives
+  for (const [s, p] of productsMap.entries()) {
+    const pSku = p.sku.toUpperCase();
+    const pId = p.id ? p.id.toUpperCase() : '';
+    const pSlug = p.slug ? p.slug.toUpperCase() : '';
+    if (deletedSkus.has(pSku) || (pId && deletedSkus.has(pId)) || (pSlug && deletedSkus.has(pSlug))) {
+      productsMap.delete(s);
     }
   }
 
@@ -761,34 +891,164 @@ export async function updateZohoProduct(
 }
 
 /**
+ * Delete a product record from Zoho CRM Products module if present in this edition
+ */
+async function deleteZohoModuleProductRecord(sku: string): Promise<boolean> {
+  if (!sku || !(await isZohoConfigured())) return false;
+  const cleanSku = sku.trim().toUpperCase();
+  try {
+    const searchRes = await zohoFetch<any>(
+      `/Products/search?criteria=(Product_Code:equals:${encodeURIComponent(cleanSku)})`,
+      { method: 'GET', cache: 'no-store' }
+    );
+    if (searchRes?.data && Array.isArray(searchRes.data) && searchRes.data.length > 0) {
+      for (const item of searchRes.data) {
+        if (item.id) {
+          await zohoFetch<any>(`/Products?ids=${item.id}`, { method: 'DELETE' });
+        }
+      }
+      return true;
+    }
+  } catch (err) {
+    // Products module might not exist in current Zoho CRM edition; warning is sufficient
+    console.warn('[ZohoProducts] Notice during Products module search/delete:', err);
+  }
+  return false;
+}
+
+/**
  * Delete or deactivate a Product record in Zoho CRM.
- * Removes/tombstones in Zoho CRM Notes attached to the Office Bazzar Account.
+ * Removes/tombstones in Zoho CRM Notes attached to the Office Bazzar Account,
+ * deletes any associated Zoho Account image attachments, deletes from Products module if present,
+ * and maintains the permanent OB_DELETED_SKUS tombstone registry to prevent static baseline resurrection.
  */
 export async function deleteZohoProduct(
   zohoIdOrSku: string,
-  skuFallback?: string
+  skuFallback?: string,
+  productMeta?: Partial<Product>
 ): Promise<{
   success: boolean;
   zohoId?: string;
   error?: string;
 }> {
-  if (!(await isZohoConfigured())) {
-    return { success: false, error: 'Zoho CRM is not configured.' };
+  const cleanSku = (skuFallback || getZohoProductSku(zohoIdOrSku) || zohoIdOrSku).trim().toUpperCase();
+  const targetId = (productMeta?.id || zohoIdOrSku).trim();
+  const targetSlug = productMeta?.slug?.trim().toLowerCase();
+
+  // 1. Immediately record in persistent tombstone registry so it NEVER resurrects
+  try {
+    await recordZohoDeletedSku(cleanSku, targetId, targetSlug);
+  } catch (recErr) {
+    console.warn('[ZohoProducts] Notice recording deleted SKU:', recErr);
   }
 
-  const cleanSku = (skuFallback || getZohoProductSku(zohoIdOrSku) || zohoIdOrSku).trim().toUpperCase();
+  // 2. Remove from live fast indexes and in-memory caches immediately
+  mappingBySku.delete(cleanSku);
+  removeProductFromLiveCache(cleanSku);
+  if (targetId && targetId !== cleanSku) {
+    removeProductFromLiveCache(targetId);
+  }
+  invalidateZohoProductCache();
+  invalidateDurableCustomProductCache();
+
+  if (!(await isZohoConfigured())) {
+    return { success: true, zohoId: cleanSku };
+  }
 
   try {
-    await deleteZohoProductNote(cleanSku);
-    if (zohoIdOrSku && zohoIdOrSku !== cleanSku) {
-      await deleteZohoProductNote(zohoIdOrSku);
+    // 3. Find matching Note to collect Note ID and attached images
+    const existingNotes = await fetchZohoProductNotes(true);
+    let noteItem = existingNotes.get(cleanSku);
+    if (!noteItem && targetId) {
+      noteItem = existingNotes.get(targetId.toUpperCase());
     }
-    mappingBySku.delete(cleanSku);
-    removeProductFromLiveCache(cleanSku);
-    if (zohoIdOrSku && zohoIdOrSku !== cleanSku) {
-      removeProductFromLiveCache(zohoIdOrSku);
+    if (!noteItem) {
+      for (const [sKey, item] of existingNotes.entries()) {
+        if (
+          item.noteId === zohoIdOrSku ||
+          sKey === cleanSku ||
+          (item.product as any)?.sku?.toUpperCase() === cleanSku ||
+          (item.product as any)?.id?.toUpperCase() === cleanSku ||
+          (targetId && (item.product as any)?.id?.toUpperCase() === targetId.toUpperCase())
+        ) {
+          noteItem = item;
+          break;
+        }
+      }
     }
-    invalidateZohoProductCache();
+
+    // 4. Delete associated Zoho Account Attachment image file(s)
+    const imagesToCheck: string[] = [];
+    if (productMeta?.images && Array.isArray(productMeta.images)) {
+      imagesToCheck.push(...productMeta.images);
+    }
+    if ((productMeta as any)?.image) imagesToCheck.push(String((productMeta as any).image));
+    if ((productMeta as any)?.imageUrl) imagesToCheck.push(String((productMeta as any).imageUrl));
+    if (noteItem?.product?.images && Array.isArray(noteItem.product.images)) {
+      imagesToCheck.push(...noteItem.product.images);
+    }
+    if ((noteItem?.product as any)?.image) imagesToCheck.push(String((noteItem?.product as any).image));
+    if ((noteItem?.product as any)?.imageUrl) imagesToCheck.push(String((noteItem?.product as any).imageUrl));
+
+    const attachmentIdsToDelete = new Set<string>();
+    for (const img of imagesToCheck) {
+      if (typeof img === 'string') {
+        const match = img.match(/zoho_(\d+)/i);
+        if (match && match[1]) {
+          attachmentIdsToDelete.add(match[1]);
+        }
+        // Also purge /tmp and Cloud KV image cache
+        if (typeof window === 'undefined') {
+          try {
+            // eslint-disable-next-line @typescript-eslint/no-require-imports
+            const { purgeProductImage } = require('@/lib/products/image-store');
+            purgeProductImage(img).catch(() => {});
+          } catch {
+            // ignore
+          }
+        }
+      }
+    }
+
+    for (const attId of attachmentIdsToDelete) {
+      try {
+        await deleteZohoAttachment(attId);
+      } catch (attErr) {
+        console.warn(`[ZohoProducts] Notice deleting attachment ${attId}:`, attErr);
+      }
+    }
+
+    // 5. Delete or tombstone the OB_PROD_<SKU> Note in Zoho CRM
+    if (noteItem) {
+      try {
+        await zohoFetch<any>(`/Notes?ids=${noteItem.noteId}`, { method: 'DELETE' });
+      } catch {
+        const tombstoneContent = JSON.stringify({
+          sku: cleanSku,
+          isActive: false,
+          isDeleted: true,
+          updatedAt: new Date().toISOString(),
+        });
+        await zohoFetch<any>('/Notes', {
+          method: 'PUT',
+          body: JSON.stringify({
+            data: [{ id: noteItem.noteId, Note_Content: tombstoneContent }],
+          }),
+        });
+      }
+    } else {
+      await deleteZohoProductNote(cleanSku);
+      if (zohoIdOrSku && zohoIdOrSku !== cleanSku) {
+        await deleteZohoProductNote(zohoIdOrSku);
+      }
+    }
+
+    // 6. Delete from Zoho's Products module (matched by Product_Code / SKU)
+    await deleteZohoModuleProductRecord(cleanSku);
+
+    // 7. Update OB_DELETED_SKUS note in Zoho CRM to ensure permanent synchronization
+    await recordZohoDeletedSku(cleanSku, targetId, targetSlug);
+
     return { success: true, zohoId: cleanSku };
   } catch (err) {
     const errorMsg = err instanceof Error ? err.message : String(err);

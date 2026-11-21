@@ -381,3 +381,33 @@ export async function getProductImage(
 
   return null;
 }
+
+/**
+ * Purge a product image from /tmp cache and Cloud KV upon permanent product deletion
+ */
+export async function purgeProductImage(filenameOrUrl: string): Promise<void> {
+  if (!filenameOrUrl) return;
+  const filename = filenameOrUrl.split('/').pop()?.split('?')[0] || '';
+  if (!filename) return;
+
+  // 1. Remove from /tmp
+  try {
+    const tmpDir = getTmpImageDir();
+    const target = path.join(tmpDir, filename);
+    if (fs.existsSync(target)) {
+      fs.unlinkSync(target);
+    }
+  } catch {
+    // ignore
+  }
+
+  // 2. Remove from Cloud KV
+  try {
+    await Promise.all([
+      callKV(['DEL', `prod_img_data:${filename}`]),
+      callKV(['DEL', `prod_img_meta:${filename}`]),
+    ]);
+  } catch {
+    // ignore
+  }
+}

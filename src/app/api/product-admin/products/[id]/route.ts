@@ -255,7 +255,7 @@ export async function DELETE(
     // 1 & 2. Delete / deactivate in Zoho CRM and store in parallel
     const zohoTargetId = (existing as any).zohoProductId || existing.sku;
     const zohoPromise: Promise<{ success: boolean; zohoId?: string; error?: string }> = zohoTargetId
-      ? deleteZohoProduct(zohoTargetId, existing.sku)
+      ? deleteZohoProduct(zohoTargetId, existing.sku, existing)
       : Promise.resolve({ success: false, error: 'No Zoho ID or SKU provided' });
 
     const deletePromise = (async () => {
@@ -267,6 +267,16 @@ export async function DELETE(
 
     const [zohoResult] = await Promise.all([zohoPromise, deletePromise]);
     const zohoSynced = zohoResult.success;
+
+    if (!zohoSynced) {
+      return NextResponse.json(
+        {
+          error: zohoResult.error || 'Failed to synchronize product deletion with Zoho CRM.',
+          zohoError: zohoResult.error,
+        },
+        { status: 500 }
+      );
+    }
 
     // 3. Immediately update live in-memory cache and bust stale sync timestamps
     removeProductFromLiveCache(existing.id);
@@ -281,6 +291,7 @@ export async function DELETE(
       revalidatePath('/product-admin-panel');
       revalidatePath('/products');
       revalidatePath('/categories');
+      revalidatePath('/shop');
       if (existing.categoryId) {
         revalidatePath(`/category/${existing.categoryId}`);
       }

@@ -81,3 +81,38 @@ export async function downloadZohoAttachment(
     return null;
   }
 }
+
+export async function deleteZohoAttachment(
+  attachmentId: string
+): Promise<boolean> {
+  if (!attachmentId || !(await isZohoConfigured())) return false;
+
+  try {
+    const token = await getZohoAccessToken();
+    const apiDomain = getZohoApiDomain();
+    const endpoint = `${apiDomain}/crm/v6/Accounts/${ZOHO_ACCOUNT_PARENT_ID}/Attachments/${attachmentId}`;
+
+    const res = await fetch(endpoint, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Zoho-oauthtoken ${token}`,
+      },
+    });
+
+    if (res.ok) {
+      return true;
+    }
+
+    const altEndpoint = `${apiDomain}/crm/v6/Accounts/${ZOHO_ACCOUNT_PARENT_ID}/Attachments?ids=${attachmentId}`;
+    const altRes = await fetch(altEndpoint, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Zoho-oauthtoken ${token}`,
+      },
+    });
+    return altRes.ok;
+  } catch (err) {
+    console.warn('[ZohoAttachment] Delete error:', err);
+    return false;
+  }
+}

@@ -508,7 +508,7 @@ export default function ProductAdminDashboardClient({
 
       const data = await res.json();
       if (!res.ok || !data.success) {
-        showToast('error', data.error || 'Failed to delete product.');
+        showToast('error', data.error || data.zohoError || 'Failed to delete product.');
         setDeleting(false);
         return;
       }
@@ -516,11 +516,11 @@ export default function ProductAdminDashboardClient({
       setProducts((prev) => prev.filter((p) => p.id !== deletingProduct.id && p.sku !== deletingProduct.sku));
       showToast(
         'success',
-        `Product "${deletingProduct.name}" (${deletingProduct.sku}) deleted and synchronized with Zoho CRM.`
+        `Product "${deletingProduct.name}" (${deletingProduct.sku}) permanently deleted from Zoho CRM and website.`
       );
       setDeletingProduct(null);
-    } catch {
-      showToast('error', 'Network error while attempting to delete product.');
+    } catch (err) {
+      showToast('error', err instanceof Error ? err.message : 'Network error while attempting to delete product.');
     } finally {
       setDeleting(false);
     }
@@ -979,7 +979,7 @@ export default function ProductAdminDashboardClient({
 
             <h3 className="text-lg font-bold text-slate-900">Delete Product Confirmation</h3>
             <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-              Are you sure you want to delete this product? This will remove it from the active OfficeBazzar catalogue and synchronize the deactivation with Zoho CRM.
+              Are you sure? This will permanently delete the product from Zoho CRM and the website.
             </p>
 
             <div className="my-4 p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-1">
