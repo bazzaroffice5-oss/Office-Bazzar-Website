@@ -113,6 +113,14 @@ export async function PUT(
       // Priority 1: File Upload (new image chosen)
       // Priority 2: Direct URL Input (URL provided or edited)
       if (file && file.size > 0) {
+        if (file.size > 2 * 1024 * 1024) {
+          return NextResponse.json(
+            {
+              error: `Image file "${file.name}" (${(file.size / (1024 * 1024)).toFixed(1)} MB) exceeds the 2MB limit. Please upload an image under 2MB.`,
+            },
+            { status: 400 }
+          );
+        }
         try {
           const cleanSku = (updates.sku || existing.sku).replace(/[^a-zA-Z0-9-_]/g, '_').toUpperCase();
           const bytes = await file.arrayBuffer();

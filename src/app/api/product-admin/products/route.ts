@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     const query = searchParams.get('query')?.toLowerCase().trim() || '';
     const category = searchParams.get('category')?.toLowerCase().trim() || '';
     const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10));
-    const limit = Math.max(1, Math.min(2500, parseInt(searchParams.get('limit') || '50', 10)));
+    const limit = Math.max(1, Math.min(250, parseInt(searchParams.get('limit') || '50', 10)));
 
     const isForceRefresh = searchParams.get('refresh') === 'true';
     const allProducts = await getProductsFromZoho(isForceRefresh);
@@ -153,6 +153,14 @@ export async function POST(request: NextRequest) {
 
       // Handle Image: File Upload takes priority, otherwise use direct URL input
       if (file && file.size > 0) {
+        if (file.size > 2 * 1024 * 1024) {
+          return NextResponse.json(
+            {
+              error: `Image file "${file.name}" (${(file.size / (1024 * 1024)).toFixed(1)} MB) exceeds the 2MB limit. Please upload an image under 2MB.`,
+            },
+            { status: 400 }
+          );
+        }
         try {
           const bytes = await file.arrayBuffer();
           const buffer = Buffer.from(bytes);

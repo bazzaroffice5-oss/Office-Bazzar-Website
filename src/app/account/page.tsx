@@ -64,7 +64,7 @@ function CustomerAccountDashboardContent() {
       setFullName(user.name || '');
       setPhone(user.phone || '');
     }
-  }, [user]);
+  }, [user?.name, user?.phone]);
 
   // Fetch real RFQs from Zoho CRM for current authenticated customer
   useEffect(() => {
@@ -91,10 +91,10 @@ function CustomerAccountDashboardContent() {
       }
     }
 
-    if (isAuthenticated && user) {
+    if (isAuthenticated && (user?.id || user?.email)) {
       loadCustomerRfqs();
     }
-  }, [user, isAuthenticated]);
+  }, [user?.id, user?.email, isAuthenticated]);
 
   const handleAddAddressSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -324,7 +324,7 @@ export async function getProducts(filters?: FilterParams): Promise<{ products: P
 
   const total = result.length;
   const page = Math.max(1, filters?.page || 1);
-  const limit = filters?.limit ?? 5000;
+  const limit = Math.max(1, Math.min(filters?.limit ?? 50, 5000));
   const startIndex = (page - 1) * limit;
   const paginated = result.slice(startIndex, startIndex + limit);
 
@@ -672,8 +672,17 @@ export async function createOrder(
   }
 
   ordersList.unshift(newOrder);
+  // Cap in-memory orders to 500 to prevent unbounded server memory bloat
+  if (ordersList.length > 500) {
+    ordersList.length = 500;
+  }
   if (orderData.idempotencyKey) {
     idempotencyStore.set(orderData.idempotencyKey, newOrder);
+    // Keep idempotency store compact
+    if (idempotencyStore.size > 200) {
+      const firstKey = idempotencyStore.keys().next().value;
+      if (firstKey) idempotencyStore.delete(firstKey);
+    }
   }
 
   // 3. Authoritative Order Synchronization to Zoho CRM Sales_Orders Module
@@ -705,8 +714,9 @@ export async function getOrderByNumber(orderNumber: string): Promise<Order | nul
   return order || null;
 }
 
-export async function getAllOrders(): Promise<Order[]> {
-  return ordersList;
+export async function getAllOrders(limit = 50, offset = 0): Promise<Order[]> {
+  if (limit <= 0) return ordersList;
+  return ordersList.slice(offset, offset + limit);
 }
 
 /**
@@ -1155,7 +1165,11 @@ export async function getQuotationsByCustomer(customerIdOrEmail: string): Promis
   );
 }
 
-export async function getAllQuotations(statusFilter?: QuotationStatus): Promise<Quotation[]> {
+export async function getAllQuotations(
+  statusFilter?: QuotationStatus,
+  limit = 50,
+  offset = 0
+): Promise<Quotation[]> {
   const zohoQuotes = await getAllQuotationsFromZoho();
   const mergedMap = new Map<string, Quotation>();
 
@@ -1172,10 +1186,9 @@ export async function getAllQuotations(statusFilter?: QuotationStatus): Promise<
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
-  if (statusFilter) {
-    return all.filter((q) => q.status === statusFilter);
-  }
-  return all;
+  const filtered = statusFilter ? all.filter((q) => q.status === statusFilter) : all;
+  if (limit <= 0) return filtered;
+  return filtered.slice(offset, offset + limit);
 }
 
 export async function updateQuotation(
@@ -1216,6 +1229,10 @@ export async function createNotificationLog(
   };
 
   notificationLogsList.unshift(newLog);
+  // Cap in-memory notification logs to 200 items to avoid server memory bloat
+  if (notificationLogsList.length > 200) {
+    notificationLogsList.length = 200;
+  }
   return newLog;
 }
 
@@ -1234,9 +1251,22 @@ export async function updateNotificationLog(
   return log;
 }
 
-export async function getNotificationLogs(quotationId?: string): Promise<NotificationLog[]> {
-  if (quotationId) {
-    return notificationLogsList.filter((l) => l.quotationId === quotationId);
-  }
-  return notificationLogsList;
+export async function getNotificationLogs(quotationId?: string, limit = 50): Promise<NotificationLog[]> {
+  const pool = quotationId
+    ? notificationLogsList.filter((l) => l.quotationId === quotationId)
+    : notificationLogsList;
+  if (limit <= 0) return pool;
+  return pool.slice(0, limit);
+}
+
+/**
+ * Prune old notification logs to reclaim server memory
+ */
+export function clearOldNotificationLogs(retentionDays = 7): number {
+  const cutoff = Date.now() - retentionDays * 24 * 60 * 60 * 1000;
+  const initial = notificationLogsList.length;
+  storeState.notificationLogsList = notificationLogsList.filter(
+    (l) => new Date(l.createdAt).getTime() > cutoff
+  );
+  return initial - storeState.notificationLogsList.length;
 }

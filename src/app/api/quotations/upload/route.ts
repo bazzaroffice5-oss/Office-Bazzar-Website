@@ -13,7 +13,7 @@ const ALLOWED_MIME_TYPES = new Set([
 ]);
 
 const ALLOWED_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp']);
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB per file
+const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 MB strict limit per file
 const MAX_FILES = 10;
 
 export async function POST(req: Request) {
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
         const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
         return NextResponse.json(
           {
-            error: `File "${file.name}" is ${sizeMb} MB, which exceeds the 5 MB limit. Please select a smaller image.`,
+            error: `File "${file.name}" is ${sizeMb} MB, which exceeds the 2 MB limit. Please upload a smaller image under 2MB.`,
           },
           { status: 400 }
         );

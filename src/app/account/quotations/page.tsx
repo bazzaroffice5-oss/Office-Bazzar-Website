@@ -49,7 +49,7 @@ export default function CustomerQuotationsPage() {
     }
 
     fetchCustomerQuotes();
-  }, [user]);
+  }, [user?.id, user?.email]);
 
   const handleGuestLookup = async (e: React.FormEvent) => {
     e.preventDefault();

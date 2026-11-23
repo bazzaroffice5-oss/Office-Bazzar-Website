@@ -147,12 +147,16 @@ export default function BazzarAIChatbot() {
   // Periodic subtle attention animation every 25 seconds when idle
   useEffect(() => {
     if (isOpen) return;
+    let waveTimer: NodeJS.Timeout | null = null;
     const interval = setInterval(() => {
       setIsWaving(true);
-      const timer = setTimeout(() => setIsWaving(false), 1400);
-      return () => clearTimeout(timer);
+      if (waveTimer) clearTimeout(waveTimer);
+      waveTimer = setTimeout(() => setIsWaving(false), 1400);
     }, 25000);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      if (waveTimer) clearTimeout(waveTimer);
+    };
   }, [isOpen]);
 
   // Unified Mouse & Touch Dragging via Pointer Events

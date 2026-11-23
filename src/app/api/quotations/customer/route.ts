@@ -58,8 +58,10 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // Filter out internal notes from customer-facing payload
-    const safeQuotations = quotations.map((q) => {
+    const limitParam = Math.max(1, Math.min(50, parseInt(searchParams.get('limit') || '50', 10)));
+
+    // Filter out internal notes from customer-facing payload and apply safe limit
+    const safeQuotations = quotations.slice(0, limitParam).map((q) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { internalNotes, ...safe } = q;
       return safe;
@@ -69,6 +71,7 @@ export async function GET(req: NextRequest) {
       success: true,
       quotations: safeQuotations,
       count: safeQuotations.length,
+      limit: limitParam,
     });
   } catch (err: unknown) {
     console.error('[Customer Quotations API Error]:', err);

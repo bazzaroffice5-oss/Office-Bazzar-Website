@@ -275,7 +275,7 @@ export default function ProductAdminDashboardClient({
     setRefreshing(true);
     setZohoApiError(null);
     try {
-      const res = await fetch('/api/product-admin/products?limit=2500&refresh=true');
+      const res = await fetch('/api/product-admin/products?limit=250&refresh=true');
       const data = await res.json();
       if (res.ok && data.products && Array.isArray(data.products)) {
         setProducts(data.products);

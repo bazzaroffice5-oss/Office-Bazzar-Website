@@ -11,13 +11,29 @@ export const dynamic = 'force-dynamic';
  * - prompt=consent
  */
 export async function GET(req: Request) {
-  const host = req.headers.get('host') || '';
-  let redirectUri: string | undefined = undefined;
-  if (host.includes('localhost') || host.includes('127.0.0.1')) {
-    redirectUri = `http://${host}/api/zoho/callback`;
-  }
+  try {
+    const clientId = process.env.ZOHO_CLIENT_ID?.trim();
+    if (!clientId) {
+      return NextResponse.json(
+        { error: 'Zoho CRM credentials (ZOHO_CLIENT_ID) not configured in environment variables.' },
+        { status: 503 }
+      );
+    }
 
-  const authUrl = buildZohoAuthorizationUrl(redirectUri);
-  return NextResponse.redirect(authUrl, { status: 302 });
+    const host = req.headers.get('host') || '';
+    let redirectUri: string | undefined = undefined;
+    if (host.includes('localhost') || host.includes('127.0.0.1')) {
+      redirectUri = `http://${host}/api/zoho/callback`;
+    }
+
+    const authUrl = buildZohoAuthorizationUrl(redirectUri);
+    return NextResponse.redirect(authUrl, { status: 302 });
+  } catch (error) {
+    console.error('[Zoho Authorize] Error creating authorization URL:', error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Failed to initialize Zoho authorization' },
+      { status: 500 }
+    );
+  }
 }
 

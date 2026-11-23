@@ -724,11 +724,40 @@ export async function saveUploadedMedia(
   filename: string,
   buffer: Buffer
 ): Promise<{ success: boolean; url: string; message: string }> {
+  // Strict 2MB file size enforcement
+  const MAX_FILE_SIZE = 2 * 1024 * 1024;
+  if (buffer.length > MAX_FILE_SIZE) {
+    return {
+      success: false,
+      url: '',
+      message: `File size exceeds the 2MB limit. Please upload an image under 2MB.`,
+    };
+  }
+
   // Sanitize filename
-  const cleanName = filename
+  let cleanName = filename
     .toLowerCase()
     .replace(/[^a-z0-9._-]/g, '-')
     .replace(/-+/g, '-');
+
+  // Compress image to WebP (max 1400px, quality 82) to avoid repo/storage bloat
+  let finalBuffer = buffer;
+  const isSvg = cleanName.endsWith('.svg');
+  if (!isSvg) {
+    try {
+      const sharpModule = await import('sharp');
+      const sharp = sharpModule.default || sharpModule;
+      finalBuffer = await sharp(buffer)
+        .resize({ width: 1400, height: 1400, fit: 'inside', withoutEnlargement: true })
+        .webp({ quality: 82, effort: 4 })
+        .toBuffer();
+      cleanName = cleanName.replace(/\.[^.]+$/, '.webp');
+    } catch (e) {
+      console.warn('[BlogMedia] Image compression fallback:', e);
+      finalBuffer = buffer;
+    }
+  }
+
   const targetPath = path.join(process.cwd(), 'public', 'images', 'blog', cleanName);
   const publicUrl = `/images/blog/${cleanName}`;
   const repoFilePath = `public/images/blog/${cleanName}`;
@@ -740,7 +769,7 @@ export async function saveUploadedMedia(
     if (!fs.existsSync(blogDir)) {
       fs.mkdirSync(blogDir, { recursive: true });
     }
-    fs.writeFileSync(targetPath, buffer);
+    fs.writeFileSync(targetPath, finalBuffer);
     localSaved = true;
   } catch (err) {
     console.warn('[Media Storage] Local write skipped:', err);
@@ -774,7 +803,7 @@ export async function saveUploadedMedia(
         },
         body: JSON.stringify({
           message: `feat(media): upload "${cleanName}"`,
-          content: buffer.toString('base64'),
+          content: finalBuffer.toString('base64'),
           branch: GITHUB_BRANCH,
           sha: existingSha,
         }),
