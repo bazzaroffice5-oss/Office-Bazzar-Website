@@ -83,3 +83,22 @@ test_shot.png
 /seo_audit_nov09_2026/
 /seo_audit_nov2026/
 
+# Agent & IDE workspaces and tool configs
+.agents/
+.amp/
+.claude/
+.codex/
+.copilot/
+.cursor/
+.gemini/
+.mcp.json
+.opencode/
+opencode.jsonc
+
+# Backup and temp files
+*.bak
+*.old
+*.orig
+*~
+
+

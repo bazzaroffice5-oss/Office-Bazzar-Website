@@ -133,6 +133,57 @@ function writeLocalJournal(data: ProductImageJournalData) {
   }
 }
 
+async function uploadToCloudinary(
+  buffer: Buffer,
+  filename: string,
+  mimeType: string
+): Promise<string | null> {
+  const cloudName = process.env.CLOUDINARY_CLOUD_NAME || process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  const apiKey = process.env.CLOUDINARY_API_KEY;
+  const apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+  if (!cloudName || !apiKey || !apiSecret) {
+    return null;
+  }
+
+  try {
+    const timestamp = Math.floor(Date.now() / 1000).toString();
+    const folder = 'office-bazzar-products';
+    const paramsToSign = `folder=${folder}&timestamp=${timestamp}${apiSecret}`;
+    const signature = crypto.createHash('sha1').update(paramsToSign).digest('hex');
+
+    const base64Data = `data:${mimeType};base64,${buffer.toString('base64')}`;
+    const formData = new URLSearchParams();
+    formData.append('file', base64Data);
+    formData.append('api_key', apiKey);
+    formData.append('timestamp', timestamp);
+    formData.append('folder', folder);
+    formData.append('signature', signature);
+
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      console.warn('[ImageStore] Cloudinary upload returned error:', res.status, errText);
+      return null;
+    }
+
+    const data = await res.json();
+    if (data && typeof data.secure_url === 'string') {
+      return data.secure_url;
+    }
+  } catch (err) {
+    console.warn('[ImageStore] Cloudinary upload notice:', err);
+  }
+  return null;
+}
+
 /**
  * Persists an uploaded product image across durable storage layers and returns its permanent public URL.
  */
@@ -195,6 +246,24 @@ export async function saveProductImage({
     fs.writeFileSync(tmpFile, processedBuffer);
   } catch (tmpErr) {
     console.warn('[ImageStore] Tmp write notice:', tmpErr);
+  }
+
+  // 2. Cloudinary Durable Media Hosting (Zero local/KV bloat, permanent CDN URL)
+  let cloudinaryUrl: string | null = null;
+  try {
+    cloudinaryUrl = await uploadToCloudinary(processedBuffer, cleanFilename, finalMime);
+  } catch (cErr) {
+    console.warn('[ImageStore] Cloudinary upload notice:', cErr);
+  }
+
+  if (cloudinaryUrl) {
+    return {
+      success: true,
+      publicUrl: cloudinaryUrl,
+      filename: cleanFilename,
+      mimeType: finalMime,
+      size: processedBuffer.length,
+    };
   }
 
   // 2. Try Zoho CRM Account Attachment for permanent cross-container storage
