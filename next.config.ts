@@ -33,6 +33,20 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  outputFileTracingExcludes: {
+    '*': [
+      'node_modules/@img/sharp-libvips-darwin-*/**',
+      'node_modules/@img/sharp-libvips-win32-*/**',
+      'node_modules/@img/sharp-darwin-*/**',
+      'node_modules/@img/sharp-win32-*/**',
+      'node_modules/@img/sharp-linuxmusl-*/**',
+    ],
+    // Exclude sharp from non-upload routes so regular pages and APIs stay ultra-lean
+    '!(/api/blog-admin/media|/api/product-admin/products|/api/product-admin/products/**|/api/quotations/upload)': [
+      'node_modules/sharp/**',
+      'node_modules/@img/**',
+    ],
+  },
   async headers() {
     return [
       {
