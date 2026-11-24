@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import {
   motion,
   useMotionValue,
@@ -28,6 +28,8 @@ interface Milestone {
   tagline: string;
   description: string;
   icon: React.ComponentType<{ className?: string }>;
+  /** Normalized position along curve: 0 to 1 */
+  fraction: number;
   cardPos: {
     left: number; // percentage from left of stage
     top: number;  // percentage from top of stage
@@ -50,6 +52,7 @@ const MILESTONES: Milestone[] = [
     description:
       'Started core B2B office supply distribution in Chennai with dedicated local fulfillment and verified GST billing.',
     icon: Building2,
+    fraction: 0.0,
     cardPos: { left: 4, top: 48 },
     nodePos: { cx: 160, cy: 289 },
   },
@@ -63,6 +66,7 @@ const MILESTONES: Milestone[] = [
     description:
       'Scaled central warehouse capacity to cover institutional housekeeping chemicals, pantry essentials, and industrial supplies.',
     icon: Warehouse,
+    fraction: 0.333,
     cardPos: { left: 27, top: 34 },
     nodePos: { cx: 400, cy: 268 },
   },
@@ -76,6 +80,7 @@ const MILESTONES: Milestone[] = [
     description:
       'Earned long-term procurement trust from India’s top enterprise leaders with multi-location contract fulfillment.',
     icon: Users,
+    fraction: 0.619,
     cardPos: { left: 49, top: 16 },
     nodePos: { cx: 641, cy: 209 },
     logos: [
@@ -111,6 +116,7 @@ const MILESTONES: Milestone[] = [
     description:
       'Unified 1,946+ curated workplace products into a fast, automated digital catalog with instant quotation and real-time inventory.',
     icon: Store,
+    fraction: 1.0,
     cardPos: { left: 69, top: 3 },
     nodePos: { cx: 920, cy: 55 },
   },
@@ -118,13 +124,128 @@ const MILESTONES: Milestone[] = [
 
 const TICK_YEARS = [2005, 2010, 2015, 2020, 2026];
 
+// Exact Cubic Bezier function mapping parameter t (0..1) to (x, y) coordinates
+function getBezierPoint(t: number): { x: number; y: number } {
+  const p0 = { x: 90, y: 290 };
+  const p1 = { x: 380, y: 290 };
+  const p2 = { x: 700, y: 240 };
+  const p3 = { x: 920, y: 55 };
+
+  const cx = 3 * (p1.x - p0.x);
+  const bx = 3 * (p2.x - p1.x) - cx;
+  const ax = p3.x - p0.x - cx - bx;
+
+  const cy = 3 * (p1.y - p0.y);
+  const by = 3 * (p2.y - p1.y) - cy;
+  const ay = p3.y - p0.y - cy - by;
+
+  const x = ax * Math.pow(t, 3) + bx * Math.pow(t, 2) + cx * t + p0.x;
+  const y = ay * Math.pow(t, 3) + by * Math.pow(t, 2) + cy * t + p0.y;
+
+  return { x, y };
+}
+
 export default function LegacyGrowthSection() {
   const shouldReduceMotion = useReducedMotion();
-  const [selectedYear, setSelectedYear] = useState<number>(2026);
+  const [autoProgress, setAutoProgress] = useState<number>(1.0);
+  const [manualYear, setManualYear] = useState<number | null>(null);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+  const pauseUntilRef = useRef<number>(0);
   const stageRef = useRef<HTMLDivElement>(null);
 
-  // Mouse 3D perspective tracking
+  // Continuous auto-play loop constants
+  const CYCLE_DURATION = 9200; // 9.2s full cycle
+  const SWEEP_DURATION = 7200; // 7.2s smooth sweep from 2005 to 2026
+  // Remaining 2.0s pauses at 2026 summit before restarting from 2005
+
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      setAutoProgress(1.0);
+      return;
+    }
+
+    let rafId: number;
+    let cycleStart: number | null = null;
+
+    const tick = (now: number) => {
+      // If user interacted, pause the auto loop temporarily
+      if (Date.now() < pauseUntilRef.current) {
+        rafId = requestAnimationFrame(tick);
+        return;
+      }
+
+      if (manualYear !== null) {
+        setManualYear(null);
+      }
+
+      if (cycleStart === null) {
+        cycleStart = now;
+      }
+
+      const elapsed = (now - cycleStart) % CYCLE_DURATION;
+
+      if (elapsed < SWEEP_DURATION) {
+        // Smooth progression from 0 to 1
+        setAutoProgress(elapsed / SWEEP_DURATION);
+      } else {
+        // Pause at summit (2026)
+        setAutoProgress(1.0);
+      }
+
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, [shouldReduceMotion, manualYear]);
+
+  // Derived timeline progress & current year
+  const activeProgress = useMemo(() => {
+    if (manualYear !== null) {
+      return Math.max(0, Math.min(1, (manualYear - 2005) / 21));
+    }
+    return autoProgress;
+  }, [autoProgress, manualYear]);
+
+  const currentYear = useMemo(() => {
+    if (manualYear !== null) return manualYear;
+    return Math.min(2026, Math.max(2005, Math.round(2005 + activeProgress * 21)));
+  }, [activeProgress, manualYear]);
+
+  // Active milestone based on current year or hovered card
+  const activeMilestone = useMemo(() => {
+    if (hoveredCardId) {
+      const found = MILESTONES.find((m) => m.id === hoveredCardId);
+      if (found) return found;
+    }
+    let current = MILESTONES[0];
+    for (const m of MILESTONES) {
+      if (currentYear >= m.year) {
+        current = m;
+      }
+    }
+    return current;
+  }, [currentYear, hoveredCardId]);
+
+  // Calculate live beacon position at current progress along the curve
+  const beaconPoint = useMemo(() => {
+    return getBezierPoint(Math.max(0, Math.min(1, activeProgress)));
+  }, [activeProgress]);
+
+  // Temporary pause on interaction
+  const handleMilestoneClick = (year: number) => {
+    setManualYear(year);
+    pauseUntilRef.current = Date.now() + 3800; // Pause auto-play for 3.8s on selection
+  };
+
+  const handleCardHover = (id: string | null, year?: number) => {
+    setHoveredCardId(id);
+    if (id && year) {
+      pauseUntilRef.current = Date.now() + 3500;
+    }
+  };
+
+  // 3D perspective tracking
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -152,40 +273,13 @@ export default function LegacyGrowthSection() {
     mouseY.set(0);
   }, [mouseX, mouseY]);
 
-  // Current progress fraction (0 to 1) from 2005 to 2026
-  const progressFraction = useMemo(() => {
-    return Math.max(0, Math.min(1, (selectedYear - 2005) / (2026 - 2005)));
-  }, [selectedYear]);
-
-  // Determine active milestone based on selectedYear
-  const activeMilestone = useMemo(() => {
-    let closest = MILESTONES[0];
-    let minDiff = Infinity;
-    for (const m of MILESTONES) {
-      const diff = Math.abs(m.year - selectedYear);
-      if (diff < minDiff) {
-        minDiff = diff;
-        closest = m;
-      }
-    }
-    return closest;
-  }, [selectedYear]);
-
-  const handleMilestoneClick = (year: number) => {
-    setSelectedYear(year);
-  };
-
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedYear(parseInt(e.target.value, 10));
-  };
-
-  // Compact, mathematically smooth exponential curve (viewBox 0 0 1000 340)
+  // SVG Curve definition (viewBox 0 0 1000 340)
   const curvePath = 'M 90,290 C 380,290 700,240 920,55';
 
   return (
     <section
       id="our-legacy"
-      className="relative w-full py-12 md:py-16 bg-gradient-to-b from-white via-[#f8fafc] to-white overflow-hidden border-b border-slate-100"
+      className="relative w-full py-12 md:py-16 bg-white overflow-hidden border-b border-slate-100"
       aria-label="21 Years of Office Bazzar"
     >
       {/* Subtle Background Architectural Grid */}
@@ -235,7 +329,7 @@ export default function LegacyGrowthSection() {
               rotateY,
               transformStyle: 'preserve-3d',
             }}
-            className="relative w-full rounded-xl bg-white/90 backdrop-blur-sm border border-slate-200/80 shadow-[0_12px_32px_-10px_rgba(0,75,135,0.06)] p-3 sm:p-6 lg:p-7 transition-shadow duration-300"
+            className="relative w-full rounded-xl bg-white border border-slate-200/80 shadow-[0_12px_32px_-10px_rgba(0,75,135,0.06)] p-3 sm:p-6 lg:p-7 transition-shadow duration-300"
           >
             {/* Stage Inner Coordinates Container */}
             <div className="relative w-full h-[290px] sm:h-[320px] md:h-[340px]">
@@ -274,7 +368,7 @@ export default function LegacyGrowthSection() {
 
                   {/* Dot glow filter */}
                   <filter id="energyDotGlow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feGaussianBlur stdDeviation="4" result="blur" />
                     <feComposite in="SourceGraphic" in2="blur" operator="over" />
                   </filter>
                 </defs>
@@ -292,7 +386,7 @@ export default function LegacyGrowthSection() {
 
                 {/* Dashed Vertical Stem Lines Connecting Nodes to Cards */}
                 {MILESTONES.map((m) => {
-                  const isActive = m.year <= selectedYear;
+                  const isActive = m.year <= currentYear;
                   return (
                     <g key={`stem-${m.id}`}>
                       <line
@@ -318,9 +412,7 @@ export default function LegacyGrowthSection() {
                   strokeLinecap="round"
                   opacity="0.22"
                   filter="url(#compactCurveGlow)"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: progressFraction }}
-                  transition={{ duration: shouldReduceMotion ? 0 : 0.6, ease: 'easeOut' }}
+                  style={{ pathLength: activeProgress }}
                 />
 
                 {/* Base Faded Full Curve Path (Guides the eye) */}
@@ -332,16 +424,14 @@ export default function LegacyGrowthSection() {
                   strokeLinecap="round"
                 />
 
-                {/* Active Royal Blue Growth Curve (dynamically syncs with scrubber) */}
+                {/* Active Royal Blue Growth Curve (dynamically syncs with automatic loop) */}
                 <motion.path
                   d={curvePath}
                   fill="none"
                   stroke="url(#compactCurveGrad)"
                   strokeWidth="5"
                   strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: progressFraction }}
-                  transition={{ duration: shouldReduceMotion ? 0 : 0.45, ease: 'easeOut' }}
+                  style={{ pathLength: activeProgress }}
                 />
 
                 {/* Vibrant Accent Orange Spine Stroke on top of the blue curve */}
@@ -351,42 +441,43 @@ export default function LegacyGrowthSection() {
                   stroke="#F97316"
                   strokeWidth="2"
                   strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: progressFraction }}
-                  transition={{ duration: shouldReduceMotion ? 0 : 0.45, ease: 'easeOut' }}
+                  style={{ pathLength: activeProgress }}
                 />
 
-                {/* Continuous Glowing Energy Pulse traveling up the curve (2005 -> 2026) */}
+                {/* Continuous Traveling Beacon Light Dot (Synced smoothly with active curve) */}
                 {!shouldReduceMotion && (
-                  <g>
+                  <g className="transition-all duration-75">
                     {/* Glowing outer halo */}
-                    <circle r="7" fill="none" stroke="#F97316" strokeWidth="1.5" opacity="0.6">
-                      <animateMotion
-                        path={curvePath}
-                        dur="4s"
-                        repeatCount="indefinite"
-                      />
-                    </circle>
+                    <circle
+                      cx={beaconPoint.x}
+                      cy={beaconPoint.y}
+                      r="8"
+                      fill="none"
+                      stroke="#F97316"
+                      strokeWidth="1.5"
+                      opacity="0.6"
+                      className="animate-ping"
+                    />
                     {/* Core energy dot */}
-                    <circle r="4" fill="#F97316" filter="url(#energyDotGlow)">
-                      <animateMotion
-                        path={curvePath}
-                        dur="4s"
-                        repeatCount="indefinite"
-                      />
-                    </circle>
+                    <circle
+                      cx={beaconPoint.x}
+                      cy={beaconPoint.y}
+                      r="4.5"
+                      fill="#F97316"
+                      filter="url(#energyDotGlow)"
+                    />
                   </g>
                 )}
 
                 {/* Milestone Nodes Along the Curve with Continuous Breathing Rings */}
                 {MILESTONES.map((m) => {
-                  const isReached = m.year <= selectedYear;
+                  const isReached = m.year <= currentYear;
                   const isCurrent = activeMilestone.id === m.id;
 
                   if (m.id === 'digital-2026') {
                     // Summit / 2026 Node
                     return (
-                      <g key={m.id} className="cursor-pointer pointer-events-auto">
+                      <g key={m.id} onClick={() => handleMilestoneClick(m.year)} className="cursor-pointer pointer-events-auto">
                         {/* Outer pulsating aura */}
                         <circle
                           cx={m.nodePos.cx}
@@ -479,15 +570,15 @@ export default function LegacyGrowthSection() {
               {MILESTONES.map((m) => {
                 const IconComponent = m.icon;
                 const isSelected = activeMilestone.id === m.id;
-                const isPast = m.year <= selectedYear;
+                const isPast = m.year <= currentYear;
                 const isHovered = hoveredCardId === m.id;
 
                 return (
                   <motion.div
                     key={m.id}
                     onClick={() => handleMilestoneClick(m.year)}
-                    onMouseEnter={() => setHoveredCardId(m.id)}
-                    onMouseLeave={() => setHoveredCardId(null)}
+                    onMouseEnter={() => handleCardHover(m.id, m.year)}
+                    onMouseLeave={() => handleCardHover(null)}
                     style={{
                       left: `${m.cardPos.left}%`,
                       top: `${m.cardPos.top}%`,
@@ -574,68 +665,52 @@ export default function LegacyGrowthSection() {
             </div>
 
             {/* ============================================================= */}
-            {/* 3. Interactive Year Scrubber Slider Track (2005 -> 2026)      */}
+            {/* 3. Automatic Progress Bar Track & Clamped Floating Pill       */}
             {/* ============================================================= */}
             <div className="mt-4 sm:mt-6 pt-4 border-t border-slate-100">
               <div className="flex flex-col gap-2.5">
-                {/* Scrubber Label + Selected Status Bar */}
+                {/* Clean Status Row (Zero manual drag/scrub instructions) */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
+                    <span className="inline-block w-2 h-2 rounded-full bg-[#16a34a] animate-pulse" />
                     <span className="text-[11px] font-bold text-slate-900 uppercase tracking-wider">
-                      Timeline Progress
-                    </span>
-                    <span className="text-[11px] text-slate-400 hidden sm:inline">
-                      • Drag slider or click milestone years
+                      Growth Timeline (2005 — 2026)
                     </span>
                   </div>
-                  <div className="text-[11px] text-slate-500 font-medium flex items-center gap-1">
-                    <span>Scrub 21 years of growth</span>
-                    <span className="text-slate-400">↔</span>
+                  <div className="text-[11px] text-slate-500 font-medium flex items-center gap-1.5">
+                    <span className="text-slate-400">Cycle:</span>
+                    <span className="font-semibold text-[#004b87]">21 Years of Continuous Evolution</span>
                   </div>
                 </div>
 
-                {/* Scrubber Range Input & Custom Track Container */}
+                {/* Progress Bar Container with Clamped Floating Pill */}
                 <div className="relative w-full py-3">
                   {/* Track Background */}
-                  <div className="relative w-full h-2 bg-slate-200/80 rounded-full overflow-hidden">
+                  <div className="relative w-full h-2 bg-slate-100 rounded-full overflow-hidden border border-slate-200/60">
                     {/* Active Progress Fill */}
                     <div
-                      className="h-full bg-gradient-to-r from-[#004b87] via-[#0284c7] to-[#004b87] transition-all duration-150"
-                      style={{ width: `${progressFraction * 100}%` }}
+                      className="h-full bg-gradient-to-r from-[#004b87] via-[#0284c7] to-[#004b87] transition-all duration-75 ease-out"
+                      style={{ width: `${activeProgress * 100}%` }}
                     />
                   </div>
 
-                  {/* HTML Range Input for accessibility & smooth scrubbing */}
-                  <input
-                    type="range"
-                    min="2005"
-                    max="2026"
-                    step="1"
-                    value={selectedYear}
-                    onChange={handleSliderChange}
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30"
-                    aria-label="Timeline Year Scrubber from 2005 to 2026"
-                    aria-valuemin={2005}
-                    aria-valuemax={2026}
-                    aria-valuenow={selectedYear}
-                  />
-
-                  {/* Dynamic Floating Pill Thumb */}
+                  {/* Dynamic Floating Pill (Mathematically Clamped: ZERO Overflow/Clipping) */}
                   <div
-                    className="absolute top-1/2 -translate-y-1/2 pointer-events-none z-20 transition-all duration-150"
+                    className="absolute top-1/2 pointer-events-none z-20 transition-all duration-75 ease-out"
                     style={{
-                      left: `calc(${progressFraction * 100}% - ${progressFraction * 20}px)`,
+                      left: `${activeProgress * 100}%`,
+                      transform: `translate(-${activeProgress * 100}%, -50%)`,
                     }}
                   >
-                    <div className="flex items-center shadow-md rounded-full bg-[#004b87] text-white border-2 border-white pl-2 pr-2.5 py-0.5 gap-1.5 whitespace-nowrap -translate-x-1/2">
+                    <div className="flex items-center shadow-md rounded-full bg-[#004b87] text-white border-2 border-white pl-2 pr-2.5 py-0.5 gap-1.5 whitespace-nowrap">
                       <div className="w-2 h-2 rounded-full bg-[#F97316] ring-2 ring-white/80 animate-pulse" />
                       <span className="text-xs font-bold font-mono text-white">
-                        {selectedYear}
+                        {currentYear}
                       </span>
                       <span className="text-[10px] font-medium text-slate-200">
-                        {selectedYear === 2005
+                        {currentYear === 2005
                           ? 'Foundation'
-                          : `${selectedYear - 2005} Yrs Growth`}
+                          : `${currentYear - 2005} Yrs Growth`}
                       </span>
                     </div>
                   </div>
@@ -644,12 +719,12 @@ export default function LegacyGrowthSection() {
                 {/* Year Tick Marks along the bottom */}
                 <div className="relative w-full flex justify-between px-1 text-[11px] font-semibold text-slate-500 select-none">
                   {TICK_YEARS.map((year) => {
-                    const isPassed = year <= selectedYear;
+                    const isPassed = year <= currentYear;
                     return (
                       <button
                         key={year}
                         type="button"
-                        onClick={() => setSelectedYear(year)}
+                        onClick={() => handleMilestoneClick(year)}
                         className={`transition-colors text-center cursor-pointer hover:text-[#004b87] ${
                           isPassed ? 'text-[#004b87] font-bold' : 'text-slate-400'
                         }`}
