@@ -113,14 +113,14 @@ const TRUSTED_CLIENTS: ClientEntry[] = [
     id: 'avt',
     name: 'AVT Group',
     sector: 'Tea & Commodities',
-    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500947/office-bazzar-clients/avt.webp',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795501824/office-bazzar-clients/avt.webp',
     fallbackDomain: 'avtgroup.in',
   },
   {
     id: 'panimalar',
     name: 'Panimalar Medical College',
     sector: 'Healthcare & Education',
-    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500952/office-bazzar-clients/panimalar.webp',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795501825/office-bazzar-clients/panimalar.webp',
     fallbackDomain: 'pmchri.ac.in',
   },
   {
@@ -134,7 +134,7 @@ const TRUSTED_CLIENTS: ClientEntry[] = [
     id: 'hinduja-tech',
     name: 'Hinduja Tech',
     sector: 'Engineering Services',
-    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500950/office-bazzar-clients/hinduja-tech.webp',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795501825/office-bazzar-clients/hinduja-tech.webp',
     fallbackDomain: 'hindujatech.com',
   },
   {
@@ -169,7 +169,7 @@ function ClientCard({ client }: { client: ClientEntry }) {
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`group relative flex flex-col items-center justify-between gap-3 p-4 rounded-xl border transition-all duration-200 cursor-default select-none min-h-[120px] bg-white ${
+      className={`group relative flex flex-col items-center justify-between gap-3 p-3 sm:p-4 rounded-xl border transition-all duration-200 cursor-default select-none min-h-[120px] bg-white ${
         hovered
           ? 'border-[#004b87] shadow-md shadow-[#004b87]/10 -translate-y-0.5'
           : 'border-slate-200/80 shadow-sm'
@@ -177,14 +177,14 @@ function ClientCard({ client }: { client: ClientEntry }) {
       title={`${client.name} — ${client.sector}`}
       aria-label={client.name}
     >
-      {/* Official Logo area */}
-      <div className="flex-1 w-full flex items-center justify-center overflow-hidden">
+      {/* Official Logo area — full-width padded container with zero horizontal clipping */}
+      <div className="w-full h-16 px-4 flex items-center justify-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={imgSrc}
           alt={`${client.name} logo`}
           onError={handleError}
-          className="h-12 md:h-14 w-auto max-w-[160px] object-contain bg-transparent mx-auto"
+          className="max-h-12 max-w-full w-auto h-auto object-contain bg-transparent mx-auto"
           loading="lazy"
         />
       </div>
