@@ -30,6 +30,11 @@ import {
   isProductDeletedDurable,
   getCustomVersionDurable,
 } from '@/lib/products/custom-store';
+import {
+  saveDurableProductOverride,
+  deleteDurableProductOverride,
+  getDurableProductState,
+} from '@/lib/durable-store';
 
 // Shared store state attached to globalThis to prevent process/worker boundary divergence in Next.js
 interface GlobalStoreState {
@@ -180,6 +185,62 @@ async function syncCustomProducts(force = false) {
       storeState.productsList.unshift(dp);
     }
   }
+
+  // Guaranteed Cloudinary raw JSON state store overlay (authoritative overrides)
+  try {
+    const cloudState = await getDurableProductState(force);
+    if (cloudState && cloudState.products) {
+      const deletedSet = new Set(cloudState.deletedSkus.map((s) => s.toUpperCase()));
+      const unpubSet = new Set(cloudState.unpublishedSkus.map((s) => s.toUpperCase()));
+
+      for (const [skuKey, cp] of Object.entries(cloudState.products)) {
+        if (!cp || typeof cp !== 'object') continue;
+        const sUpper = (cp.sku || skuKey).toUpperCase();
+        if (deletedSet.has(sUpper)) continue;
+
+        const isUnpublished = unpubSet.has(sUpper) || cp.isActive === false || cp.publishStatus === 'unpublished';
+        const resolved: Product = {
+          ...cp,
+          sku: sUpper,
+          isActive: !isUnpublished,
+          publishStatus: isUnpublished ? 'unpublished' : 'published',
+        } as Product;
+
+        const exIdx = storeState.productsList.findIndex(
+          (p) => p.id === resolved.id || p.sku.toUpperCase() === sUpper
+        );
+        if (exIdx !== -1) {
+          storeState.productsList[exIdx] = {
+            ...storeState.productsList[exIdx],
+            ...resolved,
+            images: resolved.images && resolved.images.length > 0 ? resolved.images : storeState.productsList[exIdx].images,
+          };
+        } else {
+          storeState.productsList.unshift(resolved);
+        }
+      }
+
+      // Filter deleted from storeState
+      if (deletedSet.size > 0) {
+        storeState.productsList = storeState.productsList.filter(
+          (p) => !deletedSet.has(p.sku.toUpperCase()) && (!p.id || !deletedSet.has(p.id.toUpperCase()))
+        );
+      }
+
+      // Apply unpublished flag to storeState
+      if (unpubSet.size > 0) {
+        for (const p of storeState.productsList) {
+          if (unpubSet.has(p.sku.toUpperCase()) || (p.id && unpubSet.has(p.id.toUpperCase()))) {
+            p.isActive = false;
+            (p as any).publishStatus = 'unpublished';
+          }
+        }
+      }
+    }
+  } catch (cloudErr) {
+    console.warn('[Store] Cloudinary state store sync notice:', cloudErr);
+  }
+
   productsList = storeState.productsList;
 }
 
@@ -857,6 +918,13 @@ export async function saveProduct(productData: Partial<Product>): Promise<Produc
   } catch (dErr) {
     console.warn('[Store] Durable custom product save notice:', dErr);
   }
+
+  // Persist to Cloudinary raw JSON state store
+  try {
+    await saveDurableProductOverride(newProduct);
+  } catch (cErr) {
+    console.warn('[Store] Cloudinary durable product save notice:', cErr);
+  }
   lastSyncCustomTime = 0;
 
   return newProduct;
@@ -905,6 +973,16 @@ export async function deleteProduct(productId: string): Promise<boolean> {
     await recordZohoDeletedSku(skuToTombstone, idToTombstone, slugToTombstone);
   } catch (zErr) {
     console.warn('[Store] Record Zoho deleted SKU notice:', zErr);
+  }
+
+  // Delete from Cloudinary raw JSON state store
+  try {
+    await deleteDurableProductOverride(skuToTombstone);
+    if (idToTombstone && idToTombstone !== skuToTombstone) {
+      await deleteDurableProductOverride(idToTombstone);
+    }
+  } catch (cErr) {
+    console.warn('[Store] Cloudinary durable product delete notice:', cErr);
   }
 
   // Remove from runtime storeState

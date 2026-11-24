@@ -15,6 +15,7 @@ import { zohoFetch, isZohoConfigured } from './client';
 import zohoMappingData from '@/lib/data/zoho_product_mapping.json';
 import { loadDurableCustomProducts, invalidateDurableCustomProductCache } from '@/lib/products/custom-store';
 import { deleteZohoAttachment } from './attachments';
+import { getDurableProductDeletedSkus, deleteDurableProductOverride } from '@/lib/durable-store';
 
 export interface ZohoProductRecord {
   id: string;
@@ -73,6 +74,15 @@ export async function getZohoDeletedSkus(force = false): Promise<Set<string>> {
   }
   // Ensure notes are fetched so inMemoryDeletedSkus is populated from OB_DELETED_SKUS
   await fetchZohoProductNotes(force);
+
+  // Overlay guaranteed Cloudinary raw asset durable store
+  try {
+    const durableDeleted = await getDurableProductDeletedSkus();
+    for (const d of durableDeleted) {
+      inMemoryDeletedSkus.add(d);
+    }
+  } catch {}
+
   lastDeletedSkusSync = now;
   return inMemoryDeletedSkus;
 }
@@ -85,6 +95,13 @@ export async function recordZohoDeletedSku(...identifiers: (string | undefined |
   }
   lastDeletedSkusSync = Date.now();
   invalidateZohoProductCache();
+
+  // Always record tombstone in Cloudinary durable store immediately
+  try {
+    for (const v of valid) {
+      await deleteDurableProductOverride(v);
+    }
+  } catch {}
 
   if (!(await isZohoConfigured())) return;
 
@@ -461,7 +478,8 @@ async function saveZohoProductNote(
     throw new Error('Product SKU is required to persist to Zoho CRM.');
   }
   if (!(await isZohoConfigured())) {
-    throw new Error('Zoho CRM is not configured.');
+    console.info('[ZohoProducts] Zoho CRM is not configured; skipping Zoho product note save.');
+    return '';
   }
   const cleanSku = product.sku.trim().toUpperCase();
   const noteTitle = `OB_PROD_${cleanSku}`;
@@ -826,7 +844,8 @@ export async function createZohoProduct(product: Partial<Product>): Promise<{
   error?: string;
 }> {
   if (!(await isZohoConfigured())) {
-    return { success: false, error: 'Zoho CRM is not configured.' };
+    console.info('[ZohoProducts] Zoho CRM is not configured; skipping product create sync.');
+    return { success: true, zohoId: undefined };
   }
 
   try {
@@ -878,7 +897,8 @@ export async function updateZohoProduct(
   error?: string;
 }> {
   if (!(await isZohoConfigured())) {
-    return { success: false, error: 'Zoho CRM is not configured.' };
+    console.info('[ZohoProducts] Zoho CRM is not configured; skipping product update sync.');
+    return { success: true, zohoId: undefined };
   }
 
   const cleanSku = (product.sku || skuFallback || zohoIdOrSku).trim().toUpperCase();

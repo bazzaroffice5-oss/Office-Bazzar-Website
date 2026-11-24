@@ -233,18 +233,11 @@ export async function POST(request: NextRequest) {
       isActive: cleanActive,
     };
 
-    // 1. Create product record in Zoho CRM
+    // 1. Create product record in Zoho CRM (optional & non-blocking)
     let zohoId: string | undefined = undefined;
     const zohoResult = await createZohoProduct(productData);
-    if (!zohoResult.success || !zohoResult.zohoId) {
-      console.error('[Product Admin API] Zoho create failure:', zohoResult.error);
-      return NextResponse.json(
-        {
-          success: false,
-          error: `Zoho CRM persistence failed: ${zohoResult.error || 'Unable to create product note in Zoho Account.'}`,
-        },
-        { status: 500 }
-      );
+    if (!zohoResult.success) {
+      console.info('[Product Admin API] Zoho create bypassed (non-blocking):', zohoResult.error);
     }
     zohoId = zohoResult.zohoId;
 

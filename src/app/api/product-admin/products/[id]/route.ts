@@ -182,14 +182,7 @@ export async function PUT(
     const zohoSynced = zohoResult.success;
 
     if (!zohoSynced) {
-      console.error('[Product Admin API] Zoho sync failure:', zohoResult.error);
-      return NextResponse.json(
-        {
-          success: false,
-          error: `Zoho CRM persistence failed: ${zohoResult.error || 'Unable to persist product note to Zoho Account.'}`,
-        },
-        { status: 500 }
-      );
+      console.info('[Product Admin API] Zoho sync bypassed (non-blocking):', zohoResult.error);
     }
 
     // 3. Immediately update the live in-memory cache and bust stale sync timestamps
@@ -360,13 +353,7 @@ export async function DELETE(
     const zohoSynced = zohoResult.success;
 
     if (!zohoSynced) {
-      return NextResponse.json(
-        {
-          error: zohoResult.error || 'Failed to synchronize product deletion with Zoho CRM.',
-          zohoError: zohoResult.error,
-        },
-        { status: 500 }
-      );
+      console.info('[Product Admin API] Zoho delete bypassed (non-blocking):', zohoResult.error);
     }
 
     // 3. Immediately update live in-memory cache and bust stale sync timestamps

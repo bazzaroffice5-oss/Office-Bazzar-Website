@@ -5,6 +5,13 @@ import { revalidatePath } from 'next/cache';
 import { callKV, getKVConfig } from '@/lib/distributed/coordinator';
 import { zohoFetch, isZohoConfigured } from '@/lib/zoho/client';
 import { ZOHO_ACCOUNT_PARENT_ID } from '@/lib/zoho/products';
+import {
+  saveDurableBlogPostOverride,
+  deleteDurableBlogPostOverride,
+  getDurableBlogState,
+  getDurableBlogDeletedSlugs,
+  getDurableBlogTrashedSlugs,
+} from '@/lib/durable-store';
 
 export interface AdminBlogPost {
   slug: string;
@@ -287,11 +294,17 @@ export async function getDurableDeletedSlugs(): Promise<Set<string>> {
     deleted.forEach((s) => deletedSet.add(s));
   } catch {}
 
+  // 4. Read Cloudinary raw JSON state store (guaranteed durable store)
+  try {
+    const cloudDeleted = await getDurableBlogDeletedSlugs();
+    cloudDeleted.forEach((s) => deletedSet.add(s));
+  } catch {}
+
   return deletedSet;
 }
 
 /**
- * Returns set of trashed post slugs from Zoho Notes and Cloud KV.
+ * Returns set of trashed post slugs from Zoho Notes, Cloudinary DB, and Cloud KV.
  */
 export async function getDurableTrashedSlugs(): Promise<Set<string>> {
   const trashedSet = new Set<string>();
@@ -299,6 +312,13 @@ export async function getDurableTrashedSlugs(): Promise<Set<string>> {
     const { trashed } = await fetchZohoBlogStatusNotes();
     trashed.forEach((s) => trashedSet.add(s));
   } catch {}
+
+  // Read Cloudinary raw JSON state store trashed slugs
+  try {
+    const cloudTrashed = await getDurableBlogTrashedSlugs();
+    cloudTrashed.forEach((s) => trashedSet.add(s));
+  } catch {}
+
   return trashedSet;
 }
 
@@ -345,6 +365,18 @@ export async function getDurablePosts(): Promise<Map<string, AdminBlogPost>> {
     }
   }
 
+  // 3. Read Cloudinary raw JSON state store (guaranteed durable store)
+  try {
+    const cloudBlogState = await getDurableBlogState();
+    if (cloudBlogState && cloudBlogState.posts) {
+      for (const [slug, post] of Object.entries(cloudBlogState.posts)) {
+        if (post && post.slug) {
+          postMap.set(slug, post as AdminBlogPost);
+        }
+      }
+    }
+  } catch {}
+
   return postMap;
 }
 
@@ -378,6 +410,13 @@ export async function saveDurablePost(post: AdminBlogPost): Promise<void> {
     await recordZohoBlogStatus(post.slug, post.status);
   } catch (e) {
     console.warn('[Durable Store] Zoho blog status record warning:', e);
+  }
+
+  // Persist to Cloudinary raw JSON state store
+  try {
+    await saveDurableBlogPostOverride(post);
+  } catch (e) {
+    console.warn('[Durable Store] Cloudinary blog state save warning:', e);
   }
 }
 
@@ -413,6 +452,13 @@ export async function deleteDurablePost(slug: string): Promise<void> {
     await recordZohoDeletedBlog(slug);
   } catch (e) {
     console.warn('[Durable Store] Zoho delete record warning:', e);
+  }
+
+  // Delete from Cloudinary raw JSON state store
+  try {
+    await deleteDurableBlogPostOverride(slug);
+  } catch (e) {
+    console.warn('[Durable Store] Cloudinary blog state delete warning:', e);
   }
 }
 
