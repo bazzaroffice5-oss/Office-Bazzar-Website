@@ -3,7 +3,6 @@ import path from 'path';
 import os from 'os';
 import { revalidatePath } from 'next/cache';
 import { callKV, getKVConfig } from '@/lib/distributed/coordinator';
-import { processAndOptimizeImage } from '@/lib/images/processor';
 
 export interface AdminBlogPost {
   slug: string;
@@ -749,6 +748,7 @@ export async function saveUploadedMedia(
 
   // 1. Process with automated Transparent Background + <=180KB WebP Image Processor
   try {
+    const { processAndOptimizeImage } = await import('@/lib/images/processor');
     const processed = await processAndOptimizeImage({
       buffer,
       filename,

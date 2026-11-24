@@ -35,11 +35,18 @@ const nextConfig: NextConfig = {
   },
   serverExternalPackages: ['sharp'],
   outputFileTracingExcludes: {
-    '*': [
+    '/*': [
       'node_modules/@img/sharp-libvips-darwin-*/**',
       'node_modules/@img/sharp-libvips-win32-*/**',
       'node_modules/@img/sharp-darwin-*/**',
       'node_modules/@img/sharp-win32-*/**',
+      'node_modules/@img/sharp-win32-*',
+      'node_modules/@img/sharp-darwin-*',
+      'public/assets/**',
+      'public/images/**',
+      'public/assets/products/catalog_2026/**',
+      'scripts/**',
+      '.git/**',
     ],
   },
   async headers() {

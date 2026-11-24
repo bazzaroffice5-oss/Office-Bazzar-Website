@@ -17,7 +17,7 @@ import os from 'os';
 import crypto from 'crypto';
 import { callKV } from '@/lib/distributed/kv-client';
 import { uploadZohoAttachment, downloadZohoAttachment } from '@/lib/zoho/attachments';
-import { processAndOptimizeImage, ProcessedImageResult } from '@/lib/images/processor';
+import type { ProcessedImageResult } from '@/lib/images/processor';
 
 export interface StoredProductImage {
   filename: string;
@@ -213,6 +213,7 @@ export async function saveProductImage({
 
   // 1. Process with automated Transparent Background + <=180KB WebP Image Processor
   try {
+    const { processAndOptimizeImage } = await import('@/lib/images/processor');
     const processed = await processAndOptimizeImage({
       buffer,
       filename,
