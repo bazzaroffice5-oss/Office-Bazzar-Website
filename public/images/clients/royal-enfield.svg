@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 80" role="img" aria-label="Royal Enfield">
-  <!-- Royal Enfield: gold wordmark on white, no background box -->
-  <text x="110" y="34" font-family="Georgia,'Times New Roman',serif" font-size="20" font-weight="bold" fill="#C8A84B" text-anchor="middle" letter-spacing="2">ROYAL</text>
-  <line x1="30" y1="40" x2="190" y2="40" stroke="#C8A84B" stroke-width="1"/>
-  <text x="110" y="58" font-family="Georgia,'Times New Roman',serif" font-size="20" font-weight="bold" fill="#C8A84B" text-anchor="middle" letter-spacing="2">ENFIELD</text>
-  <text x="110" y="72" font-family="Georgia,serif" font-size="7" fill="#888" text-anchor="middle" letter-spacing="2">EST. 1901</text>
-</svg>

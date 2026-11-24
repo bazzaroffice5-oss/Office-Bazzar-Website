@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img" aria-label="Taj Hotels">
-  <!-- Taj Hotels: gold serif wordmark, no background box -->
-  <text x="100" y="40" font-family="Georgia,'Times New Roman',serif" font-size="34" font-weight="bold" fill="#8B6914" text-anchor="middle" letter-spacing="5">TAJ</text>
-  <line x1="28" y1="47" x2="172" y2="47" stroke="#8B6914" stroke-width="1"/>
-  <text x="100" y="60" font-family="Georgia,serif" font-size="8" fill="#888" text-anchor="middle" letter-spacing="2">HOTELS &amp; RESORTS</text>
-</svg>

@@ -3,17 +3,17 @@
 import React, { useState } from 'react';
 
 // ---------------------------------------------------------------------------
-// Client data — logo files live in public/images/clients/
-// onError fallback: Google S2 favicon for the company domain
+// 100% Authentic, Official Client Logos hosted permanently on Cloudinary
+// (Folder: "office-bazzar-clients", optimized transparent WebP < 180KB)
 // ---------------------------------------------------------------------------
 
 interface ClientEntry {
   id: string;
   name: string;
   sector: string;
-  /** Path relative to /public (served at this URL in browser) */
-  logo: string;
-  /** Google S2 favicon fallback if logo fails to load */
+  /** Permanent Cloudinary secure URL */
+  logoUrl: string;
+  /** Google S2 favicon fallback if network error */
   fallbackDomain: string;
 }
 
@@ -22,126 +22,126 @@ const TRUSTED_CLIENTS: ClientEntry[] = [
     id: 'royal-enfield',
     name: 'Royal Enfield',
     sector: 'Automotive',
-    logo: '/images/clients/royal-enfield.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500953/office-bazzar-clients/royal-enfield.webp',
     fallbackDomain: 'royalenfield.com',
   },
   {
     id: 'cat',
     name: 'Caterpillar (CAT)',
     sector: 'Heavy Equipment',
-    logo: '/images/clients/cat.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500949/office-bazzar-clients/cat.webp',
     fallbackDomain: 'cat.com',
   },
   {
     id: 'ashok-leyland',
     name: 'Ashok Leyland',
     sector: 'Commercial Vehicles',
-    logo: '/images/clients/ashok-leyland.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500946/office-bazzar-clients/ashok-leyland.webp',
     fallbackDomain: 'ashokleyland.com',
   },
   {
     id: 'tcs',
     name: 'Tata Consultancy Services',
     sector: 'IT Services',
-    logo: '/images/clients/tcs.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500958/office-bazzar-clients/tcs.webp',
     fallbackDomain: 'tcs.com',
   },
   {
     id: 'zoho',
     name: 'Zoho',
     sector: 'SaaS / Technology',
-    logo: '/images/clients/zoho.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500958/office-bazzar-clients/zoho.webp',
     fallbackDomain: 'zoho.com',
   },
   {
     id: 'lt',
     name: 'L&T',
     sector: 'Engineering & Construction',
-    logo: '/images/clients/lt.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500952/office-bazzar-clients/lt.webp',
     fallbackDomain: 'larsentoubro.com',
   },
   {
     id: 'srm',
     name: 'SRM IST',
     sector: 'Education',
-    logo: '/images/clients/srm.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500956/office-bazzar-clients/srm.webp',
     fallbackDomain: 'srmist.edu.in',
   },
   {
     id: 'hyundai-glovis',
     name: 'Hyundai Glovis',
     sector: 'Logistics',
-    logo: '/images/clients/hyundai-glovis.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500950/office-bazzar-clients/hyundai-glovis.webp',
     fallbackDomain: 'glovis.net',
   },
   {
     id: 'indianoil',
     name: 'IndianOil',
     sector: 'Energy & Petroleum',
-    logo: '/images/clients/indianoil.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500951/office-bazzar-clients/indianoil.webp',
     fallbackDomain: 'iocl.com',
   },
   {
     id: 'arun-excello',
     name: 'Arun Excello',
     sector: 'Real Estate',
-    logo: '/images/clients/arun-excello.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500945/office-bazzar-clients/arun-excello.webp',
     fallbackDomain: 'arunexcello.com',
   },
   {
     id: 'samsung',
     name: 'Samsung',
     sector: 'Electronics',
-    logo: '/images/clients/samsung.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500955/office-bazzar-clients/samsung.webp',
     fallbackDomain: 'samsung.com',
   },
   {
     id: 'sun-tv',
     name: 'Sun TV Network',
     sector: 'Media & Broadcasting',
-    logo: '/images/clients/sun-tv.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500956/office-bazzar-clients/sun-tv.webp',
     fallbackDomain: 'suntv.in',
   },
   {
     id: 'brakes-india',
     name: 'Brakes India',
     sector: 'Automotive Components',
-    logo: '/images/clients/brakes-india.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500948/office-bazzar-clients/brakes-india.webp',
     fallbackDomain: 'brakesindia.com',
   },
   {
     id: 'avt',
     name: 'AVT Group',
     sector: 'Tea & Commodities',
-    logo: '/images/clients/avt.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500947/office-bazzar-clients/avt.webp',
     fallbackDomain: 'avtgroup.in',
   },
   {
     id: 'panimalar',
     name: 'Panimalar Medical College',
     sector: 'Healthcare & Education',
-    logo: '/images/clients/panimalar.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500952/office-bazzar-clients/panimalar.webp',
     fallbackDomain: 'pmchri.ac.in',
   },
   {
     id: 'taj',
     name: 'Taj Hotels',
     sector: 'Luxury Hospitality',
-    logo: '/images/clients/taj.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500957/office-bazzar-clients/taj.webp',
     fallbackDomain: 'tajhotels.com',
   },
   {
     id: 'hinduja-tech',
     name: 'Hinduja Tech',
     sector: 'Engineering Services',
-    logo: '/images/clients/hinduja-tech.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500950/office-bazzar-clients/hinduja-tech.webp',
     fallbackDomain: 'hindujatech.com',
   },
   {
     id: 'bvg',
     name: 'BVG India',
     sector: 'Facility Management',
-    logo: '/images/clients/bvg.svg',
+    logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795500948/office-bazzar-clients/bvg.webp',
     fallbackDomain: 'bvgindia.com',
   },
 ];
@@ -152,25 +152,24 @@ const TRUSTED_CLIENTS: ClientEntry[] = [
 
 function ClientCard({ client }: { client: ClientEntry }) {
   const [hovered, setHovered] = useState(false);
-  const [imgSrc, setImgSrc] = useState(client.logo);
+  const [imgSrc, setImgSrc] = useState(client.logoUrl);
   const [imgFailed, setImgFailed] = useState(false);
 
   const handleError = () => {
     if (!imgFailed) {
-      // First failure: try Google S2 favicon (128px, usually a real brand icon)
+      // Fallback to Google S2 favicon (128px) if CDN image fails to load
       setImgSrc(
         `https://www.google.com/s2/favicons?domain=${client.fallbackDomain}&sz=128`
       );
       setImgFailed(true);
     }
-    // Second failure: leave as-is; brand name below still identifies the client
   };
 
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`group relative flex flex-col items-center justify-between gap-3 p-4 rounded-xl border transition-all duration-200 cursor-default select-none min-h-[112px] bg-white ${
+      className={`group relative flex flex-col items-center justify-between gap-3 p-4 rounded-xl border transition-all duration-200 cursor-default select-none min-h-[120px] bg-white ${
         hovered
           ? 'border-[#004b87] shadow-md shadow-[#004b87]/10 -translate-y-0.5'
           : 'border-slate-200/80 shadow-sm'
@@ -178,14 +177,14 @@ function ClientCard({ client }: { client: ClientEntry }) {
       title={`${client.name} — ${client.sector}`}
       aria-label={client.name}
     >
-      {/* Logo area — clean white background, object-contain, no colored box */}
+      {/* Official Logo area */}
       <div className="flex-1 w-full flex items-center justify-center overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={imgSrc}
           alt={`${client.name} logo`}
           onError={handleError}
-          className="h-11 w-auto max-w-[136px] object-contain mx-auto"
+          className="h-12 md:h-14 w-auto max-w-[160px] object-contain bg-transparent mx-auto"
           loading="lazy"
         />
       </div>

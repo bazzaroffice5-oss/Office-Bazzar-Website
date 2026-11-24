@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img" aria-label="Arun Excello">
-  <!-- Arun Excello: red wordmark, white background -->
-  <text x="100" y="34" font-family="'Arial Black','Helvetica Neue',sans-serif" font-size="18" font-weight="900" fill="#C0392B" text-anchor="middle" letter-spacing="1">ARUN</text>
-  <text x="100" y="58" font-family="'Arial Black','Helvetica Neue',sans-serif" font-size="18" font-weight="900" fill="#922B21" text-anchor="middle" letter-spacing="1">EXCELLO</text>
-  <line x1="30" y1="62" x2="170" y2="62" stroke="#C0392B" stroke-width="1.5"/>
-  <text x="100" y="73" font-family="Arial,sans-serif" font-size="7" fill="#888" text-anchor="middle" letter-spacing="1.5">HOMES &amp; PROPERTIES</text>
-</svg>
