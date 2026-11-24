@@ -1,14 +1,12 @@
 'use client';
 
-import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
-import Image from 'next/image';
+import React, { useState, useRef, useCallback, useMemo } from 'react';
 import {
   motion,
   useMotionValue,
   useSpring,
   useTransform,
   useReducedMotion,
-  AnimatePresence,
 } from 'motion/react';
 import {
   Building2,
@@ -16,8 +14,6 @@ import {
   Users,
   Store,
   Sparkles,
-  ArrowRight,
-  TrendingUp,
 } from 'lucide-react';
 
 // ---------------------------------------------------------------------------
@@ -259,7 +255,7 @@ export default function LegacyGrowthSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl"
           >
-            From a local Chennai launch to a pan-India digital B2B hub, we’ve spent over two decades
+            From a local Chennai launch to a pan-India digital B2B hub, we&apos;ve spent over two decades
             scale-proofing procurement for enterprises.
           </motion.p>
         </div>
