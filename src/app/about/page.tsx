@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { constructMetadata, getBreadcrumbJsonLd } from '@/lib/seo/config';
 import JsonLd from '@/components/seo/JsonLd';
-import TrustedClientsSection from '@/components/home/TrustedClientsSection';
+import TrustedClientsSection from '@/components/about/TrustedClientsSection';
 
 export const metadata: Metadata = constructMetadata({
   title: 'About Us - Corporate Office & Facility Supplier',
