@@ -34,7 +34,7 @@ export interface AdminRecipientStatus {
 export interface QuoteEmailNotificationResult {
   success: boolean;
   messageId?: string;
-  provider: 'zoho_crm_send_mail' | 'zoho_mail_api' | 'zoho_unconfigured' | 'simulated' | 'unconfigured';
+  provider: 'zoho_crm_send_mail' | 'zoho_mail_api' | 'smtp' | 'zoho_unconfigured' | 'simulated' | 'unconfigured';
   isDuplicate?: boolean;
   admin1: AdminRecipientStatus;
   admin2: AdminRecipientStatus;
@@ -57,7 +57,7 @@ export interface ContactUsSubmission {
 export interface ContactEmailNotificationResult {
   success: boolean;
   messageId?: string;
-  provider: 'zoho_crm_send_mail' | 'zoho_mail_api' | 'zoho_unconfigured' | 'simulated' | 'unconfigured';
+  provider: 'zoho_crm_send_mail' | 'zoho_mail_api' | 'smtp' | 'zoho_unconfigured' | 'simulated' | 'unconfigured';
   to: string;
   cc: string;
   error?: string;
@@ -403,10 +403,10 @@ export function buildCustomerQuotationEmailHtml(quotation: Quotation): string {
     </div>
 
     <!-- Confirmation Banner -->
-    <div style="background-color: #f0fdf4; border-bottom: 1px solid #dcfce7; padding: 18px 24px;">
+    <div style="background-color: #f0f7ff; border-bottom: 2px solid #004b87; padding: 18px 24px;">
       <div>
-        <span style="font-size: 12px; color: #166534; font-weight: 700; text-transform: uppercase;">Quotation Request Confirmed</span>
-        <div style="font-size: 20px; font-weight: 800; color: #15803d; font-family: monospace; margin-top: 2px;">
+        <span style="font-size: 12px; color: #ea580c; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Quotation Request Confirmed</span>
+        <div style="font-size: 20px; font-weight: 800; color: #004b87; font-family: monospace; margin-top: 2px;">
           ${quotation.quotationNumber}
         </div>
         <p style="margin: 6px 0 0 0; font-size: 13px; color: #374151;">

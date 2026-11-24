@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, Send, Building2, CheckCircle2, ShieldCheck } from 'lucide-react';
-import { createBulkRFQ } from '@/lib/db/store';
+import { X, Send, Building2, CheckCircle2, ShieldCheck, Loader2 } from 'lucide-react';
 import { CATEGORIES } from '@/lib/data/catalog';
 
 interface RFQModalProps {
@@ -25,6 +24,7 @@ export default function RFQModal({ isOpen, onClose, prefilledProduct }: RFQModal
   const [deliveryLocation, setDeliveryLocation] = useState('Chennai, Tamil Nadu');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   if (!isOpen) return null;
 
@@ -33,23 +33,48 @@ export default function RFQModal({ isOpen, onClose, prefilledProduct }: RFQModal
     if (!companyName || !contactPerson || !email || !phone) return;
 
     setIsSubmitting(true);
-    await createBulkRFQ({
-      companyName,
-      contactPerson,
-      email,
-      phone,
-      gstin,
-      category,
-      requirements,
-      estimatedQuantity,
-      deliveryLocation,
-    });
-    setIsSubmitting(false);
-    setSubmitted(true);
+    setErrorMessage('');
+
+    try {
+      const detailedMessage = `[Bulk RFQ Modal Request]
+Category: ${category}
+Estimated Quantity: ${estimatedQuantity}
+Delivery Location: ${deliveryLocation}
+GSTIN: ${gstin || 'Not Provided'}
+Specific Requirements:
+${requirements || 'Standard wholesale inquiry'}`;
+
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: contactPerson.trim(),
+          companyName: companyName.trim(),
+          email: email.trim().toLowerCase(),
+          phone: phone.trim(),
+          message: detailedMessage,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.success) {
+        setSubmitted(true);
+      } else {
+        setErrorMessage(data.error || 'Failed to submit quote request. Please try again.');
+      }
+    } catch (err: any) {
+      console.error('[RFQModal Error]:', err);
+      setErrorMessage(err?.message || 'Network error. Please verify your connection.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setErrorMessage('');
     onClose();
   };
 
@@ -211,6 +236,12 @@ export default function RFQModal({ isOpen, onClose, prefilledProduct }: RFQModal
                 </div>
               </div>
 
+              {errorMessage && (
+                <div className="p-2.5 text-xs bg-red-50 text-red-700 border border-red-200 rounded-md">
+                  {errorMessage}
+                </div>
+              )}
+
               <div className="pt-2 flex items-center justify-between">
                 <div className="flex items-center text-[11px] text-slate-500">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 mr-1" />
@@ -228,9 +259,9 @@ export default function RFQModal({ isOpen, onClose, prefilledProduct }: RFQModal
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-5 py-1.5 bg-[#d9232d] hover:bg-[#b81822] disabled:opacity-50 text-white text-xs font-semibold rounded-md flex items-center space-x-1.5 transition-colors shadow-xs cursor-pointer"
+                    className="px-5 py-1.5 bg-[#004b87] hover:bg-[#0a355c] disabled:opacity-50 text-white text-xs font-semibold rounded-md flex items-center space-x-1.5 transition-colors shadow-xs cursor-pointer"
                   >
-                    <Send className="w-3.5 h-3.5" />
+                    {isSubmitting ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
                     <span>{isSubmitting ? 'Submitting...' : 'Submit RFQ'}</span>
                   </button>
                 </div>

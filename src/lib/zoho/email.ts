@@ -10,6 +10,7 @@
  */
 
 import { getZohoAccessToken, zohoFetch, isZohoConfigured } from './client';
+import { sendSmtpEmailWithRetry } from '../mail/transport';
 
 export interface ZohoFromAddress {
   user_name: string;
@@ -22,7 +23,7 @@ export interface ZohoEmailDispatchResult {
   recipient: string;
   success: boolean;
   messageId?: string;
-  provider: 'zoho_crm_send_mail' | 'zoho_mail_api' | 'zoho_unconfigured';
+  provider: 'zoho_crm_send_mail' | 'zoho_mail_api' | 'smtp' | 'zoho_unconfigured';
   error?: string;
   missingScopes?: string[];
   rawStatus?: number;
@@ -160,11 +161,29 @@ export async function sendZohoEmail(params: {
   const recipient = params.toEmail.trim().toLowerCase();
 
   if (!(await isZohoConfigured())) {
+    // If Zoho OAuth is unconfigured, immediately try hardened Serverless SMTP
+    const smtpRes = await sendSmtpEmailWithRetry({
+      to: recipient,
+      replyTo: params.replyTo,
+      subject: params.subject,
+      html: params.html,
+      text: params.text,
+    });
+
+    if (smtpRes.success) {
+      return {
+        recipient,
+        success: true,
+        messageId: smtpRes.messageId,
+        provider: 'smtp',
+      };
+    }
+
     return {
       recipient,
       success: false,
       provider: 'zoho_unconfigured',
-      error: 'Zoho OAuth credentials (ZOHO_CLIENT_ID, ZOHO_CLIENT_SECRET, ZOHO_REFRESH_TOKEN) are not configured.',
+      error: `Zoho OAuth unconfigured and SMTP failed: ${smtpRes.error || 'Unknown error'}`,
     };
   }
 
@@ -297,6 +316,26 @@ export async function sendZohoEmail(params: {
       }
     }
 
+    // 3. Fallback: Hardened Serverless SMTP (Nodemailer via smtppro.zoho.in)
+    const smtpRes = await sendSmtpEmailWithRetry({
+      to: recipient,
+      replyTo: params.replyTo,
+      subject: params.subject,
+      html: params.html,
+      text: params.text,
+    });
+
+    if (smtpRes.success) {
+      return {
+        recipient,
+        success: true,
+        messageId: smtpRes.messageId,
+        provider: 'smtp',
+      };
+    } else if (smtpRes.error) {
+      errorMessages.push(`SMTP error: ${smtpRes.error}`);
+    }
+
     return {
       recipient,
       success: false,
@@ -306,6 +345,27 @@ export async function sendZohoEmail(params: {
     };
   } catch (err) {
     const errMsg = err instanceof Error ? err.message : String(err);
+    // Even if an unexpected error occurs during Zoho APIs, try SMTP as last-ditch guarantee
+    try {
+      const smtpFallback = await sendSmtpEmailWithRetry({
+        to: recipient,
+        replyTo: params.replyTo,
+        subject: params.subject,
+        html: params.html,
+        text: params.text,
+      });
+      if (smtpFallback.success) {
+        return {
+          recipient,
+          success: true,
+          messageId: smtpFallback.messageId,
+          provider: 'smtp',
+        };
+      }
+    } catch {
+      // ignore secondary catch
+    }
+
     return {
       recipient,
       success: false,

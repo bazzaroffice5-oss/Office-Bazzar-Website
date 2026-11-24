@@ -10,8 +10,8 @@ import {
   CheckCircle2,
   PackageCheck,
   Percent,
+  Loader2,
 } from 'lucide-react';
-import { createBulkRFQ } from '@/lib/db/store';
 import { CATEGORIES } from '@/lib/data/catalog';
 
 export default function BulkOrdersClient() {
@@ -26,25 +26,50 @@ export default function BulkOrdersClient() {
   const [deliveryLocation, setDeliveryLocation] = useState('Chennai, Tamil Nadu');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!companyName || !contactPerson || !email || !phone) return;
 
     setIsSubmitting(true);
-    await createBulkRFQ({
-      companyName,
-      contactPerson,
-      email,
-      phone,
-      gstin,
-      category,
-      requirements,
-      estimatedQuantity,
-      deliveryLocation,
-    });
-    setIsSubmitting(false);
-    setSubmitted(true);
+    setErrorMessage('');
+
+    try {
+      const detailedMessage = `[Institutional RFQ Form Submission]
+Category: ${category}
+Estimated Quantity: ${estimatedQuantity}
+Delivery Location: ${deliveryLocation}
+GSTIN: ${gstin || 'Not Provided'}
+Specific Requirements:
+${requirements || 'Institutional procurement inquiry'}`;
+
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: contactPerson.trim(),
+          companyName: companyName.trim(),
+          email: email.trim().toLowerCase(),
+          phone: phone.trim(),
+          message: detailedMessage,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.success) {
+        setSubmitted(true);
+      } else {
+        setErrorMessage(data.error || 'Failed to submit quote request. Please try again.');
+      }
+    } catch (err: any) {
+      console.error('[BulkOrdersClient Error]:', err);
+      setErrorMessage(err?.message || 'Network connection error. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -269,13 +294,23 @@ export default function BulkOrdersClient() {
                   </div>
                 </div>
 
+                {errorMessage && (
+                  <div className="p-3 text-xs bg-red-50 text-red-700 border border-red-200 rounded-xl">
+                    {errorMessage}
+                  </div>
+                )}
+
                 <div className="pt-2">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white text-xs font-semibold rounded-xl transition-colors shadow-sm flex items-center justify-center space-x-2 disabled:opacity-50"
+                    className="w-full py-3 bg-[#004b87] hover:bg-[#0a355c] text-white text-xs font-semibold rounded-xl transition-colors shadow-sm flex items-center justify-center space-x-2 disabled:opacity-50 cursor-pointer"
                   >
-                    <Send className="w-3.5 h-3.5" />
+                    {isSubmitting ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Send className="w-3.5 h-3.5" />
+                    )}
                     <span>{isSubmitting ? 'Sending Request...' : 'Submit Institutional RFQ'}</span>
                   </button>
                 </div>

@@ -769,7 +769,7 @@ export default function RequestQuoteClient() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="px-6 py-2.5 bg-[#16a34a] hover:bg-[#15803d] disabled:opacity-60 text-white font-bold text-xs sm:text-sm rounded-lg transition-all shadow-sm flex items-center gap-2 cursor-pointer"
+                      className="px-6 py-2.5 bg-[#004b87] hover:bg-[#0a355c] active:bg-[#082a4a] disabled:opacity-60 text-white font-bold text-xs sm:text-sm rounded-lg transition-all shadow-sm flex items-center gap-2 cursor-pointer"
                     >
                       {isSubmitting ? (
                         <>

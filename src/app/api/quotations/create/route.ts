@@ -72,12 +72,11 @@ export async function POST(req: Request) {
       );
     }
 
-    if (!companyName || typeof companyName !== 'string' || companyName.trim().length < 2) {
-      return NextResponse.json(
-        { error: 'Company or business enterprise name is required.' },
-        { status: 400 }
-      );
-    }
+    // Company or business enterprise name (optional fallback for individual/freelance buyers)
+    const cleanCompanyName =
+      companyName && typeof companyName === 'string' && companyName.trim().length >= 2
+        ? companyName.trim()
+        : 'Direct Procurement / Enterprise Client';
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -223,7 +222,7 @@ export async function POST(req: Request) {
       idempotencyKey: idempotencyKey || undefined,
       customerId: customerId || undefined,
       customerName: customerName.trim(),
-      companyName: companyName.trim(),
+      companyName: cleanCompanyName,
       email: email.trim().toLowerCase(),
       phone: cleanPhone,
       gstin: cleanGstin,
@@ -287,20 +286,13 @@ export async function POST(req: Request) {
     savedQuotation.syncError = isCrmSynced ? undefined : (zohoSyncResult?.error || 'CRM connection failed');
 
     if (!isCrmSynced) {
-      console.error(
-        `[Quotation API] Customer RFQ [${savedQuotation.quotationNumber}] rejected: Zoho CRM persistence failed:`,
-        zohoSyncResult?.error || 'CRM connection unavailable'
-      );
-      return NextResponse.json(
-        {
-          success: false,
-          error: zohoSyncResult?.error || 'Failed to register quotation in Zoho CRM. Please try again.',
-        },
-        { status: 502 }
+      console.warn(
+        `[Quotation API] Customer RFQ [${savedQuotation.quotationNumber}] warning: Zoho CRM initial sync deferred:`,
+        zohoSyncResult?.error || 'CRM connection unavailable. Proceeding with database registration and dual-email notification dispatch.'
       );
     }
 
-    // 7. Send Notifications to BOTH Admin recipients (sales4@officebazzar.com AND marketing@officebazzar.com)
+    // 7. Send Notifications to BOTH Customer AND Admin recipients
     let notificationResults: NotificationResult[] = [];
     try {
       notificationResults = await dispatchQuotationNotifications(savedQuotation, {
