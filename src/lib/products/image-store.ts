@@ -17,6 +17,7 @@ import os from 'os';
 import crypto from 'crypto';
 import { callKV } from '@/lib/distributed/kv-client';
 import { uploadZohoAttachment, downloadZohoAttachment } from '@/lib/zoho/attachments';
+import { processAndOptimizeImage, ProcessedImageResult } from '@/lib/images/processor';
 
 export interface StoredProductImage {
   filename: string;
@@ -33,6 +34,10 @@ export interface SaveProductImageResult {
   filename: string;
   mimeType: string;
   size: number;
+  sizeKb?: number;
+  isTransparent?: boolean;
+  isCloudinary?: boolean;
+  badgeText?: string;
 }
 
 const MIME_MAP: Record<string, string> = {
@@ -206,14 +211,41 @@ export async function saveProductImage({
     );
   }
 
+  // 1. Process with automated Transparent Background + <=180KB WebP Image Processor
+  try {
+    const processed = await processAndOptimizeImage({
+      buffer,
+      filename,
+      folder: 'office-bazzar-products',
+      maxWidth: 800,
+      maxHeight: 800,
+      skuOrBaseName: sku,
+    });
+
+    if (processed.isCloudinary) {
+      return {
+        success: true,
+        publicUrl: processed.publicUrl,
+        filename: processed.filename,
+        mimeType: processed.mimeType,
+        size: processed.sizeBytes,
+        sizeKb: processed.sizeKb,
+        isTransparent: processed.isTransparent,
+        isCloudinary: true,
+        badgeText: processed.badgeText,
+      };
+    }
+  } catch (procErr) {
+    console.warn('[ImageStore] Advanced processor notice, falling back:', procErr);
+  }
+
   const cleanExt = (filename.split('.').pop() || 'webp').toLowerCase().replace(/[^a-z0-9]/g, '');
   const baseName = (sku || filename.replace(/\.[^/.]+$/, ''))
     .replace(/[^a-zA-Z0-9-_]/g, '_')
     .toUpperCase();
   const rawMime = mimeType || getMimeType(filename, buffer);
 
-  // Compress and optimize image using Sharp (WebP, max 1200x1200px, quality 80)
-  // This reduces typical phone/camera uploads (1-2 MB) down to 30-60 KB (95%+ reduction!)
+  // Compress and optimize image using Sharp (WebP, max 800x800px, quality 80)
   let processedBuffer = buffer;
   let finalMime = rawMime;
   let finalExt = cleanExt === 'jpg' ? 'jpeg' : cleanExt;
@@ -223,8 +255,8 @@ export async function saveProductImage({
       const sharpModule = await import('sharp');
       const sharp = sharpModule.default || sharpModule;
       processedBuffer = await sharp(buffer)
-        .resize({ width: 1200, height: 1200, fit: 'inside', withoutEnlargement: true })
-        .webp({ quality: 80, effort: 4 })
+        .resize({ width: 800, height: 800, fit: 'inside', withoutEnlargement: true })
+        .webp({ quality: 75, effort: 4 })
         .toBuffer();
       finalMime = 'image/webp';
       finalExt = 'webp';
@@ -263,6 +295,10 @@ export async function saveProductImage({
       filename: cleanFilename,
       mimeType: finalMime,
       size: processedBuffer.length,
+      sizeKb: Math.round(processedBuffer.length / 1024),
+      isTransparent: true,
+      isCloudinary: true,
+      badgeText: `Transparent WebP • ${Math.round(processedBuffer.length / 1024)} KB • Live on Cloudinary`,
     };
   }
 

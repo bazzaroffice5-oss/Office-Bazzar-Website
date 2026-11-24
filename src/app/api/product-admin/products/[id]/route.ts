@@ -8,6 +8,13 @@ import { INITIAL_PRODUCTS } from '@/lib/data/catalog';
 import { Product } from '@/types';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+const NO_CACHE_HEADERS = {
+  'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+  Pragma: 'no-cache',
+  Expires: '0',
+};
 
 export async function GET(
   request: NextRequest,
@@ -15,17 +22,17 @@ export async function GET(
 ) {
   const session = await getProductAdminSession();
   if (!session.authenticated) {
-    return NextResponse.json({ error: 'Unauthorized. Admin session required.' }, { status: 401 });
+    return NextResponse.json({ error: 'Unauthorized. Admin session required.' }, { status: 401, headers: NO_CACHE_HEADERS });
   }
 
   const { id } = await params;
   const product = await getProductById(id);
 
   if (!product) {
-    return NextResponse.json({ error: 'Product not found.' }, { status: 404 });
+    return NextResponse.json({ error: 'Product not found.' }, { status: 404, headers: NO_CACHE_HEADERS });
   }
 
-  return NextResponse.json({ success: true, product });
+  return NextResponse.json({ success: true, product }, { headers: NO_CACHE_HEADERS });
 }
 
 export async function PUT(
@@ -198,24 +205,36 @@ export async function PUT(
       revalidatePath('/', 'layout');
       revalidatePath('/product-admin-panel');
       revalidatePath('/products');
+      revalidatePath('/products/[slug]', 'page');
+      revalidatePath('/product/[slug]', 'page');
       revalidatePath('/categories');
+      revalidatePath('/categories/[slug]', 'page');
+      revalidatePath('/category/[slug]', 'page');
+      revalidatePath('/shop');
+      revalidatePath('/sitemap.xml');
       if (saved.categoryId) {
         revalidatePath(`/category/${saved.categoryId}`);
+        revalidatePath(`/categories/${saved.categoryId}`);
       }
       if (existing?.categoryId && existing.categoryId !== saved.categoryId) {
         revalidatePath(`/category/${existing.categoryId}`);
+        revalidatePath(`/categories/${existing.categoryId}`);
       }
       if (saved.slug) {
         revalidatePath(`/product/${saved.slug}`);
+        revalidatePath(`/products/${saved.slug}`);
       }
       if (saved.sku) {
         revalidatePath(`/product/${saved.sku.toLowerCase()}`);
+        revalidatePath(`/products/${saved.sku.toLowerCase()}`);
       }
       if (existing?.slug && existing.slug !== saved.slug) {
         revalidatePath(`/product/${existing.slug}`);
+        revalidatePath(`/products/${existing.slug}`);
       }
       if (existing?.sku && existing.sku.toLowerCase() !== saved.sku.toLowerCase()) {
         revalidatePath(`/product/${existing.sku.toLowerCase()}`);
+        revalidatePath(`/products/${existing.sku.toLowerCase()}`);
       }
     } catch (revalidateErr) {
       console.warn('[Product Admin] Revalidation notice:', revalidateErr);
@@ -227,18 +246,21 @@ export async function PUT(
       publishStatus: saved.isActive ? 'published' : 'draft',
     };
 
-    return NextResponse.json({
-      success: true,
-      message: 'Product updated successfully across Zoho CRM and live website.',
-      product: productResponse,
-      zohoSynced,
-      zohoError: zohoResult.error,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Product updated successfully across Zoho CRM and live website.',
+        product: productResponse,
+        zohoSynced,
+        zohoError: zohoResult.error,
+      },
+      { headers: NO_CACHE_HEADERS }
+    );
   } catch (error) {
     console.error('[Product Admin API] PUT error:', error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to update product.' },
-      { status: 500 }
+      { status: 500, headers: NO_CACHE_HEADERS }
     );
   }
 }
@@ -358,34 +380,45 @@ export async function DELETE(
       revalidatePath('/', 'layout');
       revalidatePath('/product-admin-panel');
       revalidatePath('/products');
+      revalidatePath('/products/[slug]', 'page');
+      revalidatePath('/product/[slug]', 'page');
       revalidatePath('/categories');
+      revalidatePath('/categories/[slug]', 'page');
+      revalidatePath('/category/[slug]', 'page');
       revalidatePath('/shop');
+      revalidatePath('/sitemap.xml');
       if (existing.categoryId) {
         revalidatePath(`/category/${existing.categoryId}`);
+        revalidatePath(`/categories/${existing.categoryId}`);
       }
       if (existing.slug) {
         revalidatePath(`/product/${existing.slug}`);
+        revalidatePath(`/products/${existing.slug}`);
       }
       if (existing.sku) {
         revalidatePath(`/product/${existing.sku.toLowerCase()}`);
+        revalidatePath(`/products/${existing.sku.toLowerCase()}`);
       }
     } catch (revalidateErr) {
       console.warn('[Product Admin] Revalidation notice:', revalidateErr);
     }
 
-    return NextResponse.json({
-      success: true,
-      message: `Product "${existing.name}" (${existing.sku}) successfully deleted and synchronized with Zoho CRM.`,
-      deletedId: existing.id,
-      deletedSku: existing.sku,
-      zohoSynced,
-      zohoError: zohoResult.error,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: `Product "${existing.name}" (${existing.sku}) successfully deleted and synchronized with Zoho CRM.`,
+        deletedId: existing.id,
+        deletedSku: existing.sku,
+        zohoSynced,
+        zohoError: zohoResult.error,
+      },
+      { headers: NO_CACHE_HEADERS }
+    );
   } catch (error) {
     console.error('[Product Admin API] DELETE error:', error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to delete product.' },
-      { status: 500 }
+      { status: 500, headers: NO_CACHE_HEADERS }
     );
   }
 }

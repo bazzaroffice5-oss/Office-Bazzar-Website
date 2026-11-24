@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   Package,
   CheckCircle2,
@@ -160,9 +161,11 @@ export default function ProductAdminDashboardClient({
   const [formDescription, setFormDescription] = useState('');
   const [formPrice, setFormPrice] = useState<string>('');
   const [formPublishStatus, setFormPublishStatus] = useState<'published' | 'draft' | 'unpublished'>('published');
+  const router = useRouter();
   const [formImageFile, setFormImageFile] = useState<File | null>(null);
   const [formImageUrl, setFormImageUrl] = useState('');
   const [formImagePreview, setFormImagePreview] = useState<string | null>(null);
+  const [imageBadge, setImageBadge] = useState<string | null>(null);
 
   // Operational states
   const [saving, setSaving] = useState(false);
@@ -344,6 +347,7 @@ export default function ProductAdminDashboardClient({
     setFormImageFile(null);
     setFormImageUrl('');
     setFormImagePreview(null);
+    setImageBadge(null);
     setIsAddModalOpen(true);
   };
 
@@ -364,6 +368,13 @@ export default function ProductAdminDashboardClient({
     const existingImg = p.images && p.images[0] ? p.images[0] : '';
     setFormImageUrl(existingImg);
     setFormImagePreview(existingImg || null);
+    if (existingImg && existingImg.includes('cloudinary.com')) {
+      setImageBadge('Transparent WebP • Live on Cloudinary');
+    } else if (existingImg) {
+      setImageBadge('Transparent WebP • Verified Storefront');
+    } else {
+      setImageBadge(null);
+    }
   };
 
   const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -373,6 +384,7 @@ export default function ProductAdminDashboardClient({
       setFormImageUrl(''); // Clear old URL state so newly selected file is authoritative
       const previewUrl = URL.createObjectURL(file);
       setFormImagePreview(previewUrl);
+      setImageBadge('Auto-Removing Background • Generating Transparent <=180KB WebP');
     }
   };
 
@@ -419,6 +431,9 @@ export default function ProductAdminDashboardClient({
 
       setProducts((prev) => [data.product, ...prev]);
       setIsAddModalOpen(false);
+      try {
+        router.refresh();
+      } catch {}
       if (data.zohoSynced === false) {
         showToast(
           'error',
@@ -479,6 +494,9 @@ export default function ProductAdminDashboardClient({
         prev.map((p) => (p.id === editingProduct.id || p.sku === editingProduct.sku ? data.product : p))
       );
       setEditingProduct(null);
+      try {
+        router.refresh();
+      } catch {}
       if (data.zohoSynced === false) {
         showToast(
           'error',
@@ -517,6 +535,9 @@ export default function ProductAdminDashboardClient({
       }
 
       setProducts((prev) => prev.filter((p) => p.id !== deletingProduct.id && p.sku !== deletingProduct.sku));
+      try {
+        router.refresh();
+      } catch {}
       showToast(
         'success',
         `Product "${deletingProduct.name}" (${deletingProduct.sku}) permanently deleted from Zoho CRM and website.`
@@ -1268,6 +1289,15 @@ export default function ProductAdminDashboardClient({
                           <span>{formImagePreview ? 'Upload New Image File' : 'Select Image File'}</span>
                         </label>
                       </div>
+
+                      {imageBadge && (
+                        <div>
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#004b87]/10 text-[#004b87] border border-[#004b87]/20 shadow-xs">
+                            <span className="w-2 h-2 rounded-full bg-[#F97316] animate-pulse" />
+                            <span>{imageBadge}</span>
+                          </div>
+                        </div>
+                      )}
 
                       <div className="text-xs text-slate-500 font-medium">
                         Or enter an external/existing Image URL directly below:

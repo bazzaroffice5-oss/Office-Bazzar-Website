@@ -7,6 +7,13 @@ import { saveProductImage } from '@/lib/products/image-store';
 import { Product } from '@/types';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+const NO_CACHE_HEADERS = {
+  'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+  Pragma: 'no-cache',
+  Expires: '0',
+};
 
 export async function GET(request: NextRequest) {
   const session = await getProductAdminSession();
@@ -73,34 +80,37 @@ export async function GET(request: NextRequest) {
       price: p.price,
     }));
 
-    return NextResponse.json({
-      success: true,
-      products: paginatedProducts,
-      pagination: {
-        page,
-        limit,
-        total,
-        totalPages: Math.ceil(total / limit),
+    return NextResponse.json(
+      {
+        success: true,
+        products: paginatedProducts,
+        pagination: {
+          page,
+          limit,
+          total,
+          totalPages: Math.ceil(total / limit),
+        },
+        metrics: {
+          totalProducts: totalCount,
+          publishedProducts: publishedCount,
+          draftProducts: draftCount,
+          unpublishedProducts: unpublishedCount,
+          recentlyAddedProducts: recentlyAddedCount,
+          recentlyUpdatedProducts: recentlyUpdatedCount,
+          // Backwards compatibility aliases
+          activeProducts: publishedCount,
+          recentlyAddedCount,
+          recentlyUpdatedCount,
+        },
+        recentlyAdded,
       },
-      metrics: {
-        totalProducts: totalCount,
-        publishedProducts: publishedCount,
-        draftProducts: draftCount,
-        unpublishedProducts: unpublishedCount,
-        recentlyAddedProducts: recentlyAddedCount,
-        recentlyUpdatedProducts: recentlyUpdatedCount,
-        // Backwards compatibility aliases
-        activeProducts: publishedCount,
-        recentlyAddedCount,
-        recentlyUpdatedCount,
-      },
-      recentlyAdded,
-    });
+      { headers: NO_CACHE_HEADERS }
+    );
   } catch (error) {
     console.error('[Product Admin API] GET error:', error);
     return NextResponse.json(
       { error: 'Failed to retrieve products from Zoho CRM.' },
-      { status: 500 }
+      { status: 500, headers: NO_CACHE_HEADERS }
     );
   }
 }
@@ -253,15 +263,24 @@ export async function POST(request: NextRequest) {
       revalidatePath('/', 'layout');
       revalidatePath('/product-admin-panel');
       revalidatePath('/products');
+      revalidatePath('/products/[slug]', 'page');
+      revalidatePath('/product/[slug]', 'page');
       revalidatePath('/categories');
+      revalidatePath('/categories/[slug]', 'page');
+      revalidatePath('/category/[slug]', 'page');
+      revalidatePath('/shop');
+      revalidatePath('/sitemap.xml');
       if (saved.categoryId) {
         revalidatePath(`/category/${saved.categoryId}`);
+        revalidatePath(`/categories/${saved.categoryId}`);
       }
       if (saved.slug) {
         revalidatePath(`/product/${saved.slug}`);
+        revalidatePath(`/products/${saved.slug}`);
       }
       if (saved.sku) {
         revalidatePath(`/product/${saved.sku.toLowerCase()}`);
+        revalidatePath(`/products/${saved.sku.toLowerCase()}`);
       }
     } catch (revalidateErr) {
       console.warn('[Product Admin] Revalidation notice:', revalidateErr);
@@ -273,19 +292,22 @@ export async function POST(request: NextRequest) {
       publishStatus: saved.isActive ? 'published' : 'draft',
     };
 
-    return NextResponse.json({
-      success: true,
-      message: 'Product successfully created and synchronized with Zoho CRM and the live website.',
-      product: productResponse,
-      zohoSynced: Boolean(zohoId),
-      zohoId,
-      zohoError: zohoResult.error,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Product successfully created and synchronized with Zoho CRM and the live website.',
+        product: productResponse,
+        zohoSynced: Boolean(zohoId),
+        zohoId,
+        zohoError: zohoResult.error,
+      },
+      { headers: NO_CACHE_HEADERS }
+    );
   } catch (error) {
     console.error('[Product Admin API] POST error:', error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to save product.' },
-      { status: 500 }
+      { status: 500, headers: NO_CACHE_HEADERS }
     );
   }
 }

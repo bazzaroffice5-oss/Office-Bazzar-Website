@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import {
   LayoutDashboard,
   FileText,
@@ -60,6 +61,7 @@ const DEFAULT_CATEGORIES = [
 ];
 
 export default function BlogAdminDashboardClient({ initialPosts, username }: Props) {
+  const router = useRouter();
   const [posts, setPosts] = useState<AdminBlogPost[]>(initialPosts);
   const [currentView, setCurrentView] = useState<
     'dashboard' | 'posts' | 'editor' | 'media' | 'categories' | 'tags' | 'seo-manager' | 'settings'
@@ -332,6 +334,9 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
         throw new Error(data.error || 'Failed to move to trash.');
       }
       await fetchPosts();
+      try {
+        router.refresh();
+      } catch {}
     } catch (e: unknown) {
       alert(e instanceof Error ? e.message : 'Failed to move to trash.');
     }
@@ -356,6 +361,9 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
         throw new Error(data.error || 'Failed to restore post.');
       }
       await fetchPosts();
+      try {
+        router.refresh();
+      } catch {}
     } catch (e: unknown) {
       alert(e instanceof Error ? e.message : 'Failed to restore post.');
     }
@@ -375,6 +383,9 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
       }
       setDeleteModalSlug(null);
       await fetchPosts();
+      try {
+        router.refresh();
+      } catch {}
       if (currentView === 'editor' && editingSlug === slugToDelete) {
         setCurrentView('posts');
       }
@@ -487,6 +498,9 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
       setFormData(postPayload);
       setEditingSlug(postPayload.slug);
       await fetchPosts();
+      try {
+        router.refresh();
+      } catch {}
     } catch (err) {
       setSaveMessage({
         type: 'error',
@@ -531,6 +545,9 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
       });
       if (res.ok) {
         await fetchPosts();
+        try {
+          router.refresh();
+        } catch {}
         setQuickDraftTitle('');
         setQuickDraftContent('');
       }
@@ -1972,6 +1989,16 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                             className="object-cover"
                           />
                         </div>
+                        <div>
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#004b87]/10 text-[#004b87] border border-[#004b87]/20 shadow-xs">
+                            <span className="w-2 h-2 rounded-full bg-[#F97316] animate-pulse" />
+                            <span>
+                              {formData.featuredImage.includes('cloudinary.com')
+                                ? 'Transparent WebP • Live on Cloudinary'
+                                : 'Transparent WebP • <=180KB Optimized'}
+                            </span>
+                          </div>
+                        </div>
                         <div className="flex items-center gap-2">
                           <button
                             type="button"
@@ -2086,9 +2113,9 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
               </div>
 
               {uploadingMedia && (
-                <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl text-xs text-blue-800 flex items-center gap-2">
+                <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl text-xs text-blue-800 flex items-center gap-2 shadow-xs">
                   <RefreshCw className="w-4 h-4 animate-spin text-[#004b87]" />
-                  <span>Uploading image and committing to repository...</span>
+                  <span>Processing transparent background, compressing to &lt;=180KB WebP, and syncing to Cloudinary...</span>
                 </div>
               )}
 
@@ -2394,12 +2421,24 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
               <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
                 Choose Image from Media Library
               </span>
-              <button
-                onClick={() => setMediaPickerOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-700"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-2">
+                <label className="px-3 py-1 rounded-md bg-[#004b87] hover:bg-[#0a355c] text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer shadow-xs">
+                  <Upload className="w-3.5 h-3.5" />
+                  <span>Upload &amp; Optimize</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                  />
+                </label>
+                <button
+                  onClick={() => setMediaPickerOpen(false)}
+                  className="p-1 rounded-lg text-slate-400 hover:text-slate-700 cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             <div className="p-4 overflow-y-auto grid grid-cols-3 sm:grid-cols-4 gap-3">
