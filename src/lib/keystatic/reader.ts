@@ -6,6 +6,7 @@ import {
   getDurableTrashedSlugs,
   getDurablePosts,
 } from '@/lib/blog-admin/storage';
+import { getDurableBlogState } from '@/lib/durable-store';
 
 // Initialize server-side Keystatic reader reading directly from repo content
 const reader = createReader(process.cwd(), keystaticConfig);
@@ -105,11 +106,22 @@ export async function getBlogPosts(options: {
 }> {
   const { page = 1, perPage = 12, categorySlug, search, includeDrafts = false } = options;
 
-  const [deletedSlugs, trashedSlugs, durablePosts] = await Promise.all([
+  const [deletedSlugs, trashedSlugs, durablePosts, blogState] = await Promise.all([
     getDurableDeletedSlugs(),
     getDurableTrashedSlugs(),
     getDurablePosts(),
+    getDurableBlogState(),
   ]);
+
+  const allDeleted = new Set([
+    ...deletedSlugs,
+    ...blogState.deletedSlugs.map((s) => s.toLowerCase()),
+  ]);
+  const allTrashed = new Set([
+    ...trashedSlugs,
+    ...blogState.trashedSlugs.map((s) => s.toLowerCase()),
+  ]);
+  const allUnpub = new Set(blogState.unpublishedSlugs.map((s) => s.toLowerCase()));
 
   let rawPosts: Array<{ slug: string; entry: any }> = [];
 
@@ -120,16 +132,20 @@ export async function getBlogPosts(options: {
   }
 
   // Filter out any permanently deleted posts
-  rawPosts = rawPosts.filter((p) => !deletedSlugs.has(p.slug));
+  rawPosts = rawPosts.filter((p) => !allDeleted.has(p.slug.toLowerCase()));
 
   const postMap = new Map<string, KeystaticBlogPost>();
 
   // 1. Process Keystatic repository posts
   for (const { slug, entry } of rawPosts) {
-    const durable = durablePosts.get(slug);
-    const isTrashedViaZoho = trashedSlugs.has(slug.toLowerCase().trim());
-    const effectiveStatus = (isTrashedViaZoho
+    const cleanSlug = slug.toLowerCase().trim();
+    const durable = durablePosts.get(cleanSlug) || (blogState.posts ? blogState.posts[cleanSlug] : undefined);
+    const isTrashed = allTrashed.has(cleanSlug);
+    const isUnpub = allUnpub.has(cleanSlug);
+    const effectiveStatus = (isTrashed
       ? 'trash'
+      : isUnpub
+      ? 'draft'
       : durable
       ? durable.status
       : entry.status || 'published') as
@@ -325,15 +341,21 @@ export async function getBlogPostBySlug(
   if (!slug) return null;
 
   // 1. If slug is permanently deleted or trashed, NEVER return it for public view!
-  const [deletedSlugs, trashedSlugs] = await Promise.all([
+  const [deletedSlugs, trashedSlugs, blogState] = await Promise.all([
     getDurableDeletedSlugs(),
     getDurableTrashedSlugs(),
+    getDurableBlogState(),
   ]);
   const cleanSlug = slug.toLowerCase().trim();
-  if (deletedSlugs.has(cleanSlug)) {
+  if (deletedSlugs.has(cleanSlug) || blogState.deletedSlugs.map((s) => s.toLowerCase()).includes(cleanSlug)) {
     return null;
   }
-  if (!includeDrafts && trashedSlugs.has(cleanSlug)) {
+  if (
+    !includeDrafts &&
+    (trashedSlugs.has(cleanSlug) ||
+      blogState.trashedSlugs.map((s) => s.toLowerCase()).includes(cleanSlug) ||
+      blogState.unpublishedSlugs.map((s) => s.toLowerCase()).includes(cleanSlug))
+  ) {
     return null;
   }
 

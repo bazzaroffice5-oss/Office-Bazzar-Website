@@ -412,12 +412,8 @@ export async function saveDurablePost(post: AdminBlogPost): Promise<void> {
     console.warn('[Durable Store] Zoho blog status record warning:', e);
   }
 
-  // Persist to Cloudinary raw JSON state store
-  try {
-    await saveDurableBlogPostOverride(post);
-  } catch (e) {
-    console.warn('[Durable Store] Cloudinary blog state save warning:', e);
-  }
+  // Persist to Cloudinary raw JSON state store (authoritative durable store)
+  await saveDurableBlogPostOverride(post);
 }
 
 /**
@@ -454,12 +450,8 @@ export async function deleteDurablePost(slug: string): Promise<void> {
     console.warn('[Durable Store] Zoho delete record warning:', e);
   }
 
-  // Delete from Cloudinary raw JSON state store
-  try {
-    await deleteDurableBlogPostOverride(slug);
-  } catch (e) {
-    console.warn('[Durable Store] Cloudinary blog state delete warning:', e);
-  }
+  // Delete from Cloudinary raw JSON state store (authoritative durable store)
+  await deleteDurableBlogPostOverride(slug);
 }
 
 // ----------------------------------------------------------------------
@@ -568,10 +560,21 @@ export function serializeMdoc(post: AdminBlogPost): string {
  * Merges filesystem baseline with durable storage overlays and removes deleted posts.
  */
 export async function listAllAdminPosts(): Promise<AdminBlogPost[]> {
-  const [deletedSlugs, durablePosts] = await Promise.all([
+  const blogState = await getDurableBlogState(true);
+  const [durableDeleted, durablePosts] = await Promise.all([
     getDurableDeletedSlugs(),
     getDurablePosts(),
   ]);
+
+  const deletedSlugs = new Set([
+    ...durableDeleted,
+    ...blogState.deletedSlugs.map((s) => s.toLowerCase()),
+  ]);
+  const trashedSlugs = new Set([
+    ...(await getDurableTrashedSlugs()),
+    ...blogState.trashedSlugs.map((s) => s.toLowerCase()),
+  ]);
+  const unpubSlugs = new Set(blogState.unpublishedSlugs.map((s) => s.toLowerCase()));
 
   const postsDir = path.join(process.cwd(), 'content', 'posts');
   const postMap = new Map<string, AdminBlogPost>();
@@ -580,7 +583,8 @@ export async function listAllAdminPosts(): Promise<AdminBlogPost[]> {
   if (fs.existsSync(postsDir)) {
     const subdirs = fs.readdirSync(postsDir);
     for (const slug of subdirs) {
-      if (deletedSlugs.has(slug)) continue; // Permanently deleted
+      const cleanSlug = slug.toLowerCase();
+      if (deletedSlugs.has(cleanSlug)) continue; // Permanently deleted
       const fullDir = path.join(postsDir, slug);
       if (fs.statSync(fullDir).isDirectory()) {
         const mdocPath = path.join(fullDir, 'index.mdoc');
@@ -588,12 +592,18 @@ export async function listAllAdminPosts(): Promise<AdminBlogPost[]> {
           try {
             const raw = fs.readFileSync(mdocPath, 'utf8');
             const { data, body } = parseMdoc(raw);
-            const validStatus = ['published', 'draft', 'scheduled', 'trash'].includes(data.status)
+            let validStatus = ['published', 'draft', 'scheduled', 'trash'].includes(data.status)
               ? (data.status as 'published' | 'draft' | 'scheduled' | 'trash')
               : 'published';
 
-            postMap.set(slug, {
-              slug,
+            if (trashedSlugs.has(cleanSlug)) {
+              validStatus = 'trash';
+            } else if (unpubSlugs.has(cleanSlug)) {
+              validStatus = 'draft';
+            }
+
+            postMap.set(cleanSlug, {
+              slug: cleanSlug,
               title: data.title || slug,
               status: validStatus,
               previousStatus: data.previousStatus,
@@ -624,23 +634,48 @@ export async function listAllAdminPosts(): Promise<AdminBlogPost[]> {
     }
   }
 
-  // 2. Overlay durable storage posts (new creations or status updates)
+  // 2. Overlay durable storage posts
   for (const [slug, durablePost] of durablePosts.entries()) {
-    if (deletedSlugs.has(slug)) continue;
-    postMap.set(slug, durablePost);
+    const cleanSlug = slug.toLowerCase();
+    if (deletedSlugs.has(cleanSlug)) continue;
+    postMap.set(cleanSlug, durablePost);
   }
 
-  // 3. Overlay Zoho CRM Notes trashed status fallback
-  try {
-    const { trashed } = await fetchZohoBlogStatusNotes();
-    for (const trashedSlug of trashed) {
-      if (deletedSlugs.has(trashedSlug)) continue;
-      const existing = postMap.get(trashedSlug);
-      if (existing) {
-        postMap.set(trashedSlug, { ...existing, status: 'trash' });
-      }
+  // 3. Overlay blogState posts directly from Cloudinary
+  if (blogState && blogState.posts) {
+    for (const [slug, p] of Object.entries(blogState.posts)) {
+      const cleanSlug = slug.toLowerCase();
+      if (deletedSlugs.has(cleanSlug)) continue;
+      const existing = postMap.get(cleanSlug);
+      postMap.set(cleanSlug, {
+        ...(existing || {}),
+        ...p,
+        slug: cleanSlug,
+      } as AdminBlogPost);
     }
-  } catch {}
+  }
+
+  // 4. Force apply trashed and unpublished overrides
+  for (const trashedSlug of trashedSlugs) {
+    if (deletedSlugs.has(trashedSlug)) continue;
+    const existing = postMap.get(trashedSlug);
+    if (existing) {
+      postMap.set(trashedSlug, { ...existing, status: 'trash' });
+    }
+  }
+
+  for (const unpubSlug of unpubSlugs) {
+    if (deletedSlugs.has(unpubSlug) || trashedSlugs.has(unpubSlug)) continue;
+    const existing = postMap.get(unpubSlug);
+    if (existing) {
+      postMap.set(unpubSlug, { ...existing, status: 'draft' });
+    }
+  }
+
+  // Guarantee deleted slugs are removed
+  for (const d of deletedSlugs) {
+    postMap.delete(d);
+  }
 
   const posts = Array.from(postMap.values());
   // Sort newest first
@@ -652,13 +687,35 @@ export async function listAllAdminPosts(): Promise<AdminBlogPost[]> {
  * Retrieve a single post by slug for the admin editor.
  */
 export async function getAdminPostBySlug(slug: string): Promise<AdminBlogPost | null> {
-  const deletedSlugs = await getDurableDeletedSlugs();
-  if (deletedSlugs.has(slug)) return null;
+  const cleanSlug = slug.toLowerCase().trim();
+  const blogState = await getDurableBlogState();
+  const deletedSlugs = new Set([
+    ...(await getDurableDeletedSlugs()),
+    ...blogState.deletedSlugs.map((s) => s.toLowerCase()),
+  ]);
+  if (deletedSlugs.has(cleanSlug)) return null;
 
-  // 1. Check durable store first
+  // 1. Check Cloudinary raw asset state first
+  if (blogState.posts && blogState.posts[cleanSlug]) {
+    const p = { ...blogState.posts[cleanSlug] };
+    if (blogState.trashedSlugs.map((s) => s.toLowerCase()).includes(cleanSlug)) {
+      p.status = 'trash';
+    } else if (blogState.unpublishedSlugs.map((s) => s.toLowerCase()).includes(cleanSlug)) {
+      p.status = 'draft';
+    }
+    return p as AdminBlogPost;
+  }
+
+  // 2. Check durable KV store
   const durablePosts = await getDurablePosts();
-  if (durablePosts.has(slug)) {
-    return durablePosts.get(slug)!;
+  if (durablePosts.has(cleanSlug)) {
+    const dp = { ...durablePosts.get(cleanSlug)! };
+    if (blogState.trashedSlugs.map((s) => s.toLowerCase()).includes(cleanSlug)) {
+      dp.status = 'trash';
+    } else if (blogState.unpublishedSlugs.map((s) => s.toLowerCase()).includes(cleanSlug)) {
+      dp.status = 'draft';
+    }
+    return dp;
   }
 
   // 2. Check disk

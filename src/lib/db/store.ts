@@ -919,12 +919,8 @@ export async function saveProduct(productData: Partial<Product>): Promise<Produc
     console.warn('[Store] Durable custom product save notice:', dErr);
   }
 
-  // Persist to Cloudinary raw JSON state store
-  try {
-    await saveDurableProductOverride(newProduct);
-  } catch (cErr) {
-    console.warn('[Store] Cloudinary durable product save notice:', cErr);
-  }
+  // Persist to Cloudinary raw JSON state store (authoritative durable store)
+  await saveDurableProductOverride(newProduct);
   lastSyncCustomTime = 0;
 
   return newProduct;
@@ -975,14 +971,10 @@ export async function deleteProduct(productId: string): Promise<boolean> {
     console.warn('[Store] Record Zoho deleted SKU notice:', zErr);
   }
 
-  // Delete from Cloudinary raw JSON state store
-  try {
-    await deleteDurableProductOverride(skuToTombstone);
-    if (idToTombstone && idToTombstone !== skuToTombstone) {
-      await deleteDurableProductOverride(idToTombstone);
-    }
-  } catch (cErr) {
-    console.warn('[Store] Cloudinary durable product delete notice:', cErr);
+  // Delete from Cloudinary raw JSON state store (authoritative durable store)
+  await deleteDurableProductOverride(skuToTombstone);
+  if (idToTombstone && idToTombstone !== skuToTombstone) {
+    await deleteDurableProductOverride(idToTombstone);
   }
 
   // Remove from runtime storeState

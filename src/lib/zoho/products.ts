@@ -15,7 +15,7 @@ import { zohoFetch, isZohoConfigured } from './client';
 import zohoMappingData from '@/lib/data/zoho_product_mapping.json';
 import { loadDurableCustomProducts, invalidateDurableCustomProductCache } from '@/lib/products/custom-store';
 import { deleteZohoAttachment } from './attachments';
-import { getDurableProductDeletedSkus, deleteDurableProductOverride } from '@/lib/durable-store';
+import { getDurableProductDeletedSkus, deleteDurableProductOverride, getDurableProductState } from '@/lib/durable-store';
 
 export interface ZohoProductRecord {
   id: string;
@@ -784,6 +784,52 @@ async function syncProductsFromZohoInternal(forceRefresh = false): Promise<Produ
     } catch (dErr) {
       console.warn('[ZohoProducts] Notice checking durable custom products:', dErr);
     }
+  }
+
+  // 3. Guaranteed Cloudinary raw JSON state store overlay (authoritative overrides)
+  try {
+    const cloudState = await getDurableProductState(forceRefresh);
+    if (cloudState && cloudState.products) {
+      const cloudDeleted = new Set(cloudState.deletedSkus.map((s) => s.toUpperCase()));
+      const cloudUnpub = new Set(cloudState.unpublishedSkus.map((s) => s.toUpperCase()));
+
+      // Apply product overrides
+      for (const [skuKey, cp] of Object.entries(cloudState.products)) {
+        if (!cp || typeof cp !== 'object') continue;
+        const sUpper = (cp.sku || skuKey).toUpperCase();
+        if (cloudDeleted.has(sUpper) || deletedSkus.has(sUpper)) {
+          productsMap.delete(sUpper);
+          continue;
+        }
+
+        const isUnpublished = cloudUnpub.has(sUpper) || cp.isActive === false || cp.publishStatus === 'unpublished';
+        const existing = productsMap.get(sUpper);
+        const resolved: Product = {
+          ...(existing || {}),
+          ...cp,
+          sku: sUpper,
+          isActive: !isUnpublished,
+          publishStatus: isUnpublished ? 'unpublished' : 'published',
+        } as Product;
+
+        productsMap.set(sUpper, resolved);
+      }
+
+      // Apply deleted tombstones
+      for (const d of cloudDeleted) {
+        productsMap.delete(d);
+      }
+
+      // Apply unpublished flags
+      for (const [sKey, p] of productsMap.entries()) {
+        if (cloudUnpub.has(sKey) || (p.id && cloudUnpub.has(p.id.toUpperCase()))) {
+          p.isActive = false;
+          (p as any).publishStatus = 'unpublished';
+        }
+      }
+    }
+  } catch (cloudErr) {
+    console.warn('[ZohoProducts] Cloudinary product overrides sync notice:', cloudErr);
   }
 
   // Final filter pass to guarantee no deleted SKU, ID, or slug survives
