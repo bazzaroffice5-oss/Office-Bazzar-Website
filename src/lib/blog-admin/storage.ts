@@ -3,6 +3,8 @@ import path from 'path';
 import os from 'os';
 import { revalidatePath } from 'next/cache';
 import { callKV, getKVConfig } from '@/lib/distributed/coordinator';
+import { zohoFetch, isZohoConfigured } from '@/lib/zoho/client';
+import { ZOHO_ACCOUNT_PARENT_ID } from '@/lib/zoho/products';
 
 export interface AdminBlogPost {
   slug: string;
@@ -121,8 +123,141 @@ function writeLocalBlogState(state: LocalBlogState): void {
   }
 }
 
+// In-memory cache for Zoho Blog Notes
+let deletedBlogsNoteId: string | null = null;
+let trashedBlogsNoteId: string | null = null;
+let cachedZohoDeletedBlogs: Set<string> | null = null;
+let cachedZohoTrashedBlogs: Set<string> | null = null;
+let lastZohoBlogNotesFetch = 0;
+const ZOHO_BLOG_NOTES_CACHE_TTL = 30 * 1000;
+
+async function fetchZohoBlogStatusNotes(force = false): Promise<{ deleted: Set<string>; trashed: Set<string> }> {
+  const now = Date.now();
+  if (!force && cachedZohoDeletedBlogs && cachedZohoTrashedBlogs && now - lastZohoBlogNotesFetch < ZOHO_BLOG_NOTES_CACHE_TTL) {
+    return { deleted: cachedZohoDeletedBlogs, trashed: cachedZohoTrashedBlogs };
+  }
+
+  const deleted = new Set<string>();
+  const trashed = new Set<string>();
+  if (!(await isZohoConfigured())) return { deleted, trashed };
+
+  try {
+    const res = await zohoFetch<any>(
+      `/Accounts/${ZOHO_ACCOUNT_PARENT_ID}/Notes?fields=id,Note_Title,Note_Content&per_page=200`,
+      { method: 'GET', cache: 'no-store' }
+    );
+    if (res?.data && Array.isArray(res.data)) {
+      for (const item of res.data) {
+        if (item.Note_Title === 'OB_DELETED_BLOGS') {
+          deletedBlogsNoteId = item.id;
+          if (item.Note_Content) {
+            try {
+              const parsed = JSON.parse(item.Note_Content);
+              if (Array.isArray(parsed)) {
+                parsed.forEach((s) => typeof s === 'string' && deleted.add(s.toLowerCase().trim()));
+              }
+            } catch {}
+          }
+        } else if (item.Note_Title === 'OB_TRASHED_BLOGS') {
+          trashedBlogsNoteId = item.id;
+          if (item.Note_Content) {
+            try {
+              const parsed = JSON.parse(item.Note_Content);
+              if (Array.isArray(parsed)) {
+                parsed.forEach((s) => typeof s === 'string' && trashed.add(s.toLowerCase().trim()));
+              }
+            } catch {}
+          }
+        }
+      }
+    }
+    cachedZohoDeletedBlogs = deleted;
+    cachedZohoTrashedBlogs = trashed;
+    lastZohoBlogNotesFetch = now;
+  } catch (err) {
+    console.warn('[BlogStore] Error fetching Zoho blog status notes:', err);
+  }
+  return { deleted, trashed };
+}
+
+export async function recordZohoBlogStatus(slug: string, status: 'published' | 'draft' | 'scheduled' | 'trash'): Promise<void> {
+  const clean = slug.toLowerCase().trim();
+  if (!cachedZohoTrashedBlogs) cachedZohoTrashedBlogs = new Set();
+  if (status === 'trash') {
+    cachedZohoTrashedBlogs.add(clean);
+  } else {
+    cachedZohoTrashedBlogs.delete(clean);
+  }
+
+  if (!(await isZohoConfigured())) return;
+
+  try {
+    if (!trashedBlogsNoteId) {
+      await fetchZohoBlogStatusNotes(true);
+    }
+    const payload = JSON.stringify(Array.from(cachedZohoTrashedBlogs));
+    if (trashedBlogsNoteId) {
+      await zohoFetch<any>('/Notes', {
+        method: 'PUT',
+        cache: 'no-store',
+        body: JSON.stringify({
+          data: [{ id: trashedBlogsNoteId, Note_Content: payload }],
+        }),
+      });
+    } else {
+      const res = await zohoFetch<any>(`/Accounts/${ZOHO_ACCOUNT_PARENT_ID}/Notes`, {
+        method: 'POST',
+        cache: 'no-store',
+        body: JSON.stringify({
+          data: [{ Note_Title: 'OB_TRASHED_BLOGS', Note_Content: payload }],
+        }),
+      });
+      const createdId = res?.data?.[0]?.details?.id;
+      if (createdId) trashedBlogsNoteId = String(createdId);
+    }
+  } catch (err) {
+    console.warn('[BlogStore] Error persisting Zoho trashed blog note:', err);
+  }
+}
+
+async function recordZohoDeletedBlog(slug: string): Promise<void> {
+  const clean = slug.toLowerCase().trim();
+  if (!cachedZohoDeletedBlogs) cachedZohoDeletedBlogs = new Set();
+  cachedZohoDeletedBlogs.add(clean);
+
+  if (!(await isZohoConfigured())) return;
+
+  try {
+    if (!deletedBlogsNoteId) {
+      await fetchZohoBlogStatusNotes(true);
+    }
+    const payload = JSON.stringify(Array.from(cachedZohoDeletedBlogs));
+    if (deletedBlogsNoteId) {
+      await zohoFetch<any>('/Notes', {
+        method: 'PUT',
+        cache: 'no-store',
+        body: JSON.stringify({
+          data: [{ id: deletedBlogsNoteId, Note_Content: payload }],
+        }),
+      });
+    } else {
+      const res = await zohoFetch<any>(`/Accounts/${ZOHO_ACCOUNT_PARENT_ID}/Notes`, {
+        method: 'POST',
+        cache: 'no-store',
+        body: JSON.stringify({
+          data: [{ Note_Title: 'OB_DELETED_BLOGS', Note_Content: payload }],
+        }),
+      });
+      const createdId = res?.data?.[0]?.details?.id;
+      if (createdId) deletedBlogsNoteId = String(createdId);
+    }
+  } catch (err) {
+    console.warn('[BlogStore] Error persisting Zoho deleted blog note:', err);
+  }
+}
+
 /**
- * Returns set of permanently deleted post slugs from cloud KV and local journal.
+ * Returns set of permanently deleted post slugs from cloud KV, Zoho Notes, and local journal.
  */
 export async function getDurableDeletedSlugs(): Promise<Set<string>> {
   const deletedSet = new Set<string>();
@@ -146,7 +281,25 @@ export async function getDurableDeletedSlugs(): Promise<Set<string>> {
     }
   }
 
+  // 3. Read Zoho CRM Account Notes fallback (survives cold starts even if KV unconfigured)
+  try {
+    const { deleted } = await fetchZohoBlogStatusNotes();
+    deleted.forEach((s) => deletedSet.add(s));
+  } catch {}
+
   return deletedSet;
+}
+
+/**
+ * Returns set of trashed post slugs from Zoho Notes and Cloud KV.
+ */
+export async function getDurableTrashedSlugs(): Promise<Set<string>> {
+  const trashedSet = new Set<string>();
+  try {
+    const { trashed } = await fetchZohoBlogStatusNotes();
+    trashed.forEach((s) => trashedSet.add(s));
+  } catch {}
+  return trashedSet;
 }
 
 /**
@@ -219,6 +372,13 @@ export async function saveDurablePost(post: AdminBlogPost): Promise<void> {
       console.warn('[Durable Store] Cloud KV save warning:', e);
     }
   }
+
+  // Update Zoho CRM Notes status
+  try {
+    await recordZohoBlogStatus(post.slug, post.status);
+  } catch (e) {
+    console.warn('[Durable Store] Zoho blog status record warning:', e);
+  }
 }
 
 /**
@@ -246,6 +406,13 @@ export async function deleteDurablePost(slug: string): Promise<void> {
     } catch (e) {
       console.warn('[Durable Store] Cloud KV delete warning:', e);
     }
+  }
+
+  // Update Zoho CRM Account Notes fallback
+  try {
+    await recordZohoDeletedBlog(slug);
+  } catch (e) {
+    console.warn('[Durable Store] Zoho delete record warning:', e);
   }
 }
 
@@ -416,6 +583,18 @@ export async function listAllAdminPosts(): Promise<AdminBlogPost[]> {
     if (deletedSlugs.has(slug)) continue;
     postMap.set(slug, durablePost);
   }
+
+  // 3. Overlay Zoho CRM Notes trashed status fallback
+  try {
+    const { trashed } = await fetchZohoBlogStatusNotes();
+    for (const trashedSlug of trashed) {
+      if (deletedSlugs.has(trashedSlug)) continue;
+      const existing = postMap.get(trashedSlug);
+      if (existing) {
+        postMap.set(trashedSlug, { ...existing, status: 'trash' });
+      }
+    }
+  } catch {}
 
   const posts = Array.from(postMap.values());
   // Sort newest first

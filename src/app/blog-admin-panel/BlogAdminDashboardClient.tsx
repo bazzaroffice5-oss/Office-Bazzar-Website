@@ -42,6 +42,7 @@ import {
   Grid,
   ListFilter,
   Calendar,
+  Loader2,
 } from 'lucide-react';
 import { AdminBlogPost, MediaItem } from '@/lib/blog-admin/storage';
 
@@ -126,6 +127,9 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
   // Modals state
   const [deleteModalSlug, setDeleteModalSlug] = useState<string | null>(null);
   const [previewModalPost, setPreviewModalPost] = useState<AdminBlogPost | null>(null);
+  const [trashingSlug, setTrashingSlug] = useState<string | null>(null);
+  const [deletingSlug, setDeletingSlug] = useState<string | null>(null);
+  const [restoringSlug, setRestoringSlug] = useState<string | null>(null);
 
   // Quick Draft state on Dashboard
   const [quickDraftTitle, setQuickDraftTitle] = useState('');
@@ -316,65 +320,126 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
     }
   };
 
-  // Move to Trash action (preserves previousStatus for faithful restore)
+  // Move to Trash action (optimistic UI update + resilient dual persistence)
   const handleMoveToTrash = async (post: AdminBlogPost) => {
+    setTrashingSlug(post.slug);
+    const prevPosts = [...posts];
+    const prevStatus = post.status !== 'trash' ? post.status : 'published';
+
+    // Optimistic UI state update
+    setPosts((prev) =>
+      prev.map((p) =>
+        p.slug === post.slug
+          ? {
+              ...p,
+              previousStatus: prevStatus,
+              status: 'trash' as const,
+            }
+          : p
+      )
+    );
+
     const updated: AdminBlogPost = {
       ...post,
-      previousStatus: post.status !== 'trash' ? post.status : 'published',
+      previousStatus: prevStatus,
       status: 'trash',
     };
+
     try {
-      const res = await fetch('/api/blog-admin/posts', {
-        method: 'POST',
+      const res = await fetch(`/api/blog-admin/posts/${encodeURIComponent(post.slug)}`, {
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updated),
+        body: JSON.stringify({ status: 'trash', previousStatus: prevStatus }),
       });
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || 'Failed to move to trash.');
+        const fallbackRes = await fetch('/api/blog-admin/posts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updated),
+        });
+        if (!fallbackRes.ok) {
+          const data = await fallbackRes.json().catch(() => ({}));
+          throw new Error(data.error || 'Failed to move to trash.');
+        }
       }
       await fetchPosts();
       try {
         router.refresh();
       } catch {}
     } catch (e: unknown) {
+      setPosts(prevPosts);
       alert(e instanceof Error ? e.message : 'Failed to move to trash.');
+    } finally {
+      setTrashingSlug(null);
     }
   };
 
-  // Restore from Trash action (restores original status)
+  // Restore from Trash action (optimistic UI update + resilient restore)
   const handleRestoreFromTrash = async (post: AdminBlogPost) => {
+    setRestoringSlug(post.slug);
     const targetStatus = post.previousStatus || 'published';
+    const prevPosts = [...posts];
+
+    // Optimistic UI state update
+    setPosts((prev) =>
+      prev.map((p) =>
+        p.slug === post.slug
+          ? {
+              ...p,
+              status: targetStatus,
+              previousStatus: undefined,
+            }
+          : p
+      )
+    );
+
     const updated: AdminBlogPost = {
       ...post,
       status: targetStatus,
     };
     delete updated.previousStatus;
+
     try {
-      const res = await fetch('/api/blog-admin/posts', {
-        method: 'POST',
+      const res = await fetch(`/api/blog-admin/posts/${encodeURIComponent(post.slug)}`, {
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updated),
+        body: JSON.stringify({ status: targetStatus }),
       });
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || 'Failed to restore post.');
+        const fallbackRes = await fetch('/api/blog-admin/posts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updated),
+        });
+        if (!fallbackRes.ok) {
+          const data = await fallbackRes.json().catch(() => ({}));
+          throw new Error(data.error || 'Failed to restore post.');
+        }
       }
       await fetchPosts();
       try {
         router.refresh();
       } catch {}
     } catch (e: unknown) {
+      setPosts(prevPosts);
       alert(e instanceof Error ? e.message : 'Failed to restore post.');
+    } finally {
+      setRestoringSlug(null);
     }
   };
 
-  // Delete Confirm (Strict verification of server response)
+  // Delete Confirm (Optimistic removal + strict server verification)
   const handleDeleteConfirm = async () => {
     if (!deleteModalSlug) return;
     const slugToDelete = deleteModalSlug;
+    setDeletingSlug(slugToDelete);
+    const prevPosts = [...posts];
+
+    // Optimistically remove from UI
+    setPosts((prev) => prev.filter((p) => p.slug !== slugToDelete));
+
     try {
-      const res = await fetch(`/api/blog-admin/posts/${slugToDelete}`, {
+      const res = await fetch(`/api/blog-admin/posts/${encodeURIComponent(slugToDelete)}`, {
         method: 'DELETE',
       });
       const data = await res.json().catch(() => ({}));
@@ -390,7 +455,10 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
         setCurrentView('posts');
       }
     } catch (err: unknown) {
+      setPosts(prevPosts);
       alert(err instanceof Error ? err.message : 'Delete operation failed on server.');
+    } finally {
+      setDeletingSlug(null);
     }
   };
 
@@ -1322,26 +1390,41 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
                                     </button>
                                     <span>|</span>
                                     <button
+                                      disabled={trashingSlug === post.slug}
                                       onClick={() => handleMoveToTrash(post)}
-                                      className="text-rose-600 hover:underline cursor-pointer"
+                                      className="text-rose-600 hover:underline cursor-pointer disabled:opacity-50"
                                     >
-                                      Trash
+                                      {trashingSlug === post.slug ? (
+                                        <span className="inline-flex items-center gap-1">
+                                          <Loader2 className="w-3 h-3 animate-spin inline" /> Trashing...
+                                        </span>
+                                      ) : (
+                                        'Trash'
+                                      )}
                                     </button>
                                   </>
                                 ) : (
                                   <>
                                     <button
+                                      disabled={restoringSlug === post.slug}
                                       onClick={() => handleRestoreFromTrash(post)}
-                                      className="text-emerald-600 hover:underline cursor-pointer"
+                                      className="text-emerald-600 hover:underline cursor-pointer disabled:opacity-50"
                                     >
-                                      Restore
+                                      {restoringSlug === post.slug ? (
+                                        <span className="inline-flex items-center gap-1">
+                                          <Loader2 className="w-3 h-3 animate-spin inline" /> Restoring...
+                                        </span>
+                                      ) : (
+                                        'Restore'
+                                      )}
                                     </button>
                                     <span>|</span>
                                     <button
+                                      disabled={deletingSlug === post.slug}
                                       onClick={() => setDeleteModalSlug(post.slug)}
-                                      className="text-rose-600 hover:underline cursor-pointer font-bold"
+                                      className="text-rose-600 hover:underline cursor-pointer font-bold disabled:opacity-50"
                                     >
-                                      Delete Permanently
+                                      {deletingSlug === post.slug ? 'Deleting...' : 'Delete Permanently'}
                                     </button>
                                   </>
                                 )}
@@ -2518,16 +2601,24 @@ export default function BlogAdminDashboardClient({ initialPosts, username }: Pro
             </p>
             <div className="flex items-center justify-end gap-3 pt-2">
               <button
+                disabled={Boolean(deletingSlug)}
                 onClick={() => setDeleteModalSlug(null)}
-                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold cursor-pointer disabled:opacity-50"
               >
                 Cancel
               </button>
               <button
+                disabled={Boolean(deletingSlug)}
                 onClick={handleDeleteConfirm}
-                className="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold cursor-pointer disabled:opacity-50 inline-flex items-center gap-1.5"
               >
-                Yes, Delete Permanently
+                {deletingSlug ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" /> Deleting...
+                  </>
+                ) : (
+                  'Yes, Delete Permanently'
+                )}
               </button>
             </div>
           </div>

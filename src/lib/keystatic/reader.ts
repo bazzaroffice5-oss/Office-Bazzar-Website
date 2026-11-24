@@ -3,6 +3,7 @@ import keystaticConfig from '../../../keystatic.config';
 import { BLOG_POSTS } from '@/lib/data/blog';
 import {
   getDurableDeletedSlugs,
+  getDurableTrashedSlugs,
   getDurablePosts,
 } from '@/lib/blog-admin/storage';
 
@@ -104,8 +105,9 @@ export async function getBlogPosts(options: {
 }> {
   const { page = 1, perPage = 12, categorySlug, search, includeDrafts = false } = options;
 
-  const [deletedSlugs, durablePosts] = await Promise.all([
+  const [deletedSlugs, trashedSlugs, durablePosts] = await Promise.all([
     getDurableDeletedSlugs(),
+    getDurableTrashedSlugs(),
     getDurablePosts(),
   ]);
 
@@ -125,7 +127,12 @@ export async function getBlogPosts(options: {
   // 1. Process Keystatic repository posts
   for (const { slug, entry } of rawPosts) {
     const durable = durablePosts.get(slug);
-    const effectiveStatus = (durable ? durable.status : entry.status || 'published') as
+    const isTrashedViaZoho = trashedSlugs.has(slug.toLowerCase().trim());
+    const effectiveStatus = (isTrashedViaZoho
+      ? 'trash'
+      : durable
+      ? durable.status
+      : entry.status || 'published') as
       | 'published'
       | 'draft'
       | 'scheduled'
@@ -234,7 +241,7 @@ export async function getBlogPosts(options: {
   // and no deletions occurred.
   if (postMap.size === 0 && deletedSlugs.size === 0 && durablePosts.size === 0 && rawPosts.length === 0) {
     for (const p of BLOG_POSTS) {
-      if (deletedSlugs.has(p.slug)) continue;
+      if (deletedSlugs.has(p.slug) || trashedSlugs.has(p.slug.toLowerCase().trim())) continue;
       const d = new Date(p.publishedDate);
       const iso = !isNaN(d.getTime()) ? d.toISOString() : new Date().toISOString();
       postMap.set(p.slug, {
@@ -317,9 +324,16 @@ export async function getBlogPostBySlug(
 ): Promise<KeystaticBlogPost | null> {
   if (!slug) return null;
 
-  // 1. If slug is permanently deleted, NEVER return it!
-  const deletedSlugs = await getDurableDeletedSlugs();
-  if (deletedSlugs.has(slug)) {
+  // 1. If slug is permanently deleted or trashed, NEVER return it for public view!
+  const [deletedSlugs, trashedSlugs] = await Promise.all([
+    getDurableDeletedSlugs(),
+    getDurableTrashedSlugs(),
+  ]);
+  const cleanSlug = slug.toLowerCase().trim();
+  if (deletedSlugs.has(cleanSlug)) {
+    return null;
+  }
+  if (!includeDrafts && trashedSlugs.has(cleanSlug)) {
     return null;
   }
 
@@ -425,7 +439,7 @@ export async function getBlogPostBySlug(
 
   // 4. Fallback to static post definition ONLY if NOT deleted and NOT in durable store
   const staticMatch = BLOG_POSTS.find((p) => p.slug === slug);
-  if (staticMatch && !deletedSlugs.has(slug)) {
+  if (staticMatch && !deletedSlugs.has(slug) && !trashedSlugs.has(cleanSlug)) {
     const d = new Date(staticMatch.publishedDate);
     const iso = !isNaN(d.getTime()) ? d.toISOString() : new Date().toISOString();
     return {

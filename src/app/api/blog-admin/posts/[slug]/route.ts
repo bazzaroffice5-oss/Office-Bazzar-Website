@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAdminSession } from '@/lib/blog-admin/auth';
-import { getAdminPostBySlug, deleteAdminPost, revalidateBlogCache } from '@/lib/blog-admin/storage';
+import { getAdminPostBySlug, saveAdminPost, deleteAdminPost, revalidateBlogCache } from '@/lib/blog-admin/storage';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -27,6 +27,42 @@ export async function GET(
   }
 
   return NextResponse.json({ post }, { headers: NO_CACHE_HEADERS });
+}
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const session = await getAdminSession();
+  if (!session.authenticated) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: NO_CACHE_HEADERS });
+  }
+
+  const { slug } = await params;
+  try {
+    const existing = await getAdminPostBySlug(slug);
+    if (!existing) {
+      return NextResponse.json({ error: 'Post not found' }, { status: 404, headers: NO_CACHE_HEADERS });
+    }
+
+    const updates = await request.json().catch(() => ({}));
+    const merged = { ...existing, ...updates, slug };
+    const result = await saveAdminPost(merged);
+    revalidateBlogCache(slug);
+    return NextResponse.json({ success: true, post: merged, message: result.message }, { headers: NO_CACHE_HEADERS });
+  } catch (error) {
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Failed to update post' },
+      { status: 500, headers: NO_CACHE_HEADERS }
+    );
+  }
+}
+
+export async function PUT(
+  request: NextRequest,
+  context: { params: Promise<{ slug: string }> }
+) {
+  return PATCH(request, context);
 }
 
 export async function DELETE(
