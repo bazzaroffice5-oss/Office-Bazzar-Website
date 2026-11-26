@@ -21,6 +21,7 @@
 
 import { zohoFetch, isZohoConfigured } from './client';
 import { extractStructuredMeta, getCustomerQuotationsFromZoho } from './quotes';
+import { getNextAtomicRoundRobinSequence } from '@/lib/durable-store';
 
 export type LeadAssigneeName = 'Sales' | 'Marketing';
 export type LeadAssigneeRole = 'ADMIN_1_SALES' | 'ADMIN_2_MARKETING';
@@ -293,7 +294,46 @@ export async function getNextLeadAssignee(): Promise<LeadAssignee> {
   return await assignmentMutex.runExclusive(async () => {
     const { salesEmail, marketingEmail } = getAdminRecipients();
 
-    // 1. Resolve current state from fastest to most authoritative:
+    // 0. Primary cross-container atomic counter via Upstash KV INCR (zero cold-start reset)
+    try {
+      const atomic = await getNextAtomicRoundRobinSequence(salesEmail, marketingEmail);
+      if (atomic) {
+        const nextName: LeadAssigneeName = atomic.assignedTo;
+        const nextEmail = atomic.email;
+        const nextRole: LeadAssigneeRole = nextName === 'Sales' ? 'ADMIN_1_SALES' : 'ADMIN_2_MARKETING';
+        const nextSequence = atomic.sequenceNumber;
+        const assignedAt = new Date().toISOString();
+        const label = `${nextName} (${nextEmail})`;
+
+        const newState: StoredRoundRobinState = {
+          lastAssigned: nextName,
+          lastEmail: nextEmail,
+          sequenceNumber: nextSequence,
+          updatedAt: assignedAt,
+        };
+
+        memoryState = newState;
+        writeDiskCache(newState);
+        writeStateToZohoVariable(newState).catch(() => {});
+
+        console.log(
+          `[RoundRobin] Assigned Customer Lead #${nextSequence} -> ${label} [${nextRole}] at ${assignedAt} (Source: Upstash KV Atomic INCR)`
+        );
+
+        return {
+          name: nextName,
+          email: nextEmail,
+          label,
+          role: nextRole,
+          sequenceNumber: nextSequence,
+          assignedAt,
+        };
+      }
+    } catch (atomicErr) {
+      console.warn('[RoundRobin] Atomic sequence check notice:', atomicErr);
+    }
+
+    // 1. Fallback: Resolve current state from fastest to most authoritative:
     // Priority: memory -> disk cache -> Zoho Org Variable -> Zoho Quotes History
     let currentState = memoryState || readDiskCache();
 

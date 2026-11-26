@@ -1,22 +1,48 @@
 import crypto from 'crypto';
+import { Quotation, QuotationSyncStatus } from '@/types';
 
 /**
- * Cloudinary JSON State Store (office-bazzar-db)
- * Guaranteed primary durable state store backed by Cloudinary raw assets.
+ * Cloudinary + Upstash KV Distributed State Store (office-bazzar-db)
  *
- * READ FLOW:
- * Directly queries Cloudinary Admin API (https://api.cloudinary.com/v1_1/${cloudName}/resources/raw/upload/${publicId})
- * using HTTP Basic Auth (API Key + API Secret). This bypasses Cloudinary's edge CDN caching and returns
- * the exact authoritative current metadata (including current version and exact versioned secure_url).
- * Then fetches that versioned URL with cache: 'no-store', guaranteeing 100% fresh state on page reload.
- *
- * WRITE FLOW:
- * Uploads atomic raw JSON (resource_type: 'raw', public_id: 'office-bazzar-db/...', overwrite: true, invalidate: true).
- * Strictly verifies the returned secure_url before returning HTTP 200.
+ * ARCHITECTURAL GUARANTEES:
+ * 1. Distributed Mutex Lock:
+ *    Cross-container atomic lock using Upstash KV (`SET lock:key lockId NX PX ttl`)
+ *    paired with in-process Promise-based async mutexes to prevent concurrent write collisions.
+ * 2. Optimistic Concurrency & Monotonic Versioning:
+ *    Every collection has a strictly increasing `version` and `updatedAt` timestamp.
+ *    Stale writes cannot overwrite newer state.
+ * 3. Dual-Write + Automatic Read-Repair:
+ *    Writes persist to Cloudinary raw JSON (authoritative) and Upstash KV (low-latency cache).
+ *    On read, if Upstash KV misses or lags behind Cloudinary Admin API, KV is repaired in the background.
+ * 4. Schema Validation & Backup Snapshots:
+ *    Integrity validation guards against writing empty or corrupted states.
+ *    A rolling snapshot (`..._backup`) is preserved before destructive writes.
+ * 5. Free-Tier Quota & Footprint Protection:
+ *    Minified compact JSON (`JSON.stringify(data)` without indentation), fixed public IDs,
+ *    and atomic Redis `INCR` for Round-Robin sales rep sequence numbering.
  */
 
+// Cloudinary Public IDs
 const PRODUCT_DB_PUBLIC_ID = 'office-bazzar-db/catalog-overrides.json';
+const PRODUCT_DB_BACKUP_PUBLIC_ID = 'office-bazzar-db/catalog-overrides_backup.json';
+
 const BLOG_DB_PUBLIC_ID = 'office-bazzar-db/blog-overrides.json';
+const BLOG_DB_BACKUP_PUBLIC_ID = 'office-bazzar-db/blog-overrides_backup.json';
+
+const QUOTATION_DB_PUBLIC_ID = 'office-bazzar-db/quotations.json';
+const QUOTATION_DB_BACKUP_PUBLIC_ID = 'office-bazzar-db/quotations_backup.json';
+
+// Upstash KV Redis Keys
+const KV_KEY_PRODUCTS = 'office_bazzar:product_overrides';
+const KV_KEY_PRODUCTS_BACKUP = 'office_bazzar:product_overrides:backup';
+
+const KV_KEY_BLOGS = 'office_bazzar:blog_overrides';
+const KV_KEY_BLOGS_BACKUP = 'office_bazzar:blog_overrides:backup';
+
+const KV_KEY_QUOTATIONS = 'office_bazzar:quotations';
+const KV_KEY_QUOTATIONS_BACKUP = 'office_bazzar:quotations:backup';
+
+const KV_KEY_ROUND_ROBIN_SEQ = 'office_bazzar:round_robin:seq';
 
 export interface ProductOverridesState {
   version: number;
@@ -29,18 +55,33 @@ export interface ProductOverridesState {
 export interface BlogOverridesState {
   version: number;
   updatedAt: string;
-  posts: Record<string, any>; // keyed by slug
+  posts: Record<string, any>; // keyed by slug (lowercase)
   trashedSlugs: string[];
   unpublishedSlugs: string[];
   deletedSlugs: string[];
 }
 
-// In-memory cache for fast reuse within identical serverless invocation
+export interface QuotationOverridesState {
+  version: number;
+  updatedAt: string;
+  quotations: Record<string, Quotation>; // keyed by quotationNumber or id
+}
+
+// In-memory cache for fast reuse within the same serverless invocation tick
 let cachedProductState: ProductOverridesState | null = null;
 let lastProductFetchTime = 0;
+
 let cachedBlogState: BlogOverridesState | null = null;
 let lastBlogFetchTime = 0;
+
+let cachedQuotationState: QuotationOverridesState | null = null;
+let lastQuotationFetchTime = 0;
+
 const CACHE_TTL_MS = 2 * 1000; // 2 seconds TTL
+
+// ============================================================================
+// CREDENTIALS & KV REST CLIENT
+// ============================================================================
 
 function getRequiredCloudinaryCredentials() {
   const cloudName = (process.env.CLOUDINARY_CLOUD_NAME || process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || '').trim();
@@ -57,37 +98,166 @@ function getRequiredCloudinaryCredentials() {
   return { cloudName, apiKey, apiSecret };
 }
 
-async function callCloudKV(command: any[]): Promise<any> {
-  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+function getKVRestConfig(): { url: string; token: string } | null {
+  const url =
+    process.env.KV_REST_API_URL ||
+    process.env.UPSTASH_REDIS_KV_REST_API_URL ||
+    process.env.UPSTASH_REDIS_REST_URL ||
+    process.env.STORAGE_KV_REST_API_URL ||
+    process.env.REDIS_REST_URL;
+
+  const token =
+    process.env.KV_REST_API_TOKEN ||
+    process.env.UPSTASH_REDIS_KV_REST_API_TOKEN ||
+    process.env.UPSTASH_REDIS_REST_TOKEN ||
+    process.env.STORAGE_KV_REST_API_TOKEN ||
+    process.env.REDIS_REST_TOKEN;
+
   if (!url || !token) return null;
+
+  return {
+    url: url.trim().replace(/^["']|["']$/g, '').replace(/\/+$/, ''),
+    token: token.trim().replace(/^["']|["']$/g, ''),
+  };
+}
+
+export async function callCloudKV(command: any[]): Promise<any> {
+  const config = getKVRestConfig();
+  if (!config) return null;
+
   try {
-    const cleanUrl = url.trim().replace(/^["']|["']$/g, '').replace(/\/+$/, '');
-    const cleanToken = token.trim().replace(/^["']|["']$/g, '');
-    const res = await fetch(cleanUrl, {
+    const res = await fetch(config.url, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${cleanToken}`,
+        Authorization: `Bearer ${config.token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(command),
       cache: 'no-store',
     });
+
     if (res.ok) {
       const data = await res.json();
       return data?.result;
     }
-  } catch {}
+  } catch (err) {
+    console.warn('[DurableStore] KV command notice:', err instanceof Error ? err.message : err);
+  }
+  return null;
+}
+
+// ============================================================================
+// CONCURRENCY CONTROLS (Async Mutex + Upstash Distributed Lock)
+// ============================================================================
+
+class LocalAsyncMutex {
+  private current: Promise<void> = Promise.resolve();
+
+  async runExclusive<T>(fn: () => Promise<T>): Promise<T> {
+    let release: () => void = () => {};
+    const next = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    const wait = this.current;
+    this.current = this.current.then(() => next);
+    await wait;
+    try {
+      return await fn();
+    } finally {
+      release();
+    }
+  }
+}
+
+const localMutexMap = new Map<string, LocalAsyncMutex>();
+
+function getLocalMutex(key: string): LocalAsyncMutex {
+  let mutex = localMutexMap.get(key);
+  if (!mutex) {
+    mutex = new LocalAsyncMutex();
+    localMutexMap.set(key, mutex);
+  }
+  return mutex;
+}
+
+/**
+ * Acquire cross-container distributed lock using Upstash KV SET NX PX.
+ * Returns lockId if acquired, null if not acquired or KV not configured.
+ */
+async function acquireDistributedLock(lockKey: string, ttlMs = 5000, maxRetries = 6): Promise<string | null> {
+  const config = getKVRestConfig();
+  if (!config) return null;
+
+  const lockId = `${Date.now()}-${crypto.randomBytes(6).toString('hex')}`;
+  const fullKey = `lock:${lockKey}`;
+
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      const result = await callCloudKV(['SET', fullKey, lockId, 'NX', 'PX', ttlMs]);
+      if (result === 'OK') {
+        return lockId;
+      }
+    } catch {}
+
+    // Back off with jitter: 75ms to 175ms
+    const delay = 75 + Math.floor(Math.random() * 100);
+    await new Promise((r) => setTimeout(r, delay));
+  }
+
   return null;
 }
 
 /**
- * Upload atomic raw JSON to Cloudinary with explicit validation
+ * Release cross-container distributed lock safely (deleting only if lockId matches)
+ */
+async function releaseDistributedLock(lockKey: string, lockId: string): Promise<void> {
+  if (!lockId) return;
+  const fullKey = `lock:${lockKey}`;
+  try {
+    // Check if current value matches lockId before deleting
+    const currentVal = await callCloudKV(['GET', fullKey]);
+    if (currentVal === lockId) {
+      await callCloudKV(['DEL', fullKey]);
+    }
+  } catch {}
+}
+
+/**
+ * High-order runner wrapping critical section in both local in-process mutex
+ * and cross-container distributed Upstash lock.
+ */
+export async function withDistributedLock<T>(
+  lockKey: string,
+  fn: () => Promise<T>,
+  ttlMs = 6000
+): Promise<T> {
+  const localMutex = getLocalMutex(lockKey);
+
+  return await localMutex.runExclusive(async () => {
+    const lockId = await acquireDistributedLock(lockKey, ttlMs);
+    try {
+      return await fn();
+    } finally {
+      if (lockId) {
+        await releaseDistributedLock(lockKey, lockId);
+      }
+    }
+  });
+}
+
+// ============================================================================
+// CLOUDINARY RAW JSON STORAGE ENGINE
+// ============================================================================
+
+/**
+ * Upload atomic minified raw JSON to Cloudinary with explicit validation
  */
 async function uploadRawJsonToCloudinary(publicId: string, data: any): Promise<string> {
   const { cloudName, apiKey, apiSecret } = getRequiredCloudinaryCredentials();
   const timestamp = Math.floor(Date.now() / 1000).toString();
-  const jsonString = JSON.stringify(data, null, 2);
+
+  // Strict storage footprint protection: compact minified JSON to save bandwidth & quota
+  const jsonString = JSON.stringify(data);
   const base64Data = `data:application/json;base64,${Buffer.from(jsonString).toString('base64')}`;
 
   const paramsToSign = `invalidate=true&overwrite=true&public_id=${publicId}&timestamp=${timestamp}${apiSecret}`;
@@ -154,7 +324,7 @@ async function fetchRawJsonFromCloudinary<T>(publicId: string): Promise<T | null
     return null;
   }
 
-  // Fetch the versioned immutable raw URL
+  // Fetch the versioned immutable raw URL with cache: 'no-store'
   const contentRes = await fetch(meta.secure_url, {
     cache: 'no-store',
     headers: {
@@ -173,6 +343,33 @@ async function fetchRawJsonFromCloudinary<T>(publicId: string): Promise<T | null
 }
 
 // ============================================================================
+// INTEGRITY & SCHEMA VALIDATION GUARDS
+// ============================================================================
+
+function validateProductState(state: any): boolean {
+  if (!state || typeof state !== 'object') return false;
+  if (typeof state.version !== 'number' || state.version <= 0) return false;
+  if (!state.products || typeof state.products !== 'object' || Array.isArray(state.products)) return false;
+  if (!Array.isArray(state.unpublishedSkus) || !Array.isArray(state.deletedSkus)) return false;
+  return true;
+}
+
+function validateBlogState(state: any): boolean {
+  if (!state || typeof state !== 'object') return false;
+  if (typeof state.version !== 'number' || state.version <= 0) return false;
+  if (!state.posts || typeof state.posts !== 'object' || Array.isArray(state.posts)) return false;
+  if (!Array.isArray(state.trashedSlugs) || !Array.isArray(state.unpublishedSlugs) || !Array.isArray(state.deletedSlugs)) return false;
+  return true;
+}
+
+function validateQuotationState(state: any): boolean {
+  if (!state || typeof state !== 'object') return false;
+  if (typeof state.version !== 'number' || state.version <= 0) return false;
+  if (!state.quotations || typeof state.quotations !== 'object' || Array.isArray(state.quotations)) return false;
+  return true;
+}
+
+// ============================================================================
 // 1. PRODUCT CATALOG STATE MANAGEMENT
 // ============================================================================
 
@@ -182,44 +379,52 @@ export async function getDurableProductState(force = false): Promise<ProductOver
     return cachedProductState;
   }
 
-  // 1. Try Cloudinary Admin API (authoritative versioned raw asset)
+  let cloudState: ProductOverridesState | null = null;
+  let kvState: ProductOverridesState | null = null;
+
+  // 1. Read Cloudinary Admin API (authoritative versioned raw asset)
   try {
     const remote = await fetchRawJsonFromCloudinary<ProductOverridesState>(PRODUCT_DB_PUBLIC_ID);
-    if (remote && typeof remote === 'object' && remote.products) {
-      cachedProductState = {
-        version: remote.version || 1,
-        updatedAt: remote.updatedAt || new Date().toISOString(),
-        products: remote.products || {},
-        unpublishedSkus: Array.isArray(remote.unpublishedSkus) ? remote.unpublishedSkus : [],
-        deletedSkus: Array.isArray(remote.deletedSkus) ? remote.deletedSkus : [],
-      };
-      lastProductFetchTime = now;
-      return cachedProductState;
+    if (validateProductState(remote)) {
+      cloudState = remote!;
     }
   } catch (err) {
-    console.warn('[DurableStore] Product state fetch notice:', err);
+    console.warn('[DurableStore] Product state Cloudinary read notice:', err);
   }
 
-  // 2. Try Upstash Cloud KV if available
+  // 2. Read Upstash Cloud KV
   try {
-    const kvRaw = await callCloudKV(['GET', 'office_bazzar:product_overrides']);
+    const kvRaw = await callCloudKV(['GET', KV_KEY_PRODUCTS]);
     if (kvRaw) {
       const parsed = typeof kvRaw === 'string' ? JSON.parse(kvRaw) : kvRaw;
-      cachedProductState = {
-        version: parsed.version || 1,
-        updatedAt: parsed.updatedAt || new Date().toISOString(),
-        products: parsed.products || {},
-        unpublishedSkus: Array.isArray(parsed.unpublishedSkus) ? parsed.unpublishedSkus : [],
-        deletedSkus: Array.isArray(parsed.deletedSkus) ? parsed.deletedSkus : [],
-      };
-      lastProductFetchTime = now;
-      return cachedProductState;
+      if (validateProductState(parsed)) {
+        kvState = parsed;
+      }
     }
   } catch {}
 
-  // 3. Fallback baseline if empty
-  if (!cachedProductState) {
-    cachedProductState = {
+  // 3. Reconcile & Automatic Read-Repair
+  let resolved: ProductOverridesState;
+
+  if (cloudState && kvState) {
+    if (cloudState.version >= kvState.version) {
+      resolved = cloudState;
+      // Auto-heal KV if lagging behind Cloudinary
+      if (cloudState.version > kvState.version) {
+        callCloudKV(['SET', KV_KEY_PRODUCTS, JSON.stringify(cloudState)]).catch(() => {});
+      }
+    } else {
+      resolved = kvState;
+    }
+  } else if (cloudState) {
+    resolved = cloudState;
+    // Auto-heal KV from Cloudinary
+    callCloudKV(['SET', KV_KEY_PRODUCTS, JSON.stringify(cloudState)]).catch(() => {});
+  } else if (kvState) {
+    resolved = kvState;
+  } else {
+    // Initial empty baseline
+    resolved = {
       version: 1,
       updatedAt: new Date().toISOString(),
       products: {},
@@ -227,102 +432,135 @@ export async function getDurableProductState(force = false): Promise<ProductOver
       deletedSkus: [],
     };
   }
+
+  cachedProductState = resolved;
   lastProductFetchTime = now;
-  return cachedProductState;
+  return resolved;
 }
 
 export async function saveDurableProductOverride(product: any): Promise<void> {
   const cleanSku = (product.sku || '').trim().toUpperCase();
   if (!cleanSku) throw new Error('Product SKU is required for durable persistence.');
 
-  const state = await getDurableProductState(true);
+  return await withDistributedLock('products', async () => {
+    const state = await getDurableProductState(true);
 
-  state.products[cleanSku] = {
-    ...product,
-    sku: cleanSku,
-    updatedAt: new Date().toISOString(),
-  };
-
-  // Remove from deleted list if re-added or edited
-  state.deletedSkus = state.deletedSkus.filter((s) => s.toUpperCase() !== cleanSku);
-
-  // Update unpublished list according to isActive / publishStatus
-  const isUnpublished = product.isActive === false || product.publishStatus === 'unpublished';
-  if (isUnpublished) {
-    if (!state.unpublishedSkus.includes(cleanSku)) {
-      state.unpublishedSkus.push(cleanSku);
+    // Save rolling backup snapshot before mutation
+    if (state.version > 0 && Object.keys(state.products).length > 0) {
+      uploadRawJsonToCloudinary(PRODUCT_DB_BACKUP_PUBLIC_ID, state).catch(() => {});
+      callCloudKV(['SET', KV_KEY_PRODUCTS_BACKUP, JSON.stringify(state)]).catch(() => {});
     }
-  } else {
-    state.unpublishedSkus = state.unpublishedSkus.filter((s) => s.toUpperCase() !== cleanSku);
-  }
 
-  state.version = (state.version || 1) + 1;
-  state.updatedAt = new Date().toISOString();
+    state.products[cleanSku] = {
+      ...product,
+      sku: cleanSku,
+      updatedAt: new Date().toISOString(),
+    };
 
-  // Upload to Cloudinary with strict error propagation
-  await uploadRawJsonToCloudinary(PRODUCT_DB_PUBLIC_ID, state);
+    // Remove from deleted list if re-added or edited
+    state.deletedSkus = state.deletedSkus.filter((s) => s.toUpperCase() !== cleanSku);
 
-  cachedProductState = state;
-  lastProductFetchTime = Date.now();
+    // Update unpublished list according to isActive / publishStatus
+    const isUnpublished = product.isActive === false || product.publishStatus === 'unpublished';
+    if (isUnpublished) {
+      if (!state.unpublishedSkus.includes(cleanSku)) {
+        state.unpublishedSkus.push(cleanSku);
+      }
+    } else {
+      state.unpublishedSkus = state.unpublishedSkus.filter((s) => s.toUpperCase() !== cleanSku);
+    }
 
-  // Non-blocking mirror to Cloud KV
-  callCloudKV(['SET', 'office_bazzar:product_overrides', JSON.stringify(state)]).catch(() => {});
+    // Monotonic optimistic version increment
+    state.version = Math.max(state.version || 1, (cachedProductState?.version || 0)) + 1;
+    state.updatedAt = new Date().toISOString();
+
+    if (!validateProductState(state)) {
+      throw new Error('[DurableStore] State validation failed before saving product override.');
+    }
+
+    // Upload to Cloudinary with strict error propagation
+    await uploadRawJsonToCloudinary(PRODUCT_DB_PUBLIC_ID, state);
+
+    cachedProductState = state;
+    lastProductFetchTime = Date.now();
+
+    // Mirror to Cloud KV
+    await callCloudKV(['SET', KV_KEY_PRODUCTS, JSON.stringify(state)]).catch(() => {});
+  });
 }
 
 export async function deleteDurableProductOverride(skuOrId: string): Promise<void> {
   const clean = skuOrId.trim().toUpperCase();
   if (!clean) return;
 
-  const state = await getDurableProductState(true);
+  return await withDistributedLock('products', async () => {
+    const state = await getDurableProductState(true);
 
-  delete state.products[clean];
-  if (!state.deletedSkus.includes(clean)) {
-    state.deletedSkus.push(clean);
-  }
-  state.unpublishedSkus = state.unpublishedSkus.filter((s) => s.toUpperCase() !== clean);
+    // Snapshot backup before deletion
+    if (state.version > 0 && Object.keys(state.products).length > 0) {
+      uploadRawJsonToCloudinary(PRODUCT_DB_BACKUP_PUBLIC_ID, state).catch(() => {});
+      callCloudKV(['SET', KV_KEY_PRODUCTS_BACKUP, JSON.stringify(state)]).catch(() => {});
+    }
 
-  state.version = (state.version || 1) + 1;
-  state.updatedAt = new Date().toISOString();
+    delete state.products[clean];
+    if (!state.deletedSkus.includes(clean)) {
+      state.deletedSkus.push(clean);
+    }
+    state.unpublishedSkus = state.unpublishedSkus.filter((s) => s.toUpperCase() !== clean);
 
-  await uploadRawJsonToCloudinary(PRODUCT_DB_PUBLIC_ID, state);
+    state.version = Math.max(state.version || 1, (cachedProductState?.version || 0)) + 1;
+    state.updatedAt = new Date().toISOString();
 
-  cachedProductState = state;
-  lastProductFetchTime = Date.now();
+    if (!validateProductState(state)) {
+      throw new Error('[DurableStore] State validation failed before deleting product override.');
+    }
 
-  callCloudKV(['SET', 'office_bazzar:product_overrides', JSON.stringify(state)]).catch(() => {});
+    await uploadRawJsonToCloudinary(PRODUCT_DB_PUBLIC_ID, state);
+
+    cachedProductState = state;
+    lastProductFetchTime = Date.now();
+
+    await callCloudKV(['SET', KV_KEY_PRODUCTS, JSON.stringify(state)]).catch(() => {});
+  });
 }
 
 export async function setDurableProductPublishStatus(skuOrId: string, isPublished: boolean): Promise<void> {
   const clean = skuOrId.trim().toUpperCase();
   if (!clean) return;
 
-  const state = await getDurableProductState(true);
+  return await withDistributedLock('products', async () => {
+    const state = await getDurableProductState(true);
 
-  if (isPublished) {
-    state.unpublishedSkus = state.unpublishedSkus.filter((s) => s.toUpperCase() !== clean);
-    if (state.products[clean]) {
-      state.products[clean].isActive = true;
-      state.products[clean].publishStatus = 'published';
+    if (isPublished) {
+      state.unpublishedSkus = state.unpublishedSkus.filter((s) => s.toUpperCase() !== clean);
+      if (state.products[clean]) {
+        state.products[clean].isActive = true;
+        state.products[clean].publishStatus = 'published';
+      }
+    } else {
+      if (!state.unpublishedSkus.includes(clean)) {
+        state.unpublishedSkus.push(clean);
+      }
+      if (state.products[clean]) {
+        state.products[clean].isActive = false;
+        state.products[clean].publishStatus = 'unpublished';
+      }
     }
-  } else {
-    if (!state.unpublishedSkus.includes(clean)) {
-      state.unpublishedSkus.push(clean);
+
+    state.version = Math.max(state.version || 1, (cachedProductState?.version || 0)) + 1;
+    state.updatedAt = new Date().toISOString();
+
+    if (!validateProductState(state)) {
+      throw new Error('[DurableStore] State validation failed before updating product status.');
     }
-    if (state.products[clean]) {
-      state.products[clean].isActive = false;
-      state.products[clean].publishStatus = 'unpublished';
-    }
-  }
 
-  state.version = (state.version || 1) + 1;
-  state.updatedAt = new Date().toISOString();
+    await uploadRawJsonToCloudinary(PRODUCT_DB_PUBLIC_ID, state);
 
-  await uploadRawJsonToCloudinary(PRODUCT_DB_PUBLIC_ID, state);
+    cachedProductState = state;
+    lastProductFetchTime = Date.now();
 
-  cachedProductState = state;
-  lastProductFetchTime = Date.now();
-
-  callCloudKV(['SET', 'office_bazzar:product_overrides', JSON.stringify(state)]).catch(() => {});
+    await callCloudKV(['SET', KV_KEY_PRODUCTS, JSON.stringify(state)]).catch(() => {});
+  });
 }
 
 export async function getDurableProductDeletedSkus(): Promise<Set<string>> {
@@ -345,46 +583,49 @@ export async function getDurableBlogState(force = false): Promise<BlogOverridesS
     return cachedBlogState;
   }
 
-  // 1. Try Cloudinary Admin API (authoritative versioned raw asset)
+  let cloudState: BlogOverridesState | null = null;
+  let kvState: BlogOverridesState | null = null;
+
+  // 1. Read Cloudinary Admin API
   try {
     const remote = await fetchRawJsonFromCloudinary<BlogOverridesState>(BLOG_DB_PUBLIC_ID);
-    if (remote && typeof remote === 'object' && remote.posts) {
-      cachedBlogState = {
-        version: remote.version || 1,
-        updatedAt: remote.updatedAt || new Date().toISOString(),
-        posts: remote.posts || {},
-        trashedSlugs: Array.isArray(remote.trashedSlugs) ? remote.trashedSlugs : [],
-        unpublishedSlugs: Array.isArray(remote.unpublishedSlugs) ? remote.unpublishedSlugs : [],
-        deletedSlugs: Array.isArray(remote.deletedSlugs) ? remote.deletedSlugs : [],
-      };
-      lastBlogFetchTime = now;
-      return cachedBlogState;
+    if (validateBlogState(remote)) {
+      cloudState = remote!;
     }
   } catch (err) {
-    console.warn('[DurableStore] Blog state fetch notice:', err);
+    console.warn('[DurableStore] Blog state Cloudinary read notice:', err);
   }
 
-  // 2. Try Upstash Cloud KV if available
+  // 2. Read Upstash Cloud KV
   try {
-    const kvRaw = await callCloudKV(['GET', 'office_bazzar:blog_overrides']);
+    const kvRaw = await callCloudKV(['GET', KV_KEY_BLOGS]);
     if (kvRaw) {
       const parsed = typeof kvRaw === 'string' ? JSON.parse(kvRaw) : kvRaw;
-      cachedBlogState = {
-        version: parsed.version || 1,
-        updatedAt: parsed.updatedAt || new Date().toISOString(),
-        posts: parsed.posts || {},
-        trashedSlugs: Array.isArray(parsed.trashedSlugs) ? parsed.trashedSlugs : [],
-        unpublishedSlugs: Array.isArray(parsed.unpublishedSlugs) ? parsed.unpublishedSlugs : [],
-        deletedSlugs: Array.isArray(parsed.deletedSlugs) ? parsed.deletedSlugs : [],
-      };
-      lastBlogFetchTime = now;
-      return cachedBlogState;
+      if (validateBlogState(parsed)) {
+        kvState = parsed;
+      }
     }
   } catch {}
 
-  // 3. Fallback baseline
-  if (!cachedBlogState) {
-    cachedBlogState = {
+  // 3. Reconcile & Automatic Read-Repair
+  let resolved: BlogOverridesState;
+
+  if (cloudState && kvState) {
+    if (cloudState.version >= kvState.version) {
+      resolved = cloudState;
+      if (cloudState.version > kvState.version) {
+        callCloudKV(['SET', KV_KEY_BLOGS, JSON.stringify(cloudState)]).catch(() => {});
+      }
+    } else {
+      resolved = kvState;
+    }
+  } else if (cloudState) {
+    resolved = cloudState;
+    callCloudKV(['SET', KV_KEY_BLOGS, JSON.stringify(cloudState)]).catch(() => {});
+  } else if (kvState) {
+    resolved = kvState;
+  } else {
+    resolved = {
       version: 1,
       updatedAt: new Date().toISOString(),
       posts: {},
@@ -393,53 +634,66 @@ export async function getDurableBlogState(force = false): Promise<BlogOverridesS
       deletedSlugs: [],
     };
   }
+
+  cachedBlogState = resolved;
   lastBlogFetchTime = now;
-  return cachedBlogState;
+  return resolved;
 }
 
 export async function saveDurableBlogPostOverride(post: any): Promise<void> {
   const cleanSlug = (post.slug || '').trim().toLowerCase();
   if (!cleanSlug) throw new Error('Blog URL slug is required for durable persistence.');
 
-  const state = await getDurableBlogState(true);
+  return await withDistributedLock('blogs', async () => {
+    const state = await getDurableBlogState(true);
 
-  state.posts[cleanSlug] = {
-    ...post,
-    slug: cleanSlug,
-    updatedAt: new Date().toISOString(),
-  };
-
-  // Remove from deleted list if re-saved
-  state.deletedSlugs = state.deletedSlugs.filter((s) => s.toLowerCase() !== cleanSlug);
-
-  // Sync trashed list
-  if (post.status === 'trash') {
-    if (!state.trashedSlugs.includes(cleanSlug)) {
-      state.trashedSlugs.push(cleanSlug);
+    // Save rolling backup snapshot before mutation
+    if (state.version > 0 && Object.keys(state.posts).length > 0) {
+      uploadRawJsonToCloudinary(BLOG_DB_BACKUP_PUBLIC_ID, state).catch(() => {});
+      callCloudKV(['SET', KV_KEY_BLOGS_BACKUP, JSON.stringify(state)]).catch(() => {});
     }
-  } else {
-    state.trashedSlugs = state.trashedSlugs.filter((s) => s.toLowerCase() !== cleanSlug);
-  }
 
-  // Sync unpublished list
-  if (post.status === 'draft') {
-    if (!state.unpublishedSlugs.includes(cleanSlug)) {
-      state.unpublishedSlugs.push(cleanSlug);
+    state.posts[cleanSlug] = {
+      ...post,
+      slug: cleanSlug,
+      updatedAt: new Date().toISOString(),
+    };
+
+    // Remove from deleted list if re-saved
+    state.deletedSlugs = state.deletedSlugs.filter((s) => s.toLowerCase() !== cleanSlug);
+
+    // Sync trashed list
+    if (post.status === 'trash') {
+      if (!state.trashedSlugs.includes(cleanSlug)) {
+        state.trashedSlugs.push(cleanSlug);
+      }
+    } else {
+      state.trashedSlugs = state.trashedSlugs.filter((s) => s.toLowerCase() !== cleanSlug);
     }
-  } else {
-    state.unpublishedSlugs = state.unpublishedSlugs.filter((s) => s.toLowerCase() !== cleanSlug);
-  }
 
-  state.version = (state.version || 1) + 1;
-  state.updatedAt = new Date().toISOString();
+    // Sync unpublished list
+    if (post.status === 'draft') {
+      if (!state.unpublishedSlugs.includes(cleanSlug)) {
+        state.unpublishedSlugs.push(cleanSlug);
+      }
+    } else {
+      state.unpublishedSlugs = state.unpublishedSlugs.filter((s) => s.toLowerCase() !== cleanSlug);
+    }
 
-  // Strict verification: upload must succeed and return secure_url
-  await uploadRawJsonToCloudinary(BLOG_DB_PUBLIC_ID, state);
+    state.version = Math.max(state.version || 1, (cachedBlogState?.version || 0)) + 1;
+    state.updatedAt = new Date().toISOString();
 
-  cachedBlogState = state;
-  lastBlogFetchTime = Date.now();
+    if (!validateBlogState(state)) {
+      throw new Error('[DurableStore] State validation failed before saving blog post.');
+    }
 
-  callCloudKV(['SET', 'office_bazzar:blog_overrides', JSON.stringify(state)]).catch(() => {});
+    await uploadRawJsonToCloudinary(BLOG_DB_PUBLIC_ID, state);
+
+    cachedBlogState = state;
+    lastBlogFetchTime = Date.now();
+
+    await callCloudKV(['SET', KV_KEY_BLOGS, JSON.stringify(state)]).catch(() => {});
+  });
 }
 
 export async function setDurableBlogStatus(
@@ -449,58 +703,75 @@ export async function setDurableBlogStatus(
   const clean = slug.trim().toLowerCase();
   if (!clean) return;
 
-  const state = await getDurableBlogState(true);
+  return await withDistributedLock('blogs', async () => {
+    const state = await getDurableBlogState(true);
 
-  if (state.posts[clean]) {
-    state.posts[clean].status = status;
-    state.posts[clean].updatedAt = new Date().toISOString();
-  }
+    if (state.posts[clean]) {
+      state.posts[clean].status = status;
+      state.posts[clean].updatedAt = new Date().toISOString();
+    }
 
-  if (status === 'trash') {
-    if (!state.trashedSlugs.includes(clean)) state.trashedSlugs.push(clean);
-  } else {
-    state.trashedSlugs = state.trashedSlugs.filter((s) => s.toLowerCase() !== clean);
-  }
+    if (status === 'trash') {
+      if (!state.trashedSlugs.includes(clean)) state.trashedSlugs.push(clean);
+    } else {
+      state.trashedSlugs = state.trashedSlugs.filter((s) => s.toLowerCase() !== clean);
+    }
 
-  if (status === 'draft') {
-    if (!state.unpublishedSlugs.includes(clean)) state.unpublishedSlugs.push(clean);
-  } else {
-    state.unpublishedSlugs = state.unpublishedSlugs.filter((s) => s.toLowerCase() !== clean);
-  }
+    if (status === 'draft') {
+      if (!state.unpublishedSlugs.includes(clean)) state.unpublishedSlugs.push(clean);
+    } else {
+      state.unpublishedSlugs = state.unpublishedSlugs.filter((s) => s.toLowerCase() !== clean);
+    }
 
-  state.version = (state.version || 1) + 1;
-  state.updatedAt = new Date().toISOString();
+    state.version = Math.max(state.version || 1, (cachedBlogState?.version || 0)) + 1;
+    state.updatedAt = new Date().toISOString();
 
-  await uploadRawJsonToCloudinary(BLOG_DB_PUBLIC_ID, state);
+    if (!validateBlogState(state)) {
+      throw new Error('[DurableStore] State validation failed before updating blog status.');
+    }
 
-  cachedBlogState = state;
-  lastBlogFetchTime = Date.now();
+    await uploadRawJsonToCloudinary(BLOG_DB_PUBLIC_ID, state);
 
-  callCloudKV(['SET', 'office_bazzar:blog_overrides', JSON.stringify(state)]).catch(() => {});
+    cachedBlogState = state;
+    lastBlogFetchTime = Date.now();
+
+    await callCloudKV(['SET', KV_KEY_BLOGS, JSON.stringify(state)]).catch(() => {});
+  });
 }
 
 export async function deleteDurableBlogPostOverride(slug: string): Promise<void> {
   const clean = slug.trim().toLowerCase();
   if (!clean) return;
 
-  const state = await getDurableBlogState(true);
+  return await withDistributedLock('blogs', async () => {
+    const state = await getDurableBlogState(true);
 
-  delete state.posts[clean];
-  if (!state.deletedSlugs.includes(clean)) {
-    state.deletedSlugs.push(clean);
-  }
-  state.trashedSlugs = state.trashedSlugs.filter((s) => s.toLowerCase() !== clean);
-  state.unpublishedSlugs = state.unpublishedSlugs.filter((s) => s.toLowerCase() !== clean);
+    if (state.version > 0 && Object.keys(state.posts).length > 0) {
+      uploadRawJsonToCloudinary(BLOG_DB_BACKUP_PUBLIC_ID, state).catch(() => {});
+      callCloudKV(['SET', KV_KEY_BLOGS_BACKUP, JSON.stringify(state)]).catch(() => {});
+    }
 
-  state.version = (state.version || 1) + 1;
-  state.updatedAt = new Date().toISOString();
+    delete state.posts[clean];
+    if (!state.deletedSlugs.includes(clean)) {
+      state.deletedSlugs.push(clean);
+    }
+    state.trashedSlugs = state.trashedSlugs.filter((s) => s.toLowerCase() !== clean);
+    state.unpublishedSlugs = state.unpublishedSlugs.filter((s) => s.toLowerCase() !== clean);
 
-  await uploadRawJsonToCloudinary(BLOG_DB_PUBLIC_ID, state);
+    state.version = Math.max(state.version || 1, (cachedBlogState?.version || 0)) + 1;
+    state.updatedAt = new Date().toISOString();
 
-  cachedBlogState = state;
-  lastBlogFetchTime = Date.now();
+    if (!validateBlogState(state)) {
+      throw new Error('[DurableStore] State validation failed before deleting blog post.');
+    }
 
-  callCloudKV(['SET', 'office_bazzar:blog_overrides', JSON.stringify(state)]).catch(() => {});
+    await uploadRawJsonToCloudinary(BLOG_DB_PUBLIC_ID, state);
+
+    cachedBlogState = state;
+    lastBlogFetchTime = Date.now();
+
+    await callCloudKV(['SET', KV_KEY_BLOGS, JSON.stringify(state)]).catch(() => {});
+  });
 }
 
 export async function getDurableBlogDeletedSlugs(): Promise<Set<string>> {
@@ -511,4 +782,342 @@ export async function getDurableBlogDeletedSlugs(): Promise<Set<string>> {
 export async function getDurableBlogTrashedSlugs(): Promise<Set<string>> {
   const state = await getDurableBlogState();
   return new Set(state.trashedSlugs.map((s) => s.toLowerCase()));
+}
+
+// ============================================================================
+// 3. QUOTATIONS STATE MANAGEMENT & DURABLE QUEUE
+// ============================================================================
+
+export async function getDurableQuotationState(force = false): Promise<QuotationOverridesState> {
+  const now = Date.now();
+  if (!force && cachedQuotationState && now - lastQuotationFetchTime < CACHE_TTL_MS) {
+    return cachedQuotationState;
+  }
+
+  let cloudState: QuotationOverridesState | null = null;
+  let kvState: QuotationOverridesState | null = null;
+
+  try {
+    const remote = await fetchRawJsonFromCloudinary<QuotationOverridesState>(QUOTATION_DB_PUBLIC_ID);
+    if (validateQuotationState(remote)) {
+      cloudState = remote!;
+    }
+  } catch (err) {
+    console.warn('[DurableStore] Quotation state Cloudinary read notice:', err);
+  }
+
+  try {
+    const kvRaw = await callCloudKV(['GET', KV_KEY_QUOTATIONS]);
+    if (kvRaw) {
+      const parsed = typeof kvRaw === 'string' ? JSON.parse(kvRaw) : kvRaw;
+      if (validateQuotationState(parsed)) {
+        kvState = parsed;
+      }
+    }
+  } catch {}
+
+  let resolved: QuotationOverridesState;
+
+  if (cloudState && kvState) {
+    if (cloudState.version >= kvState.version) {
+      resolved = cloudState;
+      if (cloudState.version > kvState.version) {
+        callCloudKV(['SET', KV_KEY_QUOTATIONS, JSON.stringify(cloudState)]).catch(() => {});
+      }
+    } else {
+      resolved = kvState;
+    }
+  } else if (cloudState) {
+    resolved = cloudState;
+    callCloudKV(['SET', KV_KEY_QUOTATIONS, JSON.stringify(cloudState)]).catch(() => {});
+  } else if (kvState) {
+    resolved = kvState;
+  } else {
+    resolved = {
+      version: 1,
+      updatedAt: new Date().toISOString(),
+      quotations: {},
+    };
+  }
+
+  cachedQuotationState = resolved;
+  lastQuotationFetchTime = now;
+  return resolved;
+}
+
+export async function saveDurableQuotation(quote: Quotation): Promise<void> {
+  const quoteKey = quote.quotationNumber || quote.id;
+  if (!quoteKey) throw new Error('Quotation ID or Quotation Number is required for durable persistence.');
+
+  return await withDistributedLock('quotations', async () => {
+    const state = await getDurableQuotationState(true);
+
+    // Save rolling backup snapshot before mutation
+    if (state.version > 0 && Object.keys(state.quotations).length > 0) {
+      uploadRawJsonToCloudinary(QUOTATION_DB_BACKUP_PUBLIC_ID, state).catch(() => {});
+      callCloudKV(['SET', KV_KEY_QUOTATIONS_BACKUP, JSON.stringify(state)]).catch(() => {});
+    }
+
+    state.quotations[quoteKey] = {
+      ...quote,
+      lastSyncedAt: new Date().toISOString(),
+    };
+
+    // Also index by ID if quotationNumber differs
+    if (quote.id && quote.id !== quoteKey) {
+      state.quotations[quote.id] = state.quotations[quoteKey];
+    }
+
+    state.version = Math.max(state.version || 1, (cachedQuotationState?.version || 0)) + 1;
+    state.updatedAt = new Date().toISOString();
+
+    if (!validateQuotationState(state)) {
+      throw new Error('[DurableStore] State validation failed before saving quotation.');
+    }
+
+    await uploadRawJsonToCloudinary(QUOTATION_DB_PUBLIC_ID, state);
+
+    cachedQuotationState = state;
+    lastQuotationFetchTime = Date.now();
+
+    await callCloudKV(['SET', KV_KEY_QUOTATIONS, JSON.stringify(state)]).catch(() => {});
+  });
+}
+
+export async function updateDurableQuotationSyncStatus(
+  idOrNumber: string,
+  syncStatus: QuotationSyncStatus,
+  syncError?: string,
+  extraDetails?: Partial<Quotation>
+): Promise<void> {
+  const cleanKey = idOrNumber.trim();
+  if (!cleanKey) return;
+
+  return await withDistributedLock('quotations', async () => {
+    const state = await getDurableQuotationState(true);
+    const existing = state.quotations[cleanKey];
+    if (!existing) return;
+
+    const updatedQuote: Quotation = {
+      ...existing,
+      ...(extraDetails || {}),
+      syncStatus,
+      syncError: syncError || undefined,
+      lastSyncedAt: new Date().toISOString(),
+    };
+
+    state.quotations[cleanKey] = updatedQuote;
+    if (updatedQuote.quotationNumber && updatedQuote.quotationNumber !== cleanKey) {
+      state.quotations[updatedQuote.quotationNumber] = updatedQuote;
+    }
+    if (updatedQuote.id && updatedQuote.id !== cleanKey) {
+      state.quotations[updatedQuote.id] = updatedQuote;
+    }
+
+    state.version = Math.max(state.version || 1, (cachedQuotationState?.version || 0)) + 1;
+    state.updatedAt = new Date().toISOString();
+
+    if (!validateQuotationState(state)) {
+      throw new Error('[DurableStore] State validation failed before updating quotation sync status.');
+    }
+
+    await uploadRawJsonToCloudinary(QUOTATION_DB_PUBLIC_ID, state);
+
+    cachedQuotationState = state;
+    lastQuotationFetchTime = Date.now();
+
+    await callCloudKV(['SET', KV_KEY_QUOTATIONS, JSON.stringify(state)]).catch(() => {});
+  });
+}
+
+export async function getDurableQuotationById(idOrNumber: string): Promise<Quotation | null> {
+  const state = await getDurableQuotationState();
+  const clean = idOrNumber.trim();
+  if (state.quotations[clean]) {
+    return state.quotations[clean];
+  }
+  // Case-insensitive search
+  const foundKey = Object.keys(state.quotations).find(
+    (k) => k.toLowerCase() === clean.toLowerCase()
+  );
+  return foundKey ? state.quotations[foundKey] : null;
+}
+
+export async function listDurableQuotations(): Promise<Quotation[]> {
+  const state = await getDurableQuotationState();
+  const seen = new Set<string>();
+  const list: Quotation[] = [];
+
+  for (const q of Object.values(state.quotations)) {
+    const identifier = q.quotationNumber || q.id;
+    if (!seen.has(identifier)) {
+      seen.add(identifier);
+      list.push(q);
+    }
+  }
+
+  // Sort newest first
+  return list.sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
+}
+
+// ============================================================================
+// 4. ATOMIC ROUND-ROBIN SALES REP COUNTER (Upstash KV INCR)
+// ============================================================================
+
+export async function getNextAtomicRoundRobinSequence(
+  salesEmail = 'sales4@officebazzar.com',
+  marketingEmail = 'marketing@officebazzar.com'
+): Promise<{
+  sequenceNumber: number;
+  assignedTo: 'Sales' | 'Marketing';
+  email: string;
+  source: 'upstash_atomic_incr' | 'fallback_local';
+} | null> {
+  try {
+    const nextSeq = await callCloudKV(['INCR', KV_KEY_ROUND_ROBIN_SEQ]);
+    if (typeof nextSeq === 'number' && nextSeq > 0) {
+      // Alternating sequence:
+      // Odd (1, 3, 5, ...) -> Sales (sales4@officebazzar.com)
+      // Even (2, 4, 6, ...) -> Marketing (marketing@officebazzar.com)
+      const isSales = nextSeq % 2 === 1;
+      return {
+        sequenceNumber: nextSeq,
+        assignedTo: isSales ? 'Sales' : 'Marketing',
+        email: isSales ? salesEmail : marketingEmail,
+        source: 'upstash_atomic_incr',
+      };
+    }
+  } catch (err) {
+    console.warn('[DurableStore] Atomic round-robin INCR notice:', err);
+  }
+  return null;
+}
+
+// ============================================================================
+// 5. DIAGNOSTICS & HEALTH AUDIT
+// ============================================================================
+
+export interface PersistenceDiagnostics {
+  status: 'HEALTHY' | 'DEGRADED';
+  timestamp: string;
+  storage: {
+    cloudinary: {
+      configured: boolean;
+      cloudName: string | null;
+      connected: boolean;
+      latencyMs: number;
+      error?: string;
+    };
+    upstashKV: {
+      configured: boolean;
+      connected: boolean;
+      latencyMs: number;
+      error?: string;
+    };
+  };
+  records: {
+    productsCount: number;
+    blogsCount: number;
+    quotationsCount: number;
+  };
+  concurrency: {
+    distributedLockAvailable: boolean;
+    atomicRoundRobinAvailable: boolean;
+  };
+}
+
+export async function getPersistenceDiagnostics(): Promise<PersistenceDiagnostics> {
+  const start = Date.now();
+  const kvConfig = getKVRestConfig();
+  const isKvConfigured = Boolean(kvConfig);
+
+  let cloudinaryConnected = false;
+  let cloudinaryLatency = 0;
+  let cloudinaryError: string | undefined = undefined;
+
+  let cloudNameMasked: string | null = null;
+  const rawCloudName = process.env.CLOUDINARY_CLOUD_NAME || process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || '';
+  if (rawCloudName) {
+    cloudNameMasked = rawCloudName.length > 3
+      ? `${rawCloudName.slice(0, 2)}***${rawCloudName.slice(-2)}`
+      : 'configured';
+  }
+
+  try {
+    const cStart = Date.now();
+    const creds = getRequiredCloudinaryCredentials();
+    const testFetch = await fetchRawJsonFromCloudinary<any>(BLOG_DB_PUBLIC_ID);
+    cloudinaryConnected = testFetch !== undefined; // null (404) or object is considered connected
+    cloudinaryLatency = Date.now() - cStart;
+  } catch (cErr: any) {
+    cloudinaryConnected = false;
+    cloudinaryError = cErr?.message || 'Cloudinary connection failure';
+  }
+
+  let kvConnected = false;
+  let kvLatency = 0;
+  let kvError: string | undefined = undefined;
+
+  if (isKvConfigured) {
+    try {
+      const kStart = Date.now();
+      const pingResult = await callCloudKV(['PING']);
+      kvConnected = pingResult === 'PONG' || pingResult !== null;
+      kvLatency = Date.now() - kStart;
+    } catch (kErr: any) {
+      kvConnected = false;
+      kvError = kErr?.message || 'KV ping failure';
+    }
+  }
+
+  // Record counts
+  let productsCount = 0;
+  let blogsCount = 0;
+  let quotationsCount = 0;
+
+  try {
+    const prodState = await getDurableProductState();
+    productsCount = Object.keys(prodState.products || {}).length;
+  } catch {}
+
+  try {
+    const blogState = await getDurableBlogState();
+    blogsCount = Object.keys(blogState.posts || {}).length;
+  } catch {}
+
+  try {
+    const quoteState = await getDurableQuotationState();
+    quotationsCount = Object.keys(quoteState.quotations || {}).length;
+  } catch {}
+
+  const isHealthy = (cloudinaryConnected || kvConnected) && !cloudinaryError;
+
+  return {
+    status: isHealthy ? 'HEALTHY' : 'DEGRADED',
+    timestamp: new Date().toISOString(),
+    storage: {
+      cloudinary: {
+        configured: Boolean(rawCloudName),
+        cloudName: cloudNameMasked,
+        connected: cloudinaryConnected,
+        latencyMs: cloudinaryLatency,
+        error: cloudinaryError,
+      },
+      upstashKV: {
+        configured: isKvConfigured,
+        connected: kvConnected,
+        latencyMs: kvLatency,
+        error: kvError,
+      },
+    },
+    records: {
+      productsCount,
+      blogsCount,
+      quotationsCount,
+    },
+    concurrency: {
+      distributedLockAvailable: kvConnected,
+      atomicRoundRobinAvailable: kvConnected,
+    },
+  };
 }

@@ -34,6 +34,7 @@ import {
   saveDurableProductOverride,
   deleteDurableProductOverride,
   getDurableProductState,
+  getDurableQuotationById,
 } from '@/lib/durable-store';
 
 // Shared store state attached to globalThis to prevent process/worker boundary divergence in Next.js
@@ -1181,7 +1182,23 @@ export async function getQuotationById(id: string): Promise<Quotation | null> {
     return localQuote;
   }
 
-  // 2. Authoritative lookup in Zoho CRM
+  // 2. Lookup in Durable Store (Cloudinary & Upstash KV)
+  try {
+    const durable = await getDurableQuotationById(id);
+    if (durable) {
+      const idx = quotationsList.findIndex(
+        (q) => q.id === durable.id || q.quotationNumber === durable.quotationNumber
+      );
+      if (idx !== -1) {
+        quotationsList[idx] = durable;
+      } else {
+        quotationsList.unshift(durable);
+      }
+      return durable;
+    }
+  } catch {}
+
+  // 3. Authoritative lookup in Zoho CRM
   try {
     const zohoQuote = await getQuoteByReferenceFromZoho(id);
     if (zohoQuote) {
@@ -1208,6 +1225,14 @@ export async function getQuotationByNumber(quotationNumber: string): Promise<Quo
   if (localQuote) {
     return localQuote;
   }
+
+  // Lookup in Durable Store (Cloudinary & Upstash KV)
+  try {
+    const durable = await getDurableQuotationById(cleanNumber);
+    if (durable) {
+      return durable;
+    }
+  } catch {}
 
   // Authoritative lookup in Zoho CRM
   try {

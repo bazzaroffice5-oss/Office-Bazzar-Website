@@ -8,6 +8,7 @@ import {
 } from '@/lib/notifications/service';
 import { syncQuotationToZoho, ZohoSyncResult } from '@/lib/zoho/crm';
 import { getLeadAssigneeForCustomer } from '@/lib/zoho/round-robin';
+import { saveDurableQuotation, updateDurableQuotationSyncStatus } from '@/lib/durable-store';
 
 // In-memory sliding window rate limiter to protect public quotation submission
 const submissionRateMap = new Map<string, number[]>();
@@ -244,6 +245,13 @@ export async function POST(req: Request) {
       assignedSequence: leadAssignee.sequenceNumber,
     });
 
+    // 5.5 Persist every incoming quotation to durable store FIRST before external I/O (Zoho CRM & SMTP)
+    try {
+      await saveDurableQuotation(savedQuotation);
+    } catch (durableErr) {
+      console.warn('[Quotation API] Initial durable store save notice:', durableErr);
+    }
+
     // 6. Synchronize Quotation with Zoho CRM (Authoritative Leads + Notes workflow with retry)
     let zohoSyncResult: ZohoSyncResult | undefined;
     let syncAttempts = 0;
@@ -284,6 +292,25 @@ export async function POST(req: Request) {
     savedQuotation.syncMode = crmMode;
     savedQuotation.syncStatus = syncStatus;
     savedQuotation.syncError = isCrmSynced ? undefined : (zohoSyncResult?.error || 'CRM connection failed');
+
+    // Update durable record with CRM sync status & assigned IDs
+    try {
+      await updateDurableQuotationSyncStatus(
+        savedQuotation.quotationNumber,
+        syncStatus,
+        savedQuotation.syncError,
+        {
+          id: savedQuotation.id,
+          zohoQuoteId: savedQuotation.zohoQuoteId,
+          zohoLeadId: savedQuotation.zohoLeadId,
+          zohoContactId: savedQuotation.zohoContactId,
+          zohoAccountId: savedQuotation.zohoAccountId,
+          syncMode: crmMode,
+        }
+      );
+    } catch (updateErr) {
+      console.warn('[Quotation API] Durable sync status update notice:', updateErr);
+    }
 
     if (!isCrmSynced) {
       console.warn(
