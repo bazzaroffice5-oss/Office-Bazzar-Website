@@ -111,7 +111,7 @@ const TRUSTED_CLIENTS: ClientEntry[] = [
   },
   {
     id: 'avt',
-    name: 'AVT Group',
+    name: 'AVT Natural',
     sector: 'Tea & Commodities',
     logoUrl: 'https://res.cloudinary.com/dfrwayzr/image/upload/v1795501824/office-bazzar-clients/avt.webp',
     fallbackDomain: 'avtgroup.in',
