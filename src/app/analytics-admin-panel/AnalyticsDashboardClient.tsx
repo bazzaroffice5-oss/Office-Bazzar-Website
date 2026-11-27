@@ -20,7 +20,6 @@ import {
   Package,
   Layers,
   TrendingUp,
-  ShieldCheck,
   ChevronRight,
   Info,
   Clock,
@@ -113,13 +112,13 @@ export default function AnalyticsDashboardClient({
 
       // 2. Status filter
       if (statusFilter === 'delivered') {
-        return q.recipient_1_status === 'sent' && q.recipient_2_status === 'sent';
+        return q.recipient_1_status === 'sent' || q.recipient_2_status === 'sent';
       }
       if (statusFilter === 'r1_only') {
-        return q.recipient_1_status === 'sent' && q.recipient_2_status !== 'sent';
+        return q.recipient_1_status === 'sent';
       }
       if (statusFilter === 'r2_only') {
-        return q.recipient_2_status === 'sent' && q.recipient_1_status !== 'sent';
+        return q.recipient_2_status === 'sent';
       }
       if (statusFilter === 'failed') {
         return q.recipient_1_status === 'failed' || q.recipient_2_status === 'failed';
@@ -323,99 +322,7 @@ export default function AnalyticsDashboardClient({
           </div>
         </section>
 
-        {/* 3. 2-Email Delivery Status Panel */}
-        <section className="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-2xs">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4 mb-5">
-            <div>
-              <h2 className="text-base font-bold text-slate-900 tracking-tight flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-[#004b87]" />
-                Dual-Email Delivery Status Summary
-              </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
-                Real-time tracking of quotation notification dispatch to designated company mailboxes
-              </p>
-            </div>
-            <span className="text-[11px] font-semibold text-slate-500 bg-slate-50 border border-slate-200 px-3 py-1 rounded-full self-start sm:self-auto">
-              Period: {dateRange.toUpperCase()}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Recipient 1 Box */}
-            <div className="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Recipient 1 (Commercial Sales Desk)
-                </span>
-                <span className="text-xs font-mono font-bold text-slate-900 bg-white px-2.5 py-0.5 rounded-md border border-slate-200">
-                  {data.recipient1.email}
-                </span>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 my-3 text-center">
-                <div className="bg-white p-2.5 rounded-lg border border-slate-200">
-                  <span className="text-[10px] text-slate-500 uppercase font-bold block">Sent</span>
-                  <span className="text-lg font-bold text-[#057a3b]">{data.recipient1.sentCount}</span>
-                </div>
-                <div className="bg-white p-2.5 rounded-lg border border-slate-200">
-                  <span className="text-[10px] text-slate-500 uppercase font-bold block">Failed</span>
-                  <span className={`text-lg font-bold ${data.recipient1.failedCount > 0 ? 'text-rose-600' : 'text-slate-400'}`}>
-                    {data.recipient1.failedCount}
-                  </span>
-                </div>
-                <div className="bg-white p-2.5 rounded-lg border border-slate-200">
-                  <span className="text-[10px] text-slate-500 uppercase font-bold block">Success Rate</span>
-                  <span className="text-lg font-bold text-slate-900">{data.recipient1.successRate}%</span>
-                </div>
-              </div>
-
-              <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
-                <div
-                  className="bg-[#057a3b] h-full rounded-full transition-all duration-300"
-                  style={{ width: `${Math.min(100, data.recipient1.successRate)}%` }}
-                />
-              </div>
-            </div>
-
-            {/* Recipient 2 Box */}
-            <div className="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Recipient 2 (Marketing Lead Desk)
-                </span>
-                <span className="text-xs font-mono font-bold text-slate-900 bg-white px-2.5 py-0.5 rounded-md border border-slate-200">
-                  {data.recipient2.email}
-                </span>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 my-3 text-center">
-                <div className="bg-white p-2.5 rounded-lg border border-slate-200">
-                  <span className="text-[10px] text-slate-500 uppercase font-bold block">Sent</span>
-                  <span className="text-lg font-bold text-purple-700">{data.recipient2.sentCount}</span>
-                </div>
-                <div className="bg-white p-2.5 rounded-lg border border-slate-200">
-                  <span className="text-[10px] text-slate-500 uppercase font-bold block">Failed</span>
-                  <span className={`text-lg font-bold ${data.recipient2.failedCount > 0 ? 'text-rose-600' : 'text-slate-400'}`}>
-                    {data.recipient2.failedCount}
-                  </span>
-                </div>
-                <div className="bg-white p-2.5 rounded-lg border border-slate-200">
-                  <span className="text-[10px] text-slate-500 uppercase font-bold block">Success Rate</span>
-                  <span className="text-lg font-bold text-slate-900">{data.recipient2.successRate}%</span>
-                </div>
-              </div>
-
-              <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
-                <div
-                  className="bg-purple-600 h-full rounded-full transition-all duration-300"
-                  style={{ width: `${Math.min(100, data.recipient2.successRate)}%` }}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 4. Quote Requests Table Section */}
+        {/* 3. Quote Requests Table Section */}
         <section className="bg-white border border-slate-200/90 rounded-2xl shadow-2xs overflow-hidden">
           <div className="p-4 sm:p-6 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
@@ -523,12 +430,12 @@ export default function AnalyticsDashboardClient({
                             <CheckCircle2 className="w-3 h-3" /> Sent
                           </span>
                         ) : q.recipient_1_status === 'failed' ? (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200" title={q.recipient_1_error}>
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200" title={q.recipient_1_error || 'Dispatch failed'}>
                             <AlertCircle className="w-3 h-3" /> Failed
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200">
-                            Skipped
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-500 border border-slate-200" title="Assigned to alternate representative under Round-Robin routing">
+                            Alt Route
                           </span>
                         )}
                       </td>
@@ -538,12 +445,12 @@ export default function AnalyticsDashboardClient({
                             <CheckCircle2 className="w-3 h-3" /> Sent
                           </span>
                         ) : q.recipient_2_status === 'failed' ? (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200" title={q.recipient_2_error}>
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200" title={q.recipient_2_error || 'Dispatch failed'}>
                             <AlertCircle className="w-3 h-3" /> Failed
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200">
-                            Skipped
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-500 border border-slate-200" title="Assigned to alternate representative under Round-Robin routing">
+                            Alt Route
                           </span>
                         )}
                       </td>
@@ -753,10 +660,10 @@ export default function AnalyticsDashboardClient({
               {/* 2-Email Delivery Log Audit */}
               <div className="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-2">
-                  2-Email Dispatch Audit Log
+                  Quotation Notification Delivery Audit
                 </h3>
 
-                <div className="flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200">
+                <div className="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-200">
                   <div className="flex items-center gap-2">
                     <Mail className="w-4 h-4 text-emerald-600" />
                     <div>
@@ -773,11 +680,15 @@ export default function AnalyticsDashboardClient({
                         : 'bg-slate-100 text-slate-600'
                     }`}
                   >
-                    {selectedQuote.recipient_1_status.toUpperCase()}
+                    {selectedQuote.recipient_1_status === 'sent'
+                      ? 'SENT'
+                      : selectedQuote.recipient_1_status === 'failed'
+                      ? 'FAILED'
+                      : 'ALT ROUTE (ROUND-ROBIN)'}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200">
+                <div className="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-200">
                   <div className="flex items-center gap-2">
                     <Mail className="w-4 h-4 text-purple-600" />
                     <div>
@@ -794,7 +705,11 @@ export default function AnalyticsDashboardClient({
                         : 'bg-slate-100 text-slate-600'
                     }`}
                   >
-                    {selectedQuote.recipient_2_status.toUpperCase()}
+                    {selectedQuote.recipient_2_status === 'sent'
+                      ? 'SENT'
+                      : selectedQuote.recipient_2_status === 'failed'
+                      ? 'FAILED'
+                      : 'ALT ROUTE (ROUND-ROBIN)'}
                   </span>
                 </div>
               </div>

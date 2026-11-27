@@ -50,12 +50,16 @@ export function getSmtpConfig(): SmtpConfig {
   const fromName = (
     process.env.EMAIL_FROM_NAME ||
     process.env.MAIL_FROM_NAME ||
+    process.env.SMTP_FROM_NAME ||
     'Office Bazzar'
   ).trim();
 
   const fromEmail = (
+    process.env.SMTP_FROM ||
     process.env.EMAIL_FROM_ADDRESS ||
     process.env.MAIL_FROM_ADDRESS ||
+    process.env.EMAIL_FROM ||
+    process.env.MAIL_FROM ||
     user ||
     'marketing@officebazzar.com'
   ).trim();
@@ -99,10 +103,10 @@ export function createServerlessTransporter() {
       pass: config.pass,
     },
     pool: false, // strictly single-request connection for serverless safety
-    connectionTimeout: 10000, // 10s connection timeout
-    greetingTimeout: 10000,   // 10s greeting timeout
-    socketTimeout: 15000,     // 15s socket timeout
-    requireTLS: !config.secure && config.port === 587,
+    connectionTimeout: 8000, // 8s connection timeout
+    greetingTimeout: 5000,   // 5s greeting timeout
+    socketTimeout: 10000,    // 10s socket timeout
+    requireTLS: !config.secure && (config.port === 587 || config.port === 25),
     tls: {
       rejectUnauthorized: process.env.NODE_ENV === 'production',
     },

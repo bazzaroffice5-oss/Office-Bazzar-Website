@@ -32,6 +32,7 @@ export interface ZohoEmailDispatchResult {
 let cachedFromAddress: ZohoFromAddress | null = null;
 let cachedQuoteInventoryTemplateId: string | null = null;
 let cachedZohoMailAccountId: string | null = null;
+let zohoMailApiFailedOrMissingScope = false;
 
 /**
  * Resolve the Zoho CRM Quotes Inventory Template ID from /crm/v6/settings/inventory_templates?module=Quotes
@@ -97,18 +98,29 @@ async function resolveZohoMailAccountId(token: string): Promise<{
   error?: string;
   missingScope?: string;
 }> {
+  if (zohoMailApiFailedOrMissingScope) {
+    return {
+      error: 'Zoho Mail REST API scope missing (cached).',
+      missingScope: 'ZohoMail.accounts.READ,ZohoMail.messages.CREATE',
+    };
+  }
+
   if (cachedZohoMailAccountId) {
     return { accountId: cachedZohoMailAccountId };
   }
 
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2500);
+
     const res = await fetch('https://mail.zoho.in/api/accounts', {
       method: 'GET',
       headers: {
         Authorization: `Zoho-oauthtoken ${token}`,
         Accept: 'application/json',
       },
-    });
+      signal: controller.signal,
+    }).finally(() => clearTimeout(timeoutId));
 
     const data: any = await res.json().catch(() => ({}));
     if (res.ok && Array.isArray(data?.data) && data.data.length > 0) {
@@ -125,17 +137,20 @@ async function resolveZohoMailAccountId(token: string): Promise<{
       }
     }
 
-    if (data?.data?.errorCode === 'INVALID_OAUTHSCOPE') {
+    if (data?.data?.errorCode === 'INVALID_OAUTHSCOPE' || data?.errorCode === 'INVALID_OAUTHSCOPE' || res.status === 401) {
+      zohoMailApiFailedOrMissingScope = true;
       return {
         error: 'Zoho Mail API returned INVALID_OAUTHSCOPE (missing ZohoMail.accounts.READ and ZohoMail.messages.CREATE scopes).',
         missingScope: 'ZohoMail.accounts.READ,ZohoMail.messages.CREATE',
       };
     }
 
+    zohoMailApiFailedOrMissingScope = true;
     return {
       error: `Zoho Mail API /api/accounts returned HTTP ${res.status}: ${JSON.stringify(data)}`,
     };
   } catch (err) {
+    zohoMailApiFailedOrMissingScope = true;
     return {
       error: err instanceof Error ? err.message : String(err),
     };
@@ -231,13 +246,18 @@ export async function sendZohoEmail(params: {
           data: [mailItem],
         };
 
-        const crmRes = await zohoFetch<any>(
+        const crmFetchPromise = zohoFetch<any>(
           `/${targetModule}/${targetRecordId}/actions/send_mail`,
           {
             method: 'POST',
             body: JSON.stringify(crmMailPayload),
           }
         );
+        const crmTimeoutPromise = new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error('Zoho CRM Send Mail timeout (3500ms exceeded)')), 3500)
+        );
+
+        const crmRes = await Promise.race([crmFetchPromise, crmTimeoutPromise]);
 
         const item = crmRes?.data?.[0];
         if (item && (item.code === 'SUCCESS' || item.status === 'success')) {
@@ -268,51 +288,62 @@ export async function sendZohoEmail(params: {
       }
     }
 
-    // 2. Secondary: Official Zoho Mail REST API (POST https://mail.zoho.in/api/accounts/{accountId}/messages)
-    const mailAcc = await resolveZohoMailAccountId(token);
-    if (mailAcc.accountId) {
-      const mailRes = await fetch(
-        `https://mail.zoho.in/api/accounts/${mailAcc.accountId}/messages`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Zoho-oauthtoken ${token}`,
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({
-            fromAddress: mailAcc.fromEmail || fromAddr.email,
-            toAddress: recipient,
-            subject: params.subject,
-            content: params.html,
-            mailFormat: 'html',
-          }),
+    // 2. Secondary: Official Zoho Mail REST API (if scopes exist)
+    if (!zohoMailApiFailedOrMissingScope) {
+      const mailAcc = await resolveZohoMailAccountId(token);
+      if (mailAcc.accountId) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+        try {
+          const mailRes = await fetch(
+            `https://mail.zoho.in/api/accounts/${mailAcc.accountId}/messages`,
+            {
+              method: 'POST',
+              headers: {
+                Authorization: `Zoho-oauthtoken ${token}`,
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+              },
+              body: JSON.stringify({
+                fromAddress: mailAcc.fromEmail || fromAddr.email,
+                toAddress: recipient,
+                subject: params.subject,
+                content: params.html,
+                mailFormat: 'html',
+              }),
+              signal: controller.signal,
+            }
+          ).finally(() => clearTimeout(timeoutId));
+
+          const mailJson: any = await mailRes.json().catch(() => ({}));
+          if (mailRes.ok && mailJson?.status?.code === 200) {
+            const msgId = mailJson?.data?.messageId || mailJson?.data?.mailId || `zoho_mail_${Date.now()}`;
+            return {
+              recipient,
+              success: true,
+              messageId: String(msgId),
+              provider: 'zoho_mail_api',
+            };
+          }
+
+          if (mailJson?.data?.errorCode === 'INVALID_OAUTHSCOPE') {
+            missingScopesSet.add('ZohoMail.messages.CREATE');
+            zohoMailApiFailedOrMissingScope = true;
+          }
+          errorMessages.push(
+            `Zoho Mail API send failed (HTTP ${mailRes.status}): ${JSON.stringify(mailJson?.data || mailJson)}`
+          );
+        } catch (fetchErr) {
+          errorMessages.push(`Zoho Mail API fetch error: ${fetchErr instanceof Error ? fetchErr.message : String(fetchErr)}`);
         }
-      );
-
-      const mailJson: any = await mailRes.json().catch(() => ({}));
-      if (mailRes.ok && mailJson?.status?.code === 200) {
-        const msgId = mailJson?.data?.messageId || mailJson?.data?.mailId || `zoho_mail_${Date.now()}`;
-        return {
-          recipient,
-          success: true,
-          messageId: String(msgId),
-          provider: 'zoho_mail_api',
-        };
-      }
-
-      if (mailJson?.data?.errorCode === 'INVALID_OAUTHSCOPE') {
-        missingScopesSet.add('ZohoMail.messages.CREATE');
-      }
-      errorMessages.push(
-        `Zoho Mail API send failed (HTTP ${mailRes.status}): ${JSON.stringify(mailJson?.data || mailJson)}`
-      );
-    } else {
-      if (mailAcc.missingScope) {
-        mailAcc.missingScope.split(',').forEach((s) => missingScopesSet.add(s.trim()));
-      }
-      if (mailAcc.error) {
-        errorMessages.push(mailAcc.error);
+      } else {
+        if (mailAcc.missingScope) {
+          mailAcc.missingScope.split(',').forEach((s) => missingScopesSet.add(s.trim()));
+        }
+        if (mailAcc.error) {
+          errorMessages.push(mailAcc.error);
+        }
       }
     }
 

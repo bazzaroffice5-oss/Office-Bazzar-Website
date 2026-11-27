@@ -359,7 +359,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // 7. Send Notifications to BOTH Customer AND Admin recipients (with timeout safeguard)
+    // 7. Send Notifications to BOTH Customer AND Admin recipients (with reliable timeout safeguard)
     let notificationResults: NotificationResult[] = [];
     try {
       const notifyPromise = dispatchQuotationNotifications(savedQuotation, {
@@ -372,8 +372,12 @@ export async function POST(req: Request) {
         syncMode: crmMode,
         idempotencyKey,
       });
+      // 9.5-second safeguard allowing reliable dual-email delivery (customer + admin) without false timeouts
       const timeoutPromise = new Promise<NotificationResult[]>((resolve) =>
-        setTimeout(() => resolve([]), 4500)
+        setTimeout(() => {
+          console.warn(`[Quotation API] Quotation [${savedQuotation.quotationNumber}] notification dispatch timed out after 9.5s`);
+          resolve([]);
+        }, 9500)
       );
       notificationResults = await Promise.race([notifyPromise, timeoutPromise]);
     } catch (notifyErr) {
@@ -390,6 +394,23 @@ export async function POST(req: Request) {
     const admin2Notify = notificationResults.find(
       (r) => r.channel === 'email_admin' || r.recipient.toLowerCase() === marketingEmail.toLowerCase()
     );
+
+    const isMarketingLead = savedQuotation.assignedEmail
+      ? savedQuotation.assignedEmail.toLowerCase().includes('marketing')
+      : Boolean(savedQuotation.assignedTo && /marketing/i.test(savedQuotation.assignedTo));
+
+    // Determine accurate delivery status labels
+    const r1Status = admin1Notify
+      ? admin1Notify.status
+      : (isMarketingLead ? 'skipped' : 'failed');
+    const r1Error = admin1Notify?.errorMessage || (r1Status === 'failed' ? 'Email delivery timed out or failed' : undefined);
+
+    const r2Status = admin2Notify
+      ? admin2Notify.status
+      : (isMarketingLead ? 'failed' : 'skipped');
+    const r2Error = admin2Notify?.errorMessage || (r2Status === 'failed' ? 'Email delivery timed out or failed' : undefined);
+
+    const custStatus = customerNotify ? customerNotify.status : 'failed';
 
     // 8. Record Quote Log & 2-Email Delivery status in Persistent Cloud Analytics Store
     try {
@@ -416,12 +437,12 @@ export async function POST(req: Request) {
         })),
         total_amount: savedQuotation.indicativeTotal,
         recipient_1_email: salesEmail,
-        recipient_1_status: admin1Notify?.status || 'skipped',
-        recipient_1_error: admin1Notify?.errorMessage || (admin1Notify?.status === 'failed' ? 'Dispatch failed' : undefined),
+        recipient_1_status: r1Status,
+        recipient_1_error: r1Error,
         recipient_2_email: marketingEmail,
-        recipient_2_status: admin2Notify?.status || 'skipped',
-        recipient_2_error: admin2Notify?.errorMessage || (admin2Notify?.status === 'failed' ? 'Dispatch failed' : undefined),
-        customer_email_status: customerNotify?.status || 'skipped',
+        recipient_2_status: r2Status,
+        recipient_2_error: r2Error,
+        customer_email_status: custStatus,
         sync_status: savedQuotation.syncStatus || 'SYNCED',
       };
       recordQuoteSubmission(quoteLog).catch((logErr) => {
@@ -474,25 +495,25 @@ export async function POST(req: Request) {
       syncMode: crmMode,
       customerEmail: {
         recipient: savedQuotation.email,
-        status: customerNotify?.status || 'sent',
+        status: custStatus,
         provider: customerNotify?.provider,
         messageId: customerNotify?.messageId,
-        error: customerNotify?.errorMessage,
+        error: customerNotify?.errorMessage || (custStatus === 'failed' ? 'Email delivery timed out or failed' : undefined),
       },
       admin1Email: {
         recipient: salesEmail,
-        status: admin1Notify?.status || 'skipped',
+        status: r1Status,
         provider: admin1Notify?.provider,
         messageId: admin1Notify?.messageId,
-        error: admin1Notify?.errorMessage,
+        error: r1Error,
         reason: admin1Notify?.reason,
       },
       admin2Email: {
         recipient: marketingEmail,
-        status: admin2Notify?.status || 'skipped',
+        status: r2Status,
         provider: admin2Notify?.provider,
         messageId: admin2Notify?.messageId,
-        error: admin2Notify?.errorMessage,
+        error: r2Error,
         reason: admin2Notify?.reason,
       },
       quotation: safeQuotation,
