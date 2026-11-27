@@ -21,7 +21,7 @@ export interface NotificationResult {
 
 export interface AdminRecipientStatus {
   recipient: string;
-  role: 'ADMIN 1 (Sales)' | 'ADMIN 2 (Marketing)';
+  role: 'ADMIN 1 (Sales)' | 'ADMIN 2 (Marketing)' | 'Marketing Lead Desk';
   success: boolean;
   status: 'sent' | 'failed' | 'skipped';
   provider?: string;
@@ -585,7 +585,7 @@ export async function sendAdminQuotationEmail(
   quotation: Quotation,
   recipientEmail: string,
   partnerEmail: string,
-  roleLabel: 'ADMIN 1 (Sales)' | 'ADMIN 2 (Marketing)',
+  roleLabel: 'ADMIN 1 (Sales)' | 'ADMIN 2 (Marketing)' | 'Marketing Lead Desk',
   crmContext?: { zohoQuoteId?: string; zohoLeadId?: string; zohoContactId?: string }
 ): Promise<AdminRecipientStatus> {
   const cleanRecipient = recipientEmail.trim().toLowerCase();
@@ -678,7 +678,7 @@ export async function sendQuoteEmailNotification(
     quotation,
     marketingEmail,
     marketingEmail,
-    'ADMIN 2 (Marketing)',
+    'Marketing Lead Desk',
     crmContext
   );
 
@@ -735,11 +735,11 @@ export async function dispatchQuotationNotifications(
       quotation,
       marketingEmail,
       marketingEmail,
-      'ADMIN 2 (Marketing)',
+      'Marketing Lead Desk',
       crmContext
     ).catch((err): AdminRecipientStatus => ({
       recipient: marketingEmail,
-      role: 'ADMIN 2 (Marketing)',
+      role: 'Marketing Lead Desk',
       success: false,
       status: 'failed',
       provider: 'zoho_crm_send_mail',

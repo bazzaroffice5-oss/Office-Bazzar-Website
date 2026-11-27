@@ -1041,7 +1041,7 @@ export async function getNextAtomicRoundRobinSequence(
   marketingEmail = 'marketing@officebazzar.com'
 ): Promise<{
   sequenceNumber: number;
-  assignedTo: 'Marketing';
+  assignedTo: 'Sales' | 'Marketing';
   email: string;
   source: 'upstash_atomic_incr' | 'fallback_local';
 }> {

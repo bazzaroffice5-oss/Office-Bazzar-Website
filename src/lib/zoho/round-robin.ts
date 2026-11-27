@@ -24,7 +24,7 @@ import { extractStructuredMeta, getCustomerQuotationsFromZoho } from './quotes';
 import { getNextAtomicRoundRobinSequence } from '@/lib/durable-store';
 
 export type LeadAssigneeName = 'Sales' | 'Marketing';
-export type LeadAssigneeRole = 'ADMIN_1_SALES' | 'ADMIN_2_MARKETING';
+export type LeadAssigneeRole = 'ADMIN_1_SALES' | 'ADMIN_2_MARKETING' | 'ADMIN_MARKETING';
 
 export interface LeadAssignee {
   name: LeadAssigneeName;
@@ -53,7 +53,7 @@ class AsyncMutex {
   private current: Promise<void> = Promise.resolve();
 
   async runExclusive<T>(fn: () => Promise<T>): Promise<T> {
-    let release: () => void = () => {};
+    let release: () => void = () => { };
     const next = new Promise<void>((resolve) => {
       release = resolve;
     });
@@ -300,7 +300,7 @@ export async function getNextLeadAssignee(): Promise<LeadAssignee> {
       if (atomic) {
         const nextName: LeadAssigneeName = atomic.assignedTo;
         const nextEmail = atomic.email;
-        const nextRole: LeadAssigneeRole = (nextName as string) === 'Sales' ? 'ADMIN_1_SALES' : 'ADMIN_2_MARKETING';
+        const nextRole: LeadAssigneeRole = (nextName as LeadAssigneeName) === 'Sales' ? 'ADMIN_1_SALES' : 'ADMIN_2_MARKETING';
         const nextSequence = atomic.sequenceNumber;
         const assignedAt = new Date().toISOString();
         const label = `${nextName} (${nextEmail})`;
@@ -314,7 +314,7 @@ export async function getNextLeadAssignee(): Promise<LeadAssignee> {
 
         memoryState = newState;
         writeDiskCache(newState);
-        writeStateToZohoVariable(newState).catch(() => {});
+        writeStateToZohoVariable(newState).catch(() => { });
 
         console.log(
           `[RoundRobin] Assigned Customer Lead #${nextSequence} -> ${label} [${nextRole}] at ${assignedAt} (Source: Upstash KV Atomic INCR)`
@@ -432,7 +432,7 @@ export async function getLeadAssigneeForCustomer(
     name: 'Marketing',
     email: marketingEmail,
     label: `Marketing (${marketingEmail})`,
-    role: 'ADMIN_2_MARKETING',
+    role: 'ADMIN_MARKETING',
     sequenceNumber: 1,
     assignedAt: new Date().toISOString(),
   };
