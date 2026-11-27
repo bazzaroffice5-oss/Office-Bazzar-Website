@@ -43,7 +43,7 @@ export default function AnalyticsDashboardClient({
   const [dateRange, setDateRange] = useState<DateRangePreset>('all');
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState<'all' | 'delivered' | 'r1_only' | 'r2_only' | 'failed'>('all');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'delivered' | 'marketing_sent' | 'customer_sent' | 'failed'>('all');
   const [selectedQuote, setSelectedQuote] = useState<QuoteLogRecord | null>(null);
   const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
@@ -111,22 +111,38 @@ export default function AnalyticsDashboardClient({
       }
 
       // 2. Status filter
+      const mktStatus = q.marketing_status || q.recipient_2_status || q.recipient_1_status;
+      const custStatus = q.customer_email_status || 'sent';
+
       if (statusFilter === 'delivered') {
-        return q.recipient_1_status === 'sent' || q.recipient_2_status === 'sent';
+        return mktStatus === 'sent' && custStatus === 'sent';
       }
-      if (statusFilter === 'r1_only') {
-        return q.recipient_1_status === 'sent';
+      if (statusFilter === 'marketing_sent') {
+        return mktStatus === 'sent';
       }
-      if (statusFilter === 'r2_only') {
-        return q.recipient_2_status === 'sent';
+      if (statusFilter === 'customer_sent') {
+        return custStatus === 'sent';
       }
       if (statusFilter === 'failed') {
-        return q.recipient_1_status === 'failed' || q.recipient_2_status === 'failed';
+        return mktStatus === 'failed' || custStatus === 'failed';
       }
 
       return true;
     });
   }, [data.quotes, searchQuery, statusFilter]);
+
+  const marketingStats = useMemo(() => {
+    return data.marketingRecipient || data.recipient2 || {
+      email: 'marketing@officebazzar.com',
+      role: 'Marketing Lead Desk',
+      sentCount: data.totalQuoteRequests,
+      failedCount: 0,
+    };
+  }, [data.marketingRecipient, data.recipient2, data.totalQuoteRequests]);
+
+  const customerConfirmationsCount = useMemo(() => {
+    return data.quotes.filter((q) => (q.customer_email_status || 'sent') === 'sent').length;
+  }, [data.quotes]);
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col font-sans selection:bg-[#ea580c] selection:text-white">
@@ -279,44 +295,44 @@ export default function AnalyticsDashboardClient({
             </p>
           </div>
 
-          {/* KPI 3: Quotes Sent to Recipient 1 (Sales) */}
+          {/* KPI 3: Quotes Sent to Marketing Lead Desk */}
           <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-xs transition-shadow">
             <div className="flex items-center justify-between text-slate-500 mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600 truncate max-w-[190px]" title={data.recipient1.email}>
-                Quotes: {data.recipient1.email}
-              </span>
-              <div className="w-8 h-8 rounded-xl bg-emerald-50 text-[#057a3b] flex items-center justify-center">
-                <Mail className="w-4 h-4" />
-              </div>
-            </div>
-            <div className="text-3xl font-extrabold text-[#057a3b] tracking-tight">
-              {data.recipient1.sentCount.toLocaleString()}
-            </div>
-            <div className="flex items-center justify-between text-xs mt-2 text-slate-600 font-medium">
-              <span>{data.recipient1.role}</span>
-              <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md font-bold text-[10px]">
-                {data.recipient1.failedCount > 0 ? `${data.recipient1.failedCount} Failed` : '100% OK'}
-              </span>
-            </div>
-          </div>
-
-          {/* KPI 4: Quotes Sent to Recipient 2 (Marketing) */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-xs transition-shadow">
-            <div className="flex items-center justify-between text-slate-500 mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600 truncate max-w-[190px]" title={data.recipient2.email}>
-                Quotes: {data.recipient2.email}
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600 truncate max-w-[190px]" title={marketingStats.email}>
+                Quotes: {marketingStats.email}
               </span>
               <div className="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
                 <Mail className="w-4 h-4" />
               </div>
             </div>
             <div className="text-3xl font-extrabold text-purple-700 tracking-tight">
-              {data.recipient2.sentCount.toLocaleString()}
+              {marketingStats.sentCount.toLocaleString()}
             </div>
             <div className="flex items-center justify-between text-xs mt-2 text-slate-600 font-medium">
-              <span>{data.recipient2.role}</span>
+              <span>{marketingStats.role}</span>
               <span className="text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md font-bold text-[10px]">
-                {data.recipient2.failedCount > 0 ? `${data.recipient2.failedCount} Failed` : '100% OK'}
+                {marketingStats.failedCount > 0 ? `${marketingStats.failedCount} Failed` : '100% OK'}
+              </span>
+            </div>
+          </div>
+
+          {/* KPI 4: Customer Confirmation Emails */}
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-xs transition-shadow">
+            <div className="flex items-center justify-between text-slate-500 mb-2">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
+                Customer Confirmations
+              </span>
+              <div className="w-8 h-8 rounded-xl bg-emerald-50 text-[#057a3b] flex items-center justify-center">
+                <CheckCircle2 className="w-4 h-4" />
+              </div>
+            </div>
+            <div className="text-3xl font-extrabold text-[#057a3b] tracking-tight">
+              {customerConfirmationsCount.toLocaleString()}
+            </div>
+            <div className="flex items-center justify-between text-xs mt-2 text-slate-600 font-medium">
+              <span>Customer Inboxes</span>
+              <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md font-bold text-[10px]">
+                Direct to Buyer
               </span>
             </div>
           </div>
@@ -355,9 +371,9 @@ export default function AnalyticsDashboardClient({
                 className="text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-slate-700 font-medium focus:outline-none focus:border-[#ea580c]"
               >
                 <option value="all">All Delivery Statuses</option>
-                <option value="delivered">Both Recipients Sent</option>
-                <option value="r1_only">Sales Desk Sent Only</option>
-                <option value="r2_only">Marketing Lead Sent Only</option>
+                <option value="delivered">Both Sent (Marketing &amp; Customer)</option>
+                <option value="marketing_sent">Marketing Alert Sent Only</option>
+                <option value="customer_sent">Customer Confirmation Sent Only</option>
                 <option value="failed">Delivery Issues</option>
               </select>
             </div>
@@ -373,8 +389,8 @@ export default function AnalyticsDashboardClient({
                   <th className="py-3 px-4">Customer &amp; Company</th>
                   <th className="py-3 px-4">Contact Info</th>
                   <th className="py-3 px-4">Requested Products</th>
-                  <th className="py-3 px-4 text-center">Sales Email Status</th>
-                  <th className="py-3 px-4 text-center">Marketing Email Status</th>
+                  <th className="py-3 px-4 text-center">Customer Email</th>
+                  <th className="py-3 px-4 text-center">Marketing Email</th>
                   <th className="py-3 px-4 text-right">Action</th>
                 </tr>
               </thead>
@@ -394,76 +410,83 @@ export default function AnalyticsDashboardClient({
                     </td>
                   </tr>
                 ) : (
-                  filteredQuotes.map((q) => (
-                    <tr key={q.id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-3 px-4 text-slate-600 whitespace-nowrap">
-                        <div className="font-semibold text-slate-900">{q.created_at_ist.split(',')[0]}</div>
-                        <div className="text-[10px] text-slate-400">{q.created_at_ist.split(',')[1] || ''}</div>
-                      </td>
-                      <td className="py-3 px-4 whitespace-nowrap">
-                        <span className="font-mono font-bold text-[#004b87] bg-blue-50/80 px-2 py-0.5 rounded-md border border-blue-200/60">
-                          {q.quotation_number || q.id}
-                        </span>
-                      </td>
-                      <td className="py-3 px-4">
-                        <div className="font-bold text-slate-900">{q.customer_name}</div>
-                        <div className="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
-                          <Building2 className="w-3 h-3 text-slate-400 shrink-0" />
-                          <span className="truncate max-w-[150px]">{q.company_name || 'Individual / Enterprise'}</span>
-                        </div>
-                      </td>
-                      <td className="py-3 px-4 whitespace-nowrap text-[11px]">
-                        <div><a href={`tel:${q.phone}`} className="text-slate-800 hover:text-[#004b87]">{q.phone}</a></div>
-                        <div className="text-slate-500 truncate max-w-[160px]"><a href={`mailto:${q.email}`} className="hover:underline">{q.email}</a></div>
-                      </td>
-                      <td className="py-3 px-4 max-w-[200px]">
-                        <div className="font-semibold text-slate-900 truncate">
-                          {q.products.length > 0 ? q.products[0].name : 'Custom Item'}
-                        </div>
-                        <div className="text-[11px] text-slate-500">
-                          {q.products.length} item{q.products.length !== 1 ? 's' : ''} total
-                        </div>
-                      </td>
-                      <td className="py-3 px-4 text-center whitespace-nowrap">
-                        {q.recipient_1_status === 'sent' ? (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-[#057a3b] border border-emerald-200">
-                            <CheckCircle2 className="w-3 h-3" /> Sent
+                  filteredQuotes.map((q) => {
+                    const mktStatus = q.marketing_status || q.recipient_2_status || q.recipient_1_status || 'sent';
+                    const mktErr = q.marketing_error || q.recipient_2_error || q.recipient_1_error;
+                    const custStatus = q.customer_email_status || 'sent';
+                    const custErr = q.customer_email_error;
+
+                    return (
+                      <tr key={q.id} className="hover:bg-slate-50/80 transition-colors">
+                        <td className="py-3 px-4 text-slate-600 whitespace-nowrap">
+                          <div className="font-semibold text-slate-900">{q.created_at_ist.split(',')[0]}</div>
+                          <div className="text-[10px] text-slate-400">{q.created_at_ist.split(',')[1] || ''}</div>
+                        </td>
+                        <td className="py-3 px-4 whitespace-nowrap">
+                          <span className="font-mono font-bold text-[#004b87] bg-blue-50/80 px-2 py-0.5 rounded-md border border-blue-200/60">
+                            {q.quotation_number || q.id}
                           </span>
-                        ) : q.recipient_1_status === 'failed' ? (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200" title={q.recipient_1_error || 'Dispatch failed'}>
-                            <AlertCircle className="w-3 h-3" /> Failed
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-500 border border-slate-200" title="Assigned to alternate representative under Round-Robin routing">
-                            Alt Route
-                          </span>
-                        )}
-                      </td>
-                      <td className="py-3 px-4 text-center whitespace-nowrap">
-                        {q.recipient_2_status === 'sent' ? (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-200">
-                            <CheckCircle2 className="w-3 h-3" /> Sent
-                          </span>
-                        ) : q.recipient_2_status === 'failed' ? (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200" title={q.recipient_2_error || 'Dispatch failed'}>
-                            <AlertCircle className="w-3 h-3" /> Failed
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-500 border border-slate-200" title="Assigned to alternate representative under Round-Robin routing">
-                            Alt Route
-                          </span>
-                        )}
-                      </td>
-                      <td className="py-3 px-4 text-right whitespace-nowrap">
-                        <button
-                          onClick={() => setSelectedQuote(q)}
-                          className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:text-[#ea580c] hover:border-[#ea580c]/50 transition-colors shadow-2xs cursor-pointer"
-                        >
-                          View Details
-                        </button>
-                      </td>
-                    </tr>
-                  ))
+                        </td>
+                        <td className="py-3 px-4">
+                          <div className="font-bold text-slate-900">{q.customer_name}</div>
+                          <div className="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
+                            <Building2 className="w-3 h-3 text-slate-400 shrink-0" />
+                            <span className="truncate max-w-[150px]">{q.company_name || 'Individual / Enterprise'}</span>
+                          </div>
+                        </td>
+                        <td className="py-3 px-4 whitespace-nowrap text-[11px]">
+                          <div><a href={`tel:${q.phone}`} className="text-slate-800 hover:text-[#004b87]">{q.phone}</a></div>
+                          <div className="text-slate-500 truncate max-w-[160px]"><a href={`mailto:${q.email}`} className="hover:underline">{q.email}</a></div>
+                        </td>
+                        <td className="py-3 px-4 max-w-[200px]">
+                          <div className="font-semibold text-slate-900 truncate">
+                            {q.products.length > 0 ? q.products[0].name : 'Custom Item'}
+                          </div>
+                          <div className="text-[11px] text-slate-500">
+                            {q.products.length} item{q.products.length !== 1 ? 's' : ''} total
+                          </div>
+                        </td>
+                        <td className="py-3 px-4 text-center whitespace-nowrap">
+                          {custStatus === 'sent' ? (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-[#057a3b] border border-emerald-200">
+                              <CheckCircle2 className="w-3 h-3" /> Sent
+                            </span>
+                          ) : custStatus === 'failed' ? (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200" title={custErr || 'Dispatch failed'}>
+                              <AlertCircle className="w-3 h-3" /> Failed
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-500 border border-slate-200">
+                              Pending
+                            </span>
+                          )}
+                        </td>
+                        <td className="py-3 px-4 text-center whitespace-nowrap">
+                          {mktStatus === 'sent' ? (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-200">
+                              <CheckCircle2 className="w-3 h-3" /> Sent
+                            </span>
+                          ) : mktStatus === 'failed' ? (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200" title={mktErr || 'Dispatch failed'}>
+                              <AlertCircle className="w-3 h-3" /> Failed
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-500 border border-slate-200">
+                              Pending
+                            </span>
+                          )}
+                        </td>
+                        <td className="py-3 px-4 text-right whitespace-nowrap">
+                          <button
+                            onClick={() => setSelectedQuote(q)}
+                            className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:text-[#ea580c] hover:border-[#ea580c]/50 transition-colors shadow-2xs cursor-pointer"
+                          >
+                            View Details
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })
                 )}
               </tbody>
             </table>
@@ -657,59 +680,63 @@ export default function AnalyticsDashboardClient({
                 </div>
               </div>
 
-              {/* 2-Email Delivery Log Audit */}
+              {/* Quotation Notification Delivery Audit */}
               <div className="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-2">
                   Quotation Notification Delivery Audit
                 </h3>
 
+                {/* 1. Customer Confirmation Email */}
                 <div className="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-200">
                   <div className="flex items-center gap-2">
                     <Mail className="w-4 h-4 text-emerald-600" />
                     <div>
-                      <div className="font-bold text-slate-900 text-[11px]">{selectedQuote.recipient_1_email}</div>
-                      <div className="text-[10px] text-slate-500">Sales Desk (ADMIN 1)</div>
+                      <div className="font-bold text-slate-900 text-[11px]">{selectedQuote.email}</div>
+                      <div className="text-[10px] text-slate-500">Customer Confirmation Email</div>
                     </div>
                   </div>
                   <span
                     className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
-                      selectedQuote.recipient_1_status === 'sent'
+                      (selectedQuote.customer_email_status || 'sent') === 'sent'
                         ? 'bg-emerald-50 text-[#057a3b] border border-emerald-200'
-                        : selectedQuote.recipient_1_status === 'failed'
+                        : selectedQuote.customer_email_status === 'failed'
                         ? 'bg-rose-50 text-rose-700 border border-rose-200'
                         : 'bg-slate-100 text-slate-600'
                     }`}
                   >
-                    {selectedQuote.recipient_1_status === 'sent'
+                    {(selectedQuote.customer_email_status || 'sent') === 'sent'
                       ? 'SENT'
-                      : selectedQuote.recipient_1_status === 'failed'
+                      : selectedQuote.customer_email_status === 'failed'
                       ? 'FAILED'
-                      : 'ALT ROUTE (ROUND-ROBIN)'}
+                      : 'PENDING'}
                   </span>
                 </div>
 
+                {/* 2. Marketing Lead Desk (marketing@officebazzar.com) */}
                 <div className="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-200">
                   <div className="flex items-center gap-2">
                     <Mail className="w-4 h-4 text-purple-600" />
                     <div>
-                      <div className="font-bold text-slate-900 text-[11px]">{selectedQuote.recipient_2_email}</div>
-                      <div className="text-[10px] text-slate-500">Marketing Desk (ADMIN 2)</div>
+                      <div className="font-bold text-slate-900 text-[11px]">
+                        {selectedQuote.marketing_email || 'marketing@officebazzar.com'}
+                      </div>
+                      <div className="text-[10px] text-slate-500">Marketing Lead Desk (Internal Alert)</div>
                     </div>
                   </div>
                   <span
                     className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
-                      selectedQuote.recipient_2_status === 'sent'
+                      (selectedQuote.marketing_status || selectedQuote.recipient_2_status || selectedQuote.recipient_1_status) === 'sent'
                         ? 'bg-purple-50 text-purple-700 border border-purple-200'
-                        : selectedQuote.recipient_2_status === 'failed'
+                        : (selectedQuote.marketing_status || selectedQuote.recipient_2_status || selectedQuote.recipient_1_status) === 'failed'
                         ? 'bg-rose-50 text-rose-700 border border-rose-200'
                         : 'bg-slate-100 text-slate-600'
                     }`}
                   >
-                    {selectedQuote.recipient_2_status === 'sent'
+                    {(selectedQuote.marketing_status || selectedQuote.recipient_2_status || selectedQuote.recipient_1_status) === 'sent'
                       ? 'SENT'
-                      : selectedQuote.recipient_2_status === 'failed'
+                      : (selectedQuote.marketing_status || selectedQuote.recipient_2_status || selectedQuote.recipient_1_status) === 'failed'
                       ? 'FAILED'
-                      : 'ALT ROUTE (ROUND-ROBIN)'}
+                      : 'PENDING'}
                   </span>
                 </div>
               </div>

@@ -988,17 +988,29 @@ export async function updateDurableQuotationSyncStatus(
   });
 }
 
-export async function getDurableQuotationById(idOrNumber: string): Promise<Quotation | null> {
-  const state = await getDurableQuotationState();
+export async function getDurableQuotationById(idOrNumber: string, force = false): Promise<Quotation | null> {
+  const state = await getDurableQuotationState(force);
   const clean = idOrNumber.trim();
   if (state.quotations[clean]) {
     return state.quotations[clean];
   }
-  // Case-insensitive search
+  // Case-insensitive search on keys
   const foundKey = Object.keys(state.quotations).find(
     (k) => k.toLowerCase() === clean.toLowerCase()
   );
-  return foundKey ? state.quotations[foundKey] : null;
+  if (foundKey) {
+    return state.quotations[foundKey];
+  }
+  // Search within quotation objects by quotationNumber or id
+  for (const q of Object.values(state.quotations)) {
+    if (
+      (q.quotationNumber && q.quotationNumber.toLowerCase() === clean.toLowerCase()) ||
+      (q.id && q.id.toLowerCase() === clean.toLowerCase())
+    ) {
+      return q;
+    }
+  }
+  return null;
 }
 
 export async function listDurableQuotations(): Promise<Quotation[]> {
@@ -1025,26 +1037,22 @@ export async function listDurableQuotations(): Promise<Quotation[]> {
 let localRoundRobinSeq = 0;
 
 export async function getNextAtomicRoundRobinSequence(
-  salesEmail = 'sales4@officebazzar.com',
+  _salesEmail = 'marketing@officebazzar.com',
   marketingEmail = 'marketing@officebazzar.com'
 ): Promise<{
   sequenceNumber: number;
-  assignedTo: 'Sales' | 'Marketing';
+  assignedTo: 'Marketing';
   email: string;
   source: 'upstash_atomic_incr' | 'fallback_local';
 }> {
   try {
     const nextSeq = await callCloudKV(['INCR', KV_KEY_ROUND_ROBIN_SEQ]);
     if (typeof nextSeq === 'number' && nextSeq > 0) {
-      // Alternating sequence:
-      // Odd (1, 3, 5, ...) -> Sales (sales4@officebazzar.com)
-      // Even (2, 4, 6, ...) -> Marketing (marketing@officebazzar.com)
-      const isSales = nextSeq % 2 === 1;
       localRoundRobinSeq = nextSeq;
       return {
         sequenceNumber: nextSeq,
-        assignedTo: isSales ? 'Sales' : 'Marketing',
-        email: isSales ? salesEmail : marketingEmail,
+        assignedTo: 'Marketing',
+        email: marketingEmail,
         source: 'upstash_atomic_incr',
       };
     }
@@ -1052,13 +1060,12 @@ export async function getNextAtomicRoundRobinSequence(
     console.warn('[DurableStore] Atomic round-robin INCR notice:', err);
   }
 
-  // Safe local rep fallback if KV has a transient hiccup
+  // Safe local fallback if KV has a transient hiccup
   localRoundRobinSeq++;
-  const isSales = localRoundRobinSeq % 2 === 1;
   return {
     sequenceNumber: localRoundRobinSeq,
-    assignedTo: isSales ? 'Sales' : 'Marketing',
-    email: isSales ? salesEmail : marketingEmail,
+    assignedTo: 'Marketing',
+    email: marketingEmail,
     source: 'fallback_local',
   };
 }

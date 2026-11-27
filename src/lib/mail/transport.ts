@@ -66,8 +66,9 @@ export function getSmtpConfig(): SmtpConfig {
 
   const adminEmail = (
     process.env.ADMIN_NOTIFICATION_EMAIL ||
-    process.env.SALES_EMAIL ||
-    'sales4@officebazzar.com'
+    process.env.QUOTE_MARKETING_EMAIL ||
+    process.env.MARKETING_EMAIL ||
+    'marketing@officebazzar.com'
   ).trim();
 
   return {

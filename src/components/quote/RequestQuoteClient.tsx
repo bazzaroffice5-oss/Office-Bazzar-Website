@@ -262,13 +262,15 @@ export default function RequestQuoteClient() {
 
       setSubmittingStatusText('Registering Quotation in Zoho CRM...');
 
+      const currentIdempotencyKey = `OB-RFQ-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`;
+
       if (items.length > 0) {
         // 2A. Submit authoritative RFQ with selected catalog items to server -> Zoho CRM
         const response = await fetch('/api/quotations/create', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Idempotency-Key': idempotencyKey,
+            'Idempotency-Key': currentIdempotencyKey,
           },
           body: JSON.stringify({
             customerName: contactPerson.trim(),
@@ -285,7 +287,7 @@ export default function RequestQuoteClient() {
             preferredContactMethod: 'email',
             additionalRequirements: additionalNotes.trim() || undefined,
             customerId: user?.id,
-            idempotencyKey,
+            idempotencyKey: currentIdempotencyKey,
             items: items.map((it) => ({
               productId: it.product.id,
               productName: it.product.name,

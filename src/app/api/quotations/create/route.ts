@@ -100,9 +100,10 @@ export async function POST(req: Request) {
     const itemsSignature = Array.isArray(items)
       ? items.map((it: any) => `${it.productId || it.sku}:${it.quantity}`).sort().join(',')
       : '';
+    const cleanCustomerNameForDedup = typeof customerName === 'string' ? customerName.trim().toLowerCase() : '';
     const cleanEmailForDedup = typeof email === 'string' ? email.trim().toLowerCase() : '';
     const cleanPhoneForDedup = phone ? String(phone).replace(/[^0-9]/g, '') : '';
-    const dedupKey = (idempotencyKey || `${cleanEmailForDedup}_${cleanPhoneForDedup}_${itemsSignature}`).slice(0, 200);
+    const dedupKey = (idempotencyKey ? `${idempotencyKey}_${cleanCustomerNameForDedup}` : `${cleanCustomerNameForDedup}_${cleanEmailForDedup}_${cleanPhoneForDedup}_${itemsSignature}`).slice(0, 200);
 
     const existingSubmission = recentSubmissionsMap.get(dedupKey);
     if (existingSubmission && Date.now() - existingSubmission.timestamp < DEDUP_WINDOW_MS) {
@@ -257,11 +258,15 @@ export async function POST(req: Request) {
 
     // 4. Concurrency-Safe Customer Lead Assignment:
     // If repeat customer, preserves their existing assigned owner in Zoho CRM.
-    // If new customer, alternates sequentially via persistent round-robin:
-    // New Customer 1 -> Sales (sales4@officebazzar.com)
-    // New Customer 2 -> Marketing (marketing@officebazzar.com)
-    // New Customer 3 -> Sales (sales4@officebazzar.com)
-    const leadAssignee = await getLeadAssigneeForCustomer(email.trim().toLowerCase(), cleanPhone);
+    // 4. Assign lead exclusively to Marketing Desk (marketing@officebazzar.com)
+    const leadAssignee = {
+      name: 'Marketing',
+      email: 'marketing@officebazzar.com',
+      label: 'Marketing (marketing@officebazzar.com)',
+      role: 'ADMIN_MARKETING',
+      sequenceNumber: 1,
+      assignedAt: new Date().toISOString(),
+    };
 
     // 5. Construct Quotation Record in Memory (Zoho CRM is the primary authoritative database)
     const savedQuotation = await createQuotation({
@@ -384,35 +389,19 @@ export async function POST(req: Request) {
       console.warn('[Quotation API] Notification dispatch notice:', notifyErr);
     }
 
-    const { salesEmail, marketingEmail } = getNotificationRecipients();
+    const { marketingEmail } = getNotificationRecipients();
     const customerNotify = notificationResults.find(
       (r) => r.channel === 'email_quote' || r.recipient.toLowerCase() === savedQuotation.email.toLowerCase()
     );
-    const admin1Notify = notificationResults.find(
-      (r) => r.channel === 'email_sales' || r.recipient.toLowerCase() === salesEmail.toLowerCase()
-    );
-    const admin2Notify = notificationResults.find(
+    const adminNotify = notificationResults.find(
       (r) => r.channel === 'email_admin' || r.recipient.toLowerCase() === marketingEmail.toLowerCase()
     );
 
-    const isMarketingLead = savedQuotation.assignedEmail
-      ? savedQuotation.assignedEmail.toLowerCase().includes('marketing')
-      : Boolean(savedQuotation.assignedTo && /marketing/i.test(savedQuotation.assignedTo));
-
-    // Determine accurate delivery status labels
-    const r1Status = admin1Notify
-      ? admin1Notify.status
-      : (isMarketingLead ? 'skipped' : 'failed');
-    const r1Error = admin1Notify?.errorMessage || (r1Status === 'failed' ? 'Email delivery timed out or failed' : undefined);
-
-    const r2Status = admin2Notify
-      ? admin2Notify.status
-      : (isMarketingLead ? 'failed' : 'skipped');
-    const r2Error = admin2Notify?.errorMessage || (r2Status === 'failed' ? 'Email delivery timed out or failed' : undefined);
-
+    const mktStatus = adminNotify ? adminNotify.status : 'failed';
+    const mktError = adminNotify?.errorMessage || (mktStatus === 'failed' ? 'Email delivery timed out or failed' : undefined);
     const custStatus = customerNotify ? customerNotify.status : 'failed';
 
-    // 8. Record Quote Log & 2-Email Delivery status in Persistent Cloud Analytics Store
+    // 8. Record Quote Log & Email Delivery status in Persistent Cloud Analytics Store
     try {
       const now = new Date();
       const quoteLog: QuoteLogRecord = {
@@ -436,12 +425,15 @@ export async function POST(req: Request) {
           packSize: it.packSize,
         })),
         total_amount: savedQuotation.indicativeTotal,
-        recipient_1_email: salesEmail,
-        recipient_1_status: r1Status,
-        recipient_1_error: r1Error,
+        recipient_1_email: marketingEmail,
+        recipient_1_status: mktStatus,
+        recipient_1_error: mktError,
         recipient_2_email: marketingEmail,
-        recipient_2_status: r2Status,
-        recipient_2_error: r2Error,
+        recipient_2_status: mktStatus,
+        recipient_2_error: mktError,
+        marketing_email: marketingEmail,
+        marketing_status: mktStatus,
+        marketing_error: mktError,
         customer_email_status: custStatus,
         sync_status: savedQuotation.syncStatus || 'SYNCED',
       };
@@ -500,21 +492,12 @@ export async function POST(req: Request) {
         messageId: customerNotify?.messageId,
         error: customerNotify?.errorMessage || (custStatus === 'failed' ? 'Email delivery timed out or failed' : undefined),
       },
-      admin1Email: {
-        recipient: salesEmail,
-        status: r1Status,
-        provider: admin1Notify?.provider,
-        messageId: admin1Notify?.messageId,
-        error: r1Error,
-        reason: admin1Notify?.reason,
-      },
-      admin2Email: {
+      marketingEmail: {
         recipient: marketingEmail,
-        status: r2Status,
-        provider: admin2Notify?.provider,
-        messageId: admin2Notify?.messageId,
-        error: r2Error,
-        reason: admin2Notify?.reason,
+        status: mktStatus,
+        provider: adminNotify?.provider,
+        messageId: adminNotify?.messageId,
+        error: mktError,
       },
       quotation: safeQuotation,
       message: 'Request for Quotation confirmed and registered in Zoho CRM.',

@@ -300,7 +300,7 @@ export async function getNextLeadAssignee(): Promise<LeadAssignee> {
       if (atomic) {
         const nextName: LeadAssigneeName = atomic.assignedTo;
         const nextEmail = atomic.email;
-        const nextRole: LeadAssigneeRole = nextName === 'Sales' ? 'ADMIN_1_SALES' : 'ADMIN_2_MARKETING';
+        const nextRole: LeadAssigneeRole = (nextName as string) === 'Sales' ? 'ADMIN_1_SALES' : 'ADMIN_2_MARKETING';
         const nextSequence = atomic.sequenceNumber;
         const assignedAt = new Date().toISOString();
         const label = `${nextName} (${nextEmail})`;
@@ -420,60 +420,22 @@ export async function getNextLeadAssignee(): Promise<LeadAssignee> {
  *    New Customer 3 -> sales4@officebazzar.com
  */
 export async function getLeadAssigneeForCustomer(
-  customerEmail: string,
+  _customerEmail: string,
   _customerPhone?: string
 ): Promise<LeadAssignee> {
-  const cleanEmail = (customerEmail || '').trim().toLowerCase();
-  const { salesEmail, marketingEmail } = getAdminRecipients();
+  const marketingEmail = (
+    process.env.QUOTE_MARKETING_EMAIL ||
+    'marketing@officebazzar.com'
+  ).trim();
 
-  if (cleanEmail) {
-    try {
-      const priorQuotes = await getCustomerQuotationsFromZoho(cleanEmail);
-      if (Array.isArray(priorQuotes) && priorQuotes.length > 0) {
-        // Find existing assigned admin from previous quotes (newest first)
-        for (const q of priorQuotes) {
-          const emailCheck = (q.assignedEmail || '').toLowerCase();
-          const toCheck = q.assignedTo || '';
-
-          if (emailCheck.includes('marketing') || /marketing/i.test(toCheck)) {
-            console.log(
-              `[RoundRobin] Repeat RFQ for customer [${cleanEmail}]: Retaining assigned owner Marketing (${marketingEmail})`
-            );
-            return {
-              name: 'Marketing',
-              email: marketingEmail,
-              label: `Marketing (${marketingEmail})`,
-              role: 'ADMIN_2_MARKETING',
-              sequenceNumber: q.assignedSequence || 0,
-              assignedAt: new Date().toISOString(),
-            };
-          }
-
-          if (emailCheck.includes('sales') || /sales/i.test(toCheck)) {
-            console.log(
-              `[RoundRobin] Repeat RFQ for customer [${cleanEmail}]: Retaining assigned owner Sales (${salesEmail})`
-            );
-            return {
-              name: 'Sales',
-              email: salesEmail,
-              label: `Sales (${salesEmail})`,
-              role: 'ADMIN_1_SALES',
-              sequenceNumber: q.assignedSequence || 0,
-              assignedAt: new Date().toISOString(),
-            };
-          }
-        }
-      }
-    } catch (err: any) {
-      console.warn(
-        `[RoundRobin] Warning: Could not check prior customer quotes for [${cleanEmail}]:`,
-        err?.message
-      );
-    }
-  }
-
-  // New Customer: Alternate via persistent, concurrency-safe round-robin
-  return await getNextLeadAssignee();
+  return {
+    name: 'Marketing',
+    email: marketingEmail,
+    label: `Marketing (${marketingEmail})`,
+    role: 'ADMIN_2_MARKETING',
+    sequenceNumber: 1,
+    assignedAt: new Date().toISOString(),
+  };
 }
 
 /**

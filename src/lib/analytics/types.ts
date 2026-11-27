@@ -23,13 +23,17 @@ export interface QuoteLogRecord {
   message?: string;
   products: ProductItemSummary[];
   total_amount?: number;
-  recipient_1_email: string;
-  recipient_1_status: 'sent' | 'failed' | 'skipped' | 'pending';
+  recipient_1_email?: string;
+  recipient_1_status?: 'sent' | 'failed' | 'skipped' | 'pending';
   recipient_1_error?: string;
-  recipient_2_email: string;
-  recipient_2_status: 'sent' | 'failed' | 'skipped' | 'pending';
+  recipient_2_email?: string;
+  recipient_2_status?: 'sent' | 'failed' | 'skipped' | 'pending';
   recipient_2_error?: string;
+  marketing_email?: string;
+  marketing_status?: 'sent' | 'failed' | 'skipped' | 'pending';
+  marketing_error?: string;
   customer_email_status?: 'sent' | 'failed' | 'skipped' | 'pending';
+  customer_email_error?: string;
   sync_status?: string;
 }
 
@@ -64,8 +68,9 @@ export interface AnalyticsKPIs {
   totalPageViews: number;
   uniqueVisitors: number;
   totalQuoteRequests: number;
-  recipient1: RecipientStats;
-  recipient2: RecipientStats;
+  marketingRecipient: RecipientStats;
+  recipient1?: RecipientStats;
+  recipient2?: RecipientStats;
   dateRange: DateRangePreset;
   quotes: QuoteLogRecord[];
   pageBreakdown: PageBreakdownItem[];

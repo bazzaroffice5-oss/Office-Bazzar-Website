@@ -33,7 +33,9 @@ export default function QuotationSuccessPage({
   useEffect(() => {
     async function loadQuote() {
       try {
-        const res = await fetch(`/api/quotations/${encodeURIComponent(quotationRef)}`);
+        const res = await fetch(`/api/quotations/${encodeURIComponent(quotationRef)}?t=${Date.now()}`, {
+          cache: 'no-store',
+        });
         const data = await res.json();
         if (res.ok && data.quotation) {
           setQuotation(data.quotation);

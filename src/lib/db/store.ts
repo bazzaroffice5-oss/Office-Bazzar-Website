@@ -1111,13 +1111,16 @@ function generateFallbackQuotationNumber(): string {
 export async function createQuotation(
   quoteData: Omit<Quotation, 'id' | 'quotationNumber' | 'createdAt'> & { quotationNumber?: string }
 ): Promise<Quotation> {
-  // 1. Idempotency check to prevent duplicate submissions across process boundaries
+  // 1. Idempotency check to prevent rapid double-clicks on identical submissions
   if (quoteData.idempotencyKey) {
-    if (quotationIdempotencyStore.has(quoteData.idempotencyKey)) {
-      return quotationIdempotencyStore.get(quoteData.idempotencyKey)!;
-    }
-    const existing = quotationsList.find((q) => q.idempotencyKey === quoteData.idempotencyKey);
-    if (existing) {
+    const existing = quotationIdempotencyStore.get(quoteData.idempotencyKey) ||
+      quotationsList.find((q) => q.idempotencyKey === quoteData.idempotencyKey);
+    if (
+      existing &&
+      existing.customerName.trim().toLowerCase() === quoteData.customerName.trim().toLowerCase() &&
+      existing.email.trim().toLowerCase() === quoteData.email.trim().toLowerCase() &&
+      existing.items.length === quoteData.items.length
+    ) {
       quotationIdempotencyStore.set(quoteData.idempotencyKey, existing);
       return existing;
     }

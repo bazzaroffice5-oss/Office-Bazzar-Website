@@ -80,14 +80,6 @@ export function getEmailFromAddress(): string {
  * ADMIN 2: marketing@officebazzar.com
  */
 export function getNotificationRecipients(): { salesEmail: string; marketingEmail: string } {
-  const salesEmail = (
-    process.env.QUOTE_SALES_EMAIL ||
-    BUSINESS_CONFIG.contact.salesEmail ||
-    'sales4@officebazzar.com'
-  )
-    .replace(/[\r\n]/g, '')
-    .trim();
-
   const marketingEmail = (
     process.env.QUOTE_MARKETING_EMAIL ||
     BUSINESS_CONFIG.contact.marketingEmail ||
@@ -96,7 +88,8 @@ export function getNotificationRecipients(): { salesEmail: string; marketingEmai
     .replace(/[\r\n]/g, '')
     .trim();
 
-  return { salesEmail, marketingEmail };
+  // Internal quote notifications route exclusively to marketing@officebazzar.com
+  return { salesEmail: marketingEmail, marketingEmail };
 }
 
 // Track sent keys per recipient so retrying only retries failed recipients without duplicating sent ones
@@ -673,53 +666,45 @@ export async function sendAdminQuotationEmail(
 }
 
 /**
- * Send TWO ADMIN EMAIL NOTIFICATIONS independently:
- * ADMIN 1: sales4@officebazzar.com
- * ADMIN 2: marketing@officebazzar.com
+ * Send internal admin email notification exclusively to marketing@officebazzar.com
  */
 export async function sendQuoteEmailNotification(
   quotation: Quotation,
   crmContext?: { zohoQuoteId?: string; zohoContactId?: string }
 ): Promise<QuoteEmailNotificationResult> {
-  const { salesEmail, marketingEmail } = getNotificationRecipients();
+  const { marketingEmail } = getNotificationRecipients();
 
-  const [admin1Result, admin2Result] = await Promise.all([
-    sendAdminQuotationEmail(quotation, salesEmail, marketingEmail, 'ADMIN 1 (Sales)', crmContext),
-    sendAdminQuotationEmail(quotation, marketingEmail, salesEmail, 'ADMIN 2 (Marketing)', crmContext),
-  ]);
-
-  const bothSucceeded = admin1Result.success && admin2Result.success;
-  const errors = [
-    !admin1Result.success ? `Admin 1 (${salesEmail}): ${admin1Result.error}` : null,
-    !admin2Result.success ? `Admin 2 (${marketingEmail}): ${admin2Result.error}` : null,
-  ]
-    .filter(Boolean)
-    .join(' | ');
+  const adminResult = await sendAdminQuotationEmail(
+    quotation,
+    marketingEmail,
+    marketingEmail,
+    'ADMIN 2 (Marketing)',
+    crmContext
+  );
 
   return {
-    success: bothSucceeded,
-    provider: (admin1Result.provider as QuoteEmailNotificationResult['provider']) || 'zoho_crm_send_mail',
-    admin1: admin1Result,
-    admin2: admin2Result,
-    to: salesEmail,
-    cc: marketingEmail,
-    error: errors || undefined,
+    success: adminResult.success,
+    provider: (adminResult.provider as QuoteEmailNotificationResult['provider']) || 'zoho_crm_send_mail',
+    admin1: adminResult,
+    admin2: adminResult,
+    to: marketingEmail,
+    cc: '',
+    error: adminResult.error,
   };
 }
 
 /**
- * Dispatch notification ONLY to the designated assigned Admin recipient (Round-Robin):
- * - If assigned to Sales: sales4@officebazzar.com ONLY
- * - If assigned to Marketing: marketing@officebazzar.com ONLY
- * Does NOT send to both admins. Does NOT send a customer email notification.
- * Dispatches only after authoritative Zoho CRM record creation with zero attachments.
+ * Dispatch notification exclusively to:
+ * 1. Customer Confirmation Email (the requesting buyer)
+ * 2. Dedicated Internal Notification: marketing@officebazzar.com ONLY
+ * (Never routes to sales4@officebazzar.com or dm@officebazzar.com)
  */
 export async function dispatchQuotationNotifications(
   quotation: Quotation,
   crmContext: QuotationNotificationContext
 ): Promise<NotificationResult[]> {
   const results: NotificationResult[] = [];
-  const { salesEmail, marketingEmail } = getNotificationRecipients();
+  const { marketingEmail } = getNotificationRecipients();
 
   // 1. Production submission source validation
   if (!crmContext || (crmContext.source !== 'production_customer_submission' && crmContext.source !== 'admin_manual_retry' && crmContext.source !== 'outbox_drain')) {
@@ -737,26 +722,7 @@ export async function dispatchQuotationNotifications(
     return [];
   }
 
-  // 3. Determine alternating admin lead routing
-  // Deterministic Alternating Assignment:
-  // - Odd sequence / Sales assignee -> Sales (sales4@officebazzar.com) ONLY
-  // - Even sequence / Marketing assignee -> Marketing (marketing@officebazzar.com) ONLY
-  let isMarketing = false;
-  if (quotation.assignedEmail) {
-    isMarketing = quotation.assignedEmail.toLowerCase().includes('marketing');
-  } else if (quotation.assignedTo) {
-    isMarketing = /marketing/i.test(quotation.assignedTo);
-  } else if (typeof quotation.assignedSequence === 'number') {
-    isMarketing = quotation.assignedSequence % 2 === 0;
-  } else {
-    const seqMatch = (quotation.quotationNumber || '').match(/(\d+)$/);
-    if (seqMatch) {
-      const seqNum = parseInt(seqMatch[1], 10);
-      isMarketing = !isNaN(seqNum) && seqNum % 2 === 0;
-    }
-  }
-
-  // Dispatch Customer Confirmation Email AND the designated Admin Alert Email concurrently
+  // 3. Dispatch Customer Confirmation Email AND the exclusive Marketing Alert Email concurrently
   const [customerRes, adminRes] = await Promise.all([
     sendCustomerQuotationEmail(quotation, crmContext).catch((err) => ({
       channel: 'email_quote' as const,
@@ -765,124 +731,56 @@ export async function dispatchQuotationNotifications(
       provider: 'zoho_crm_send_mail',
       errorMessage: err instanceof Error ? err.message : String(err),
     })),
-    isMarketing
-      ? sendAdminQuotationEmail(
-          quotation,
-          marketingEmail,
-          salesEmail,
-          'ADMIN 2 (Marketing)',
-          crmContext
-        ).catch((err): AdminRecipientStatus => ({
-          recipient: marketingEmail,
-          role: 'ADMIN 2 (Marketing)',
-          success: false,
-          status: 'failed',
-          provider: 'zoho_crm_send_mail',
-          messageId: undefined,
-          missingScopes: undefined,
-          error: err instanceof Error ? err.message : String(err),
-        }))
-      : sendAdminQuotationEmail(
-          quotation,
-          salesEmail,
-          marketingEmail,
-          'ADMIN 1 (Sales)',
-          crmContext
-        ).catch((err): AdminRecipientStatus => ({
-          recipient: salesEmail,
-          role: 'ADMIN 1 (Sales)',
-          success: false,
-          status: 'failed',
-          provider: 'zoho_crm_send_mail',
-          messageId: undefined,
-          missingScopes: undefined,
-          error: err instanceof Error ? err.message : String(err),
-        })),
+    sendAdminQuotationEmail(
+      quotation,
+      marketingEmail,
+      marketingEmail,
+      'ADMIN 2 (Marketing)',
+      crmContext
+    ).catch((err): AdminRecipientStatus => ({
+      recipient: marketingEmail,
+      role: 'ADMIN 2 (Marketing)',
+      success: false,
+      status: 'failed',
+      provider: 'zoho_crm_send_mail',
+      messageId: undefined,
+      missingScopes: undefined,
+      error: err instanceof Error ? err.message : String(err),
+    })),
   ]);
 
   // 1. Customer Confirmation Email Result
   results.push(customerRes);
 
-  // 2. Admin Alert Results: ONE is sent, the other is explicitly skipped with reason 'alternating_route'
-  if (isMarketing) {
-    // Admin 1 (Sales) was skipped due to alternating round-robin route
-    results.push({
-      channel: 'email_sales',
-      recipient: salesEmail,
-      status: 'skipped',
-      reason: 'alternating_route',
-    });
-
-    // Record Admin 2 (Marketing) in Notification Logs
-    await createNotificationLog({
-      quotationId: quotation.id,
-      quotationNumber: quotation.quotationNumber,
-      channel: 'email_admin',
-      recipient: adminRes.recipient,
-      status: adminRes.status === 'sent' ? 'sent' : 'failed',
-      errorMessage: adminRes.error,
-      metadata: {
-        role: 'ADMIN_2_MARKETING',
-        assignedTo: quotation.assignedTo,
-        sequence: quotation.assignedSequence,
-        provider: adminRes.provider,
-        messageId: adminRes.messageId,
-        zohoQuoteId: crmContext?.zohoQuoteId,
-        zohoLeadId: crmContext?.zohoLeadId,
-        syncMode: crmContext?.syncMode,
-        missingScopes: adminRes.missingScopes,
-      },
-    });
-
-    results.push({
-      channel: 'email_admin',
-      recipient: adminRes.recipient,
-      status: adminRes.status,
+  // 2. Exclusive Marketing Alert Email Result
+  await createNotificationLog({
+    quotationId: quotation.id,
+    quotationNumber: quotation.quotationNumber,
+    channel: 'email_admin',
+    recipient: marketingEmail,
+    status: adminRes.status === 'sent' ? 'sent' : 'failed',
+    errorMessage: adminRes.error,
+    metadata: {
+      role: 'MARKETING_LEAD',
+      assignedTo: 'Marketing',
       provider: adminRes.provider,
       messageId: adminRes.messageId,
-      errorMessage: adminRes.error,
+      zohoQuoteId: crmContext?.zohoQuoteId,
+      zohoLeadId: crmContext?.zohoLeadId,
+      syncMode: crmContext?.syncMode,
       missingScopes: adminRes.missingScopes,
-    });
-  } else {
-    // Record Admin 1 (Sales) in Notification Logs
-    await createNotificationLog({
-      quotationId: quotation.id,
-      quotationNumber: quotation.quotationNumber,
-      channel: 'email_sales',
-      recipient: adminRes.recipient,
-      status: adminRes.status === 'sent' ? 'sent' : 'failed',
-      errorMessage: adminRes.error,
-      metadata: {
-        role: 'ADMIN_1_SALES',
-        assignedTo: quotation.assignedTo,
-        sequence: quotation.assignedSequence,
-        provider: adminRes.provider,
-        messageId: adminRes.messageId,
-        zohoQuoteId: crmContext?.zohoQuoteId,
-        zohoLeadId: crmContext?.zohoLeadId,
-        syncMode: crmContext?.syncMode,
-        missingScopes: adminRes.missingScopes,
-      },
-    });
+    },
+  });
 
-    results.push({
-      channel: 'email_sales',
-      recipient: adminRes.recipient,
-      status: adminRes.status,
-      provider: adminRes.provider,
-      messageId: adminRes.messageId,
-      errorMessage: adminRes.error,
-      missingScopes: adminRes.missingScopes,
-    });
-
-    // Admin 2 (Marketing) was skipped due to alternating round-robin route
-    results.push({
-      channel: 'email_admin',
-      recipient: marketingEmail,
-      status: 'skipped',
-      reason: 'alternating_route',
-    });
-  }
+  results.push({
+    channel: 'email_admin',
+    recipient: marketingEmail,
+    status: adminRes.status,
+    provider: adminRes.provider,
+    messageId: adminRes.messageId,
+    errorMessage: adminRes.error,
+    missingScopes: adminRes.missingScopes,
+  });
 
   return results;
 }
@@ -1233,9 +1131,8 @@ export function buildCustomerFinalQuotationEmailHtml(quotation: Quotation): stri
                 <td style="padding: 5px 8px; text-align: right; color: #475569;">Subtotal:</td>
                 <td style="padding: 5px 8px; text-align: right; font-weight: 600; color: #0f172a;">₹${subtotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               </tr>
-              ${
-                discountAmount > 0
-                  ? `<tr>
+              ${discountAmount > 0
+      ? `<tr>
                 <td style="padding: 5px 8px; text-align: right; color: #16a34a;">Discount (${discountPercent}%):</td>
                 <td style="padding: 5px 8px; text-align: right; font-weight: 600; color: #16a34a;">-₹${discountAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               </tr>
@@ -1243,28 +1140,26 @@ export function buildCustomerFinalQuotationEmailHtml(quotation: Quotation): stri
                 <td style="padding: 5px 8px; text-align: right; color: #475569;">Taxable Subtotal:</td>
                 <td style="padding: 5px 8px; text-align: right; font-weight: 600; color: #0f172a;">₹${taxableSubtotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               </tr>`
-                  : ''
-              }
+      : ''
+    }
               <tr>
                 <td style="padding: 5px 8px; text-align: right; color: #475569;">GST (${gstPercent}%):</td>
                 <td style="padding: 5px 8px; text-align: right; font-weight: 600; color: #0f172a;">+₹${gstAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               </tr>
-              ${
-                deliveryCharges > 0
-                  ? `<tr>
+              ${deliveryCharges > 0
+      ? `<tr>
                 <td style="padding: 5px 8px; text-align: right; color: #475569;">Delivery &amp; Transport Charges:</td>
                 <td style="padding: 5px 8px; text-align: right; font-weight: 600; color: #0f172a;">+₹${deliveryCharges.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               </tr>`
-                  : ''
-              }
-              ${
-                additionalCharges > 0
-                  ? `<tr>
+      : ''
+    }
+              ${additionalCharges > 0
+      ? `<tr>
                 <td style="padding: 5px 8px; text-align: right; color: #475569;">Additional Charges:</td>
                 <td style="padding: 5px 8px; text-align: right; font-weight: 600; color: #0f172a;">+₹${additionalCharges.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               </tr>`
-                  : ''
-              }
+      : ''
+    }
               <tr style="border-top: 2px solid #0f172a; background-color: #fef2f2;">
                 <td style="padding: 10px 8px; text-align: right; font-size: 14px; font-weight: 800; color: #0f172a;">Grand Total (INR):</td>
                 <td style="padding: 10px 8px; text-align: right; font-size: 16px; font-weight: 800; color: #dc2626;">₹${grandTotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
