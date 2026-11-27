@@ -5,7 +5,6 @@ import Image from 'next/image';
 import {
   RefreshCw,
   LogOut,
-  ExternalLink,
   Eye,
   Users,
   FileText,
@@ -186,18 +185,6 @@ export default function AnalyticsDashboardClient({
               <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin text-[#ea580c]' : 'text-slate-600'}`} />
               <span className="hidden sm:inline">Refresh</span>
             </button>
-
-            <a
-              href="/products"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden lg:flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-[#ea580c] bg-white px-3 py-2 rounded-xl border border-slate-200 hover:border-[#ea580c]/40 transition-colors shadow-2xs"
-            >
-              <span>Live Store</span>
-              <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-            </a>
-
-            <div className="h-5 w-px bg-slate-200 hidden sm:block shrink-0" />
 
             <button
               onClick={handleLogout}
