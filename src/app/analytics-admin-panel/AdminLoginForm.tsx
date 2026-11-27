@@ -131,21 +131,7 @@ export default function AdminLoginForm() {
           </button>
         </form>
 
-        <div className="mt-6 pt-5 border-t border-slate-100 flex items-center justify-center gap-3 text-xs font-semibold text-slate-500">
-          <a href="/product-admin-panel" className="hover:text-[#ea580c] transition-colors">
-            Product Admin
-          </a>
-          <span>&bull;</span>
-          <a href="/blog-admin-panel" className="hover:text-[#004b87] transition-colors">
-            Blog Admin
-          </a>
-          <span>&bull;</span>
-          <a href="/admin" className="hover:text-slate-800 transition-colors">
-            Sales Console
-          </a>
-        </div>
-
-        <div className="mt-4 pt-4 border-t border-slate-100/60 flex items-center justify-between text-[11px] text-slate-400 font-medium">
+        <div className="mt-6 pt-5 border-t border-slate-100/60 flex items-center justify-between text-[11px] text-slate-400 font-medium">
           <span>Office Bazzar Admin Portal</span>
           <span>Encrypted Session (365 Days)</span>
         </div>

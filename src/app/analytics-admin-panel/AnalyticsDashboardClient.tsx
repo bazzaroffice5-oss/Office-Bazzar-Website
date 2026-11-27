@@ -2,7 +2,6 @@
 
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import {
   RefreshCw,
   LogOut,
@@ -158,32 +157,6 @@ export default function AnalyticsDashboardClient({
                 Live Cloud Metrics
               </span>
             </div>
-
-            <div className="h-6 w-px bg-slate-200 hidden xl:block shrink-0" />
-
-            <nav className="hidden xl:flex items-center gap-1 text-xs font-semibold shrink-0">
-              <span className="px-2.5 py-1.5 rounded-lg bg-slate-900 text-white shadow-2xs">
-                Analytics
-              </span>
-              <a
-                href="/product-admin-panel"
-                className="px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
-              >
-                Products
-              </a>
-              <a
-                href="/blog-admin-panel"
-                className="px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
-              >
-                Blog
-              </a>
-              <a
-                href="/admin"
-                className="px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
-              >
-                Orders
-              </a>
-            </nav>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
