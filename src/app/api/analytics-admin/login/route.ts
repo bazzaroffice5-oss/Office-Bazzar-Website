@@ -36,20 +36,27 @@ export async function POST(req: NextRequest) {
       user: { email: userEmail },
     });
 
-    // Multi-domain support: set domain to .officebazzar.com in production so that
-    // admin.officebazzar.com and www.officebazzar.com share the session seamlessly
     const host = req.headers.get('host') || '';
     const isOfficeBazzarDomain = host.includes('officebazzar.com');
     const isProduction = process.env.NODE_ENV === 'production';
+    const ONE_YEAR_SECONDS = 365 * 24 * 60 * 60;
 
+    // 1. Host-bound cookie (guaranteed to work on https://www.officebazzar.com and localhost)
     response.cookies.set(ANALYTICS_COOKIE_NAME, sessionToken, {
       httpOnly: true,
       secure: isProduction,
       sameSite: 'lax',
       path: '/',
-      domain: isProduction && isOfficeBazzarDomain ? '.officebazzar.com' : undefined,
-      maxAge: 365 * 24 * 60 * 60, // 365 days
+      maxAge: ONE_YEAR_SECONDS,
     });
+
+    // 2. Also set multi-subdomain cookie (.officebazzar.com) when accessed via officebazzar.com
+    if (isProduction && isOfficeBazzarDomain) {
+      response.headers.append(
+        'Set-Cookie',
+        `${ANALYTICS_COOKIE_NAME}=${sessionToken}; Path=/; Domain=.officebazzar.com; Max-Age=${ONE_YEAR_SECONDS}; HttpOnly; SameSite=Lax${isProduction ? '; Secure' : ''}`
+      );
+    }
 
     return response;
   } catch (err) {
