@@ -100,6 +100,7 @@ export default function TrendingCategoriesSection() {
             >
               <Link
                 href={cat.href}
+                prefetch={true}
                 className={`group relative flex flex-col h-full bg-white rounded-2xl p-5 border border-slate-200/90 ${cat.hoverBorder} transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004b87] focus-visible:ring-offset-2`}
               >
                 {/* High-Resolution Product Preview Image Container */}

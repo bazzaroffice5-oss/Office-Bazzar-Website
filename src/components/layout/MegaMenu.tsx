@@ -74,6 +74,7 @@ export default function MegaMenu({
               {category.viewAllHref && !category.isInformationalOnly && (
                 <Link
                   href={category.viewAllHref}
+                  prefetch={true}
                   onClick={onClose}
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#d9232d] hover:text-[#b31b24] bg-red-50/60 hover:bg-red-50 px-2.5 py-1 rounded transition-colors"
                 >
@@ -107,6 +108,7 @@ export default function MegaMenu({
                   {column.href && !category.isInformationalOnly ? (
                     <Link
                       href={column.href}
+                      prefetch={true}
                       onClick={onClose}
                       className="group/title inline-flex items-center justify-between w-full text-xs font-bold text-slate-900 hover:text-[#d9232d] transition-colors"
                     >
@@ -127,6 +129,7 @@ export default function MegaMenu({
                       {item.href && !category.isInformationalOnly ? (
                         <Link
                           href={item.href}
+                          prefetch={true}
                           onClick={onClose}
                           className="group/link flex items-center justify-between text-[11.5px] text-slate-600 hover:text-[#d9232d] hover:translate-x-0.5 py-0.5 transition-all"
                         >
@@ -220,6 +223,7 @@ export default function MegaMenu({
                   <div className="pt-2 border-t border-slate-100">
                     <Link
                       href={category.highlightCard.ctaHref}
+                      prefetch={true}
                       onClick={onClose}
                       className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-[#d9232d] hover:bg-[#b31b24] text-white text-xs font-semibold rounded shadow-xs transition-colors"
                     >

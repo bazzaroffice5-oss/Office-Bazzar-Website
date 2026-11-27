@@ -29,6 +29,7 @@ export default function CategoriesSection({
 
           <Link
             href="/categories"
+            prefetch={true}
             className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#004b87] hover:text-[#003866] transition-colors"
           >
             <span>Explore All Categories</span>
@@ -42,6 +43,7 @@ export default function CategoriesSection({
             <Link
               key={cat.id}
               href={`/category/${cat.slug}`}
+              prefetch={true}
               className="group relative flex flex-col bg-white rounded-xl sm:rounded-2xl border border-slate-200/90 hover:border-slate-300 overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004b87] focus-visible:ring-offset-2"
             >
               {/* Category Image Banner with Consistent Sizing and Smooth Hover */}

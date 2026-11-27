@@ -45,7 +45,7 @@ let cachedProducts: Product[] | null = null;
 let lastCacheSync = 0;
 let hasSyncedInitialCatalog = false;
 let inflightSyncPromise: Promise<Product[]> | null = null;
-const CACHE_TTL_MS = 30 * 1000; // 30-second server-side cache for high responsiveness
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5-minute server-side cache for instant public storefront responses
 
 export function isZohoCacheSynced(): boolean {
   return hasSyncedInitialCatalog && Date.now() - lastCacheSync < CACHE_TTL_MS;
@@ -395,7 +395,7 @@ export function getAllZohoProductMappings(): Record<string, string> {
 
 let cachedNotesMap: Map<string, { noteId: string; product: Partial<Product> & { isDeleted?: boolean } }> | null = null;
 let lastNotesFetchTime = 0;
-const NOTES_CACHE_TTL_MS = 30 * 1000; // 30-second TTL for rapid admin propagation
+const NOTES_CACHE_TTL_MS = 5 * 60 * 1000; // 5-minute TTL for fast in-memory product queries
 
 /**
  * Retrieve all product sync notes attached to the Office Bazzar Account in Zoho CRM

@@ -267,7 +267,7 @@ export default function CategoryLandingClient({
         </Link>
         <ChevronRight className="w-3.5 h-3.5 text-[#526174]/50 shrink-0" />
         <Link
-          href={categoryBaseUrl}
+          href={categoryBaseUrl} prefetch={true}
           className="hover:text-[#163A5F] transition-colors font-medium"
         >
           {category.name}

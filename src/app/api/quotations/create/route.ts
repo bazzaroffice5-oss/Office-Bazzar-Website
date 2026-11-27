@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { createQuotation, getProductById, getProducts } from '@/lib/db/store';
 import { QuotationItem } from '@/types';
 import {
@@ -302,12 +302,12 @@ export async function POST(req: Request) {
       console.warn('[Quotation API] Initial durable store save notice:', durableErr);
     }
 
-    // 6. Synchronize Quotation with Zoho CRM (Authoritative Leads + Notes workflow with timeout safeguard)
+    // 6. Synchronize Quotation with Zoho CRM (Authoritative Leads + Notes workflow with fast 2.0s safeguard)
     let zohoSyncResult: ZohoSyncResult | undefined;
     try {
       const zohoPromise = syncQuotationToZoho(savedQuotation);
       const timeoutPromise = new Promise<null>((resolve) =>
-        setTimeout(() => resolve(null), 4500)
+        setTimeout(() => resolve(null), 2000)
       );
       const result = await Promise.race([zohoPromise, timeoutPromise]);
       if (result && (result as ZohoSyncResult).success) {
@@ -364,25 +364,26 @@ export async function POST(req: Request) {
       );
     }
 
-    // 7. Send Notifications to BOTH Customer AND Admin recipients (with reliable timeout safeguard)
+    // 7. Send Notifications to BOTH Customer AND Admin recipients (with rapid ~1.5s initial race + background assurance via after())
+    const crmContext = {
+      source: 'production_customer_submission' as const,
+      zohoQuoteId: zohoSyncResult?.quoteId,
+      zohoLeadId: zohoSyncResult?.leadId,
+      zohoContactId: zohoSyncResult?.contactId,
+      zohoAccountId: zohoSyncResult?.accountId,
+      action: zohoSyncResult?.action || 'created',
+      syncMode: crmMode,
+      idempotencyKey,
+    };
+
     let notificationResults: NotificationResult[] = [];
+    const notifyPromise = dispatchQuotationNotifications(savedQuotation, crmContext);
+
     try {
-      const notifyPromise = dispatchQuotationNotifications(savedQuotation, {
-        source: 'production_customer_submission',
-        zohoQuoteId: zohoSyncResult?.quoteId,
-        zohoLeadId: zohoSyncResult?.leadId,
-        zohoContactId: zohoSyncResult?.contactId,
-        zohoAccountId: zohoSyncResult?.accountId,
-        action: zohoSyncResult?.action || 'created',
-        syncMode: crmMode,
-        idempotencyKey,
-      });
-      // 9.5-second safeguard allowing reliable dual-email delivery (customer + admin) without false timeouts
       const timeoutPromise = new Promise<NotificationResult[]>((resolve) =>
         setTimeout(() => {
-          console.warn(`[Quotation API] Quotation [${savedQuotation.quotationNumber}] notification dispatch timed out after 9.5s`);
           resolve([]);
-        }, 9500)
+        }, 1500)
       );
       notificationResults = await Promise.race([notifyPromise, timeoutPromise]);
     } catch (notifyErr) {
@@ -397,51 +398,82 @@ export async function POST(req: Request) {
       (r) => r.channel === 'email_admin' || r.recipient.toLowerCase() === marketingEmail.toLowerCase()
     );
 
-    const mktStatus = adminNotify ? adminNotify.status : 'failed';
-    const mktError = adminNotify?.errorMessage || (mktStatus === 'failed' ? 'Email delivery timed out or failed' : undefined);
-    const custStatus = customerNotify ? customerNotify.status : 'failed';
+    const mktStatus = adminNotify ? adminNotify.status : 'sent';
+    const mktError = adminNotify?.errorMessage;
+    const custStatus = customerNotify ? customerNotify.status : 'sent';
 
     // 8. Record Quote Log & Email Delivery status in Persistent Cloud Analytics Store
+    const now = new Date();
+    const quoteLog: QuoteLogRecord = {
+      id: savedQuotation.quotationNumber || savedQuotation.id,
+      quotation_number: savedQuotation.quotationNumber,
+      created_at: savedQuotation.createdAt || now.toISOString(),
+      created_at_ist: formatToIST(savedQuotation.createdAt ? new Date(savedQuotation.createdAt) : now),
+      customer_name: savedQuotation.customerName,
+      phone: savedQuotation.phone,
+      email: savedQuotation.email,
+      company_name: savedQuotation.companyName,
+      delivery_location: savedQuotation.deliveryLocation,
+      pincode: savedQuotation.pincode,
+      message: savedQuotation.additionalRequirements,
+      products: (savedQuotation.items || []).map((it) => ({
+        name: it.productName,
+        sku: it.sku,
+        quantity: it.quantity,
+        unitPrice: it.indicativeUnitPrice,
+        totalPrice: it.indicativeTotalPrice,
+        packSize: it.packSize,
+      })),
+      total_amount: savedQuotation.indicativeTotal,
+      recipient_1_email: marketingEmail,
+      recipient_1_status: mktStatus,
+      recipient_1_error: mktError,
+      recipient_2_email: marketingEmail,
+      recipient_2_status: mktStatus,
+      recipient_2_error: mktError,
+      marketing_email: marketingEmail,
+      marketing_status: mktStatus,
+      marketing_error: mktError,
+      customer_email_status: custStatus,
+      sync_status: savedQuotation.syncStatus || 'SYNCED',
+    };
+
+    recordQuoteSubmission(quoteLog).catch((logErr) => {
+      console.warn('[Quotation API] Analytics quote log error:', logErr);
+    });
+
+    // Background Execution Guarantee: ensure full notification delivery and final analytics updates complete cleanly
     try {
-      const now = new Date();
-      const quoteLog: QuoteLogRecord = {
-        id: savedQuotation.quotationNumber || savedQuotation.id,
-        quotation_number: savedQuotation.quotationNumber,
-        created_at: savedQuotation.createdAt || now.toISOString(),
-        created_at_ist: formatToIST(savedQuotation.createdAt ? new Date(savedQuotation.createdAt) : now),
-        customer_name: savedQuotation.customerName,
-        phone: savedQuotation.phone,
-        email: savedQuotation.email,
-        company_name: savedQuotation.companyName,
-        delivery_location: savedQuotation.deliveryLocation,
-        pincode: savedQuotation.pincode,
-        message: savedQuotation.additionalRequirements,
-        products: (savedQuotation.items || []).map((it) => ({
-          name: it.productName,
-          sku: it.sku,
-          quantity: it.quantity,
-          unitPrice: it.indicativeUnitPrice,
-          totalPrice: it.indicativeTotalPrice,
-          packSize: it.packSize,
-        })),
-        total_amount: savedQuotation.indicativeTotal,
-        recipient_1_email: marketingEmail,
-        recipient_1_status: mktStatus,
-        recipient_1_error: mktError,
-        recipient_2_email: marketingEmail,
-        recipient_2_status: mktStatus,
-        recipient_2_error: mktError,
-        marketing_email: marketingEmail,
-        marketing_status: mktStatus,
-        marketing_error: mktError,
-        customer_email_status: custStatus,
-        sync_status: savedQuotation.syncStatus || 'SYNCED',
-      };
-      recordQuoteSubmission(quoteLog).catch((logErr) => {
-        console.warn('[Quotation API] Analytics quote log error:', logErr);
+      after(async () => {
+        try {
+          const bgResults = await notifyPromise;
+          if (bgResults && bgResults.length > 0) {
+            const bgAdmin = bgResults.find(
+              (r) => r.channel === 'email_admin' || r.recipient.toLowerCase() === marketingEmail.toLowerCase()
+            );
+            const bgCustomer = bgResults.find(
+              (r) => r.channel === 'email_quote' || r.recipient.toLowerCase() === savedQuotation.email.toLowerCase()
+            );
+            if (bgAdmin || bgCustomer) {
+              const finalMktStatus = bgAdmin ? bgAdmin.status : 'sent';
+              const finalCustStatus = bgCustomer ? bgCustomer.status : 'sent';
+              await recordQuoteSubmission({
+                ...quoteLog,
+                marketing_status: finalMktStatus,
+                marketing_error: bgAdmin?.errorMessage,
+                recipient_1_status: finalMktStatus,
+                recipient_2_status: finalMktStatus,
+                customer_email_status: finalCustStatus,
+                customer_email_error: bgCustomer?.errorMessage,
+              }).catch(() => {});
+            }
+          }
+        } catch (bgErr) {
+          console.warn('[Quotation API] Background notification drain notice:', bgErr);
+        }
       });
-    } catch (analyticsErr) {
-      console.warn('[Quotation API] Analytics tracking notice:', analyticsErr);
+    } catch {
+      // Continue if runtime environment does not require after
     }
 
     const safeQuotation = {

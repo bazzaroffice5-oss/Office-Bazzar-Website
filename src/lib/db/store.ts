@@ -133,7 +133,7 @@ const notificationLogsList: NotificationLog[] = storeState.notificationLogsList;
 
 let lastSyncCustomTime = 0;
 let lastKnownCustomVersion = '';
-const SYNC_CUSTOM_THROTTLE_MS = 5 * 1000;
+const SYNC_CUSTOM_THROTTLE_MS = 60 * 1000; // 60-second throttle to prevent blocking Cloudinary roundtrips on public browsing
 
 async function syncCustomProducts(force = false) {
   const now = Date.now();

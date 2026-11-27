@@ -35,6 +35,101 @@ interface PhotoItem {
   size: number;
 }
 
+interface QuoteProductRowProps {
+  item: any;
+  onUpdateQuantity: (productId: string, quantity: number) => void;
+  onRemove: (productId: string) => void;
+}
+
+function QuoteProductRow({ item, onUpdateQuantity, onRemove }: QuoteProductRowProps) {
+  const [draftQty, setDraftQty] = useState(String(item.quantity));
+
+  // Sync draft if item.quantity changes externally
+  useEffect(() => {
+    setDraftQty(String(item.quantity));
+  }, [item.quantity]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value;
+    // Allow empty string or digits only while actively editing
+    if (raw === '' || /^\d*$/.test(raw)) {
+      setDraftQty(raw);
+      const parsed = parseInt(raw, 10);
+      if (!isNaN(parsed) && parsed >= 1) {
+        onUpdateQuantity(item.product.id, parsed);
+      }
+    }
+  };
+
+  const handleBlur = () => {
+    const parsed = parseInt(draftQty, 10);
+    if (isNaN(parsed) || parsed < 1) {
+      setDraftQty('1');
+      onUpdateQuantity(item.product.id, 1);
+    } else {
+      setDraftQty(String(parsed));
+      onUpdateQuantity(item.product.id, parsed);
+    }
+  };
+
+  return (
+    <div className="py-3 flex items-center justify-between gap-3 text-xs">
+      <div className="flex items-center gap-3 min-w-0">
+        <div className="relative w-12 h-12 rounded-lg bg-white border border-slate-200 overflow-hidden shrink-0 flex items-center justify-center p-1">
+          <Image
+            src={getVersionedImageUrl(
+              item.product.images?.[0] || '/assets/placeholder-product.svg'
+            )}
+            alt={item.product.name}
+            fill
+            className="object-contain"
+            sizes="48px"
+          />
+        </div>
+        <div className="min-w-0">
+          <h4 className="font-semibold text-slate-900 truncate text-xs" title={item.product.name}>
+            {item.product.name}
+          </h4>
+          <div className="text-[10px] text-slate-400 mt-0.5">
+            SKU: {item.product.sku} • Pack: {item.product.packSize || 'Standard Pack'}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2 shrink-0">
+        {/* Manual Quantity Input: clean editing with draft state */}
+        <div className="flex items-center gap-1.5">
+          <label htmlFor={`qty-${item.product.id}`} className="text-[11px] text-slate-500 font-medium">
+            Qty:
+          </label>
+          <input
+            id={`qty-${item.product.id}`}
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            value={draftQty}
+            onFocus={(e) => e.target.select()}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            aria-label={`Quantity for ${item.product.name}`}
+            className="w-16 px-2 py-1 bg-slate-50 border border-slate-200 rounded-md text-xs font-bold text-slate-900 text-center focus:outline-none focus:border-[#004b87] focus:bg-white transition-all"
+          />
+        </div>
+
+        {/* Remove Button */}
+        <button
+          type="button"
+          onClick={() => onRemove(item.product.id)}
+          className="text-slate-400 hover:text-rose-600 transition-colors p-1 cursor-pointer"
+          title="Remove item"
+        >
+          <X className="w-4 h-4" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 const ALLOWED_EXTS = ['.jpg', '.jpeg', '.png', '.webp'];
 const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
@@ -288,17 +383,20 @@ export default function RequestQuoteClient() {
             additionalRequirements: additionalNotes.trim() || undefined,
             customerId: user?.id,
             idempotencyKey: currentIdempotencyKey,
-            items: items.map((it) => ({
-              productId: it.product.id,
-              productName: it.product.name,
-              sku: it.product.sku,
-              indicativeUnitPrice: it.product.price ?? 0,
-              gstPercent: it.product.gstPercent || 18,
-              quantity: it.quantity,
-              indicativeTotalPrice: (it.product.price ?? 0) * it.quantity,
-              productImage: resolveProductImageUrl(it.product.images?.[0]),
-              packSize: it.product.packSize || 'Standard Pack',
-            })),
+            items: items.map((it) => {
+              const qty = Math.max(1, typeof it.quantity === 'number' && !isNaN(it.quantity) ? it.quantity : 1);
+              return {
+                productId: it.product.id,
+                productName: it.product.name,
+                sku: it.product.sku,
+                indicativeUnitPrice: it.product.price ?? 0,
+                gstPercent: it.product.gstPercent || 18,
+                quantity: qty,
+                indicativeTotalPrice: (it.product.price ?? 0) * qty,
+                productImage: resolveProductImageUrl(it.product.images?.[0]),
+                packSize: it.product.packSize || 'Standard Pack',
+              };
+            }),
           }),
         });
 
@@ -812,69 +910,12 @@ export default function RequestQuoteClient() {
                     {/* Products List: Clean with image, name, SKU, pack size, manual quantity input, and remove button */}
                     <div className="divide-y divide-slate-100 max-h-[380px] overflow-y-auto pr-1">
                       {items.map((item) => (
-                        <div key={item.id} className="py-3 flex items-center justify-between gap-3 text-xs">
-                          <div className="flex items-center gap-3 min-w-0">
-                            <div className="relative w-12 h-12 rounded-lg bg-white border border-slate-200 overflow-hidden shrink-0 flex items-center justify-center p-1">
-                              <Image
-                                src={getVersionedImageUrl(
-                                  item.product.images?.[0] || '/assets/placeholder-product.svg'
-                                )}
-                                alt={item.product.name}
-                                fill
-                                className="object-contain"
-                                sizes="48px"
-                              />
-                            </div>
-                            <div className="min-w-0">
-                              <h4 className="font-semibold text-slate-900 truncate text-xs" title={item.product.name}>
-                                {item.product.name}
-                              </h4>
-                              <div className="text-[10px] text-slate-400 mt-0.5">
-                                SKU: {item.product.sku} • Pack: {item.product.packSize || 'Standard Pack'}
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center gap-2 shrink-0">
-                            {/* Manual Quantity Input */}
-                            <div className="flex items-center gap-1.5">
-                              <label htmlFor={`qty-${item.product.id}`} className="text-[11px] text-slate-500 font-medium">
-                                Qty:
-                              </label>
-                              <input
-                                id={`qty-${item.product.id}`}
-                                type="number"
-                                min={1}
-                                value={item.quantity}
-                                onFocus={(e) => e.target.select()}
-                                onChange={(e) => {
-                                  const val = parseInt(e.target.value, 10);
-                                  if (!isNaN(val) && val >= 1) {
-                                    updateQuantity(item.product.id, val);
-                                  }
-                                }}
-                                onBlur={(e) => {
-                                  const val = parseInt(e.target.value, 10);
-                                  if (isNaN(val) || val < 1) {
-                                    updateQuantity(item.product.id, 1);
-                                  }
-                                }}
-                                aria-label={`Quantity for ${item.product.name}`}
-                                className="w-16 px-2 py-1 bg-slate-50 border border-slate-200 rounded-md text-xs font-bold text-slate-900 text-center focus:outline-none focus:border-[#004b87] focus:bg-white transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                              />
-                            </div>
-
-                            {/* Remove Button */}
-                            <button
-                              type="button"
-                              onClick={() => removeFromCart(item.product.id)}
-                              className="text-slate-400 hover:text-rose-600 transition-colors p-1"
-                              title="Remove item"
-                            >
-                              <X className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
+                        <QuoteProductRow
+                          key={item.id}
+                          item={item}
+                          onUpdateQuantity={updateQuantity}
+                          onRemove={removeFromCart}
+                        />
                       ))}
                     </div>
 
