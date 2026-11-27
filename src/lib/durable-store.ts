@@ -77,7 +77,12 @@ let lastBlogFetchTime = 0;
 let cachedQuotationState: QuotationOverridesState | null = null;
 let lastQuotationFetchTime = 0;
 
-const CACHE_TTL_MS = 2 * 1000; // 2 seconds TTL
+// High-concurrency TTL optimizations:
+// Products and blogs change infrequently via admin -> 25s TTL saves Cloudinary Admin read quota.
+// Quotations change on submission -> 5s TTL balances instant visibility with burst buffering.
+const PRODUCT_CACHE_TTL_MS = 25 * 1000;
+const BLOG_CACHE_TTL_MS = 25 * 1000;
+const QUOTATION_CACHE_TTL_MS = 5 * 1000;
 
 // ============================================================================
 // CREDENTIALS & KV REST CLIENT
@@ -183,8 +188,9 @@ function getLocalMutex(key: string): LocalAsyncMutex {
 /**
  * Acquire cross-container distributed lock using Upstash KV SET NX PX.
  * Returns lockId if acquired, null if not acquired or KV not configured.
+ * Enhanced for high concurrency with 15 retries and jittered backoff.
  */
-async function acquireDistributedLock(lockKey: string, ttlMs = 5000, maxRetries = 6): Promise<string | null> {
+async function acquireDistributedLock(lockKey: string, ttlMs = 8000, maxRetries = 15): Promise<string | null> {
   const config = getKVRestConfig();
   if (!config) return null;
 
@@ -199,8 +205,8 @@ async function acquireDistributedLock(lockKey: string, ttlMs = 5000, maxRetries 
       }
     } catch {}
 
-    // Back off with jitter: 75ms to 175ms
-    const delay = 75 + Math.floor(Math.random() * 100);
+    // Jittered backoff: 30ms to 120ms with progressive attempt jitter
+    const delay = Math.min(150, 30 + Math.floor(Math.random() * 30) + attempt * 6);
     await new Promise((r) => setTimeout(r, delay));
   }
 
@@ -298,6 +304,26 @@ async function uploadRawJsonToCloudinary(publicId: string, data: any): Promise<s
  */
 async function fetchRawJsonFromCloudinary<T>(publicId: string): Promise<T | null> {
   const { cloudName, apiKey, apiSecret } = getRequiredCloudinaryCredentials();
+
+  // 1. Try fast raw asset delivery via Cloudinary CDN first (zero Admin API quota consumption)
+  try {
+    const cdnUrl = `https://res.cloudinary.com/${cloudName}/raw/upload/${publicId}?_t=${Date.now()}`;
+    const cdnRes = await fetch(cdnUrl, {
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        Pragma: 'no-cache',
+      },
+    });
+    if (cdnRes.ok) {
+      const data = await cdnRes.json();
+      if (data && typeof data === 'object') {
+        return data as T;
+      }
+    }
+  } catch {}
+
+  // 2. Fallback to authenticated Admin API if CDN not directly available
   const auth = Buffer.from(`${apiKey}:${apiSecret}`).toString('base64');
   const adminUrl = `https://api.cloudinary.com/v1_1/${cloudName}/resources/raw/upload/${encodeURIComponent(publicId)}`;
 
@@ -375,24 +401,14 @@ function validateQuotationState(state: any): boolean {
 
 export async function getDurableProductState(force = false): Promise<ProductOverridesState> {
   const now = Date.now();
-  if (!force && cachedProductState && now - lastProductFetchTime < CACHE_TTL_MS) {
+  if (!force && cachedProductState && now - lastProductFetchTime < PRODUCT_CACHE_TTL_MS) {
     return cachedProductState;
   }
 
   let cloudState: ProductOverridesState | null = null;
   let kvState: ProductOverridesState | null = null;
 
-  // 1. Read Cloudinary Admin API (authoritative versioned raw asset)
-  try {
-    const remote = await fetchRawJsonFromCloudinary<ProductOverridesState>(PRODUCT_DB_PUBLIC_ID);
-    if (validateProductState(remote)) {
-      cloudState = remote!;
-    }
-  } catch (err) {
-    console.warn('[DurableStore] Product state Cloudinary read notice:', err);
-  }
-
-  // 2. Read Upstash Cloud KV
+  // 1. Read Upstash Cloud KV first (ultra-fast, zero Cloudinary Admin API quota)
   try {
     const kvRaw = await callCloudKV(['GET', KV_KEY_PRODUCTS]);
     if (kvRaw) {
@@ -402,6 +418,24 @@ export async function getDurableProductState(force = false): Promise<ProductOver
       }
     }
   } catch {}
+
+  // High-concurrency optimization: if KV has valid state and not forcing refresh,
+  // return KV state immediately. This protects Cloudinary Admin API from quota exhaustion.
+  if (!force && kvState) {
+    cachedProductState = kvState;
+    lastProductFetchTime = now;
+    return kvState;
+  }
+
+  // 2. Read Cloudinary Admin API when KV misses or force=true
+  try {
+    const remote = await fetchRawJsonFromCloudinary<ProductOverridesState>(PRODUCT_DB_PUBLIC_ID);
+    if (validateProductState(remote)) {
+      cloudState = remote!;
+    }
+  } catch (err) {
+    console.warn('[DurableStore] Product state Cloudinary read notice:', err);
+  }
 
   // 3. Reconcile & Automatic Read-Repair
   let resolved: ProductOverridesState;
@@ -579,24 +613,14 @@ export async function getDurableProductUnpublishedSkus(): Promise<Set<string>> {
 
 export async function getDurableBlogState(force = false): Promise<BlogOverridesState> {
   const now = Date.now();
-  if (!force && cachedBlogState && now - lastBlogFetchTime < CACHE_TTL_MS) {
+  if (!force && cachedBlogState && now - lastBlogFetchTime < BLOG_CACHE_TTL_MS) {
     return cachedBlogState;
   }
 
   let cloudState: BlogOverridesState | null = null;
   let kvState: BlogOverridesState | null = null;
 
-  // 1. Read Cloudinary Admin API
-  try {
-    const remote = await fetchRawJsonFromCloudinary<BlogOverridesState>(BLOG_DB_PUBLIC_ID);
-    if (validateBlogState(remote)) {
-      cloudState = remote!;
-    }
-  } catch (err) {
-    console.warn('[DurableStore] Blog state Cloudinary read notice:', err);
-  }
-
-  // 2. Read Upstash Cloud KV
+  // 1. Read Upstash Cloud KV first (ultra-fast, zero Cloudinary Admin API quota)
   try {
     const kvRaw = await callCloudKV(['GET', KV_KEY_BLOGS]);
     if (kvRaw) {
@@ -606,6 +630,24 @@ export async function getDurableBlogState(force = false): Promise<BlogOverridesS
       }
     }
   } catch {}
+
+  // High-concurrency optimization: if KV has valid state and not forcing refresh,
+  // return KV state immediately. This protects Cloudinary Admin API from quota exhaustion.
+  if (!force && kvState) {
+    cachedBlogState = kvState;
+    lastBlogFetchTime = now;
+    return kvState;
+  }
+
+  // 2. Read Cloudinary Admin API when KV misses or force=true
+  try {
+    const remote = await fetchRawJsonFromCloudinary<BlogOverridesState>(BLOG_DB_PUBLIC_ID);
+    if (validateBlogState(remote)) {
+      cloudState = remote!;
+    }
+  } catch (err) {
+    console.warn('[DurableStore] Blog state Cloudinary read notice:', err);
+  }
 
   // 3. Reconcile & Automatic Read-Repair
   let resolved: BlogOverridesState;
@@ -790,22 +832,14 @@ export async function getDurableBlogTrashedSlugs(): Promise<Set<string>> {
 
 export async function getDurableQuotationState(force = false): Promise<QuotationOverridesState> {
   const now = Date.now();
-  if (!force && cachedQuotationState && now - lastQuotationFetchTime < CACHE_TTL_MS) {
+  if (!force && cachedQuotationState && now - lastQuotationFetchTime < QUOTATION_CACHE_TTL_MS) {
     return cachedQuotationState;
   }
 
   let cloudState: QuotationOverridesState | null = null;
   let kvState: QuotationOverridesState | null = null;
 
-  try {
-    const remote = await fetchRawJsonFromCloudinary<QuotationOverridesState>(QUOTATION_DB_PUBLIC_ID);
-    if (validateQuotationState(remote)) {
-      cloudState = remote!;
-    }
-  } catch (err) {
-    console.warn('[DurableStore] Quotation state Cloudinary read notice:', err);
-  }
-
+  // 1. Read Upstash Cloud KV first (low latency, zero Cloudinary Admin quota)
   try {
     const kvRaw = await callCloudKV(['GET', KV_KEY_QUOTATIONS]);
     if (kvRaw) {
@@ -815,6 +849,24 @@ export async function getDurableQuotationState(force = false): Promise<Quotation
       }
     }
   } catch {}
+
+  // High-concurrency optimization: if KV has valid state and not forcing refresh,
+  // return KV state immediately.
+  if (!force && kvState) {
+    cachedQuotationState = kvState;
+    lastQuotationFetchTime = now;
+    return kvState;
+  }
+
+  // 2. Read Cloudinary Admin API when KV misses or force=true
+  try {
+    const remote = await fetchRawJsonFromCloudinary<QuotationOverridesState>(QUOTATION_DB_PUBLIC_ID);
+    if (validateQuotationState(remote)) {
+      cloudState = remote!;
+    }
+  } catch (err) {
+    console.warn('[DurableStore] Quotation state Cloudinary read notice:', err);
+  }
 
   let resolved: QuotationOverridesState;
 
@@ -921,12 +973,18 @@ export async function updateDurableQuotationSyncStatus(
       throw new Error('[DurableStore] State validation failed before updating quotation sync status.');
     }
 
-    await uploadRawJsonToCloudinary(QUOTATION_DB_PUBLIC_ID, state);
-
     cachedQuotationState = state;
     lastQuotationFetchTime = Date.now();
 
+    // Fast atomic update to Upstash KV
     await callCloudKV(['SET', KV_KEY_QUOTATIONS, JSON.stringify(state)]).catch(() => {});
+
+    // Upload to Cloudinary with non-blocking error handling
+    try {
+      await uploadRawJsonToCloudinary(QUOTATION_DB_PUBLIC_ID, state);
+    } catch (uploadErr) {
+      console.warn('[DurableStore] Secondary Cloudinary sync status update notice:', uploadErr);
+    }
   });
 }
 
@@ -964,6 +1022,8 @@ export async function listDurableQuotations(): Promise<Quotation[]> {
 // 4. ATOMIC ROUND-ROBIN SALES REP COUNTER (Upstash KV INCR)
 // ============================================================================
 
+let localRoundRobinSeq = 0;
+
 export async function getNextAtomicRoundRobinSequence(
   salesEmail = 'sales4@officebazzar.com',
   marketingEmail = 'marketing@officebazzar.com'
@@ -972,7 +1032,7 @@ export async function getNextAtomicRoundRobinSequence(
   assignedTo: 'Sales' | 'Marketing';
   email: string;
   source: 'upstash_atomic_incr' | 'fallback_local';
-} | null> {
+}> {
   try {
     const nextSeq = await callCloudKV(['INCR', KV_KEY_ROUND_ROBIN_SEQ]);
     if (typeof nextSeq === 'number' && nextSeq > 0) {
@@ -980,6 +1040,7 @@ export async function getNextAtomicRoundRobinSequence(
       // Odd (1, 3, 5, ...) -> Sales (sales4@officebazzar.com)
       // Even (2, 4, 6, ...) -> Marketing (marketing@officebazzar.com)
       const isSales = nextSeq % 2 === 1;
+      localRoundRobinSeq = nextSeq;
       return {
         sequenceNumber: nextSeq,
         assignedTo: isSales ? 'Sales' : 'Marketing',
@@ -990,7 +1051,16 @@ export async function getNextAtomicRoundRobinSequence(
   } catch (err) {
     console.warn('[DurableStore] Atomic round-robin INCR notice:', err);
   }
-  return null;
+
+  // Safe local rep fallback if KV has a transient hiccup
+  localRoundRobinSeq++;
+  const isSales = localRoundRobinSeq % 2 === 1;
+  return {
+    sequenceNumber: localRoundRobinSeq,
+    assignedTo: isSales ? 'Sales' : 'Marketing',
+    email: isSales ? salesEmail : marketingEmail,
+    source: 'fallback_local',
+  };
 }
 
 // ============================================================================

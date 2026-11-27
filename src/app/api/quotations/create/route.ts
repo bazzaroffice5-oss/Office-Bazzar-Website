@@ -12,42 +12,60 @@ import { saveDurableQuotation, updateDurableQuotationSyncStatus } from '@/lib/du
 import { recordQuoteSubmission, formatToIST } from '@/lib/analytics/store';
 import { QuoteLogRecord } from '@/lib/analytics/types';
 
-// In-memory sliding window rate limiter to protect public quotation submission
+// In-memory sliding window rate limiter with composite key (IP + email)
 const submissionRateMap = new Map<string, number[]>();
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
-const MAX_SUBMISSIONS_PER_WINDOW = 10;
+const MAX_SUBMISSIONS_PER_IP = 35; // Supports corporate office proxies and shared NAT networks
+const MAX_SUBMISSIONS_PER_EMAIL = 12;
 
-function checkRateLimit(clientIp: string): boolean {
+// In-flight / recent duplicate submission guard (5-second window prevents double-click races)
+interface CachedSubmission {
+  timestamp: number;
+  response: any;
+}
+const recentSubmissionsMap = new Map<string, CachedSubmission>();
+const DEDUP_WINDOW_MS = 5000; // 5 seconds
+
+function checkRateLimit(clientIp: string, email?: string): boolean {
   const now = Date.now();
-  const timestamps = submissionRateMap.get(clientIp) || [];
-  const validTimestamps = timestamps.filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+  const ipKey = `ip:${clientIp}`;
+  const ipTimestamps = (submissionRateMap.get(ipKey) || []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
 
-  if (validTimestamps.length >= MAX_SUBMISSIONS_PER_WINDOW) {
+  if (ipTimestamps.length >= MAX_SUBMISSIONS_PER_IP) {
     return false;
   }
 
-  validTimestamps.push(now);
-  submissionRateMap.set(clientIp, validTimestamps);
+  if (email) {
+    const emailKey = `email:${email.toLowerCase().trim()}`;
+    const emailTimestamps = (submissionRateMap.get(emailKey) || []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+    if (emailTimestamps.length >= MAX_SUBMISSIONS_PER_EMAIL) {
+      return false;
+    }
+    emailTimestamps.push(now);
+    submissionRateMap.set(emailKey, emailTimestamps);
+  }
+
+  ipTimestamps.push(now);
+  submissionRateMap.set(ipKey, ipTimestamps);
+
+  // Periodically clean up map if large
+  if (submissionRateMap.size > 2000) {
+    for (const [k, v] of submissionRateMap.entries()) {
+      const valid = v.filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+      if (valid.length === 0) submissionRateMap.delete(k);
+      else submissionRateMap.set(k, valid);
+    }
+  }
+
   return true;
 }
 
 export async function POST(req: Request) {
   try {
-    // 1. Rate-limiting check
     const forwardedHeader = req.headers.get('x-forwarded-for');
     const clientIp = forwardedHeader ? forwardedHeader.split(',')[0].trim() : '127.0.0.1';
 
-    if (!checkRateLimit(clientIp)) {
-      return NextResponse.json(
-        {
-          error:
-            'Too many quotation requests received from this address. Please wait a few minutes before submitting again.',
-        },
-        { status: 429 }
-      );
-    }
-
-    const body = await req.json();
+    const body = await req.json().catch(() => ({}));
     const idempotencyHeader =
       req.headers.get('Idempotency-Key') || req.headers.get('x-idempotency-key');
     const idempotencyKey = idempotencyHeader || body.idempotencyKey;
@@ -66,6 +84,31 @@ export async function POST(req: Request) {
       items,
       customerId,
     } = body;
+
+    // 1. Rate-limiting check with composite IP + email key
+    if (!checkRateLimit(clientIp, typeof email === 'string' ? email : undefined)) {
+      return NextResponse.json(
+        {
+          error:
+            'Too many quotation requests received from this address. Please wait a few minutes before submitting again.',
+        },
+        { status: 429 }
+      );
+    }
+
+    // 1.5 Rapid duplicate submission guard (5-second window prevents double-click race conditions)
+    const itemsSignature = Array.isArray(items)
+      ? items.map((it: any) => `${it.productId || it.sku}:${it.quantity}`).sort().join(',')
+      : '';
+    const cleanEmailForDedup = typeof email === 'string' ? email.trim().toLowerCase() : '';
+    const cleanPhoneForDedup = phone ? String(phone).replace(/[^0-9]/g, '') : '';
+    const dedupKey = (idempotencyKey || `${cleanEmailForDedup}_${cleanPhoneForDedup}_${itemsSignature}`).slice(0, 200);
+
+    const existingSubmission = recentSubmissionsMap.get(dedupKey);
+    if (existingSubmission && Date.now() - existingSubmission.timestamp < DEDUP_WINDOW_MS) {
+      console.log(`[Quotation API] Returning duplicate submission response for dedupKey [${dedupKey}]`);
+      return NextResponse.json(existingSubmission.response, { status: 200 });
+    }
 
     // 2. Field Validations
     if (!customerName || typeof customerName !== 'string' || customerName.trim().length < 2) {
@@ -254,24 +297,19 @@ export async function POST(req: Request) {
       console.warn('[Quotation API] Initial durable store save notice:', durableErr);
     }
 
-    // 6. Synchronize Quotation with Zoho CRM (Authoritative Leads + Notes workflow with retry)
+    // 6. Synchronize Quotation with Zoho CRM (Authoritative Leads + Notes workflow with timeout safeguard)
     let zohoSyncResult: ZohoSyncResult | undefined;
-    let syncAttempts = 0;
-    const MAX_SYNC_ATTEMPTS = 2;
-
-    while (syncAttempts < MAX_SYNC_ATTEMPTS) {
-      syncAttempts++;
-      try {
-        zohoSyncResult = await syncQuotationToZoho(savedQuotation);
-        if (zohoSyncResult?.success) {
-          break;
-        }
-      } catch (zohoErr) {
-        console.error(`[Quotation API] Zoho CRM sync attempt ${syncAttempts} failed:`, zohoErr);
+    try {
+      const zohoPromise = syncQuotationToZoho(savedQuotation);
+      const timeoutPromise = new Promise<null>((resolve) =>
+        setTimeout(() => resolve(null), 4500)
+      );
+      const result = await Promise.race([zohoPromise, timeoutPromise]);
+      if (result && (result as ZohoSyncResult).success) {
+        zohoSyncResult = result as ZohoSyncResult;
       }
-      if (syncAttempts < MAX_SYNC_ATTEMPTS) {
-        await new Promise((r) => setTimeout(r, 600));
-      }
+    } catch (zohoErr) {
+      console.warn('[Quotation API] Zoho CRM sync notice:', zohoErr);
     }
 
     const isCrmSynced = Boolean(zohoSyncResult?.success);
@@ -321,10 +359,10 @@ export async function POST(req: Request) {
       );
     }
 
-    // 7. Send Notifications to BOTH Customer AND Admin recipients
+    // 7. Send Notifications to BOTH Customer AND Admin recipients (with timeout safeguard)
     let notificationResults: NotificationResult[] = [];
     try {
-      notificationResults = await dispatchQuotationNotifications(savedQuotation, {
+      const notifyPromise = dispatchQuotationNotifications(savedQuotation, {
         source: 'production_customer_submission',
         zohoQuoteId: zohoSyncResult?.quoteId,
         zohoLeadId: zohoSyncResult?.leadId,
@@ -334,8 +372,12 @@ export async function POST(req: Request) {
         syncMode: crmMode,
         idempotencyKey,
       });
+      const timeoutPromise = new Promise<NotificationResult[]>((resolve) =>
+        setTimeout(() => resolve([]), 4500)
+      );
+      notificationResults = await Promise.race([notifyPromise, timeoutPromise]);
     } catch (notifyErr) {
-      console.error('[Quotation API] Notification dispatch error:', notifyErr);
+      console.warn('[Quotation API] Notification dispatch notice:', notifyErr);
     }
 
     const { salesEmail, marketingEmail } = getNotificationRecipients();
@@ -420,45 +462,60 @@ export async function POST(req: Request) {
       createdAt: savedQuotation.createdAt,
     };
 
-    return NextResponse.json(
-      {
-        success: true,
-        quotationNumber: savedQuotation.quotationNumber,
-        quotationId: savedQuotation.id,
-        zohoQuoteId: zohoSyncResult?.quoteId,
-        zohoLeadId: zohoSyncResult?.leadId,
-        zohoContactId: zohoSyncResult?.contactId,
-        zohoAccountId: zohoSyncResult?.accountId,
-        zohoStatus: 'synced',
-        syncMode: crmMode,
-        customerEmail: {
-          recipient: savedQuotation.email,
-          status: customerNotify?.status || 'sent',
-          provider: customerNotify?.provider,
-          messageId: customerNotify?.messageId,
-          error: customerNotify?.errorMessage,
-        },
-        admin1Email: {
-          recipient: salesEmail,
-          status: admin1Notify?.status || 'skipped',
-          provider: admin1Notify?.provider,
-          messageId: admin1Notify?.messageId,
-          error: admin1Notify?.errorMessage,
-          reason: admin1Notify?.reason,
-        },
-        admin2Email: {
-          recipient: marketingEmail,
-          status: admin2Notify?.status || 'skipped',
-          provider: admin2Notify?.provider,
-          messageId: admin2Notify?.messageId,
-          error: admin2Notify?.errorMessage,
-          reason: admin2Notify?.reason,
-        },
-        quotation: safeQuotation,
-        message: 'Request for Quotation confirmed and registered in Zoho CRM.',
+    const responsePayload = {
+      success: true,
+      quotationNumber: savedQuotation.quotationNumber,
+      quotationId: savedQuotation.id,
+      zohoQuoteId: zohoSyncResult?.quoteId,
+      zohoLeadId: zohoSyncResult?.leadId,
+      zohoContactId: zohoSyncResult?.contactId,
+      zohoAccountId: zohoSyncResult?.accountId,
+      zohoStatus: isCrmSynced ? 'synced' : 'pending',
+      syncMode: crmMode,
+      customerEmail: {
+        recipient: savedQuotation.email,
+        status: customerNotify?.status || 'sent',
+        provider: customerNotify?.provider,
+        messageId: customerNotify?.messageId,
+        error: customerNotify?.errorMessage,
       },
-      { status: 201 }
-    );
+      admin1Email: {
+        recipient: salesEmail,
+        status: admin1Notify?.status || 'skipped',
+        provider: admin1Notify?.provider,
+        messageId: admin1Notify?.messageId,
+        error: admin1Notify?.errorMessage,
+        reason: admin1Notify?.reason,
+      },
+      admin2Email: {
+        recipient: marketingEmail,
+        status: admin2Notify?.status || 'skipped',
+        provider: admin2Notify?.provider,
+        messageId: admin2Notify?.messageId,
+        error: admin2Notify?.errorMessage,
+        reason: admin2Notify?.reason,
+      },
+      quotation: safeQuotation,
+      message: 'Request for Quotation confirmed and registered in Zoho CRM.',
+    };
+
+    // Store in rapid duplicate submission guard
+    recentSubmissionsMap.set(dedupKey, {
+      timestamp: Date.now(),
+      response: responsePayload,
+    });
+
+    // Prune stale dedup cache entries if map grows
+    if (recentSubmissionsMap.size > 500) {
+      const nowMs = Date.now();
+      for (const [k, v] of recentSubmissionsMap.entries()) {
+        if (nowMs - v.timestamp > DEDUP_WINDOW_MS) {
+          recentSubmissionsMap.delete(k);
+        }
+      }
+    }
+
+    return NextResponse.json(responsePayload, { status: 201 });
   } catch (error: unknown) {
     console.error('[Quotation API Error]:', error);
     return NextResponse.json(
