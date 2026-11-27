@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   X,
   Minus,
@@ -72,10 +73,26 @@ function formatCurrentTime(): string {
 }
 
 export default function BazzarAIChatbot() {
+  const pathname = usePathname();
+  const [isAdminHost, setIsAdminHost] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hostname.includes('admin.officebazzar.com')) {
+      setIsAdminHost(true);
+    }
+  }, []);
+
+  const isHiddenOnAdmin =
+    pathname?.startsWith('/blog-admin-panel') ||
+    pathname?.startsWith('/product-admin-panel') ||
+    pathname?.startsWith('/analytics-admin-panel') ||
+    pathname === '/admin' ||
+    pathname?.startsWith('/admin/') ||
+    isAdminHost;
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -396,7 +413,7 @@ export default function BazzarAIChatbot() {
     handleSendMessage(suggestion);
   };
 
-  if (!isMounted) return null;
+  if (!isMounted || isHiddenOnAdmin) return null;
 
   return (
     <>

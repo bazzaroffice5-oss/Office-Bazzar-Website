@@ -18,11 +18,21 @@ export default function PublicLayoutShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const [isAdminHost, setIsAdminHost] = React.useState(false);
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hostname.includes('admin.officebazzar.com')) {
+      setIsAdminHost(true);
+    }
+  }, []);
+
   const isAdmin =
     pathname?.startsWith('/blog-admin-panel') ||
     pathname?.startsWith('/product-admin-panel') ||
     pathname?.startsWith('/analytics-admin-panel') ||
-    pathname?.startsWith('/admin');
+    pathname === '/admin' ||
+    pathname?.startsWith('/admin/') ||
+    isAdminHost;
 
   if (isAdmin) {
     return <main className="w-full min-h-screen">{children}</main>;

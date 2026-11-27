@@ -17,9 +17,23 @@ const BazzarAIChatbot = dynamic(() => import('@/components/chatbot/BazzarAIChatb
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isAdmin = pathname?.startsWith('/blog-admin-panel') || pathname?.startsWith('/product-admin-panel');
+  const [isAdminHost, setIsAdminHost] = React.useState(false);
 
-  // Complete isolation for standalone admin dashboards (blog & product catalog):
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hostname.includes('admin.officebazzar.com')) {
+      setIsAdminHost(true);
+    }
+  }, []);
+
+  const isAdmin =
+    pathname?.startsWith('/blog-admin-panel') ||
+    pathname?.startsWith('/product-admin-panel') ||
+    pathname?.startsWith('/analytics-admin-panel') ||
+    pathname === '/admin' ||
+    pathname?.startsWith('/admin/') ||
+    isAdminHost;
+
+  // Complete isolation for standalone admin dashboards (blog, product catalog, analytics, orders):
   // Do not load public e-commerce providers, floating cart drawer, pincode modal, or customer AI chatbot
   if (isAdmin) {
     return <>{children}</>;

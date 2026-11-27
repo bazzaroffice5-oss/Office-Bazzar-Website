@@ -137,7 +137,7 @@ export default function AnalyticsDashboardClient({
       <header className="border-b border-slate-200 bg-white sticky top-0 z-40 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between gap-2 sm:gap-4">
           <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-            <Link href="/" className="flex items-center shrink-0" title="Return to Storefront">
+            <div className="flex items-center shrink-0 cursor-default select-none" title="Office Bazzar Admin Portal">
               <Image
                 src="/images/officebazzar-logo-transparent.webp"
                 alt="OfficeBazzar Logo"
@@ -146,7 +146,7 @@ export default function AnalyticsDashboardClient({
                 className="w-[110px] sm:w-[130px] h-auto object-contain"
                 priority
               />
-            </Link>
+            </div>
 
             <div className="h-6 w-px bg-slate-200 hidden sm:block shrink-0" />
 

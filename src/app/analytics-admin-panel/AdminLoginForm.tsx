@@ -42,13 +42,13 @@ export default function AdminLoginForm() {
     <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 bg-[#F8FAFC] relative overflow-hidden font-sans">
       <div className="w-full max-w-md bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-10 shadow-xl relative z-10">
         <div className="flex flex-col items-center text-center mb-8">
-          <div className="mb-4">
+          <div className="mb-4 cursor-default select-none" title="Office Bazzar Admin Portal">
             <Image
               src="/images/officebazzar-logo-transparent.webp"
               alt="OfficeBazzar Logo"
               width={160}
               height={45}
-              className="w-[130px] sm:w-[145px] h-auto object-contain"
+              className="w-[130px] sm:w-[145px] h-auto object-contain pointer-events-none"
               priority
             />
           </div>
