@@ -343,6 +343,46 @@ export async function getAnalyticsData(range: DateRangePreset = 'all'): Promise<
     }
   }
 
+  // 4. If quotes are still empty, merge existing real quotes from database store
+  if (quotes.length === 0) {
+    try {
+      const { getAllQuotations } = await import('@/lib/db/store');
+      const dbQuotes = await getAllQuotations(undefined, 200, 0);
+      if (Array.isArray(dbQuotes) && dbQuotes.length > 0) {
+        quotes = dbQuotes.map((dq) => ({
+          id: dq.quotationNumber || dq.id,
+          quotation_number: dq.quotationNumber,
+          created_at: dq.createdAt || new Date().toISOString(),
+          created_at_ist: formatToIST(new Date(dq.createdAt || Date.now())),
+          customer_name: dq.customerName || 'Customer',
+          phone: dq.phone || '-',
+          email: dq.email || '-',
+          company_name: dq.companyName,
+          delivery_location: dq.deliveryLocation,
+          pincode: dq.pincode,
+          message: dq.additionalRequirements,
+          products: (dq.items || []).map((it) => ({
+            name: it.productName,
+            sku: it.sku,
+            quantity: it.quantity,
+            unitPrice: it.indicativeUnitPrice,
+            totalPrice: it.indicativeTotalPrice,
+            packSize: it.packSize,
+          })),
+          total_amount: dq.indicativeTotal,
+          recipient_1_email: salesEmail,
+          recipient_1_status: 'sent',
+          recipient_2_email: marketingEmail,
+          recipient_2_status: 'sent',
+          customer_email_status: 'sent',
+          sync_status: dq.syncStatus || 'SYNCED',
+        }));
+      }
+    } catch (err) {
+      console.warn('[AnalyticsStore] Fallback to db store quotes notice:', err);
+    }
+  }
+
   // Apply date range filter to local results if not already filtered by Supabase
   if (startDate) {
     const startMs = startDate.getTime();

@@ -18,7 +18,11 @@ export default function PublicLayoutShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isAdmin = pathname?.startsWith('/blog-admin-panel') || pathname?.startsWith('/product-admin-panel');
+  const isAdmin =
+    pathname?.startsWith('/blog-admin-panel') ||
+    pathname?.startsWith('/product-admin-panel') ||
+    pathname?.startsWith('/analytics-admin-panel') ||
+    pathname?.startsWith('/admin');
 
   if (isAdmin) {
     return <main className="w-full min-h-screen">{children}</main>;

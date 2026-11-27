@@ -201,7 +201,61 @@ const nextConfig: NextConfig = {
     ];
   },
   async rewrites() {
+    const adminSubdomainRewrites = [
+      {
+        source: '/',
+        has: [
+          {
+            type: 'host' as const,
+            value: 'admin.officebazzar.com',
+          },
+        ],
+        destination: '/analytics-admin-panel',
+      },
+      {
+        source: '/analytics',
+        has: [
+          {
+            type: 'host' as const,
+            value: 'admin.officebazzar.com',
+          },
+        ],
+        destination: '/analytics-admin-panel',
+      },
+      {
+        source: '/products',
+        has: [
+          {
+            type: 'host' as const,
+            value: 'admin.officebazzar.com',
+          },
+        ],
+        destination: '/product-admin-panel',
+      },
+      {
+        source: '/blog',
+        has: [
+          {
+            type: 'host' as const,
+            value: 'admin.officebazzar.com',
+          },
+        ],
+        destination: '/blog-admin-panel',
+      },
+      {
+        source: '/orders',
+        has: [
+          {
+            type: 'host' as const,
+            value: 'admin.officebazzar.com',
+          },
+        ],
+        destination: '/admin',
+      },
+    ];
+
     return [
+      ...adminSubdomainRewrites,
       {
         source: '/assets/supplier-library/:path*',
         destination: '/assets/product/:path*',

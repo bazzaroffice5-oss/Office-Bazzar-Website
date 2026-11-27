@@ -14,34 +14,46 @@ export async function POST(req: NextRequest) {
 
     if (!email || !password) {
       return NextResponse.json(
-        { success: false, error: 'Email and password are required.' },
+        { success: false, error: 'Administrator email and password are required.' },
         { status: 400 }
       );
     }
 
-    const isValid = verifyAnalyticsCredentials(email, password);
+    const authResult = verifyAnalyticsCredentials(email, password);
 
-    if (!isValid) {
+    if (!authResult.success) {
       return NextResponse.json(
-        { success: false, error: 'Invalid administrator credentials. Access denied.' },
+        { success: false, error: authResult.error || 'Invalid administrator credentials. Access denied.' },
         { status: 401 }
       );
     }
 
-    const sessionToken = createAnalyticsSessionToken(email);
-    const response = NextResponse.json({ success: true, message: 'Authenticated successfully.' });
+    const userEmail = authResult.email || String(email).trim().toLowerCase();
+    const sessionToken = createAnalyticsSessionToken(userEmail);
+    const response = NextResponse.json({
+      success: true,
+      message: 'Authentication successful. Redirecting to Analytics Portal...',
+      user: { email: userEmail },
+    });
 
-    // 1-Year persistent session cookie so admin stays logged in across browser restarts
+    // Multi-domain support: set domain to .officebazzar.com in production so that
+    // admin.officebazzar.com and www.officebazzar.com share the session seamlessly
+    const host = req.headers.get('host') || '';
+    const isOfficeBazzarDomain = host.includes('officebazzar.com');
+    const isProduction = process.env.NODE_ENV === 'production';
+
     response.cookies.set(ANALYTICS_COOKIE_NAME, sessionToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: isProduction,
       sameSite: 'lax',
       path: '/',
+      domain: isProduction && isOfficeBazzarDomain ? '.officebazzar.com' : undefined,
       maxAge: 365 * 24 * 60 * 60, // 365 days
     });
 
     return response;
-  } catch {
+  } catch (err) {
+    console.error('[AnalyticsAdmin Login Error]:', err);
     return NextResponse.json(
       { success: false, error: 'Internal server error during authentication.' },
       { status: 500 }
