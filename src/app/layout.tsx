@@ -4,6 +4,8 @@ import './globals.css';
 import Providers from '@/components/Providers';
 import PublicLayoutShell from '@/components/layout/PublicLayoutShell';
 import JsonLd from '@/components/seo/JsonLd';
+import PageTracker from '@/components/analytics/PageTracker';
+import { Suspense } from 'react';
 import {
   SITE_CONFIG,
   getOrganizationJsonLd,
@@ -110,6 +112,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={organizationSchema} id="organization-schema-root" />
         <JsonLd data={websiteSchema} id="website-schema-root" />
         <Providers>
+          <Suspense fallback={null}>
+            <PageTracker />
+          </Suspense>
           <PublicLayoutShell>{children}</PublicLayoutShell>
         </Providers>
       </body>

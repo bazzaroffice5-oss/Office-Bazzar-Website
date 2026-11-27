@@ -9,6 +9,8 @@ import {
 import { syncQuotationToZoho, ZohoSyncResult } from '@/lib/zoho/crm';
 import { getLeadAssigneeForCustomer } from '@/lib/zoho/round-robin';
 import { saveDurableQuotation, updateDurableQuotationSyncStatus } from '@/lib/durable-store';
+import { recordQuoteSubmission, formatToIST } from '@/lib/analytics/store';
+import { QuoteLogRecord } from '@/lib/analytics/types';
 
 // In-memory sliding window rate limiter to protect public quotation submission
 const submissionRateMap = new Map<string, number[]>();
@@ -346,6 +348,46 @@ export async function POST(req: Request) {
     const admin2Notify = notificationResults.find(
       (r) => r.channel === 'email_admin' || r.recipient.toLowerCase() === marketingEmail.toLowerCase()
     );
+
+    // 8. Record Quote Log & 2-Email Delivery status in Persistent Cloud Analytics Store
+    try {
+      const now = new Date();
+      const quoteLog: QuoteLogRecord = {
+        id: savedQuotation.quotationNumber || savedQuotation.id,
+        quotation_number: savedQuotation.quotationNumber,
+        created_at: savedQuotation.createdAt || now.toISOString(),
+        created_at_ist: formatToIST(savedQuotation.createdAt ? new Date(savedQuotation.createdAt) : now),
+        customer_name: savedQuotation.customerName,
+        phone: savedQuotation.phone,
+        email: savedQuotation.email,
+        company_name: savedQuotation.companyName,
+        delivery_location: savedQuotation.deliveryLocation,
+        pincode: savedQuotation.pincode,
+        message: savedQuotation.additionalRequirements,
+        products: (savedQuotation.items || []).map((it) => ({
+          name: it.productName,
+          sku: it.sku,
+          quantity: it.quantity,
+          unitPrice: it.indicativeUnitPrice,
+          totalPrice: it.indicativeTotalPrice,
+          packSize: it.packSize,
+        })),
+        total_amount: savedQuotation.indicativeTotal,
+        recipient_1_email: salesEmail,
+        recipient_1_status: admin1Notify?.status || 'skipped',
+        recipient_1_error: admin1Notify?.errorMessage || (admin1Notify?.status === 'failed' ? 'Dispatch failed' : undefined),
+        recipient_2_email: marketingEmail,
+        recipient_2_status: admin2Notify?.status || 'skipped',
+        recipient_2_error: admin2Notify?.errorMessage || (admin2Notify?.status === 'failed' ? 'Dispatch failed' : undefined),
+        customer_email_status: customerNotify?.status || 'skipped',
+        sync_status: savedQuotation.syncStatus || 'SYNCED',
+      };
+      recordQuoteSubmission(quoteLog).catch((logErr) => {
+        console.warn('[Quotation API] Analytics quote log error:', logErr);
+      });
+    } catch (analyticsErr) {
+      console.warn('[Quotation API] Analytics tracking notice:', analyticsErr);
+    }
 
     const safeQuotation = {
       id: savedQuotation.id,
