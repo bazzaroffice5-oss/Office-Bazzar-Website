@@ -15,7 +15,10 @@ export async function POST(req: NextRequest) {
     if (!email || !password) {
       return NextResponse.json(
         { success: false, error: 'Administrator email and password are required.' },
-        { status: 400 }
+        {
+          status: 400,
+          headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' },
+        }
       );
     }
 
@@ -24,24 +27,33 @@ export async function POST(req: NextRequest) {
     if (!authResult.success) {
       return NextResponse.json(
         { success: false, error: authResult.error || 'Invalid administrator credentials. Access denied.' },
-        { status: 401 }
+        {
+          status: 401,
+          headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' },
+        }
       );
     }
 
     const userEmail = authResult.email || String(email).trim().toLowerCase();
     const sessionToken = createAnalyticsSessionToken(userEmail);
-    const response = NextResponse.json({
-      success: true,
-      message: 'Authentication successful. Redirecting to Analytics Portal...',
-      user: { email: userEmail },
-    });
-
-    const host = req.headers.get('host') || '';
-    const isOfficeBazzarDomain = host.includes('officebazzar.com');
     const isProduction = process.env.NODE_ENV === 'production';
     const ONE_YEAR_SECONDS = 365 * 24 * 60 * 60;
 
-    // 1. Host-bound cookie (guaranteed to work on https://www.officebazzar.com and localhost)
+    const response = NextResponse.json(
+      {
+        success: true,
+        message: 'Authentication successful. Redirecting to Analytics Portal...',
+        user: { email: userEmail },
+      },
+      {
+        status: 200,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      }
+    );
+
+    // Set single deterministic cookie (host-bound path=/, httpOnly, sameSite=lax)
     response.cookies.set(ANALYTICS_COOKIE_NAME, sessionToken, {
       httpOnly: true,
       secure: isProduction,
@@ -50,20 +62,15 @@ export async function POST(req: NextRequest) {
       maxAge: ONE_YEAR_SECONDS,
     });
 
-    // 2. Also set multi-subdomain cookie (.officebazzar.com) when accessed via officebazzar.com
-    if (isProduction && isOfficeBazzarDomain) {
-      response.headers.append(
-        'Set-Cookie',
-        `${ANALYTICS_COOKIE_NAME}=${sessionToken}; Path=/; Domain=.officebazzar.com; Max-Age=${ONE_YEAR_SECONDS}; HttpOnly; SameSite=Lax${isProduction ? '; Secure' : ''}`
-      );
-    }
-
     return response;
   } catch (err) {
     console.error('[AnalyticsAdmin Login Error]:', err);
     return NextResponse.json(
       { success: false, error: 'Internal server error during authentication.' },
-      { status: 500 }
+      {
+        status: 500,
+        headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' },
+      }
     );
   }
 }

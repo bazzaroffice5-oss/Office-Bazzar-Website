@@ -31,7 +31,7 @@ export default function AdminLoginForm() {
         return;
       }
 
-      window.location.href = '/analytics-admin-panel';
+      window.location.replace('/analytics-admin-panel?t=' + Date.now());
     } catch {
       setError('A network error occurred while contacting the authentication service.');
       setLoading(false);

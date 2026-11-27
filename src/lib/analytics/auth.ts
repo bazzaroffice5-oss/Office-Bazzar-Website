@@ -1,23 +1,23 @@
 import crypto from 'crypto';
 import { cookies } from 'next/headers';
 import { AnalyticsAdminSession } from './types';
-import { verifyProductAdminCredentials } from '@/lib/product-admin/auth';
-import {
-  verifyPassword as verifyBlogScryptPassword,
-  getAuthConfig as getBlogAuthConfig,
-} from '@/lib/blog-admin/auth';
-import { verifyAdminCredentials } from '@/lib/auth/service';
 
 export const ANALYTICS_COOKIE_NAME = 'ob_analytics_admin_session';
+export const EXACT_ADMIN_PASSWORD = 'Officebazzar2026!';
 
 const DEFAULT_ADMIN_EMAIL = 'bazzaroffice5@gmail.com';
 const DEFAULT_SECONDARY_EMAIL = 'bazzaroffcie5@gmail.com';
 const ONE_YEAR_MS = 365 * 24 * 60 * 60 * 1000;
 
-const SESSION_SECRET =
-  process.env.ADMIN_SECRET_KEY ||
-  process.env.ANALYTICS_SESSION_SECRET ||
-  'officebazzar_analytics_sec_2026_durable_secret_key_chennai';
+const DETERMINISTIC_SECRET = 'officebazzar_analytics_sec_2026_durable_secret_key_chennai';
+
+function getSigningSecret(): string {
+  const secret = process.env.ADMIN_SECRET_KEY || process.env.ANALYTICS_SESSION_SECRET;
+  if (secret && secret.trim()) {
+    return secret.trim();
+  }
+  return DETERMINISTIC_SECRET;
+}
 
 function cleanEnvVal(val?: string): string {
   if (!val) return '';
@@ -25,8 +25,8 @@ function cleanEnvVal(val?: string): string {
 }
 
 /**
- * Validates admin credentials against authorized administrator emails,
- * environment variables, case variations, and cryptographic hashes.
+ * Validates admin credentials with an exact, case-sensitive lock against ONLY 'Officebazzar2026!'.
+ * Eliminates all fuzzy, normalized, and alternative password fallbacks.
  */
 export function verifyAnalyticsCredentials(
   email?: string,
@@ -37,14 +37,18 @@ export function verifyAnalyticsCredentials(
   }
 
   let cleanEmail = cleanEnvVal(email).toLowerCase();
-  // Auto-normalize username prefix if user typed without @gmail.com
+  // Auto-normalize username prefix if entered without @gmail.com
   if (cleanEmail === 'bazzaroffice5' || cleanEmail === 'bazzaroffcie5') {
     cleanEmail = 'bazzaroffice5@gmail.com';
   }
 
-  const cleanPassword = cleanEnvVal(password);
+  // 1. Strict, case-sensitive password lock: EXACTLY 'Officebazzar2026!'
+  const inputPassword = password.trim();
+  if (inputPassword !== EXACT_ADMIN_PASSWORD) {
+    return { success: false, error: 'Invalid administrator credentials. Access denied.' };
+  }
 
-  // 1. Authorized emails list
+  // 2. Authorized administrator emails
   const authorizedEmails = new Set<string>([
     DEFAULT_ADMIN_EMAIL,
     DEFAULT_SECONDARY_EMAIL,
@@ -61,9 +65,6 @@ export function verifyAnalyticsCredentials(
   const envProductEmail = cleanEnvVal(process.env.PRODUCT_ADMIN_EMAIL).toLowerCase();
   if (envProductEmail) authorizedEmails.add(envProductEmail);
 
-  const envBlogUser = cleanEnvVal(process.env.BLOG_ADMIN_USERNAME).toLowerCase();
-  if (envBlogUser) authorizedEmails.add(envBlogUser);
-
   if (process.env.ADMIN_ALLOWED_EMAILS) {
     process.env.ADMIN_ALLOWED_EMAILS.split(',').forEach((em) => {
       const e = cleanEnvVal(em).toLowerCase();
@@ -71,62 +72,8 @@ export function verifyAnalyticsCredentials(
     });
   }
 
-  // 2. Comprehensive Master Password Matching:
-  // Normalizes casing and special character delimiters (@, !, #, $, _, -, spaces)
-  // so any casing of OfficeBazzar2026, OfficeBazzar@2026!, officebazzar2026, etc. matches reliably.
-  const normalizedPwd = cleanPassword.toLowerCase().replace(/[@!#$_\-\s]/g, '');
-  const isMasterOfficeBazzarPassword =
-    normalizedPwd === 'officebazzar2026' ||
-    normalizedPwd === 'officebazzar' ||
-    cleanPassword.toLowerCase() === 'officebazzar2026!' ||
-    cleanPassword.toLowerCase() === 'officebazzar@2026!';
-
-  // Direct environment variable passwords
-  const envPasswords = [
-    cleanEnvVal(process.env.ANALYTICS_ADMIN_PASSWORD),
-    cleanEnvVal(process.env.ADMIN_PASSWORD),
-    cleanEnvVal(process.env.PRODUCT_ADMIN_PASSWORD),
-    cleanEnvVal(process.env.ADMIN_PASSWORD_SALES4),
-    cleanEnvVal(process.env.ADMIN_PASSWORD_MARKETING),
-  ].filter(Boolean);
-
-  const isEnvPasswordMatch = envPasswords.some((ep) => ep === cleanPassword);
-
-  if (authorizedEmails.has(cleanEmail) && (isMasterOfficeBazzarPassword || isEnvPasswordMatch)) {
+  if (authorizedEmails.has(cleanEmail)) {
     return { success: true, email: cleanEmail };
-  }
-
-  // 3. Delegate to Product Admin verification (checks scrypt hash)
-  try {
-    const productAuth = verifyProductAdminCredentials(cleanEmail, cleanPassword);
-    if (productAuth.success && productAuth.user) {
-      return { success: true, email: productAuth.user.email };
-    }
-  } catch {
-    // Continue
-  }
-
-  // 4. Delegate to Blog Admin verification (checks scrypt hash)
-  try {
-    const blogConfig = getBlogAuthConfig();
-    if (
-      blogConfig.username.toLowerCase() === cleanEmail &&
-      verifyBlogScryptPassword(cleanPassword, blogConfig.passwordHash)
-    ) {
-      return { success: true, email: cleanEmail };
-    }
-  } catch {
-    // Continue
-  }
-
-  // 5. Delegate to Corporate Admin verification (handles sales4@ / marketing@)
-  try {
-    const corporateAuth = verifyAdminCredentials(cleanEmail, cleanPassword);
-    if (corporateAuth.success && corporateAuth.user) {
-      return { success: true, email: corporateAuth.user.email };
-    }
-  } catch {
-    // Continue
   }
 
   return { success: false, error: 'Invalid administrator credentials. Access denied.' };
@@ -136,17 +83,18 @@ export function createAnalyticsSessionToken(email: string): string {
   const expiresAt = Date.now() + ONE_YEAR_MS;
   const payload = JSON.stringify({ u: cleanEnvVal(email).toLowerCase(), exp: expiresAt });
   const payloadB64 = Buffer.from(payload).toString('base64url');
-  const signature = crypto.createHmac('sha256', SESSION_SECRET).update(payloadB64).digest('base64url');
+  const signature = crypto.createHmac('sha256', getSigningSecret()).update(payloadB64).digest('base64url');
   return `${payloadB64}.${signature}`;
 }
 
 export function verifyAnalyticsSessionToken(token: string): { valid: boolean; email?: string } {
   try {
+    if (!token || typeof token !== 'string') return { valid: false };
     const parts = token.split('.');
     if (parts.length !== 2) return { valid: false };
 
     const [payloadB64, signature] = parts;
-    const expectedSig = crypto.createHmac('sha256', SESSION_SECRET).update(payloadB64).digest('base64url');
+    const expectedSig = crypto.createHmac('sha256', getSigningSecret()).update(payloadB64).digest('base64url');
 
     const sigBuf = Buffer.from(signature);
     const expBuf = Buffer.from(expectedSig);
@@ -168,7 +116,7 @@ export function verifyAnalyticsSessionToken(token: string): { valid: boolean; em
 /**
  * Retrieves the current admin session.
  * STRICT: Exclusively requires a valid ob_analytics_admin_session cookie.
- * Does NOT auto-bypass with sessions from other panels, ensuring strict login isolation.
+ * Uses deterministic signing secret matching createAnalyticsSessionToken().
  */
 export async function getAnalyticsAdminSession(): Promise<AnalyticsAdminSession> {
   try {

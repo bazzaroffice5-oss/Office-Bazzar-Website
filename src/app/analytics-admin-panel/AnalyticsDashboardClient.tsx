@@ -84,7 +84,7 @@ export default function AnalyticsDashboardClient({
     } catch (err) {
       console.warn('[Logout Notice]:', err);
     } finally {
-      window.location.href = '/analytics-admin-panel';
+      window.location.replace('/analytics-admin-panel?t=' + Date.now());
     }
   };
 
