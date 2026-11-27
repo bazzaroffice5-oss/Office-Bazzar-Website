@@ -1,14 +1,8 @@
 import crypto from 'crypto';
 import { cookies } from 'next/headers';
 import { AnalyticsAdminSession } from './types';
+import { verifyProductAdminCredentials } from '@/lib/product-admin/auth';
 import {
-  PRODUCT_ADMIN_COOKIE_NAME,
-  verifyProductAdminSessionToken,
-  verifyProductAdminCredentials,
-} from '@/lib/product-admin/auth';
-import {
-  ADMIN_COOKIE_NAME as BLOG_ADMIN_COOKIE_NAME,
-  verifySessionToken as verifyBlogAdminSessionToken,
   verifyPassword as verifyBlogScryptPassword,
   getAuthConfig as getBlogAuthConfig,
 } from '@/lib/blog-admin/auth';
@@ -31,8 +25,8 @@ function cleanEnvVal(val?: string): string {
 }
 
 /**
- * Validates admin credentials against all authorized administrator email & password variations,
- * environment variables (ANALYTICS_ADMIN_PASSWORD, ADMIN_PASSWORD, etc.), and cryptographic hashes.
+ * Validates admin credentials against authorized administrator emails,
+ * environment variables, and cryptographic hashes.
  */
 export function verifyAnalyticsCredentials(
   email?: string,
@@ -45,7 +39,7 @@ export function verifyAnalyticsCredentials(
   const cleanEmail = cleanEnvVal(email).toLowerCase();
   const cleanPassword = cleanEnvVal(password);
 
-  // 1. Gather all authorized emails
+  // 1. Authorized emails list
   const authorizedEmails = new Set<string>([
     DEFAULT_ADMIN_EMAIL,
     DEFAULT_SECONDARY_EMAIL,
@@ -72,7 +66,7 @@ export function verifyAnalyticsCredentials(
     });
   }
 
-  // 2. Gather all authorized passwords
+  // 2. Authorized passwords list
   const authorizedPasswords = new Set<string>([
     'Officebazzar2026!',
     'Officebazzar2026',
@@ -96,22 +90,22 @@ export function verifyAnalyticsCredentials(
   const envMarketingPass = cleanEnvVal(process.env.ADMIN_PASSWORD_MARKETING);
   if (envMarketingPass) authorizedPasswords.add(envMarketingPass);
 
-  // Check direct authorized set
+  // Direct match
   if (authorizedEmails.has(cleanEmail) && authorizedPasswords.has(cleanPassword)) {
     return { success: true, email: cleanEmail };
   }
 
-  // 3. Delegate to Product Admin verification (checks scrypt hash + fixed admin credentials)
+  // 3. Delegate to Product Admin verification
   try {
     const productAuth = verifyProductAdminCredentials(cleanEmail, cleanPassword);
     if (productAuth.success && productAuth.user) {
       return { success: true, email: productAuth.user.email };
     }
   } catch {
-    // Continue fallback
+    // Continue
   }
 
-  // 4. Delegate to Blog Admin verification (checks scrypt hash)
+  // 4. Delegate to Blog Admin verification
   try {
     const blogConfig = getBlogAuthConfig();
     if (
@@ -121,17 +115,17 @@ export function verifyAnalyticsCredentials(
       return { success: true, email: cleanEmail };
     }
   } catch {
-    // Continue fallback
+    // Continue
   }
 
-  // 5. Delegate to Corporate Admin verification (handles sales4@ / marketing@)
+  // 5. Delegate to Corporate Admin verification
   try {
     const corporateAuth = verifyAdminCredentials(cleanEmail, cleanPassword);
     if (corporateAuth.success && corporateAuth.user) {
       return { success: true, email: corporateAuth.user.email };
     }
   } catch {
-    // Continue fallback
+    // Continue
   }
 
   return { success: false, error: 'Invalid administrator credentials. Access denied.' };
@@ -172,49 +166,27 @@ export function verifyAnalyticsSessionToken(token: string): { valid: boolean; em
 
 /**
  * Retrieves the current admin session.
- * Supports primary analytics session token, plus seamless SSO with Product Admin and Blog Admin session cookies.
+ * STRICT: Exclusively requires a valid ob_analytics_admin_session cookie.
+ * Does NOT auto-bypass with sessions from other panels, ensuring strict login isolation.
  */
 export async function getAnalyticsAdminSession(): Promise<AnalyticsAdminSession> {
   try {
     const cookieStore = await cookies();
-
-    // 1. Direct analytics session cookie
     const token = cookieStore.get(ANALYTICS_COOKIE_NAME)?.value;
-    if (token) {
-      const verified = verifyAnalyticsSessionToken(token);
-      if (verified.valid) {
-        return {
-          authenticated: true,
-          email: verified.email,
-        };
-      }
+
+    if (!token) {
+      return { authenticated: false };
     }
 
-    // 2. Product Admin SSO session cookie
-    const productToken = cookieStore.get(PRODUCT_ADMIN_COOKIE_NAME)?.value;
-    if (productToken) {
-      const verifiedProduct = verifyProductAdminSessionToken(productToken);
-      if (verifiedProduct.valid) {
-        return {
-          authenticated: true,
-          email: verifiedProduct.email,
-        };
-      }
+    const verified = verifyAnalyticsSessionToken(token);
+    if (!verified.valid) {
+      return { authenticated: false };
     }
 
-    // 3. Blog Admin SSO session cookie
-    const blogToken = cookieStore.get(BLOG_ADMIN_COOKIE_NAME)?.value;
-    if (blogToken) {
-      const verifiedBlog = verifyBlogAdminSessionToken(blogToken);
-      if (verifiedBlog.valid) {
-        return {
-          authenticated: true,
-          email: verifiedBlog.username,
-        };
-      }
-    }
-
-    return { authenticated: false };
+    return {
+      authenticated: true,
+      email: verified.email,
+    };
   } catch {
     return { authenticated: false };
   }

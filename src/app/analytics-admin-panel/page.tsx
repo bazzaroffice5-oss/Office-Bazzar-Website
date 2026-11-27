@@ -25,7 +25,7 @@ export default async function AnalyticsAdminPanelPage() {
   return (
     <AnalyticsDashboardClient
       initialData={initialData}
-      adminEmail={session.email || 'bazzaroffice5@gmail.com'}
+      adminEmail={session.email || 'Administrator'}
     />
   );
 }

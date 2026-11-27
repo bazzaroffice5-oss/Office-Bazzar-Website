@@ -20,18 +20,18 @@ export default function AdminLoginForm() {
       const res = await fetch('/api/analytics-admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: email.trim(), password }),
       });
 
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok || !data.success) {
-        setError(data.error || 'Authentication failed. Please verify your credentials.');
+        setError(data.error || 'Invalid administrator credentials. Access denied.');
         setLoading(false);
         return;
       }
 
-      window.location.reload();
+      window.location.href = '/analytics-admin-panel';
     } catch {
       setError('A network error occurred while contacting the authentication service.');
       setLoading(false);
@@ -39,16 +39,16 @@ export default function AdminLoginForm() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 bg-[#F8FAFC] relative overflow-hidden font-sans">
-      <div className="w-full max-w-md bg-white border border-slate-200/90 rounded-3xl p-8 sm:p-10 shadow-xl relative z-10">
+    <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 bg-[#F8FAFC] relative overflow-hidden font-sans">
+      <div className="w-full max-w-md bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-10 shadow-xl relative z-10">
         <div className="flex flex-col items-center text-center mb-8">
           <div className="mb-4">
             <Image
               src="/images/officebazzar-logo-transparent.webp"
               alt="OfficeBazzar Logo"
-              width={180}
-              height={50}
-              className="w-[140px] h-auto object-contain"
+              width={160}
+              height={45}
+              className="w-[130px] sm:w-[145px] h-auto object-contain"
               priority
             />
           </div>
@@ -56,18 +56,18 @@ export default function AdminLoginForm() {
             Quote &amp; Traffic Analytics
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
-            Administrative Portal &bull; Real-Time Performance Monitor
+            Administrative Portal &bull; Standalone Performance Monitor
           </p>
         </div>
 
         {error && (
-          <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 flex items-start gap-3 text-rose-700 text-xs sm:text-sm font-medium">
+          <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 flex items-start gap-3 text-rose-700 text-xs sm:text-sm font-medium animate-in fade-in duration-150">
             <ShieldAlert className="w-5 h-5 shrink-0 mt-0.5 text-rose-600" />
             <span>{error}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5" autoComplete="off">
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
               Email Address
@@ -79,8 +79,8 @@ export default function AdminLoginForm() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@officebazzar.com"
-                autoComplete="email"
+                placeholder="Enter authorized email"
+                autoComplete="off"
                 className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15 transition-all"
               />
             </div>
@@ -97,14 +97,15 @@ export default function AdminLoginForm() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••••••"
-                autoComplete="current-password"
+                placeholder="Enter password"
+                autoComplete="new-password"
                 className="w-full pl-11 pr-11 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/15 transition-all"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer"
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
