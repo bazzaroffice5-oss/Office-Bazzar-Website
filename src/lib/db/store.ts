@@ -13,7 +13,7 @@ import {
   QuotationStatus,
   NotificationLog,
 } from '@/types';
-import { CATEGORIES, BRANDS, INITIAL_PRODUCTS, COUPONS, resolveMainCategory, NINE_SUBCATEGORIES, CATEGORY_MAP, isProductInSubcategory } from '@/lib/data/catalog';
+import { CATEGORIES, BRANDS, INITIAL_PRODUCTS, COUPONS, resolveMainCategory, NINE_SUBCATEGORIES, ALL_SUBCATEGORIES, CATEGORY_MAP, isProductInSubcategory } from '@/lib/data/catalog';
 import { getProductsFromZoho, getCachedProductBySlug, getCachedProductById, isZohoCacheSynced, getZohoDeletedSkus, recordZohoDeletedSku, isSkuOrIdDeleted } from '@/lib/zoho/products';
 import {
   getAllQuotationsFromZoho,
@@ -284,6 +284,10 @@ export async function getProducts(filters?: FilterParams): Promise<{ products: P
     const resolvedCat = resolveMainCategory(filters.category);
     if (resolvedCat) {
       result = result.filter((p) => {
+        const pMain = resolveMainCategory(p.categoryId) || resolveMainCategory(p.subcategoryId) || resolveMainCategory(p.categoryName);
+        if (pMain) {
+          return pMain.id === resolvedCat.id || pMain.slug === resolvedCat.slug;
+        }
         if (p.categoryId === resolvedCat.id || p.categoryId === resolvedCat.slug) return true;
         if (p.categoryName?.toLowerCase() === resolvedCat.name.toLowerCase()) return true;
         const mapped = CATEGORY_MAP[p.subcategoryId || ''] || CATEGORY_MAP[p.categoryId || ''];
@@ -293,13 +297,18 @@ export async function getProducts(filters?: FilterParams): Promise<{ products: P
         return false;
       });
     } else {
-      const catLower = filters.category.toLowerCase();
-      result = result.filter(
-        (p) =>
+      const catLower = filters.category.toLowerCase().trim();
+      result = result.filter((p) => {
+        const pMain = resolveMainCategory(p.categoryId) || resolveMainCategory(p.subcategoryId) || resolveMainCategory(p.categoryName);
+        if (pMain && (pMain.id === catLower || pMain.slug === catLower || pMain.name.toLowerCase() === catLower)) {
+          return true;
+        }
+        return (
           p.categoryId?.toLowerCase() === catLower ||
           p.categoryName.toLowerCase().includes(catLower) ||
           p.subcategoryId?.toLowerCase() === catLower
-      );
+        );
+      });
     }
   }
 
@@ -426,7 +435,11 @@ export const getCatalogFilterMetadata = cache(async (): Promise<CatalogFilterMet
   const brandCounts: Record<string, number> = {};
 
   pool.forEach((p) => {
-    if (p.categoryId) {
+    const mainCat = resolveMainCategory(p.categoryId) || resolveMainCategory(p.subcategoryId) || resolveMainCategory(p.categoryName);
+    if (mainCat) {
+      categoryCounts[mainCat.id] = (categoryCounts[mainCat.id] || 0) + 1;
+      categoryCounts[mainCat.slug] = categoryCounts[mainCat.id];
+    } else if (p.categoryId) {
       categoryCounts[p.categoryId] = (categoryCounts[p.categoryId] || 0) + 1;
     }
     const bId = p.brandId || p.brandName?.toLowerCase().replace(/\s+/g, '-');
@@ -442,8 +455,10 @@ export const getCatalogFilterMetadata = cache(async (): Promise<CatalogFilterMet
   });
 
   const subcategoryCounts: Record<string, number> = {};
-  NINE_SUBCATEGORIES.forEach((s) => {
-    subcategoryCounts[s.slug] = pool.filter((p) => isProductInSubcategory(p, s.slug)).length;
+  ALL_SUBCATEGORIES.forEach((s) => {
+    const count = pool.filter((p) => isProductInSubcategory(p, s.slug)).length;
+    subcategoryCounts[s.slug] = count;
+    subcategoryCounts[s.id] = count;
   });
 
   const availableBrands = Array.from(brandMap.values()).sort((a, b) => a.name.localeCompare(b.name));

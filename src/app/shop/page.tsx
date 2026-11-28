@@ -1,6 +1,6 @@
 import React from 'react';
 import { getCategories, getProducts } from '@/lib/db/store';
-import { CATEGORY_MAP } from '@/lib/data/catalog';
+import { CATEGORY_MAP, resolveMainCategory } from '@/lib/data/catalog';
 import ShopPageClient from '@/components/shop/ShopPageClient';
 import { getCanonicalUrl, SITE_CONFIG } from '@/lib/seo/config';
 
@@ -50,6 +50,10 @@ export default async function ShopPage() {
   categories.forEach((cat) => {
     const catProducts = allProducts.filter((p) => {
       if (!p.isActive) return false;
+      const pMain = resolveMainCategory(p.categoryId) || resolveMainCategory(p.subcategoryId) || resolveMainCategory(p.categoryName);
+      if (pMain) {
+        return pMain.id === cat.id || pMain.slug === cat.slug;
+      }
       if (p.categoryId === cat.id || p.categoryId === cat.slug) return true;
       if (p.categoryName?.toLowerCase() === cat.name.toLowerCase()) return true;
       const mapped = CATEGORY_MAP[p.subcategoryId || ''] || CATEGORY_MAP[p.categoryId || ''];

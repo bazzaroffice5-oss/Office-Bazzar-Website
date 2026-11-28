@@ -362,7 +362,7 @@ export const MAIN_CATEGORIES: Category[] = [
     "imageUrl": "/images/categories/housekeeping-facility.jpg",
     "icon": "Sparkles",
     "featured": true,
-    "itemCount": 1423,
+    "itemCount": 1520,
     "subcategories": [
       {
         "id": "cleaning-chemicals",
@@ -446,7 +446,7 @@ export const MAIN_CATEGORIES: Category[] = [
     "imageUrl": "/images/banners/stationery-files-workspace.jpg",
     "icon": "PenTool",
     "featured": true,
-    "itemCount": 316,
+    "itemCount": 353,
     "subcategories": [
       {
         "id": "writing-instruments",
@@ -521,7 +521,7 @@ export const MAIN_CATEGORIES: Category[] = [
     "imageUrl": "/images/categories/printer-supplies-toner.jpg",
     "icon": "Printer",
     "featured": true,
-    "itemCount": 28,
+    "itemCount": 29,
     "subcategories": [
       {
         "id": "laser-toner-cartridges",
@@ -578,7 +578,7 @@ export const MAIN_CATEGORIES: Category[] = [
     "imageUrl": "/images/categories/packaging-materials.jpg",
     "icon": "Package",
     "featured": true,
-    "itemCount": 41,
+    "itemCount": 46,
     "subcategories": [
       {
         "id": "bopp-packaging-tapes",
@@ -648,107 +648,96 @@ export const CATEGORY_MAP: Record<
     subSlug: string;
   }
 > = {
-  // Legacy product categories
-  'cat-stationery': {
+  // 4 Approved Main Categories
+  'office-stationery': {
     mainId: 'office-stationery',
     mainName: 'Office Stationery',
     mainSlug: 'office-stationery',
     subName: 'Files & Office Organization',
     subSlug: 'files-office-organization',
   },
-  'cat-boards': {
-    mainId: 'office-stationery',
-    mainName: 'Office Stationery',
-    mainSlug: 'office-stationery',
-    subName: 'Files & Office Organization',
-    subSlug: 'files-office-organization',
-  },
-  'cat-display-stand': {
-    mainId: 'office-stationery',
-    mainName: 'Office Stationery',
-    mainSlug: 'office-stationery',
-    subName: 'Files & Office Organization',
-    subSlug: 'files-office-organization',
-  },
-  'cat-housekeeping': {
+  'housekeeping-hygiene': {
     mainId: 'housekeeping-hygiene',
     mainName: 'Housekeeping & Hygiene',
     mainSlug: 'housekeeping-hygiene',
-    subName: 'Cleaning & Hygiene Essentials',
-    subSlug: 'cleaning-hygiene-essentials',
+    subName: 'Cleaning Chemicals & Detergents',
+    subSlug: 'cleaning-chemicals',
   },
-  'cat-cleaning-chemicals': {
-    mainId: 'housekeeping-hygiene',
-    mainName: 'Housekeeping & Hygiene',
-    mainSlug: 'housekeeping-hygiene',
-    subName: 'Cleaning & Hygiene Essentials',
-    subSlug: 'cleaning-hygiene-essentials',
-  },
-  'cat-garbage-bin': {
-    mainId: 'housekeeping-hygiene',
-    mainName: 'Housekeeping & Hygiene',
-    mainSlug: 'housekeeping-hygiene',
-    subName: 'Cleaning & Hygiene Essentials',
-    subSlug: 'cleaning-hygiene-essentials',
-  },
-  'cat-housekeeping-accessories': {
-    mainId: 'housekeeping-hygiene',
-    mainName: 'Housekeeping & Hygiene',
-    mainSlug: 'housekeeping-hygiene',
-    subName: 'Cleaning & Hygiene Essentials',
-    subSlug: 'cleaning-hygiene-essentials',
-  },
-  'cat-tissue-napkin': {
-    mainId: 'housekeeping-hygiene',
-    mainName: 'Housekeeping & Hygiene',
-    mainSlug: 'housekeeping-hygiene',
-    subName: 'Cleaning & Hygiene Essentials',
-    subSlug: 'cleaning-hygiene-essentials',
-  },
-  'cat-printer-cartridges': {
+  'printers-technology': {
     mainId: 'printers-technology',
     mainName: 'Printers & Technology',
     mainSlug: 'printers-technology',
-    subName: 'Printing & IT Supplies',
-    subSlug: 'printing-it-supplies',
+    subName: 'Laser Toner Cartridges',
+    subSlug: 'laser-toner-cartridges',
   },
-  'cat-computer-consumables': {
-    mainId: 'printers-technology',
-    mainName: 'Printers & Technology',
-    mainSlug: 'printers-technology',
-    subName: 'Printing & IT Supplies',
-    subSlug: 'printing-it-supplies',
-  },
-  'cat-shredders-currency': {
-    mainId: 'printers-technology',
-    mainName: 'Printers & Technology',
-    mainSlug: 'printers-technology',
-    subName: 'Printing & IT Supplies',
-    subSlug: 'printing-it-supplies',
-  },
-  'cat-packaging': {
+  'packaging-supplies': {
     mainId: 'packaging-supplies',
     mainName: 'Packaging Supplies',
     mainSlug: 'packaging-supplies',
-    subName: 'Packaging & Dispatch',
-    subSlug: 'packaging-dispatch',
-  },
-  'cat-packaging-tapes': {
-    mainId: 'packaging-supplies',
-    mainName: 'Packaging Supplies',
-    mainSlug: 'packaging-supplies',
-    subName: 'Packaging & Dispatch',
-    subSlug: 'packaging-dispatch',
-  },
-  'cat-protective-materials': {
-    mainId: 'packaging-supplies',
-    mainName: 'Packaging Supplies',
-    mainSlug: 'packaging-supplies',
-    subName: 'Packaging & Dispatch',
-    subSlug: 'packaging-dispatch',
+    subName: 'BOPP Packaging Tapes',
+    subSlug: 'bopp-packaging-tapes',
   },
 
-  // 9 Subcategories mappings
+  // 25 Canonical Subcategories
+  // Housekeeping & Hygiene (8 subcategories)
+  'cleaning-chemicals': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning Chemicals & Detergents',
+    subSlug: 'cleaning-chemicals',
+  },
+  'washroom-dispensers': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Washroom Hygiene & Dispensers',
+    subSlug: 'washroom-dispensers',
+  },
+  'tissue-papers-rolls': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Tissue Papers & Rolls',
+    subSlug: 'tissue-papers-rolls',
+  },
+  'dustbins-waste-handling': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Dustbins & Waste Handling',
+    subSlug: 'dustbins-waste-handling',
+  },
+  'mops-floor-wipers': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Mops & Floor Wipers',
+    subSlug: 'mops-floor-wipers',
+  },
+  'cloths-scrubbers-brushes': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning Cloths, Scrubbers & Brushes',
+    subSlug: 'cloths-scrubbers-brushes',
+  },
+  'cleaning-equipment-trolleys': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning Equipment & Trolleys',
+    subSlug: 'cleaning-equipment-trolleys',
+  },
+  'air-fresheners-care': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Air Fresheners & Washroom Care',
+    subSlug: 'air-fresheners-care',
+  },
+
+  // Office Stationery (7 subcategories)
   'writing-instruments': {
     mainId: 'office-stationery',
     mainName: 'Office Stationery',
@@ -770,26 +759,19 @@ export const CATEGORY_MAP: Record<
     subName: 'Files & Office Organization',
     subSlug: 'files-office-organization',
   },
-  'printing-it-supplies': {
-    mainId: 'printers-technology',
-    mainName: 'Printers & Technology',
-    mainSlug: 'printers-technology',
-    subName: 'Printing & IT Supplies',
-    subSlug: 'printing-it-supplies',
+  'desk-accessories-tools': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Desk Organization & Tools',
+    subSlug: 'desk-accessories-tools',
   },
-  'cleaning-hygiene-essentials': {
-    mainId: 'housekeeping-hygiene',
-    mainName: 'Housekeeping & Hygiene',
-    mainSlug: 'housekeeping-hygiene',
-    subName: 'Cleaning & Hygiene Essentials',
-    subSlug: 'cleaning-hygiene-essentials',
-  },
-  'packaging-dispatch': {
-    mainId: 'packaging-supplies',
-    mainName: 'Packaging Supplies',
-    mainSlug: 'packaging-supplies',
-    subName: 'Packaging & Dispatch',
-    subSlug: 'packaging-dispatch',
+  'boards-visual-display': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Boards & Visual Display',
+    subSlug: 'boards-visual-display',
   },
   'office-pantry-essentials': {
     mainId: 'office-stationery',
@@ -798,22 +780,336 @@ export const CATEGORY_MAP: Record<
     subName: 'Office Pantry Essentials',
     subSlug: 'office-pantry-essentials',
   },
-  'office-furniture-accessories': {
-    mainId: 'office-stationery',
-    mainName: 'Office Stationery',
-    mainSlug: 'office-stationery',
-    subName: 'Office Furniture & Accessories',
-    subSlug: 'office-furniture-accessories',
-  },
   'safety-maintenance': {
     mainId: 'office-stationery',
     mainName: 'Office Stationery',
     mainSlug: 'office-stationery',
-    subName: 'Safety & Maintenance',
+    subName: 'Safety & Facility Maintenance',
     subSlug: 'safety-maintenance',
   },
 
-  // Legacy subcategory slugs
+  // Printers & Technology (5 subcategories)
+  'laser-toner-cartridges': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Laser Toner Cartridges',
+    subSlug: 'laser-toner-cartridges',
+  },
+  'ink-cartridges-supplies': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Ink Cartridges & Print Supplies',
+    subSlug: 'ink-cartridges-supplies',
+  },
+  'paper-shredders': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Paper Shredding Machines',
+    subSlug: 'paper-shredders',
+  },
+  'currency-counting-machines': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Currency Counting Machines',
+    subSlug: 'currency-counting-machines',
+  },
+  'it-peripherals-machines': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'IT Peripherals & Office Machines',
+    subSlug: 'it-peripherals-machines',
+  },
+
+  // Packaging Supplies (5 subcategories)
+  'bopp-packaging-tapes': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'BOPP Packaging Tapes',
+    subSlug: 'bopp-packaging-tapes',
+  },
+  'protective-packaging-cushioning': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'Protective Packaging & Cushioning',
+    subSlug: 'protective-packaging-cushioning',
+  },
+  'box-strapping-banding': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'Box Strapping & Banding Rolls',
+    subSlug: 'box-strapping-banding',
+  },
+  'floor-marking-safety-tapes': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'Floor Marking & Safety Tapes',
+    subSlug: 'floor-marking-safety-tapes',
+  },
+  'adhesives-packaging-tools': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'Adhesives & Packaging Tools',
+    subSlug: 'adhesives-packaging-tools',
+  },
+
+  // Legacy Categories & Aliases
+  'cat-stationery': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Files & Office Organization',
+    subSlug: 'files-office-organization',
+  },
+  'office-stationery-suppliers-in-chennai': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Files & Office Organization',
+    subSlug: 'files-office-organization',
+  },
+  'cat-boards': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Boards & Visual Display',
+    subSlug: 'boards-visual-display',
+  },
+  'boards-and-accessories': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Boards & Visual Display',
+    subSlug: 'boards-visual-display',
+  },
+  'cat-display-stand': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Boards & Visual Display',
+    subSlug: 'boards-visual-display',
+  },
+  'display-stand-in-chennai': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Boards & Visual Display',
+    subSlug: 'boards-visual-display',
+  },
+  'cat-housekeeping': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning Equipment & Trolleys',
+    subSlug: 'cleaning-equipment-trolleys',
+  },
+  'housekeeping-items-and-equipment': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning Equipment & Trolleys',
+    subSlug: 'cleaning-equipment-trolleys',
+  },
+  'cat-cleaning-chemicals': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning Chemicals & Detergents',
+    subSlug: 'cleaning-chemicals',
+  },
+  'cleaning-chemical-suppliers-in-chennai': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning Chemicals & Detergents',
+    subSlug: 'cleaning-chemicals',
+  },
+  'cat-garbage-bin': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Dustbins & Waste Handling',
+    subSlug: 'dustbins-waste-handling',
+  },
+  'garbage-bin-suppliers-in-chennai': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Dustbins & Waste Handling',
+    subSlug: 'dustbins-waste-handling',
+  },
+  'cat-housekeeping-accessories': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning Cloths, Scrubbers & Brushes',
+    subSlug: 'cloths-scrubbers-brushes',
+  },
+  'housekeeping-accessories-suppliers-in-chennai': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning Cloths, Scrubbers & Brushes',
+    subSlug: 'cloths-scrubbers-brushes',
+  },
+  'cat-tissue-napkin': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Tissue Papers & Rolls',
+    subSlug: 'tissue-papers-rolls',
+  },
+  'tissue-paper-napkin': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Tissue Papers & Rolls',
+    subSlug: 'tissue-papers-rolls',
+  },
+  'cat-printer-cartridges': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Laser Toner Cartridges',
+    subSlug: 'laser-toner-cartridges',
+  },
+  'printer-cartridges-suppliers-in-chennai': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Laser Toner Cartridges',
+    subSlug: 'laser-toner-cartridges',
+  },
+  'cat-computer-consumables': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'IT Peripherals & Office Machines',
+    subSlug: 'it-peripherals-machines',
+  },
+  'computer-consumable-items-in-chennai': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'IT Peripherals & Office Machines',
+    subSlug: 'it-peripherals-machines',
+  },
+  'cat-shredders-currency': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Paper Shredding Machines',
+    subSlug: 'paper-shredders',
+  },
+  'best-paper-shredders-and-currency-counting-machine-in-chennai': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Paper Shredding Machines',
+    subSlug: 'paper-shredders',
+  },
+  'cat-packaging': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'BOPP Packaging Tapes',
+    subSlug: 'bopp-packaging-tapes',
+  },
+  'packaging-adhesive-material-in-chennai': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'BOPP Packaging Tapes',
+    subSlug: 'bopp-packaging-tapes',
+  },
+  'cat-packaging-tapes': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'BOPP Packaging Tapes',
+    subSlug: 'bopp-packaging-tapes',
+  },
+  'cat-protective-materials': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'Protective Packaging & Cushioning',
+    subSlug: 'protective-packaging-cushioning',
+  },
+
+  // Legacy and Subcategory Aliases
+  'dispensers-washroom-fittings': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Washroom Hygiene & Dispensers',
+    subSlug: 'washroom-dispensers',
+  },
+  'tissue-paper-products': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Tissue Papers & Rolls',
+    subSlug: 'tissue-papers-rolls',
+  },
+  'packaging-materials': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'BOPP Packaging Tapes',
+    subSlug: 'bopp-packaging-tapes',
+  },
+  'safety-ppe-gear': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Safety & Facility Maintenance',
+    subSlug: 'safety-maintenance',
+  },
+  'general-office-stationery': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Files & Office Organization',
+    subSlug: 'files-office-organization',
+  },
+  'cleaning-hygiene-essentials': {
+    mainId: 'housekeeping-hygiene',
+    mainName: 'Housekeeping & Hygiene',
+    mainSlug: 'housekeeping-hygiene',
+    subName: 'Cleaning Chemicals & Detergents',
+    subSlug: 'cleaning-chemicals',
+  },
+  'office-furniture-accessories': {
+    mainId: 'office-stationery',
+    mainName: 'Office Stationery',
+    mainSlug: 'office-stationery',
+    subName: 'Desk Organization & Tools',
+    subSlug: 'desk-accessories-tools',
+  },
+  'printing-it-supplies': {
+    mainId: 'printers-technology',
+    mainName: 'Printers & Technology',
+    mainSlug: 'printers-technology',
+    subName: 'Laser Toner Cartridges',
+    subSlug: 'laser-toner-cartridges',
+  },
+  'packaging-dispatch': {
+    mainId: 'packaging-supplies',
+    mainName: 'Packaging Supplies',
+    mainSlug: 'packaging-supplies',
+    subName: 'BOPP Packaging Tapes',
+    subSlug: 'bopp-packaging-tapes',
+  },
   'desk-stationery-files': {
     mainId: 'office-stationery',
     mainName: 'Office Stationery',
@@ -825,92 +1121,92 @@ export const CATEGORY_MAP: Record<
     mainId: 'office-stationery',
     mainName: 'Office Stationery',
     mainSlug: 'office-stationery',
-    subName: 'Files & Office Organization',
-    subSlug: 'files-office-organization',
+    subName: 'Boards & Visual Display',
+    subSlug: 'boards-visual-display',
   },
   'display-stands-nameplates': {
     mainId: 'office-stationery',
     mainName: 'Office Stationery',
     mainSlug: 'office-stationery',
-    subName: 'Files & Office Organization',
-    subSlug: 'files-office-organization',
+    subName: 'Boards & Visual Display',
+    subSlug: 'boards-visual-display',
   },
   'laser-toners-cartridges': {
     mainId: 'printers-technology',
     mainName: 'Printers & Technology',
     mainSlug: 'printers-technology',
-    subName: 'Printing & IT Supplies',
-    subSlug: 'printing-it-supplies',
+    subName: 'Laser Toner Cartridges',
+    subSlug: 'laser-toner-cartridges',
   },
   'computer-consumables-peripherals': {
     mainId: 'printers-technology',
     mainName: 'Printers & Technology',
     mainSlug: 'printers-technology',
-    subName: 'Printing & IT Supplies',
-    subSlug: 'printing-it-supplies',
+    subName: 'IT Peripherals & Office Machines',
+    subSlug: 'it-peripherals-machines',
   },
   'paper-shredders-currency-counters': {
     mainId: 'printers-technology',
     mainName: 'Printers & Technology',
     mainSlug: 'printers-technology',
-    subName: 'Printing & IT Supplies',
-    subSlug: 'printing-it-supplies',
+    subName: 'Paper Shredding Machines',
+    subSlug: 'paper-shredders',
   },
   'housekeeping-equipment-tools': {
     mainId: 'housekeeping-hygiene',
     mainName: 'Housekeeping & Hygiene',
     mainSlug: 'housekeeping-hygiene',
-    subName: 'Cleaning & Hygiene Essentials',
-    subSlug: 'cleaning-hygiene-essentials',
+    subName: 'Cleaning Equipment & Trolleys',
+    subSlug: 'cleaning-equipment-trolleys',
   },
   'cleaning-chemicals-taski': {
     mainId: 'housekeeping-hygiene',
     mainName: 'Housekeeping & Hygiene',
     mainSlug: 'housekeeping-hygiene',
-    subName: 'Cleaning & Hygiene Essentials',
-    subSlug: 'cleaning-hygiene-essentials',
+    subName: 'Cleaning Chemicals & Detergents',
+    subSlug: 'cleaning-chemicals',
   },
   'industrial-garbage-bins': {
     mainId: 'housekeeping-hygiene',
     mainName: 'Housekeeping & Hygiene',
     mainSlug: 'housekeeping-hygiene',
-    subName: 'Cleaning & Hygiene Essentials',
-    subSlug: 'cleaning-hygiene-essentials',
+    subName: 'Dustbins & Waste Handling',
+    subSlug: 'dustbins-waste-handling',
   },
   'housekeeping-accessories-sprays': {
     mainId: 'housekeeping-hygiene',
     mainName: 'Housekeeping & Hygiene',
     mainSlug: 'housekeeping-hygiene',
-    subName: 'Cleaning & Hygiene Essentials',
-    subSlug: 'cleaning-hygiene-essentials',
+    subName: 'Air Fresheners & Washroom Care',
+    subSlug: 'air-fresheners-care',
   },
   'tissue-paper-napkins': {
     mainId: 'housekeeping-hygiene',
     mainName: 'Housekeeping & Hygiene',
     mainSlug: 'housekeeping-hygiene',
-    subName: 'Cleaning & Hygiene Essentials',
-    subSlug: 'cleaning-hygiene-essentials',
+    subName: 'Tissue Papers & Rolls',
+    subSlug: 'tissue-papers-rolls',
   },
   'packaging-materials-tapes': {
     mainId: 'packaging-supplies',
     mainName: 'Packaging Supplies',
     mainSlug: 'packaging-supplies',
-    subName: 'Packaging & Dispatch',
-    subSlug: 'packaging-dispatch',
+    subName: 'BOPP Packaging Tapes',
+    subSlug: 'bopp-packaging-tapes',
   },
   'packaging-tapes-adhesives': {
     mainId: 'packaging-supplies',
     mainName: 'Packaging Supplies',
     mainSlug: 'packaging-supplies',
-    subName: 'Packaging & Dispatch',
-    subSlug: 'packaging-dispatch',
+    subName: 'Adhesives & Packaging Tools',
+    subSlug: 'adhesives-packaging-tools',
   },
   'protective-strapping-materials': {
     mainId: 'packaging-supplies',
     mainName: 'Packaging Supplies',
     mainSlug: 'packaging-supplies',
-    subName: 'Packaging & Dispatch',
-    subSlug: 'packaging-dispatch',
+    subName: 'Box Strapping & Banding Rolls',
+    subSlug: 'box-strapping-banding',
   },
 };
 
@@ -918,18 +1214,22 @@ export function isProductInSubcategory(p: Product, subSlug: string): boolean {
   if (!p.isActive) return false;
   const slug = subSlug.toLowerCase().trim();
 
-  if (p.subcategoryId?.toLowerCase() === slug) return true;
-  if (p.subcategoryName?.toLowerCase() === slug) return true;
-  const normSub = p.subcategoryName ? p.subcategoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') : '';
-  if (normSub && (normSub === slug || slug.includes(normSub) || normSub.includes(slug))) return true;
-  const normSubId = p.subcategoryId ? p.subcategoryId.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') : '';
-  if (normSubId && (normSubId === slug || slug.includes(normSubId) || normSubId.includes(slug))) return true;
+  const pSubId = (p.subcategoryId || '').toLowerCase().trim();
+  const pSubName = (p.subcategoryName || '').toLowerCase().trim();
 
-  const mapped = CATEGORY_MAP[p.subcategoryId || ''] || CATEGORY_MAP[p.categoryId || ''];
-  if (mapped?.subSlug === slug || mapped?.subName?.toLowerCase() === slug) {
+  if (pSubId === slug || pSubName === slug) return true;
+
+  const mapped = CATEGORY_MAP[pSubId] || CATEGORY_MAP[pSubName];
+  if (mapped && (mapped.subSlug === slug || mapped.subName.toLowerCase() === slug)) {
     return true;
   }
 
+  const queryMap = CATEGORY_MAP[slug];
+  if (queryMap && (queryMap.subSlug === pSubId || queryMap.subName.toLowerCase() === pSubName)) {
+    return true;
+  }
+
+  // Legacy groupings
   if (slug === 'files-office-organization') {
     return [
       'cat-stationery',
@@ -938,7 +1238,8 @@ export function isProductInSubcategory(p: Product, subSlug: string): boolean {
       'desk-stationery-files',
       'boards-accessories',
       'display-stands-nameplates',
-    ].includes(p.subcategoryId || '');
+      'general-office-stationery',
+    ].includes(pSubId);
   }
 
   if (slug === 'printing-it-supplies') {
@@ -949,7 +1250,12 @@ export function isProductInSubcategory(p: Product, subSlug: string): boolean {
       'laser-toners-cartridges',
       'computer-consumables-peripherals',
       'paper-shredders-currency-counters',
-    ].includes(p.subcategoryId || '');
+      'laser-toner-cartridges',
+      'ink-cartridges-supplies',
+      'paper-shredders',
+      'currency-counting-machines',
+      'it-peripherals-machines',
+    ].includes(pSubId);
   }
 
   if (slug === 'cleaning-hygiene-essentials') {
@@ -964,7 +1270,9 @@ export function isProductInSubcategory(p: Product, subSlug: string): boolean {
       'industrial-garbage-bins',
       'housekeeping-accessories-sprays',
       'tissue-paper-napkins',
-    ].includes(p.subcategoryId || '');
+      'dispensers-washroom-fittings',
+      'tissue-paper-products',
+    ].includes(pSubId);
   }
 
   if (slug === 'packaging-dispatch') {
@@ -975,7 +1283,8 @@ export function isProductInSubcategory(p: Product, subSlug: string): boolean {
       'packaging-materials-tapes',
       'packaging-tapes-adhesives',
       'protective-strapping-materials',
-    ].includes(p.subcategoryId || '');
+      'packaging-materials',
+    ].includes(pSubId);
   }
 
   return false;
@@ -986,7 +1295,9 @@ export function resolveMainCategory(slugOrId?: string): Category | undefined {
   const s = slugOrId.toLowerCase().trim();
 
   // 1. Direct match on main category id or slug in MAIN_CATEGORIES
-  const direct = MAIN_CATEGORIES.find((c) => c.id === s || c.slug === s);
+  const direct = MAIN_CATEGORIES.find(
+    (c) => c.id === s || c.slug === s || c.name.toLowerCase() === s
+  );
   if (direct) return direct;
 
   // 2. Direct match on category map
@@ -998,23 +1309,31 @@ export function resolveMainCategory(slugOrId?: string): Category | undefined {
 
   // 3. Match on any subcategory in MAIN_CATEGORIES
   for (const cat of MAIN_CATEGORIES) {
-    if (cat.subcategories?.some((sub) => sub.slug === s || sub.id === s)) {
+    if (cat.subcategories?.some((sub) => sub.slug === s || sub.id === s || sub.name.toLowerCase() === s)) {
       return cat;
     }
   }
 
-  // 4. Substring heuristics
-  if (s.includes('stationer') || s.includes('file') || s.includes('paper') || s.includes('writing') || s.includes('pen') || s.includes('board') || s.includes('pantry') || s.includes('furniture')) {
-    return MAIN_CATEGORIES.find((c) => c.id === 'office-stationery');
+  // 4. Normalized string comparison (handling & vs and, punctuation)
+  const norm = s.replace(/&/g, 'and').replace(/[^a-z0-9]/g, '');
+  for (const cat of MAIN_CATEGORIES) {
+    const catNorm = cat.name.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]/g, '');
+    const slugNorm = cat.slug.replace(/[^a-z0-9]/g, '');
+    if (norm === catNorm || norm === slugNorm) return cat;
   }
-  if (s.includes('housekeep') || s.includes('hygiene') || s.includes('clean') || s.includes('taski') || s.includes('garbage') || s.includes('bin') || s.includes('tissue')) {
-    return MAIN_CATEGORIES.find((c) => c.id === 'housekeeping-hygiene');
-  }
-  if (s.includes('printer') || s.includes('tech') || s.includes('toner') || s.includes('cartridge') || s.includes('consumable') || s.includes('shredder')) {
+
+  // 5. Prioritized substring heuristics (specific equipment/materials before generic words)
+  if (s.includes('shredder') || s.includes('currency') || s.includes('printer') || s.includes('toner') || s.includes('cartridge') || s.includes('lamination')) {
     return MAIN_CATEGORIES.find((c) => c.id === 'printers-technology');
   }
-  if (s.includes('packag') || s.includes('dispatch') || s.includes('tape') || s.includes('bubble') || s.includes('box')) {
+  if (s.includes('tissue') || s.includes('napkin') || s.includes('garbage') || s.includes('dustbin') || s.includes('clean') || s.includes('mop') || s.includes('wiper') || s.includes('housekeep') || s.includes('hygiene') || s.includes('taski') || s.includes('dispenser') || s.includes('handwash') || s.includes('soap')) {
+    return MAIN_CATEGORIES.find((c) => c.id === 'housekeeping-hygiene');
+  }
+  if (s.includes('packag') || s.includes('dispatch') || s.includes('bopp') || s.includes('strapping') || s.includes('bubble') || s.includes('stretch film') || s.includes('sealing tape')) {
     return MAIN_CATEGORIES.find((c) => c.id === 'packaging-supplies');
+  }
+  if (s.includes('stationer') || s.includes('file') || s.includes('paper') || s.includes('notebook') || s.includes('writing') || s.includes('pen') || s.includes('pencil') || s.includes('board') || s.includes('stapler') || s.includes('punch') || s.includes('pantry') || s.includes('safety')) {
+    return MAIN_CATEGORIES.find((c) => c.id === 'office-stationery');
   }
 
   return undefined;
@@ -22250,10 +22569,10 @@ const RAW_PRODUCTS: any[] = [
     "name": "Soap And Sanitizer Dispensers Collection",
     "slug": "soap-and-sanitizer-dispensers-collection-ob-sta-2006",
     "sku": "OB-STA-2006",
-    "categoryId": "office-stationery",
-    "categoryName": "Office Stationery",
-    "subcategoryId": "desk-accessories-tools",
-    "subcategoryName": "Desk Organization & Tools",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "washroom-dispensers",
+    "subcategoryName": "Washroom Hygiene & Dispensers",
     "brandId": "brand-officebazzar",
     "brandName": "OfficeBazzar",
     "description": "Soap And Sanitizer Dispensers Collection (OB-STA-2006) supplied by OfficeBazzar for corporate offices, commercial facilities, and institutions. Verified genuine supplier photography. Available for wholesale and bulk B2B procurement.",
@@ -22277,8 +22596,8 @@ const RAW_PRODUCTS: any[] = [
       "catalogueCode": "OB-STA-2006",
       "supplierFolder": "Collage",
       "brand": "OfficeBazzar",
-      "category": "Office Stationery",
-      "subcategory": "Desk Organization & Tools",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Washroom Hygiene & Dispensers",
       "source": "OfficeBazzar Verified Supplier Photography",
       "availability": "Available on Quotation / RFQ",
       "inventoryStatus": "On Demand / RFQ",
@@ -22290,10 +22609,10 @@ const RAW_PRODUCTS: any[] = [
     "name": "Soap Dispenser",
     "slug": "soap-dispenser-ob-sta-2007",
     "sku": "OB-STA-2007",
-    "categoryId": "office-stationery",
-    "categoryName": "Office Stationery",
-    "subcategoryId": "desk-accessories-tools",
-    "subcategoryName": "Desk Organization & Tools",
+    "categoryId": "housekeeping-hygiene",
+    "categoryName": "Housekeeping & Hygiene",
+    "subcategoryId": "washroom-dispensers",
+    "subcategoryName": "Washroom Hygiene & Dispensers",
     "brandId": "brand-officebazzar",
     "brandName": "OfficeBazzar",
     "description": "Soap Dispenser (OB-STA-2007) supplied by OfficeBazzar for corporate offices, commercial facilities, and institutions. Verified genuine supplier photography. Available for wholesale and bulk B2B procurement.",
@@ -22318,8 +22637,8 @@ const RAW_PRODUCTS: any[] = [
       "catalogueCode": "OB-STA-2007",
       "supplierFolder": "Collage",
       "brand": "OfficeBazzar",
-      "category": "Office Stationery",
-      "subcategory": "Desk Organization & Tools",
+      "category": "Housekeeping & Hygiene",
+      "subcategory": "Washroom Hygiene & Dispensers",
       "source": "OfficeBazzar Verified Supplier Photography",
       "availability": "Available on Quotation / RFQ",
       "inventoryStatus": "On Demand / RFQ",
@@ -76286,10 +76605,10 @@ const RAW_PRODUCTS: any[] = [
     "name": "Bubble Sheet Roll",
     "slug": "bubble-sheet-roll-ob-hou-3573",
     "sku": "OB-HOU-3573",
-    "categoryId": "housekeeping-hygiene",
-    "categoryName": "Housekeeping & Hygiene",
-    "subcategoryId": "cleaning-hygiene-essentials",
-    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "categoryId": "packaging-supplies",
+    "categoryName": "Packaging Supplies",
+    "subcategoryId": "protective-packaging-cushioning",
+    "subcategoryName": "Protective Packaging & Cushioning",
     "brandId": "brand-officebazzar",
     "brandName": "OfficeBazzar",
     "description": "Bubble Sheet Roll (OB-HOU-3573) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
@@ -76312,8 +76631,8 @@ const RAW_PRODUCTS: any[] = [
     "specifications": {
       "catalogueCode": "OB-HOU-3573",
       "brand": "OfficeBazzar",
-      "category": "Housekeeping & Hygiene",
-      "subcategory": "Cleaning & Hygiene Essentials",
+      "category": "Packaging Supplies",
+      "subcategory": "Protective Packaging & Cushioning",
       "source": "OfficeBazzar Master Catalogue",
       "availability": "Available on Quotation",
       "inventoryStatus": "On Demand / RFQ",
@@ -76364,10 +76683,10 @@ const RAW_PRODUCTS: any[] = [
     "name": "Gobbler Shredder Machine Gs904 Cd",
     "slug": "gobbler-shredder-machine-gs904-cd-ob-hou-3575",
     "sku": "OB-HOU-3575",
-    "categoryId": "housekeeping-hygiene",
-    "categoryName": "Housekeeping & Hygiene",
-    "subcategoryId": "cleaning-hygiene-essentials",
-    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "categoryId": "printers-technology",
+    "categoryName": "Printers & Technology",
+    "subcategoryId": "paper-shredders",
+    "subcategoryName": "Paper Shredding Machines",
     "brandId": "brand-officebazzar",
     "brandName": "OfficeBazzar",
     "description": "Gobbler Shredder Machine Gs904 Cd (OB-HOU-3575) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
@@ -76390,8 +76709,8 @@ const RAW_PRODUCTS: any[] = [
     "specifications": {
       "catalogueCode": "OB-HOU-3575",
       "brand": "OfficeBazzar",
-      "category": "Housekeeping & Hygiene",
-      "subcategory": "Cleaning & Hygiene Essentials",
+      "category": "Printers & Technology",
+      "subcategory": "Paper Shredding Machines",
       "source": "OfficeBazzar Master Catalogue",
       "availability": "Available on Quotation",
       "inventoryStatus": "On Demand / RFQ",
@@ -76442,10 +76761,10 @@ const RAW_PRODUCTS: any[] = [
     "name": "Stretch Film Roll",
     "slug": "stretch-film-roll-ob-hou-3577",
     "sku": "OB-HOU-3577",
-    "categoryId": "housekeeping-hygiene",
-    "categoryName": "Housekeeping & Hygiene",
-    "subcategoryId": "cleaning-hygiene-essentials",
-    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "categoryId": "packaging-supplies",
+    "categoryName": "Packaging Supplies",
+    "subcategoryId": "protective-packaging-cushioning",
+    "subcategoryName": "Protective Packaging & Cushioning",
     "brandId": "brand-officebazzar",
     "brandName": "OfficeBazzar",
     "description": "Stretch Film Roll (OB-HOU-3577) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
@@ -76468,8 +76787,8 @@ const RAW_PRODUCTS: any[] = [
     "specifications": {
       "catalogueCode": "OB-HOU-3577",
       "brand": "OfficeBazzar",
-      "category": "Housekeeping & Hygiene",
-      "subcategory": "Cleaning & Hygiene Essentials",
+      "category": "Packaging Supplies",
+      "subcategory": "Protective Packaging & Cushioning",
       "source": "OfficeBazzar Master Catalogue",
       "availability": "Available on Quotation",
       "inventoryStatus": "On Demand / RFQ",
@@ -76599,10 +76918,10 @@ const RAW_PRODUCTS: any[] = [
     "name": "Stainless Water Bottle",
     "slug": "stainless-water-bottle-ob-hou-3581",
     "sku": "OB-HOU-3581",
-    "categoryId": "housekeeping-hygiene",
-    "categoryName": "Housekeeping & Hygiene",
-    "subcategoryId": "cleaning-hygiene-essentials",
-    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "office-pantry-essentials",
+    "subcategoryName": "Office Pantry Essentials",
     "brandId": "brand-officebazzar",
     "brandName": "OfficeBazzar",
     "description": "Stainless Water Bottle (OB-HOU-3581) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
@@ -76625,8 +76944,8 @@ const RAW_PRODUCTS: any[] = [
     "specifications": {
       "catalogueCode": "OB-HOU-3581",
       "brand": "OfficeBazzar",
-      "category": "Housekeeping & Hygiene",
-      "subcategory": "Cleaning & Hygiene Essentials",
+      "category": "Office Stationery",
+      "subcategory": "Office Pantry Essentials",
       "source": "OfficeBazzar Master Catalogue",
       "availability": "Available on Quotation",
       "inventoryStatus": "On Demand / RFQ",
@@ -76638,10 +76957,10 @@ const RAW_PRODUCTS: any[] = [
     "name": "Water Bottle",
     "slug": "water-bottle-ob-hou-3582",
     "sku": "OB-HOU-3582",
-    "categoryId": "housekeeping-hygiene",
-    "categoryName": "Housekeeping & Hygiene",
-    "subcategoryId": "cleaning-hygiene-essentials",
-    "subcategoryName": "Cleaning & Hygiene Essentials",
+    "categoryId": "office-stationery",
+    "categoryName": "Office Stationery",
+    "subcategoryId": "office-pantry-essentials",
+    "subcategoryName": "Office Pantry Essentials",
     "brandId": "brand-officebazzar",
     "brandName": "OfficeBazzar",
     "description": "Water Bottle (OB-HOU-3582) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
@@ -76664,8 +76983,8 @@ const RAW_PRODUCTS: any[] = [
     "specifications": {
       "catalogueCode": "OB-HOU-3582",
       "brand": "OfficeBazzar",
-      "category": "Housekeeping & Hygiene",
-      "subcategory": "Cleaning & Hygiene Essentials",
+      "category": "Office Stationery",
+      "subcategory": "Office Pantry Essentials",
       "source": "OfficeBazzar Master Catalogue",
       "availability": "Available on Quotation",
       "inventoryStatus": "On Demand / RFQ",
@@ -77821,10 +78140,10 @@ const RAW_PRODUCTS: any[] = [
     "name": "Floor Masking Tape 2 Inch 25 Mtr",
     "slug": "floor-masking-tape-2-inch-25-mtr-ob-sta-3612",
     "sku": "OB-STA-3612",
-    "categoryId": "office-stationery",
-    "categoryName": "Office Stationery",
-    "subcategoryId": "general-office-stationery",
-    "subcategoryName": "General Office Stationery",
+    "categoryId": "packaging-supplies",
+    "categoryName": "Packaging Supplies",
+    "subcategoryId": "floor-marking-safety-tapes",
+    "subcategoryName": "Floor Marking & Safety Tapes",
     "brandId": "brand-officebazzar",
     "brandName": "OfficeBazzar",
     "description": "Floor Masking Tape 2 Inch 25 Mtr (OB-STA-3612) supplied by OfficeBazzar for corporate offices, enterprises, and facility managers across India. High quality, verified specifications, available for wholesale B2B institutional orders.",
@@ -77847,8 +78166,8 @@ const RAW_PRODUCTS: any[] = [
     "specifications": {
       "catalogueCode": "OB-STA-3612",
       "brand": "OfficeBazzar",
-      "category": "Office Stationery",
-      "subcategory": "General Office Stationery",
+      "category": "Packaging Supplies",
+      "subcategory": "Floor Marking & Safety Tapes",
       "source": "OfficeBazzar Master Catalogue",
       "availability": "Available on Quotation",
       "inventoryStatus": "On Demand / RFQ",
@@ -78916,14 +79235,195 @@ const RAW_PRODUCTS: any[] = [
   }
 ];
 
+export const SKU_SUBCATEGORY_OVERRIDES: Record<
+  string,
+  {
+    categoryId?: string;
+    categoryName?: string;
+    subcategoryId?: string;
+    subcategoryName?: string;
+  }
+> = {
+  // 1. Cross-category reassignments (defensive overrides in addition to RAW_PRODUCTS)
+  'OB-HOU-3575': { categoryId: 'printers-technology', categoryName: 'Printers & Technology', subcategoryId: 'paper-shredders', subcategoryName: 'Paper Shredding Machines' },
+  'OB-STA-2006': { categoryId: 'housekeeping-hygiene', categoryName: 'Housekeeping & Hygiene', subcategoryId: 'washroom-dispensers', subcategoryName: 'Washroom Hygiene & Dispensers' },
+  'OB-STA-2007': { categoryId: 'housekeeping-hygiene', categoryName: 'Housekeeping & Hygiene', subcategoryId: 'washroom-dispensers', subcategoryName: 'Washroom Hygiene & Dispensers' },
+  'OB-HOU-3573': { categoryId: 'packaging-supplies', categoryName: 'Packaging Supplies', subcategoryId: 'protective-packaging-cushioning', subcategoryName: 'Protective Packaging & Cushioning' },
+  'OB-HOU-3577': { categoryId: 'packaging-supplies', categoryName: 'Packaging Supplies', subcategoryId: 'protective-packaging-cushioning', subcategoryName: 'Protective Packaging & Cushioning' },
+  'OB-STA-3612': { categoryId: 'packaging-supplies', categoryName: 'Packaging Supplies', subcategoryId: 'floor-marking-safety-tapes', subcategoryName: 'Floor Marking & Safety Tapes' },
+  'OB-HOU-3581': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'office-pantry-essentials', subcategoryName: 'Office Pantry Essentials' },
+  'OB-HOU-3582': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'office-pantry-essentials', subcategoryName: 'Office Pantry Essentials' },
+
+  // 2. dispensers-washroom-fittings (6 items)
+  'OB-HOU-3534': { subcategoryId: 'washroom-dispensers', subcategoryName: 'Washroom Hygiene & Dispensers' },
+  'OB-HOU-3535': { subcategoryId: 'washroom-dispensers', subcategoryName: 'Washroom Hygiene & Dispensers' },
+  'OB-HOU-3536': { subcategoryId: 'washroom-dispensers', subcategoryName: 'Washroom Hygiene & Dispensers' },
+  'OB-HOU-3537': { subcategoryId: 'washroom-dispensers', subcategoryName: 'Washroom Hygiene & Dispensers' },
+  'OB-HOU-3538': { subcategoryId: 'washroom-dispensers', subcategoryName: 'Washroom Hygiene & Dispensers' },
+  'OB-HOU-3539': { subcategoryId: 'washroom-dispensers', subcategoryName: 'Washroom Hygiene & Dispensers' },
+
+  // 3. tissue-paper-products (10 items)
+  'OB-HOU-3627': { subcategoryId: 'tissue-papers-rolls', subcategoryName: 'Tissue Papers & Rolls' },
+  'OB-HOU-3628': { subcategoryId: 'tissue-papers-rolls', subcategoryName: 'Tissue Papers & Rolls' },
+  'OB-HOU-3629': { subcategoryId: 'tissue-papers-rolls', subcategoryName: 'Tissue Papers & Rolls' },
+  'OB-HOU-3630': { subcategoryId: 'tissue-papers-rolls', subcategoryName: 'Tissue Papers & Rolls' },
+  'OB-HOU-3631': { subcategoryId: 'tissue-papers-rolls', subcategoryName: 'Tissue Papers & Rolls' },
+  'OB-HOU-3632': { subcategoryId: 'tissue-papers-rolls', subcategoryName: 'Tissue Papers & Rolls' },
+  'OB-HOU-3633': { subcategoryId: 'tissue-papers-rolls', subcategoryName: 'Tissue Papers & Rolls' },
+  'OB-HOU-3634': { subcategoryId: 'tissue-papers-rolls', subcategoryName: 'Tissue Papers & Rolls' },
+  'OB-HOU-3635': { subcategoryId: 'tissue-papers-rolls', subcategoryName: 'Tissue Papers & Rolls' },
+  'OB-HOU-3636': { subcategoryId: 'tissue-papers-rolls', subcategoryName: 'Tissue Papers & Rolls' },
+
+  // 4. packaging-materials (2 items)
+  'OB-PAC-3583': { subcategoryId: 'box-strapping-banding', subcategoryName: 'Box Strapping & Banding Rolls' },
+  'OB-PAC-3584': { subcategoryId: 'adhesives-packaging-tools', subcategoryName: 'Adhesives & Packaging Tools' },
+
+  // 5. safety-ppe-gear (10 items) -> safety-maintenance in office-stationery
+  'OB-HOU-3587': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'safety-maintenance', subcategoryName: 'Safety & Facility Maintenance' },
+  'OB-HOU-3588': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'safety-maintenance', subcategoryName: 'Safety & Facility Maintenance' },
+  'OB-HOU-3589': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'safety-maintenance', subcategoryName: 'Safety & Facility Maintenance' },
+  'OB-HOU-3590': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'safety-maintenance', subcategoryName: 'Safety & Facility Maintenance' },
+  'OB-HOU-3591': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'safety-maintenance', subcategoryName: 'Safety & Facility Maintenance' },
+  'OB-HOU-3592': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'safety-maintenance', subcategoryName: 'Safety & Facility Maintenance' },
+  'OB-HOU-3593': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'safety-maintenance', subcategoryName: 'Safety & Facility Maintenance' },
+  'OB-HOU-3594': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'safety-maintenance', subcategoryName: 'Safety & Facility Maintenance' },
+  'OB-HOU-3595': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'safety-maintenance', subcategoryName: 'Safety & Facility Maintenance' },
+  'OB-HOU-3596': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'safety-maintenance', subcategoryName: 'Safety & Facility Maintenance' },
+
+  // 6. general-office-stationery (24 items)
+  'OB-STA-3548': { subcategoryId: 'files-office-organization', subcategoryName: 'Files & Office Organization' },
+  'OB-STA-3603': { subcategoryId: 'files-office-organization', subcategoryName: 'Files & Office Organization' },
+  'OB-STA-3604': { subcategoryId: 'files-office-organization', subcategoryName: 'Files & Office Organization' },
+  'OB-STA-3605': { subcategoryId: 'desk-accessories-tools', subcategoryName: 'Desk Organization & Tools' },
+  'OB-STA-3606': { subcategoryId: 'boards-visual-display', subcategoryName: 'Boards & Visual Display' },
+  'OB-STA-3607': { subcategoryId: 'files-office-organization', subcategoryName: 'Files & Office Organization' },
+  'OB-STA-3608': { subcategoryId: 'files-office-organization', subcategoryName: 'Files & Office Organization' },
+  'OB-STA-3609': { subcategoryId: 'files-office-organization', subcategoryName: 'Files & Office Organization' },
+  'OB-STA-3610': { subcategoryId: 'boards-visual-display', subcategoryName: 'Boards & Visual Display' },
+  'OB-STA-3611': { subcategoryId: 'writing-instruments', subcategoryName: 'Writing Instruments' },
+  'OB-STA-3613': { subcategoryId: 'desk-accessories-tools', subcategoryName: 'Desk Organization & Tools' },
+  'OB-STA-3614': { subcategoryId: 'paper-notebooks', subcategoryName: 'Paper & Notebooks' },
+  'OB-STA-3615': { subcategoryId: 'desk-accessories-tools', subcategoryName: 'Desk Organization & Tools' },
+  'OB-STA-3616': { subcategoryId: 'desk-accessories-tools', subcategoryName: 'Desk Organization & Tools' },
+  'OB-STA-3617': { subcategoryId: 'boards-visual-display', subcategoryName: 'Boards & Visual Display' },
+  'OB-STA-3618': { subcategoryId: 'boards-visual-display', subcategoryName: 'Boards & Visual Display' },
+  'OB-STA-3619': { subcategoryId: 'boards-visual-display', subcategoryName: 'Boards & Visual Display' },
+  'OB-STA-3620': { subcategoryId: 'writing-instruments', subcategoryName: 'Writing Instruments' },
+  'OB-STA-3621': { subcategoryId: 'files-office-organization', subcategoryName: 'Files & Office Organization' },
+  'OB-STA-3622': { subcategoryId: 'boards-visual-display', subcategoryName: 'Boards & Visual Display' },
+  'OB-STA-3623': { subcategoryId: 'files-office-organization', subcategoryName: 'Files & Office Organization' },
+  'OB-STA-3624': { subcategoryId: 'files-office-organization', subcategoryName: 'Files & Office Organization' },
+  'OB-STA-3625': { subcategoryId: 'files-office-organization', subcategoryName: 'Files & Office Organization' },
+  'OB-STA-3626': { subcategoryId: 'files-office-organization', subcategoryName: 'Files & Office Organization' },
+
+  // 7. cleaning-hygiene-essentials (74 items)
+  'OB-HOU-3500': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3501': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3502': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3503': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3504': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3505': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3506': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3507': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3508': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3509': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3510': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3511': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3512': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3513': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3514': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3515': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3516': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3517': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3518': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3519': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3520': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3521': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3522': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3523': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3524': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3525': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3526': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3527': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3528': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3529': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3530': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3531': { subcategoryId: 'tissue-papers-rolls', subcategoryName: 'Tissue Papers & Rolls' },
+  'OB-HOU-3532': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3533': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3549': { subcategoryId: 'dustbins-waste-handling', subcategoryName: 'Dustbins & Waste Handling' },
+  'OB-HOU-3550': { subcategoryId: 'dustbins-waste-handling', subcategoryName: 'Dustbins & Waste Handling' },
+  'OB-HOU-3551': { subcategoryId: 'dustbins-waste-handling', subcategoryName: 'Dustbins & Waste Handling' },
+  'OB-HOU-3552': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3553': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3554': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3555': { subcategoryId: 'air-fresheners-care', subcategoryName: 'Air Fresheners & Washroom Care' },
+  'OB-HOU-3556': { subcategoryId: 'air-fresheners-care', subcategoryName: 'Air Fresheners & Washroom Care' },
+  'OB-HOU-3557': { subcategoryId: 'air-fresheners-care', subcategoryName: 'Air Fresheners & Washroom Care' },
+  'OB-HOU-3558': { subcategoryId: 'washroom-dispensers', subcategoryName: 'Washroom Hygiene & Dispensers' },
+  'OB-HOU-3559': { subcategoryId: 'washroom-dispensers', subcategoryName: 'Washroom Hygiene & Dispensers' },
+  'OB-HOU-3560': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3561': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3562': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3563': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3564': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3565': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3566': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3567': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'safety-maintenance', subcategoryName: 'Safety & Facility Maintenance' },
+  'OB-HOU-3568': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'safety-maintenance', subcategoryName: 'Safety & Facility Maintenance' },
+  'OB-HOU-3569': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3570': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3571': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3572': { categoryId: 'office-stationery', categoryName: 'Office Stationery', subcategoryId: 'safety-maintenance', subcategoryName: 'Safety & Facility Maintenance' },
+  'OB-HOU-3574': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3576': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3578': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3579': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3580': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3585': { subcategoryId: 'air-fresheners-care', subcategoryName: 'Air Fresheners & Washroom Care' },
+  'OB-HOU-3586': { subcategoryId: 'air-fresheners-care', subcategoryName: 'Air Fresheners & Washroom Care' },
+  'OB-HOU-3597': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3598': { subcategoryId: 'cloths-scrubbers-brushes', subcategoryName: 'Cleaning Cloths, Scrubbers & Brushes' },
+  'OB-HOU-3599': { subcategoryId: 'cleaning-chemicals', subcategoryName: 'Cleaning Chemicals & Detergents' },
+  'OB-HOU-3600': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3601': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3602': { subcategoryId: 'cleaning-equipment-trolleys', subcategoryName: 'Cleaning Equipment & Trolleys' },
+  'OB-HOU-3637': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3638': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' },
+  'OB-HOU-3639': { subcategoryId: 'mops-floor-wipers', subcategoryName: 'Mops & Floor Wipers' }
+};
+
 export const INITIAL_PRODUCTS: Product[] = RAW_PRODUCTS.map((p) => {
-  const mapping = CATEGORY_MAP[p.categoryId];
+  const override = SKU_SUBCATEGORY_OVERRIDES[p.sku];
+  let catId = override?.categoryId || p.categoryId;
+  let catName = override?.categoryName || p.categoryName;
+  let subId = override?.subcategoryId || p.subcategoryId;
+  let subName = override?.subcategoryName || p.subcategoryName;
+
+  const subMapping = subId ? CATEGORY_MAP[subId.toLowerCase().trim()] : undefined;
+  if (subMapping) {
+    catId = subMapping.mainId;
+    catName = subMapping.mainName;
+    subName = subMapping.subName;
+    subId = subMapping.subSlug;
+  } else {
+    const catMapping = catId ? CATEGORY_MAP[catId.toLowerCase().trim()] : undefined;
+    if (catMapping) {
+      catId = catMapping.mainId;
+      catName = catMapping.mainName;
+      if (!subId) {
+        subId = catMapping.subSlug;
+        subName = catMapping.subName;
+      }
+    }
+  }
+
   return {
     ...p,
-    categoryId: mapping ? mapping.mainId : p.categoryId,
-    categoryName: mapping ? mapping.mainName : p.categoryName,
-    subcategoryId: p.subcategoryId || (mapping ? mapping.subSlug : p.categoryId),
-    subcategoryName: p.subcategoryName || (mapping ? mapping.subName : p.categoryName),
+    categoryId: catId,
+    categoryName: catName,
+    subcategoryId: subId,
+    subcategoryName: subName,
     packSize: p.packSize || '1 Unit',
   };
 });
