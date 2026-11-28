@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
-  ClipboardCheck,
-  ShoppingBasket,
-  FileCheck,
+  ListChecks,
+  PackageSearch,
+  FileCheck2,
   Truck,
   Check,
 } from 'lucide-react';
@@ -14,7 +14,7 @@ interface TimelineStep {
   title: string;
   stage: string;
   description: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
 }
 
 const TIMELINE_STEPS: TimelineStep[] = [
@@ -24,7 +24,7 @@ const TIMELINE_STEPS: TimelineStep[] = [
     stage: 'Stage 01 • Consultation',
     description:
       'Understand your corporate stationery, housekeeping chemicals, and facility supplies requirements.',
-    icon: ClipboardCheck,
+    icon: ListChecks,
   },
   {
     number: '02',
@@ -32,7 +32,7 @@ const TIMELINE_STEPS: TimelineStep[] = [
     stage: 'Stage 02 • SKU Matching',
     description:
       'Identify suitable products, confirm exact brand specifications, pack sizes, and custom bulk quantities.',
-    icon: ShoppingBasket,
+    icon: PackageSearch,
   },
   {
     number: '03',
@@ -40,7 +40,7 @@ const TIMELINE_STEPS: TimelineStep[] = [
     stage: 'Stage 03 • Wholesale Pricing',
     description:
       'Prepare competitive quotations with full 100% GST input tax credit and confirm order details.',
-    icon: FileCheck,
+    icon: FileCheck2,
   },
   {
     number: '04',
@@ -223,44 +223,45 @@ export default function ProcessTimelineSection() {
                       : 'bg-transparent hover:bg-white/50 border border-transparent hover:border-slate-200/50'
                   }`}
                 >
-                  {/* Step Icon Badge */}
-                  <div className="relative mb-2">
+                  {/* Clean Stage Step Label */}
+                  <span
+                    className={`text-[10px] font-mono font-bold tracking-wider mb-2 transition-colors ${
+                      isActive
+                        ? isLastStep
+                          ? 'text-[#004b87]'
+                          : 'text-[#ea580c]'
+                        : isCompleted
+                        ? 'text-[#004b87]'
+                        : 'text-slate-400'
+                    }`}
+                  >
+                    STEP {step.number}
+                  </span>
+
+                  {/* Step Icon Badge: Crisp, Centered, No Overlapping Badges */}
+                  <div className="relative mb-2.5">
                     <div
-                      className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center transition-all duration-300 relative ${
+                      className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 relative ${
                         isActive
                           ? isLastStep
-                            ? 'bg-gradient-to-br from-[#004b87] to-[#0284c7] text-white shadow-sm ring-3 ring-[#004b87]/20 scale-105'
-                            : 'bg-gradient-to-br from-[#ea580c] to-[#f97316] text-white shadow-sm ring-3 ring-orange-500/20 scale-105'
+                            ? 'bg-gradient-to-br from-[#004b87] to-[#0284c7] text-white shadow-sm ring-4 ring-[#004b87]/20 scale-105'
+                            : 'bg-gradient-to-br from-[#ea580c] to-[#f97316] text-white shadow-sm ring-4 ring-orange-500/20 scale-105'
                           : isCompleted
-                          ? 'bg-white border-2 border-[#004b87] text-[#004b87] shadow-xs group-hover:border-[#ea580c]'
-                          : 'bg-white/90 border-2 border-[#D1C7B7] text-slate-400 group-hover:border-slate-400'
+                          ? 'bg-blue-50 text-[#004b87] border border-blue-200 shadow-2xs group-hover:border-[#004b87]'
+                          : 'bg-white/90 border border-slate-200 text-slate-500 group-hover:border-slate-300 group-hover:text-slate-700 shadow-2xs'
                       }`}
                     >
                       <StepIcon
-                        className={`w-4.5 h-4.5 sm:w-5 sm:h-5 transition-transform duration-300 ${
-                          isActive ? 'scale-105' : 'group-hover:scale-105'
-                        }`}
+                        className="w-5 h-5 transition-transform duration-300 group-hover:scale-110"
+                        strokeWidth={1.85}
                       />
 
                       {/* Completed Checkmark Indicator */}
                       {isCompleted && (
-                        <div className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-[#16a34a] text-white flex items-center justify-center shadow-xs border border-white">
-                          <Check className="w-2 h-2 stroke-[3]" />
+                        <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-xs border-2 border-white">
+                          <Check className="w-2.5 h-2.5 stroke-[3]" />
                         </div>
                       )}
-                    </div>
-
-                    {/* Step Number Badge */}
-                    <div
-                      className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full text-[8.5px] sm:text-[9px] font-bold flex items-center justify-center border border-[#FAF7F2] transition-all duration-300 shadow-2xs ${
-                        isActive
-                          ? 'bg-slate-900 text-white scale-105'
-                          : isCompleted
-                          ? 'bg-[#004b87] text-white'
-                          : 'bg-slate-300 text-slate-600'
-                      }`}
-                    >
-                      {idx + 1}
                     </div>
                   </div>
 
@@ -371,20 +372,20 @@ export default function ProcessTimelineSection() {
                 >
                   {/* Node Milestone Icon */}
                   <div
-                    className={`absolute -left-5 top-0.5 w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 z-10 ${
+                    className={`absolute -left-5.5 top-0.5 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 z-10 ${
                       isActive
                         ? isLastStep
                           ? 'bg-[#004b87] text-white shadow-xs ring-2 ring-[#004b87]/30 scale-105'
                           : 'bg-[#ea580c] text-white shadow-xs ring-2 ring-orange-500/30 scale-105'
                         : isCompleted
                         ? 'bg-[#004b87] text-white shadow-xs'
-                        : 'bg-white border-2 border-[#D1C7B7] text-slate-400'
+                        : 'bg-white border-2 border-slate-300 text-slate-400'
                     }`}
                   >
                     {isCompleted ? (
-                      <Check className="w-2.5 h-2.5 stroke-[3]" />
+                      <Check className="w-3 h-3 stroke-[3]" />
                     ) : (
-                      <StepIcon className="w-2.5 h-2.5" />
+                      <StepIcon className="w-3.5 h-3.5" strokeWidth={2} />
                     )}
                   </div>
 
