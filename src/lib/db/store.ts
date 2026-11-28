@@ -13,7 +13,30 @@ import {
   QuotationStatus,
   NotificationLog,
 } from '@/types';
-import { CATEGORIES, BRANDS, INITIAL_PRODUCTS, COUPONS, resolveMainCategory, NINE_SUBCATEGORIES, ALL_SUBCATEGORIES, CATEGORY_MAP, isProductInSubcategory } from '@/lib/data/catalog';
+import {
+  CATEGORIES,
+  BRANDS,
+  INITIAL_PRODUCTS,
+  COUPONS,
+  resolveMainCategory,
+  NINE_SUBCATEGORIES,
+  ALL_SUBCATEGORIES,
+  CATEGORY_MAP,
+  isProductInSubcategory,
+} from '@/lib/data/catalog';
+
+// Re-export catalog definitions cleanly for backward compatibility across consumers
+export {
+  CATEGORIES,
+  BRANDS,
+  INITIAL_PRODUCTS,
+  COUPONS,
+  resolveMainCategory,
+  NINE_SUBCATEGORIES,
+  ALL_SUBCATEGORIES,
+  CATEGORY_MAP,
+  isProductInSubcategory,
+};
 import { getProductsFromZoho, getCachedProductBySlug, getCachedProductById, isZohoCacheSynced, getZohoDeletedSkus, recordZohoDeletedSku, isSkuOrIdDeleted } from '@/lib/zoho/products';
 import {
   getAllQuotationsFromZoho,
