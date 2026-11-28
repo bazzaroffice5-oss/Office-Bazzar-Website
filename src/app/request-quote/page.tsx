@@ -25,7 +25,7 @@ export default function RequestQuotePage() {
       <div className="bg-white border-b border-slate-200/80 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto text-center space-y-2">
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Request an Institutional Quotation (RFQ)
+            Request an Institutional Quotation
           </h1>
           <p className="text-sm text-slate-600 max-w-3xl mx-auto leading-relaxed">
             Get transparent wholesale pricing, tiered corporate volume discounts, and formal GST tax quotations directly from our central Royapettah fulfillment desk within 2 to 4 business hours.

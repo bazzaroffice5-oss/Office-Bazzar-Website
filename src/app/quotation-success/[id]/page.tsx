@@ -81,7 +81,7 @@ export default function QuotationSuccessPage({
           </span>
 
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-3 tracking-tight">
-            Thank You! Your RFQ is Confirmed
+            Thank You! Your Quotation Request is Confirmed
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-lg mx-auto font-normal">
             Our commercial sales team has received your quotation request and assigned it for volume tier pricing review.
@@ -91,7 +91,7 @@ export default function QuotationSuccessPage({
           <div className="mt-5 p-4 bg-slate-50/80 border border-slate-200 rounded-xl max-w-lg mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="text-left">
               <span className="text-[11px] font-semibold text-slate-500 block uppercase tracking-wider">
-                Official RFQ Reference
+                Official Quotation Reference
               </span>
               <div className="text-lg font-bold text-[#004b87] font-mono">
                 {displayRef}

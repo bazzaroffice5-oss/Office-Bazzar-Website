@@ -429,7 +429,7 @@ export default function RequestQuoteClient() {
             email: email.trim().toLowerCase(),
             phone: phone.replace(/[^0-9]/g, '').slice(-10),
             message: [
-              `[Direct Institutional RFQ - Custom Requirement List]`,
+              `[Direct Institutional Quotation - Custom Requirement List]`,
               `Delivery PIN: ${pincode.trim()}`,
               deliveryLocation.trim() ? `Delivery Address: ${deliveryLocation.trim()}` : '',
               gstin.trim() ? `GSTIN: ${gstin.trim().toUpperCase()}` : '',
@@ -448,7 +448,7 @@ export default function RequestQuoteClient() {
 
         const contactData = await contactRes.json();
         if (!contactRes.ok || contactData.success === false) {
-          throw new Error(contactData.error || 'Failed to submit RFQ enquiry. Please try again.');
+          throw new Error(contactData.error || 'Failed to submit quotation enquiry. Please try again.');
         }
 
         setSubmittedQuotation({
